@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http:www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<EnterpriseMobilityManager>
+
+	<DeviceMonitorFrequency>60000</DeviceMonitorFrequency>
+
+	<iOSEMMConfigurations>
+		<!-- iOS EMM endpoint urls -->
+		<iOSEnrollURL>https://192.168.1.2:9443/emm/scep</iOSEnrollURL>
+		<iOSProfileURL>https://192.168.1.2:9443/emm/profile</iOSProfileURL>
+		<iOSCheckinURL>https://192.168.1.2:9443/emm/checkin</iOSCheckinURL>
+		<iOSServerURL>https://192.168.1.2:9443/emm/server</iOSServerURL>
+		
+		<!-- post url for device tokens -->
+		<TokenURL>http://192.168.1.2:9763/emm/api/devices/iostokenregister</TokenURL>
+		
+		<EmmKeystore>		
+			<!-- EMM Keystore file location-->
+            <EMMKeystoreLocation>${carbon.home}/repository/resources/security/wso2emm.jks</EMMKeystoreLocation>
+            <!-- EMM Keystore type (JKS/PKCS12 etc.)-->
+            <EMMKeystoreType>JKS</EMMKeystoreType>
+            <!-- EMM Keystore password-->
+            <EMMKeystorePassword>wso2carbon</EMMKeystorePassword>
+			<!-- Certificate authority certificate alias -->
+			<EMMCACertAlias>cacert</EMMCACertAlias>
+			<!-- Certificate authority private key password -->
+			<EMMCAPrivateKeyPassword>cacert</EMMCAPrivateKeyPassword>
+			<!-- Registration authority certificate alias -->
+			<EMMRACertAlias>racert</EMMRACertAlias>
+			<!-- Registration authority private key password -->
+			<EMMRAPrivateKeyPassword>racert</EMMRAPrivateKeyPassword>
+        </EmmKeystore>
+	</iOSEMMConfigurations>
+	
+</EnterpriseMobilityManager>

@@ -1,0 +1,24 @@
+<IdentityProvider>
+	<IdentityProviderName>default</IdentityProviderName>
+	<DisplayName>default</DisplayName>
+	<IdentityProviderDescription></IdentityProviderDescription>
+	<Alias></Alias>
+	<IsPrimary></IsPrimary>
+	<IsFederationHub></IsFederationHub>
+	<HomeRealmId></HomeRealmId>
+	<ProvisioningRole></ProvisioningRole>
+	<FederatedAuthenticatorConfigs></FederatedAuthenticatorConfigs>
+	<DefaultAuthenticatorConfig>
+	</DefaultAuthenticatorConfig>
+	<ProvisioningConnectorConfigs>
+		<ProvisioningConnectorConfig>
+			<ProvisioningProperties>
+			</ProvisioningProperties>
+		</ProvisioningConnectorConfig>
+	</ProvisioningConnectorConfigs>
+	<DefaultProvisioningConnectorConfig></DefaultProvisioningConnectorConfig>
+	<ClaimConfig></ClaimConfig>
+	<Certificate></Certificate>
+	<PermissionAndRoleConfig></PermissionAndRoleConfig>
+	<JustInTimeProvisioningConfig></JustInTimeProvisioningConfig>
+</IdentityProvider>

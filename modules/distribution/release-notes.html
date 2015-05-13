@@ -1,0 +1,164 @@
+<!--
+~ Copyright 2005-2010 WSO2, Inc. (http://wso2.com)
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~ http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+-->
+<html>
+<head>
+    <meta http-equiv="content-type" content=""/>
+    <title>WSO2 Enterprise Mobility Manager ${product.version} Release Notes</title>
+    <link href="./tools/cmd/css/gs-dist-doc.css" rel="stylesheet"
+          type="text/css" media="all"/>
+</head>
+
+<body>
+<h1>Enterprise Mobility Manager ${product.version} Release Notes</h1>
+
+<p>
+    WSO2 Enterprise Mobility Manager (EMM) is a unique solution designed to specifically address the mobile enterprise needs. EMM includes of two key aspects:
+    Mobile Device Management (MDM) and Mobile Application Management (MAM). WSO2 EMM also supports single sign-on (SSO) and multi-tenancy.
+</p>
+<p>
+	EMM enables organizations to secure, manage and monitor Android and iOS powered devices (i.e., smart phones, ipod touch devices and tablet PCs), irrespective of the mobile operator, service provider, or the organization. Users need to accept the Policy agreement, which states all the actions that can be carried out on the device when enrolling with EMM. EMM only controls the corporate data that is present on the devices, while the personal data is left untouched.
+</p>
+
+<h3>
+    What is new in this release
+</h3>
+<p>
+    <b>First user experience</b>
+</p>
+<p>
+    In the previous WSO2 EMM releases it was mandatory for the users to fully configure WSO2 EMM before being able to run the product. Now, WSO2 EMM 1.1.0
+    binary pack comprises of a default Android Agent. Thereby, enabling users to seamlessly download and run EMM without any prior configurations. This will
+    allow users to use Android devices to get a better understanding of WSO2 EMM.
+</p>
+<p>
+    <b>Local notification method for Android devices</b>
+</p>
+<p>
+    The GCM server has a limitation on the number of messages that can be sent to the GCM server. However, this new Local notification method for Android
+    devices does not make use of the GCM server. Thereby, the number of messages sent via the GCM will be minimized. Furthermore, the Local notification method
+    does not send the messages via the payload, as it did in previous EMM versions. Thereby, this will minimize the MDM command loss.
+</p>
+<p>
+    <b>Tenant based configuration</b>
+</p>
+<p>
+    The tenant admin will be able to use the Configuration Manager wizard to setup the tenant's general, Android and iOS configuration details. Thereby, this
+    allows each tenant to customize their settings based on their requirements. For more information, see Tenant Based Settings.
+</p>
+<p>
+    <b>Ability to change password</b>
+</p>
+<p>
+    Previously, users were not allowed to change the default password that was assigned by WSO2 EMM. However, now users are allowed to change their password.
+    Thereby, users will be able to change their default password to a password of their choice.
+</p>
+<p>
+    <b>Removal of devices from WSO2 EMM</b>
+</p>
+<p>
+    Previously, administrators were not allowed to remove devices from WSO2 EMM after they were enrolled. However, now the administrators can use the
+    Enterprise Wipe feature to remove enrolled devices from WSO2 EMM. Thereby, this will enable the administrators to maintain WSO2 EMM efficiently.
+</p>
+<p>
+    <b>Improved API security</b>
+</p>
+<p>
+    The APIs that are exposed to the devices have been secured in WSO2 EMM using OAuth.
+</p>
+<p>
+    <b>Improved compliance monitoring</b>
+</p>
+<p>
+    When the system is clustered, then using the nTask Component, only one node will be allowed to perform the compliance monitoring that will dispatch
+    messages to the GCM or APNS.
+</p>
+
+<h2>Features</h2>
+
+<ul>
+    <li>Self-service device enrollment and management with end-user MDM console</li>
+    <li>Policy-driven device management for security, data, and device features (Camera, Password Policy)</li>
+    <li>Deploy policies over-the-air</li>
+    <li>Compliance monitoring for reporting, alerting, and device deprovisioning</li>
+    <li>Role based permissions for device management</li>
+	<li>Provisioning and deprovisioning applications to enrolled devices</li>
+	<li>Blacklisting of applications for Android</li>
+	<li>Supports App management</li>
+	<li>App approval process through a lifecycle</li>
+	<li>Discover mobile apps through an Enterprise App Store</li>
+	<li>Self-provisioning of mobile apps to devices</li>
+</ul>
+<p>
+    <b>Bug Fixes / Improvements</b>
+</p>
+<p>
+    For the list of fixed issues, go to <a href="https://wso2.org/jira/issues/?filter=11896">WSO2 EMM 1.1.0 - Fixed Issues</a>.
+</p>
+<p>
+    <b>Known Issues</b>
+</p>
+<p>
+    For the list of known issues, go to <a href="https://wso2.org/jira/issues/?filter=11894">WSO2 EMM 1.1.0 - Known Issues</a>.
+</p>
+<p>
+    <b>Reporting Problems</b>
+</p>
+<p>
+    Issues can be reported using the <a href="https://wso2.org/jira/browse/EMM"> public JIRA</a>.
+</p>
+<p>
+    <b>Engaging with Community</b>
+</p>
+<p>
+    <b>Mailing Lists</b>
+</p>
+<p>
+    Join our mailing list and correspond with the developers directly.
+</p>
+<p>
+    Developer List : dev@wso2.org | Subscribe |<a href="http://wso2.org/mailarchive/dev/"> Mail Archive</a>
+</p>
+<p>
+    <b>Reporting Issues</b>
+</p>
+<p>
+    WSO2 encourages you to report issues, enhancements and feature requests for WSO2 EMM. Use the <a href="https://wso2.org/jira/browse/EMM">issue tracker</a>
+    for reporting issues.
+</p>
+<p>
+    <b>Discussion Forums</b>
+</p>
+<p>
+    We encourage to use <a href="http://stackoverflow.com/tags/wso2/">stackoverflow</a> to engage with developers as well as other users.
+</p>
+<p>
+    <b>Support</b>
+</p>
+<p>
+    We are committed to ensuring that your enterprise middleware deployment is completely supported from evaluation to production. Our unique approach ensures
+    that all support leverages our open development methodology and is provided by the very same engineers who build the technology.
+</p>
+<p>
+    For additional support information please refer to <a href="http://wso2.com/support/">http://wso2.com/support/</a>
+</p>
+<p>
+    We welcome your feedback and would love to hear your thoughts on this release of WSO2 EMM.
+</p>
+<p>
+    --WSO2 EMM Development Team--
+</p>
+</body>
+</html>
