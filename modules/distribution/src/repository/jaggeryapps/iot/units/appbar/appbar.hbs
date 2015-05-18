@@ -1,0 +1,44 @@
+{{#zone "main"}}
+
+    <div id="nav" class="row wr-app-bar">
+        <div class="wr-action-container">
+            <div class="wr-action-btn-bar">
+                <!--<a href="javascript:history.go(-1)" class="cu-btn">
+                    <i class="wso2icon wso2-c-left-arrow"></i>Go Back
+                </a>-->
+                {{#if permissions.ADD_USER}}
+                    <a href="/mdm/add-user" class="cu-btn">
+                        <span class="wso2icon-stack">
+                            <i class="wso2icon wso2-ring wso2icon-stack-2x"></i>
+                            <i class="wso2icon wso2-add wso2icon-stack-1x"></i>
+                        </span>
+                        Add User
+                    </a>
+                {{/if}}
+                {{#if permissions.LIST_USERS}}
+                    <a href="/mdm/users" class="cu-btn">
+                        <span class="wso2icon-stack">
+                            <i class="wso2icon wso2icon-stack-1x"></i>
+                        </span>
+                        User Management
+                    </a>
+                {{/if}}
+                {{#if permissions.LIST_DEVICES}}
+                    <a href="/mdm" class="cu-btn">
+                        <span class="wso2icon-stack">
+                            <i class="wso2icon wso2icon-stack-1x"></i>
+                        </span>
+                        Device Management
+                    </a>
+                {{/if}}
+                <a href="javascript:openNotificationbar()" class="cu-btn wr-notification-toggle-btn">
+                    <span class="wso2icon-stack-md">
+                        <i class="wso2icon wso2-bell wso2icon-stack-1-5x"></i>
+                    </span>
+                    <span class="wr-notification-bubble">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{{/zone}}

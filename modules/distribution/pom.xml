@@ -340,6 +340,10 @@
                             <tasks>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps" />
 
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps" overwrite="true">
+                                    <fileset dir="src/repository/jaggeryapps"></fileset>
+                                </copy>
+
                                 <!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/modules" overwrite="true">
                                     <fileset dir="src/repository/modules"></fileset>
                                 </copy>

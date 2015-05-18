@@ -1,0 +1,56 @@
+{{#zone "main"}}
+    <!-- content/body -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- content -->
+            <div class="container col-centered wr-content">
+                <div class="wr-form">
+                    <h1 class="wr-title">Add User</h1>
+                    Please note that * sign represents required fields of data.
+                    <hr />
+                    <span class="wr-validation-summary hidden">
+                        <p></p>
+                    </span>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <label class="wr-input-label">User Name *</label>
+                                <div class="wr-input-control">
+                                    <input type="text" id="username" value="" placeholder="input text"/>
+                                </div>
+                            <label class="wr-input-label">First Name *</label>
+                                <div class="wr-input-control">
+                                    <input type="text" id="firstname" value="" placeholder="input text"/>
+                                </div>
+                            <label class="wr-input-label">Last Name *</label>
+                                <div class="wr-input-control">
+                                    <input type="text" id="lastname" value="" placeholder="input text"/>
+                                </div>
+                            <label class="wr-input-label">Email Address *</label>
+                                <div class="wr-input-control">
+                                    <input type="email" id="email" value="" placeholder="input text"/>
+                                </div>
+                            <label class="wr-input-label">
+                                User Roles
+                                <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
+                            </label>
+                                <div class="wr-input-control">
+                                    <select id="roles" class="form-control select2" multiple="multiple">
+                                        {{#each roles}}
+                                            <option>{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                        </div>
+                    </div>
+                    <button id="add-user-btn" class="wr-btn">Add User</button>
+                </div>
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+    <!-- /content/body -->
+{{/zone}}
+{{#zone "bottomJs"}}
+    <script src="{{self.publicURL}}/js/bottomJs.js"></script>
+{{/zone}}
+
