@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {{ defineZone "title"}}
+        </title>
+        {{ defineZone "topLibCss"}}
+        {{ defineZone "topCss"}}
+    </head>
+    <body>
+    <div class="container col-lg-12 col-md-12 col-sm-12">
+        <!-- header -->
+        <header>
+            <div class="row wr-global-header">
+                <div class="col-sm-8 app-logo">
+                    {{ defineZone "brand"}}
+                </div>
+            </div>
+        </header>
+        <!-- /header -->
+        {{ defineZone "body"}}
+    </div>
+    {{ defineZone "bottomjquery" }}
+    {{ defineZone "bottomLibJs" }}
+    {{ defineZone "bottomJs" }}
+    </body>
+</html>

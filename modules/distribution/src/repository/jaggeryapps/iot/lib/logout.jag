@@ -18,7 +18,7 @@
  */
 var constants = require('/modules/constants.js');
 var user = session.get(constants.USER_SESSION_KEY);
-var dataConfig = require('/config/mdm-props.js').config();
+var dataConfig = require('/config/dc-props.js').config();
 var log = new Log();
 if (user === null) {
     log.debug("Cannot perform logout. No user session found.");

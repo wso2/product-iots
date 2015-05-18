@@ -21,18 +21,15 @@ userModule = function () {
     var log = new Log("modules/user.js");
 
     var constants = require("/modules/constants.js");
-    var dataConfig = require("/config/mdm-props.js").config();
     var utility = require("/modules/utility.js").utility;
 
     var userManagementService = utility.getUserManagementService();
-    var deviceManagementService = utility.getDeviceManagementService();
-    var EmailMessageProperties = Packages.org.wso2.carbon.device.mgt.common.EmailMessageProperties;
 
     var publicMethods = {};
     var privateMethods = {};
 
     /**
-     * Authenticate a user when he or she attempts to login to MDM.
+     * Authenticate a user when he or she attempts to login to DC.
      *
      * @param username Username of the user
      * @param password Password of the user
@@ -60,7 +57,7 @@ userModule = function () {
     };
 
     /**
-     * Add user to mdm-user-store.
+     * Add user to dc-user-store.
      *
      * @param username Username of the user
      * @param firstname First name of the user
@@ -182,33 +179,6 @@ userModule = function () {
         return defaultUserClaims;
     };
 
-    /**
-     * Send an initial invitation email to a user with username/password attached
-     * for the very-first enrollment with WSO2 MDM.
-     *
-     * @param username Username of the user
-     * @param password Password of the user
-     */
-    privateMethods.inviteUserToEnroll = function (username, password) {
-        var enrollmentURL = dataConfig.httpsURL + dataConfig.appContext + "download-agent";
-        var carbonUser = session.get(constants.USER_SESSION_KEY);
-        if (!carbonUser) {
-            log.error("User object was not found in the session");
-            throw constants.ERRORS.USER_NOT_FOUND;
-        }
-        var user = userManagementService.getUser(username, carbonUser.tenantId);
-
-        var emailTo = [];
-        emailTo[0] = user.getEmail();
-        var emailMessageProperties = new EmailMessageProperties();
-        emailMessageProperties.setMailTo(emailTo);
-        emailMessageProperties.setFirstName(user.getFirstName());
-        emailMessageProperties.setUserName(username);
-        emailMessageProperties.setPassword(password);
-        emailMessageProperties.setEnrolmentUrl(enrollmentURL);
-        deviceManagementService.sendRegistrationEmail(emailMessageProperties);
-    };
-
     publicMethods.addPermissions = function (permissionList, path, init) {
         var carbonModule = require("carbon");
         var carbonServer = application.get("carbonServer");
@@ -234,32 +204,24 @@ userModule = function () {
         }
     };
 
-    publicMethods.inviteUser = function (username) {
-        var carbonUser = session.get(constants.USER_SESSION_KEY);
-        if (!carbonUser) {
-            log.error("User object was not found in the session");
-            throw constants.ERRORS.USER_NOT_FOUND;
-        }
-        var user = userManagementService.getUser(username, carbonUser.tenantId);
-        var enrollmentURL = dataConfig.httpsURL + dataConfig.appContext + "download-agent";
-
-        var emailProperties = new EmailMessageProperties();
-        var emailTo = [];
-        emailTo[0] = user.getEmail();
-        emailProperties.setMailTo(emailTo);
-        emailProperties.setFirstName(user.getFirstName());
-        emailProperties.setEnrolmentUrl(enrollmentURL);
-        deviceManagementService.sendEnrolmentInvitation(emailProperties);
-    };
-
     publicMethods.getUsers = function () {
-        var users = [];
+        var carbon = require('carbon');
+
         var carbonUser = session.get(constants.USER_SESSION_KEY);
         if (!carbonUser) {
             log.error("User object was not found in the session");
             throw constants.ERRORS.USER_NOT_FOUND;
         }
-        var userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
+
+        var userList;
+        try{
+            userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
+        }catch(e){
+            log.error("Error occurred while reading all users");
+            return [];
+        }
+
+        var users = [];
         var i, userObject;
         for (i = 0; i < userList.size(); i++) {
             userObject = userList.get(i);

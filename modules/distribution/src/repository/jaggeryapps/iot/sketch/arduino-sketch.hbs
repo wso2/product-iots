@@ -1,0 +1,30 @@
+    <div class="container container-bg white">
+        <h1 class="white">Arduino Uno</h1><hr>
+        <p>Connect your Arduino Uno device to the IBM Internet of Things Foundation.</p>
+        <img src="{{self.publicURL}}/images/arduino-board.png" alt="Arduino UNO Board" width="300" height="253"/><br/>
+        <h2>Prepare</h2>
+        <h6>Get your device ready</h6>
+        <ul>
+            <li>Mount the Ethernet / Wifi shield on the Arduino Uno device.</li>
+            <li>Connect the Arduino Uno to the USB of your computer.</li>
+            <li>Connect an Ethernet cable to the Ethernet / WiFi Shield.</li>
+        </ul>
+
+        <h2>Connect (Quickstart)</h2>
+        <h6>Internet of Things Foundation Quickstart connection</h6>
+        <ul>
+            <li>Use the following command to download the installer from GitHub:</li>
+            <li>curl -LO https://github.com/ibm-messaging/iot-arduino.git</li>
+            <li>Download the Sketch installer from the Arduino website http://arduino.cc/en/Main/Software</li>
+            <li>Install the Sketch program</li>
+            <li>Use the Sketch program to open the samples code samples/quickstart/quickstart.ino</li>
+            <li>View the lower part of the Sketch pad window to check that the COM connection is shown as active</li>
+            <li>Compile and deploy the sample code to the Arduino Uno device</li>
+        </ul>
+        </p>
+        <form method="POST" class="form-login-box" action="{{sketchPath}}">
+            <input type="hidden" name="type" value="arduino" />
+            <button class="blue-btn">Create Sketch</button>
+        </form>
+        <br/><br/><br/>
+    </div>

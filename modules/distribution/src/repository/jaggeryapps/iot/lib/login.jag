@@ -19,7 +19,7 @@
 (function(){
     var constants = require('/modules/constants.js');
     if (!session.get(constants.USER_SESSION_KEY)) {
-        var dataConfig = require('/config/mdm-props.js').config();
+        var dataConfig = require('/config/dc-props.js').config();
         var sso = require('/modules/sso.js').sso;
         var keyStoreParams = {
             keyStoreName : dataConfig.ssoConfiguration.keyStoreName,

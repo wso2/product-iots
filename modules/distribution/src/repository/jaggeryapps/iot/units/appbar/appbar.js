@@ -1,16 +1,19 @@
-function onRequest(context) {
-    var userModule = require("/modules/user.js").userModule;
-    var permissions = {};
-    if (userModule.isAuthorized("/permission/device-mgt/admin/devices/list") ||
-                    userModule.isAuthorized("/permission/device-mgt/user/devices/list")) {
-        permissions.LIST_DEVICES = true;
+function onRequest(context){
+    var dcProps = require('/config/dc-props.js').config();
+    if (dcProps.ssoConfiguration.enabled) {
+        response.sendRedirect(dcProps.appContext + "sso/login");
+        exit();
+    }else{
+        context.loginPath = "api/user/login";
     }
-    if (userModule.isAuthorized("/permission/device-mgt/admin/users/list")) {
-        permissions.LIST_USERS = true;
-    }
-    if (userModule.isAuthorized("/permission/device-mgt/admin/users/add")) {
-        permissions.ADD_USER = true;
-    }
-    context.permissions = permissions;
+
+    var constants = require("/modules/constants.js");
+    var localLogoutURL = dcProps.appContext + "api/user/logout";
+    var ssoLogoutURL = dcProps.appContext + "sso/logout";
+    context.logoutURL = dcProps.ssoConfiguration.enabled? ssoLogoutURL : localLogoutURL;
+    context.user = session.get(constants.USER_SESSION_KEY);
+
+    context.viewonly = !context.user;
+
     return context;
 }

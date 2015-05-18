@@ -1,23 +1,12 @@
 {
-  "appContext" : "/mdm/",
+  "appContext" : "/iot/",
   "apiContext" : "api",
   "httpsURL": "%https.ip%",
   "httpURL": "%http.ip%",
-  "iOSConfigRoot": "%https.ip%/ios/",
-  "device": {
-    "ios": {
-      "location": "%http.ip%/mdm/public/asset-download-agent/asset/ios-agent.ipa",
-      "bundleid": "org.wso2.carbon.mdm.mobileservices.ios.agent.iOSMDMAgent",
-      "version": "1.0",
-      "appname": "MDM Agent"
-    }
-  },
-  "androidAgentApp" : "android-agent.apk",
-  "windowsConfigRoot": "http://10.10.10.198:9763/mdm-windows-api/services/federated/bst/authentication",
   "ssoConfiguration": {
         "enabled": false,
-        "issuer": "mdm",
-        "appName": "mdm",
+        "issuer": "iot",
+        "appName": "iot",
         "identityProviderURL": "%https.ip%/sso/samlsso.jag",
         "responseSigningEnabled": "true",
         "keyStorePassword": "wso2carbon",

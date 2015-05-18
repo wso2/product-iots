@@ -15,9 +15,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var WEB_APP_TITLE = "WSO2 Device Cloud";
+
+var WEB_APP_TITLE = "WSO2 DC - Device Cloud";
 var WEB_APP_CONTEXT = "/iot";
 var USER_SESSION_KEY = "USER";
 var UNSPECIFIED = "Unspecified";
 
-
+var ERRORS = {
+        "USER_NOT_FOUND": "USER_NOT_FOUND"
+    };

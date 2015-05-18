@@ -17,9 +17,10 @@
  */
 
 var carbonModule = require("carbon");
+var dcProps = require('/config/dc-props.js').config();
 var carbonServer = new carbonModule.server.Server({
     tenanted: true,
-    url: mdmProps.httpsURL + '/admin'
+    url: dcProps.httpsURL + '/admin'
 });
 application.put("carbonServer", carbonServer);
 var userModule = require("/modules/user.js").userModule;

@@ -23,9 +23,8 @@ var uriMatcher = new URIMatcher(String(uri));
 var log = new Log("api/user-api.jag");
 
 var constants = require("/modules/constants.js");
-var mdmProps = require('/config/mdm-props.js').config();
+var dcProps = require('/config/dc-props.js').config();
 var userModule = require("/modules/user.js").userModule;
-var deviceModule = require("/modules/device.js").deviceModule;
 var utility = require("/modules/utility.js").utility;
 
 var result;
@@ -41,31 +40,16 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
             utility.insertAppPermissions(userModule, "login");
             response.sendRedirect(constants.WEB_APP_CONTEXT);
         }, function() {
-            response.sendRedirect(mdmProps.appContext + "login?#auth-failed");
+            response.sendRedirect(dcProps.appContext + "login?#auth-failed");
         });
     } catch (e) {
-        log.error("Exception occurred while a user tried to login to MDM", e);
-        response.sendRedirect(mdmProps.appContext + "login?#error");
+        log.error("Exception occurred while a user tried to login to DC", e);
+        response.sendRedirect(dcProps.appContext + "login?#error");
     }
 } else if (uriMatcher.match("/{context}/api/user/logout/")){
     userModule.logout(function() {
-        response.sendRedirect(mdmProps.appContext + "login");
+        response.sendRedirect(dcProps.appContext + "login");
     });
-} else if (uriMatcher.match("/{context}/api/user/devices/")) {
-    if (userModule.isAuthorized("/permission/device-mgt/user/devices/list")) {
-        carbonUser = session.get(constants.USER_SESSION_KEY);
-        result = deviceModule.listDevicesForUser(carbonUser.username);
-    } else {
-        response.sendError(403);
-    }
-} else if (uriMatcher.match("/{context}/api/users/{username}/invite")) {
-    if (userModule.isAuthorized("/permission/device-mgt/admin/users/invite")) {
-        elements = uriMatcher.elements();
-        username = elements.username;
-        userModule.inviteUser(username);
-    } else {
-        response.sendError(403);
-    }
 } else if (uriMatcher.match("/{context}/api/users/add")) {
     if (userModule.isAuthorized("/permission/device-mgt/admin/users/add")) {
         addUserFormData = request.getContent();
@@ -84,7 +68,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
         try {
             result = userModule.addUser(username, firstname, lastname, emailAddress, userRoles);
         } catch (e) {
-            log.error("Exception occurred while trying to add a user to MDM User Store", e);
+            log.error("Exception occurred while trying to add a user to DC User Store", e);
             // http status code 400 refers to - Bad request.
             result = 400;
         }
@@ -99,7 +83,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
         try {
             result = userModule.removeUser(username);
         } catch (e) {
-            log.error("Exception occurred while trying to remove a user from MDM User Store", e);
+            log.error("Exception occurred while trying to remove a user from DC User Store", e);
             // http status code 400 refers to - Bad request.
             result = 400;
         }
