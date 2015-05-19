@@ -102,11 +102,11 @@
             <name>ArduinoDM_DS</name>
             <description>The datasource used for API Manager database</description>
             <jndiConfig>
-                <name>jdbc/ArduinoDM_DB</name>
+                <name>jdbc/FireAlarmDM_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/ArduinoDM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
+                    <url>jdbc:h2:repository/database/FireAlarmDM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>

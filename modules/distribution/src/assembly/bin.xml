@@ -26,7 +26,7 @@
                 <exclude>**/client-truststore.jks</exclude>
                 <exclude>**/wso2carbon.jks</exclude>
                 <exclude>**/WSO2AM_DB.h2.db</exclude>
-		<exclude>**/ArduinoDM_DB.h2.db</exclude>
+                <exclude>**/ArduinoDM_DB.h2.db</exclude>
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/conf/axis2/axis2_client.xml</exclude>
                 <exclude>**/conf/etc/launch.ini</exclude>
@@ -606,7 +606,7 @@
                 target/wso2carbon-core-${carbon.kernel.version}/repository/database/FireAlarmDM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>ArduinoDM_DB.h2.db</destName>
+            <destName>FireAlarmDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
 
