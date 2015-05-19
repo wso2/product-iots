@@ -36,3 +36,8 @@ input[type="checkbox"], input[type="radio"] {
     margin-top: -3px;
     width: 30px;
 }
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #747474;
+    outline: 0;
+}

@@ -255,7 +255,7 @@ h5{ font-size:30px;font-weight:100; line-height:Auto; font-style: normal; color:
 .black{color:#000;}
 .grey{color:#333;}
 .white{color:#FFF;}
-.blue{color: #00979c;}
+.blue{color: #00979c;} .blue:hover{color: #03c5cb;}
 
 .bold{font-weight:bold;}
 .no-underline{text-decoration:none;}

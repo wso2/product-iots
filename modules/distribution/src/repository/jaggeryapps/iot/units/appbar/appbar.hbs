@@ -132,7 +132,7 @@
 
                 <div class="col-lg-12 center padding-top-double padding-bottom-double">
                     <button id="add-user-btn" class="blue-action-btn uppercase margin"> Submit</button>
-                    <button class="black-btn uppercase margin " > Cancel</button>
+                    <button class="black-btn uppercase margin cancel-btn" > Cancel</button>
                 </div>
             </div>
         </div>
@@ -145,15 +145,19 @@
                         Username :<br> <input name="username" type="text" value="">
                     </div>
                     <div class="col-lg-3 padding ">
-                        Password: <br> <input name="password" type="text" value="">
+                        Password: <br> <input name="password" type="password" value="">
                     </div>
                     <div class="col-lg-6 padding-top-double padding-bottom-double padding-left-none">
                         <button class="blue-action-btn uppercase margin" onclick="document.location.href='home.html';"> Login</button>
-                        <button class="black-btn uppercase margin " > Cancel</button>
+                        <button class="black-btn uppercase margin cancel-btn" > Cancel</button>
                     </div>
                 </div>
             </form>
         </div>
     </header>
 
+{{/zone}}
+
+{{#zone "bottomJs"}}
+	<script src="{{self.publicURL}}/scripts/validate-register.js"></script>
 {{/zone}}

@@ -24,7 +24,7 @@ var getScope = function (unit,configs) {
             };
             onRequestCb = script.onRequest;
             cbResult = onRequestCb(templateConfigs);
-            log.info("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
+            log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
             //If the execution does not yield an object we will print
             //a warning as the unit author may have forgotten to return a data object
             if(cbResult===undefined){
@@ -157,7 +157,7 @@ Handlebars.registerHelper('unit', function (unitName,options) {
     //TODO warn when unspecified decencies are included.
     fuseState.zoneStack.push('main');
     var template = fuse.getFile(baseUnit, '', '.hbs');
-    log.info('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
+    log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
     var result = new Handlebars.SafeString(Handlebars.compileFile(template)(getScope(baseUnit,templateConfigs)));
     fuseState.zoneStack.pop();
     return result;

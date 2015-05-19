@@ -57,6 +57,47 @@ userModule = function () {
     };
 
     /**
+     * Register user to dc-user-store.
+     *
+     * @param username Username of the user
+     * @param firstname First name of the user
+     * @param lastname Last name of the user
+     * @param emailAddress Email address of the user
+     * @param password Password of the user
+     * @param userRoles Roles assigned to the user
+     *
+     * @returns {number} HTTP Status code 201 if succeeded, 409 if user already exists
+     */
+    publicMethods.registerUser = function (username, firstname, lastname, emailAddress, password, userRoles) {
+        var carbon = require('carbon');
+        var tenantId = carbon.server.tenantId();
+        var url = carbon.server.address('https') + "/admin/services";
+        var server = new carbon.server.Server(url);
+        var userManager = new carbon.user.UserManager(server, tenantId);
+
+        try {
+            if (userManager.userExists(username)) {
+                if (log.isDebugEnabled()) {
+                    log.debug("A user with name '" + username + "' already exists.");
+                }
+                // http status code 409 refers to - conflict.
+                return 409;
+            } else {
+                var defaultUserClaims = privateMethods.buildDefaultUserClaims(firstname, lastname, emailAddress);
+
+                userManager.addUser(username, password, userRoles, defaultUserClaims, "default");
+                if (log.isDebugEnabled()) {
+                    log.debug("A new user with name '" + username + "' was created.");
+                }
+                // http status code 201 refers to - created.
+                return 201;
+            }
+        } catch (e) {
+            throw e;
+        }
+    };
+
+    /**
      * Add user to dc-user-store.
      *
      * @param username Username of the user
