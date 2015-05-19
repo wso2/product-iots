@@ -601,9 +601,9 @@
             <fileMode>644</fileMode>
         </file>
 
-	<file>
+        <file>
             <source>
-                target/wso2carbon-core-${carbon.kernel.version}/repository/database/ArduinoDM_DB.h2.db
+                target/wso2carbon-core-${carbon.kernel.version}/repository/database/FireAlarmDM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
             <destName>ArduinoDM_DB.h2.db</destName>
