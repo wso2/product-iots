@@ -273,14 +273,14 @@
                                 <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
                                 <property name="userid" value="wso2carbon" />
                                 <property name="password" value="wso2carbon" />                          
-				<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/ArduinoDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+				<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/FireAlarmDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
 
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
                                     <classpath refid="maven.dependency.classpath" />
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" />
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_arduino.sql" />
+                                    <!--fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" /-->
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_firealarm.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
 				</tasks>
