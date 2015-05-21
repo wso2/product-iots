@@ -41,15 +41,9 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
         exit();
     }
 
-    if(sketchType=="arduino"){
-        downloadModule.downloadSketch("arduino-sketch.hbs",response, {"{{self.publicURL}}":"####"});
-    }else if(sketchType=="raspberry"){
-        downloadModule.downloadSketch("raspberry-sketch.hbs",response, {"{{self.publicURL}}":"####"});
-    }else{
-        log.error("Sketch type `"+sketchType+"` not found");
-        response.sendRedirect(uri + "?#sketch-failed");
-        exit();
-    }
+	serviceUrl = "http://localhost:9763/WSO2ConnectedDevices-1.0.0/FireAlarmDeviceManager/DownloadSketch";
+    response.sendRedirect(serviceUrl + "?type="+sketchType+"&owner="+user.username);
+	exit();
 }
 
 // returning the result.

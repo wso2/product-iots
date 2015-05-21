@@ -1,9 +1,9 @@
 {{#zone "main"}}
-    <div class="container container-bg">
+    <div class="container container-bg white-bg">
         <div data-type="login">
             <div class="container padding margin-top-double ">
-            <form method="POST" class="white form-login-box" action="{{loginPath}}">
-                <h1 class="white">Login </h1> <hr>
+            <form method="POST" class="form-login-box" action="{{loginPath}}">
+                <h1 class="grey">Login </h1> <hr>
 
                 <div class="col-lg-3 padding ">
                     Username :<br> <input name="username" type="text" value="" placeholder=""/>
@@ -13,7 +13,9 @@
                 </div>
                 <div class="col-lg-6 padding-top-double padding-bottom-double padding-left-none">
                     <button class="blue-action-btn uppercase margin" onclick="document.location.href='home.html';"> Login</button>
-                    <button class="black-btn uppercase margin " > Cancel</button>
+                    <button class="black-btn uppercase margin" onclick="javascript:window
+                    .location='/iot'" >
+                    Cancel</button>
                 </div>
             </form>
             </div>

@@ -5,7 +5,6 @@ $(document).ready(function(){
         $(container).slideToggle("fast");
         $(container).siblings('div.sign-panel').slideUp("fast");
     });
-
     $(".cancel-btn").click(function(){
         $(".sign-panel").slideUp();
     });

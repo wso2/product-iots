@@ -263,8 +263,8 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </fileSet-->
-	<!-- Copying Device Cloud webapp -->
-	<fileSet>
+    	<!-- Copying Device Cloud webapp -->
+    	<fileSet>
             <directory>src/repository/webapps/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>

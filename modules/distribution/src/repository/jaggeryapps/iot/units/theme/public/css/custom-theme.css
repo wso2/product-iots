@@ -2,7 +2,7 @@
     background-color: #2a2a2a;
     border-color:#2a2a2a ;
 }
-.navbar-nav{color: #a5a5a5; font-weight:300; padding-top: 12px; padding-left:0px;}
+.navbar-nav{color: #a5a5a5; font-weight:300; padding-top: 5px; padding-left:0px;}
 .form-control {background-color: #121212; border: 0px;}
 .btn-default {background-color: #121212; border: 1px solid #121212;}
 .container { padding:0px;}
@@ -40,4 +40,7 @@ input[type="checkbox"], input[type="radio"] {
 .navbar-default .navbar-nav>li>a:hover {
     color: #747474;
     outline: 0;
+}
+.navbar {
+    margin-bottom: 5px;
 }

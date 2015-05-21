@@ -68,92 +68,94 @@
             </nav>
         </div><!--container-->
         <div class="sign-panel" data-type="register">
-            <div class="container padding margin-top-double ">
-                <h5 >Register </h5> <hr class="opacity">
-
-                <div class="form-group" align="center">
-                  <span class="wr-validation-summary hidden">
-                    <strong class="label label-danger"></strong>
-                  </span>
-                </div>
-
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase ">
-                        First Name
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="text right" id="first_name"  placeholder="First Name">
-                    </div>
-                </div>
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase ">
-                        Last Name
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="text right" id="last_name" placeholder="Last Name">
-                    </div>
-                </div>
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase  ">
-                        Username
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="text right" id="user_name" placeholder="Username ">
-                    </div>
-                </div>
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase  ">
-                        Email
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="text right" id="email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase ">
-                        Password
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="password" id="password" placeholder="Password">
-                    </div>
-                </div>
-                <div class="col-lg-10 padding center ">
-                    <div class="col-lg-5 right padding-top-double uppercase ">
-                        Confirm Password
-                    </div>
-                    <div class="col-lg-6 ">
-                        <input type="password" id="password_confirmation" placeholder="Confirm Password">
-                    </div>
-                </div>
-                <div class="col-lg-9 right padding-top-double padding-bottom-double margin-right-none">
-                    <input type="checkbox" name="Agree" id="t_and_c" value="Bike"> <span class="italic">
-                    I Agree by Clicking register, you agree to the Terms and Conditions set out by this site</span>
-                </div>
-
-                <div class="col-lg-12 center padding-top-double padding-bottom-double">
-                    <button id="add-user-btn" class="blue-action-btn uppercase margin"> Submit</button>
-                    <button class="black-btn uppercase margin cancel-btn" > Cancel</button>
-                </div>
-            </div>
-        </div>
-        <div class="sign-panel" data-type="login">
-            <form method="POST" class="form-login-box" action="{{loginPath}}">
                 <div class="container padding margin-top-double ">
-                    <h5 >Login </h5> <hr class="opacity">
+                    <h5 >Register </h5> <hr class="opacity">
+                    <div class="form-group" align="center">
+					  <span class="wr-validation-summary hidden">
+						<strong class="label label-danger"></strong>
+					  </span>
+					</div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            First Name
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="first_name" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Last Name
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="last_name" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase  ">
+                            Username
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="user_name" placeholder="Username ">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase  ">
+                            Email
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Password
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="password right" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Confirm Password
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="password right" id="password_confirmation"
+                            placeholder="Confirm
+                            Password">
+                        </div>
+                    </div>
+                    <div class="col-lg-9 right padding-top-double padding-bottom-double margin-right-none">
+                        <input type="checkbox" name="Agree" id="t_and_c" value="Bike"> <span class="italic">
+                        I Agree by Clicking register, you agree to the Terms and Conditions set out by this site</span>
+                    </div>
 
-                    <div class="col-lg-3 padding ">
-                        Username :<br> <input name="username" type="text" value="">
-                    </div>
-                    <div class="col-lg-3 padding ">
-                        Password: <br> <input name="password" type="password" value="">
-                    </div>
-                    <div class="col-lg-6 padding-top-double padding-bottom-double padding-left-none">
-                        <button class="blue-action-btn uppercase margin" onclick="document.location.href='home.html';"> Login</button>
+                    <div class="col-lg-12 center padding-top-double padding-bottom-double">
+                        <button id="add-user-btn" class="blue-action-btn uppercase margin">
+                        Register </button>
                         <button class="black-btn uppercase margin cancel-btn" > Cancel</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+
+		<div class="sign-panel" data-type="login">
+			<form method="POST" class="form-login-box" action="{{loginPath}}">
+				<div class="container padding margin-top-double ">
+					<h5 >Login </h5> <hr class="opacity">
+
+					<div class="col-lg-3 padding ">
+						Username :<br> <input type="text" name="username" />
+					</div>
+					<div class="col-lg-3 padding ">
+						Password: <br> <input type="password" name="password" />
+					</div>
+					<div class="col-lg-6 padding-top-double padding-bottom-double padding-left-none">
+						<button class="blue-action-btn uppercase margin" onclick="document.location.href='home.html';"> Login</button>
+						<button class="black-btn uppercase margin cancel-btn " > Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
     </header>
 
 {{/zone}}
