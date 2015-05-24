@@ -44,3 +44,31 @@ input[type="checkbox"], input[type="radio"] {
 .navbar {
     margin-bottom: 5px;
 }
+.navbar-brand {
+    padding: 15px 10px;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    color: #fff;
+    background-color:#202020 ;
+}
+.dropdown-menu {
+    background-clip: padding-box;
+    background-color: #202020;
+    border: 0px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    box-shadow: none;
+    display: none;
+    float: left;
+    font-size: 14px;
+    left: 0;
+    color: #a5a5a5;
+}
+.dropdown-menu > li > a {
+    color: #a5a5a5;
+}
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #313131;
+}

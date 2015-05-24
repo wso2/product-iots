@@ -47,11 +47,11 @@
 /* Light Italic */
 @font-face {
     font-family: 'Open Sans';
-    src: url(../fonts/OpenSans-LightItalic-webfont.eot);
-    src: url(../fonts/OpenSans-LightItalic-webfont.eot?#iefix) format('embedded-opentype'),
-    url(../fonts/OpenSans-LightItalic-webfont.woff) format('woff'),
-    url(../fonts/OpenSans-LightItalic-webfont.ttf) format('truetype'),
-    url(../fonts/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic) format('svg');
+    src: url('../fonts/OpenSans-LightItalic-webfont.eot');
+    src: url('../fonts/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-LightItalic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-LightItalic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic') format('svg');
     font-weight: 200;
     font-style: italic;
 
@@ -298,6 +298,7 @@ h5{ font-size:30px;font-weight:100; line-height:Auto; font-style: normal; color:
 .white-bg{background-color:#fff;}
 .off-white{background-color:#3a9ecf;}
 .dark-grey{background-color: #2a2a2a;}
+.blue-bg{background-color: #00979c;}
 
 /*  _____________________________________________________________________________
 
@@ -308,14 +309,14 @@ body {  margin: 0; }
 header{background-color: #2a2a2a;}
 
 
-.product-wrapper{ float: left; width:100%;   min-height: 310px; -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);
+.product-wrapper{ float: left; width:100%; margin-top: -2px;   min-height: 310px; -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);}
 .icon-wrapper{min-height: 110px; padding-top: 12px; text-align: center; }
 .text-wrapper{margin:15px; font-size:14px; border-top: 1px solid #404040; padding-top: 20px; color:#c6c5c5; line-height: 18px; text-align: center }
 .sign-panel {background-color: #191919; width: 100%; height: auto; min-height: 150px; display: none;  padding:15px; color: #a5a5a5; cursor:pointer;}
-#flip-login{ font-weight: 500; font-size: 14px; padding: 20px;  cursor:pointer;}
-
+#flip-login{ font-weight: 500; font-size: 14px; padding: 20px;  cursor:pointer; margin-top:-2px; }
+.chart1,.chart2,.chart3 {width: 100%; height: 350px;}
 /*  ____________________________________________________________________________
 
 	 COLUMNS
@@ -326,7 +327,7 @@ header{background-color: #2a2a2a;}
 .col-large{width:75%; }
 .col-medium{width:50%; }
 .col-small{width:24%; }
-.col-x-small{width:10%; }
+.col-x-small{width:223px; }
 
 .opacity{opacity: 0.2;}
 /*  ____________________________________________________________________________
@@ -341,6 +342,7 @@ header{background-color: #2a2a2a;}
 .padding-none{ padding:0px;}
 .padding-left-none{ padding-left:0px;}
 
+
 .padding-left-double {padding-left:20px;}
 .padding-right-double  {padding-right:20px;}
 .padding-top-double  {padding-top:20px;}
@@ -354,7 +356,7 @@ header{background-color: #2a2a2a;}
 .margin-top  {margin-top:10px;}
 .margin-bottom  {margin-bottom:10px;}
 .margin{margin:10px;}
-
+.margin-top-minus{margin-top:-50px;}
 
 .margin-left-double {margin-left:20px;}
 .margin-right-double  {margin-right:20px;}
@@ -455,3 +457,14 @@ header{background-color: #2a2a2a;}
     text-decoration: none;
 }
 .grey-btn a{color: #fff; text-decoration: none;}
+.btn-black{width: 150px;color: #ffffff; paddings: 0px 35px;text-decoration: none; max-height: 50px; overflow: hidden; background:#5c5c5c; text-align: center;  margin: 0 10px; float: left; cursor: pointer;  }
+.btn-black:hover{opacity: 0.8;  }
+
+.tick { opacity: 0 !important; }
+#date-range1{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+.hour-range,.minute-range{background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;}

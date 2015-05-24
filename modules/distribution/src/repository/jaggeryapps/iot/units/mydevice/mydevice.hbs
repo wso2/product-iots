@@ -1,0 +1,110 @@
+{{#zone "topCss"}}
+	<link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet" />
+	<link  href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
+{{/zone}}
+{{#zone "topJs"}}
+	<!-- -->
+	<script src="{{self.publicURL}}/js/d3.min.js"></script>
+	<script src="{{self.publicURL}}/js/nv.d3.js"></script>
+	<script src="{{self.publicURL}}/js/stream_layers.js"></script>
+	<script src="{{self.publicURL}}/js/moment.min.js"></script>
+	<script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
+{{/zone}}
+{{#zone "main"}}
+<div class="container container-bg  white-bg">
+        <div class=" margin-top-double">
+                    <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                        <div class="col-lg-12  margin-top-double">
+                            <h1 class="grey ">Device Cloud</h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row float-right margin-top-minus">
+                        <div class="btn-black padding-top padding-bottom">
+                            <span> <img src="{{self.publicURL}}/images/temp.png" > </span>
+                            <span class="middle padding-bottom-double">Read Temp</span></div>
+                        <div class="btn-black padding-top padding-bottom">
+                            <span> <img src="{{self.publicURL}}/images/fan.png" > </span>
+                            <span class="middle padding-bottom-double">Switch Fan</span>
+                        </div>
+                        <div class="btn-black padding-top padding-bottom" onclick="changeImage()">
+                                    <span> <img id="myImage" onclick="changeImage()" src="{{self.publicURL}}/images/bulb-off.png" > </span>
+                            <span class="middle padding-bottom-double">Switch Bulb</span>
+                        </div >
+
+                        <div class="right margin-right">
+                            <span class="right margin-right">Select date range :</span>
+                            <input id="date-range1" size="60" value=""> </div>
+                    </div>
+
+        <div class="clear"></div>
+
+                    <div class="row margin-double">
+                        <div class="chart1">
+                            <h2 class="grey ">Read Temp</h2><hr>
+                            <svg></svg>
+                        </div><hr>
+                    </div>
+                    <div class="row margin-double padding-double "></div>
+                    <div class="row margin-double">
+                        <div class="chart2">
+                            <h2 class="grey ">Switch Fan</h2><hr>
+                            <svg></svg>
+                        </div><hr>
+                    </div>
+                    <div class="row margin-double">
+                        <div class="chart3">
+                            <h2 class="grey ">Switch Bulb</h2><hr>
+                            <svg></svg>
+                        </div><hr>
+                    </div>
+                </div>
+        </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+	<script type="text/javascript">
+		var configObject = {
+
+			format: 'DD.MM.YYYY HH:mm',
+			separator: ' to ',
+			language: 'auto',
+			startOfWeek: 'sunday',// or sunday
+			getValue: function()
+			{
+				return this.value;
+			},
+			setValue: function(s)
+			{
+				this.value = s;
+			},
+			startDate: false,
+			endDate: false,
+			minDays: 0,
+			maxDays: 0,
+			showShortcuts: true,
+			time: {
+				enabled: true
+			},
+			shortcuts:
+			{
+				//'prev-days': [1,3,5,7],
+				'next-days': [3,5,7],
+				//'prev' : ['week','month','year'],
+				'next' : ['week','month','year']
+			},
+			customShortcuts : [],
+			inline:false,
+			container: 'body',
+			alwaysOpen:false,
+			singleDate:false,
+			batchMode:false,
+			stickyMonths: false
+		};
+
+		$('#date-range1').dateRangePicker(configObject);
+	</script>
+	<script src="{{self.publicURL}}/js/bulb.js"></script>
+	<script src="{{self.publicURL}}/js/cumulativelinechart.js"></script>
+	<script src="{{self.publicURL}}/js/discretebarchart.js"></script>
+	<script src="{{self.publicURL}}/js/linewithfocuschart.js"></script>
+{{/zone}}

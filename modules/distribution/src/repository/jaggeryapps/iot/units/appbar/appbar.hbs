@@ -13,7 +13,8 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="{{self.publicURL}}/images/logo.png" </a>
+                        <a class="navbar-brand" href="/iot/"><img src="{{self
+                        .publicURL}}/images/logo.png" </a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,7 +43,7 @@
                                     </div>
                                 </a>
 
-                                <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-menu" style="padding:10px" role="menu">
                                     <div class="cu-arrow"></div>
                                     <div class="dropdown-menu-content">
                                         <a href="{{logoutURL}}" class="filter-item pull-right">Logout</a>
@@ -112,7 +113,7 @@
                             Password
                         </div>
                         <div class="col-lg-7 ">
-                            <input type="password right" id="password" placeholder="Password">
+                            <input type="password" id="password" placeholder="Password">
                         </div>
                     </div>
                     <div class="col-lg-5 padding center ">
@@ -120,9 +121,8 @@
                             Confirm Password
                         </div>
                         <div class="col-lg-7 ">
-                            <input type="password right" id="password_confirmation"
-                            placeholder="Confirm
-                            Password">
+                            <input type="password" id="password_confirmation"
+                            placeholder="Confirm Password">
                         </div>
                     </div>
                     <div class="col-lg-9 right padding-top-double padding-bottom-double margin-right-none">
@@ -158,8 +158,4 @@
 		</div>
     </header>
 
-{{/zone}}
-
-{{#zone "bottomJs"}}
-	<script src="{{self.publicURL}}/scripts/validate-register.js"></script>
 {{/zone}}
