@@ -1,91 +1,78 @@
-String resource, tempResource, host;
-String myIP = "";
-String hostIP = "";
-
-void setupResource(){
-  
-  setHostIP(server);
-  String port = String(SERVICE_PORT);
-  
-  host = "Host: " + hostIP + ":" + port;      
-  Serial.println(host);
-  
-  myIP = String(Ethernet.localIP()[0]);
-  
-  for ( int index = 1; index < 4; index++) {
-    myIP += "." + String(Ethernet.localIP()[index]);
-  }
-  
-  resource = String(SERVICE_EPOINT) + myIP + "/" +  String(DEVICE_OWNER) + "/" + 
-                                                    String(DEVICE_TYPE) + "/" + String(DEVICE_ID) + "/";  
-      
-  resource = resource + 30;
-  Serial.println(resource);
-  Serial.println("-------------------------------");
-}
-
-
-
-void setHostIP(byte server[4]){
-  hostIP = String(server[0]);
-  
-  for ( int index = 1; index < 4; index++) {
-    hostIP += "." + String(server[index]);
-  }
-}
-
-
-
 void pushDigitalPinData(){
   for ( int pin = 0; pin < (sizeof(digitalPins)/sizeof(int)); pin++) {
-    tempResource = " " + resource + "/D" + digitalPins[pin] + "/";
+    String resource = " " + String(SERVICE_EPOINT) + String(PUSH_ALARM_DATA) + " ";
 
-    if ( digitalRead(digitalPins[pin]) == HIGH) {
-      tempResource += "HIGH ";
-    } else if ( digitalRead(digitalPins[pin]) == LOW) {
-      tempResource += "LOW ";
+    String payLoad = jsonPayLoad + "DigitalPinData";
+    payLoad = payLoad + String(TIME_JSON) + "9999";
+    payLoad = payLoad + String(KEY_JSON) + getDataType(digitalPins[pin]);
+    payLoad += String(VALUE_JSON);
+    
+    
+    if ( digitalPins[pin] == TEMP_PIN ) {
+      payLoad += String(getTemperature());
+    } else if ( digitalRead(digitalPins[pin]) == HIGH ) {
+      payLoad += "ON";
+    } else if ( digitalRead(digitalPins[pin]) == LOW ) {
+      payLoad += "OFF";
     }
 
-    httpClient.print(HTTP_METHOD);
-    httpClient.print(tempResource);
+    payLoad = payLoad + String(END_JSON);
+    httpClient.print(HTTP_POST);
+    httpClient.print(resource);
     httpClient.println(HTTP_VERSION);
     httpClient.println(host);
+    httpClient.println(HTTP_CONTENT_TYPE);
+    httpClient.print(HTTP_CONTENT_LEN);
+    httpClient.println(payLoad.length());
     httpClient.println();
-    delay(2000);
+    httpClient.println(payLoad);
+    httpClient.println();
+    delay(1000);
     
     while (httpClient.available()) {
       char response = httpClient.read();
-      Serial.print(response);
+//      Serial.print(response);
     }
     
-    Serial.println();
-    Serial.println("-------------------------------");
-    tempResource = "";
-    delay(2000);
+//    Serial.println();
+//    Serial.println("-------------------------------");
+    delay(1000);
   }
 }
-
 
 
 void pushAnalogPinData(){
   for ( int pin = 0; pin < (sizeof(analogPins)/sizeof(int)); pin++) {
-    tempResource = " " + resource + "/A" + analogPins[pin] + "/" + analogRead(analogPins[pin]) + " ";
+    String resource = " " + String(SERVICE_EPOINT) + String(PUSH_ALARM_DATA) + " ";
+       
+    String payLoad = jsonPayLoad + "AnalogPinData";
+    payLoad = payLoad + String(TIME_JSON) + "9999";
+    payLoad = payLoad + String(KEY_JSON) + getDataType(analogPins[pin]);
+    payLoad = payLoad + String(VALUE_JSON) + analogRead(analogPins[pin]);
+    payLoad = payLoad + String(END_JSON);
 
-    httpClient.print(HTTP_METHOD);
-    httpClient.print(tempResource);
+    httpClient.print(HTTP_POST);
+    httpClient.print(resource);
     httpClient.println(HTTP_VERSION);
     httpClient.println(host);
+    httpClient.println(HTTP_CONTENT_TYPE);
+    httpClient.print(HTTP_CONTENT_LEN);
+    httpClient.println(payLoad.length());
+    httpClient.println();
+    httpClient.println(payLoad);
     httpClient.println();
     delay(1000);
     
     while (httpClient.available()) {
       char response = httpClient.read();
-      Serial.print(response);
+//      Serial.print(response);
     }
     
-    Serial.println();
-    Serial.println("-------------------------------");
-    tempResource = "";
+//    Serial.println();
+//    Serial.println("-------------------------------");
     delay(1000);
   }
 }
+
+
+
