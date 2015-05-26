@@ -27,11 +27,20 @@
                                     <i class="fw fw-right-arrow-2 fw-stack-1x"></i>
                                 </span>Arduino Ethernet / WiFi Shield
 								<br /><br />
-                                <form method="POST" class="form-login-box"
+								<form method="POST" class="float-left margin-right"
+									action="{{sketchPath}}">
+										<input type="hidden" name="type" value="firealarm_wifi" />
+										<button class="blue-btn" type="submit">Create Sketch for
+										Wifi
+										</button>
+									</form>
+                                <form method="POST" class="form-login-box float-left"
                                 action="{{sketchPath}}">
 									<input type="hidden" name="type" value="firealarm" />
-									<button class="blue-btn" type="submit">Create Sketch</button>
-									<button class="blue-btn right" type="button" onclick="document
+									<button class="blue-btn margin-right" type="submit">Create
+									Sketch
+									for Ethernet</button>
+									<button class="blue-btn" type="button" onclick="document
 									.location
                                     								.href='mydevices'">My
                                     								Devices</button>

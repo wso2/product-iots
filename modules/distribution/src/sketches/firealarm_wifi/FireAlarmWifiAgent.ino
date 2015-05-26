@@ -1,17 +1,23 @@
-#include "FireAlarmAgent.h"
+#include "FireAlarmWifiAgent.h"
 
-#include <Ethernet.h>
+#include <Adafruit_CC3000.h>
+//#include <ccspi.h>
+//#include <string.h>
+//#include "utility/debug.h"
 #include <SPI.h>
 #include "dht.h"
 
 int digitalPins[] = { TEMP_PIN, BULB_PIN, FAN_PIN };
 int analogPins[] = { 0, 1, 2, 3, 4, 5 };
 
-EthernetClient httpClient;
+Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ, ADAFRUIT_CC3000_VBAT,
+                                         SPI_CLOCK_DIVIDER); // you can change this clock speed
+
+Adafruit_CC3000_Client httpClient;
 String host, jsonPayLoad, replyMsg;
 
 void setup() {
-  if(DEBUG) Serial.begin(9600);
+  if(true) Serial.begin(115200); 
   pinMode(BULB_PIN, OUTPUT);
   pinMode(FAN_PIN, OUTPUT);
   connectHttp();
@@ -31,13 +37,14 @@ void loop() {
 
     if (subStrn.equals("IN")) {
       responseMsg = responseMsg.substring(newLine + 1, index); 
-      if (responseMsg.equals("TEMPERATURE")) {
-        replyMsg = "Temperature is " + String(getTemperature()) + "C.";
-        reply(replyMsg);
+      if (responseMsg.equals("TEMP")) {
+        int temperature =  (uint8_t)getTemperature();
+        replyMsg = "Temperature is " + String(temperature) + " C";
+        reply();
       } else if (responseMsg.equals("BULB")) {
         replyMsg = "Bulb was switched " + switchBulb();
       } else if (responseMsg.equals("FAN")) {
-        replyMsg = "Bulb was switched " + switchFan();
+        replyMsg = "Buzzer was switched " + switchFan();
       }    
     } 
   } else {
@@ -45,6 +52,7 @@ void loop() {
       Serial.println("client not found...");
       Serial.println("disconnecting.");
     }
+    
     httpClient.stop();
     connectHttp();
 
@@ -89,26 +97,26 @@ String switchFan() {
 
 double getTemperature(){
   dht DHT;
+  
   if(DEBUG) {
     Serial.println("-------------------------------");
     Serial.println("Type,\tstatus,\tHumidity (%),\tTemperature (C)");
     Serial.print("DHT11, \t");
   }
-  
   int chk = DHT.read11(TEMP_PIN);
   switch (chk)
   {
     case DHTLIB_OK:  
-		if(DEBUG) Serial.print("OK,\t"); 
+		if(DEBUG)  Serial.print("OK,\t"); 
 		break;
     case DHTLIB_ERROR_CHECKSUM: 
-		if(DEBUG) Serial.print("Checksum error,\t"); 
+		if(DEBUG)  Serial.print("Checksum error,\t"); 
 		break;
     case DHTLIB_ERROR_TIMEOUT: 
-		if(DEBUG) Serial.print("Time out error,\t"); 
+		if(DEBUG)  Serial.print("Time out error,\t"); 
 		break;
     case DHTLIB_ERROR_CONNECT:
-                if(DEBUG) Serial.print("Connect error,\t");
+                if(DEBUG)  Serial.print("Connect error,\t");
                 break;
     case DHTLIB_ERROR_ACK_L:
                 if(DEBUG) Serial.print("Ack Low error,\t");
@@ -117,7 +125,7 @@ double getTemperature(){
                 if(DEBUG) Serial.print("Ack High error,\t");
                 break;
     default: 
-	        if(DEBUG) Serial.print("Unknown error,\t"); 
+		if(DEBUG) Serial.print("Unknown error,\t"); 
 		break;
   }
   

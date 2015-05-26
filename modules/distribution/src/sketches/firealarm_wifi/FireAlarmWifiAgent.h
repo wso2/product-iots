@@ -1,5 +1,5 @@
-#ifndef FireAlarmAgent_H
-#define FireAlarmAgent_H
+#ifndef FireAlarmWifiAgent_H
+#define FireAlarmWifiAgent_H
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -7,27 +7,21 @@
  #include "WProgram.h"
 #endif
 
-#define HTTP_POST "POST"
-#define HTTP_GET "GET"
-#define HTTP_VERSION "HTTP/1.1"
-#define HTTP_CONTENT_TYPE "Content-Type: application/json"
-#define HTTP_CONTENT_LEN "Content-Length: "
+// These are the interrupt and control pins
+#define ADAFRUIT_CC3000_IRQ   3  // MUST be an interrupt pin!
+// These can be any two pins
+#define ADAFRUIT_CC3000_VBAT  5
+#define ADAFRUIT_CC3000_CS    10
+
+#define WLAN_SSID       "Dialog 4G"     // cannot be longer than 32 characters!
+#define WLAN_PASS       "FA09C543"
+#define WLAN_SECURITY   WLAN_SEC_WPA2
+                           // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
+#define IDLE_TIMEOUT_MS  3000      
 
 #define DEVICE_OWNER "${DEVICE_OWNER}"
 #define DEVICE_TYPE "FireAlarm"
 #define DEVICE_ID  "${DEVICE_ID}"
-
-#define PUSH_ALARM_DATA "pushalarmdata"
-#define READ_CONTROLS "readcontrols/"
-#define REPLY "reply"
-
-#define OWNER_JSON "{\"owner\":\""
-#define DEVICE_ID_JSON "\",\"deviceId\":\""
-#define REPLY_JSON "\",\"replyMessage\":\""
-#define TIME_JSON "\",\"time\":\""
-#define KEY_JSON "\",\"key\":\""
-#define VALUE_JSON "\",\"value\":\""
-#define END_JSON "\"}"
 
 #define SERVICE_PORT 9763 
 #define SERVICE_EPOINT "/WSO2ConnectedDevices/FireAlarmController/" 
@@ -35,13 +29,12 @@
                                         // readcontrols/{owner}/{deviceId}
                                         // reply - application/json - {"owner":"","deviceId":"","replyMessage":""}
 
-#define TEMP_PIN 3
-#define BULB_PIN 4
-#define FAN_PIN 5
+#define TEMP_PIN 6
+#define BULB_PIN 7
+#define FAN_PIN 8
 
-#define DEBUG false
 #define POLL_INTERVAL 1000
-
+#define DEBUG false
 
 #endif
 

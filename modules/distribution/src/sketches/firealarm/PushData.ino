@@ -17,6 +17,9 @@ void pushDigitalPinData(){
     }
 
     payLoad = payLoad + String(END_JSON);
+    
+    if(DEBUG) Serial.println(payLoad);
+    
     httpClient.print(HTTP_POST);
     httpClient.print(resource);
     httpClient.println(HTTP_VERSION);
@@ -27,15 +30,31 @@ void pushDigitalPinData(){
     httpClient.println();
     httpClient.println(payLoad);
     httpClient.println();
+    
+    if(DEBUG)  {
+      Serial.print(HTTP_POST);
+      Serial.print(resource);
+      Serial.println(HTTP_VERSION);
+      Serial.println(host);
+      Serial.println(HTTP_CONTENT_TYPE);
+      Serial.print(HTTP_CONTENT_LEN);
+      Serial.println(payLoad.length());
+      Serial.println();
+      Serial.println(payLoad);
+      Serial.println();
+    }
+    
     delay(1000);
     
     while (httpClient.available()) {
       char response = httpClient.read();
-//      Serial.print(response);
+      if(DEBUG) Serial.print(response);
     }
     
-//    Serial.println();
-//    Serial.println("-------------------------------");
+  if(DEBUG) {
+    Serial.println();
+    Serial.println("-------------------------------");
+  }
     delay(1000);
   }
 }
@@ -50,7 +69,9 @@ void pushAnalogPinData(){
     payLoad = payLoad + String(KEY_JSON) + getDataType(analogPins[pin]);
     payLoad = payLoad + String(VALUE_JSON) + analogRead(analogPins[pin]);
     payLoad = payLoad + String(END_JSON);
-
+  
+    if(DEBUG) Serial.println(payLoad);
+  
     httpClient.print(HTTP_POST);
     httpClient.print(resource);
     httpClient.println(HTTP_VERSION);
@@ -61,15 +82,31 @@ void pushAnalogPinData(){
     httpClient.println();
     httpClient.println(payLoad);
     httpClient.println();
+    
+    if(DEBUG) {
+      Serial.print(HTTP_POST);
+      Serial.print(resource);
+      Serial.println(HTTP_VERSION);
+      Serial.println(host);
+      Serial.println(HTTP_CONTENT_TYPE);
+      Serial.print(HTTP_CONTENT_LEN);
+      Serial.println(payLoad.length());
+      Serial.println();
+      Serial.println(payLoad);
+      Serial.println();
+    }
+    
     delay(1000);
     
     while (httpClient.available()) {
       char response = httpClient.read();
-//      Serial.print(response);
+      if(DEBUG) Serial.print(response);
     }
     
-//    Serial.println();
-//    Serial.println("-------------------------------");
+  if(DEBUG) {
+    Serial.println();
+    Serial.println("-------------------------------");
+  }
     delay(1000);
   }
 }

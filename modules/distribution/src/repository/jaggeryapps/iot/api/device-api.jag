@@ -41,7 +41,8 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
         exit();
     }
 
-	serviceUrl = "http://localhost:9763/WSO2ConnectedDevices-1.0.0/FireAlarmDeviceManager/DownloadSketch";
+	serviceUrl = "http://localhost:9763/WSO2ConnectedDevices-1.0" +
+	".0/FireAlarmDeviceManager/downloadSketch";
     response.sendRedirect(serviceUrl + "?type="+sketchType+"&owner="+user.username);
 	exit();
 }
