@@ -264,11 +264,23 @@
             <fileMode>755</fileMode>
         </fileSet-->
     	<!-- Copying Device Cloud webapp -->
-    	<fileSet>
-            <directory>src/repository/webapps/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
+    	<!--<fileSet>-->
+            <!--<directory>src/repository/webapps/</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
+            <!--</outputDirectory>-->
+        <!--</fileSet>-->
+
+        <!--copy web app for iotdevices-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
+            <includes>
+                <include>iotdevices.war</include>
+            </includes>
         </fileSet>
+
         <!-- Copying Authentication Endpoint webapp -->
         <fileSet>
             <directory>
