@@ -277,7 +277,7 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
             <includes>
-                <include>devices.war</include>
+                <include>iotdevices.war</include>
             </includes>
         </fileSet>
 
