@@ -33,78 +33,42 @@
                         </div >
 
                         <div class="right margin-right">
-                            <span class="right margin-right">Select date range :</span>
-                            <input id="date-range1" size="60" value=""> </div>
-                    </div>
+                            <input class="right margin-right" id="date-range1" size="60" value="">
+                                                        <button type="button" id="btn-draw-graphs" class="btn btn-primary">
+                                                            Draw Graphs
+                                                        </button>
+                                                        </div>
+                                                </div>
 
         <div class="clear"></div>
 
                     <div class="row margin-double">
                         <div class="chart1">
-                            <h2 class="grey ">Read Temp</h2><hr>
+                            <h2 class="grey ">Temperature</h2><hr>
                             <svg></svg>
                         </div><hr>
                     </div>
                     <div class="row margin-double padding-double "></div>
                     <div class="row margin-double">
                         <div class="chart2">
-                            <h2 class="grey ">Switch Fan</h2><hr>
+                            <h2 class="grey ">Fan Status</h2><hr>
                             <svg></svg>
                         </div><hr>
                     </div>
                     <div class="row margin-double">
                         <div class="chart3">
-                            <h2 class="grey ">Switch Bulb</h2><hr>
+                            <h2 class="grey ">Bulb Status</h2><hr>
                             <svg></svg>
                         </div><hr>
                     </div>
                 </div>
         </div>
-{{/zone}}
-{{#zone "bottomJs"}}
-	<script type="text/javascript">
-		var configObject = {
-
-			format: 'DD.MM.YYYY HH:mm',
-			separator: ' to ',
-			language: 'auto',
-			startOfWeek: 'sunday',// or sunday
-			getValue: function()
-			{
-				return this.value;
-			},
-			setValue: function(s)
-			{
-				this.value = s;
-			},
-			startDate: false,
-			endDate: false,
-			minDays: 0,
-			maxDays: 0,
-			showShortcuts: true,
-			time: {
-				enabled: true
-			},
-			shortcuts:
-			{
-				//'prev-days': [1,3,5,7],
-				'next-days': [3,5,7],
-				//'prev' : ['week','month','year'],
-				'next' : ['week','month','year']
-			},
-			customShortcuts : [],
-			inline:false,
-			container: 'body',
-			alwaysOpen:false,
-			singleDate:false,
-			batchMode:false,
-			stickyMonths: false
-		};
-
-		$('#date-range1').dateRangePicker(configObject);
-	</script>
+<!-- TODO : Move these scripts to a bottomJs zone.
+When they are moved the script tags get repeated for some reason :-(
+    -->
+	<script src="{{self.publicURL}}/js/graph_util.js"></script>
 	<script src="{{self.publicURL}}/js/bulb.js"></script>
-	<script src="{{self.publicURL}}/js/cumulativelinechart.js"></script>
-	<script src="{{self.publicURL}}/js/discretebarchart.js"></script>
-	<script src="{{self.publicURL}}/js/linewithfocuschart.js"></script>
+	<script src="{{self.publicURL}}/js/temperature_graph.js"></script>
+	<script src="{{self.publicURL}}/js/fan_status_graph.js"></script>
+	<script src="{{self.publicURL}}/js/bulb_status_graph.js"></script>
 {{/zone}}
