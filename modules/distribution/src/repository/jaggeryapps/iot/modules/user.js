@@ -23,7 +23,7 @@ userModule = function () {
     var constants = require("/modules/constants.js");
     var utility = require("/modules/utility.js").utility;
 
-    var userManagementService = utility.getUserManagementService();
+    //var userManagementService = utility.getUserManagementService();
 
     var publicMethods = {};
     var privateMethods = {};
@@ -245,35 +245,35 @@ userModule = function () {
         }
     };
 
-    publicMethods.getUsers = function () {
-        var carbon = require('carbon');
-
-        var carbonUser = session.get(constants.USER_SESSION_KEY);
-        if (!carbonUser) {
-            log.error("User object was not found in the session");
-            throw constants.ERRORS.USER_NOT_FOUND;
-        }
-
-        var userList;
-        try{
-            userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
-        }catch(e){
-            log.error("Error occurred while reading all users");
-            return [];
-        }
-
-        var users = [];
-        var i, userObject;
-        for (i = 0; i < userList.size(); i++) {
-            userObject = userList.get(i);
-            users.push({
-                "username" : userObject.getUserName(),
-                "email" : userObject.getEmail(),
-                "name" : userObject.getFirstName() + " " + userObject.getLastName()
-            });
-        }
-        return users;
-    };
+    //publicMethods.getUsers = function () {
+    //    var carbon = require('carbon');
+    //
+    //    var carbonUser = session.get(constants.USER_SESSION_KEY);
+    //    if (!carbonUser) {
+    //        log.error("User object was not found in the session");
+    //        throw constants.ERRORS.USER_NOT_FOUND;
+    //    }
+    //
+    //    var userList;
+    //    try{
+    //        userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
+    //    }catch(e){
+    //        log.error("Error occurred while reading all users");
+    //        return [];
+    //    }
+    //
+    //    var users = [];
+    //    var i, userObject;
+    //    for (i = 0; i < userList.size(); i++) {
+    //        userObject = userList.get(i);
+    //        users.push({
+    //            "username" : userObject.getUserName(),
+    //            "email" : userObject.getEmail(),
+    //            "name" : userObject.getFirstName() + " " + userObject.getLastName()
+    //        });
+    //    }
+    //    return users;
+    //};
 
     publicMethods.isAuthorized = function (permission) {
         var carbonModule = require("carbon");

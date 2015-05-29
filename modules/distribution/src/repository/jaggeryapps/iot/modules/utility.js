@@ -18,18 +18,20 @@
 
 var utility;
 utility = function () {
-    var JavaClass = Packages.java.lang.Class;
-    var PrivilegedCarbonContext = Packages.org.wso2.carbon.context.PrivilegedCarbonContext;
+    //var JavaClass = Packages.java.lang.Class;
+    //var PrivilegedCarbonContext = Packages.org.wso2.carbon.context.PrivilegedCarbonContext;
 
-    var getOsgiService = function (className) {
-        return PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(JavaClass.forName(className));
-    };
+    //var getOsgiService = function (className) {
+    //    var log = new Log();
+    //    log.info("###### Current Class : "+className);
+    //    return PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(JavaClass.forName(className));
+    //};
 
     var publicMethods = {};
 
-    publicMethods.getUserManagementService = function () {
-        return getOsgiService('org.wso2.carbon.device.mgt.user.core.service.UserManagementService');
-    };
+    //publicMethods.getUserManagementService = function () {
+    //    return getOsgiService('org.wso2.carbon.device.mgt.user.core.service.UserManagementService');
+    //};
 
     publicMethods.insertAppPermissions = function (userModule, type) {
         userModule.addPermissions([{key: "device-mgt", name: "Device Management"}], "", type);
