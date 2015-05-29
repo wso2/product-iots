@@ -355,9 +355,9 @@
 
             <!--MDM dependencies-->
             <dependency>
-                <groupId>org.wso2.carbon.mdm</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.mobile.impl</artifactId>
-                <version>${carbon.mobile.device.mgt.version}</version>
+                <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
 
             <!--Osgi dependencies-->
@@ -785,7 +785,7 @@
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
 
         <!-- Mobile Device Management -->
-        <carbon.mobile.device.mgt.version>1.9.2-SNAPSHOT</carbon.mobile.device.mgt.version>
+        <carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
         <mdm.version>1.0.0-SNAPSHOT</mdm.version>
 
         <!-- API Management -->
