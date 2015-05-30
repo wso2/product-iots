@@ -16,6 +16,7 @@
 #define DEVICE_OWNER "${DEVICE_OWNER}"
 #define DEVICE_TYPE "FireAlarm"
 #define DEVICE_ID  "${DEVICE_ID}"
+#define DEVICE_TOKEN  "${DEVICE_TOKEN}"
 
 #define PUSH_ALARM_DATA "pushalarmdata"
 #define READ_CONTROLS "readcontrols/"
