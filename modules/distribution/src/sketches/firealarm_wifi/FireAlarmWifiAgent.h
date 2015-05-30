@@ -22,6 +22,7 @@
 #define DEVICE_OWNER "${DEVICE_OWNER}"
 #define DEVICE_TYPE "FireAlarm"
 #define DEVICE_ID  "${DEVICE_ID}"
+#define DEVICE_TOKEN  "${DEVICE_TOKEN}"
 
 #define SERVICE_PORT 9763 
 #define SERVICE_EPOINT "/WSO2ConnectedDevices/FireAlarmController/" 
