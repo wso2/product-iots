@@ -1,74 +1,81 @@
 {{#zone "topCss"}}
-	<link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet" />
-	<link  href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
+    <link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet"/>
+    <link href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
 {{/zone}}
 {{#zone "topJs"}}
-	<!-- -->
-	<script src="{{self.publicURL}}/js/d3.min.js"></script>
-	<script src="{{self.publicURL}}/js/nv.d3.js"></script>
-	<script src="{{self.publicURL}}/js/stream_layers.js"></script>
-	<script src="{{self.publicURL}}/js/moment.min.js"></script>
-	<script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
+    <!-- -->
+    <script src="{{self.publicURL}}/js/d3.min.js"></script>
+    <script src="{{self.publicURL}}/js/nv.d3.js"></script>
+    <script src="{{self.publicURL}}/js/stream_layers.js"></script>
+    <script src="{{self.publicURL}}/js/moment.min.js"></script>
+    <script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
 {{/zone}}
 {{#zone "main"}}
-<div class="container container-bg  white-bg">
+    <div class="container container-bg  white-bg">
         <div class=" margin-top-double">
-                    <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
-                        <div class="col-lg-12  margin-top-double">
-                            <h1 class="grey ">Device Cloud</h1>
-                            <hr>
-                        </div>
-                    </div>
-                    <div class="row float-right margin-top-minus">
-                        <div class="btn-black padding-top padding-bottom">
-                            <span> <img src="{{self.publicURL}}/images/temp.png" > </span>
-                            <span class="middle padding-bottom-double">Read Temp</span></div>
-                        <div class="btn-black padding-top padding-bottom">
-                            <span> <img src="{{self.publicURL}}/images/fan.png" > </span>
-                            <span class="middle padding-bottom-double">Switch Fan</span>
-                        </div>
-                        <div class="btn-black padding-top padding-bottom" onclick="changeImage()">
-                                    <span> <img id="myImage" onclick="changeImage()" src="{{self.publicURL}}/images/bulb-off.png" > </span>
-                            <span class="middle padding-bottom-double">Switch Bulb</span>
-                        </div >
-
-                        <div class="right margin-right">
-                            <input class="right margin-right" id="date-range1" size="60" value="">
-                                                        <button type="button" id="btn-draw-graphs" class="btn btn-primary">
-                                                            Draw Graphs
-                                                        </button>
-                                                        </div>
-                                                </div>
-
-        <div class="clear"></div>
-
-                    <div class="row margin-double">
-                        <div class="chart1">
-                            <h2 class="grey ">Temperature</h2><hr>
-                            <svg></svg>
-                        </div><hr>
-                    </div>
-                    <div class="row margin-double padding-double "></div>
-                    <div class="row margin-double">
-                        <div class="chart2">
-                            <h2 class="grey ">Fan Status</h2><hr>
-                            <svg></svg>
-                        </div><hr>
-                    </div>
-                    <div class="row margin-double">
-                        <div class="chart3">
-                            <h2 class="grey ">Bulb Status</h2><hr>
-                            <svg></svg>
-                        </div><hr>
-                    </div>
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                <div class="col-lg-12  margin-top-double">
+                    <h1 class="grey ">Device Cloud</h1>
+                    <hr>
                 </div>
+            </div>
+            <div class="row float-right margin-top-minus">
+                <div class="btn-black padding-top padding-bottom">
+                    <span> <img src="{{self.publicURL}}/images/temp.png"> </span>
+                    <span class="middle padding-bottom-double">Read Temp</span></div>
+                <div class="btn-black padding-top padding-bottom">
+                    <span> <img src="{{self.publicURL}}/images/fan.png"> </span>
+                    <span class="middle padding-bottom-double">Switch Fan</span>
+                </div>
+                <div class="btn-black padding-top padding-bottom" onclick="changeImage()">
+                    <span> <img id="myImage" onclick="changeImage()"
+                                src="{{self.publicURL}}/images/bulb-off.png"> </span>
+                    <span class="middle padding-bottom-double">Switch Bulb</span>
+                </div>
+
+                <div class="right margin-right">
+                    <input class="right margin-right" id="date-range1" size="60" value="">
+                    <button type="button" id="btn-draw-graphs" class="btn btn-primary">
+                        Draw Graphs
+                    </button>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="row margin-double">
+                <div class="chart1">
+                    <h2 class="grey ">Temperature</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double padding-double "></div>
+            <div class="row margin-double">
+                <div class="chart2">
+                    <h2 class="grey ">Fan Status</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div class="chart3">
+                    <h2 class="grey ">Bulb Status</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
         </div>
-<!-- TODO : Move these scripts to a bottomJs zone.
+    </div>
+    <!-- TODO : Move these scripts to a bottomJs zone.
 When they are moved the script tags get repeated for some reason :-(
-    -->
-	<script src="{{self.publicURL}}/js/graph_util.js"></script>
-	<script src="{{self.publicURL}}/js/bulb.js"></script>
-	<script src="{{self.publicURL}}/js/temperature_graph.js"></script>
-	<script src="{{self.publicURL}}/js/fan_status_graph.js"></script>
-	<script src="{{self.publicURL}}/js/bulb_status_graph.js"></script>
+	-->
+    <script src="{{self.publicURL}}/js/graph_util.js"></script>
+    <script src="{{self.publicURL}}/js/bulb.js"></script>
+    <script src="{{self.publicURL}}/js/temperature_graph.js"></script>
+    <script src="{{self.publicURL}}/js/fan_status_graph.js"></script>
+    <script src="{{self.publicURL}}/js/bulb_status_graph.js"></script>
 {{/zone}}

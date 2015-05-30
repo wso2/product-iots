@@ -38,7 +38,6 @@ var configObject = {
 
 $('#date-range1').dateRangePicker(configObject)
     .bind('datepicker-apply', function (event, dateRange) {
-
         fromDate = dateRange.date1 != "Invalid Date" ? dateRange.date1.getTime() / 1000 : null;
         toDate = dateRange.date2 != "Invalid Date" ? dateRange.date2.getTime() / 1000 : null;
     });
@@ -46,6 +45,7 @@ $('#date-range1').dateRangePicker(configObject)
 $('#btn-draw-graphs').on('click', function () {
     var deviceId = $('#device-id').val();
     console.log(deviceId);
+    console.log(dateRange.date1.toString());
     getStats(deviceId, fromDate, toDate);
 })
 
@@ -62,6 +62,10 @@ function getStats(deviceId, from, to) {
     if (to) {
         requestData['to'] = to;
     }
+
+
+    console.log("from: "+from);
+    console.log("to:" +to);
 
     var getStatsRequest = $.ajax({
         url: "api/stats",

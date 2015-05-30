@@ -51,10 +51,14 @@ function getUsername() {
 	var user = session.get(constants.USER_SESSION_KEY);
 
 	if (user) {
+		log.info("username: "+ user.username);
 		return user.username;
 	} else {
+		log.info("username is null");
 		return null;
 	}
+
+
 
 }
 

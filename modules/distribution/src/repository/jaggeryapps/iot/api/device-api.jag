@@ -31,8 +31,6 @@ var result;
 
 if (uriMatcher.match("/{context}/api/device/sketch/")) {
     sketchType = request.getParameter("type");
-    log.error("#################");
-    log.error(sketchType);
     if(!sketchType){log.error("Sketch Type is empty");}
 
     var user = session.get(constants.USER_SESSION_KEY);
@@ -41,9 +39,9 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
         exit();
     }
 
-	serviceUrl = "http://localhost:9763/WSO2ConnectedDevices-1.0" +
-	".0/FireAlarmDeviceManager/downloadSketch";
-    response.sendRedirect(serviceUrl + "?type="+sketchType+"&owner="+user.username);
+	fireAlarmManagerService = "http://localhost:9763/iotdevices/FireAlarmManager";
+	sketchDownloadEndPoint = fireAlarmManagerService + "/downloadSketch";
+    response.sendRedirect(sketchDownloadEndPoint + "?type="+sketchType+"&owner="+user.username);
 	exit();
 }
 

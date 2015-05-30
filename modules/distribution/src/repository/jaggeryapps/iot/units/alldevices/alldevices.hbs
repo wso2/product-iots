@@ -10,6 +10,11 @@
             </div>
         </div>
 
+		{{#each devices.devices}}
+			{{name}}<br/>
+			{{id}}<br/><br/>
+		{{/each}}
+
         <div class="row margin-double padding-double">
             <table class="table table-hover border">
                 <thead>
@@ -20,6 +25,8 @@
                 </tr>
                 </thead>
                 <tbody>
+
+
                 <tr class="border-top">
                     <th scope="row">001</th>
                     <td>RaspberryPi</td>
@@ -90,7 +97,6 @@
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 {{/zone}}
