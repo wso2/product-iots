@@ -137,7 +137,8 @@
             </definition>
         </datasource>
 
-        <datasource>
+        <!-- *****Replace ${BAM_HOME} in `url` element with your WSO2 BAM home directory.***** -->
+        <!--datasource>
             <name>WSO2IOT_STATS_DB</name>
             <jndiConfig>
             <name>jdbc/WSO2IOT_STATS_DB</name>
@@ -145,7 +146,7 @@
             <description>The datasource used for analyzer data</description>
             <definition type="RDBMS">
             <configuration>
-                <url>jdbc:h2:repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url>
+                <url>jdbc:h2:${BAM_HOME}/repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url>
                 <username>wso2carbon</username>
                 <password>wso2carbon</password>
                 <driverClassName>org.h2.Driver</driverClassName>
@@ -156,7 +157,7 @@
                 <validationInterval>30000</validationInterval>
             </configuration>
             </definition>
-        </datasource>   
+        </datasource-->
         
     </datasources>
 </datasources-configuration>
