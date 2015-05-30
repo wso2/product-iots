@@ -1,5 +1,5 @@
-#ifndef FireAlarmAgent_H
-#define FireAlarmAgent_H
+#ifndef FireAlarmEthernetAgent_H
+#define FireAlarmEthernetAgent_H
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -13,10 +13,9 @@
 #define HTTP_CONTENT_TYPE "Content-Type: application/json"
 #define HTTP_CONTENT_LEN "Content-Length: "
 
-#define DEVICE_OWNER "${DEVICE_OWNER}"
-#define DEVICE_TYPE "FireAlarm"
-#define DEVICE_ID  "${DEVICE_ID}"
-#define DEVICE_TOKEN  "${DEVICE_TOKEN}"
+#define DEVICE_OWNER "${DEVICE_OWNER}"          //"Smeansbeer"
+#define DEVICE_ID "${DEVICE_ID}"              //"vbhenqyt85yq"
+#define DEVICE_TOKEN "${DEVICE_TOKEN}"
 
 #define PUSH_ALARM_DATA "pushalarmdata"
 #define READ_CONTROLS "readcontrols/"
@@ -31,7 +30,7 @@
 #define END_JSON "\"}"
 
 #define SERVICE_PORT 9763 
-#define SERVICE_EPOINT "/WSO2ConnectedDevices/FireAlarmController/" 
+#define SERVICE_EPOINT "/iotdevices/FireAlarmController/" 
                                         // pushalarmdata - application/json - {"owner":"","deviceId":"","replyMessage":"","time":"","key":"","value":""}
                                         // readcontrols/{owner}/{deviceId}
                                         // reply - application/json - {"owner":"","deviceId":"","replyMessage":""}

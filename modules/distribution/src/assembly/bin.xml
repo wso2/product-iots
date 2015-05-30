@@ -402,14 +402,22 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-	<file>
+	    <file>
              <source>
                  ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml
              </source>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/device-mgt-plugin-configs/iot</outputDirectory>
+             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
              <filtered>true</filtered>
              <fileMode>644</fileMode>
          </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/devicecloud-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!--        <file>
                     <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
                     </source>

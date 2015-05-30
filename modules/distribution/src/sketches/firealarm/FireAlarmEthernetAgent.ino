@@ -1,8 +1,17 @@
-#include "FireAlarmAgent.h"
+#include "FireAlarmEthernetAgent.h"
 
 #include <Ethernet.h>
 #include <SPI.h>
 #include "dht.h"
+
+    /**********************************************************************************************  
+        0. Check with a sample Ethernet code of the Ethernet library to ensure that the sheild is working
+        1. Set the ip of the server(byte array below) where the Web-Rest API for the FireAlarm is running
+        2. Check whether the "SERVICE_EPOINT" is correct in the 'FireAlarmWifiAgent.h' file
+        3. Check whether the "SERVICE_PORT" is the same (9763) for the server running. Change it if needed
+        4. Check whether the pins have been attached accordingly in the Arduino
+        5. Check whether all reqquired pins are added to the 'digitalPins' array  
+    ***********************************************************************************************/
 
 int digitalPins[] = { TEMP_PIN, BULB_PIN, FAN_PIN };
 int analogPins[] = { 0, 1, 2, 3, 4, 5 };
@@ -21,7 +30,8 @@ void setup() {
 void loop() {
   if (httpClient.connected()) {    
     pushDigitalPinData();
-
+//    pushData();            //  Use this method to batch all data together and send in one call
+    
     delay(POLL_INTERVAL);
     
     String responseMsg = readControls();    

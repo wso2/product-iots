@@ -1,29 +1,43 @@
-String readControls() {
-  String responseMsg;
+boolean readControls() {
+//  String responseMsg;
   
-  httpClient.fastrprint(F("GET ")); 
-  httpClient.fastrprint(SERVICE_EPOINT); httpClient.fastrprint(F("readcontrols/"));
-  httpClient.fastrprint(DEVICE_OWNER); httpClient.fastrprint(F("/")); httpClient.fastrprint(DEVICE_ID);
-  httpClient.fastrprint(F(" HTTP/1.1")); httpClient.fastrprint(F("\n"));
-  httpClient.fastrprint(host.c_str()); httpClient.fastrprint(F("\n"));
-  httpClient.println();
+  pollClient.fastrprint(F("GET ")); 
+  pollClient.fastrprint(SERVICE_EPOINT); pollClient.fastrprint(F("readcontrols/"));
+  pollClient.fastrprint(DEVICE_OWNER); pollClient.fastrprint(F("/")); pollClient.fastrprint(DEVICE_ID);
+  pollClient.fastrprint(F(" HTTP/1.1")); pollClient.fastrprint(F("\n"));
+  pollClient.fastrprint(host.c_str()); pollClient.fastrprint(F("\n"));
+  pollClient.println();
 
   delay(1000);
   
-  while (httpClient.available()) {
-    char response = httpClient.read();
-    responseMsg += response;
+  if (true) {
+    while (pollClient.available()) {
+      char response = pollClient.read();
+      responseMsg += response;
+    }
   }
   
+  
+    int index = responseMsg.lastIndexOf(":");
+    int newLine = responseMsg.lastIndexOf("\n");
+    subStrn = responseMsg.substring(index + 1);
+    responseMsg = responseMsg.substring(newLine + 1, index); 
+    
   if(DEBUG) {
     Serial.print(responseMsg);
     Serial.println();
     Serial.println("-------------------------------");
   }
   
-  delay(1000);
-  return responseMsg; 
+  
+  if (subStrn.equals("IN")) {
+    return false;
+  }
+
+  return true; 
 }
+
+
 
 void reply() {
   String payLoad = replyMsg + "\"}";
@@ -32,17 +46,17 @@ void reply() {
     Serial.print(jsonPayLoad); Serial.println(payLoad);
   }
      
-  httpClient.fastrprint(F("POST ")); 
-  httpClient.fastrprint(SERVICE_EPOINT); httpClient.fastrprint(F("reply")); 
-  httpClient.fastrprint(F(" HTTP/1.1")); httpClient.fastrprint(F("\n")); 
-  httpClient.fastrprint(host.c_str()); httpClient.fastrprint(F("\n"));
-  httpClient.fastrprint(F("Content-Type: application/json")); httpClient.fastrprint(F("\n"));
-  httpClient.fastrprint(F("Content-Length: "));
+  pollClient.fastrprint(F("POST ")); 
+  pollClient.fastrprint(SERVICE_EPOINT); pollClient.fastrprint(F("reply")); 
+  pollClient.fastrprint(F(" HTTP/1.1")); pollClient.fastrprint(F("\n")); 
+  pollClient.fastrprint(host.c_str()); pollClient.fastrprint(F("\n"));
+  pollClient.fastrprint(F("Content-Type: application/json")); pollClient.fastrprint(F("\n"));
+  pollClient.fastrprint(F("Content-Length: "));
   
   int payLength = jsonPayLoad.length() + payLoad.length();
   
-  httpClient.fastrprint(String(payLength).c_str()); httpClient.fastrprint(F("\n"));
-  httpClient.fastrprint(F("\n")); 
+  pollClient.fastrprint(String(payLength).c_str()); pollClient.fastrprint(F("\n"));
+  pollClient.fastrprint(F("\n")); 
     
   if(DEBUG) {
     Serial.print("POST ");
@@ -59,43 +73,45 @@ void reply() {
   
   for (int i = 0; i < jsonPayLoad.length(); i++) {
     if ( (i+1)*chunkSize > jsonPayLoad.length()) {
-      httpClient.print(jsonPayLoad.substring(i*chunkSize, jsonPayLoad.length()));
+      pollClient.print(jsonPayLoad.substring(i*chunkSize, jsonPayLoad.length()));
       if(DEBUG) Serial.print(jsonPayLoad.substring(i*chunkSize, jsonPayLoad.length()));
       i = jsonPayLoad.length();
     } else {
-      httpClient.print(jsonPayLoad.substring(i*chunkSize, (i+1)*chunkSize));
+      pollClient.print(jsonPayLoad.substring(i*chunkSize, (i+1)*chunkSize));
       if(DEBUG) Serial.print(jsonPayLoad.substring(i*chunkSize, (i+1)*chunkSize));
     }
   } 
   
   for (int i = 0; i < payLoad.length(); i++) {
     if ( (i+1)*chunkSize > payLoad.length()) {
-      httpClient.print(payLoad.substring(i*chunkSize, payLoad.length()));
+      pollClient.print(payLoad.substring(i*chunkSize, payLoad.length()));
       if(DEBUG) Serial.print(payLoad.substring(i*chunkSize, payLoad.length()));
       i = payLoad.length();
     } else {
-      httpClient.print(payLoad.substring(i*chunkSize, (i+1)*chunkSize));
+      pollClient.print(payLoad.substring(i*chunkSize, (i+1)*chunkSize));
       if(DEBUG) Serial.print(payLoad.substring(i*chunkSize, (i+1)*chunkSize));
     }
   }
   
-  httpClient.fastrprint(F("\n"));
+  pollClient.fastrprint(F("\n"));
   if(DEBUG) Serial.println();
     
   delay(1000);
   
-  while (httpClient.available()) {
-    char response = httpClient.read();
-    if(DEBUG) Serial.print(response);
+  if(true) { 
+    while (pollClient.available()) {
+      char response = pollClient.read();
+      if(DEBUG) Serial.print(response);
+    }
   }
- 
+  
   if(DEBUG) {
     Serial.println();
     Serial.println("-------------------------------");
   }
   
   payLoad = "";
-  delay(1000);
+//  delay(1000);
 
 }
 
