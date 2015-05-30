@@ -44,8 +44,6 @@ $('#date-range1').dateRangePicker(configObject)
 
 $('#btn-draw-graphs').on('click', function () {
     var deviceId = $('#device-id').val();
-    console.log(deviceId);
-    console.log(dateRange.date1.toString());
     getStats(deviceId, fromDate, toDate);
 })
 
@@ -62,10 +60,6 @@ function getStats(deviceId, from, to) {
     if (to) {
         requestData['to'] = to;
     }
-
-
-    console.log("from: "+from);
-    console.log("to:" +to);
 
     var getStatsRequest = $.ajax({
         url: "api/stats",

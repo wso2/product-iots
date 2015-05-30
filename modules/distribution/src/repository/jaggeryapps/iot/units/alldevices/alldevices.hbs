@@ -9,12 +9,6 @@
                 </div>
             </div>
         </div>
-
-		{{#each devices.devices}}
-			{{name}}<br/>
-			{{id}}<br/><br/>
-		{{/each}}
-
         <div class="row margin-double padding-double">
             <table class="table table-hover border">
                 <thead>
@@ -25,76 +19,26 @@
                 </tr>
                 </thead>
                 <tbody>
-
-
-                <tr class="border-top">
-                    <th scope="row">001</th>
-                    <td>RaspberryPi</td>
-                    <td class="float-right border-top ">
-                        <form method="GET" action="{{myDevicePath}}">
-                            <button class="btn-black-action" name="view" value="">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="edit" value="">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="remove" value="">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="border-top">
-                    <th scope="row">002</th>
-                    <td>ArduinoUno</td>
-                    <td class="float-right border-top">
-                        <form method="GET" action="{{myDevicePath}}">
-                            <button class="btn-black-action" name="view" value="">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="edit" value="">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="remove" value="">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="border-top">
-                    <th scope="row">003</th>
-                    <td>BeagleBone</td>
-                    <td class=" float-right border-top">
-                        <form method="GET" action="{{myDevicePath}}">
-                            <button class="btn-black-action" name="view" value="">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="edit" value="">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="remove" value="">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="border-top">
-                    <th scope="row">003</th>
-                    <td>Fire Alarm</td>
-                    <td class="float-right border-top">
-                        <form method="GET" action="{{myDevicePath}}">
-                            <button class="btn-black-action" name="view" value="">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="edit" value="">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="remove" value="">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                <form method="GET" action="{{myDevicePath}}">
+				{{#each devices.device}}
+				<tr class="border-top">
+					<th scope="row">{{deviceIdentifier}}</th>
+					<td>{{name}}</td>
+					<td class="float-right border-top ">
+						<button class="btn-black-action" name="deviceId"
+								value="{{deviceIdentifier}}">
+							<i class="fw fw-view padding-right"></i>View
+						</button>
+						<button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
+							<i class="fw fw-edit padding-right"></i>Edit
+						</button>
+						<button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
+							<i class="fw fw-delete padding-right"></i>Remove
+						</button>
+					</td>
+				</tr>
+				{{/each}}
+                </form>
                 </tbody>
             </table>
         </div>
