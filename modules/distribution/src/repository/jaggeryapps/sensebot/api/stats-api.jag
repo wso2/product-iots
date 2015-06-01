@@ -66,9 +66,9 @@ function getData(user, deviceId, from, to) {
 
 	result = new Object();
 
-	result['sonarData'] = getSensorData("SONAR_SENSOR_SUMMARY","SONAR",user, deviceId, from, to);
-	result['motionData'] = getSensorData("PIR_MOTION_SENSOR_SUMMARY","MOTION",user, deviceId, from, to);
-	result['lightData'] = getSensorData("LDR_LIGHT_SENSOR_SUMMARY","LIGHT",user, deviceId, from, to);
+	result['sonarData'] = getSensorData("SONAR_SENSOR_SUMMARY","sonar",user, deviceId, from, to);
+	result['motionData'] = getSensorData("PIR_MOTION_SENSOR_SUMMARY","motion",user, deviceId, from, to);
+	result['lightData'] = getSensorData("LDR_LIGHT_SENSOR_SUMMARY","light",user, deviceId, from, to);
 	result['temperatureData'] = getSensorData("DEVICE_TEMPERATURE_SUMMARY","TEMPERATURE",user, deviceId, from, to);
 
 	return result;

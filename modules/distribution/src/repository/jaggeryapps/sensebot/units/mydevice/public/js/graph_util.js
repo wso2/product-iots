@@ -43,7 +43,8 @@ $('#date-range1').dateRangePicker(configObject)
     });
 
 $('#btn-draw-graphs').on('click', function () {
-    var deviceId = $('#device-id').val();
+    var deviceId = $('#device_id').val();
+    console.log("device id:"+deviceId);
     getStats(deviceId, fromDate, toDate);
 });
 
@@ -51,7 +52,7 @@ function getStats(deviceId, from, to) {
 
     var requestData = new Object();
 
-    requestData['deviceId'] = getUrlParameter('deviceId');
+    requestData['deviceId'] = deviceId;
 
     if (from) {
         requestData['from'] = from;

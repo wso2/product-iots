@@ -475,6 +475,7 @@ header{background-color: #2a2a2a;}
 #device_id{
     background: #fff none repeat scroll 0 0;
     border: 1px solid #ccc;
+    width: 220px;
 }
 
 .hour-range,.minute-range{background: #fff none repeat scroll 0 0;  border: 1px solid #ccc;}
