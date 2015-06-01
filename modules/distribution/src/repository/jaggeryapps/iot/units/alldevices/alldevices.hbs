@@ -20,6 +20,7 @@
                 </thead>
                 <tbody>
                 <form method="GET" action="{{myDevicePath}}">
+				{{#if devices.device}}
 				{{#each devices.device}}
 				<tr class="border-top">
 					<th scope="row">{{deviceIdentifier}}</th>
@@ -38,6 +39,14 @@
 					</td>
 				</tr>
 				{{/each}}
+				{{else}}
+				<tr class="border-top">
+					<th scope="row"></th>
+					<td colspan="2">
+						No Devices available.
+					</td>
+				</tr>
+				{{/if}}
                 </form>
                 </tbody>
             </table>
