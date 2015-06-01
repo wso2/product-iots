@@ -1,0 +1,484 @@
+/*  _____________________________________________________________________________
+
+	 FONT
+    _____________________________________________________________________________  */
+/* Regular */
+@font-face {
+    font-family: 'Open Sans';
+
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: normal;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+/* Italic */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Italic-webfont.eot');
+    src: url('../fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-Italic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-Italic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-Italic-webfont.svg#OpenSansItalic') format('svg');
+    font-weight: normal;
+    font-weight: 400;
+    font-style: italic;
+
+}
+
+/* Light */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Light-webfont.eot');
+    src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+
+}
+
+/* Light Italic */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-LightItalic-webfont.eot');
+    src: url('../fonts/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-LightItalic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-LightItalic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+
+}
+
+/* Semibold */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Semibold-webfont.eot');
+    src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+/* Semibold Italic */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-SemiboldItalic-webfont.eot');
+    src: url('../fonts/OpenSans-SemiboldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-SemiboldItalic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-SemiboldItalic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-SemiboldItalic-webfont.svg#OpenSansSemiboldItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+
+}
+
+/* Bold */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Bold-webfont.eot');
+    src: url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-Bold-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
+    font-weight: bold;
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+/* Bold Italic */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-BoldItalic-webfont.eot');
+    src: url('../fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-BoldItalic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-BoldItalic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic') format('svg');
+    font-weight: bold;
+    font-weight: 700;
+    font-style: italic;
+
+}
+
+/* Extra Bold */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-ExtraBold-webfont.eot');
+    src: url('../fonts/OpenSans-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-ExtraBold-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-ExtraBold-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold') format('svg');
+    font-weight: 900;
+    font-style: normal;
+
+}
+
+/* Extra Bold Italic */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-ExtraBoldItalic-webfont.eot');
+    src: url('../fonts/OpenSans-ExtraBoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/OpenSans-ExtraBoldItalic-webfont.woff') format('woff'),
+    url('../fonts/OpenSans-ExtraBoldItalic-webfont.ttf') format('truetype'),
+    url('../fonts/OpenSans-ExtraBoldItalic-webfont.svg#OpenSansExtraboldItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+
+}
+/*  _____________________________________________________________________________
+
+	 RESET
+    _____________________________________________________________________________  */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {
+    font-family: 'Open Sans';
+    line-height:1;
+    color:#141414;
+    line-height:1;
+    background: url("../images/content-bg-1.png")repeat scroll 0 0 #f0f2f4;
+    margin: 15px;
+}
+
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+nav ul {
+    list-style:none;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #7f7f7f;
+    margin:1em 0;
+    padding:0;
+    opacity: 0.2;
+}
+input, select {
+    vertical-align:middle;
+}
+
+/*  _____________________________________________________________________________
+
+	 TYPOGRAPHY
+    _____________________________________________________________________________  */
+
+
+p{font-size:17px; line-height:24px; color:#c7c7c7;}
+h1{ font-size:39px;font-weight:100; line-height:Auto; font-style: normal;}
+h2{font-size:24px;  line-height:Auto; font-weight: 400;    }
+h3{font-size:15px;  line-height:Auto; font-weight: 400; }
+h4{font-size:20px;  line-height:Auto; font-weight: 400; }
+h5{ font-size:30px;font-weight:100; line-height:Auto; font-style: normal; color: #929292;}
+.font-small{font-size:12px;}
+.font-large{font-size:25px;}
+.font-medium{font-size:16px;}
+.medium-weight{font-weight: 100;}
+
+.uppercase{text-transform:uppercase;}
+.capitalize{text-transform:capitalize;}
+.lowercase{text-transform:lowercase;}
+
+
+.light-blue{color:#3a9ecf;}
+.black{color:#000;}
+.grey{color:#333;}
+.light-grey{color:#7c7c7c;}
+.white{color:#FFF;}
+.blue{color: #00979c;} .blue:hover{color: #03c5cb;}
+
+.bold{font-weight:bold;}
+.no-underline{text-decoration:none;}
+.italic{font-style: italic;}
+
+.center{text-align:center;}
+.right{text-align:right;}
+.left{text-align:left;}
+.justify{text-align:justify;}
+
+.middle{vertical-align: middle;}
+
+.top{vertical-align: top;}
+.middle{vertical-align: middle;}
+.bottom{vertical-align: bottom;}
+.rounded{-webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;}
+.opacity{opacity: 0.8;}
+
+
+.circle {
+    background: none repeat scroll 0 0 #191919;
+    border-radius: 50px;
+    height: 50px;
+    padding: 10px;
+    width: 50px;
+    color: #fff;
+}
+
+
+/*  _____________________________________________________________________________
+
+	 BACKGROUND
+    _____________________________________________________________________________  */
+.grey-bg{ background-color:#f6f4f4;}
+.light-grey-bg{  background-color:#f5f5f5 ; }
+.white-bg{background-color:#fff;}
+.off-white{background-color:#3a9ecf;}
+.dark-grey{background-color: #2a2a2a;}
+.blue-bg{background-color: #00979c;}
+
+/*  _____________________________________________________________________________
+
+	 Main
+    _____________________________________________________________________________  */
+
+body {  margin: 0; }
+header{background-color: #2a2a2a;}
+
+
+.product-wrapper{ float: left; width:100%; margin-top: -2px;   min-height: 310px; -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.14);}
+.icon-wrapper{min-height: 110px; padding-top: 12px; text-align: center; }
+.text-wrapper{margin:15px; font-size:14px; border-top: 1px solid #404040; padding-top: 20px; color:#c6c5c5; line-height: 18px; text-align: center }
+.sign-panel {background-color: #191919; width: 100%; height: auto; min-height: 150px; display: none;  padding:15px; color: #a5a5a5; cursor:pointer;}
+#flip-login{ font-weight: 500; font-size: 14px; padding: 20px;  cursor:pointer; margin-top:-2px; }
+.chart1,.chart2,.chart3 {width: 100%; height: 350px;}
+/*  ____________________________________________________________________________
+
+	 COLUMNS
+    _____________________________________________________________________________  */
+
+.col-row{width:100%;  height: 100px;}
+.col-x-large{width:100%; }
+.col-large{width:75%; }
+.col-medium{width:50%; }
+.col-small{width:24%; }
+.col-x-small{width:223px; }
+
+.opacity{opacity: 0.2;}
+/*  ____________________________________________________________________________
+
+	 padding-margin
+    _____________________________________________________________________________  */
+.padding-left {padding-left:10px;}
+.padding-right  {padding-right:10px;}
+.padding-top  {padding-top:10px;}
+.padding-bottom  {padding-bottom:10px;}
+.padding{padding:10px;}
+.padding-none{ padding:0px;}
+.padding-left-none{ padding-left:0px;}
+
+
+.padding-left-double {padding-left:20px;}
+.padding-right-double  {padding-right:20px;}
+.padding-top-double  {padding-top:20px;}
+.padding-bottom-double  {padding-bottom:20px;}
+.padding-double{padding:20px;}
+.padding-top-large{padding-top:60px;}
+.padding-bottom-large{padding-bottom:60px;}
+
+.margin-left {margin-left:10px;}
+.margin-right  {margin-right:10px;}
+.margin-top  {margin-top:10px;}
+.margin-bottom  {margin-bottom:10px;}
+.margin{margin:10px;}
+.margin-top-minus{margin-top:-123px;}
+
+.margin-left-double {margin-left:20px;}
+.margin-right-double  {margin-right:20px;}
+.margin-top-double  {margin-top:20px;}
+.margin-bottom-double  {margin-bottom:20px;}
+.margin-double{margin:20px;}
+.margin-left-none{margin-left: 0px;}
+.margin-right-none{margin-right: 0px;}
+
+.float-left{float:left;}
+.float-right{float:right;}
+.clear{ clear:both;}
+
+.inline-block{display: inline-block;}
+.relative{ position:relative;}
+.border{border: 2px solid #dddddd;}
+.border-bottom{border-bottom: 1px solid #efefef;}
+.border-radius{border-radius: 5px;}
+.border-top{border-top: 1px solid #ddd;}
+
+/*  ____________________________________________________________________________
+
+	 button
+    _____________________________________________________________________________  */
+.blue-btn {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    background: #00979c;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: 0px;  cursor:pointer;
+}
+
+.blue-btn:hover {
+    background: #00787a;
+    text-decoration: none;
+}
+.blue-action-btn {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    background: #00979c;
+    padding: 10px 30px;
+    height: 45px;
+    text-decoration: none;
+    border: 0px;  cursor:pointer;
+}
+
+.blue-action-btn:hover {
+    background: #00787a;
+    text-decoration: none;
+}
+.black-btn {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    color: #ccc;
+    font-size: 15px;
+    font-weight: 500;
+    background: #333333;
+    padding: 10px 30px;
+    height: 45px;
+    text-decoration: none;
+    border: 0px;  cursor:pointer;
+}
+
+.black-btn:hover {
+    background: #2a2a2a;
+    text-decoration: none;  ;
+}
+.grey-btn {
+    background: none repeat scroll 0 0 #00979c;
+    border: 0 none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 10px 35px;
+    text-decoration: none;
+}
+.grey-btn:hover {
+    background: none repeat scroll 0 0 #006a6d;
+    border: 0 none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 10px 35px;
+    text-decoration: none;
+}
+.grey-btn a{color: #fff; text-decoration: none;}
+.btn-black{color: #ffffff; margin-right: 5px; padding: 10px; text-decoration: none; overflow: hidden; background:#5c5c5c; text-align: center;  float: left; cursor: pointer;  }
+.btn-black:hover{opacity: 0.8;  }
+
+.menu-button-wrapper-temp{float: left; font-size: 13px; width: 125px;}
+.menu-button-wrapper{float: left; font-size: 13px; width: 100px;}
+.tick { opacity: 0 !important; }
+.nv-discreteBarWithAxes>g>.nv-x>g>g>g{opacity: 1 !important;}
+#date-range1{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+#device_id{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+}
+
+.hour-range,.minute-range{background: #fff none repeat scroll 0 0;  border: 1px solid #ccc;}
+
+.btn-black-action{color: #ffffff; padding: 5px 20px; text-decoration: none; overflow: hidden; background:#5c5c5c; text-align: center;  margin: 0 10px; float: left; cursor: pointer;  border: none;  outline:none;}
+.btn-black-action:hover{background-color: #0076a3;   }
+.date-picker-wrapper {box-shadow:none;}
