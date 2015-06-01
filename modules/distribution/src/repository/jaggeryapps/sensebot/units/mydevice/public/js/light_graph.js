@@ -53,8 +53,9 @@ function updateLightGraph(lightData) {
     var chartData = getLightChartData();
     chartData[0]['values'] = lightData;
 
-    d3.select('.chart2 svg')
-        .datum(chartData)
-        .transition().duration(500)
-        .call(lightChart);
+    //TODO
+    //d3.select('.chart2 svg')
+    //    .datum(chartData)
+    //    .transition().duration(500)
+    //    .call(lightChart);
 }
