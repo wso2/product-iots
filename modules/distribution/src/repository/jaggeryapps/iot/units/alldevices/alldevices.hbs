@@ -20,70 +20,33 @@
                 </thead>
                 <tbody>
                 <form method="GET" action="{{myDevicePath}}">
-                    <tr class="border-top">
-                        <th scope="row">001</th>
-                        <td>John's Raspberry Pi</td>
-                        <td class="float-right border-top ">
-                            <button class="btn-black-action" name="deviceId"
-                                    value="{{deviceIdentifier}}">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="border-top">
-                        <th scope="row">002</th>
-                        <td>John's Arduino</td>
-                        <td class="float-right border-top ">
-                            <button class="btn-black-action" name="deviceId"
-                                    value="{{deviceIdentifier}}">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="border-top">
-                        <th scope="row">003</th>
-                        <td>John's BeagleBone</td>
-                        <td class="float-right border-top ">
-                            <button class="btn-black-action" name="deviceId"
-                                    value="{{deviceIdentifier}}">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="border-top">
-                        <th scope="row">004</th>
-                        <td>John's Firealarm</td>
-                        <td class="float-right border-top ">
-                            <button class="btn-black-action" name="deviceId"
-                                    value="{{deviceIdentifier}}">
-                                <i class="fw fw-view padding-right"></i>View
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-edit padding-right"></i>Edit
-                            </button>
-                            <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                <i class="fw fw-delete padding-right"></i>Remove
-                            </button>
-                        </td>
-                    </tr>
+					{{#if devices.device}}
+						{{#each devices.device}}
+                            <tr class="border-top">
+                                <th scope="row">{{deviceIdentifier}}</th>
+                                <td>{{name}}</td>
+                                <td class="float-right border-top ">
+                                    <button class="btn-black-action" name="deviceId"
+                                            value="{{deviceIdentifier}}">
+                                        <i class="fw fw-view padding-right"></i>View
+                                    </button>
+                                    <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
+                                        <i class="fw fw-edit padding-right"></i>Edit
+                                    </button>
+                                    <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
+                                        <i class="fw fw-delete padding-right"></i>Remove
+                                    </button>
+                                </td>
+                            </tr>
+						{{/each}}
+					{{else}}
+                        <tr class="border-top">
+                            <th scope="row"></th>
+                            <td colspan="2">
+                                No Devices available.
+                            </td>
+                        </tr>
+					{{/if}}
                 </form>
                 </tbody>
             </table>
