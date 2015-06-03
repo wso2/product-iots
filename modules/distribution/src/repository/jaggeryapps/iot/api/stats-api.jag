@@ -80,11 +80,14 @@ function getBulbStatusData(user, deviceId, from, to) {
 
 	var bulbStatusData = [];
 
-	for (var i = 0; i < fetchedData.size(); i++) {
-		bulbStatusData.push({
-			time: fetchedData.get(i).getTime(),
-			value: fetchedData.get(i).getValue()
-		});
+	if(fetchedData != null) {
+
+		for (var i = 0; i < fetchedData.size(); i++) {
+			bulbStatusData.push({
+				time: fetchedData.get(i).getTime(),
+				value: fetchedData.get(i).getValue()
+			});
+		}
 	}
 
 	return bulbStatusData;
@@ -97,11 +100,15 @@ function getFanStatusData(user, deviceId, from, to) {
 
 	var fanStatusData = [];
 
-	for (var i = 0; i < fetchedData.size(); i++) {
-		fanStatusData.push({
-			time: fetchedData.get(i).getTime(),
-			value: fetchedData.get(i).getValue()
-		});
+	if(fetchedData != null) {
+
+		for (var i = 0; i < fetchedData.size(); i++) {
+			fanStatusData.push({
+				time: fetchedData.get(i).getTime(),
+				value: fetchedData.get(i).getValue()
+			});
+
+		}
 	}
 
 	return fanStatusData;
@@ -113,13 +120,16 @@ function getTemperatureData(user, deviceId, from, to) {
 
 	var temperatureData = [];
 
-	for (var i = 0; i < fetchedData.size(); i++) {
-		temperatureData.push({
-			time: fetchedData.get(i).getTime(),
-			value: fetchedData.get(i).getValue()
-		});
-	}
+	if(fetchedData != null) {
 
+		for (var i = 0; i < fetchedData.size(); i++) {
+			temperatureData.push({
+				time: fetchedData.get(i).getTime(),
+				value: fetchedData.get(i).getValue()
+			});
+		}
+
+	}
 	return temperatureData;
 }
 

@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="row margin-double padding-double">
-            <table class="table table-hover border">
+            <form method="GET" action="{{myDevicePath}}">
+			<table class="table table-hover border" id="devicesTable">
                 <thead>
                 <tr class="grey-bg">
                     <th class="uppercase">Device ID</th>
@@ -19,37 +20,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <form method="GET" action="{{myDevicePath}}">
-					{{#if devices.device}}
-						{{#each devices.device}}
-                            <tr class="border-top">
-                                <th scope="row">{{deviceIdentifier}}</th>
-                                <td>{{name}}</td>
-                                <td class="float-right border-top ">
-                                    <button class="btn-black-action" name="deviceId"
-                                            value="{{deviceIdentifier}}">
-                                        <i class="fw fw-view padding-right"></i>View
-                                    </button>
-                                    <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                        <i class="fw fw-edit padding-right"></i>Edit
-                                    </button>
-                                    <button class="btn-black-action" name="deviceId" value="{{deviceIdentifier}}">
-                                        <i class="fw fw-delete padding-right"></i>Remove
-                                    </button>
-                                </td>
-                            </tr>
-						{{/each}}
-					{{else}}
-                        <tr class="border-top">
-                            <th scope="row"></th>
-                            <td colspan="2">
-                                No Devices available.
-                            </td>
-                        </tr>
-					{{/if}}
-                </form>
+					{{! All devices will be listed here @see: alldevices_util.js}}
+                	<tr class="border-top">
+						<th scope="row"></th>
+						<td colspan="2">
+							No Devices available.
+						</td>
+					</tr>
                 </tbody>
             </table>
+            </form>
         </div>
     </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+<script src="{{self.publicURL}}/js/alldevices_util.js"></script>
 {{/zone}}
