@@ -784,8 +784,8 @@
         <carbon.device.mgt.version>0.9.2-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
 
-        <!-- Mobile Device Management -->
-        <carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
+        <!-- IOT Device Management -->
+        <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
         <mdm.version>1.0.0-SNAPSHOT</mdm.version>
 
         <!-- API Management -->
