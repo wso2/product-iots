@@ -41,7 +41,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
         exit();
     }
 
-	fireAlarmManagerService = carbonHttpsServletTransport + "/iotdevices/FireAlarmManager";
+	fireAlarmManagerService = carbonHttpsServletTransport + "/firealarm/manager";
 	sketchDownloadEndPoint = fireAlarmManagerService + "/downloadSketch";
     response.sendRedirect(sketchDownloadEndPoint + "?type="+sketchType+"&owner="+user.username);
 	exit();
@@ -57,7 +57,7 @@ if (uriMatcher.match("/{context}/api/devices/")) {
 		exit();
 	}
 
-	devicesManagerService = carbonHttpsServletTransport + "/iotdevices/DevicesManager";
+	devicesManagerService = carbonHttpsServletTransport + "/devicecloud/manager";
 	listAllDevicesEndPoint = devicesManagerService + "/getDevices";
 
 	var data = {};

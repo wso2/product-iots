@@ -33,7 +33,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
     sketchType = request.getParameter("type");
     if(!sketchType){log.error("Sketch Type is empty");}
 
-	senseBotManagerService = "http://localhost:9763/iotdevices/SenseBotManager";
+	senseBotManagerService = "http://localhost:9763/sensebot/manager";
 	sketchDownloadEndPoint = senseBotManagerService + "/downloadSketch";
     response.sendRedirect(sketchDownloadEndPoint + "?type="+sketchType+"&owner=anonymous");
 	exit();
