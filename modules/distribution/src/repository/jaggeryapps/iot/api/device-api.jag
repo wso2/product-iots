@@ -32,18 +32,21 @@ var carbonHttpsServletTransport = carbon.server.address('https');
 var result;
 
 if (uriMatcher.match("/{context}/api/device/sketch/")) {
-    sketchType = request.getParameter("type");
-    if(!sketchType){log.error("Sketch Type is empty");}
+	sketchType = request.getParameter("type");
+	if (!sketchType) {
+		log.error("Sketch Type is empty");
+	}
 
-    var user = session.get(constants.USER_SESSION_KEY);
-    if(!user){
-        response.sendRedirect(dcProps.appContext + "login?#login-required");
-        exit();
-    }
+	var user = session.get(constants.USER_SESSION_KEY);
+	if (!user) {
+		response.sendRedirect(dcProps.appContext + "login?#login-required");
+		exit();
+	}
 
+	//URL: /iotdevices/FireAlarmManager/device/firealarm/download
 	fireAlarmManagerService = carbonHttpsServletTransport + "/iotdevices/FireAlarmManager";
-	sketchDownloadEndPoint = fireAlarmManagerService + "/downloadSketch";
-    response.sendRedirect(sketchDownloadEndPoint + "?type="+sketchType+"&owner="+user.username);
+	sketchDownloadEndPoint = fireAlarmManagerService + "/device/" + sketchType + "/download";
+	response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
 	exit();
 }
 
@@ -52,17 +55,18 @@ if (uriMatcher.match("/{context}/api/devices/")) {
 	var constants = require("/modules/constants.js");
 
 	var user = session.get(constants.USER_SESSION_KEY);
-	if(!user){
+	if (!user) {
 		response.sendRedirect(dcProps.appContext + "login?#login-required");
 		exit();
 	}
 
+	//URL: /iotdevices/DevicesManager/devices/username
 	devicesManagerService = carbonHttpsServletTransport + "/iotdevices/DevicesManager";
-	listAllDevicesEndPoint = devicesManagerService + "/getDevices";
+	listAllDevicesEndPoint = devicesManagerService + "/devices/" + user.username;
 
 	var data = {};
 	//XMLHTTPRequest's GET
-	result = get(listAllDevicesEndPoint+"?username="+user.username, data ,"json");
+	result = get(listAllDevicesEndPoint, data, "json");
 
 	//response.sendRedirect(listAllDevicesEndPoint + "?username="+user.username);
 	//exit();
@@ -70,6 +74,6 @@ if (uriMatcher.match("/{context}/api/devices/")) {
 
 // returning the result.
 if (result) {
-    print(result);
+	print(result);
 }
 %>

@@ -27,15 +27,19 @@ var dcProps = require('/config/dc-props.js').config();
 var downloadModule = require("/modules/download.js").downloadModule;
 var utility = require("/modules/utility.js").utility;
 
+var carbon = require('carbon');
+var carbonHttpServletTransport = carbon.server.address('http');
+var carbonHttpsServletTransport = carbon.server.address('https');
+
 var result;
 
 if (uriMatcher.match("/{context}/api/device/sketch/")) {
     sketchType = request.getParameter("type");
     if(!sketchType){log.error("Sketch Type is empty");}
 
-	senseBotManagerService = "http://localhost:9763/iotdevices/SenseBotManager";
-	sketchDownloadEndPoint = senseBotManagerService + "/downloadSketch";
-    response.sendRedirect(sketchDownloadEndPoint + "?type="+sketchType+"&owner=anonymous");
+	senseBotManagerService = carbonHttpsServletTransport+"/iotdevices/SenseBotManager";
+	sketchDownloadEndPoint = senseBotManagerService + "/downloadSketch/device/";
+    response.sendRedirect(sketchDownloadEndPoint + sketchType + "?owner=anonymous");
 	exit();
 }
 
