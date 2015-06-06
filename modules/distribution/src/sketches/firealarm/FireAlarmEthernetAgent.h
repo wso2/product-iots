@@ -30,7 +30,7 @@
 #define END_JSON "\"}"
 
 #define SERVICE_PORT 9763 
-#define SERVICE_EPOINT "/iotdevices/FireAlarmController/" 
+#define SERVICE_EPOINT "/firealarm/controller/"
                                         // pushalarmdata - application/json - {"owner":"","deviceId":"","replyMessage":"","time":"","key":"","value":""}
                                         // readcontrols/{owner}/{deviceId}
                                         // reply - application/json - {"owner":"","deviceId":"","replyMessage":""}
