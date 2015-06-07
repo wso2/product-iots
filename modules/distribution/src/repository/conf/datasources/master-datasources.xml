@@ -99,7 +99,7 @@
         </datasource>
 
 	<datasource>
-            <name>ArduinoDM_DS</name>
+            <name>FireAlarmDM_DS</name>
             <description>The datasource used for API Manager database</description>
             <jndiConfig>
                 <name>jdbc/FireAlarmDM_DB</name>

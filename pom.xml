@@ -353,10 +353,16 @@
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
 
-            <!--MDM dependencies-->
+            <!--IOT dependencies-->
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.impl</artifactId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
 
