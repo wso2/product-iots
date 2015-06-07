@@ -354,15 +354,32 @@
             </dependency>
 
             <!--IOT dependencies-->
+
+
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.digitaldisplay.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.sensebot.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.raspberrypi.impl</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
 

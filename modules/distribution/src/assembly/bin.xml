@@ -280,6 +280,8 @@
                 <include>devicecloud.war</include>
                 <include>firealarm.war</include>
                 <include>sensebot.war</include>
+                <include>raspberrypi.war</include>
+                <include>digitaldisplay.war</include>
             </includes>
         </fileSet>
 

@@ -260,8 +260,8 @@
                         </configuration>
                     </execution>
 		    <execution>
-                        <!-- Creating API Management schema -->
-                        <id>create-dc-schema</id>
+                        <!-- Creating IOT Management schema -->
+                        <id>create-firealarm-schema</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
@@ -286,6 +286,96 @@
 				</tasks>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <!-- Creating IOT Management schema -->
+                        <id>create-sensebot-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Device Cloud H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/SensebotDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+                                    <!--fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" /-->
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_sensebot.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating IOT Management schema -->
+                        <id>create-raspberrypi-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Device Cloud H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/RaspberrypiDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+                                    <!--fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" /-->
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberrypi.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating IOT Management schema -->
+                        <id>create-digitaldisply-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Device Cloud H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/DigitalDisplayDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+                                    <!--fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" /-->
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_digitaldisplay.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+
+
+
+
+
                     <execution>
                         <id>3-extract-docs-from-components</id>
                         <phase>package</phase>
