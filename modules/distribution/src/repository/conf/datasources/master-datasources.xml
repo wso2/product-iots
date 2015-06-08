@@ -144,7 +144,7 @@
             <name>DigitalDisplayDM_DS</name>
             <description>The datasource used for Digital Display database</description>
             <jndiConfig>
-                <name>jdbc/FireAlarmDM_DB</name>
+                <name>jdbc/DigitalDisplayDM_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
