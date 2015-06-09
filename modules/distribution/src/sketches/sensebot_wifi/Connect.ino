@@ -75,6 +75,7 @@ void connectHttp() {
   }
   
   pushClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
+ 
   if (pushClient.connected()) {
     if(CON_DEBUG) Serial.println("PushClient Connected to server");
   } else {
@@ -82,15 +83,9 @@ void connectHttp() {
     if(CON_DEBUG) Serial.println(F("PushClient Connection failed"));    
   }
   
+  httpServer.begin();
+  Serial.println(F("Listening for connections..."));
   
-  pollClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
-  if (pollClient.connected()) {
-    if(CON_DEBUG) Serial.println("PollClient Connected to server");
-  } else {
-    cc3000.disconnect(); 
-    if(CON_DEBUG) Serial.println(F("PollClient Connection failed"));    
-  }
-
   if(CON_DEBUG) Serial.println(F("-------------------------------------"));
 }
 
@@ -139,10 +134,10 @@ bool displayConnectionDetails(void)
   {
     if(CON_DEBUG) {
       Serial.print(F("\nIP Addr: ")); cc3000.printIPdotsRev(ipAddress);
-      Serial.print(F("\nNetmask: ")); cc3000.printIPdotsRev(netmask);
-      Serial.print(F("\nGateway: ")); cc3000.printIPdotsRev(gateway);
-      Serial.print(F("\nDHCPsrv: ")); cc3000.printIPdotsRev(dhcpserv);
-      Serial.print(F("\nDNSserv: ")); cc3000.printIPdotsRev(dnsserv);
+//      Serial.print(F("\nNetmask: ")); cc3000.printIPdotsRev(netmask);
+//      Serial.print(F("\nGateway: ")); cc3000.printIPdotsRev(gateway);
+//      Serial.print(F("\nDHCPsrv: ")); cc3000.printIPdotsRev(dhcpserv);
+//      Serial.print(F("\nDNSserv: ")); cc3000.printIPdotsRev(dnsserv);
       Serial.println();
     }
     return true;
