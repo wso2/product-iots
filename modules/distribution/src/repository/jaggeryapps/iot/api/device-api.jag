@@ -44,7 +44,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
 	}
 
 	//URL: /iotdevices/FireAlarmManager/device/firealarm/download
-	fireAlarmManagerService = carbonHttpsServletTransport + "/iotdevices/FireAlarmManager";
+	fireAlarmManagerService = carbonHttpsServletTransport + "/firealarm/manager";
 	sketchDownloadEndPoint = fireAlarmManagerService + "/device/" + sketchType + "/download";
 	response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
 	exit();
@@ -61,8 +61,8 @@ if (uriMatcher.match("/{context}/api/devices/")) {
 	}
 
 	//URL: /iotdevices/DevicesManager/devices/username
-	devicesManagerService = carbonHttpsServletTransport + "/iotdevices/DevicesManager";
-	listAllDevicesEndPoint = devicesManagerService + "/devices/" + user.username;
+	devicesManagerService = carbonHttpsServletTransport + "/devicecloud/manager";
+	listAllDevicesEndPoint = devicesManagerService + "/devices/username/" + user.username;
 
 	var data = {};
 	//XMLHTTPRequest's GET

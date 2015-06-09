@@ -471,6 +471,12 @@ header{background-color: #2a2a2a;}
     border: 1px solid #ccc;
     width: 300px;
 }
+
+#device_id{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    width: 220px;
+}
 .hour-range,.minute-range{background: #fff none repeat scroll 0 0;  border: 1px solid #ccc;}
 
 .btn-black-action{color: #ffffff; padding: 5px 20px; text-decoration: none; overflow: hidden; background:#5c5c5c; text-align: center;  margin: 0 10px; float: left; cursor: pointer;  border: none;  outline:none;}
