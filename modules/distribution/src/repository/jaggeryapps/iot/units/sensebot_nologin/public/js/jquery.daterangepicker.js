@@ -125,7 +125,7 @@
 			'selected': 'Selected:',
 			'day':'Day',
 			'days': 'Days',
-			'apply': 'Close',
+			'apply': 'Apply',
 			'week-1' : 'mo',
 			'week-2' : 'tu',
 			'week-3' : 'we',

@@ -15,26 +15,14 @@
         <div class=" margin-top-double">
             <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
                 <div class="col-lg-12  margin-top-double">
-                    <h1 class="grey ">Device Cloud</h1>
+                    <h1 class="grey ">Device statistics</h1>
                     <hr>
                 </div>
             </div>
-            <div class="row float-right margin-top-minus">
-                <div class="btn-black padding-top padding-bottom">
-                    <span> <img src="{{self.publicURL}}/images/temp.png"> </span>
-                    <span class="middle padding-bottom-double">Read Temp</span></div>
-                <div class="btn-black padding-top padding-bottom">
-                    <span> <img src="{{self.publicURL}}/images/fan.png"> </span>
-                    <span class="middle padding-bottom-double">Switch Fan</span>
-                </div>
-                <div class="btn-black padding-top padding-bottom" onclick="changeImage()">
-                    <span> <img id="myImage" onclick="changeImage()"
-                                src="{{self.publicURL}}/images/bulb-off.png"> </span>
-                    <span class="middle padding-bottom-double">Switch Bulb</span>
-                </div>
-
+            <div class="row float-right margin-top">
                 <div class="right margin-right">
-                    <input class="right margin-right" id="date-range1" size="60" value="" style="margin-top: 20px">
+                    <p style="color:#000;float:left;margin-top:25px">Date Range:</p>
+					<input class="right margin-right" id="date-range1" size="60" value="" style="margin-top: 20px">
                     <button type="button" id="btn-draw-graphs" class="btn btn-primary" style="margin-top: 20px">
                         Draw Graphs
                     </button>
@@ -54,7 +42,7 @@
             <div class="row margin-double padding-double "></div>
             <div class="row margin-double">
                 <div class="chart2">
-                    <h2 class="grey ">Fan Status</h2>
+                    <h2 class="grey ">Light</h2>
                     <hr>
                     <svg></svg>
                 </div>
@@ -62,7 +50,15 @@
             </div>
             <div class="row margin-double">
                 <div class="chart3">
-                    <h2 class="grey ">Bulb Status</h2>
+                    <h2 class="grey ">Motion</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div class="chart4">
+                    <h2 class="grey ">Sonar</h2>
                     <hr>
                     <svg></svg>
                 </div>
@@ -76,6 +72,7 @@ When they are moved the script tags get repeated for some reason :-(
     <script src="{{self.publicURL}}/js/graph_util.js"></script>
     <script src="{{self.publicURL}}/js/bulb.js"></script>
     <script src="{{self.publicURL}}/js/temperature_graph.js"></script>
-    <script src="{{self.publicURL}}/js/fan_status_graph.js"></script>
-    <script src="{{self.publicURL}}/js/bulb_status_graph.js"></script>
+    <script src="{{self.publicURL}}/js/light_graph.js"></script>
+    <script src="{{self.publicURL}}/js/motion_graph.js"></script>
+    <script src="{{self.publicURL}}/js/sonar_graph.js"></script>
 {{/zone}}

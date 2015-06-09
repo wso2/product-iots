@@ -43,15 +43,16 @@ $('#date-range1').dateRangePicker(configObject)
     });
 
 $('#btn-draw-graphs').on('click', function () {
-    var deviceId = $('#device-id').val();
+    var deviceId = getUrlParameter('deviceId');
+    console.log("device id:"+deviceId);
     getStats(deviceId, fromDate, toDate);
-})
+});
 
 function getStats(deviceId, from, to) {
 
     var requestData = new Object();
 
-    requestData['deviceId'] = getUrlParameter('deviceId');
+    requestData['deviceId'] = deviceId;
 
     if (from) {
         requestData['from'] = from;
@@ -89,19 +90,23 @@ function getUrlParameter(paramName) {
 }
 
 function updateGraphs(stats) {
+    console.log(stats);
 
     var temperatureData = stats['temperatureData'];
-    updateTemperatureGraph(convertTemperatureStatsToGraphData(temperatureData));
+    updateTemperatureGraph(convertStatsToGraphData(temperatureData));
 
-    var fanStatusData = stats['fanStatusData'];
-    updateFanStatusGraph(convertFanStatusStatsToGraphData(fanStatusData));
+    var lightData = stats['lightData'];
+    updateLightGraph(convertStatsToGraphData(lightData));
 
-    var bulbStatusData = stats['bulbStatusData'];
-    updateBulbStatusGraph(convertBulbStatusStatsToGraphData(bulbStatusData));
+    var motionData = stats['motionData'];
+    updateMotionGraph(convertStatsToGraphData(motionData));
+
+    var sonarData = stats['sonarData'];
+    updateSonarGraph(convertStatsToGraphData(sonarData));
 
 }
 
-function convertTemperatureStatsToGraphData(stats) {
+function convertStatsToGraphData(stats) {
 
     var graphData = new Array();
 
@@ -110,46 +115,4 @@ function convertTemperatureStatsToGraphData(stats) {
     }
 
     return graphData;
-}
-
-function convertFanStatusStatsToGraphData(stats) {
-
-    var graphData = new Array();
-
-    var yValue;
-    for (var i = 0; i < stats.length; i++) {
-        yValue = -1;
-
-        if (stats[i]['value'].toUpperCase() == 'ON') {
-            yValue = 1;
-        } else if (stats[i]['value'].toUpperCase() == 'OFF') {
-            yValue = 0;
-        }
-
-        graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
-    }
-
-    return graphData;
-
-}
-
-function convertBulbStatusStatsToGraphData(stats) {
-
-    var graphData = new Array();
-
-    var yValue;
-    for (var i = 0; i < stats.length; i++) {
-        yValue = -1;
-
-        if (stats[i]['value'].toUpperCase() == 'ON') {
-            yValue = 1;
-        } else if (stats[i]['value'].toUpperCase() == 'OFF') {
-            yValue = 0;
-        }
-
-        graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
-    }
-
-    return graphData;
-
 }
