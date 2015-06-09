@@ -65,6 +65,9 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 		userRoles = String(addUserFormData.userRoles).split(",");
 	}
 
+	//enable internal subscriptions for APIM
+	userRoles = userRoles + ", Internal/subscriber, Internal/everyone";
+
 	try {
 		result = userModule.registerUser(username, firstname, lastname, emailAddress, password,
 				userRoles);

@@ -1,0 +1,80 @@
+{{#zone "topCss"}}
+    <link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet"/>
+    <link href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
+{{/zone}}
+{{#zone "topJs"}}
+    <!-- -->
+    <script src="{{self.publicURL}}/js/d3.min.js"></script>
+    <script src="{{self.publicURL}}/js/nv.d3.js"></script>
+    <script src="{{self.publicURL}}/js/stream_layers.js"></script>
+    <script src="{{self.publicURL}}/js/moment.min.js"></script>
+    <script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
+{{/zone}}
+{{#zone "main"}}
+    <div class="container container-bg  white-bg">
+        <div class=" margin-top-double">
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                <div class="col-lg-12  margin-top-double">
+                    <h1 class="grey ">Sense Bot</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row float-right margin-top">
+                <div class="right margin-right">
+                    <p style="color:#000;float:left;margin-top:25px">Device Id:</p>
+					<input class="margin-right" id="device_id" value="" style="margin-top:
+					20px" />
+                    <input class="right margin-right" id="date-range1" size="60" value="" style="margin-top: 20px">
+                    <button type="button" id="btn-draw-graphs" class="btn btn-primary" style="margin-top: 20px">
+                        Draw Graphs
+                    </button>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="row margin-double">
+                <div class="chart1">
+                    <h2 class="grey ">Temperature</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double padding-double "></div>
+            <!--<div class="row margin-double">-->
+                <!--<div class="chart2">-->
+                    <!--<h2 class="grey ">Light</h2>-->
+                    <!--<hr>-->
+                    <!--<svg></svg>-->
+                <!--</div>-->
+                <!--<hr>-->
+            <!--</div>-->
+            <div class="row margin-double">
+                <div class="chart3">
+                    <h2 class="grey ">Motion</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div class="chart4">
+                    <h2 class="grey ">Sonar</h2>
+                    <hr>
+                    <svg></svg>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <!-- TODO : Move these scripts to a bottomJs zone.
+When they are moved the script tags get repeated for some reason :-(
+	-->
+    <script src="{{self.publicURL}}/js/graph_util.js"></script>
+    <script src="{{self.publicURL}}/js/bulb.js"></script>
+    <script src="{{self.publicURL}}/js/temperature_graph.js"></script>
+    <script src="{{self.publicURL}}/js/light_graph.js"></script>
+    <script src="{{self.publicURL}}/js/motion_graph.js"></script>
+    <script src="{{self.publicURL}}/js/sonar_graph.js"></script>
+{{/zone}}

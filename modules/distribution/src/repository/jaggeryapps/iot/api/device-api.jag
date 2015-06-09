@@ -32,7 +32,8 @@ var carbonHttpsServletTransport = carbon.server.address('https');
 var result;
 
 if (uriMatcher.match("/{context}/api/device/sketch/")) {
-	sketchType = request.getParameter("type");
+	sketchType = request.getParameter("sketchType");
+	deviceType = request.getParameter("deviceType");
 	if (!sketchType) {
 		log.error("Sketch Type is empty");
 	}
@@ -44,7 +45,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/")) {
 	}
 
 	//URL: /iotdevices/FireAlarmManager/device/firealarm/download
-	fireAlarmManagerService = carbonHttpsServletTransport + "/firealarm/manager";
+	fireAlarmManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
 	sketchDownloadEndPoint = fireAlarmManagerService + "/device/" + sketchType + "/download";
 	response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
 	exit();

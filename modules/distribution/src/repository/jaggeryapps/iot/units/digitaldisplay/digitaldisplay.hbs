@@ -3,15 +3,15 @@
         <div class=" margin-top-double">
             <div class="row row padding-top-double padding-bottom-double margin-bottom-double">
                 <div class="col-lg-12  margin-top-double">
-                    <h1 class="grey ">Fire Alarm</h1>
+                    <h1 class="grey ">Digital Display</h1>
                     <hr>
-                    <p  class="margin-bottom-double light-grey ">Connect your Fire Alarm device
+                    <p  class="margin-bottom-double light-grey ">Connect your Digital Display device
                     to the WSO2 device cloud. </p>
                 </div>
             </div>
             <div class="row margin-bottom-double">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 padding-top">
-                <img src="{{self.publicURL}}/images/firealarm.png" class="img-responsive">
+                <img src="{{self.publicURL}}/images/digital_display.png" class="img-responsive">
             </div>
                 <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 padding-top">
                     <h2 class="uppercase">Ingredients</h2>
@@ -29,20 +29,11 @@
 								<br /><br />
 								<form method="POST" class="float-left margin-right"
 									action="{{sketchPath}}">
-                                        <input type="hidden" name="deviceType" value="firealarm" />
-                                        <input type="hidden" name="sketchType" value="firealarm_wifi" />
-										<button class="blue-btn" type="submit">Create Sketch for
-										Wifi
+                                    <input type="hidden" name="deviceType" value="digitaldisplay" />
+                                    <input type="hidden" name="sketchType" value="digitaldisplay" />
+										<button class="blue-btn" type="submit">Download DEB
 										</button>
 									</form>
-                                <form method="POST" class="form-login-box float-left"
-                                action="{{sketchPath}}">
-                                    <input type="hidden" name="deviceType" value="firealarm" />
-                                    <input type="hidden" name="sketchType" value="firealarm" />
-									<button class="blue-btn margin-right" type="submit">Create
-									Sketch
-									for Ethernet</button>
-								</form>
 
                 </div>
                 <div class ="col-xs-12 col-sm-6 col-md-3 col-lg-12 padding-double grey-bg ">
