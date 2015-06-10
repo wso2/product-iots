@@ -123,7 +123,7 @@
             <name>ArduinoDM_DS</name>
             <description>The datasource used for Arduino database</description>
             <jndiConfig>
-                <name>jdbc/ArduinoDM_DS</name>
+                <name>jdbc/ArduinoDM_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
