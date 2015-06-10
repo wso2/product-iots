@@ -21,7 +21,7 @@ void pushData(){
   payLoad += "\"}";
 
   pushClient.fastrprint(F("POST "));     
-  pushClient.fastrprint(SERVICE_EPOINT); pushClient.fastrprint(F("pushsensordata"));  
+  pushClient.fastrprint(SERVICE_EPOINT); pushClient.fastrprint(F("pushsensordata"));
   pushClient.fastrprint(F(" HTTP/1.1")); pushClient.fastrprint(F("\n"));
   pushClient.fastrprint(host.c_str()); pushClient.fastrprint(F("\n"));    
   pushClient.fastrprint(F("Content-Type: application/json")); pushClient.fastrprint(F("\n"));   

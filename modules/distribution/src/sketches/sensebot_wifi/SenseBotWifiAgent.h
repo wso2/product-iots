@@ -18,11 +18,12 @@
 #define WLAN_SECURITY   WLAN_SEC_WPA2
                            // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
 
-#define DEVICE_OWNER "Test" //"${DEVICE_OWNER}"          
-#define DEVICE_ID "Test" //"${DEVICE_ID}"             
+#define DEVICE_OWNER "${DEVICE_OWNER}"
+#define DEVICE_ID "${DEVICE_ID}"
 
-#define SERVICE_PORT 9763 
-#define SERVICE_EPOINT "/iotdevices/SenseBotController/" 
+#define SERVICE_PORT 8281
+#define SERVICE_EPOINT "/sensebotdata/1.0/controller/"
+
                                         // pushalarmdata - application/json - {"owner":"","deviceId":"","replyMessage":"","time":"","key":"","value":""}
                                         // readcontrols/{owner}/{deviceId}
                                         // reply - application/json - {"owner":"","deviceId":"","replyMessage":""}
