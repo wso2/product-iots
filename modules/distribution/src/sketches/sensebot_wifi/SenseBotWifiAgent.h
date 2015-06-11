@@ -21,12 +21,18 @@
 #define DEVICE_OWNER "${DEVICE_OWNER}"
 #define DEVICE_ID "${DEVICE_ID}"
 
+/**********************************************************************************************
+ The following two parameters are used when pushing data via the API in the API Manager
+ ***********************************************************************************************/
 #define SERVICE_PORT 8281
 #define SERVICE_EPOINT "/sensebotdata/1.0/controller/"
 
-                                        // pushalarmdata - application/json - {"owner":"","deviceId":"","replyMessage":"","time":"","key":"","value":""}
-                                        // readcontrols/{owner}/{deviceId}
-                                        // reply - application/json - {"owner":"","deviceId":"","replyMessage":""}
+/**********************************************************************************************
+ Use the following two parameters when pushing data directly to the JAX-RS Service
+ ***********************************************************************************************/
+//#define SERVICE_PORT 9763
+//#define SERVICE_EPOINT "/sensebot/controller/"
+
 #define BUZZER A0
 #define LDR_PIN  A1
 #define TEMP_PIN A2

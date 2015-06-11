@@ -21,13 +21,13 @@ void pushData(){
   payLoad += "\"}";
 
   pushClient.fastrprint(F("POST "));     
-  pushClient.fastrprint(SERVICE_EPOINT); pushClient.fastrprint(F("pushsensordata"));  
+  pushClient.fastrprint(SERVICE_EPOINT); pushClient.fastrprint(F("pushsensordata"));
   pushClient.fastrprint(F(" HTTP/1.1")); pushClient.fastrprint(F("\n"));
   pushClient.fastrprint(host.c_str()); pushClient.fastrprint(F("\n"));    
   pushClient.fastrprint(F("Content-Type: application/json")); pushClient.fastrprint(F("\n"));   
   pushClient.fastrprint(F("Content-Length: "));
 
-  int payLength = jsonPayLoad.length() + payLoad.length();
+  int payLength = jsonPayLoad.length() + payLoad.length() + 2;
     
   pushClient.fastrprint(String(payLength).c_str()); pushClient.fastrprint(F("\n"));
   pushClient.fastrprint(F("\n")); 
@@ -67,7 +67,7 @@ void pushData(){
     }
   } 
   
-  pushClient.fastrprint(F("\n"));
+  pushClient.fastrprint(F("\r\n"));
   if(DEBUG) Serial.println();
  
   delay(1000);
