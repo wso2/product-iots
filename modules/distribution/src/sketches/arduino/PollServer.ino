@@ -1,77 +1,53 @@
-String readControls() {
-  String responseMsg;
-  String resource = " " + String(SERVICE_EPOINT) + String(READ_CONTROLS) + String(DEVICE_OWNER) + "/" + String(DEVICE_ID) + " ";
+boolean readControls() {
+//  String responseMsg;
+  
+  pollClient.fastrprint(F("GET ")); 
+  pollClient.fastrprint(SERVICE_EPOINT); 
+  pollClient.fastrprint(F("readcontrols/"));
+  pollClient.fastrprint(DEVICE_ID);
+  pollClient.fastrprint(F("?owner="));
+  pollClient.fastrprint(DEVICE_OWNER);
+  pollClient.fastrprint(F(" HTTP/1.1")); pollClient.fastrprint(F("\n"));
+  pollClient.fastrprint(host.c_str()); pollClient.fastrprint(F("\n"));
+  pollClient.println();
 
-  httpClient.print(HTTP_GET);
-  httpClient.print(resource);
-  httpClient.println(HTTP_VERSION);
-  httpClient.println(host);
-  httpClient.println();
-  
-  if(DEBUG) {
-    Serial.print(HTTP_GET);
-    Serial.print(resource);
-    Serial.println(HTTP_VERSION);
-    Serial.println(host);
-    Serial.println();
-  }
-  
   delay(1000);
   
-  while (httpClient.available()) {
-    char response = httpClient.read();
-    responseMsg += response;
-  }
   
+    while (pollClient.available()) {
+      char response = pollClient.read();
+      responseMsg += response;
+      
+    }
+  
+  
+       int index = responseMsg.lastIndexOf(":");
+      int newLine = responseMsg.lastIndexOf("\n");
+      subStrn = responseMsg.substring(index + 1);
+      responseMsg = responseMsg.substring(newLine + 1, index); 
   if(DEBUG) {
     Serial.print(responseMsg);
     Serial.println();
     Serial.println("-------------------------------");
   }
-  delay(1000);
-  return responseMsg; 
-}
+  
+  if (subStrn.equals("ON")) {
+        Serial.println("ITS ON");
+        //digitalWrite(13, HIGH); 
+        digitalWrite(6, HIGH);
+      } else if (subStrn.equals("OFF")){
+          
+          Serial.println("ITS OFF");
+          //digitalWrite(13, LOW);
+          digitalWrite(6, LOW);
+      
+      }
+   if (responseMsg.equals("BULB")) {
+        return false;
+   }
+  
 
-void reply(String replyMsg) {
-  String resource = " " + String(SERVICE_EPOINT) + String(REPLY) + " ";
-  String payLoad = jsonPayLoad + replyMsg + String(END_JSON);
-  
-  httpClient.print(HTTP_POST);
-  httpClient.print(resource);
-  httpClient.println(HTTP_VERSION);
-  httpClient.println(host);
-  httpClient.println(HTTP_CONTENT_TYPE);
-  httpClient.print(HTTP_CONTENT_LEN);
-  httpClient.println(payLoad.length());
-  httpClient.println();
-  httpClient.println(payLoad);
-  httpClient.println();
-  
-  if(DEBUG) {
-    Serial.print(HTTP_POST);
-    Serial.print(resource);
-    Serial.println(HTTP_VERSION);
-    Serial.println(host);
-    Serial.println(HTTP_CONTENT_TYPE);
-    Serial.print(HTTP_CONTENT_LEN);
-    Serial.println(payLoad.length());
-    Serial.println();
-    Serial.println(payLoad);
-    Serial.println();
-  }
-  
-  delay(1000);
-  
-  while (httpClient.available()) {
-    char response = httpClient.read();
-    if(DEBUG) Serial.print(response);
-  }
-  
-  if(DEBUG) {
-    Serial.println();
-    Serial.println("-------------------------------");
-  }
-  delay(1000);
+  return true; 
 }
 
 
