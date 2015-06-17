@@ -70,9 +70,9 @@ function getData(user, deviceId, from, to) {
 	result['motionData'] = getSensorData("PIR_MOTION_SENSOR_SUMMARY","motion",user, deviceId, from, to);
 	result['lightData'] = getSensorData("LDR_LIGHT_SENSOR_SUMMARY","light",user, deviceId, from, to);
 	result['temperatureData'] = getSensorData("DEVICE_TEMPERATURE_SUMMARY","TEMPERATURE",user, deviceId, from, to);
-
+	result['fanData'] = getSensorData("DEVICE_FAN_USAGE_SUMMARY","status",user, deviceId, from, to);
+	result['bulbData'] = getSensorData("DEVICE_BULB_USAGE_SUMMARY","status",user, deviceId, from, to);
 	return result;
-
 }
 
 function getSensorData(table, column, user, deviceId, from, to) {

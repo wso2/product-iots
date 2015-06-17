@@ -104,6 +104,12 @@ function updateGraphs(stats) {
     var sonarData = stats['sonarData'];
     updateSonarGraph(convertStatsToGraphData(sonarData));
 
+    var fanData = stats['fanData'];
+    updateFanGraph(convertStateStatsToGraphData(fanData));
+
+    var bulbData = stats['bulbData'];
+    updateBulbGraph(convertStateStatsToGraphData(bulbData));
+
 }
 
 function convertStatsToGraphData(stats) {
@@ -115,4 +121,26 @@ function convertStatsToGraphData(stats) {
     }
 
     return graphData;
+}
+
+
+
+function convertStateStatsToGraphData(stats){
+
+    var graphData = new Array();
+
+    var yValue;
+	for(var i = 0; i < stats.length; i++){
+    		yValue = -1;
+
+        		if(stats[i]['value'].toUpperCase() == 'ON'){
+        			yValue  = 1;
+        		}else if(stats[i]['value'].toUpperCase() == 'OFF'){
+        			yValue = 0;
+        		}
+
+        		graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
+    	}
+
+    	return graphData;
 }
