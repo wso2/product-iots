@@ -13,10 +13,11 @@
 //  byte mac[6] = { 0xC0, 0x4A, 0x00, 0x1A, 0x08, 0xDA };  //mac - c0:4a:00:1a:08:da 
                                                            //      c0:4a:00:1a:03:f8 
                                                            //      b8:27:eb:88:37:7a
+uint32_t ipAddress;
 String connecting = "connecting.... ";
 
-void connectHttp() {
-  /* Initialise the module */
+void connectWifi() {
+/* Initialise the module */
   if(DEBUG) Serial.println(F("\nInitializing..."));
   if (!cc3000.begin())
   {
@@ -61,6 +62,8 @@ void connectHttp() {
     while(1);
   }
    
+  wdt_reset(); 
+  
   if(CON_DEBUG) Serial.println(F("Connected to Wifi network!"));
 
   if(CON_DEBUG) Serial.println(F("Request DHCP"));
@@ -74,23 +77,42 @@ void connectHttp() {
     delay(1000);
   }
   
+  wdt_reset();
+ 
+//  deviceIP =   String((uint8_t)(ipAddress >> 24)) + "." 
+//             + String((uint8_t)(ipAddress >> 16)) + "." 
+//             + String((uint8_t)(ipAddress >> 8)) + "." 
+//             + String((uint8_t)ipAddress); 
+  
+  if(DEBUG) {
+    Serial.print("(String) IP: ");
+//    Serial.println(deviceIP);
+  }
+  
+  if( cc3000.checkConnected() ){
+//    pinMode(13, HIGH);
+    connectToAndUpServer();
+  }
+}
+
+void connectToAndUpServer() {
   pushClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
+  wdt_reset();
+  
+  httpServer.begin();
+  wdt_reset();
+  if(CON_DEBUG) Serial.println(F("Listening for connections..."));
+  
   if (pushClient.connected()) {
+    registerIP();
+    wdt_reset();
+    
     if(CON_DEBUG) Serial.println("PushClient Connected to server");
   } else {
-    cc3000.disconnect(); 
-    if(CON_DEBUG) Serial.println(F("PushClient Connection failed"));    
+    if(CON_DEBUG) Serial.println(F("PushClient Connection failed"));
+    reconnectInterval = millis();    
   }
   
-  
-  pollClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
-  if (pollClient.connected()) {
-    if(CON_DEBUG) Serial.println("PollClient Connected to server");
-  } else {
-    cc3000.disconnect(); 
-    if(CON_DEBUG) Serial.println(F("PollClient Connection failed"));    
-  }
-
   if(CON_DEBUG) Serial.println(F("-------------------------------------"));
 }
 
@@ -128,7 +150,7 @@ String getHostIP(byte server[4]){
 
 bool displayConnectionDetails(void)
 {
-  uint32_t ipAddress, netmask, gateway, dhcpserv, dnsserv;
+  uint32_t netmask, gateway, dhcpserv, dnsserv;
   
   if(!cc3000.getIPAddress(&ipAddress, &netmask, &gateway, &dhcpserv, &dnsserv))
   {
@@ -139,10 +161,10 @@ bool displayConnectionDetails(void)
   {
     if(CON_DEBUG) {
       Serial.print(F("\nIP Addr: ")); cc3000.printIPdotsRev(ipAddress);
-      Serial.print(F("\nNetmask: ")); cc3000.printIPdotsRev(netmask);
-      Serial.print(F("\nGateway: ")); cc3000.printIPdotsRev(gateway);
-      Serial.print(F("\nDHCPsrv: ")); cc3000.printIPdotsRev(dhcpserv);
-      Serial.print(F("\nDNSserv: ")); cc3000.printIPdotsRev(dnsserv);
+//      Serial.print(F("\nNetmask: ")); cc3000.printIPdotsRev(netmask);
+//      Serial.print(F("\nGateway: ")); cc3000.printIPdotsRev(gateway);
+//      Serial.print(F("\nDHCPsrv: ")); cc3000.printIPdotsRev(dhcpserv);
+//      Serial.print(F("\nDNSserv: ")); cc3000.printIPdotsRev(dnsserv);
       Serial.println();
     }
     return true;

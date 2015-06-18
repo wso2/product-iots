@@ -1,6 +1,7 @@
 #include "FireAlarmWifiAgent.h"
 
 #include <Adafruit_CC3000.h>
+#include <avr/wdt.h>
 #include <SPI.h>
 #include "dht.h"
 #include <pt.h> 
@@ -9,8 +10,12 @@ Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ
                                          SPI_CLOCK_DIVIDER); // you can change this clock speed
 
 Adafruit_CC3000_Client pushClient;
-Adafruit_CC3000_Client pollClient;
+Adafruit_CC3000_Server httpServer(LISTEN_PORT);
+
 static struct pt pushThread;
+static unsigned long reconnectInterval = 0;
+static unsigned long pushInterval = 0;
+//String deviceIP;
 
 uint32_t sserver;
 
@@ -23,75 +28,47 @@ uint32_t sserver;
         5. Check whether all reqquired pins are added to the 'digitalPins' array  
     ***********************************************************************************************/
 
-byte server[4] = { 10, 100, 7, 38 };
+//byte server[4] = { 10, 100, 7, 38 };
+byte server[4] = { 192, 168, 2, 1 };
 
 int digitalPins[] = { TEMP_PIN, BULB_PIN, FAN_PIN };
-String host, jsonPayLoad, replyMsg;
+String host, jsonPayLoad;
 String responseMsg, subStrn;
 
 void setup() {
-  if(true) Serial.begin(115200); 
+  if(CON_DEBUG) Serial.begin(115200); 
+  
   pinMode(BULB_PIN, OUTPUT);
-  pinMode(FAN_PIN, OUTPUT);
+  pinMode(FAN_PIN, OUTPUT);  
+//  pinMode(13, OUTPUT);  
   
   PT_INIT(&pushThread);
   
-  connectHttp();
   setupResource();
+  
+  while( !cc3000.checkConnected() ){
+   connectWifi();
+  }
+    
+  wdt_enable(WDTO_8S);
 }
 
 void loop() {
-  if (pushClient.connected() && pollClient.connected()) {   
-    pushData();                    // batches all the required pin values together and pushes once
+    wdt_reset();
+    protothread1(&pushThread);      // Pushes data and waits for control signals to be received
 
-//    pushDigitalPinData();        // pushes pin data via multiple calls with a single pin data per call
-//    protothread1(&pushThread, 1000);      // Pushes data and waits for control signals to be received
-    delay(POLL_INTERVAL);
-    
-    boolean valid = readControls();
-    
-    if (!valid) {
-      if (responseMsg.equals("TEMPERATURE")) {
-        int temperature =  (uint8_t)getTemperature();
-        replyMsg = "Temperature is " + String(temperature) + " C";
-        reply();
-      } else if (responseMsg.equals("BULB")) {
-        replyMsg = "Bulb was switched " + switchBulb();
+    if ( subStrn.equals("ON") ) {
+      if (responseMsg.equals("BULB")) {
+        digitalWrite(BULB_PIN, HIGH);
       } else if (responseMsg.equals("FAN")) {
-        replyMsg = "Buzzer was switched " + switchFan();
+        digitalWrite(FAN_PIN, HIGH);
       } 
-    } 
-  } else {
-    if(DEBUG) {
-      Serial.println("client not found...");
-      Serial.println("disconnecting.");
-    }
-    pushClient.close();
-    pollClient.close();
-    cc3000.disconnect();  
-   
-    connectHttp();
-  }  
-}
-
-
-String switchBulb() {
-    if (digitalRead(BULB_PIN) == HIGH) {
-      digitalWrite(BULB_PIN, LOW);
-      return "OFF";
-    } else {
-      digitalWrite(BULB_PIN, HIGH);
-      return "ON";
-    }
-}
-
-String switchFan() {
-    if (digitalRead(FAN_PIN) == HIGH) {
-      digitalWrite(FAN_PIN, LOW);
-      return "OFF";
-    } else {
-      digitalWrite(FAN_PIN, HIGH);
-      return "ON";
+    } else if ( subStrn.equals("OFF") ) {
+      if (responseMsg.equals("BULB")) {
+        digitalWrite(BULB_PIN, LOW);
+      } else if (responseMsg.equals("FAN")) {
+        digitalWrite(FAN_PIN, LOW);
+      } 
     }
 }
 
@@ -129,7 +106,6 @@ double getTemperature(){
 		if(DEBUG) Serial.print("Unknown error,\t"); 
 		break;
   }
-  
                         // DISPLAY DATA
   if(DEBUG) {
     Serial.print("\t");
@@ -142,15 +118,39 @@ double getTemperature(){
 }
 
 
-static int protothread1(struct pt *pt, int interval) {
-  static unsigned long timestamp = 0;
+static int protothread1(struct pt *pt) {
   PT_BEGIN(pt);
   while(1) { // never stop 
     /* each time the function it is checked whether any control signals are sent
     *  if so exit this proto thread
     */
-    PT_WAIT_UNTIL(pt, readControls() );
-    pushData();
+    PT_WAIT_UNTIL(pt, listen() );
+    
+    if (pushClient.connected()) {    
+      if ((millis() - pushInterval) > 2000) {
+        pushData();
+        pushInterval = millis();
+        wdt_reset();
+      }
+    } else {
+      if(DEBUG) {
+        Serial.println("client not found...");
+        Serial.println("disconnecting.");
+      }
+      
+      pushClient.flush();
+
+      if(CON_DEBUG) Serial.println("Disconnection!!!!");
+
+      if ( (millis() - reconnectInterval) > 3000 ) {
+        if (cc3000.checkConnected()) {
+          connectToAndUpServer();
+        } else {
+//          pinMode(13, LOW);  
+          while(1);
+        }  
+      } 
+    }  
   }
   PT_END(pt);
 }
