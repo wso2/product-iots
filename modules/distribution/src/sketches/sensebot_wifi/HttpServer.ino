@@ -3,17 +3,12 @@ int bufindex = 0;
 char action[MAX_ACTION+1];
 char path[MAX_PATH+1];
 
-boolean listen()
+void readControls()
 {
   
   // Try to get a client which is connected.
   Adafruit_CC3000_ClientRef client = httpServer.available();
-  if (client) {
-    //Serial.println(F("Client connected."));
-    // Process this request until it completes or times out.
-    // Note that this is explicitly limited to handling one request at a time!
-
-    // Clear the incoming data buffer and point to the beginning of it.
+   if(client){
     bufindex = 0;
     memset(&buffer, 0, sizeof(buffer));
     
@@ -37,7 +32,7 @@ boolean listen()
 //      Serial.print(F("Path: ")); Serial.println(path);
 
       if (strcmp(action, "GET") == 0) {
-          String urlPath = path;
+          urlPath = path;
           urlPath.replace("/move/","");
           urlPath.replace("/","");
 
@@ -61,15 +56,11 @@ boolean listen()
 
     // Wait a short period to make sure the response had time to send before
     // the connection is closed (the CC3000 sends data asyncronously).
-    delay(100);
-
-    // Close the connection when done.
-    Serial.println(F("Client disconnected"));
+    delay(200);
     client.close();
-    return false;
-  } else {
-    return true;
-  }
+ 
+   }
+  
 }
 
 

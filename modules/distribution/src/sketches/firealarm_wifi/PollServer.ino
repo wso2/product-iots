@@ -26,7 +26,8 @@ void registerIP() {
     Serial.print(host); Serial.println(); Serial.println();
   }
   
-  delay(1000);
+  delay(100);
 
   pushClient.flush();
+  pushClient.close();
 }
