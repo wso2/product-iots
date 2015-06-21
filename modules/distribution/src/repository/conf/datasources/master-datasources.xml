@@ -141,6 +141,27 @@
         </datasource>
 
         <datasource>
+            <name>AndroidDM_DS</name>
+            <description>The datasource used for Android database</description>
+            <jndiConfig>
+                <name>jdbc/AndroidDM_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/AndroidDM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+
+        <datasource>
             <name>SensebotDM_DS</name>
             <description>The datasource used for Sensebot database</description>
             <jndiConfig>
