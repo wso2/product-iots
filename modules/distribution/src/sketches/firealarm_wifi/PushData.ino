@@ -64,6 +64,8 @@ void pushData(){
    
     delay(100);
     
+    pushClient.flush();
+    pushClient.close();
     wdt_reset();
     
 //    if(true) { 
