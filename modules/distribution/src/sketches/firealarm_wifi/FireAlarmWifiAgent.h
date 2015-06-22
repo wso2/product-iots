@@ -34,8 +34,8 @@
 
 
 
-#define WLAN_SSID       "linksys"           // cannot be longer than 32 characters!
-#define WLAN_PASS       "ramsgate717"
+#define WLAN_SSID       "SSID"           // cannot be longer than 32 characters!
+#define WLAN_PASS       "PASSWORD"
 
 #define WLAN_SECURITY   WLAN_SEC_WPA
                            // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
