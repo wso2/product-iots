@@ -42,17 +42,40 @@ $('#date-range1').dateRangePicker(configObject)
         toDate = dateRange.date2 != "Invalid Date" ? dateRange.date2.getTime() / 1000 : null;
     });
 
-$('#btn-draw-graphs').on('click', function () {
-    var deviceId = getUrlParameter('deviceId');
-    console.log("device id:"+deviceId);
-    getStats(deviceId, fromDate, toDate);
+var now = new Date();
+var startDate = new Date(now.getTime() - (60*60*24*100));
+var endDate = new Date(now.getTime());
+
+var DateRange = customFormatDate(startDate,configObject.format) +" "+ configObject.separator +" "+ customFormatDate(endDate,configObject.format);
+console.log(DateRange);
+
+$( document ).ready(function() {
+    $('#date-range1').val(DateRange);
+    $('#date-range1').trigger('datepicker-apply',
+        {
+            'value': DateRange,
+            'date1' : startDate,
+            'date2' : endDate
+        });
+
+    $('#btn-draw-graphs').trigger("click");
 });
 
-function getStats(deviceId, from, to) {
+//26.04.2015 08:46 to 22.07.2015 08:46
+
+$('#btn-draw-graphs').on('click', function () {
+    var deviceId = getUrlParameter('deviceId');
+    var deviceType = getUrlParameter('deviceType');
+    console.log("device id:"+deviceId);
+    getStats(deviceId, deviceType, fromDate, toDate);
+});
+
+function getStats(deviceId, deviceType, from, to) {
 
     var requestData = new Object();
 
     requestData['deviceId'] = deviceId;
+    requestData['deviceType'] = deviceType;
 
     if (from) {
         requestData['from'] = from;
@@ -108,6 +131,8 @@ function updateGraphs(stats) {
     updateFanGraph(convertStateStatsToGraphData(fanData));
 
     var bulbData = stats['bulbData'];
+    console.log("bulbData...");
+    console.log(bulbData);
     updateBulbGraph(convertStateStatsToGraphData(bulbData));
 
 }
@@ -115,7 +140,7 @@ function updateGraphs(stats) {
 function convertStatsToGraphData(stats) {
 
     var graphData = new Array();
-
+    if(!stats){return graphData;}
     for (var i = 0; i < stats.length; i++) {
         graphData.push({x: parseInt(stats[i]['time']) * 1000, y: stats[i]['value']})
     }
@@ -128,7 +153,7 @@ function convertStatsToGraphData(stats) {
 function convertStateStatsToGraphData(stats){
 
     var graphData = new Array();
-
+    if(!stats){return graphData;}
     var yValue;
 	for(var i = 0; i < stats.length; i++){
     		yValue = -1;
@@ -143,4 +168,46 @@ function convertStateStatsToGraphData(stats){
     	}
 
     	return graphData;
+}
+
+function arrayMin(arr) {
+    var len = arr.length, min = Infinity;
+    while (len--) {
+        if (arr[len] < min) {
+            min = arr[len];
+        }
+    }
+    return min;
+};
+
+function arrayMax(arr) {
+    var len = arr.length, max = -Infinity;
+    while (len--) {
+        if (arr[len] > max) {
+            max = arr[len];
+        }
+    }
+    return max;
+};
+
+
+function customFormatDate(timeStamp, formatString){
+    console.log("came"+formatString);
+    var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
+    YYYY=timeStamp.getFullYear();
+    MM = (M=timeStamp.getMonth()+1)<10?('0'+M):M;
+    //MMM = (MMMM=["January","February","March","April","May","June","July","August","September","October","November","December"][M-1]).substring(0,3);
+    DD = (D=timeStamp.getDate())<10?('0'+D):D;
+    //DDD = (DDDD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][timeStamp.getDay()]).substring(0,3);
+    formatString = formatString.replace("YYYY",YYYY).replace("MM",MM).replace("DD",DD).replace("D",D);
+    console.log(formatString);
+
+    h=(hhh=timeStamp.getHours());
+    if (h==0) h=24;
+    if (h>12) h-=12;
+    hh = h<10?('0'+h):h;
+    AMPM=(ampm=hhh<12?'am':'pm').toUpperCase();
+    mm=(m=timeStamp.getMinutes())<10?('0'+m):m;
+    ss=(s=timeStamp.getSeconds())<10?('0'+s):s;
+    return formatString.replace("hhh",hhh).replace("HH",hh).replace("h",h).replace("mm",mm).replace("m",m).replace("ss",ss).replace("s",s).replace("ampm",ampm).replace("AMPM",AMPM);
 }

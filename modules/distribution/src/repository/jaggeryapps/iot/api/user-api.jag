@@ -30,14 +30,16 @@ var utility = require("/modules/utility.js").utility;
 var result;
 
 if (uriMatcher.match("/{context}/api/user/login/")) {
-	username = request.getParameter("username");
-	password = request.getParameter("password");
+
+	var username = request.getParameter("username");
+	var password = request.getParameter("password");
+
 	try {
 		userModule.login(username, password, function (user) {
+			utility.insertAppPermissions(userModule, "login");
 			if (log.isDebugEnabled()) {
 				log.debug("User Logged In : " + user);
 			}
-			utility.insertAppPermissions(userModule, "login");
 			response.sendRedirect(constants.WEB_APP_CONTEXT);
 		}, function () {
 			response.sendRedirect(dcProps.appContext + "login?#auth-failed");
@@ -46,22 +48,27 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 		log.error("Exception occurred while a user tried to login to DC", e);
 		response.sendRedirect(dcProps.appContext + "login?#error");
 	}
+
 } else if (uriMatcher.match("/{context}/api/user/logout/")) {
+
 	userModule.logout(function () {
 		response.sendRedirect(dcProps.appContext + "login");
 	});
-} else if (uriMatcher.match("/{context}/api/users/register")) {
-	addUserFormData = request.getContent();
 
+} else if (uriMatcher.match("/{context}/api/users/register")) {
+
+	addUserFormData = request.getContent();
 	username = addUserFormData.username;
 	firstname = addUserFormData.firstname;
 	lastname = addUserFormData.lastname;
 	emailAddress = addUserFormData.emailAddress;
-	password =  addUserFormData.password;
+	password = addUserFormData.password;
 
-	//enable internal subscriptions for APIM
-	userRoleStr = "Internal/subscriber,Internal/everyone" ;
-	userRoles = String(userRoleStr).split(",");
+	if (!addUserFormData.userRoles) {
+		userRoles = null;
+	} else {
+		userRoles = String(addUserFormData.userRoles).split(",");
+	}
 
 	try {
 		result = userModule.registerUser(username, firstname, lastname, emailAddress, password,
@@ -71,10 +78,12 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 		// http status code 400 refers to - Bad request.
 		result = 400;
 	}
-} else if (uriMatcher.match("/{context}/api/users/add")) {
-	if (userModule.isAuthorized("/permission/device-mgt/admin/users/add")) {
-		addUserFormData = request.getContent();
 
+} else if (uriMatcher.match("/{context}/api/users/add")) {
+
+	if (userModule.isAuthorized("/permission/device-mgt/admin/users/add")) {
+
+		addUserFormData = request.getContent();
 		username = addUserFormData.username;
 		firstname = addUserFormData.firstname;
 		lastname = addUserFormData.lastname;
@@ -97,10 +106,14 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 		// http status code 403 refers to - forbidden.
 		result = 403;
 	}
+
 } else if (uriMatcher.match("/{context}/api/users/{username}/remove")) {
+
 	if (userModule.isAuthorized("/permission/device-mgt/admin/users/remove")) {
+
 		elements = uriMatcher.elements();
 		username = elements.username;
+
 		try {
 			result = userModule.removeUser(username);
 		} catch (e) {
@@ -108,10 +121,12 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 			// http status code 400 refers to - Bad request.
 			result = 400;
 		}
+
 	} else {
 		// http status code 403 refers to - forbidden.
 		result = 403;
 	}
+
 }
 
 // returning the result.

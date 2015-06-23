@@ -1,11 +1,12 @@
 {{#zone "topCss"}}
-    <link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet"/>
+    <!--<link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet"/>-->
     <link href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
 {{/zone}}
 {{#zone "topJs"}}
     <!-- -->
-    <script src="{{self.publicURL}}/js/d3.min.js"></script>
-    <script src="{{self.publicURL}}/js/nv.d3.js"></script>
+    <!--<script src="{{self.publicURL}}/js/d3.min.js"></script>-->
+    <!--<script src="{{self.publicURL}}/js/nv.d3.js"></script>-->
+    <script src="{{self.publicURL}}/js/Chart.min.js"></script>
     <script src="{{self.publicURL}}/js/stream_layers.js"></script>
     <script src="{{self.publicURL}}/js/moment.min.js"></script>
     <script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
@@ -30,53 +31,51 @@
             </div>
 
             <div class="clear"></div>
-
             <div class="row margin-double">
-                <div class="chart1">
+                <div>
                     <h2 class="grey ">Temperature</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper1">No data available...</div>
                 </div>
                 <hr>
             </div>
-            <div class="row margin-double padding-double "></div>
             <div class="row margin-double">
-                <div class="chart2">
+                <div>
                     <h2 class="grey ">Light</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper2">No data available...</div>
                 </div>
                 <hr>
             </div>
             <div class="row margin-double">
-                <div class="chart3">
+                <div>
                     <h2 class="grey ">Motion</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper3">No data available...</div>
                 </div>
                 <hr>
             </div>
             <div class="row margin-double">
-                <div class="chart4">
+                <div>
                     <h2 class="grey ">Sonar</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper4">No data available...</div>
                 </div>
                 <hr>
             </div>
             <div class="row margin-double">
-                <div class="chart5">
-                    <h2 class="grey ">Fan</h2>
+                <div>
+                    <h2 class="grey ">Fan Status</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper5">No data available...</div>
                 </div>
                 <hr>
             </div>
             <div class="row margin-double">
-                <div class="chart6">
-                    <h2 class="grey ">Bulb</h2>
+                <div>
+                    <h2 class="grey ">Bulb Status</h2>
                     <hr>
-                    <svg></svg>
+                    <div id="canvas-wrapper6">No data available...</div>
                 </div>
                 <hr>
             </div>
@@ -87,10 +86,10 @@ When they are moved the script tags get repeated for some reason :-(
 	-->
     <script src="{{self.publicURL}}/js/graph_util.js"></script>
     <script src="{{self.publicURL}}/js/bulb.js"></script>
-    <script src="{{self.publicURL}}/js/fan_graph.js"></script>
-    <script src="{{self.publicURL}}/js/bulb_graph.js"></script>
-    <script src="{{self.publicURL}}/js/temperature_graph.js"></script>
-    <script src="{{self.publicURL}}/js/light_graph.js"></script>
-    <script src="{{self.publicURL}}/js/motion_graph.js"></script>
-    <script src="{{self.publicURL}}/js/sonar_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/fan_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/bulb_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/temperature_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/light_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/motion_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/sonar_graph.js"></script>
 {{/zone}}
