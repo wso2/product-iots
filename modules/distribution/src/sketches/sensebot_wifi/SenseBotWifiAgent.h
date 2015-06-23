@@ -1,37 +1,27 @@
-#ifndef SenseBotWifiAgent_H
-#define SenseBotWifiAgent_H
+#ifndef ArduinoWifiAgent_H
+#define ArduinoWifiAgent_H
 
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 
 // These are the interrupt and control pins
 #define ADAFRUIT_CC3000_IRQ   3  // MUST be an interrupt pin!
+// These can be any two pins
 #define ADAFRUIT_CC3000_VBAT  5
 #define ADAFRUIT_CC3000_CS    10
 
-#define WLAN_SSID       "YourAccessPointSSID"           // cannot be longer than 32 characters!
-#define WLAN_PASS       "APPassword"
+#define WLAN_SSID       "SSID"           // cannot be longer than 32 characters!
+#define WLAN_PASS       "password"
 
-#define WLAN_SECURITY   WLAN_SEC_WPA2
-                           // Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
+#define WLAN_SECURITY   WLAN_SEC_WPA
+// Security can be WLAN_SEC_UNSEC, WLAN_SEC_WEP, WLAN_SEC_WPA or WLAN_SEC_WPA2
+#define IDLE_TIMEOUT_MS  3000
 
-#define DEVICE_OWNER "${DEVICE_OWNER}"
-#define DEVICE_ID "${DEVICE_ID}"
+#define DEVICE_OWNER "${DEVICE_OWNER}"          
+#define DEVICE_ID "${DEVICE_ID}"              
+#define DEVICE_TOKEN "${DEVICE_TOKEN}"
 
-/**********************************************************************************************
- The following two parameters are used when pushing data via the API in the API Manager
- ***********************************************************************************************/
-#define SERVICE_PORT 8281
-#define SERVICE_EPOINT "/sensebotdata/1.0/controller/"
-
-/**********************************************************************************************
- Use the following two parameters when pushing data directly to the JAX-RS Service
- ***********************************************************************************************/
-//#define SERVICE_PORT 9763
-//#define SERVICE_EPOINT "/sensebot/controller/"
+#define SERVICE_PORT 9763
+#define SERVICE_EPOINT "/sensebot/controller/"
 
 #define BUZZER A0
 #define LDR_PIN  A1
@@ -45,27 +35,40 @@
 
 #define TURN_DELAY 100
 
-#define LISTEN_PORT           80      // What TCP port to listen on for connections.  
-                                      // The HTTP protocol uses port 80 by default.
-
+#define PUSH_INTERVAL 30000
 #define MAX_ACTION            6      // Maximum length of the HTTP action that can be parsed.
 
-#define MAX_PATH              10      // Maximum length of the HTTP request path that can be parsed.
-                                      // There isn't much memory available so keep this short!
-
+#define MAX_PATH              10
 #define BUFFER_SIZE           MAX_ACTION + MAX_PATH + 10  // Size of buffer for incoming request data.
-                                                          // Since only the first line is parsed this
-                                                          // needs to be as large as the maximum action
-                                                          // and path plus a little for whitespace and
-                                                          // HTTP version.
 
-#define TIMEOUT_MS            500    // Amount of time in milliseconds to wait for
-                                     // an incoming request to finish.  Don't set this
-                                     // too high or your server could be slow to respond.
+#define TIMEOUT_MS            500 
 
 #define DEBUG false
-#define CON_DEBUG true
+#define CON_DEBUG false
+
+
+
+byte server[4] = { 192, 168, 1, 101 };
+String host, jsonPayLoad;
+ unsigned long pushTimestamp = 0;
+ unsigned long pollTimestamp = 0;
+
+#define LISTEN_PORT           80
+
+byte motion_global = 0;
+byte temperature =  0;
+int pir =0;
+int sonar=0;
+int ldr =0;
+
+const byte motor_left[] = {7, 8};
+const byte enA = 12;
+
+const byte motor_right[] = {4, 6};
+const byte enB = 11;
+String urlPath;
 
 #endif
+
 
 

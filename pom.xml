@@ -374,6 +374,11 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.android.impl</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.iot</groupId>
                 <artifactId>org.wso2.carbon.device.mgt.iot.digitaldisplay.impl</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>

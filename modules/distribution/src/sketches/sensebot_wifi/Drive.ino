@@ -1,4 +1,11 @@
 
+
+
+void updateDirectionVariable(int motionDir){
+  motion_global = motionDir;
+}
+
+
 void motor_stop(){
   digitalWrite(motor_left[0], LOW); 
   digitalWrite(motor_left[1], LOW); 
@@ -52,4 +59,20 @@ void turn_left(){
   }
   updateDirectionVariable(0);
   motor_stop();
+}
+
+void drive(){
+  switch(motion_global){           
+     case 1 : drive_forward();                     
+               break;
+     case 2 : drive_backward();            
+               break;
+     case 3 : turn_left();           
+               break;
+     case 4 : turn_right();
+               break;                   
+     case 5 : 
+              motor_stop();          
+               break;  
+  }
 }
