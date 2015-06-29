@@ -122,89 +122,7 @@
 			     </tasks>
                         </configuration>
                     </execution>
-                    <!--execution-->
-                        <!-- Creating IOS Mobile Plugin Management schema -->
-                        <!--id>create-ios-mobile-plugin-mgt-schema</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <echo message="########### Create IOS Mobile plugin Management H2 Schema ###########" />
 
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
-                                <property name="userid" value="wso2carbon" />
-                                <property name="password" value="wso2carbon" />
-                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2MobileIOS_DB;DB_CLOSE_ON_EXIT=FALSE" />
-
-                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
-                                    <classpath refid="maven.dependency.classpath" />
-                                    <classpath refid="maven.compile.classpath" />
-                                    <classpath refid="maven.runtime.classpath" />
-
-                                    <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_ios.sql" />
-                                </sql>
-                                <echo message="##################### END ####################" />
-                            </tasks>
-                        </configuration>
-                    </execution-->
-                    <!--execution-->
-                        <!-- Creating Android Mobile Plugin Management schema -->
-                        <!--id>create-mobile-android-plugin-mgt-schema</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <echo message="########### Create ANDROID Mobile plugin Management H2 Schema ###########" />
-
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
-                                <property name="userid" value="wso2carbon" />
-                                <property name="password" value="wso2carbon" />
-                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2MobileAndroid_DB;DB_CLOSE_ON_EXIT=FALSE" />
-
-                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
-                                    <classpath refid="maven.dependency.classpath" />
-                                    <classpath refid="maven.compile.classpath" />
-                                    <classpath refid="maven.runtime.classpath" />
-
-                                    <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_android.sql" />
-                                </sql>
-                                <echo message="##################### END ####################" />
-                            </tasks>
-                        </configuration>
-                    </execution-->
-                    <!--execution-->
-                        <!-- Creating Windows Mobile Plugin Management schema -->
-                        <!--id>create-mobile-windows-plugin-mgt-schema</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <echo message="########### Create WINDOWS Mobile plugin Management H2 Schema ###########" />
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
-                                <property name="userid" value="wso2carbon" />
-                                <property name="password" value="wso2carbon" />
-                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2MobileWindows_DB;DB_CLOSE_ON_EXIT=FALSE" />
-
-                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
-                                    <classpath refid="maven.dependency.classpath" />
-                                    <classpath refid="maven.compile.classpath" />
-                                    <classpath refid="maven.runtime.classpath" />
-
-                                    <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_windows.sql" />
-                                </sql>
-                                <echo message="##################### END ####################" />
-                            </tasks>
-                        </configuration>
-                    </execution-->
                     <execution>
                         <!-- Creating IDP Management schema -->
                         <id>create-idp-mgt-schema</id>
@@ -345,7 +263,7 @@
 
                     <execution>
                         <!-- Creating IOT Management schema -->
-                        <id>create-android-schema</id>
+                        <id>create-android-sense-schema</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
@@ -357,13 +275,13 @@
                                 <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
                                 <property name="userid" value="wso2carbon" />
                                 <property name="password" value="wso2carbon" />
-                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/AndroidDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/AndroidSenseDM_DB;DB_CLOSE_ON_EXIT=FALSE" />
 
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
                                     <classpath refid="maven.dependency.classpath" />
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
-                                     <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_android.sql" />
+                                     <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_android_sense.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
                             </tasks>
@@ -419,7 +337,7 @@
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
                                     <!--fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberry.sql" /-->
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_digitaldisplay.sql" />
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_digital_display.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
                             </tasks>

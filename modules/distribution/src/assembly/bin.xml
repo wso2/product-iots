@@ -280,7 +280,7 @@
                 <include>devicecloud.war</include>
                 <include>firealarm.war</include>
                 <include>arduino.war</include>
-                <include>android.war</include>
+                <include>android_sense.war</include>
                 <include>sensebot.war</include>
                 <include>raspberrypi.war</include>
                 <include>digitaldisplay.war</include>

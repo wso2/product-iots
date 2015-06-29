@@ -374,7 +374,7 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.android.impl</artifactId>
+                <artifactId>org.wso2.carbon.device.mgt.iot.android.sense.impl</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
             <dependency>
@@ -785,9 +785,7 @@
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
         <orbit.tomcat.jdbc.pooling.version>7.0.34.wso2v2</orbit.tomcat.jdbc.pooling.version>
 
-        <!--MDM android Agent-->
 
-        <mdm.android.agent.archetype.version>1.0.0-SNAPSHOT</mdm.android.agent.archetype.version>
 
         <!--CXF properties-->
         <cxf.version>2.6.1</cxf.version>

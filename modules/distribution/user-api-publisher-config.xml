@@ -16,39 +16,39 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
 -->
-<APIPublisherConfig>
-        <APIs>
-            <API>
-               <Name>appmanager</Name>
-               <Owner>admin</Owner>
-               <Context>/devices</Context>
-               <Version>1.0.0</Version>
-               <Endpoint>http://localhost:9763/test/app</Endpoint>
-               <Transports>http,https</Transports>
-            </API>
-            <API>
-               <Name>enrol</Name>
-               <Owner>admin</Owner>
-               <Context>/enroll</Context>
-               <Version>1.0.0</Version>
-               <Endpoint>http://localhost:9763/cdm-android-api/enrollment</Endpoint>
-               <Transports>http,https</Transports>
-            </API>
-            <API>
-               <Name>license</Name>
-               <Owner>admin</Owner>
-               <Context>/license</Context>
-               <Version>1.0.0</Version>
-               <Endpoint>http://localhost:9763/cdm-android-api/devices/license</Endpoint>
-               <Transports>http,https</Transports>
-            </API>
-            <API>
-               <Name>operation</Name>
-               <Owner>admin</Owner>
-               <Context>/operation</Context>
-               <Version>1.0.0</Version>
-               <Endpoint>http://localhost:9763/cdm-android-ap/operation</Endpoint>
-               <Transports>http,https</Transports>
-            </API>
-         </APIs>
-</APIPublisherConfig>
+<!--<APIPublisherConfig>-->
+        <!--<APIs>-->
+            <!--<API>-->
+               <!--<Name>appmanager</Name>-->
+               <!--<Owner>admin</Owner>-->
+               <!--<Context>/devices</Context>-->
+               <!--<Version>1.0.0</Version>-->
+               <!--<Endpoint>http://localhost:9763/test/app</Endpoint>-->
+               <!--<Transports>http,https</Transports>-->
+            <!--</API>-->
+            <!--<API>-->
+               <!--<Name>enrol</Name>-->
+               <!--<Owner>admin</Owner>-->
+               <!--<Context>/enroll</Context>-->
+               <!--<Version>1.0.0</Version>-->
+               <!--<Endpoint>http://localhost:9763/cdm-android-api/enrollment</Endpoint>-->
+               <!--<Transports>http,https</Transports>-->
+            <!--</API>-->
+            <!--<API>-->
+               <!--<Name>license</Name>-->
+               <!--<Owner>admin</Owner>-->
+               <!--<Context>/license</Context>-->
+               <!--<Version>1.0.0</Version>-->
+               <!--<Endpoint>http://localhost:9763/cdm-android-api/devices/license</Endpoint>-->
+               <!--<Transports>http,https</Transports>-->
+            <!--</API>-->
+            <!--<API>-->
+               <!--<Name>operation</Name>-->
+               <!--<Owner>admin</Owner>-->
+               <!--<Context>/operation</Context>-->
+               <!--<Version>1.0.0</Version>-->
+               <!--<Endpoint>http://localhost:9763/cdm-android-ap/operation</Endpoint>-->
+               <!--<Transports>http,https</Transports>-->
+            <!--</API>-->
+         <!--</APIs>-->
+<!--</APIPublisherConfig>-->
