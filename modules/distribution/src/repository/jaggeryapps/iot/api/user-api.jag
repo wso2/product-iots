@@ -33,6 +33,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 
 	var username = request.getParameter("username");
 	var password = request.getParameter("password");
+	var redirect = request.getParameter("redirect");
 
 	try {
 		userModule.login(username, password, function (user) {
@@ -40,13 +41,25 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 			if (log.isDebugEnabled()) {
 				log.debug("User Logged In : " + user);
 			}
-			response.sendRedirect(constants.WEB_APP_CONTEXT);
+			if(redirect==null){
+				response.sendRedirect(constants.WEB_APP_CONTEXT);
+			}else{
+
+				result=200;
+			}
 		}, function () {
-			response.sendRedirect(dcProps.appContext + "login?#auth-failed");
+			
+			if(redirect==null){
+				response.sendRedirect(dcProps.appContext + "login?#auth-failed");
+			}else{
+
+				result=401;
+			}
 		});
 	} catch (e) {
 		log.error("Exception occurred while a user tried to login to DC", e);
 		response.sendRedirect(dcProps.appContext + "login?#error");
+		
 	}
 
 } else if (uriMatcher.match("/{context}/api/user/logout/")) {
