@@ -1,6 +1,16 @@
 var fromDate;
 var toDate;
 
+// create a custom bar renderer that has no gaps
+Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
+    name: 'bar_no_gap',
+    barWidth: function (series) {
+        var frequentInterval = this._frequentInterval(series.stack);
+        var barWidth = this.graph.x(series.stack[0].x + frequentInterval.magnitude * 1);
+        return barWidth;
+    }
+});
+
 var configObject = {
 
     format: 'DD.MM.YYYY HH:mm',
@@ -134,7 +144,32 @@ function updateGraphs(stats) {
     console.log("bulbData...");
     console.log(bulbData);
     updateBulbGraph(convertStateStatsToGraphData(bulbData));
+    scaleGraphs();
+}
 
+function scaleGraphs() {
+    //Scale graphs
+    var sliderX = 1110 * 60 * 60 / (toDate - fromDate);
+    if (sliderX < 1110) {
+        // fake handle move
+        if (sliderX < 100) {
+            sliderX = 100;
+        }
+        var edown = document.createEvent("HTMLEvents");
+        edown.initEvent("mousedown", true, true);
+        edown.clientX = 1160;
+        var emove = document.createEvent("HTMLEvents");
+        emove.initEvent("mousemove", true, true);
+        emove.clientX = sliderX;
+        var eup = document.createEvent("HTMLEvents");
+        eup.initEvent("mouseup", true, true);
+        var sliders = $('.right_handle');
+        for (var slider in sliders) {
+            sliders[slider].dispatchEvent(edown);
+            document.dispatchEvent(emove);
+            document.dispatchEvent(eup);
+        }
+    }
 }
 
 function convertStatsToGraphData(stats) {
