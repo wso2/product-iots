@@ -5,7 +5,7 @@ function updateMotionGraph(motionData) {
 
 function renderMotionChart(chartDataRaw){
     var chartWrapperElmId = "#canvas-wrapper3";
-
+    var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
         $(chartWrapperElmId).html("No data available...");
         return;
@@ -31,7 +31,7 @@ function renderMotionChart(chartDataRaw){
 
     var graph = new Rickshaw.Graph({
         element: document.getElementById(chartDiv),
-        width: 1110,
+        width: graphWidth,
         height: 400,
         strokeWidth: 0.5,
         renderer: 'line',

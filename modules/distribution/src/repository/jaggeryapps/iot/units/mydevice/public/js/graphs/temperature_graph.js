@@ -5,7 +5,7 @@ function updateTemperatureGraph(temperatureData) {
 
 function renderTemperatureChart(chartDataRaw){
     var chartWrapperElmId = "#canvas-wrapper1";
-
+    var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
         $(chartWrapperElmId).html("No data available...");
         return;
@@ -31,7 +31,7 @@ function renderTemperatureChart(chartDataRaw){
 
     var graph = new Rickshaw.Graph({
         element: document.getElementById(chartDiv),
-        width: 1110,
+        width: graphWidth,
         height: 400,
         strokeWidth: 1,
         renderer: 'line',

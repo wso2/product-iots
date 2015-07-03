@@ -4,7 +4,7 @@ function updateSonarGraph(sonarData) {
 
 function renderSonarChart(chartDataRaw){
     var chartWrapperElmId = "#canvas-wrapper4";
-
+    var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
         $(chartWrapperElmId).html("No data available...");
         return;
@@ -30,7 +30,7 @@ function renderSonarChart(chartDataRaw){
 
     var graph = new Rickshaw.Graph({
         element: document.getElementById(chartDiv),
-        width: 1110,
+        width: graphWidth,
         height: 400,
         strokeWidth: 1,
         renderer: 'line',

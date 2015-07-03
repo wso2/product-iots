@@ -141,29 +141,33 @@ function updateGraphs(stats) {
     updateFanGraph(convertStateStatsToGraphData(fanData));
 
     var bulbData = stats['bulbData'];
-    console.log("bulbData...");
-    console.log(bulbData);
     updateBulbGraph(convertStateStatsToGraphData(bulbData));
+
     scaleGraphs();
 }
 
 function scaleGraphs() {
+    var sliders = $('.right_handle');
+    if (sliders.length == 0){
+        return;
+    }
+
+    var graphWidth = $('#canvas-wrapper1').width() - 50;
     //Scale graphs
-    var sliderX = 1110 * 60 * 60 / (toDate - fromDate);
-    if (sliderX < 1110) {
+    var sliderX = graphWidth * 60 * 60 / (toDate - fromDate);
+    if (sliderX < graphWidth) {
         // fake handle move
         if (sliderX < 100) {
             sliderX = 100;
         }
         var edown = document.createEvent("HTMLEvents");
         edown.initEvent("mousedown", true, true);
-        edown.clientX = 1160;
+        edown.clientX = graphWidth;
         var emove = document.createEvent("HTMLEvents");
         emove.initEvent("mousemove", true, true);
         emove.clientX = sliderX;
         var eup = document.createEvent("HTMLEvents");
         eup.initEvent("mouseup", true, true);
-        var sliders = $('.right_handle');
         for (var slider in sliders) {
             sliders[slider].dispatchEvent(edown);
             document.dispatchEvent(emove);

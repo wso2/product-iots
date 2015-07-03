@@ -5,6 +5,7 @@ function updateLightGraph(lightData) {
 
 function renderLightChart(chartDataRaw){
     var chartWrapperElmId = "#canvas-wrapper2";
+    var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
         $(chartWrapperElmId).html("No data available...");
         return;
@@ -12,7 +13,8 @@ function renderLightChart(chartDataRaw){
 
     var chartData = [[], []];
     for (var i = 0; i < chartDataRaw.length; i++){
-        chartData.push({x:parseInt(chartDataRaw[i].x), y:parseInt(chartDataRaw[i].y)});
+        chartData[0].push({x:parseInt(chartDataRaw[i].x), y:parseInt(chartDataRaw[i].y)});
+        chartData[1].push({x:parseInt(chartDataRaw[i].x), y:Math.abs(parseInt(chartDataRaw[i].y) - 1)});
     }
 
     //var i = parseInt(fromDate);
@@ -31,7 +33,7 @@ function renderLightChart(chartDataRaw){
 
     var graph = new Rickshaw.Graph({
         element: document.getElementById(chartDiv),
-        width: 1100,
+        width: graphWidth,
         height: 150,
         strokeWidth: 0.5,
         renderer: 'bar_no_gap',
