@@ -24,16 +24,22 @@
                     <hr>
                 </div>
             </div>
-            <div class="row float-right margin-top">
-                <div class="right margin-right">
-                    <p style="color:#000;float:left;margin-top:25px">Date Range:</p>
-					<input class="right margin-right" id="date-range1" size="60" value="" style="margin-top: 20px">
-                    <button type="button" id="btn-draw-graphs" class="btn btn-primary" style="margin-top: 20px">
-                        Draw Graphs
-                    </button>
+            <div id="rangeSliderWrapper" class="pull-right" style="width: 550px;">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="dateRangePickerContainer">
+                            <div class="btn-group" role="group">
+                                <button id="hour-btn" type="button" class="btn btn-default date-range">Hour</button>
+                                <button id="today-btn" type="button" class="btn btn-default date-range">Day</button>
+                                <button id="week-btn" type="button" class="btn btn-default date-range">Week</button>
+                                <button id="month-btn" type="button" class="btn btn-default date-range">Month</button>
+                                <button id="date-range" type="button" class="btn btn-default date-range last-child" data-toggle="popup" title="Click to set custom date range"></button>
+                            </div>
+                            <span class="add-on-cal"><i style="margin-right:0px;" class="icon-calendar"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="clear"></div>
             <div class="row margin-double">
                 <div>

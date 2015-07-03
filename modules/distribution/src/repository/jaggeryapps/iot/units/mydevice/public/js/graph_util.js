@@ -11,76 +11,96 @@ Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer
     }
 });
 
-var configObject = {
 
-    format: 'DD.MM.YYYY HH:mm',
+var currentDay = new Date();
+var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
+var endDate = new Date(currentDay.getTime());
+
+var configObject = {
+    startOfWeek: 'monday',
     separator: ' to ',
-    language: 'auto',
-    startOfWeek: 'sunday',// or sunday
+    format: 'YYYY-MM-DD HH:mm',
+    autoClose: false,
+    time: {
+        enabled: true
+    },
+    shortcuts: 'hide',
+    endDate: currentDay,
+
     getValue: function () {
         return this.value;
     },
     setValue: function (s) {
         this.value = s;
-    },
-    startDate: false,
-    endDate: false,
-    minDays: 0,
-    maxDays: 0,
-    showShortcuts: true,
-    time: {
-        enabled: true
-    },
-    shortcuts: {
-        //'prev-days': [1,3,5,7],
-        'next-days': [3, 5, 7],
-        //'prev' : ['week','month','year'],
-        'next': ['week', 'month', 'year']
-    },
-    customShortcuts: [],
-    inline: false,
-    container: 'body',
-    alwaysOpen: false,
-    singleDate: false,
-    batchMode: false,
-    stickyMonths: false
+    }
 };
 
-$('#date-range1').dateRangePicker(configObject)
+var DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
+
+$('#date-range').dateRangePicker(configObject)
     .bind('datepicker-apply', function (event, dateRange) {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
         fromDate = dateRange.date1 != "Invalid Date" ? dateRange.date1.getTime() / 1000 : null;
         toDate = dateRange.date2 != "Invalid Date" ? dateRange.date2.getTime() / 1000 : null;
-    });
+        getStats(fromDate, toDate);
+    }
+);
 
-var now = new Date();
-var startDate = new Date(now.getTime() - (60*60*24*100));
-var endDate = new Date(now.getTime());
-
-var DateRange = customFormatDate(startDate,configObject.format) +" "+ configObject.separator +" "+ customFormatDate(endDate,configObject.format);
-console.log(DateRange);
-
-$( document ).ready(function() {
-    $('#date-range1').val(DateRange);
-    $('#date-range1').trigger('datepicker-apply',
+$(document).ready(function () {
+    $('#date-range').html(DateRange);
+    $('#date-range').trigger('datepicker-apply',
         {
             'value': DateRange,
-            'date1' : startDate,
-            'date2' : endDate
+            'date1': startDate,
+            'date2': endDate
         });
-
-    $('#btn-draw-graphs').trigger("click");
 });
 
-//26.04.2015 08:46 to 22.07.2015 08:46
+//day picker
+$('#today-btn').on('click', function () {
+    getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
+});
 
-$('#btn-draw-graphs').on('click', function () {
+//hour picker
+$('#hour-btn').on('click', function () {
+    getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
+})
+
+//week picker
+$('#week-btn').on('click', function () {
+    getDateTime(currentDay.getTime() - 604800000, currentDay.getTime());
+})
+
+//month picker
+$('#month-btn').on('click', function () {
+    getDateTime(currentDay.getTime() - (604800000 * 4), currentDay.getTime());
+});
+
+$('body').on('click', '.btn-group button', function (e) {
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+});
+
+function getDateTime(from, to) {
+    startDate = new Date(from);
+    endDate = new Date(to);
+    DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
+    console.log(DateRange);
+    $('#date-range').html(DateRange);
+    $('#date-range').trigger('datepicker-apply',
+        {
+            'value': DateRange,
+            'date1': startDate,
+            'date2': endDate
+        }
+    );
+    getStats(from / 1000, to / 1000);
+}
+
+function getStats(from, to) {
     var deviceId = getUrlParameter('deviceId');
     var deviceType = getUrlParameter('deviceType');
-    console.log("device id:"+deviceId);
-    getStats(deviceId, deviceType, fromDate, toDate);
-});
-
-function getStats(deviceId, deviceType, from, to) {
 
     var requestData = new Object();
 
@@ -148,7 +168,7 @@ function updateGraphs(stats) {
 
 function scaleGraphs() {
     var sliders = $('.right_handle');
-    if (sliders.length == 0){
+    if (sliders.length == 0) {
         return;
     }
 
@@ -179,7 +199,9 @@ function scaleGraphs() {
 function convertStatsToGraphData(stats) {
 
     var graphData = new Array();
-    if(!stats){return graphData;}
+    if (!stats) {
+        return graphData;
+    }
     for (var i = 0; i < stats.length; i++) {
         graphData.push({x: parseInt(stats[i]['time']) * 1000, y: stats[i]['value']})
     }
@@ -188,65 +210,34 @@ function convertStatsToGraphData(stats) {
 }
 
 
-
-function convertStateStatsToGraphData(stats){
+function convertStateStatsToGraphData(stats) {
 
     var graphData = new Array();
-    if(!stats){return graphData;}
+    if (!stats) {
+        return graphData;
+    }
     var yValue;
-	for(var i = 0; i < stats.length; i++){
-    		yValue = -1;
+    for (var i = 0; i < stats.length; i++) {
+        yValue = -1;
 
-        		if(stats[i]['value'].toUpperCase() == 'ON'){
-        			yValue  = 1;
-        		}else if(stats[i]['value'].toUpperCase() == 'OFF'){
-        			yValue = 0;
-        		}
+        if (stats[i]['value'].toUpperCase() == 'ON') {
+            yValue = 1;
+        } else if (stats[i]['value'].toUpperCase() == 'OFF') {
+            yValue = 0;
+        }
 
-        		graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
-    	}
+        graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
+    }
 
-    	return graphData;
+    return graphData;
 }
 
-function arrayMin(arr) {
-    var len = arr.length, min = Infinity;
-    while (len--) {
-        if (arr[len] < min) {
-            min = arr[len];
-        }
-    }
-    return min;
-};
-
-function arrayMax(arr) {
-    var len = arr.length, max = -Infinity;
-    while (len--) {
-        if (arr[len] > max) {
-            max = arr[len];
-        }
-    }
-    return max;
-};
-
-
-function customFormatDate(timeStamp, formatString){
-    console.log("came"+formatString);
-    var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
-    YYYY=timeStamp.getFullYear();
-    MM = (M=timeStamp.getMonth()+1)<10?('0'+M):M;
-    //MMM = (MMMM=["January","February","March","April","May","June","July","August","September","October","November","December"][M-1]).substring(0,3);
-    DD = (D=timeStamp.getDate())<10?('0'+D):D;
-    //DDD = (DDDD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][timeStamp.getDay()]).substring(0,3);
-    formatString = formatString.replace("YYYY",YYYY).replace("MM",MM).replace("DD",DD).replace("D",D);
-    console.log(formatString);
-
-    h=(hhh=timeStamp.getHours());
-    if (h==0) h=24;
-    if (h>12) h-=12;
-    hh = h<10?('0'+h):h;
-    AMPM=(ampm=hhh<12?'am':'pm').toUpperCase();
-    mm=(m=timeStamp.getMinutes())<10?('0'+m):m;
-    ss=(s=timeStamp.getSeconds())<10?('0'+s):s;
-    return formatString.replace("hhh",hhh).replace("HH",hh).replace("h",h).replace("mm",mm).replace("m",m).replace("ss",ss).replace("s",s).replace("ampm",ampm).replace("AMPM",AMPM);
+function convertDate(date) {
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour=date.getHours();
+    var minute=date.getMinutes();
+    return date.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '')
+        + month + '-' + (('' + day).length < 2 ? '0' : '') + day +" "+ (('' + hour).length < 2 ? '0' : '')
+        + hour +":"+(('' + minute).length < 2 ? '0' : '')+ minute;
 }
