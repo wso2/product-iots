@@ -250,10 +250,10 @@
                         <groupId>org.apache.ant.wso2</groupId>
                         <artifactId>ant</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>commons-httpclient.wso2</groupId>
-                        <artifactId>commons-httpclient</artifactId>
-                    </exclusion>
+                    <!--<exclusion>-->
+                        <!--<groupId>commons-httpclient.wso2</groupId>-->
+                        <!--<artifactId>commons-httpclient</artifactId>-->
+                    <!--</exclusion>-->
                     <exclusion>
                         <groupId>org.eclipse.equinox</groupId>
                         <artifactId>javax.servlet</artifactId>
@@ -361,6 +361,8 @@
                 <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
                 <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
+
+
 
             <dependency>
                 <groupId>org.wso2.carbon.iot</groupId>
@@ -504,10 +506,10 @@
                         <groupId>org.wso2.carbon</groupId>
                         <artifactId>org.wso2.carbon.rest.api.stub</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>org.json.wso2</groupId>
-                        <artifactId>json</artifactId>
-                    </exclusion>
+                    <!--<exclusion>-->
+                        <!--<groupId>org.json.wso2</groupId>-->
+                        <!--<artifactId>json</artifactId>-->
+                    <!--</exclusion>-->
                     <exclusion>
                         <groupId>com.h2database.wso2</groupId>
                         <artifactId>h2-database-engine</artifactId>
@@ -739,11 +741,20 @@
             </dependency>
             <!-- End of Tomcat dependencies -->
 
+
+
+            <!--<dependency>-->
+                <!--<groupId>com.google.code.gson</groupId>-->
+                <!--<artifactId>gson</artifactId>-->
+                <!--&lt;!&ndash;<version>${google.code.gson.version}</version>&ndash;&gt;-->
+            <!--</dependency>-->
+
             <dependency>
-                <groupId>commons-httpclient.wso2</groupId>
-                <artifactId>commons-httpclient</artifactId>
-                <version>${orbit.version.commons-httpclient}</version>
+                <groupId>org.json.wso2</groupId>
+                <artifactId>json</artifactId>
+                <version>${commons-json.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -819,6 +830,8 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
         <mdm.version>1.0.0-SNAPSHOT</mdm.version>
 
+        <commons-json.version>3.0.0.wso2v1</commons-json.version>
+
         <!-- API Management -->
         <carbon.api.mgt.version>1.4.0</carbon.api.mgt.version>
 
@@ -833,7 +846,8 @@
         <codehaus.plexus.version>3.0.21</codehaus.plexus.version>
         <axis2-transports.wso2.version>1.1.0-wso2v13</axis2-transports.wso2.version>
 
-        <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
+
+
         <wss4j.security.version>1.6.17</wss4j.security.version>
         <wss4j.security.common.version>2.0.0</wss4j.security.common.version>
         <axiom-api.version>1.2.14</axiom-api.version>
