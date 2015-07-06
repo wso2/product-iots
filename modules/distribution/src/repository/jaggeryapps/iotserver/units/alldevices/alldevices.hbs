@@ -1,0 +1,39 @@
+{{#zone "main"}}
+    <div class="container container-bg  white-bg  " xmlns="http://www.w3.org/1999/html"
+         xmlns="http://www.w3.org/1999/html">
+        <div class=" margin-top-double">
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                <div class="col-lg-12  margin-top-double">
+                    <h2 class="grey ">My Devices </h2>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-double padding-double">
+            <form method="GET" action="{{myDevicePath}}">
+			<table class="table table-hover border" id="devicesTable">
+                <thead>
+                <tr class="grey-bg">
+                    <th class="uppercase">Device ID</th>
+                    <th class="uppercase">Name</th>
+                    <th class="uppercase">Type</th>
+                    <th class="uppercase center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+					{{! All devices will be listed here @see: alldevices_util.js}}
+                	<tr class="border-top">
+						<th scope="row"></th>
+						<td colspan="3">
+							No Devices available.
+						</td>
+					</tr>
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+<script src="{{self.publicURL}}/js/alldevices_util.js"></script>
+{{/zone}}

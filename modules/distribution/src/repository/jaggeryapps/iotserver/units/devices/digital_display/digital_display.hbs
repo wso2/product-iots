@@ -1,0 +1,81 @@
+{{#zone "main"}}
+<div class="container container-bg  white-bg">
+        <div class=" margin-top-double">
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double">
+                <div class="col-lg-12  margin-top-double">
+                    <h1 class="grey ">Digital Display</h1>
+                    <hr>
+                    <p  class="margin-bottom-double light-grey ">Connect your Digital Display device
+                    to the WSO2 device cloud. </p>
+                </div>
+            </div>
+            <div class="row margin-bottom-double">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 padding-top">
+                <img src="{{self.publicURL}}/images/digital_display.png" class="img-responsive">
+            </div>
+                <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 padding-top">
+                    <h2 class="uppercase">Ingredients</h2>
+                    <hr>
+                    <p class="grey margin-top">Hardware Requirements </p>
+                    <br><br>
+                                <span class="fw-stack fw-lg margin-right">
+                                    <i class="fw fw-ring fw-stack-2x"> </i>
+                                    <i class="fw fw-right-arrow-2 fw-stack-1x"></i>
+                                </span>Raspberry Pi<br><br>
+                                <span class="fw-stack fw-lg margin-right">
+                                    <i class="fw fw-ring fw-stack-2x"> </i>
+                                    <i class="fw fw-right-arrow-2 fw-stack-1x"></i>
+                                </span>HDMI Supported Digital Display
+								<br /><br />
+								<form method="POST" class="float-left margin-right"
+									action="{{sketchPath}}">
+                                    <input type="hidden" name="deviceType" value="digitaldisplay" />
+                                    <input type="hidden" name="sketchType" value="digitaldisplay" />
+										<button class="wr-btn" type="submit">Download DEB
+										</button>
+									</form>
+                                <br/>
+
+                </div>
+                <div class ="col-xs-12 col-sm-6 col-md-3 col-lg-12 padding-double grey-bg ">
+                    <h2 class="uppercase">Prepare</h2><hr>
+                    <p class="grey margin-top">Get your device ready  </p>
+                         <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                             <span class="circle">01  </span> <span class="padding-left"> Mount the Ethernet / Wifi shield on the Arduino Uno device.</span>
+                        </div>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom">
+                        <span class="circle">02  </span> <span class="padding-left"> Mount the Ethernet / Wifi shield on the Arduino Uno device.</span>
+                    </div>
+                    <div class="margin-doubles padding-top-double margin-bottom-double light-grey  margin-left-double margin-bottom">
+                        <span class="circle">03  </span> <span class="padding-left"> Mount the Ethernet / Wifi shield on the Arduino Uno device.</span>
+                        </div>
+                </div>
+            </div>
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                <div class="col-lg-12  margin-top-double">
+                    <h2 class="uppercase ">Connect (Quickstart)</h2>
+                    <hr>
+                    <p  class="margin-bottom-double light-grey ">Internet of Things Foundation Quickstart connection  </p>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                        <span class="circle">01  </span> <span class="padding-left">Use the following command to download the installer from GitHub:</span><br>
+                    </div>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                        <span class="circle">02  </span> <span class="padding-left">Download the Sketch installer from the Arduino website http://arduino.cc/en/Main/Software</span><br>
+                    </div>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                        <span class="circle">03  </span> <span class="padding-left"> Install the Sketch program</span><br>
+                    </div>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                        <span class="circle">04  </span> <span class="padding-left">Use the Sketch program to open the samples code samples/quickstart/quickstart.ino</span><br>
+                    </div>
+                    <div class="margin-doubles padding-top-double light-grey  margin-left-double margin-bottom ">
+                        <span class="circle">05  </span> <span class="padding-left">View the lower part of the Sketch pad window to check that the COM connection is shown as active</span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{/zone}}
+{{#zone  "topCss"}}
+    <link href="{{self.publicURL}}/css/fontwso2.css" rel="stylesheet">
+    <link href="{{self.publicURL}}/css/fontwso2-extend.css" rel="stylesheet">
+{{/zone}}

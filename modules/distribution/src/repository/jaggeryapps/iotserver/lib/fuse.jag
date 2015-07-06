@@ -1,0 +1,36 @@
+<%
+
+var getPath = File.prototype.getPath;
+File.prototype.getPath = function() {
+    var path = getPath.call(this);
+    path = path.replace(/\\/g, '/');
+    return path;
+};
+
+//global object to pass request stat among fuse framework files.
+var fuseState = {
+    zones: {},
+    appName: '',
+    zoneStack: [],
+    currentUnit: null
+};
+
+var requestId = function makeId() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}();
+var fuseDebug = false;
+//var fuseDebug = true;
+
+var handlebars = require('handlebars-helpers.js');
+var fuseRouter = require('fuse-router.js');
+var fuse = require('fuse.js');
+
+
+fuseRouter.route();
+
+%>

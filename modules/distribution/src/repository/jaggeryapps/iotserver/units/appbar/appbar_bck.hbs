@@ -1,0 +1,950 @@
+{{#zone "main"}}
+
+<!-- new markup -->
+
+	
+    <!-- header -->
+	<div class="container-fluid">
+    <header>
+        <div class="row wr-global-header">
+            <div class="col-xs-8 col-sm-6 col-lg-8 app-logo">
+                <a href="home.html"><img src="{{self.publicURL}}/images/logo.png" /><h2 class="app-title">IOT Device Manager</h2></a>
+            </div>
+            <div class="col-xs-4 col-sm-6 col-lg-4 wr-auth-container">
+                <div class="wr-authx pull-right">
+						<a href="#">
+						<div class="auth-img">
+                            Login
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-lock fw-stack-1-5x"></i>
+                            </span>
+                        </div>
+						</a>
+						
+						<a href="#">
+                        <div class="auth-img">
+                            Register
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-register fw-stack-1-5x"></i>
+                            </span>
+                        </div>		
+						</a>
+						
+						
+						<a href="#" data-toggle="dropdown">
+                        
+                        <div class="auth-img">
+                            Administrator
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-user fw-stack-1-5x"></i>
+                            </span>
+                        </div>	
+											
+						</a>
+                    <div class="dropdown-menu">
+                        <div class="cu-arrow"></div>
+                        <div class="dropdown-menu-content">
+                            <a class="filter-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+	</div>
+    <!-- /header -->	
+	
+	
+    <!-- secondary header - app bar -->
+	<div class="container-fluid">
+    <div id="nav" class="row wr-app-bar">
+        <div class="wr-action-container">
+            <div class="wr-action-btn-bar">
+                <a href="javascript:openCollapsedNav()" class="cu-btn wr-hidden-nav-toggle-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-tiles fw-stack-1-5x"></i>
+                    </span>
+                </a><a class="cu-btn page-title" href='home.html'>
+                    <span class="fw-stack"></span>
+                    Devices
+                </a><a href="dashboard.html" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-left-arrow fw-stack-1x"></i>
+                    </span>
+                    Go Back
+                </a><a href="#" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-add fw-stack-1x"></i>
+                    </span>
+                    Add New Device
+                </a>
+            </div>
+        </div>
+    </div>
+	</div>
+    <!-- secondary header - app bar -->
+
+    <!-- common navigation -->
+	<div class="container-fluid">
+    <div id="hiddenNav" class="wr-hidden-nav">
+        <ul>
+			<li><a href="#"><i class="fw fw-mobile"></i>Device Management</a></li>
+            <li><a href="#"><i class="fw fw-user"></i>User Management</a></li>
+            <li><a href="#"><i class="fw fw-policy"></i>Policy Management</a></li>
+            <li><a href="#"><i class="fw fw-settings"></i>Dashboard</a></li>			
+        </ul>
+    </div>
+	</div>
+    <!-- /common navigation -->	
+	
+	
+		<!-- dashboard -->
+		<div class="container-fluid wr-content-alt" style="display:none">
+        <div class="row wr-stats-board">
+
+            <div class="col-md-4">
+                <div class="wr-stats-board-tile">
+                    <div class="tile-name">Devices</div>
+                    <div>
+                        <div class="tile-icon"><i class="fw fw-devices"></i></div>
+                        <div class="tile-stats">
+                            532
+                            <span class="tile-stats-free">
+                                <a href="home.html">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-view fw-stack-1x"></i>
+                                    </span>
+                                    View
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="wr-stats-board-tile">
+                    <div class="tile-name">Users</div>
+                    <div>
+                        <div class="tile-icon"><i class="fw fw-user"></i></div>
+                        <div class="tile-stats">
+                            503
+                            <span class="tile-stats-free">
+                                <a href="users.html">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-view fw-stack-1x"></i>
+                                    </span>
+                                    View
+                                </a>
+                                <a href="user-create.html">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-add fw-stack-1x"></i>
+                                    </span>
+                                    Add
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="wr-stats-board-tile">
+                    <div class="tile-name">Policies</div>
+                    <div>
+                        <div class="tile-icon"><i class="fw fw-policy"></i></div>
+                        <div class="tile-stats">
+                            8
+                            <span class="tile-stats-free">
+                                <a href="policies.html">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-view fw-stack-1x"></i>
+                                    </span>
+                                    View
+                                </a>
+                                <a href="policy-create-wizard.html">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-add fw-stack-1x"></i>
+                                    </span>
+                                    Add
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>	
+		</div>
+		<!-- /dashboard -->
+		
+		
+		
+		
+		
+	<!-- device search and operations -->
+	<div class="container-fluid">
+    <div class="row wr-operations-board">
+        <div class="wr-secondary-bar">
+
+            <div class="wr-filters col-xs-12 col-sm-7 col-md-8">
+                <!-- asset filter -->
+                <div class="wr-search">
+                    <div class="wr-asset-type-switcher">
+                        <a href="javascript:void(0)" class="ctrl-asset-type-switcher"><span class="btn-asset"><i class="fw fw-filter"></i></span></a>
+                        <div class="popover menu fade bottom in">
+                            <div class="arrow"></div>
+                            <div class="popover-content">
+                                <div id="advance-filter-options">
+                                    <div class="title">Search method</div>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="devices" checked />
+                                        <span class="helper">Device</span>
+                                    </label>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="users" />
+                                        <span class="helper">User</span>
+                                    </label>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="user roles" />
+                                        <span class="helper">User Role</span>
+                                    </label>
+                                </div>
+                                <div id="device-filter-options">
+                                    <div id="asset-selected"></div>
+                                    <div id="asset-select">
+                                        <ul>
+
+                                            <!-- Android -->
+                                            <li><i class="fw fw-android"></i><span class="tag-name">Android</span></li>
+                                            <ul>
+                                                <li><h4>Android</h4><h6 class="tag-name">Ice Cream Sandwich</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">3.0</h3></li>
+                                                    <li><h3 class="tag-name">3.0.1</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">Jelly Bean</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">4.2</h3></li>
+                                                    <li><h3 class="tag-name">4.3</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">KitKat</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">4.4</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">Lollipop</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">5.0</h3></li>
+                                                    <li><h3 class="tag-name">5.0.1</h3></li>
+                                                    <li><h3 class="tag-name">5.0.2</h3></li>
+                                                </ul>
+                                            </ul>
+
+                                            <!-- iOS -->
+                                            <li><i class="fw fw-apple"></i><span class="tag-name">iOS</span></li>
+
+                                            <!-- Windows -->
+                                            <li><i class="fw fw-windows"></i><span class="tag-name">Windows</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wr-search-tags"></div>
+                    <a href="#" class="btn-search"><i class="fw fw-search"></i></a>
+                    <div class="input" id="search" data-value="" data-placeholder="Search devices ..." contenteditable="true"></div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- /asset filter -->
+            </div>
+
+            <div class="wr-filters col-xs-12 col-sm-5 col-md-4 wr-filters-right">
+                <div class="wr-filter-sort pull-right">
+                    <a href="javascript:void(0)" onclick="selectAllDevices(this)" class="wr-btn">Select All Devices</a>
+                    <a href="javascript:void(0)" onclick="changeDeviceView('grid', this)" class="ico-filter ctrl-filter-grid view-toggle"><i class="fw fw-grid"></i></a>
+                    <a href="javascript:void(0)" onclick="changeDeviceView('list', this)" class="ico-filter ctrl-filter-list view-toggle selected"><i class="fw fw-list"></i></a>
+                    <span class="wr-filter-type-switcher"><a href="#" class="ico-filter ctrl-filter-type-switcher" data-placement="bottom" data-trigger="focus"><i class="fw fw-list-sort"></i></a></span>
+                </div>
+            </div>
+
+        </div>
+    </div>		
+	</div>
+	<!-- /device search and operations -->
+	
+	
+	
+	
+	<!-- no devices found -->
+	<div class="container-fluid wr-content-alt">
+		<div class="ctrl-info-panel col-md-6 col-centered">
+			<h2>You dont have any Devices registered at the moment.</h2>
+			<p>
+                </a><a href="#" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-add fw-stack-1x"></i>
+                    </span>
+                    Add New Device
+                </a>			
+			</p>
+		</div>
+	</div>
+	<!-- /no devices found -->
+	
+	
+	
+	<!-- device list -->
+	<div class="container-fluid wr-content-alt">
+	<div class="wr-device-list row">
+
+            <div class="col-md-12 wr-page-content">
+
+            <!-- content -->
+            <div>
+
+                <!-- form content placeholder -->
+                <div id="ast-container" class="ast-container list-view">
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/windows-mobile.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name" title="mymobile">mymobile</h3>
+                                        <span class="ast-auth" title="navinda">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Windows 8</span>
+                                        <span class="ast-published">Nokia Lumia 925</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>										
+										</div>										
+                                    </div>
+									
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" checked />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/android-mobile.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">Ruwan's Phone</h3>
+                                        <span class="ast-auth">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Android-KitKat</span>
+                                        <span class="ast-published">Samsung Galaxy S4</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>	
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" checked />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/ipad.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">Brother's iPad</h3>
+                                        <span class="ast-auth">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">iOS6</span>
+                                        <span class="ast-published">Apple iPad3</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>	
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" checked />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/windows-tab.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">MySurface</h3>
+                                        <span class="ast-auth">admin</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Windows 8.1</span>
+                                        <span class="ast-published">Windows Surface Pro3</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>	
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" checked />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/macbook.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">John's Macbook</h3>
+                                        <span class="ast-auth">admin</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">OSX 11</span>
+                                        <span class="ast-published">Mac Book Air</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>	
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/windows-pc.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">Developer's PC</h3>
+                                        <span class="ast-auth">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Window 8</span>
+                                        <span class="ast-published">Dell Inspiron E1564</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/laptop.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">Developer's Laptop</h3>
+                                        <span class="ast-auth">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Windows 8.1</span>
+                                        <span class="ast-published">Alienware MX17</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>	
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-wr-asset">
+                        <div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" />
+                                <span class="helper"></span>
+                            </label>
+                        </div>
+                        <div class="itm-ast">
+                            <a href="device.html">
+                                <div class="ast-img"><img src="images/device_icons/android-tab.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name">Brother's Galaxy Tab</h3>
+                                        <span class="ast-auth">navinda</span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver">Android-Jellybean</span>
+                                        <span class="ast-published">Samsung Galaxy Tab 10</span>
+										<div class="ast-btn-group">
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">View</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Edit</span>
+										</a>
+										<a href="users.html">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+											<span class="lbl-action">Delete</span>
+										</a>
+										</div>										
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <br class="c-both" />
+
+                </div>
+
+
+            </div>
+            <!-- /content -->
+
+
+        </div>
+    </div>
+	</div>
+    <!-- /device list -->	
+	
+	
+	
+	
+	
+           <!-- register form -->
+            <div class="container col-centered wr-content">
+
+                
+
+                    <h1 class="wr-title">Register</h1>
+                    <hr />
+
+                    <div class="row wr-form">
+                        <div class="col-lg-6">
+
+                            <label class="wr-input-label">First Name</label>
+                            <div class="wr-input-control">
+                                <input type="text" value="" placeholder="input text"/>
+                            </div>
+
+                            <label class="wr-input-label">Last Name</label>
+                            <div class="wr-input-control">
+								<input type="text" value="" placeholder="input text"/>
+                            </div>
+							
+                            <label class="wr-input-label">Last Name</label>
+                            <div class="wr-input-control">
+								<input type="text" value="" placeholder="input text"/>
+                            </div>
+
+                            <label class="wr-input-label">Email</label>
+                            <div class="wr-input-control">
+								<input type="text" value="" placeholder="input text"/>
+                            </div>
+
+                            <label class="wr-input-label">Password</label>
+                            <div class="wr-input-control">
+								<input type="text" value="" placeholder="input text"/>
+                            </div>
+
+                            <label class="wr-input-label">Confirm Password</label>
+                            <div class="wr-input-control">
+								<input type="text" value="" placeholder="input text"/>
+                            </div>		
+
+							<div class="ctrl-i-agree">
+								<input type="checkbox" name="Agree" id="t_and_c" value="Bike"> <span class="italic i-agree">
+								I Agree by Clicking register, you agree to the Terms and Conditions set out by this site</span>
+							</div>		
+
+							<div class="btn-group">
+							<button class="wr-btn" onclick="window.location.href='policy-created.html'">Register</button>
+							</div>
+							
+
+                        </div>
+                    </div>
+
+
+                
+
+            </div>
+            <!-- /register form -->
+	
+	
+
+		
+	
+
+
+<!-- /new markup -->
+	
+	
+        <div class="container container-fluid">
+            <!-- Static navbar -->
+            <nav class="navbar navbar-default">
+                <div class=" margin-top">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/iotserver/"><img src="{{self
+                        .publicURL}}/images/logo.png" </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"></a></li>
+                            <li><a href="#">ARCHITECTURE</a></li>
+                            <li><a href="#">GUIDE</a></li>
+                            <li><a href="#">SUPPORT</a></li>
+                            <li><a href="#">COMMUNITY</a></li>
+							{{#if user}}
+                            <li><a href="/iotserver/alldevices">MY DEVICES</a></li>
+							{{/if}}
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {{#if viewonly}}
+                            <li id="flip-login" data-type="login" class="blue sign-toggle-btn" > LOGIN </li>
+                            <li id="flip" data-type="register" class="margin-top blue-btn sign-toggle-btn"> REGISTER </li>
+                            {{/if}}
+                            {{#if user}}
+                            <li class="blue">
+                                <a href="#" data-toggle="dropdown">
+                                    <div class="auth-img">
+                                        {{user.username}}
+                                        <span class="wso2icon-stack-md wso2icon-lg">
+                                            <i class="wso2icon wso2-user wso2icon-stack-1-5x"></i>
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <div class="dropdown-menu" style="padding:10px" role="menu">
+                                    <div class="cu-arrow"></div>
+                                    <div class="dropdown-menu-content">
+                                        <a href="{{logoutURL}}" class="filter-item pull-right">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {{/if}}
+                            <li >
+                                <form class="navbar-form" role="search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control"  name="q">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div><!--container-->
+        <div class="sign-panel" data-type="register">
+                <div class="container padding margin-top-double ">
+                    <h5 >Register </h5> <hr class="opacity">
+                    <div class="form-group" align="center">
+					  <span class="wr-validation-summary hidden">
+						<strong class="label label-danger"></strong>
+					  </span>
+					</div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            First Name
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="first_name" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Last Name
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="last_name" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase  ">
+                            Username
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="user_name" placeholder="Username ">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase  ">
+                            Email
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text right" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Password
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="password" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding center ">
+                        <div class="col-lg-5 right padding-top-double uppercase ">
+                            Confirm Password
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="password" id="password_confirmation"
+                            placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="col-lg-9 right padding-top-double padding-bottom-double margin-right-none">
+                        <input type="checkbox" name="Agree" id="t_and_c" value="Bike"> <span class="italic">
+                        I Agree by Clicking register, you agree to the Terms and Conditions set out by this site</span>
+                    </div>
+
+                    <div class="col-lg-12 center padding-top-double padding-bottom-double">
+                        <button id="add-user-btn" class="blue-action-btn uppercase margin">
+                        Register </button>
+                        <button class="black-btn uppercase margin cancel-btn" > Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+		<div class="sign-panel" data-type="login">
+			<form method="POST" class="form-login-box" action="{{loginPath}}">
+				<div class="container padding margin-top-double ">
+					<h5 >Login </h5> <hr class="opacity">
+
+					<div class="col-lg-3 padding ">
+						Username :<br> <input type="text" name="username" />
+					</div>
+					<div class="col-lg-3 padding ">
+						Password: <br> <input type="password" name="password" />
+					</div>
+					<div class="col-lg-6 padding-top-double padding-bottom-double padding-left-none">
+						<button class="blue-action-btn uppercase margin" onclick="document.location.href='home.html';"> Login</button>
+						<button class="black-btn uppercase margin cancel-btn " > Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+{{/zone}}

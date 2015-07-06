@@ -1,0 +1,50 @@
+{{#zone "header"}}
+    <!-- header -->
+    <header>
+        <div class="row wr-global-header">
+            <div class="col-xs-8 col-sm-6 col-lg-8 app-logo">
+                <a href="{{homeLink}}">{{ defineZone "brand"}}</a>
+            </div>
+            <div class="col-xs-4 col-sm-6 col-lg-4 wr-auth-container">
+                <div class="wr-authx pull-right">
+                    {{#if user}}
+                    <a href="#" data-toggle="dropdown">
+
+                        <div class="auth-img">
+                            {{user.username}}
+                            <span class="fw-stack-md fw-lg">
+                                    <i class="fw fw-user fw-stack-1-5x"></i>
+                                </span>
+                        </div>
+                    {{else}}
+                        <a href="/iotserver/login">
+                            <div class="auth-img">
+                                Login
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-lock fw-stack-1-5x"></i>
+                            </span>
+                            </div>
+                        </a>
+                        <a href="/iotserver/register">
+                            <div class="auth-img">
+                                Register
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-register fw-stack-1-5x"></i>
+                            </span>
+                            </div>
+                        </a>
+                    {{/if}}
+                </a>
+                    <div class="dropdown-menu">
+                        <div class="cu-arrow"></div>
+                        <div class="dropdown-menu-content">
+                            <a class="filter-item" href="{{logoutURL}}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- /header -->
+
+{{/zone}}

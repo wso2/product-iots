@@ -1,0 +1,117 @@
+{{#zone "topCss"}}
+    <!--<link href="{{self.publicURL}}/css/nv.d3.css" rel="stylesheet"/>-->
+    <link href="{{self.publicURL}}/css/daterangepicker.css" rel="stylesheet"/>
+    <link href="{{self.publicURL}}/css/graph.css" rel="stylesheet"/>
+    <link href="{{self.publicURL}}/css/lines.css" rel="stylesheet"/>
+
+    <!-- -->
+    <!--<script src="{{self.publicURL}}/js/d3.min.js"></script>-->
+    <!--<script src="{{self.publicURL}}/js/nv.d3.js"></script>-->
+    <script src="{{self.publicURL}}/js/Chart.min.js"></script>
+    <script src="{{self.publicURL}}/js/stream_layers.js"></script>
+    <script src="{{self.publicURL}}/js/moment.min.js"></script>
+    <script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
+    <script src="{{self.publicURL}}/js/d3.v3.js"></script>
+    <script src="{{self.publicURL}}/js/rickshaw.min.js"></script>
+{{/zone}}
+{{#zone "main"}}
+    <div class="container container-bg  white-bg">
+        <div class=" margin-top-double">
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double  ">
+                <div class="col-lg-12  margin-top-double">
+                    <h1 class="grey ">Device Statistics</h1>
+                    <hr>
+                </div>
+            </div>
+            <div id="rangeSliderWrapper" class="pull-right" style="width: 550px;">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="dateRangePickerContainer">
+                            <div class="btn-group" role="group">
+                                <button id="hour-btn" type="button"
+                                        class="btn btn-default date-range">Hour
+                                </button>
+                                <button id="today-btn" type="button"
+                                        class="btn btn-default date-range">Day
+                                </button>
+                                <button id="week-btn" type="button"
+                                        class="btn btn-default date-range">Week
+                                </button>
+                                <button id="month-btn" type="button"
+                                        class="btn btn-default date-range">Month
+                                </button>
+                                <button id="date-range" type="button"
+                                        class="btn btn-default date-range last-child"
+                                        data-toggle="popup"
+                                        title="Click to set custom date range"></button>
+                            </div>
+                            <span class="add-on-cal"><i style="margin-right:0px;"
+                                                        class="icon-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Temperature</h2>
+                    <hr>
+                    <div id="canvas-wrapper1">No data available...</div>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Light</h2>
+                    <hr>
+                    <div id="canvas-wrapper2">No data available...</div>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Motion</h2>
+                    <hr>
+                    <div id="canvas-wrapper3">No data available...</div>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Sonar</h2>
+                    <hr>
+                    <div id="canvas-wrapper4">No data available...</div>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Fan Status</h2>
+                    <hr>
+                    <div id="canvas-wrapper5">No data available...</div>
+                </div>
+                <hr>
+            </div>
+            <div class="row margin-double">
+                <div>
+                    <h2 class="grey ">Bulb Status</h2>
+                    <hr>
+                    <div id="canvas-wrapper6">No data available...</div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+    <script src="{{self.publicURL}}/js/moment.min.js"></script>
+    <script src="{{self.publicURL}}/js/graph_util.js"></script>
+    <script src="{{self.publicURL}}/js/jquery.daterangepicker.js"></script>
+    <script src="{{self.publicURL}}/js/bulb.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/fan_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/bulb_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/temperature_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/light_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/motion_graph.js"></script>
+    <script src="{{self.publicURL}}/js/graphs/sonar_graph.js"></script>
+{{/zone}}

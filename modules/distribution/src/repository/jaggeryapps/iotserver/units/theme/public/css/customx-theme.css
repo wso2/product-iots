@@ -1,0 +1,74 @@
+.navbar-default {
+    background-color: #2a2a2a;
+    border-color:#2a2a2a ;
+}
+.navbar-nav{color: #a5a5a5; font-weight:300; padding-top: 5px; padding-left:0px;}
+.form-control {background-color: #121212; border: 0px;}
+.btn-default {background-color: #121212; border: 1px solid #121212;}
+.container { padding:0px;}
+.container-fluid{padding-left:0px;}
+.navbar-default .navbar-nav > li > a {color: #a5a5a5; font-size: 14px; font-weight: 500;}
+.navbar-form .input-group > .form-control { height: 39px;  margin-top: 0; }
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group { height: 39px;}
+.container-bg{background-image: url("../images/content-bg.png"); background-repeat: no-repeat; background-position: top left; min-height: 550px;  overflow: hidden;   padding: 0 15px;}
+.navbar-default .navbar-nav > li > a :focus,.navbar-default .navbar-nav>li>a:hover{color:#ccc;background-color:transparent;}
+.btn-default.active,
+.btn-default.focus,
+.btn-default:active,
+.btn-default:focus,
+.btn-default:hover,
+.open>.dropdown-toggle.btn-default {
+    color: #ccc;
+    background-color: #121212;
+    border-color: #121212;
+}
+input {
+    background-color: #333;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    height: 45px;
+    margin: 5px 0;
+    width: 100%;
+    padding-left: 10px;
+}
+input[type="checkbox"], input[type="radio"] {
+    line-height: normal;
+    margin-top: -3px;
+    width: 30px;
+}
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #747474;
+    outline: 0;
+}
+.navbar {
+    margin-bottom: 5px;
+}
+.navbar-brand {
+    padding: 15px 10px;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+    color: #fff;
+    background-color:#202020 ;
+}
+.dropdown-menu {
+    background-clip: padding-box;
+    background-color: #202020;
+    border: 0px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0;
+    box-shadow: none;
+    display: none;
+    float: left;
+    font-size: 14px;
+    left: 0;
+    color: #a5a5a5;
+}
+.dropdown-menu > li > a {
+    color: #a5a5a5;
+}
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #313131;
+}

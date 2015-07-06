@@ -1,0 +1,23 @@
+{{authorized}}
+{{layout "fluid"}}
+{{#zone  "title"}}
+    Devices
+{{/zone}}
+{{#zone "body"}}
+    {{unit "appbar" link="device-mgt" title="Device Management"}}
+    {{unit "extended-search-box"}}
+    {{unit "operation-mod"}}
+    <div class="wr-device-list row">
+        <div class="wr-hidden-operations wr-advance-operations">
+
+        </div>
+        <div class="col-md-12 wr-page-content">
+            <!-- content -->
+            <div>
+                {{unit "operation-bar"}}
+                {{unit "device-listing"}}
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+{{/zone}}

@@ -1,0 +1,54 @@
+<div id="errorOperations" class="operation">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-centered">
+                <h3>
+                        <span class="fw-stack">
+                            <i class="fw fw-error fw-stack-2x"></i>
+                        </span>
+                    No Devices selected. Please select a Device before performing an operation
+                </h3>
+                <div class="buttons">
+                    <a href="javascript:hidePopup()" class="btn-operations">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#each features}}
+    <a href="javascript:operationSelect('{{code}}')"><i class="fw {{icon}}"></i><span>{{name}}</span></a>
+    <div class="operation" data-operation="{{code}}">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>
+                    <span class="fw-stack">
+                        <i class="fw {{icon}} fw-stack-2x"></i>
+                    </span>
+                        {{#equal code "NOTIFICATION"}}
+                            Compose Message
+                        {{/equal}}
+                        {{#equal code "CHANGE_LOCK_CODE"}}
+                            Change Lockcode
+                        {{/equal}}
+                        {{#unequal code "NOTIFICATION"}}
+                            Do you want perform "{{name}}" operation on selected device(s)?
+                            <!--Are you sure you want to perform the below operation on the selected devices ?-->
+                        {{/unequal}}
+                    </h3>
+                    {{#equal code "NOTIFICATION"}}
+                        Type a message and click "SEND" to send it to all the selected device/s
+                        <div><textarea class="form-control operationDataKeys" id="message" data-key="message"></textarea></div>
+                    {{/equal}}
+                    {{#equal code "CHANGE_LOCK_CODE"}}
+                        <input type="text" class="form-control operationDataKeys" id="lockcode" data-key="lockCode" placeholder="Enter Lockcode">
+                    {{/equal}}
+                    <div class="buttons">
+                        <a href="javascript:runOperation('{{code}}')" class="btn-operations">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}
+<br class="c-both" />

@@ -1,0 +1,210 @@
+{{#zone "main"}}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- content -->
+            <div class="wr-content">
+                <p class="page-sub-title">Users</p>
+                <p>{{listUsersStatus}}</p>
+                <div class="wr-list-group wr-sortable">
+                    {{#each users}}
+                        <span id="{{username}}" class="list-group-item">
+                            <i class="wr-sortable-icon fw fw-sort hide"></i>
+                            <i class="wr-list-icon fw fw-user"></i>
+                            <div class="wr-list-desc">
+                                <h3 class="wr-list-name">{{name}}</h3>
+                                <span class="wr-list-username">{{username}}</span>
+                                {{#unequal "admin" username }}
+                                    <a href="mailto:{{email}}" class="wr-list-email"> | {{email}}</a>
+                                {{/unequal}}
+                            </div>
+                            <span class="list-group-item-actions">
+                                <!--a href="#" class="invite-user-link cu-btn-inner" data-username="{{username}}">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-invitation fw-stack-1x"></i>
+                                    </span>
+                                    Invite
+                                </a-->
+                                {{#unequal "admin" username }}
+                                    <a href="#" class="remove-user-link cu-btn-inner" data-username="{{username}}">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-delete fw-stack-1x"></i>
+                                    </span>
+                                        Remove
+                                    </a>
+                                {{/unequal}}
+                            </span>
+                            <div class="clearfix"></div>
+                        </span>
+                    {{/each}}
+                </div>
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+
+    <div id="invite-user-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>
+                        An invitation mail will be sent to this User to initiate an Enrollment Process.
+                        Do you wish to continue ?
+                    </h3>
+                    <div class="buttons">
+                        <a href="#" id="invite-user-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;yes&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="invite-user-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="invite-user-success-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>User invitation for enrollment sent.</h3>
+                    <div class="buttons">
+                        <a href="#" id="invite-user-success-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="invite-user-error-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>An unexpected error occurred.</h3>
+                    <div class="buttons">
+                        <a href="#" id="invite-user-error-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Do you really want to remove this user from IoT User Store?</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="remove-user-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>User was successfully removed.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-400-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Exception at backend. Try Later.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-400-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-403-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Action not permitted.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-403-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-409-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>User does not exist.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-409-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-user-unexpected-error-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>User does not exist.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-user-unexpected-error-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{/zone}}
+{{#zone "common-navigation"}}
+    <!--Later add the navigation menu from here-->
+{{/zone}}
+{{#zone "action-bar"}}
+    {{#if permissions.ADD_USER}}
+        <a href="/iotserver/users/add-user" class="cu-btn">
+            <span class="fw-stack">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-add-user fw-stack-1x"></i>
+            </span>
+            Add User
+        </a>
+    {{/if}}
+{{/zone}}
+{{#zone "bottomJs"}}
+    <script src="{{self.publicURL}}/js/user-listing.js"></script>
+{{/zone}}

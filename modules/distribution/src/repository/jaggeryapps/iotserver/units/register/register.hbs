@@ -1,0 +1,60 @@
+{{#zone "main"}}
+    <div class="container col-md-12 col-lg-6 col-centered wr-content wr-login col-centered sign-panel">
+
+        <p class="page-sub-title">Register</p>
+        <p>Create new account on IoT Server</p>
+
+        <!-- validation -->
+        <span class="wr-validation-summary hidden center-block col-centered">
+		    <strong class="label label-danger col-centered"></strong>
+		</span>
+
+        <hr />
+
+        <form method="POST" class="form-login-box" action="{{loginPath}}">
+            <label class="wr-input-label">First Name</label>
+            <div class="wr-input-control">
+                <input type="text right" id="first_name" placeholder="First Name">
+            </div>
+
+            <label class="wr-input-label">Last Name</label>
+            <div class="wr-input-control">
+                <input type="text right" id="last_name" placeholder="Last Name">
+            </div>
+
+            <label class="wr-input-label">Username</label>
+            <div class="wr-input-control">
+                <input type="text right" id="user_name" placeholder="Username ">
+            </div>
+
+            <label class="wr-input-label">Email</label>
+            <div class="wr-input-control">
+                <input type="text right" id="email" placeholder="Email">
+            </div>
+
+            <label class="wr-input-label">Password</label>
+            <div class="wr-input-control">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+
+            <label class="wr-input-label">Confirm Password</label>
+            <div class="wr-input-control">
+                <input type="password" id="password_confirmation" placeholder="Confirm Password">
+            </div>
+
+            <div class="wr-input-label">
+                <input type="checkbox" name="Agree" id="t_and_c" value="Bike"> <span class="italic">
+                        I Agree by Clicking register, you agree to the Terms and Conditions set out by this site</span>
+            </div>
+
+            <div class="wr-input-control">
+                <button class="wr-btn" id="add-user-btn">&nbsp;&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <button class="wr-btn" onclick="document.location.href='/iotserver';">&nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            </div>
+        </form>
+
+    </div>
+{{/zone}}
+{{#zone "bottomLibJs"}}
+    <script src="{{self.publicURL}}/js/validate-register.js"></script>
+{{/zone}}
