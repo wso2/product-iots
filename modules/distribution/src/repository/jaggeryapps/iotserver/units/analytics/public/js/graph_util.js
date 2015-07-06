@@ -148,22 +148,52 @@ function updateGraphs(stats) {
     console.log(stats);
 
     var temperatureData = stats['temperatureData'];
-    updateTemperatureGraph(convertStatsToGraphData(temperatureData));
+    if (typeof temperatureData != 'undefined'){
+        $('#div-temperatureData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Temperature</h2><hr><div id='canvas-wrapper1'></div></div><hr></div>");
+        updateTemperatureGraph(convertStatsToGraphData(temperatureData));
+    }else{
+        $('#div-temperatureData').html("");
+    }
 
     var lightData = stats['lightData'];
-    updateLightGraph(convertStatsToGraphData(lightData));
+    if (typeof lightData != 'undefined'){
+        $('#div-lightData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Light</h2><hr><div id='canvas-wrapper2'></div></div><hr></div>");
+        updateLightGraph(convertStatsToGraphData(lightData));
+    }else{
+        $('#div-lightData').html("");
+    }
 
     var motionData = stats['motionData'];
-    updateMotionGraph(convertStatsToGraphData(motionData));
+    if (typeof motionData != 'undefined'){
+        $('#div-motionData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Motion</h2><hr><div id='canvas-wrapper3'></div></div><hr></div>");
+        updateMotionGraph(convertStatsToGraphData(motionData));
+    }else{
+        $('#div-motionData').html("");
+    }
 
     var sonarData = stats['sonarData'];
-    updateSonarGraph(convertStatsToGraphData(sonarData));
+    if (typeof sonarData != 'undefined'){
+        $('#div-sonarData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Sonar</h2><hr><div id='canvas-wrapper4'></div></div><hr></div>");
+        updateSonarGraph(convertStatsToGraphData(sonarData));
+    }else{
+        $('#div-sonarData').html("");
+    }
 
     var fanData = stats['fanData'];
-    updateFanGraph(convertStateStatsToGraphData(fanData));
+    if (typeof fanData != 'undefined'){
+        $('#div-fanData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Fan Status</h2><hr><div id='canvas-wrapper5'></div></div><hr></div>");
+        updateFanGraph(convertStateStatsToGraphData(fanData));
+    }else{
+        $('#div-fanData').html("");
+    }
 
     var bulbData = stats['bulbData'];
-    updateBulbGraph(convertStateStatsToGraphData(bulbData));
+    if (typeof bulbData != 'undefined'){
+        $('#div-bulbData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Bulb Status</h2><hr><div id='canvas-wrapper6'></div></div><hr></div>");
+        updateBulbGraph(convertStateStatsToGraphData(bulbData));
+    }else{
+        $('#div-bulbData').html("");
+    }
 
     scaleGraphs();
 }
