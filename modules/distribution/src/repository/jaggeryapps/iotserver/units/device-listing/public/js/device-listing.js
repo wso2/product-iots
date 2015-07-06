@@ -168,6 +168,7 @@ function loadDevices(searchType, searchParam) {
                     addDeviceSelectedClass(this);
                 });
                 attachEvents();
+                formatDates();
             }
         };
         invokerUtil.get(serviceURL,
@@ -180,6 +181,12 @@ $(document).ready(function () {
     loadDevices();
 });
 
+function formatDates(){
+    $(".formatDate").each(function(){
+        var timeStamp = $(this).html();
+        $(this).html(new Date(parseInt(timeStamp)).toUTCString());
+    });
+}
 
 /**
  * Sorting function of users

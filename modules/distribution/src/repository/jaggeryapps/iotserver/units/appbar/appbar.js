@@ -9,7 +9,7 @@ function onRequest(context) {
         "device-mgt": [],
         "store": [],
         "dashboard": [],
-        "statistics" : []
+        "analytics" : []
     };
     var dashboardLink = {
         title: "Go back to Dashboard",
@@ -35,7 +35,7 @@ function onRequest(context) {
     links.profiles.push(dashboardLink);
     links.store.push(dashboardLink);
     links.store.push(storeLink);
-    links.statistics.push(deviceMgtLink);
+    links.analytics.push(deviceMgtLink);
     links['device-mgt'].push(dashboardLink);
 
     if (user) {
