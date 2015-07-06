@@ -301,8 +301,7 @@ function attachEvents() {
         showPopup();
 
         $("a#edit-device-yes-link").click(function () {
-            device={};
-            device.name = $('#edit-device-name').val();
+            var device={"device":{"name" : $('#edit-device-name').val()}};
             invokerUtil.post(
                 editDeviceAPI,
                 device,

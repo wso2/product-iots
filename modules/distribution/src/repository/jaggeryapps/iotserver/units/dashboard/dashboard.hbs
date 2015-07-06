@@ -11,7 +11,7 @@
                         <div class="tile-stats">
                             <span id="device-count">Loading...</span>
                             <span class="tile-stats-free">
-                                <a href="home.html">
+                                <a href="devices/">
                                     <span class="fw-stack">
                                         <i class="fw fw-ring fw-stack-2x"></i>
                                         <i class="fw fw-view fw-stack-1x"></i>
@@ -23,6 +23,7 @@
                     </div>
                 </div>
             </div>
+            {{#if permissions.ADD_USER}}
             <div class="col-md-4">
                 <div class="wr-stats-board-tile">
                     <div class="tile-name">Users</div>
@@ -50,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            {{/if}}
             <div class="col-md-4">
                 <div class="wr-stats-board-tile">
                     <div class="tile-name">Policies</div>

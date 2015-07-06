@@ -177,7 +177,7 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's POST
-        return post(updateDeviceEndpoint+ "?name="+device.name, data, "json");
+        return post(updateDeviceEndpoint+ "?name="+device.name, data, "text");
     };
 
     /*
