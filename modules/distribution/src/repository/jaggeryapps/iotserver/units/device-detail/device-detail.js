@@ -13,7 +13,6 @@ function onRequest(context) {
         if (device){
             var viewModel = {};
             var deviceInfo = device.properties.DEVICE_INFO;
-            log.info(deviceInfo);
             if (deviceInfo != undefined && String(deviceInfo.toString()).length > 0){
                 deviceInfo = JSON.parse(deviceInfo);
                 if (device.type == "ios"){
@@ -28,7 +27,6 @@ function onRequest(context) {
                     viewModel.DeviceCapacityPercentage = Math.round(viewModel.DeviceCapacityUsed
                         / viewModel.DeviceCapacity * 10000) /100;
                 }else if(device.type == "android"){
-
                     viewModel.imei = device.properties.IMEI;
                     viewModel.model = device.properties.DEVICE_MODEL;
                     viewModel.vendor = device.properties.VENDOR;
@@ -48,6 +46,7 @@ function onRequest(context) {
                     viewModel.external_memory.DeviceCapacityPercentage = Math.round(deviceInfo.EXTERNAL_AVAILABLE_MEMORY
                         /deviceInfo.EXTERNAL_TOTAL_MEMORY * 10000) /100;
                 }
+                viewModel.enrollment = device.enrollment;
                 device.viewModel = viewModel;
             }
         }

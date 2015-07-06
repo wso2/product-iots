@@ -4,7 +4,9 @@
             <label class="device-id device-select" data-deviceid="{{device.deviceIdentifier}}" data-type="{{device.type}}">
                 Device {{device.name}}
                 <span class="lbl-device">
-                    ({{device.viewModel.vendor}} {{device.viewModel.model}})
+                    {{#if device.viewModel.vendor}}
+                        ({{device.viewModel.vendor}} {{device.viewModel.model}})
+                    {{/if}}
                 </span>
             </label>
         </div>
@@ -26,11 +28,13 @@
                                 <img src="{{self.publicURL}}/img/device_icons/{{device.type}}.png" style="width:200px" />
                             </div>
                             <div class="col-lg-12 col-sm-4 ast-desc">
-                                <div class="ast-device-desc"><b>Device:</b> {{device.viewModel.vendor}} {{device.properties.model}}</div>
-                                <div class="ast-device-desc"><b>Model:</b>  {{device.viewModel.model}}</div>
-                                <div class="ast-device-desc"><b>IMEI:</b>  {{device.viewModel.imei}}</div>
-                                {{#if device.viewModel.udid}}<div class="ast-device-desc"><b>UDID:</b>  {{device.viewModel.udid}}</div>{{/if}}
-                                {{#if device.viewModel.phoneNumber}}<div class="ast-device-desc"><b>Phone Number:</b>  {{device.viewModel.phoneNumber}}</div>{{/if}}
+                                <div class="ast-device-desc"><b>Owner:</b> {{device.owner}}</div>
+                                <div class="ast-device-desc"><b>Date of Enrollment:</b><br/> <span class="formatDate">{{device.enrollment}}</span></div>
+                                <!--<div class="ast-device-desc"><b>Device:</b> {{device.viewModel.vendor}} {{device.properties.model}}</div>-->
+                                <!--<div class="ast-device-desc"><b>Model:</b>  {{device.viewModel.model}}</div>-->
+                                <!--<div class="ast-device-desc"><b>IMEI:</b>  {{device.viewModel.imei}}</div>-->
+                                <!--{{#if device.viewModel.udid}}<div class="ast-device-desc"><b>UDID:</b>  {{device.viewModel.udid}}</div>{{/if}}-->
+                                <!--{{#if device.viewModel.phoneNumber}}<div class="ast-device-desc"><b>Phone Number:</b>  {{device.viewModel.phoneNumber}}</div>{{/if}}-->
                             </div>
                         </div>
                     </div>
@@ -93,25 +97,46 @@
 
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                            <!-- device location -->
+                            <!-- statistics -->
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
+                                <div class="panel-heading" role="tab" id="headingFour">
                                     <h2 class="sub-title panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                         <span class="fw-stack">
                                             <i class="fw fw-ring fw-stack-2x"></i>
                                             <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
                                         </span>
-                                            Device Location
+                                            Device Statistics
                                         </a>
                                     </h2>
                                 </div>
-                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div id="device-location" style="height:400px" class="panel-body">
-
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="panel-body">
+                                        <a href="../../devices/analytics?deviceId={{deviceId}}&deviceType={{deviceType}}" ><i class="fw fw-charts"></i> Show Statistics</a>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /statistics -->
+
+                            <!-- device location -->
+                            <!--<div class="panel panel-default">-->
+                                <!--<div class="panel-heading" role="tab" id="headingOne">-->
+                                    <!--<h2 class="sub-title panel-title">-->
+                                        <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+                                        <!--<span class="fw-stack">-->
+                                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
+                                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
+                                        <!--</span>-->
+                                            <!--Device Location-->
+                                        <!--</a>-->
+                                    <!--</h2>-->
+                                <!--</div>-->
+                                <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
+                                    <!--<div id="device-location" style="height:400px" class="panel-body">-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <!-- /device location -->
 
                             <!-- policies -->
@@ -136,46 +161,27 @@
                             <!-- /policies -->
 
                             <!-- installed applications -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingThree">
-                                    <h2 class="sub-title panel-title">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <span class="fw-stack">
-                                            <i class="fw fw-ring fw-stack-2x"></i>
-                                            <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
-                                        </span>
-                                            Installed Applications
-                                        </a>
-                                    </h2>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                    <div class="panel-body">
-                                        Not available yet
-                                    </div>
-                                </div>
-                            </div>
+                            <!--<div class="panel panel-default">-->
+                                <!--<div class="panel-heading" role="tab" id="headingThree">-->
+                                    <!--<h2 class="sub-title panel-title">-->
+                                        <!--<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+                                        <!--<span class="fw-stack">-->
+                                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
+                                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
+                                        <!--</span>-->
+                                            <!--Installed Applications-->
+                                        <!--</a>-->
+                                    <!--</h2>-->
+                                <!--</div>-->
+                                <!--<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">-->
+                                    <!--<div class="panel-body">-->
+                                        <!--Not available yet-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <!-- /installed applications -->
 
-                            <!-- statistics -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingFour">
-                                    <h2 class="sub-title panel-title">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        <span class="fw-stack">
-                                            <i class="fw fw-ring fw-stack-2x"></i>
-                                            <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
-                                        </span>
-                                            Device Statistics
-                                        </a>
-                                    </h2>
-                                </div>
-                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                    <div class="panel-body">
-                                        <a href="../../devices/analytics?deviceId={{deviceId}}&deviceType={{deviceType}}" ><i class="fw fw-charts"></i> Show Statistics</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /statistics -->
+
 
                         </div>
 

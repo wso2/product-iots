@@ -167,6 +167,7 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's GET
+        log.info(removeDeviceEndpoint);
         return del(removeDeviceEndpoint, data, "text");
     };
 
@@ -177,6 +178,7 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's POST
+        log.info(updateDeviceEndpoint+ "?name="+device.name);
         return post(updateDeviceEndpoint+ "?name="+device.name, data, "text");
     };
 
@@ -264,7 +266,7 @@ deviceModule = function () {
                 properties[constants.DEVICE_VENDOR] = constants.VENDOR_APPLE;
             }
             deviceObject[constants.DEVICE_PROPERTIES] = properties;
-
+            deviceObject[constants.DEVICE_ENROLLMENT] = device.getDateOfEnrolment();
             return deviceObject;
         }
     };

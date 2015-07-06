@@ -8,15 +8,16 @@
             </label>
         </div>
         <div class="itm-ast">
-            <a href="device/{{type}}/{{id}}">
+            <a href="device/{{type}}/{{deviceIdentifier}}">
                 <div class="ast-img"><img src="{{../imageLocation}}{{type}}.png"/></div>
                 <div class="ast-desc">
                     <div class="ast-title">
                         <h3 class="ast-name">Device {{name}}</h3>
-                        <span class="ast-auth">Owner: {{owner}}</span>
+                        <span class="ast-auth">Device Type: {{type}}</span>
+                        <span class="ast-auth">Date of Enrollment: <span class="formatDate">{{dateOfEnrolment}}</span></span>
                     </div>
                     <div class="ast-model">
-                        <span class="ast-ver">{{type}}</span>
+                        <span class="ast-ver">{{owner}}</span>
                         <span class="ast-published">{{status}}</span>
 
                         <div class="ast-btn-group">

@@ -16,6 +16,13 @@
  * under the License.
  */
 
+function formatDates(){
+    $(".formatDate").each(function(){
+        var timeStamp = $(this).html();
+        $(this).html(new Date(parseInt(timeStamp)).toUTCString());
+    });
+}
+
 (function () {
     var deviceId = $(".device-id");
     var deviceIdentifier = deviceId.data("deviceid");
@@ -35,6 +42,7 @@
     $(document).ready(function(){
         loadOperationBar(deviceType);
         loadMap();
+        formatDates();
     });
     function loadMap(){
         var map;
