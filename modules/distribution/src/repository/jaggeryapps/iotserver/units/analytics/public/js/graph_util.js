@@ -195,6 +195,22 @@ function updateGraphs(stats) {
         $('#div-bulbData').html("");
     }
 
+    var cpuData = stats['cpuData'];
+    if (typeof cpuData != 'undefined'){
+        $('#div-CPUData').html("").html("<div class='row margin-double'><div><h2 class='grey'>CPU Load</h2><hr><div id='canvas-wrapper7'></div></div><hr></div>");
+        updateCPUGraph(convertStateStatsToGraphData(cpuData));
+    }else{
+        $('#div-CPUData').html("");
+    }
+
+    var ramData = stats['ramData'];
+    if (typeof ramData != 'undefined'){
+        $('#div-RAMData').html("").html("<div class='row margin-double'><div><h2 class='grey'>RAM Usage</h2><hr><div id='canvas-wrapper8'></div></div><hr></div>");
+        updateRAMGraph(convertStateStatsToGraphData(ramData));
+    }else{
+        $('#div-RAMData').html("");
+    }
+
     scaleGraphs();
 }
 
