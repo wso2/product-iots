@@ -47,6 +47,8 @@ if (uriMatcher.match("/{context}/api/stats")) {
 		result = getFireAlarmData(user.username, deviceId, from, to);
 	}else if(deviceType=="sensebot"){
 		result = getSensebotData(user.username, deviceId, from, to);
+	}else if(deviceType=="arduino"){
+		result = getArduinoData(user.username, deviceId, from, to);
 	}
 }
 
@@ -75,6 +77,12 @@ function getFireAlarmData(user, deviceId, from, to){
 	result['temperatureData'] = getSensorData("DEVICE_TEMPERATURE_SUMMARY","TEMPERATURE",user, deviceId, from, to);
 	result['fanData'] = getSensorData("DEVICE_FAN_USAGE_SUMMARY","status",user, deviceId, from, to);
 	result['bulbData'] = getSensorData("DEVICE_BULB_USAGE_SUMMARY","status",user, deviceId, from, to);
+	return result;
+}
+
+function getArduinoData(user, deviceId, from, to){
+	result = new Object();
+	result['temperatureData'] = getSensorData("DEVICE_TEMPERATURE_SUMMARY","TEMPERATURE",user, deviceId, from, to);
 	return result;
 }
 
