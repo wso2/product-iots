@@ -36,9 +36,7 @@ deviceModule = function () {
     var deviceManagementDAOFactory = Packages.org.wso2.carbon.device.mgt.core.dao.DeviceManagementDAOFactory;
 
     var deviceManagementService = utility.getDeviceManagementService();
-
-    log.info(deviceManagementService.getDeviceCount());
-
+    
     var publicMethods = {};
     var privateMethods = {};
 
