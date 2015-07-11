@@ -27,7 +27,7 @@ var dcProps = require('/config/dc-props.js').config();
 var utility = require("/modules/utility.js").utility;
 
 var result;
-var statsClient = new Packages.org.wso2.carbon.device.mgt.iot.common.devicecloud.usage.statistics.IoTUsageStatisticsClient;
+var statsClient = new Packages.org.wso2.carbon.device.mgt.iot.common.analytics.statistics.IoTUsageStatisticsClient;
 
 if (uriMatcher.match("/{context}/api/stats")) {
 
