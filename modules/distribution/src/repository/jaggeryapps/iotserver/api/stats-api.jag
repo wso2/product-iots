@@ -128,7 +128,7 @@ function getSensorData(table, column, user, deviceId, from, to) {
 	try {
 		fetchedData = statsClient.getDeviceStats(table, column, user, deviceId, from, to);
 	}catch(error){
-		log.info(error);
+		log.error(error);
 	}
 
 	var sensorData = [];

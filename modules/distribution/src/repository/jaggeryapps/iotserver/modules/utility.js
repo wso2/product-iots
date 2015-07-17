@@ -41,22 +41,52 @@ utility = function () {
 
     publicMethods.insertAppPermissions = function (userModule, type) {
         userModule.addPermissions([{key: "device-mgt", name: "Device Management"}], "", type);
-        userModule.addPermissions([{key: "admin", name: "Device Management Admin"}], "device-mgt", type);
-        userModule.addPermissions([{key: "user", name: "Device Management User"}], "device-mgt", type);
+        userModule.addPermissions([{
+            key: "admin",
+            name: "Device Management Admin"
+        }], "device-mgt", type);
+        userModule.addPermissions([{
+            key: "user",
+            name: "Device Management User"
+        }], "device-mgt", type);
 
         userModule.addPermissions([{key: "devices", name: "Devices"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "devices/list", name: "List Devices"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "devices/operation", name: "Perform Operation"}], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "devices/list",
+            name: "List Devices"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "devices/operation",
+            name: "Perform Operation"
+        }], "device-mgt/admin", type);
 
         userModule.addPermissions([{key: "users", name: "Users"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "users/add", name: "Add New Users"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "users/invite", name: "Invite Users"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "users/list", name: "List Users"}], "device-mgt/admin", type);
-        userModule.addPermissions([{key: "users/remove", name: "Remove Users"}], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "users/add",
+            name: "Add New Users"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "users/invite",
+            name: "Invite Users"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "users/list",
+            name: "List Users"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "users/remove",
+            name: "Remove Users"
+        }], "device-mgt/admin", type);
 
         userModule.addPermissions([{key: "devices", name: "Devices"}], "device-mgt/user", type);
-        userModule.addPermissions([{key: "devices/list", name: "List Devices"}], "device-mgt/user", type);
-        userModule.addPermissions([{key: "devices/operation", name: "Perform Operation"}], "device-mgt/user", "init");
+        userModule.addPermissions([{
+            key: "devices/list",
+            name: "List Devices"
+        }], "device-mgt/user", type);
+        userModule.addPermissions([{
+            key: "devices/operation",
+            name: "Perform Operation"
+        }], "device-mgt/user", "init");
     };
 
     return publicMethods;

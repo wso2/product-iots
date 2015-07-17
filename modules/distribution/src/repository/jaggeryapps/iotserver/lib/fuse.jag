@@ -1,17 +1,10 @@
 <%
 
-var getPath = File.prototype.getPath;
-File.prototype.getPath = function() {
-    var path = getPath.call(this);
-    path = path.replace(/\\/g, '/');
-    return path;
-};
-
 //global object to pass request stat among fuse framework files.
 var fuseState = {
     zones: {},
     appName: '',
-    zoneStack: [],
+    currentZone: [], //TODO: rename to zone Stack
     currentUnit: null
 };
 

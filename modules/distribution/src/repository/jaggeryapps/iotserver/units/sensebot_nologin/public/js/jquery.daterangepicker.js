@@ -8,7 +8,7 @@
 (function (factory) {
 		if (typeof define === 'function' && define.amd) {
 			// AMD. Register as an anonymous module.
-			define(['jquery.daterangepicker.js', 'moment.min'], factory);
+			define(['jquery.daterangepicker.js', 'moment.min.js'], factory);
 		} else if (typeof exports === 'object' && typeof module !== 'undefined') {
 			// CommonJS. Register as a module
 			module.exports = factory(require('jquery'), require('moment')); 
