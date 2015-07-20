@@ -1,4 +1,4 @@
-<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+<datasources-configuration>
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
@@ -16,7 +16,6 @@
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>
-                    <defaultAutoCommit>true</defaultAutoCommit>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>

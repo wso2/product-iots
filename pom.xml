@@ -333,6 +333,16 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.group.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.group.common</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
                 <artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
