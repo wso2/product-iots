@@ -1,6 +1,10 @@
 var fromDate;
 var toDate;
 
+var currentDay = new Date();
+var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
+var endDate = new Date(currentDay.getTime());
+
 // create a custom bar renderer that has no gaps
 Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
     name: 'bar_no_gap',
@@ -11,10 +15,11 @@ Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer
     }
 });
 
-
-var currentDay = new Date();
-var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
-var endDate = new Date(currentDay.getTime());
+function initDate(){
+    currentDay = new Date();
+    startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
+    endDate = new Date(currentDay.getTime());
+}
 
 var configObject = {
     startOfWeek: 'monday',
@@ -38,6 +43,7 @@ var configObject = {
 var DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
 
 $(document).ready(function () {
+    initDate();
     $('#date-range').dateRangePicker(configObject)
         .bind('datepicker-apply', function (event, dateRange) {
             $(this).addClass('active');
@@ -61,21 +67,25 @@ $(document).ready(function () {
 
 //day picker
 $('#today-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
 });
 
 //hour picker
 $('#hour-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
 });
 
 //week picker
 $('#week-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 604800000, currentDay.getTime());
 });
 
 //month picker
 $('#month-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - (604800000 * 4), currentDay.getTime());
 });
 
