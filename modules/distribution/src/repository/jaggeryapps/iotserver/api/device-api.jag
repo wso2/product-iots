@@ -35,7 +35,6 @@ var result;
 
 if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 	downloadId = uriMatcher.elements().downloadId;
-	if(downloadId){
 		//Just download the already created zip archive
 		var CarbonUtils = Packages.org.wso2.carbon.utils.CarbonUtils;
 		var sketchFolder = "repository/resources/sketches";
@@ -57,36 +56,34 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 			}
 		}
 
-	}else {
+} else if (uriMatcher.match("/{context}/api/device/sketch/download")) {
 		//Create a new zip archive and register user calling endpoint
 
-		/* This should match with $CARBON_HOME/repository/resources/sketches/{sketchType} */
-		sketchType = request.getParameter("sketchType");
-		/* This should be registered device type of the CDMF(Connected Device Management Framework) */
-		deviceType = request.getParameter("deviceType");
+                /* This should match with $CARBON_HOME/repository/resources/sketches/{sketchType} */
+                sketchType = request.getParameter("sketchType");
+                /* This should be registered device type of the CDMF(Connected Device Management Framework) */
+                deviceType = request.getParameter("deviceType");
 
-		if (!sketchType) {
-			log.error("Sketch Type is empty!");
-			// http status code 400 refers to - Bad request.
-			result = 400;
-		} else {
-			var user = session.get(constants.USER_SESSION_KEY);
+                if (!sketchType) {
+                        log.error("Sketch Type is empty!");
+                        // http status code 400 refers to - Bad request.
+                        result = 400;
+                } else {
+                        var user = session.get(constants.USER_SESSION_KEY);
 
-			if (!user) {
-				response.sendRedirect(dcProps.appContext + "login?#login-required");
-				exit();
-			}
+                        if (!user) {
+                                response.sendRedirect(dcProps.appContext + "login?#login-required");
+                                exit();
+                        }
 
-			//URL: https://localhost:9443/{deviceType}/download?owner={username}
-			deviceManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
+                        //URL: https://localhost:9443/{deviceType}/download?owner={username}
+                        deviceManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
 
-			sketchDownloadEndPoint = deviceManagerService + "/device/" + sketchType + "/download";
-			response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
-			exit();//stop execution
+                        sketchDownloadEndPoint = deviceManagerService + "/device/" + sketchType + "/download";
+                        response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
+                        exit();//stop execution
 
-		}
-	}
-
+                }
 } else if (uriMatcher.match("/{context}/api/device/sketch/generate_link")) {
 
 	var contents = request.getContent();
