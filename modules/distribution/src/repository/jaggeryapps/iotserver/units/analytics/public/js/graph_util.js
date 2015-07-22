@@ -1,6 +1,10 @@
 var fromDate;
 var toDate;
 
+var currentDay = new Date();
+var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
+var endDate = new Date(currentDay.getTime());
+
 // create a custom bar renderer that has no gaps
 Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
     name: 'bar_no_gap',
@@ -11,10 +15,11 @@ Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer
     }
 });
 
-
-var currentDay = new Date();
-var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
-var endDate = new Date(currentDay.getTime());
+function initDate(){
+    currentDay = new Date();
+    startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
+    endDate = new Date(currentDay.getTime());
+}
 
 var configObject = {
     startOfWeek: 'monday',
@@ -38,6 +43,7 @@ var configObject = {
 var DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
 
 $(document).ready(function () {
+    initDate();
     $('#date-range').dateRangePicker(configObject)
         .bind('datepicker-apply', function (event, dateRange) {
             $(this).addClass('active');
@@ -61,21 +67,25 @@ $(document).ready(function () {
 
 //day picker
 $('#today-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
 });
 
 //hour picker
 $('#hour-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
-})
+});
 
 //week picker
 $('#week-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - 604800000, currentDay.getTime());
-})
+});
 
 //month picker
 $('#month-btn').on('click', function () {
+    initDate();
     getDateTime(currentDay.getTime() - (604800000 * 4), currentDay.getTime());
 });
 
@@ -148,67 +158,75 @@ function updateGraphs(stats) {
     console.log(stats);
 
     var temperatureData = stats['temperatureData'];
-    if (typeof temperatureData != 'undefined'){
+    if (typeof temperatureData != 'undefined') {
         $('#div-temperatureData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Temperature</h2><hr><div id='canvas-wrapper1'></div></div><hr></div>");
         updateTemperatureGraph(convertStatsToGraphData(temperatureData));
-    }else{
+    } else {
         $('#div-temperatureData').html("");
     }
 
     var lightData = stats['lightData'];
-    if (typeof lightData != 'undefined'){
+    if (typeof lightData != 'undefined') {
         $('#div-lightData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Light</h2><hr><div id='canvas-wrapper2'></div></div><hr></div>");
         updateLightGraph(convertStatsToGraphData(lightData));
-    }else{
+    } else {
         $('#div-lightData').html("");
     }
 
     var motionData = stats['motionData'];
-    if (typeof motionData != 'undefined'){
+    if (typeof motionData != 'undefined') {
         $('#div-motionData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Motion</h2><hr><div id='canvas-wrapper3'></div></div><hr></div>");
         updateMotionGraph(convertStatsToGraphData(motionData));
-    }else{
+    } else {
         $('#div-motionData').html("");
     }
 
     var sonarData = stats['sonarData'];
-    if (typeof sonarData != 'undefined'){
+    if (typeof sonarData != 'undefined') {
         $('#div-sonarData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Sonar</h2><hr><div id='canvas-wrapper4'></div></div><hr></div>");
         updateSonarGraph(convertStatsToGraphData(sonarData));
-    }else{
+    } else {
         $('#div-sonarData').html("");
     }
 
     var fanData = stats['fanData'];
-    if (typeof fanData != 'undefined'){
+    if (typeof fanData != 'undefined') {
         $('#div-fanData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Fan Status</h2><hr><div id='canvas-wrapper5'></div></div><hr></div>");
         updateFanGraph(convertStateStatsToGraphData(fanData));
-    }else{
+    } else {
         $('#div-fanData').html("");
     }
 
     var bulbData = stats['bulbData'];
-    if (typeof bulbData != 'undefined'){
+    if (typeof bulbData != 'undefined') {
         $('#div-bulbData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Bulb Status</h2><hr><div id='canvas-wrapper6'></div></div><hr></div>");
         updateBulbGraph(convertStateStatsToGraphData(bulbData));
-    }else{
+    } else {
         $('#div-bulbData').html("");
     }
 
     var cpuData = stats['cpuData'];
-    if (typeof cpuData != 'undefined'){
+    if (typeof cpuData != 'undefined') {
         $('#div-CPUData').html("").html("<div class='row margin-double'><div><h2 class='grey'>CPU Load</h2><hr><div id='canvas-wrapper7'></div></div><hr></div>");
         updateCPUGraph(convertStateStatsToGraphData(cpuData));
-    }else{
+    } else {
         $('#div-CPUData').html("");
     }
 
     var ramData = stats['ramData'];
-    if (typeof ramData != 'undefined'){
+    if (typeof ramData != 'undefined') {
         $('#div-RAMData').html("").html("<div class='row margin-double'><div><h2 class='grey'>RAM Usage</h2><hr><div id='canvas-wrapper8'></div></div><hr></div>");
         updateRAMGraph(convertStateStatsToGraphData(ramData));
-    }else{
+    } else {
         $('#div-RAMData').html("");
+    }
+
+    var cpuTemperatureData = stats['cpuTemperatureData'];
+    if (typeof cpuTemperatureData != 'undefined') {
+        $('#div-cpuTemperatureData').html("").html("<div class='row margin-double'><div><h2 class='grey'>CPU Temperature</h2><hr><div id='canvas-wrapper9'></div></div><hr></div>");
+        updateCPUTemperatureGraph(convertStatsToGraphData(cpuTemperatureData));
+    } else {
+        $('#div-cpuTemperatureData').html("");
     }
 
     scaleGraphs();
@@ -219,8 +237,18 @@ function scaleGraphs() {
     if (sliders.length == 0) {
         return;
     }
+    var graphWidth = 0;
+    for (var i = 1; i < 10; i++){
+        if ($('#canvas-wrapper' + i).length){
+            graphWidth = $('#canvas-wrapper' + i).width() - 50;
+            break;
+        }
+    }
 
-    var graphWidth = $('#canvas-wrapper1').width() - 50;
+    if (graphWidth <= 0){
+        return;
+    }
+
     //Scale graphs
     var sliderX = graphWidth * 60 * 60 / (toDate - fromDate);
     if (sliderX < graphWidth) {
@@ -283,9 +311,9 @@ function convertStateStatsToGraphData(stats) {
 function convertDate(date) {
     var month = date.getMonth() + 1;
     var day = date.getDate();
-    var hour=date.getHours();
-    var minute=date.getMinutes();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
     return date.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '')
-        + month + '-' + (('' + day).length < 2 ? '0' : '') + day +" "+ (('' + hour).length < 2 ? '0' : '')
-        + hour +":"+(('' + minute).length < 2 ? '0' : '')+ minute;
+        + month + '-' + (('' + day).length < 2 ? '0' : '') + day + " " + (('' + hour).length < 2 ? '0' : '')
+        + hour + ":" + (('' + minute).length < 2 ? '0' : '') + minute;
 }

@@ -1,6 +1,6 @@
 function onRequest(context) {
     var constants = require("/modules/constants.js");
-    var user = session.get(constants.USER_SESSION_KEY);
+    var carbonUser = session.get(constants.USER_SESSION_KEY);
 
     var links = {
         "users": [],
@@ -18,7 +18,7 @@ function onRequest(context) {
     };
 
     var deviceMgtLink = {
-        title: "Go back to Device Management",
+        title: "Go back to My Devices",
         icon: "fw-left-arrow",
         url: "/iotserver/devices"
     };
@@ -38,9 +38,12 @@ function onRequest(context) {
     links.analytics.push(deviceMgtLink);
     links['device-mgt'].push(dashboardLink);
 
-    if (user) {
+    if (!carbonUser) {
+        //user is not logged in
+    }else{
         var userModule = require("/modules/user.js").userModule;
         var permissions = userModule.getUIPermissions();
+
         context.permissions = permissions;
 
         //if (permissions.ADD_USER) {

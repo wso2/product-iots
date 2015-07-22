@@ -10190,7 +10190,7 @@ var compile = function (args) {
     var parser = new less.Parser(options);
     parser.parse(input, function (e, root) {
         if (e) {
-            log.info(e);
+            log.error(e);
             writeError(e, options);
             quit(1);
         } else {

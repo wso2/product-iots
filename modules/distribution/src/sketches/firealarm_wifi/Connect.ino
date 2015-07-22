@@ -65,7 +65,7 @@ void connectHttp() {
     
     if(CON_DEBUG) Serial.println(F("Connected to Wifi network!"));
     
-    if(true) Serial.println(F("Request DHCP"));
+    if(CON_DEBUG) Serial.println(F("Request DHCP"));
     while (!cc3000.checkDHCP())
     {
         delay(100); // ToDo: Insert a DHCP timeout!
@@ -78,14 +78,11 @@ void connectHttp() {
     
     pushClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
     if (pushClient.connected()) {
-        if(true) Serial.println(F("pushClient Connected to server"));
+        if(CON_DEBUG) Serial.println(F("pushClient Connected to server"));
     } else {
         if(CON_DEBUG) Serial.println(F("pushClient Connection failed"));
     }
-    
-    
-    
-    
+       
     if(CON_DEBUG) Serial.println(F("-------------------------------------"));
 }
 
@@ -148,12 +145,11 @@ bool displayConnectionDetails(void)
 void setupClient(){
     pushClient = cc3000.connectTCP(sserver, SERVICE_PORT);  //SERVICE_PORT
     if (pushClient.connected()) {
-        if(CON_DEBUG) Serial.println(F("client Connected to server"));
+        if(CON_DEBUG) Serial.println(F("pushClient Connected to server"));
     } else {
         while( !cc3000.checkConnected() ){
-        connectHttp();
-    
+        connectHttp();   
     }
-        if(CON_DEBUG) Serial.println(F("client Connection failed"));
+        if(CON_DEBUG) Serial.println(F("pushClient Connection failed"));
     }
 }

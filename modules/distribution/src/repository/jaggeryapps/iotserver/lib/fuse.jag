@@ -1,5 +1,4 @@
 <%
-
 var getPath = File.prototype.getPath;
 File.prototype.getPath = function() {
     var path = getPath.call(this);
@@ -11,7 +10,7 @@ File.prototype.getPath = function() {
 var fuseState = {
     zones: {},
     appName: '',
-    zoneStack: [],
+    currentZone: [], //TODO: rename to zone Stack
     currentUnit: null
 };
 

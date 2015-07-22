@@ -167,7 +167,7 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's GET
-        log.info(removeDeviceEndpoint);
+        //log.info(removeDeviceEndpoint);
         return del(removeDeviceEndpoint, data, "text");
     };
 
@@ -178,8 +178,8 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's POST
-        log.info(updateDeviceEndpoint+ "?name="+device.name);
-        return post(updateDeviceEndpoint+ "?name="+device.name, data, "text");
+        //log.info(updateDeviceEndpoint+ "?name="+device.name);
+        return post(updateDeviceEndpoint+ "?name="+encodeURIComponent(device.name), data, "text");
     };
 
     /*
