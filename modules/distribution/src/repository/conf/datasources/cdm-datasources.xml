@@ -16,7 +16,7 @@
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>
-                    <defaultAutoCommit>true</defaultAutoCommit>
+                    <defaultAutoCommit>false</defaultAutoCommit>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
