@@ -63,7 +63,8 @@ void readControls() {
         delay(100);
 
         // Close the connection when done.
-        Serial.println(F("Client disconnected"));
+        Serial.println(F("Listener Client disconnected"));
+        client.flush();
         client.close();
         wdt_reset();
 

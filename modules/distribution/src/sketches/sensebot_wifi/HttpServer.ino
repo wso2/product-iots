@@ -57,6 +57,7 @@ void readControls()
     // Wait a short period to make sure the response had time to send before
     // the connection is closed (the CC3000 sends data asyncronously).
     delay(200);
+    client.flush();
     client.close();
  
    }

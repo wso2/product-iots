@@ -44,11 +44,10 @@ void setup() {
 
 void loop() {
 
-
     while (!cc3000.checkConnected()) {
         connectHttp();
-
     }
+    
     wdt_reset();
 
     if (millis() - pushTimestamp > PUSH_INTERVAL) {
@@ -59,6 +58,7 @@ void loop() {
         pushData();
         pushTimestamp = millis();
     }
+    
     readControls();
     wdt_reset();
 
