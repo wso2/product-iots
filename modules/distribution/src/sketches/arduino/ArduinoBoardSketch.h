@@ -19,7 +19,7 @@
 #define DEVICE_OWNER "${DEVICE_OWNER}"          
 #define DEVICE_ID "${DEVICE_ID}"              
 #define DEVICE_TOKEN "${DEVICE_TOKEN}"
-
+#define REFRESH_DEVICE_TOKEN "${REFRESH_DEVICE_TOKEN}"
 
 
 #define SERVICE_PORT 9763
