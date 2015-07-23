@@ -32,7 +32,7 @@ utility = function () {
     };
 
     publicMethods.getUserManagementService = function () {
-        return getOsgiService('org.wso2.carbon.device.mgt.user.core.UserManager');
+        return getOsgiService('org.wso2.carbon.user.api.UserRealmService');
     };
 
     publicMethods.getPolicyManagementService = function () {
