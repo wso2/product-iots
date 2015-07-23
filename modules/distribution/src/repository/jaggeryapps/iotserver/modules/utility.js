@@ -60,6 +60,28 @@ utility = function () {
             name: "Perform Operation"
         }], "device-mgt/admin", type);
 
+        userModule.addPermissions([{key: "groups", name: "Groups"}], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "groups/add_devices",
+            name: "Add Devices to Group"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "groups/remove_devices",
+            name: "Remove Devices from Group"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "groups/modify",
+            name: "Modify Group"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "groups/share",
+            name: "Change Group Sharing"
+        }], "device-mgt/admin", type);
+        userModule.addPermissions([{
+            key: "groups/delete",
+            name: "Delete Group"
+        }], "device-mgt/admin", type);
+
         userModule.addPermissions([{key: "users", name: "Users"}], "device-mgt/admin", type);
         userModule.addPermissions([{
             key: "users/add",
@@ -88,35 +110,15 @@ utility = function () {
             name: "Perform Operation"
         }], "device-mgt/user", "init");
 
-        // Group Management Permissions
+        userModule.addPermissions([{key: "groups", name: "Groups"}], "device-mgt/user", type);
         userModule.addPermissions([{
             key: "groups/monitor",
             name: "Monitor Devices in Group"
-        }], "group-mgt/user", "init");
+        }], "device-mgt/user", type);
         userModule.addPermissions([{
             key: "groups/operation",
             name: "Perform Device Operation"
-        }], "group-mgt/user", "init");
-        userModule.addPermissions([{
-            key: "groups/add_devices",
-            name: "Add Devices to Group"
-        }], "group-mgt/user", "init");
-        userModule.addPermissions([{
-            key: "groups/remove_devices",
-            name: "Remove Devices from Group"
-        }], "group-mgt/user", "init");
-        userModule.addPermissions([{
-            key: "groups/modify",
-            name: "Modify Group"
-        }], "group-mgt/user", "init");
-        userModule.addPermissions([{
-            key: "groups/share",
-            name: "Change Group Sharing"
-        }], "group-mgt/user", "init");
-        userModule.addPermissions([{
-            key: "groups/delete",
-            name: "Delete Group"
-        }], "group-mgt/user", "init");
+        }], "device-mgt/user", type);
     };
 
     return publicMethods;
