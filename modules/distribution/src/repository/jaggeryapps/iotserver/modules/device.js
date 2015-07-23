@@ -266,6 +266,8 @@ deviceModule = function () {
                 properties[constants.DEVICE_VENDOR] = constants.VENDOR_APPLE;
             }
             deviceObject[constants.DEVICE_PROPERTIES] = properties;
+            log.info("-------------------------");
+            log.info(device.getEnrolmentInfo().getDateOfEnrolment());
             deviceObject[constants.DEVICE_ENROLLMENT] = device.getEnrolmentInfo().getDateOfEnrolment();
             return deviceObject;
         }

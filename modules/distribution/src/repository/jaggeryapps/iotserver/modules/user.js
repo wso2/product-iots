@@ -252,7 +252,9 @@ userModule = function () {
             log.error("User object was not found in the session");
             throw constants.ERRORS.USER_NOT_FOUND;
         }
+
         var userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
+
         var i, userObject;
         for (i = 0; i < userList.size(); i++) {
             userObject = userList.get(i);
