@@ -405,13 +405,20 @@
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches" />
 
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts" />
+
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics" />
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps" overwrite="true">
                                     <fileset dir="src/repository/jaggeryapps"></fileset>
                                 </copy>
+
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches" overwrite="true">
                                     <fileset dir="src/sketches" />
+                                </copy>
+
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts" overwrite="true">
+                                    <fileset dir="src/scripts" />
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/statistics" overwrite="true">
