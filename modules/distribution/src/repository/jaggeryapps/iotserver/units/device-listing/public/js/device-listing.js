@@ -168,7 +168,7 @@ function loadDevices(searchType, searchParam) {
                     addDeviceSelectedClass(this);
                 });
                 attachEvents();
-                formatDates();
+                //formatDates();
             }
         };
         invokerUtil.get(serviceURL,
@@ -318,8 +318,7 @@ function attachEvents() {
                     var status = jqxhr.status;
                     if (status == 200) {
                         $(modalPopupContent).html($('#edit-device-200-content').html());
-			console.log("asdsdasda" + newDeviceName);
-			$("div[data-deviceid='"+deviceId+"'] .ast-name").html(newDeviceName);
+			            $("div[data-deviceid='"+deviceId+"'] .ast-name").html(newDeviceName);
                         $("a#edit-device-200-link").click(function () {
                             hidePopup();
                         });

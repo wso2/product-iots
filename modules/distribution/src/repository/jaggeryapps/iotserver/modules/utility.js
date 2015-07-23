@@ -32,7 +32,7 @@ utility = function () {
     };
 
     publicMethods.getUserManagementService = function () {
-        return getOsgiService('org.wso2.carbon.user.api.UserRealmService');
+        return Packages.org.wso2.carbon.device.mgt.iot.common.UserManagement();
     };
 
     publicMethods.getPolicyManagementService = function () {
