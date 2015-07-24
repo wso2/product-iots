@@ -124,7 +124,12 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 
 	var data = {};
 	//XMLHTTPRequest's GET
-	result = get(listAllDevicesEndPoint, data, "json");
+	try {
+		result = get(listAllDevicesEndPoint, data, "json");
+	}catch(err){
+		log.error("Error occured while retrieveing all devices with username: "+user.username);
+		result=[];
+	}
 
 } else if (uriMatcher.match("/{context}/api/devices/types")) {
 
