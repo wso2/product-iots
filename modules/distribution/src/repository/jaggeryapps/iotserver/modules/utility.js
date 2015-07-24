@@ -20,6 +20,7 @@ var utility;
 utility = function () {
     var JavaClass = Packages.java.lang.Class;
     var PrivilegedCarbonContext = Packages.org.wso2.carbon.context.PrivilegedCarbonContext;
+    var userManagement = Packages.org.wso2.carbon.device.mgt.iot.common.UserManagement();
 
     var getOsgiService = function (className) {
         return PrivilegedCarbonContext.getThreadLocalCarbonContext().getOSGiService(JavaClass.forName(className));
@@ -32,7 +33,7 @@ utility = function () {
     };
 
     publicMethods.getUserManagementService = function () {
-        return Packages.org.wso2.carbon.device.mgt.iot.common.UserManagement();
+        return userManagement;
     };
 
     publicMethods.getPolicyManagementService = function () {

@@ -1,0 +1,251 @@
+<div class="row no-gutter">
+    <div class="wr-hidden-operations-nav col-lg-4">
+        <a href="javascript:void(0)" onclick="showAdvanceOperation('security', this)" class="selected">
+                    <span class="wr-hidden-operations-icon fw-stack">
+                        <i class="fw fw-padlock fw-stack-2x"></i>
+                    </span>
+            Security
+        </a>
+        <a href="javascript:void(0)" onclick="showAdvanceOperation('restriction', this)">
+                <span class="wr-hidden-operations-icon fw-stack">
+                    <i class="fw fw-settings fw-stack-2x"></i>
+                </span>
+            Restrictions
+        </a>
+        <a href="javascript:void(0)" onclick="showAdvanceOperation('application', this)">
+                    <span class="wr-hidden-operations-icon fw-stack">
+                        <i class="fw fw-application fw-stack-2x"></i>
+                    </span>
+            Applications
+        </a>
+        <a href="javascript:void(0)" onclick="showAdvanceOperation('wifi', this)">
+                <span class="wr-hidden-operations-icon fw-stack">
+                    <i class="fw fw-wifi fw-stack-2x"></i>
+                </span>
+            Wi-fi
+        </a>
+    </div>
+    <div class="wr-hidden-operations-content col-lg-8">
+
+        <!-- security -->
+        <div class="wr-hidden-operation" data-operation="security" style="display: block">
+            <div class="panel panel-default operation-data" data-operation="{{features.ENCRYPT_STORAGE.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                         Encryption Enable/Disable
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#enableEncryptionTab">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="enableEncryptionTab" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="enableEncryptionTab">
+                    <div class="wr-input-control">
+                        <label class="wr-input-control checkbox">
+                            <input type="checkbox" class="operationDataKeys" id="enableEncryption" data-key="enableEncryption" />
+                            <span class="helper" title="Enable Encryption">Enable Encryption<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></span>
+                        </label>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.ENCRYPT_STORAGE.code}}')" class="btn-operations">Configure</a>-->
+                </div>
+            </div>
+            <div class="panel panel-default operation-data" data-operation="{{features.PASSCODE_POLICY.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Passcode Policy
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#passCodePolicy">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="passCodePolicy" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="passCodePolicy">
+
+                    <label class="wr-input-label col-sm-4" for="maxFailedAttempts">Maximum Failed Attempts</label>
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="maxFailedAttempts" data-key="maxFailedAttempts" placeholder="Enter maximum Failed Attempts">
+                    </div>
+
+                    <label class="wr-input-label col-sm-4" for="minLength">Minimum Length</label>
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="minLength" data-key="minLength" placeholder="Enter minimum Length">
+                    </div>
+
+                    <label class="wr-input-label col-sm-4" for="pinHistory">PIN History</label>
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="pinHistory" data-key="pinHistory" placeholder="Enter PIN History">
+                    </div>
+
+                    <label class="wr-input-label col-sm-4" for="minComplexChars">Minimum complex characters</label>
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="minComplexChars" data-key="minComplexChars" placeholder="Enter minimum complex characters">
+                    </div>
+
+                    <label class="wr-input-label col-sm-4" for="lockcode">Minimum PIN Age in days</label>
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="maxPINAgeInDays" data-key="maxPINAgeInDays" placeholder="Enter minimum PIN age in days">
+                    </div>
+
+                    <div class="wr-input-control">
+                        <label class="wr-input-control checkbox">
+                            <input type="checkbox" class="operationDataKeys" id="requireAlphanumeric" data-key="requireAlphanumeric" />
+                            <span class="helper" title="Require Alphanumeric">Require Alphanumeric<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></span>
+                        </label>
+                    </div>
+
+                    <div class="wr-input-control">
+                        <label class="wr-input-control checkbox">
+                            <input type="checkbox" class="operationDataKeys" id="allowSimple" data-key="allowSimple" />
+                            <span class="helper" title="Allow simple PIN">Allow simple PIN<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></span>
+                        </label>
+                    </div>
+
+                    <!--<a href="javascript:runOperation('{{features.PASSCODE_POLICY.code}}')" class="btn-operations">Configure</a>-->
+                </div>
+            </div>
+        </div>
+        <!-- /security -->
+
+        <!-- wi-fi -->
+        <div class="wr-hidden-operation" data-operation="wifi">
+            <div class="panel panel-default operation-data" data-operation="{{features.WIFI.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Configure Wifi
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#wifi">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="wifi" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="wifi">
+                    <label class="wr-input-label" title="Identification of the wireless network to connect to">Service Set Identifier<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+                    <!--span>Identification of the wireless network to connect to</span-->
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="ssid" data-key="ssid" placeholder="Enter SSID"/>
+                    </div>
+
+                    <label class="wr-input-label" title="Password for the wireless network">Password<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+                    <!--span>Password for the wireless network</span-->
+                    <div class="wr-input-control">
+                        <input type="password" class="form-control operationDataKeys" id="password" data-key="password" placeholder="Password"/>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.WIFI.code}}')" class="btn-operations">Configure</a>-->
+                </div>
+            </div>
+        </div>
+        <!-- /wi-fi -->
+        <!-- application -->
+        <div class="wr-hidden-operation" data-operation="application">
+            <div class="panel panel-default operation-data" data-operation="{{features.INSTALL_APPLICATION.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Install App
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#installApp">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="installApp" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="installApp">
+                    <label class="wr-input-label" title="Application Identifier">App Identifier<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="package-name" data-key="packageName" placeholder="Enter App Identifer"/>
+                    </div>
+                    <div class="wr-input-control">
+                        <label class="wr-input-control dropdown">
+                            <span class="helper" title="App Type">App Type<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></span>
+                            <select class="form-control col-sm-8 operationDataKeys appTypesInput" id="type" data-key="type">
+                                <option>Public</option>
+                                <option>Enterprise</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label class="wr-input-label" title="URL">URL<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="url" data-key="url" placeholder="Enter URL"/>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.INSTALL_APPLICATION.code}}')" class="btn-operations">Install</a>-->
+                </div>
+            </div>
+            <div class="panel panel-default operation-data" data-operation="{{features.WEBCLIP.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Install Web Clip
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#installWebClip">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="installWebClip" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="installWebClip">
+                    <label class="wr-input-label" title="Title of the web clip">Title<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="title" data-key="title" placeholder="Enter Title"/>
+                    </div>
+                    <label class="wr-input-label" title="URL">URL<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="url" data-key="url" placeholder="Enter URL"/>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.WEBCLIP.code}}')" class="btn-operations">Install</a>-->
+                </div>
+            </div>
+            <div class="panel panel-default operation-data" data-operation="{{features.UNINSTALL_APPLICATION.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Uninstall App
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#uninstallApp">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="uninstallApp" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="uninstallApp">
+                    <label class="wr-input-label" title="Application Identifier">App Identifier<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></label>
+                    <!--span>Identification of the wireless network to connect to</span-->
+                    <div class="wr-input-control">
+                        <input type="text" class="form-control operationDataKeys" id="package-name" data-key="packageName" placeholder="Enter App Identifer"/>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.UNINSTALL_APPLICATION.code}}')" class="btn-operations">Uninstall</a>-->
+                </div>
+            </div>
+        </div>
+        <!-- /application -->
+
+        <!-- Restriction -->
+        <div class="wr-hidden-operation" data-operation="restriction">
+            <div class="panel panel-default operation-data" data-operation="{{features.CAMERA.code}}">
+                <div class="panel-heading" role="tab">
+                    <h2 class="sub-title panel-title">
+                        Camera Enable/Disable
+                        <label class="wr-input-control switch" data-toggle="collapse" data-target="#cameraDisable">
+                            <span class="text">Enabled</span>
+                            <input type="checkbox">
+                            <span class="helper"></span>
+                        </label>
+                    </h2>
+                </div>
+                <div id="cameraDisable" class="panel-collapse panel-body collapse" role="tabpanel" aria-labelledby="cameraDisable">
+                    <div class="wr-input-control">
+                        <label class="wr-input-control checkbox">
+                            <input type="checkbox" class="operationDataKeys" id="enableCamera" data-key="enableCamera"  checked />
+                            <span class="helper" title="Remove App upon dis-enrollment">Enable Camera<span class="wr-help-tip glyphicon glyphicon-question-sign"></span></span>
+                        </label>
+                    </div>
+                    <!--<a href="javascript:runOperation('{{features.CAMERA.code}}')" class="btn-operations">Configure</a>-->
+                </div>
+            </div>
+        </div>
+        <!-- /Restriction -->
+    </div>
+</div>
