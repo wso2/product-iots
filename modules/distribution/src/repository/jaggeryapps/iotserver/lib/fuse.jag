@@ -11,8 +11,14 @@ File.prototype.getPath = function() {
 var fuseState = {
     zones: {},
     appName: '',
+<<<<<<< HEAD
     zoneStack: [],
     currentUnit: null
+=======
+    currentZone: [], //TODO: rename to zone Stack
+    currentUnit: null,
+    viewModelCache:{}
+>>>>>>> e27279a83b0f9a100b0a1df5ec6c63bf9b7dbf8e
 };
 
 var requestId = function makeId() {
