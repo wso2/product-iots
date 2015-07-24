@@ -168,7 +168,7 @@ function loadDevices(searchType, searchParam) {
                     addDeviceSelectedClass(this);
                 });
                 attachEvents();
-                //formatDates();
+                formatDates();
             }
         };
         invokerUtil.get(serviceURL,
@@ -253,25 +253,24 @@ function attachEvents() {
         $("a#remove-device-yes-link").click(function () {
             invokerUtil.get(
                 removeDeviceAPI,
-                function (data,txtStatus,jqxhr) {
-		    var status = jqxhr.status;
-                    if (status == 200) {
+                function (data) {
+                    if (data == 200) {
+                        $("#" + username).addClass("hide");
                         $(modalPopupContent).html($('#remove-device-200-content').html());
-                        $('div[data-deviceid="' + deviceId  + '"]').remove();
-			$("a#remove-device-200-link").click(function () {
+                        $("a#remove-device-200-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 400) {
+                    } else if (data == 400) {
                         $(modalPopupContent).html($('#remove-device-400-content').html());
                         $("a#remove-device-400-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 403) {
+                    } else if (data == 403) {
                         $(modalPopupContent).html($('#remove-device-403-content').html());
                         $("a#remove-device-403-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 409) {
+                    } else if (data == 409) {
                         $(modalPopupContent).html($('#remove-device-409-content').html());
                         $("a#remove-device-409-link").click(function () {
                             hidePopup();
@@ -309,30 +308,28 @@ function attachEvents() {
         showPopup();
 
         $("a#edit-device-yes-link").click(function () {
-            var newDeviceName = $('#edit-device-name').val();
-	    var device={"device":{"name" : newDeviceName}};
+            var device={"device":{"name" : $('#edit-device-name').val()}};
             invokerUtil.post(
                 editDeviceAPI,
                 device,
-                function (data,txtStatus,jqxhr) {
-                    var status = jqxhr.status;
-                    if (status == 200) {
+                function (data) {
+                    if (data == 200) {
+                        $("#" + username).addClass("hide");
                         $(modalPopupContent).html($('#edit-device-200-content').html());
-			            $("div[data-deviceid='"+deviceId+"'] .ast-name").html(newDeviceName);
                         $("a#edit-device-200-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 400) {
+                    } else if (data == 400) {
                         $(modalPopupContent).html($('#edit-device-400-content').html());
                         $("a#edit-device-400-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 403) {
+                    } else if (data == 403) {
                         $(modalPopupContent).html($('#edit-device-403-content').html());
                         $("a#edit-device-403-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 409) {
+                    } else if (data == 409) {
                         $(modalPopupContent).html($('#edit-device-409-content').html());
                         $("a#edit-device-409-link").click(function () {
                             hidePopup();

@@ -15,6 +15,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             for (var i = 0; i < definitions.length; i++) {
                 var definition = definitions[i];
                 lookUpTable[definition.name] = i;
+                //log.info("initLookUp()"+definition.name+"<-"+i);
             }
         }
     };
@@ -45,6 +46,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
     };
 
     var getAncestorModels = function (unit) {
+        //log.info('[' + requestId + '] getAncestorModels()'+unit);
         var unitModel = getUnitDefinition(unit);
         var ancestors = [unitModel];
         var parentName;
@@ -148,11 +150,12 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
     };
 
     getUnitDefinition = function (unit) {
+        //log.info('[' + requestId + '] getUnitDefinition()'+unit);
         var definitions = getUnitDefinitions();
         initLookUp(definitions);
+        //log.info('[' + requestId + '] lookUpTable[unit]:'+unit);
         var model = definitions[lookUpTable[unit]];
         if (!model) {
-            log.warn('[' + requestId + '] unit "' + unit + '" does not exits');
             throw '[' + requestId + '] unit "' + unit + '" does not exits';
         }
         return model;
@@ -205,7 +208,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             var unitDir = unitDirs[i];
             if (unitDir.isDirectory()) {
                 var unitName = unitDir.getName();
-                //log.info("reading: "+unitName + " basePath:"+basePath);
+                //log.info("reading: "+unitName + " basePath:'" + basePath + "'");
                 var definitionFile = new File(fuse.getUnitPath(basePath+unitName) + '/' + unitName + '.json');
 
                 if(definitionFile.isExists()) {
@@ -381,6 +384,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
      * @returns {File}
      */
     getFile = function (unitName, path, opt_suffix) {
+        //log.info("getFile() unitName:"+unitName+", path:"+path+", opt_suffix:"+opt_suffix);
         var slashPath = ((path[0] === '/') ? '' : '/') + path;
         var selfFileName = '';
         var fileName = '';
@@ -399,8 +403,10 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         var unitDef = getUnitDefinition(unitName);
         if (unitDef.path.indexOf('.hbs', unitDef.path.length - 4) !== -1) {
             if (opt_suffix.indexOf('.hbs', opt_suffix.length - 4) !== -1) {
+                //log.info("1:"+unitDef.path);
                 return new File(unitDef.path);
             } else {
+                //log.info("2:"+unitDef.path.replace(/.hbs$/, opt_suffix));
                 return new File(unitDef.path.replace(/.hbs$/, opt_suffix));
             }
         }
@@ -411,7 +417,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
                 '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
                 + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
             );
-
+            //log.info("3:"+getUnitPath(unitName) + slashPath + selfFileName);
             return selfFile;
         }
 
@@ -431,6 +437,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
                     '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
                     + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
                 );
+                //log.info("4:"+getUnitPath(ancestorName) + slashPath + fileName);
                 return file;
             }
         }
@@ -438,6 +445,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
             + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
         );
+        //log.info("5:"+getUnitPath(unitName) + slashPath + selfFileName);
         return selfFile;
     };
 

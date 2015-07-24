@@ -1,6 +1,6 @@
 {{#each devices}}
 	{{deviceMap this}}
-    <div class="ctrl-wr-asset" data-deviceid="{{deviceIdentifier}}" data-type="{{type}}">
+    <div class="ctrl-wr-asset" data-deviceid="{{id}}" data-type="{{type}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
                 <input type="checkbox"/>
@@ -12,7 +12,7 @@
                 <div class="ast-img"><img src="{{../imageLocation}}{{type}}.png"/></div>
                 <div class="ast-desc">
                     <div class="ast-title">
-                        <h3 class="ast-name">{{name}}</h3>
+                        <h3 class="ast-name">Device {{name}}</h3>
                         <span class="ast-auth">Device Type: {{type}}</span>
                         <span class="ast-auth">Date of Enrollment: <span class="formatDate">{{dateOfEnrolment}}</span></span>
                     </div>

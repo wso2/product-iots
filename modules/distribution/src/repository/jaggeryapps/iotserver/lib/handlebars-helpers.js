@@ -56,7 +56,7 @@ Handlebars.innerZonesFromUnit = null;
 Handlebars.registerHelper('defineZone', function (zoneName, zoneContent) {
     var result = '';
     var zone = Handlebars.Utils.escapeExpression(zoneName);
-    fuseState.currentZone.push(zone);
+    fuseState.zoneStack.push(zone);
     var unitsToRender = fuseState.zones[zone] || [];
 
     if (Handlebars.innerZones.length > 0) {
@@ -92,12 +92,12 @@ Handlebars.registerHelper('defineZone', function (zoneName, zoneContent) {
         return result;
     }
 
-    fuseState.currentZone.pop();
+    fuseState.zoneStack.pop();
     return new Handlebars.SafeString(result);
 });
 
 Handlebars.registerHelper('zone', function (zoneName, zoneContent) {
-    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
+    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
     if (currentZone == null) {
         return 'zone_' + zoneName + ' ';
     }
@@ -113,7 +113,7 @@ Handlebars.registerHelper('zone', function (zoneName, zoneContent) {
 });
 
 Handlebars.registerHelper('layout', function (layoutName) {
-    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
+    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
     if (currentZone == null) {
         return 'layout_' + layoutName;
     } else {
@@ -122,7 +122,7 @@ Handlebars.registerHelper('layout', function (layoutName) {
 });
 
 Handlebars.registerHelper('authorized', function () {
-    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
+    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
     if (currentZone == null) {
         return '';
     } else {
@@ -155,11 +155,11 @@ Handlebars.registerHelper('unit', function (unitName,options) {
         log.error('unit does not have a main zone');
     }
     //TODO warn when unspecified decencies are included.
-    fuseState.currentZone.push('main');
+    fuseState.zoneStack.push('main');
     var template = fuse.getFile(baseUnit, '', '.hbs');
     log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
     var result = new Handlebars.SafeString(Handlebars.compileFile(template)(getScope(baseUnit,templateConfigs)));
-    fuseState.currentZone.pop();
+    fuseState.zoneStack.pop();
     return result;
 });
 
@@ -192,6 +192,7 @@ Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
         return options.fn(this);
     }
 });
+
 Handlebars.registerHelper('unequal', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");

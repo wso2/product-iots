@@ -25,9 +25,7 @@ var log = new Log("api/user-api.jag");
 var constants = require("/modules/constants.js");
 var dcProps = require('/config/dc-props.js').config();
 var userModule = require("/modules/user.js").userModule;
-var deviceModule = require("/modules/device.js").deviceModule;
 var utility = require("/modules/utility.js").utility;
-var deviceManagementService = utility.getDeviceManagementService();
 
 var result;
 
@@ -42,15 +40,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 			if (log.isDebugEnabled()) {
 				log.debug("User Logged In : " + user);
 			}
-
-			var hasDevcies = (deviceManagementService.getDevicesOfUser(username).size() >= 1);
-
-			if(hasDevcies){
-				response.sendRedirect(constants.WEB_APP_CONTEXT+"/devices");
-			}else{
-				response.sendRedirect(constants.WEB_APP_CONTEXT);
-			}
-
+			response.sendRedirect(constants.WEB_APP_CONTEXT);
 		}, function () {
 			response.sendRedirect(dcProps.appContext + "login?#auth-failed");
 		});
@@ -79,7 +69,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 	} else {
 		userRoles = String(addUserFormData.userRoles).split(",");
 	}
-	userRoles="deviceRole, deviceUser"
+
 	try {
 		result = userModule.registerUser(username, firstname, lastname, emailAddress, password,
 				userRoles);

@@ -82,8 +82,41 @@ var route;
     };
 
     var renderStatic = function (unit, path) {
-        log.debug('[' + requestId + '] for unit "' + unit + '" a request received for a static file "' + path + '"');
-        var staticFile = fuse.getFile(unit, 'public' + path);
+        var unitModel = null;
+        var unitName = "";
+        var parts = (unit + path).split("/");
+
+        //'unitName' name can be "unitA" or "categoryA/unitA" or "categoryA/categoryAb/unitB"...etc
+        //incrementally trying to resolve a unit using url path parts.
+        for (var i = 0; i < parts.length; i++) {
+
+            if (unitName == "") {
+                unitName = parts[i];
+            } else {
+                unitName += "/" + parts[i];
+            }
+
+            try {
+                var model = fuse.getUnitDefinition(unitName);
+                if (model) {
+                    unitModel = {
+                        name: model.name,
+                        path: parts.splice(i + 1).join("/")
+                    };
+                    break;
+                }
+            } catch (err) {
+                //unit not found, ignore error
+            }
+        }
+
+        if (unitModel == null) {
+            log.error("unit `"+unit+"` not found!");
+            return false;
+        }
+
+        var staticFile = fuse.getFile(unitModel.name, 'public' + "/" + unitModel.path);
+
         if (staticFile.isExists() && !staticFile.isDirectory()) {
             response.addHeader('Content-type', getMime(path));
             response.addHeader('Cache-Control', 'public,max-age=12960000');
@@ -106,7 +139,7 @@ var route;
         if (jagFile.isExists()) {
             include(jagFile.getPath());
             return true;
-        }else{
+        } else {
             return false;
         }
     };

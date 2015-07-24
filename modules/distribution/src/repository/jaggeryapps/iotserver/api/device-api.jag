@@ -33,85 +33,27 @@ var carbonHttpsServletTransport = carbon.server.address('https');
 
 var result;
 
-if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
-	downloadId = uriMatcher.elements().downloadId;
-		//Just download the already created zip archive
-		var CarbonUtils = Packages.org.wso2.carbon.utils.CarbonUtils;
-		var sketchFolder = "repository/resources/sketches";
-		var archivesPath = "file://"+CarbonUtils.getCarbonHome() + "/" + sketchFolder + "/archives/" + downloadId + ".zip";
-		var zipFile = new File(archivesPath);
-		response.addHeader('Content-type', "application/zip, application/octet-stream");
-		response.addHeader('Cache-Control', 'public,max-age=12960000');
-		response.addHeader("Content-Disposition", "attachment; filename=\"" + downloadId + ".zip\"");
-
-		try {
-			zipFile.open('r');
-			var stream = zipFile.getStream();
-			print(stream);
-		}catch(err){
-
-		}finally{
-			if(zipFile!=null) {
-				zipFile.close();
-			}
-		}
-
-} else if (uriMatcher.match("/{context}/api/device/sketch/download")) {
-		//Create a new zip archive and register user calling endpoint
-
-                /* This should match with $CARBON_HOME/repository/resources/sketches/{sketchType} */
-                sketchType = request.getParameter("sketchType");
-                /* This should be registered device type of the CDMF(Connected Device Management Framework) */
-                deviceType = request.getParameter("deviceType");
-
-                if (!sketchType) {
-                        log.error("Sketch Type is empty!");
-                        // http status code 400 refers to - Bad request.
-                        result = 400;
-                } else {
-                        var user = session.get(constants.USER_SESSION_KEY);
-
-                        if (!user) {
-                                response.sendRedirect(dcProps.appContext + "login?#login-required");
-                                exit();
-                        }
-
-                        //URL: https://localhost:9443/{deviceType}/download?owner={username}
-                        deviceManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
-
-                        sketchDownloadEndPoint = deviceManagerService + "/device/" + sketchType + "/download";
-                        response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
-                        exit();//stop execution
-
-                }
-} else if (uriMatcher.match("/{context}/api/device/sketch/generate_link")) {
-
-	var contents = request.getContent();
-	sketchType = contents.sketchType;
-	deviceType = contents.deviceType;
-	generateLink = contents.generateLink;
+if (uriMatcher.match("/{context}/api/device/sketch/download")) {
+	sketchType = request.getParameter("sketchType");
+	deviceType = request.getParameter("deviceType");
 
 	if (!sketchType) {
-		log.error("Sketch Type is empty!");
-		// http status code 400 refers to - Bad request.
-		result = 400;
-	} else {
-		var user = session.get(constants.USER_SESSION_KEY);
-
-		if (!user) {
-			result = 403;
-		}else {
-			//URL: https://localhost:9443/{deviceType}/download?owner={username}
-			deviceManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
-
-			sketchGenerateLinkEndPoint = deviceManagerService + "/device/" + sketchType + "/generate_link";
-			var fileId = get(sketchGenerateLinkEndPoint + "?owner=" + user.username, null, "text");
-			result = carbonHttpsServletTransport + constants.WEB_APP_CONTEXT + "/api/device/sketch/download/" + fileId.data;
-		}
+		log.error("Sketch Type is empty");
 	}
 
-} else if (uriMatcher.match("/{context}/api/devices/all")) {
+	var user = session.get(constants.USER_SESSION_KEY);
+	if (!user) {
+		response.sendRedirect(dcProps.appContext + "login?#login-required");
+		exit();
+	}
 
+	//URL: https://localhost:9443/{deviceType}/download?owner={username}
+	deviceManagerService = carbonHttpsServletTransport + "/" + deviceType + "/manager";
+	sketchDownloadEndPoint = deviceManagerService + "/device/" + sketchType + "/download";
+	response.sendRedirect(sketchDownloadEndPoint + "?owner=" + user.username);
+	exit();//stop execution
+
+} else if (uriMatcher.match("/{context}/api/devices/all")) {
 	var user = session.get(constants.USER_SESSION_KEY);
 	if (!user) {
 		response.sendRedirect(dcProps.appContext + "login?#login-required");
@@ -124,12 +66,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 
 	var data = {};
 	//XMLHTTPRequest's GET
-	try {
-		result = get(listAllDevicesEndPoint, data, "json");
-	}catch(err){
-		log.error("Error occured while retrieveing all devices with username: "+user.username);
-		result=[];
-	}
+	result = get(listAllDevicesEndPoint, data, "json");
 
 } else if (uriMatcher.match("/{context}/api/devices/types")) {
 
