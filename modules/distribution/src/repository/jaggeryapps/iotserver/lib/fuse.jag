@@ -11,7 +11,8 @@ var fuseState = {
     zones: {},
     appName: '',
     currentZone: [], //TODO: rename to zone Stack
-    currentUnit: null
+    currentUnit: null,
+    viewModelCache:{}
 };
 
 var requestId = function makeId() {
