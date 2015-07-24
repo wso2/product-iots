@@ -1,0 +1,168 @@
+{{#zone "main"}}
+    <span id="permission" data-permission="{{permissions}}"></span>
+    <!-- form content placeholder -->
+    <div id="ast-container" class="ast-container list-view">
+        <!-- no devices found -->
+        <div class="container-fluid wr-content-alt">
+            <div class="ctrl-info-panel col-md-6 col-centered">
+                <h2>Loading...</h2>
+            </div>
+        </div>
+        <!-- /no groups found -->
+    </div>
+
+    <div id="no-groups-div-content" class="hide">
+        <!-- no devices found -->
+        <div class="container-fluid wr-content-alt">
+            <div class="ctrl-info-panel col-md-6 col-centered">
+                <h2>You don't have any Groups registered at the moment.</h2>
+                <p>
+                    </a><a href="#" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-add fw-stack-1x"></i>
+                    </span>
+                    Add New Group
+                </a>
+                </p>
+            </div>
+        </div>
+        <!-- /no devices found -->
+    </div>
+
+    <div id="remove-group-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Do you really want to remove this group from your Group List?</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="remove-group-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-group-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Group was successfully removed.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-group-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Please enter new name for the group?</h3>
+                    <br/>
+                    <div>
+                        <input id="edit-device-name" style="color:#3f3f3f;padding:5px" type="text" value="" placeholder="Type here" size="60">
+                    </div>
+                    <div class="buttons">
+                        <a href="#" id="edit-group-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Rename&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="edit-group-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-group-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Group was successfully updated.</h3>
+                    <div class="buttons">
+                        <a href="#" id="edit-group-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-400-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Exception at backend. Try Later.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-400-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-403-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Action not permitted.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-403-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-409-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Group does not exist.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-409-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-unexpected-error-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Group does not exist.</h3>
+                    <div class="buttons">
+                        <a href="#" id="remove-group-unexpected-error-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+    <script id="group-listing" data-image-resource="{{self.publicURL}}/images/" src="{{self.publicURL}}/templates/group-listing.hbs" type="text/x-handlebars-template" ></script>
+    <script src="{{self.publicURL}}/js/group-listing.js"></script>
+{{/zone}}

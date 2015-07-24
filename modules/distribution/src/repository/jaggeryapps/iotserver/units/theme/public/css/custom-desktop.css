@@ -250,23 +250,23 @@ a.ast-type-item:hover {
 }
 
 @media (min-width: 768px){
-    .ctrl-wr-asset { width: 24%; }
+    .ctrl-wr-asset { width: 30%; }
 }
 
 @media (min-width: 992px){
-    .ctrl-wr-asset { width: 19%; }
+    .ctrl-wr-asset { width: 25%; }
 }
 
 @media (min-width:1300px){
-    .ctrl-wr-asset { width: 13%; }
+    .ctrl-wr-asset { width: 19%; }
 }
 
 @media (min-width:1500px){
-    .ctrl-wr-asset { width: 11.5%; }
+    .ctrl-wr-asset { width: 17.5%; }
 }
 
 @media (min-width:1800px){
-    .ctrl-wr-asset { width: 9%; }
+    .ctrl-wr-asset { width: 15%; }
 }
 
 .ctrl-wr-asset.selected {

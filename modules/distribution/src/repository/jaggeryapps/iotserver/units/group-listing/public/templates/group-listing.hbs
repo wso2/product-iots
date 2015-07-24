@@ -1,0 +1,54 @@
+{{#each groups}}
+    {{groupMap this}}
+    <div class="ctrl-wr-asset" data-groupid="{{groupId}}">
+        <div class="itm-select">
+            <label class="wr-input-control checkbox">
+                <input type="checkbox"/>
+                <span class="helper"></span>
+            </label>
+        </div>
+        <div class="itm-ast">
+            <a href="group/id/{{groupId}}">
+                <div class="ast-img"><img src="{{../imageLocation}}group-icon.png"/></div>
+                <div class="ast-desc">
+                    <div class="ast-title">
+                        <h3 class="ast-name">{{name}}</h3>
+                        <span class="ast-auth">Device Count: {{deviceCount}}</span>
+                        <span class="ast-auth">Created On: <span class="formatDate">{{dateOfCreation}}</span></span>
+                    </div>
+                    <div class="ast-model">
+                        <span class="ast-ver">Shared with: {{users}}</span>
+
+                        <div class="ast-btn-group">
+                            <a href="/iotserver/group/id/{{groupId}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-view fw-stack-1x"></i>
+											</span>
+                                <span class="lbl-action">View</span>
+                            </a>
+                            <a href="#" class="edit-group-link" data-groupid="{{groupId}}" data-groupname="{{name}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+                                <span class="lbl-action">Edit</span>
+                            </a>
+                            <a href="#" class="remove-group-link" data-groupid="{{groupId}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+                                <span class="lbl-action">Delete</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br class="c-both"/>
+            </a>
+        </div>
+    </div>
+
+{{/each}}
+
+<br class="c-both"/>

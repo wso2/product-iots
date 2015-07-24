@@ -51,7 +51,7 @@ $(document).ready(function(){
     $(searchBtn).click(function(){
         var input = $(searchField).html();
         var searchType = $(searchField).data("search-type");
-        loadDevices(searchType, input);
+        loadGroups(searchType, input);
     });
 });
 
@@ -123,7 +123,7 @@ function containerUpdate(asset){
 function selectAsset(asset){
     var platformType = $(asset).data("type");
     loadOperationBar(platformType);
-    loadDevices("type", platformType);
+    loadGroups("type", platformType);
     //$(tagsContainer +' span').each(function(){
     //    if($(this).attr('level') == $(asset).attr('level')){
     //        removeTags(this);
@@ -218,5 +218,5 @@ function removeTags(tag){
         $(this).remove();
     });
     unloadOperationBar();
-    loadDevices();
+    loadGroups();
 }
