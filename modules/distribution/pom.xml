@@ -411,8 +411,6 @@
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches" />
 
-                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/dropins" />
-
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps" overwrite="true">
                                     <fileset dir="src/repository/jaggeryapps"></fileset>
                                 </copy>
@@ -431,10 +429,6 @@
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches">
                                     <fileset dir="src/patches" />
-                                </copy>
-
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/dropins">
-                                    <fileset dir="src/dropins" />
                                 </copy>
 
                                 <!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/modules" overwrite="true">

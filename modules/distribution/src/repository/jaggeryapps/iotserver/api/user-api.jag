@@ -78,7 +78,9 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 	} else {
 		userRoles = String(addUserFormData.userRoles).split(",");
 	}
-	userRoles="deviceRole, deviceUser";
+	userRoles=["deviceRole, deviceUser"];
+	//TODO-Apply new users,
+	userRoles = [];
 	try {
 		result = userModule.registerUser(username, firstname, lastname, emailAddress, password,
 				userRoles);

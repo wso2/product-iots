@@ -23,8 +23,6 @@ userModule = function () {
     var constants = require("/modules/constants.js");
     var utility = require("/modules/utility.js").utility;
 
-    var userManagementService = utility.getUserManagementService();
-
     var publicMethods = {};
     var privateMethods = {};
 
@@ -252,8 +250,8 @@ userModule = function () {
             log.error("User object was not found in the session");
             throw constants.ERRORS.USER_NOT_FOUND;
         }
-
-        var userList = userManagementService.getUsersForTenant(carbonUser.tenantId);
+        var userManager = new carbon.user.UserManager(server, tenantId);
+        var userList = userManager.listUsers();
 
         var i, userObject;
         for (i = 0; i < userList.size(); i++) {
