@@ -78,16 +78,15 @@ function savePolicy(){
     }else if (policy.selectedUserRoles){
         payload.roles = policy.selectedUserRoles;
     }
-    invokerUtil.post("/mdm-admin/policies", payload, function(){
-        $(".policy-message").removeClass("hidden");
-        $(".add-policy").addClass("hidden");
-    }, function(){
-
-    });
+    //invokerUtil.post("/mdm-admin/policies", payload, function(){
+    //    $(".policy-message").removeClass("hidden");
+    //    $(".add-policy").addClass("hidden");
+    //}, function(){
+    //
+    //});
 }
 
 $(document).ready(function(){
-    alert("hiiiii");
     initStepper(".wizard-stepper");
     $( "input[type='radio'].user-select-radio" ).change(function() {
         $('.user-select').hide();
