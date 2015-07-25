@@ -256,15 +256,14 @@ userModule = function () {
         var server = new carbon.server.Server(url);
         var userManager = new carbon.user.UserManager(server, tenantId);
         var userList = userManager.listUsers();
-        var i, userObject, email, firstname, lastname;
+        var i, username, userObject, email, firstname, lastname;
         for (i = 0; i < userList.length; i++) {
-            userObject = userManager.getUser(userList[i]);
-            email = userManager.getClaim(userList[i],"http://wso2.org/claims/emailaddress", null);
-            firstname = userManager.getClaim(userList[i],"http://wso2.org/claims/givenname", null);
-            lastname = userManager.getClaim(userList[i],"http://wso2.org/claims/lastname", null);
-            //log.info(userManager.getClaimsForSet(userList[i], new Array("http://wso2.org/claims/emailaddress",
-            //    "http://wso2.org/claims/givenname",
-            //    "http://wso2.org/claims/lastname"), null));
+            username = userList[i];
+            userObject = userManager.getUser(username);
+            email = userManager.getClaim(username,"http://wso2.org/claims/emailaddress", null);
+            firstname = userManager.getClaim(username,"http://wso2.org/claims/givenname", null);
+            lastname = userManager.getClaim(username,"http://wso2.org/claims/lastname", null);
+            //log.info(userManager.getClaimsForSet(username, "http://wso2.org/claims/emailaddress,http://wso2.org/claims/givenname,http://wso2.org/claims/lastname".split(","), null));
             userObj = {
                 "username" : userObject.username,
                 "email" : email,
