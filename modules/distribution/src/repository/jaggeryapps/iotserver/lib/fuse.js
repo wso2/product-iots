@@ -218,7 +218,9 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
                     }
 
                     var path = definitionFile.getPath();
-                    log.debug('[' + requestId + '] reading file "' + path + '"');
+                    if (log.isDebugEnabled()) {
+                        log.debug('[' + requestId + '] reading file "' + path + '"');
+                    }
                     unitModel.definition = require(path);
 
                     // add the information derived by parsing hbs file to the same model
@@ -348,10 +350,12 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         }
         while (len--) {
             if (toDelete[units[len]]) {
-                log.debug(
-                    '[' + requestId + '] unit "' + units[len] +
-                    '" is overridden by "' + toDelete[units[len]] + '"'
-                );
+                if (log.isDebugEnabled()) {
+                    log.debug(
+                        '[' + requestId + '] unit "' + units[len] +
+                        '" is overridden by "' + toDelete[units[len]] + '"'
+                    );
+                }
                 units.splice(len, 1);
             }
         }
@@ -407,10 +411,12 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
 
         var selfFile = new File(getUnitPath(unitName) + slashPath + selfFileName);
         if (selfFile.isExists()) {
-            log.debug(
-                '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-            );
+            if (log.isDebugEnabled()) {
+                log.debug(
+                    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                    + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+                );
+            }
 
             return selfFile;
         }
@@ -427,17 +433,21 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             }
             var file = new File(getUnitPath(ancestorName) + slashPath + fileName);
             if (file.isExists()) {
-                log.debug(
-                    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                    + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
-                );
+                if (log.isDebugEnabled()) {
+                    log.debug(
+                        '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                        + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
+                    );
+                }
                 return file;
             }
         }
-        log.debug(
-            '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
-            + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-        );
+        if (log.isDebugEnabled()) {
+            log.debug(
+                '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
+                + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+            );
+        }
         return selfFile;
     };
 

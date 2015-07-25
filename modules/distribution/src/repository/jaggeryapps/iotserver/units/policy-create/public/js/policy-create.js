@@ -87,6 +87,7 @@ function savePolicy(){
 }
 
 $(document).ready(function(){
+    alert("hiiiii");
     initStepper(".wizard-stepper");
     $( "input[type='radio'].user-select-radio" ).change(function() {
         $('.user-select').hide();

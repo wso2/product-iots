@@ -11,35 +11,29 @@ var getScope = function (unit,configs) {
     var viewModel = {};
     var cbResult;
     if (jsFile.isExists()) {
-        if(fuseState.viewModelCache[jsFile.getPath()]){
-            cbResult = fuseState.viewModelCache[jsFile.getPath()];
-        }else{
-            script = require(jsFile.getPath());
-            //Eagerly make the viewModel the template configs
-            viewModel = templateConfigs;
-            //Check if the unit author has specified an onRequest
-            //callback
-            if(script.hasOwnProperty('onRequest')){
-                script.app = {
-                    url: '/' + fuseState.appName,
-                    publicURL: '/' + fuseState.appName + '/public/' + unit,
-                    "class": unit + '-unit'
-                };
-                onRequestCb = script.onRequest;
-                cbResult = onRequestCb(templateConfigs);
-                log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
-                fuseState.viewModelCache[jsFile.getPath()] = cbResult;
+        script = require(jsFile.getPath());
+        //Eagerly make the viewModel the template configs
+        viewModel = templateConfigs;
+        //Check if the unit author has specified an onRequest
+        //callback
+        if(script.hasOwnProperty('onRequest')){
+            script.app = {
+                url: '/' + fuseState.appName,
+                publicURL: '/' + fuseState.appName + '/public/' + unit,
+                "class": unit + '-unit'
+            };
+            onRequestCb = script.onRequest;
+            cbResult = onRequestCb(templateConfigs);
+            log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
+            //If the execution does not yield an object we will print
+            //a warning as the unit author may have forgotten to return a data object
+            if(cbResult===undefined){
+                cbResult = {}; //Give an empty data object
+                log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
+                    +'unit not been rendered correctly.');
             }
+            viewModel = cbResult;
         }
-
-        //If the execution does not yield an object we will print
-        //a warning as the unit author may have forgotten to return a data object
-        if(cbResult===undefined){
-            cbResult = {}; //Give an empty data object
-            log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
-                +'unit not been rendered correctly.');
-        }
-        viewModel = cbResult;
     }
     else{
         //If there is no script then the view should get the configurations
