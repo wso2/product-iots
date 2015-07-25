@@ -358,7 +358,7 @@ a.ast-type-item:hover {
 }
 
 .ast-title {
-    height: 70px;
+    /*height: 70px;*/
     overflow: hidden;
 }
 

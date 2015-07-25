@@ -80,7 +80,8 @@ function onRequest(context) {
             links["group-mgt"].push({
                 title: "Add Group",
                 icon: "fw-add",
-                url: "/iotserver/group#add-device"
+                url: "#",
+                class: "add-group-link"
             });
         }
     }// end-if-user

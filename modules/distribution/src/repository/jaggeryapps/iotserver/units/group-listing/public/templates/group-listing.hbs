@@ -1,6 +1,6 @@
 {{#each groups}}
     {{groupMap this}}
-    <div class="ctrl-wr-asset" data-groupid="{{groupId}}">
+    <div class="ctrl-wr-asset" data-groupid="{{id}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
                 <input type="checkbox"/>
@@ -8,7 +8,7 @@
             </label>
         </div>
         <div class="itm-ast">
-            <a href="group/id/{{groupId}}">
+            <a href="group/{{id}}">
                 <div class="ast-img"><img src="{{../imageLocation}}group-icon.png"/></div>
                 <div class="ast-desc">
                     <div class="ast-title">
@@ -20,21 +20,28 @@
                         <span class="ast-ver">Shared with: {{users}}</span>
 
                         <div class="ast-btn-group">
-                            <a href="/iotserver/group/id/{{groupId}}">
+                            <a href="/iotserver/group/{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-view fw-stack-1x"></i>
 											</span>
                                 <span class="lbl-action">View</span>
                             </a>
-                            <a href="#" class="edit-group-link" data-groupid="{{groupId}}" data-groupname="{{name}}">
+                            <a href="#" class="share-group-link" data-groupid="{{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-share fw-stack-1x"></i>
+											</span>
+                                <span class="lbl-action">Share</span>
+                            </a>
+                            <a href="#" class="edit-group-link" data-groupid="{{id}}" data-groupname="{{name}}" data-groupdescription="{{description}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-edit fw-stack-1x"></i>
 											</span>
                                 <span class="lbl-action">Edit</span>
                             </a>
-                            <a href="#" class="remove-group-link" data-groupid="{{groupId}}">
+                            <a href="#" class="remove-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-delete fw-stack-1x"></i>

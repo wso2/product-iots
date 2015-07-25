@@ -1,53 +1,23 @@
+var log = new Log("modules/group-detail.js");
+
 function onRequest(context) {
     var uri = request.getRequestURI();
     var uriMatcher = new URIMatcher(String(uri));
-    var isMatched = uriMatcher.match("/{context}/group/id/{groupId}");
+    var isMatched = uriMatcher.match("/{context}/group/{groupId}");
     if (isMatched) {
+        var carbon = require('carbon');
+        var carbonHttpsServletTransport = carbon.server.address('https');
+
         var matchedElements = uriMatcher.elements();
         var groupId = matchedElements.groupId;
-        context.groupId = groupId;
-        //var group = deviceModule.viewDevice(deviceType, deviceId);
-        //if (device){
-        //    var viewModel = {};
-        //    var deviceInfo = device.properties.DEVICE_INFO;
-        //    if (deviceInfo != undefined && String(deviceInfo.toString()).length > 0){
-        //        deviceInfo = JSON.parse(deviceInfo);
-        //        if (device.type == "ios"){
-        //            viewModel.imei = device.properties.IMEI;
-        //            viewModel.phoneNumber = deviceInfo.PhoneNumber;
-        //            viewModel.udid = deviceInfo.UDID;
-        //            viewModel.BatteryLevel = Math.round(deviceInfo.BatteryLevel * 100);
-        //            viewModel.DeviceCapacity = Math.round(deviceInfo.DeviceCapacity * 100) / 100;
-        //            viewModel.AvailableDeviceCapacity = Math.round(deviceInfo.AvailableDeviceCapacity * 100) / 100;
-        //            viewModel.DeviceCapacityUsed = Math.round((viewModel.DeviceCapacity
-        //                - viewModel.AvailableDeviceCapacity) * 100) / 100;
-        //            viewModel.DeviceCapacityPercentage = Math.round(viewModel.DeviceCapacityUsed
-        //                / viewModel.DeviceCapacity * 10000) /100;
-        //        }else if(device.type == "android"){
-        //            viewModel.imei = device.properties.IMEI;
-        //            viewModel.model = device.properties.DEVICE_MODEL;
-        //            viewModel.vendor = device.properties.VENDOR;
-        //            viewModel.internal_memory = {};
-        //            viewModel.external_memory = {};
-        //            viewModel.location = {
-        //                latitude: device.properties.LATITUDE,
-        //                longitude: device.properties.LONGITUDE
-        //            };
-        //            viewModel.BatteryLevel = deviceInfo.BATTERY_LEVEL;
-        //            viewModel.internal_memory.FreeCapacity = Math.round((deviceInfo.INTERNAL_TOTAL_MEMORY -
-        //            deviceInfo.INTERNAL_AVAILABLE_MEMORY) * 100) / 100;
-        //            viewModel.internal_memory.DeviceCapacityPercentage = Math.round(deviceInfo.INTERNAL_AVAILABLE_MEMORY
-        //                / deviceInfo.INTERNAL_TOTAL_MEMORY * 10000) / 100;
-        //            viewModel.external_memory.FreeCapacity = Math.round((deviceInfo.EXTERNAL_TOTAL_MEMORY -
-        //                deviceInfo.EXTERNAL_AVAILABLE_MEMORY) * 100) / 100;
-        //            viewModel.external_memory.DeviceCapacityPercentage = Math.round(deviceInfo.EXTERNAL_AVAILABLE_MEMORY
-        //                /deviceInfo.EXTERNAL_TOTAL_MEMORY * 10000) /100;
-        //        }
-        //        viewModel.enrollment = device.enrollment;
-        //        device.viewModel = viewModel;
-        //    }
+        var endpoint = carbonHttpsServletTransport + "/" + matchedElements.context + "/api/group/id/" + groupId;
+        log.info(endpoint);
+        //var result = get(endpoint, {}, "json");
+        //if (result){
+        //    context.group = result.data;
+        //}else{
+        //    response.sendError(503);
         //}
-        context.group = groupId;
     } else {
         response.sendError(404);
     }

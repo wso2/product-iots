@@ -1,3 +1,4 @@
+var log = new Log("modules/device-detail.js");
 function onRequest(context) {
     var uri = request.getRequestURI();
     var uriMatcher = new URIMatcher(String(uri));

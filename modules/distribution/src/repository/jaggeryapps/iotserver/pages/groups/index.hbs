@@ -1,0 +1,23 @@
+{{authorized}}
+{{layout "fluid"}}
+{{#zone  "title"}}
+    Groups
+{{/zone}}
+{{#zone "body"}}
+    {{unit "appbar" link="group-mgt" title="My Groups"}}
+    {{unit "extended-search-box" item="Group"}}
+    {{unit "operation-mod"}}
+    <div class="wr-device-list row">
+        <div class="wr-hidden-operations wr-advance-operations">
+
+        </div>
+        <div class="col-md-12 wr-page-content">
+            <!-- content -->
+            <div>
+                {{unit "operation-bar"}}
+                {{unit "group-listing"}}
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+{{/zone}}

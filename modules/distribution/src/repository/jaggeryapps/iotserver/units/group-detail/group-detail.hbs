@@ -1,7 +1,7 @@
 {{#zone "main"}}
     <div class="row wr-group-board">
         <div class="col-lg-12 wr-secondary-bar">
-            <label class="device-id device-select" data-groupid="{{group.groupId}}">
+            <label class="device-id device-select" data-groupid="{{group.id}}">
                 Group {{group.name}}
                 <span class="lbl-device">
                     {{#if group.viewModel.vendor}}
@@ -28,8 +28,10 @@
                                 <img src="{{self.publicURL}}/img/group-icon.png" style="width:200px" />
                             </div>
                             <div class="col-lg-12 col-sm-4 ast-desc">
-                                <div class="ast-group-desc"><b>Owner:</b> {{group.ownerId}}</div>
-                                <div class="ast-group-desc"><b>Date of Enrollment:</b><br/> <span class="formatDate">{{group.enrollment}}</span></div>
+                                <div class="ast-group-desc"><b>No. of Devices:</b> {{group.deviceCount}}</div>
+                                <div class="ast-group-desc"><b>Users:</b> {{group.users}}</div>
+                                <div class="ast-group-desc"><b>Created on:</b><br/> <span class="formatDate">{{group.dateOfCreation}}</span></div>
+                                <div class="ast-group-desc"><b>Modified on:</b><br/> <span class="formatDate">{{group.dateOfLastUpdate}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +109,7 @@
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                                     <div class="panel-body">
-                                        <a href="../../groups/analytics?groupId={{groupId}}" ><i class="fw fw-charts"></i> Show Statistics</a>
+                                        <a href="../../groups/analytics?id={{id}}" ><i class="fw fw-charts"></i> Show Statistics</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,3 +1,5 @@
+var log = new Log("modules/device-listing.js");
+
 function onRequest(context){
     var userModule = require("/modules/user.js").userModule;
     var permissions = [];
