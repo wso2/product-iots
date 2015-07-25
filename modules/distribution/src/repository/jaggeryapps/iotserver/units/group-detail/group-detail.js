@@ -5,19 +5,15 @@ function onRequest(context) {
     var uriMatcher = new URIMatcher(String(uri));
     var isMatched = uriMatcher.match("/{context}/group/{groupId}");
     if (isMatched) {
-        var carbon = require('carbon');
-        var carbonHttpsServletTransport = carbon.server.address('https');
-
-        var matchedElements = uriMatcher.elements();
-        var groupId = matchedElements.groupId;
-        var endpoint = carbonHttpsServletTransport + "/" + matchedElements.context + "/api/group/id/" + groupId;
-        log.info(endpoint);
-        //var result = get(endpoint, {}, "json");
-        //if (result){
-        //    context.group = result.data;
-        //}else{
-        //    response.sendError(503);
-        //}
+        var group = {};
+        group.id = uriMatcher.elements().groupId;
+        group.name = request.getParameter("name");
+        group.deviceCount = request.getParameter("deviceCount");
+        group.dateOfCreation = request.getParameter("dateOfCreation");
+        group.dateOfLastUpdate = request.getParameter("dateOfLastUpdate");
+        group.description = request.getParameter("description");
+        group.users = request.getParameter("users");
+        context.group =group;
     } else {
         response.sendError(404);
     }

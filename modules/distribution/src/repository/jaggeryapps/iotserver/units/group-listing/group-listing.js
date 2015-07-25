@@ -1,12 +1,17 @@
 function onRequest(context){
-    //var userModule = require("/modules/user.js").userModule;
     var permissions = [];
-    //if(userModule.isAuthorized("/permission/device-mgt/admin/devices/list")){
+    //var userModule = require("/modules/user.js").userModule;
+    //if(userModule.isAuthorized("/permission/device-mgt/admin/groups/list")){
     //    permissions.push("LIST_GROUPS");
-    //}else if(userModule.isAuthorized("/permission/device-mgt/user/devices/list")){
-    //    permissions.push("LIST_OWN_GROUPS");
+    //}else if(userModule.isAuthorized("/permission/device-mgt/groups/remove")){
+    //    permissions.push("REMOVE_GROUPS");
+    //}else if(userModule.isAuthorized("/permission/device-mgt/groups/share")){
+    //    permissions.push("SHARE_GROUPS");
     //}
     permissions.push("LIST_GROUPS");
+    permissions.push("ADD_GROUPS");
+    permissions.push("SHARE_GROUPS");
     context.permissions = stringify(permissions);
+    context.SHARE_GROUPS = true;
     return context;
 }

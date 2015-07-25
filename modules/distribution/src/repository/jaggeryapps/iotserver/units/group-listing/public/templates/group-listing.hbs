@@ -1,5 +1,14 @@
 {{#each groups}}
-    {{groupMap this}}
+	{{groupMap this}}
+    <form action="/iotserver/group/{{id}}" method="POST" id="group_data" >
+        <input type="hidden" name="name" value="{{name}}">
+        <input type="hidden" name="deviceCount" value="{{deviceCount}}">
+        <input type="hidden" name="dateOfCreation" value="{{dateOfCreation}}">
+        <input type="hidden" name="dateOfLastUpdate" value="{{dateOfLastUpdate}}">
+        <input type="hidden" name="description" value="{{description}}">
+        <input type="hidden" name="users" value="{{users}}">
+    </form>
+
     <div class="ctrl-wr-asset" data-groupid="{{id}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
@@ -8,51 +17,50 @@
             </label>
         </div>
         <div class="itm-ast">
-            <a href="group/{{id}}">
-                <div class="ast-img"><img src="{{../imageLocation}}group-icon.png"/></div>
-                <div class="ast-desc">
-                    <div class="ast-title">
-                        <h3 class="ast-name">{{name}}</h3>
-                        <span class="ast-auth">Device Count: {{deviceCount}}</span>
-                        <span class="ast-auth">Created On: <span class="formatDate">{{dateOfCreation}}</span></span>
-                    </div>
-                    <div class="ast-model">
-                        <span class="ast-ver">Shared with: {{users}}</span>
+            <div class="ast-img"><img src="{{../imageLocation}}group-icon.png"/></div>
+            <div class="ast-desc">
+                <div class="ast-title">
+                    <h3 class="ast-name">{{name}}</h3>
+                    <span class="ast-auth">Device Count: {{deviceCount}}</span>
+                    <span class="ast-auth">Created On: <span class="formatDate">{{dateOfCreation}}</span></span>
+                </div>
+                <div class="ast-model">
+                    <span class="ast-ver">Shared with: {{users}}</span>
 
-                        <div class="ast-btn-group">
-                            <a href="/iotserver/group/{{id}}">
+                    <div href="#" class="ast-btn-group">
+                        <a class="view-group-link" data-group="{{this}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-view fw-stack-1x"></i>
 											</span>
-                                <span class="lbl-action">View</span>
-                            </a>
-                            <a href="#" class="share-group-link" data-groupid="{{id}}">
+                            <span class="lbl-action">View</span>
+                        </a>
+                        <a href="#" class="share-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-share fw-stack-1x"></i>
 											</span>
-                                <span class="lbl-action">Share</span>
-                            </a>
-                            <a href="#" class="edit-group-link" data-groupid="{{id}}" data-groupname="{{name}}" data-groupdescription="{{description}}">
+                            <span class="lbl-action">Share</span>
+                        </a>
+                        <a href="#" class="edit-group-link" data-groupid="{{id}}" data-groupname="{{name}}"
+                           data-groupdescription="{{description}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-edit fw-stack-1x"></i>
 											</span>
-                                <span class="lbl-action">Edit</span>
-                            </a>
-                            <a href="#" class="remove-group-link" data-groupid="{{id}}">
+                            <span class="lbl-action">Edit</span>
+                        </a>
+                        <a href="#" class="remove-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-delete fw-stack-1x"></i>
 											</span>
-                                <span class="lbl-action">Delete</span>
-                            </a>
-                        </div>
+                            <span class="lbl-action">Delete</span>
+                        </a>
                     </div>
                 </div>
-                <br class="c-both"/>
-            </a>
+            </div>
+            <br class="c-both"/>
         </div>
     </div>
 

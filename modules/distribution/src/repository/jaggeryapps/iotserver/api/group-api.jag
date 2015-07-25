@@ -112,7 +112,7 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 	data = {"username": user.username, "shareUser":shareUser, "role":role};
 	result = post(endPoint, data, "json");
 
-} else if (uriMatcher.match("/{context}/api/group/id/{groupId}/share")) {
+} else if (uriMatcher.match("/{context}/api/group/id/{groupId}/unshare")) {
 
 	groupId = uriMatcher.elements().groupId;
 	var unShareUser = request.getContent()["unShareUser"];
@@ -197,6 +197,6 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 // returning the result.
 if (result) {
 	response.status = result.xhr.status;
-	print(false);
+	print(result.data);
 }
 %>

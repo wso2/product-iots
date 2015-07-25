@@ -245,11 +245,11 @@ function attachGroupAdding() {
                     var status = jqxhr.status;
                     if (status == 200) {
                         if (data != "false") {
-                        $(modalPopupContent).html($('#add-group-200-content').html());
-                        $("a#add-group-200-link").click(function () {
-                            hidePopup();
-                            location.reload();
-                        });
+                            $(modalPopupContent).html($('#add-group-200-content').html());
+                            $("a#add-group-200-link").click(function () {
+                                hidePopup();
+                                location.reload();
+                            });
                         } else {
                             $(modalPopupContent).html($('#group-400-content').html());
                             $("a#group-400-link").click(function () {
@@ -295,6 +295,83 @@ function attachGroupAdding() {
 function attachEvents() {
     /**
      * Following click function would execute
+     * when a user clicks on "Share" link
+     * on Group Management page in WSO2 IoT Server Console.
+     */
+    $("a.view-group-link").click(function () {
+        $("#group_data").closest('form').submit();
+    });
+
+    /**
+     * Following click function would execute
+     * when a user clicks on "Share" link
+     * on Group Management page in WSO2 IoT Server Console.
+     */
+    $("a.share-group-link").click(function () {
+        var groupId = $(this).data("groupid");
+        var shareGroupApi = "/iotserver/api/group/id/" + groupId + "/share";
+        var unShareGroupApi = "/iotserver/api/group/id/" + groupId + "/unshare";
+
+        $(modalPopupContent).html($('#share-group-modal-content').html());
+        showPopup();
+
+        $("a#share-group-share-link").click(function () {
+            var data = {"shareUser":"", "role":""};
+            invokerUtil.post(
+                shareGroupApi,
+                data,
+                function (data, txtStatus, jqxhr) {
+                    var status = jqxhr.status;
+                    if (status == 200) {
+
+                    } else {
+                        displayErrors(status);
+                    }
+                },
+                function () {
+                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
+                    $("a#group-unexpected-error-link").click(function () {
+                        hidePopup();
+                    });
+                }
+            );
+        });
+
+        $("a#share-group-unshare-link").click(function () {
+            var data = {"shareUser":"", "role":""};
+            invokerUtil.post(
+                unShareGroupApi,
+                data,
+                function (data, txtStatus, jqxhr) {
+                    var status = jqxhr.status;
+                    if (status == 200) {
+
+                    } else {
+                        displayErrors(status);
+                    }
+                },
+                function () {
+                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
+                    $("a#group-unexpected-error-link").click(function () {
+                        hidePopup();
+                    });
+                }
+            );
+        });
+
+        $("a#share-group-yes-link").click(function () {
+            hidePopup();
+            location.reload();
+        });
+
+        $("a#share-group-cancel-link").click(function () {
+            hidePopup();
+        });
+
+    });
+
+    /**
+     * Following click function would execute
      * when a user clicks on "Remove" link
      * on Group Management page in WSO2 IoT Server Console.
      */
@@ -324,26 +401,13 @@ function attachEvents() {
                                 hidePopup();
                             });
                         }
-                    } else if (status == 400) {
-                        $(modalPopupContent).html($('#group-400-content').html());
-                        $("a#remove-group-400-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 403) {
-                        $(modalPopupContent).html($('#group-403-content').html());
-                        $("a#remove-group-403-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 409) {
-                        $(modalPopupContent).html($('#group-409-content').html());
-                        $("a#remove-group-409-link").click(function () {
-                            hidePopup();
-                        });
+                    } else {
+                        displayErrors(status);
                     }
                 },
                 function () {
                     $(modalPopupContent).html($('#group-unexpected-error-content').html());
-                    $("a#remove-group-unexpected-error-link").click(function () {
+                    $("a#group-unexpected-error-link").click(function () {
                         hidePopup();
                     });
                 }
@@ -387,7 +451,6 @@ function attachEvents() {
                             $("div[data-groupid='" + groupId + "'] .ast-name").html(newGroupName);
                             $("a#edit-group-200-link").click(function () {
                                 hidePopup();
-                                location.reload();
                             });
                         } else {
                             $(modalPopupContent).html($('#group-409-content').html());
@@ -395,21 +458,8 @@ function attachEvents() {
                                 hidePopup();
                             });
                         }
-                    } else if (status == 400) {
-                        $(modalPopupContent).html($('#group-400-content').html());
-                        $("a#group-400-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 403) {
-                        $(modalPopupContent).html($('#group-403-content').html());
-                        $("a#group-403-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 409) {
-                        $(modalPopupContent).html($('#group-409-content').html());
-                        $("a#group-409-link").click(function () {
-                            hidePopup();
-                        });
+                    } else {
+                        displayErrors(status);
                     }
                 },
                 function () {
@@ -425,4 +475,23 @@ function attachEvents() {
             hidePopup();
         });
     });
+}
+
+function displayErrors(status){
+    if (status == 400) {
+        $(modalPopupContent).html($('#group-400-content').html());
+        $("a#group-400-link").click(function () {
+            hidePopup();
+        });
+    } else if (status == 403) {
+        $(modalPopupContent).html($('#group-403-content').html());
+        $("a#group-403-link").click(function () {
+            hidePopup();
+        });
+    } else if (status == 409) {
+        $(modalPopupContent).html($('#group-409-content').html());
+        $("a#group-409-link").click(function () {
+            hidePopup();
+        });
+    }
 }

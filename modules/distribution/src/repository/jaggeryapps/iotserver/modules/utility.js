@@ -119,6 +119,10 @@ utility = function () {
             key: "groups/operation",
             name: "Perform Device Operation"
         }], "device-mgt/user", type);
+        userModule.addPermissions([{
+            key: "groups/list",
+            name: "List Groups of User"
+        }], "device-mgt/user", type);
     };
 
     return publicMethods;
