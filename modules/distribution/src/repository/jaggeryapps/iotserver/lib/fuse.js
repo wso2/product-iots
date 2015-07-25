@@ -15,7 +15,6 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             for (var i = 0; i < definitions.length; i++) {
                 var definition = definitions[i];
                 lookUpTable[definition.name] = i;
-                //log.info("initLookUp()"+definition.name+"<-"+i);
             }
         }
     };
@@ -46,7 +45,6 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
     };
 
     var getAncestorModels = function (unit) {
-        //log.info('[' + requestId + '] getAncestorModels()'+unit);
         var unitModel = getUnitDefinition(unit);
         var ancestors = [unitModel];
         var parentName;
@@ -150,12 +148,11 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
     };
 
     getUnitDefinition = function (unit) {
-        //log.info('[' + requestId + '] getUnitDefinition()'+unit);
         var definitions = getUnitDefinitions();
         initLookUp(definitions);
-        //log.info('[' + requestId + '] lookUpTable[unit]:'+unit);
         var model = definitions[lookUpTable[unit]];
         if (!model) {
+            log.warn('[' + requestId + '] unit "' + unit + '" does not exits');
             throw '[' + requestId + '] unit "' + unit + '" does not exits';
         }
         return model;
@@ -208,7 +205,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             var unitDir = unitDirs[i];
             if (unitDir.isDirectory()) {
                 var unitName = unitDir.getName();
-                //log.info("reading: "+unitName + " basePath:'" + basePath + "'");
+                //log.info("reading: "+unitName + " basePath:"+basePath);
                 var definitionFile = new File(fuse.getUnitPath(basePath+unitName) + '/' + unitName + '.json');
 
                 if(definitionFile.isExists()) {
@@ -221,7 +218,9 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
                     }
 
                     var path = definitionFile.getPath();
-                    log.debug('[' + requestId + '] reading file "' + path + '"');
+                    if (log.isDebugEnabled()) {
+                        log.debug('[' + requestId + '] reading file "' + path + '"');
+                    }
                     unitModel.definition = require(path);
 
                     // add the information derived by parsing hbs file to the same model
@@ -351,10 +350,12 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         }
         while (len--) {
             if (toDelete[units[len]]) {
-                log.debug(
-                    '[' + requestId + '] unit "' + units[len] +
-                    '" is overridden by "' + toDelete[units[len]] + '"'
-                );
+                if (log.isDebugEnabled()) {
+                    log.debug(
+                        '[' + requestId + '] unit "' + units[len] +
+                        '" is overridden by "' + toDelete[units[len]] + '"'
+                    );
+                }
                 units.splice(len, 1);
             }
         }
@@ -384,7 +385,6 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
      * @returns {File}
      */
     getFile = function (unitName, path, opt_suffix) {
-        //log.info("getFile() unitName:"+unitName+", path:"+path+", opt_suffix:"+opt_suffix);
         var slashPath = ((path[0] === '/') ? '' : '/') + path;
         var selfFileName = '';
         var fileName = '';
@@ -403,21 +403,21 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         var unitDef = getUnitDefinition(unitName);
         if (unitDef.path.indexOf('.hbs', unitDef.path.length - 4) !== -1) {
             if (opt_suffix.indexOf('.hbs', opt_suffix.length - 4) !== -1) {
-                //log.info("1:"+unitDef.path);
                 return new File(unitDef.path);
             } else {
-                //log.info("2:"+unitDef.path.replace(/.hbs$/, opt_suffix));
                 return new File(unitDef.path.replace(/.hbs$/, opt_suffix));
             }
         }
 
         var selfFile = new File(getUnitPath(unitName) + slashPath + selfFileName);
         if (selfFile.isExists()) {
-            log.debug(
-                '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-            );
-            //log.info("3:"+getUnitPath(unitName) + slashPath + selfFileName);
+            if (log.isDebugEnabled()) {
+                log.debug(
+                    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                    + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+                );
+            }
+
             return selfFile;
         }
 
@@ -433,19 +433,21 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             }
             var file = new File(getUnitPath(ancestorName) + slashPath + fileName);
             if (file.isExists()) {
-                log.debug(
-                    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                    + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
-                );
-                //log.info("4:"+getUnitPath(ancestorName) + slashPath + fileName);
+                if (log.isDebugEnabled()) {
+                    log.debug(
+                        '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                        + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
+                    );
+                }
                 return file;
             }
         }
-        log.debug(
-            '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
-            + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-        );
-        //log.info("5:"+getUnitPath(unitName) + slashPath + selfFileName);
+        if (log.isDebugEnabled()) {
+            log.debug(
+                '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
+                + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+            );
+        }
         return selfFile;
     };
 

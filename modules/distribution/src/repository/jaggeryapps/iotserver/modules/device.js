@@ -36,7 +36,7 @@ deviceModule = function () {
     var deviceManagementDAOFactory = Packages.org.wso2.carbon.device.mgt.core.dao.DeviceManagementDAOFactory;
 
     var deviceManagementService = utility.getDeviceManagementService();
-    
+
     var publicMethods = {};
     var privateMethods = {};
 
@@ -167,7 +167,7 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's GET
-        log.info(removeDeviceEndpoint);
+        //log.info(removeDeviceEndpoint);
         return del(removeDeviceEndpoint, data, "text");
     };
 
@@ -178,8 +178,8 @@ deviceModule = function () {
 
         var data = {};
         //XMLHTTPRequest's POST
-        log.info(updateDeviceEndpoint+ "?name="+device.name);
-        return post(updateDeviceEndpoint+ "?name="+device.name, data, "text");
+        //log.info(updateDeviceEndpoint+ "?name="+device.name);
+        return post(updateDeviceEndpoint + "?name=" + encodeURIComponent(device.name), data, "text");
     };
 
     /*
@@ -257,8 +257,8 @@ deviceModule = function () {
             var deviceObject = {};
             deviceObject[constants.DEVICE_IDENTIFIER] = device.getDeviceIdentifier();
             deviceObject[constants.DEVICE_NAME] = privateMethods.validateAndReturn(device.getName());
-            deviceObject[constants.DEVICE_OWNERSHIP] = privateMethods.validateAndReturn(device.getOwnership());
-            deviceObject[constants.DEVICE_OWNER] = device.getOwner();
+            deviceObject[constants.DEVICE_OWNERSHIP] = privateMethods.validateAndReturn(device.getEnrolmentInfo().getOwnership());
+            deviceObject[constants.DEVICE_OWNER] = device.getEnrolmentInfo().getOwner();
             deviceObject[constants.DEVICE_TYPE] = device.getType();
             if (device.getType() == constants.PLATFORM_IOS) {
                 properties[constants.DEVICE_MODEL] = properties[constants.DEVICE_PRODUCT];
@@ -266,7 +266,7 @@ deviceModule = function () {
                 properties[constants.DEVICE_VENDOR] = constants.VENDOR_APPLE;
             }
             deviceObject[constants.DEVICE_PROPERTIES] = properties;
-            deviceObject[constants.DEVICE_ENROLLMENT] = device.getDateOfEnrolment();
+            deviceObject[constants.DEVICE_ENROLLMENT] = device.getEnrolmentInfo().getDateOfEnrolment();
             return deviceObject;
         }
     };

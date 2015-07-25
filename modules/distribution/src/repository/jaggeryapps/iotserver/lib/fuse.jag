@@ -1,5 +1,4 @@
 <%
-
 var getPath = File.prototype.getPath;
 File.prototype.getPath = function() {
     var path = getPath.call(this);
@@ -12,8 +11,7 @@ var fuseState = {
     zones: {},
     appName: '',
     currentZone: [], //TODO: rename to zone Stack
-    currentUnit: null,
-    viewModelCache:{}
+    currentUnit: null
 };
 
 var requestId = function makeId() {

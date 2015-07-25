@@ -543,3 +543,56 @@ header{background-color: #2a2a2a;}
     font-size:28px;
     font-weight:100;
 }
+
+.wiz-lbl {
+    padding-top:30px;
+}
+
+/* wizard */
+.wr-wizard {
+    border-bottom:1px solid #f0f0f0;
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+
+.itm-wiz-current .wiz-no {
+    border:1px solid #444;
+    color:#fff;
+    background:#444;
+}
+
+.itm-wiz {
+    font-weight:100;
+    margin-top:50px;
+}
+
+.itm-wiz div {
+    display:inline-block;
+    float:left;
+}
+
+.wiz-no {
+    width:50px;
+    height:50px;
+    font-size:33px;
+    font-weight: 100;
+    border-radius: 80px;
+    border:1px solid #ccc;
+    color:#fff;
+    padding:0px 12px;
+    padding-bottom:10px;
+    display:inline-block;
+    text-align: center;
+    background:#ccc;
+    margin-right: 10px;
+}
+
+.wiz-lbl {
+    width:190px;
+    font-size:17px;
+}
+
+.wiz-lbl > span {
+    padding-top:0px;
+    display:inline-block;
+}

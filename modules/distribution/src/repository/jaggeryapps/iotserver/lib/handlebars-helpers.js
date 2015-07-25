@@ -11,35 +11,29 @@ var getScope = function (unit,configs) {
     var viewModel = {};
     var cbResult;
     if (jsFile.isExists()) {
-        if(fuseState.viewModelCache[jsFile.getPath()]){
-            cbResult = fuseState.viewModelCache[jsFile.getPath()];
-        }else{
-            script = require(jsFile.getPath());
-            //Eagerly make the viewModel the template configs
-            viewModel = templateConfigs;
-            //Check if the unit author has specified an onRequest
-            //callback
-            if(script.hasOwnProperty('onRequest')){
-                script.app = {
-                    url: '/' + fuseState.appName,
-                    publicURL: '/' + fuseState.appName + '/public/' + unit,
-                    "class": unit + '-unit'
-                };
-                onRequestCb = script.onRequest;
-                cbResult = onRequestCb(templateConfigs);
-                log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
-                fuseState.viewModelCache[jsFile.getPath()] = cbResult;
+        script = require(jsFile.getPath());
+        //Eagerly make the viewModel the template configs
+        viewModel = templateConfigs;
+        //Check if the unit author has specified an onRequest
+        //callback
+        if(script.hasOwnProperty('onRequest')){
+            script.app = {
+                url: '/' + fuseState.appName,
+                publicURL: '/' + fuseState.appName + '/public/' + unit,
+                "class": unit + '-unit'
+            };
+            onRequestCb = script.onRequest;
+            cbResult = onRequestCb(templateConfigs);
+            log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
+            //If the execution does not yield an object we will print
+            //a warning as the unit author may have forgotten to return a data object
+            if(cbResult===undefined){
+                cbResult = {}; //Give an empty data object
+                log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
+                    +'unit not been rendered correctly.');
             }
+            viewModel = cbResult;
         }
-
-        //If the execution does not yield an object we will print
-        //a warning as the unit author may have forgotten to return a data object
-        if(cbResult===undefined){
-            cbResult = {}; //Give an empty data object
-            log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
-                +'unit not been rendered correctly.');
-        }
-        viewModel = cbResult;
     }
     else{
         //If there is no script then the view should get the configurations
@@ -62,7 +56,7 @@ Handlebars.innerZonesFromUnit = null;
 Handlebars.registerHelper('defineZone', function (zoneName, zoneContent) {
     var result = '';
     var zone = Handlebars.Utils.escapeExpression(zoneName);
-    fuseState.zoneStack.push(zone);
+    fuseState.currentZone.push(zone);
     var unitsToRender = fuseState.zones[zone] || [];
 
     if (Handlebars.innerZones.length > 0) {
@@ -98,12 +92,12 @@ Handlebars.registerHelper('defineZone', function (zoneName, zoneContent) {
         return result;
     }
 
-    fuseState.zoneStack.pop();
+    fuseState.currentZone.pop();
     return new Handlebars.SafeString(result);
 });
 
 Handlebars.registerHelper('zone', function (zoneName, zoneContent) {
-    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
+    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
     if (currentZone == null) {
         return 'zone_' + zoneName + ' ';
     }
@@ -119,7 +113,7 @@ Handlebars.registerHelper('zone', function (zoneName, zoneContent) {
 });
 
 Handlebars.registerHelper('layout', function (layoutName) {
-    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
+    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
     if (currentZone == null) {
         return 'layout_' + layoutName;
     } else {
@@ -128,7 +122,7 @@ Handlebars.registerHelper('layout', function (layoutName) {
 });
 
 Handlebars.registerHelper('authorized', function () {
-    var currentZone = fuseState.zoneStack[fuseState.zoneStack.length - 1];
+    var currentZone = fuseState.currentZone[fuseState.currentZone.length - 1];
     if (currentZone == null) {
         return '';
     } else {
@@ -161,11 +155,11 @@ Handlebars.registerHelper('unit', function (unitName,options) {
         log.error('unit does not have a main zone');
     }
     //TODO warn when unspecified decencies are included.
-    fuseState.zoneStack.push('main');
+    fuseState.currentZone.push('main');
     var template = fuse.getFile(baseUnit, '', '.hbs');
     log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
     var result = new Handlebars.SafeString(Handlebars.compileFile(template)(getScope(baseUnit,templateConfigs)));
-    fuseState.zoneStack.pop();
+    fuseState.currentZone.pop();
     return result;
 });
 
@@ -198,7 +192,6 @@ Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
         return options.fn(this);
     }
 });
-
 Handlebars.registerHelper('unequal', function(lvalue, rvalue, options) {
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");
