@@ -231,7 +231,7 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 	data = {"username": user.username};
 	result = get(endPoint, data, "json");
 
-} else if (uriMatcher.match("/{context}/api/group/id/{groupId}/device/assign")) {
+} else if (uriMatcher.match("/{context}/api/group/id/{groupId}/assign")) {
 
 	groupId = uriMatcher.elements().groupId;
 	var deviceId = request.getContent()["deviceId"];

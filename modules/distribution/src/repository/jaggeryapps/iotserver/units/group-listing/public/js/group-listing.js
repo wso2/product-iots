@@ -331,6 +331,7 @@ function attachEvents() {
                     str += '</select>';
                     if (!hasUsers) {
                         str = "There is no any other users registered";
+                        $('#user-names').html(str);
                         return;
                     }
                     $('#user-names').html(str);

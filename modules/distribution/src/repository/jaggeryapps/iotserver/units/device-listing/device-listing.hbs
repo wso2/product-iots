@@ -1,5 +1,6 @@
 {{#zone "main"}}
     <span id="permission" data-permission="{{permissions}}"></span>
+    <span id="request-group-id" data-groupId="{{groupId}}"></span>
     <!-- form content placeholder -->
     <div id="ast-container" class="ast-container list-view">
         <!-- no devices found -->
@@ -16,6 +17,7 @@
         <div class="container-fluid wr-content-alt">
             <div class="ctrl-info-panel col-md-6 col-centered">
                 <h2>You don't have any Devices registered at the moment.</h2>
+
                 <p>
                     </a><a href="/iotserver/devices/add-device" class="cu-btn">
                     <span class="fw-stack">
@@ -30,11 +32,32 @@
         <!-- /no devices found -->
     </div>
 
+    <div id="no-grouped-devices-div-content" class="hide">
+        <!-- no devices found -->
+        <div class="container-fluid wr-content-alt">
+            <div class="ctrl-info-panel col-md-6 col-centered">
+                <h2>You don't have any associated devices with this group.</h2>
+
+                <p>
+                    </a><a href="/iotserver/devices" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-add fw-stack-1x"></i>
+                    </span>
+                    Associate Existing Device
+                </a>
+                </p>
+            </div>
+        </div>
+        <!-- /no devices found -->
+    </div>
+
     <div id="remove-device-modal-content" class="hide">
         <div class="content">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Do you really want to remove this device from your Devices List?</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-device-yes-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
@@ -54,6 +77,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Device was successfully removed.</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-device-200-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
@@ -70,8 +94,10 @@
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Please enter new name for the device?</h3>
                     <br/>
+
                     <div>
-                        <input id="edit-device-name" style="color:#3f3f3f;padding:5px" type="text" value="" placeholder="Type here" size="60">
+                        <input id="edit-device-name" style="color:#3f3f3f;padding:5px" type="text" value=""
+                               placeholder="Type here" size="60">
                     </div>
                     <div class="buttons">
                         <a href="#" id="edit-device-yes-link" class="btn-operations">
@@ -92,8 +118,63 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Device was successfully updated.</h3>
+
                     <div class="buttons">
                         <a href="#" id="edit-device-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-device-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Please select group</h3>
+                    <br/>
+
+                    <div id="user-groups">Loading...</div>
+                    <div class="buttons">
+                        <a href="#" id="group-device-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="group-device-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Assign&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-associate-device-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Device was successfully associated with group.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="group-associate-device-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-deassociate-device-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Device was successfully removed from group.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="group-deassociate-device-200-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
@@ -107,6 +188,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Exception at backend. Try Later.</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-user-400-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,6 +204,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Action not permitted.</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-device-403-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
@@ -137,6 +220,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Device does not exist.</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-device-409-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
@@ -152,6 +236,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
                     <h3>Device does not exist.</h3>
+
                     <div class="buttons">
                         <a href="#" id="remove-device-unexpected-error-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
@@ -163,6 +248,7 @@
     </div>
 {{/zone}}
 {{#zone "bottomJs"}}
-    <script id="device-listing" data-image-resource="{{self.publicURL}}/images/" src="{{self.publicURL}}/templates/device-listing.hbs" type="text/x-handlebars-template" ></script>
+    <script id="device-listing" data-image-resource="{{self.publicURL}}/images/"
+            src="{{self.publicURL}}/templates/device-listing.hbs" type="text/x-handlebars-template"></script>
     <script src="{{self.publicURL}}/js/device-listing.js"></script>
 {{/zone}}

@@ -12,5 +12,13 @@ function onRequest(context){
     }
     permissions.push("LIST_OWN_DEVICES");
     context.permissions = stringify(permissions);
+
+    var groupId = request.getParameter("groupId");
+    if (groupId){
+        context.groupId = groupId;
+    }else{
+        context.groupId = 0;
+    }
+
     return context;
 }
