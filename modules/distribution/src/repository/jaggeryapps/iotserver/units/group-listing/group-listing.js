@@ -1,4 +1,7 @@
+var log = new Log("modules/group-listing.js");
+
 function onRequest(context){
+    var constants = require("/modules/constants.js");
     var permissions = [];
     //var userModule = require("/modules/user.js").userModule;
     //if(userModule.isAuthorized("/permission/device-mgt/admin/groups/list")){
@@ -13,5 +16,6 @@ function onRequest(context){
     permissions.push("SHARE_GROUPS");
     context.permissions = stringify(permissions);
     context.SHARE_GROUPS = true;
+    context.user = session.get(constants.USER_SESSION_KEY);
     return context;
 }

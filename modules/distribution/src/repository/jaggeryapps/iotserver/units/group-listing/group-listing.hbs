@@ -1,5 +1,6 @@
 {{#zone "main"}}
     <span id="permission" data-permission="{{permissions}}"></span>
+    <span id="user-details" data-username="{{user.username}}"></span>
     <!-- form content placeholder -->
     <div id="ast-container" class="ast-container list-view">
         <!-- no devices found -->
@@ -30,13 +31,38 @@
         <!-- /no groups found -->
     </div>
 
-    <div id="share-group-modal-content" class="hide">
+    <div id="share-group-w1-modal-content" class="hide">
         <div class="content">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-centered">
-                    <h3>Share group with others</h3>
-
+                    <h3>Select user to manage group sharing</h3>
+					<div id="user-names">Loading...</div>
                     <div class="buttons">
+                        <a href="#" id="share-group-w1-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="share-group-next-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="share-group-w2-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Select sharing roles</h3>
+                    <br />
+                    <div id="user-roles">Loading...</div>
+                    <div class="buttons">
+                        <a href="#" id="share-group-w2-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
                         <a href="#" id="share-group-yes-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;OK&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
@@ -53,7 +79,7 @@
                     <h3>Group sharing updated successfully.</h3>
 
                     <div class="buttons">
-                        <a href="#" id="remove-group-200-link" class="btn-operations">
+                        <a href="#" id="share-group-200-link" class="btn-operations">
                             &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
