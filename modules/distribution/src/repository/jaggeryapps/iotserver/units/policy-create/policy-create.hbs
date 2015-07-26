@@ -1,21 +1,63 @@
+
 {{#zone "main"}}
+
+    <link rel="stylesheet" href="{{self.publicURL}}/css/codemirror.css"/>
+
+    <style>
+        .CodeMirror {
+            border-top: 1px solid #cccccc;
+            border-bottom: 1px solid black;
+        }
+    </style>
+
+
+    <script>
+        var init = function () {
+            var mime = MIME_TYPE_SIDDHI_QL;
+
+            // get mime type
+            if (window.location.href.indexOf('mime=') > -1) {
+                mime = window.location.href.substr(window.location.href.indexOf('mime=') + 5);
+            }
+
+            window.queryEditor = CodeMirror.fromTextArea(document.getElementById('policy-definition-input'), {
+                mode: mime,
+                indentWithTabs: true,
+                smartIndent: true,
+                lineNumbers: true,
+                matchBrackets: true,
+                autofocus: true,
+                extraKeys: {
+                    "Shift-2": function(cm) {
+                        insertStr(cm, cm.getCursor(), '@');
+                        CodeMirror.showHint(cm, getAnnotationHints);
+                    },
+                    "Ctrl-Space": "autocomplete"
+                }
+            });
+
+        };
+    </script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            init();
+        });
+    </script>
+
     <div class="row">
         <div class="col-md-12">
             <div class="hidden wr-steps">
-                <div class="col-md-3 col-xs-3">
-                    <div class="itm-wiz itm-wiz-current" data-step="policy-platform"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Platform</span></div></div>
+                <div class="col-md-3 col-xs-4">
+                    <div class="itm-wiz itm-wiz-current" data-step="policy-devicetype"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Platform</span></div></div>
                     <br class="c-both" />
                 </div>
-                <div class="col-md-3 col-xs-3">
+                <div class="col-md-3 col-xs-4">
                     <div class="itm-wiz" data-step="policy-profile"><div class="wiz-no">2</div><div class="wiz-lbl hidden-xs"><span>Configure Profile</span></div></div>
                     <br class="c-both" />
                 </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="itm-wiz" data-step="policy-criteria"><div class="wiz-no">3</div><div class="wiz-lbl hidden-xs"><span>Assign to a group</span></div></div>
-                    <br class="c-both" />
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <div class="itm-wiz" data-step="policy-content"><div class="wiz-no">4</div><div class="wiz-lbl hidden-xs"><span>Publish</span></div></div>
+                <div class="col-md-3 col-xs-4">
+                    <div class="itm-wiz" data-step="policy-content"><div class="wiz-no">3</div><div class="wiz-lbl hidden-xs"><span>Publish</span></div></div>
                     <br class="c-both" />
                 </div>
             </div>
@@ -67,104 +109,12 @@
                                 </div>
                             </div>
                             <div class="wr-input-control wr-btn-grp">
-                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-content" data-back="true" data-next="policy-criteria">Back</a>
+                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-content" data-back="true" data-next="policy-profile">Back</a>
                                 <a href="#" class="wr-btn wizard-stepper" data-current="policy-content" data-next="policy-message">Save</a>
                             </div>
                         </div>
                     </div>
 
-                </div>
-            </div>
-            <div class="container col-centered wr-content policy-criteria hidden">
-
-                <div class="wr-form">
-
-                    <h1 class="page-sub-title">Add Policy</h1>
-
-                    <div class="row wr-wizard"></div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="wr-input-label" title="">
-                                    Set Device Ownership Type
-                                    <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
-                                </label>
-                                <div class="wr-input-control">
-                                    <div class="cus-col-50">
-                                        <select id="ownership-input" class="form-control">
-                                            <option>COPE</option>
-                                            <option>BYOD</option>
-                                        </select>
-                                    </div>
-                                    <br class="c-both" />
-                                </div>
-                                <div class="wr-input-control">
-                                    <label class="wr-input-control radio light" rel="assetfilter">
-                                        <input id="userRadio" type="radio" name="user-select" value="userSelectField" class="user-select-radio" />
-                                        <span class="helper">User</span>
-                                    </label>
-                                    <label class="wr-input-control radio light">
-                                        <input id="userRoleRadio" type="radio" name="user-select" value="userRoleSelectField" class="user-select-radio" />
-                                        <span class="helper">User Role</span>
-                                    </label>
-                                </div>
-
-                                <div id="userSelectField" class="user-select">
-                                    <label class="wr-input-label" title="">
-                                        Set User(s)
-                                        <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
-                                    </label>
-                                    <div class="wr-input-control">
-                                        <div class="cus-col-50">
-                                            <select id="users-input" class="form-control select2" multiple="multiple">
-                                                {{#each users}}
-                                                    <option>{{username}}</option>
-                                                {{/each}}
-                                            </select>
-                                        </div>
-                                        <br class="c-both" />
-                                    </div>
-                                </div>
-
-                                <div id="userRoleSelectField" class="user-select" style="display:none">
-                                    <label class="wr-input-label" title="">
-                                        Set User Role(s)
-                                        <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
-                                    </label>
-                                    <div class="wr-input-control">
-                                        <div class="cus-col-50">
-                                            <select id="user-roles-input"  class="form-control select2" multiple="multiple">
-                                                {{#each roles}}
-                                                    <option>{{this}}</option>
-                                                {{/each}}
-                                            </select>
-                                        </div>
-                                        <br class="c-both" />
-                                    </div>
-                                </div>
-
-                                <label class="wr-input-label" title="">
-                                    Set Action upon Non-compliance
-                                    <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
-                                </label>
-                                <div class="wr-input-control">
-                                    <div class="cus-col-50">
-                                        <select id="action-input" class="form-control">
-                                            <option data-action="enforce">Enforce</option>
-                                            <option data-action="warn">Warn</option>
-                                            <option data-action="monitor">Monitor</option>
-                                        </select>
-                                    </div>
-                                    <br class="c-both" />
-                                </div>
-                            </div>
-                            <div class="wr-input-control wr-btn-grp">
-                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-criteria" data-back="true" data-next="policy-profile">Back</a>
-                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-criteria" data-next="policy-content">Continue</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="container col-centered wr-content policy-profile hidden">
@@ -178,40 +128,42 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="wr-advance-operations">
-                                <label class="wr-input-label col-sm-4" for="maxFailedAttempts">Policy</label>
+                                <label class="wr-input-label" title="">
+                                    Set Policy Definition
+                                    <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
+                                </label>
                                 <div class="wr-input-control">
-                                    <input type="text" class="form-control" id="policyDefinition" data-key="policyDefinition" placeholder="Enter the policy">
+                                    <div class="cus-col-100">
+                                        <textarea id="policy-definition-input" placeholder="Enter the policy" style="width: 100%;"></textarea>
+                                    </div>
+                                    <br class="c-both" />
                                 </div>
                             </div>
                             <div class="wr-input-control wr-btn-grp">
-                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-profile" data-back="true" data-next="policy-platform">Back</a>
-                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-profile" data-next="policy-criteria">Continue</a>
+                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-profile" data-back="true" data-next="policy-devicetype">Back</a>
+                                <a href="#" class="wr-btn wizard-stepper" data-current="policy-profile" data-next="policy-content">Continue</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container col-centered wr-content policy-platform">
+            <div class="container col-centered wr-content policy-devicetype">
 
                 <div class="wr-form">
 
                     <h1 class="page-sub-title">Add Policy</h1>
 
                     <div class="row wr-wizard">
-                        <div class="col-md-3 col-xs-3">
-                            <div class="itm-wiz itm-wiz-current" data-step="policy-platform"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Platform</span></div></div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="itm-wiz itm-wiz-current" data-step="policy-devicetype"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Platform</span></div></div>
                             <br class="c-both" />
                         </div>
-                        <div class="col-md-3 col-xs-3">
+                        <div class="col-md-4 col-xs-4">
                             <div class="itm-wiz" data-step="policy-profile"><div class="wiz-no">2</div><div class="wiz-lbl hidden-xs"><span>Configure Profile</span></div></div>
                             <br class="c-both" />
                         </div>
-                        <div class="col-md-3 col-xs-3">
-                            <div class="itm-wiz" data-step="policy-criteria"><div class="wiz-no">3</div><div class="wiz-lbl hidden-xs"><span>Assign to a group</span></div></div>
-                            <br class="c-both" />
-                        </div>
-                        <div class="col-md-3 col-xs-3">
-                            <div class="itm-wiz" data-step="policy-content"><div class="wiz-no">4</div><div class="wiz-lbl hidden-xs"><span>Publish</span></div></div>
+                        <div class="col-md-4 col-xs-4">
+                            <div class="itm-wiz" data-step="policy-content"><div class="wiz-no">3</div><div class="wiz-lbl hidden-xs"><span>Publish</span></div></div>
                             <br class="c-both" />
                         </div>
                     </div>
@@ -220,11 +172,9 @@
                         <div class="col-lg-12">
                             <div class="row wr-tile-buttons-list">
                                 <div class="wr-input-control">
-                                    <ul class="tile-buttons row">
-                                        <li class="col-lg-4"><a href="#" class="wizard-stepper" data-current="policy-platform" data-next="policy-profile" data-platform="android" data-platform-id="1"><i class="fw fw-android"></i>Android</a></li>
-                                        <li class="col-lg-4"><a href="#" class="wizard-stepper" data-current="policy-platform" data-next="policy-profile" data-platform="ios" data-platform-id="2"><i class="fw fw-apple"></i>iOS</a></li>
-                                        <li class="col-lg-4"><a href="#" class="wizard-stepper" data-current="policy-platform" data-next="policy-profile" data-platform="windows" data-platform-id="3"><i class="fw fw-windows"></i>Windows</a></li>
-                                    </ul>
+                                    <div id="ast-container" class="ast-container">
+                                        {{! All "Device Types" registered in CDMF will be listed here. please refer: public/js/store-listing.js }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -238,4 +188,9 @@
 {{/zone}}
 {{#zone "bottomJs"}}
     <script src="{{self.publicURL}}/js/policy-create.js"></script>
+    <script src="{{self.publicURL}}/js/codemirror.js"></script>
+    <script src="{{self.publicURL}}/js/sql.js"></script>
+
+        <script id="store-listing" src="{{self.publicURL}}/templates/store-listing.hbs" type="text/x-handlebars-template" ></script>
+        <script src="{{self.publicURL}}/js/store-listing.js"></script>
 {{/zone}}

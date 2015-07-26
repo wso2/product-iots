@@ -49,16 +49,7 @@ var policy = {};
 var configuredProfiles = [];
 
 function savePolicy(){
-    var profilePayloads = [];
-    for (var key in policy.profile) {
-        if (policy.profile.hasOwnProperty(key)) {
-           profilePayloads.push({
-               featureCode: key,
-               deviceTypeId: policy.platformId,
-               content: policy.profile[key]
-           });
-        }
-    }
+
     var payload = {
         policyName: policy.policyName,
         compliance: policy.selectedAction,
@@ -66,19 +57,15 @@ function savePolicy(){
         profile: {
             profileName: policy.policyName,
             deviceType: {
-                id: policy.platformId
+                id: policy.devicetypeId
             },
-            profileFeaturesList: profilePayloads
+            policyDefinition: policy.policyDefinition
         }
     };
-    payload.users = [];
-    payload.roles = [];
-    if (policy.selectedUsers){
-        payload.users = policy.selectedUsers;
-    }else if (policy.selectedUserRoles){
-        payload.roles = policy.selectedUserRoles;
-    }
-    //invokerUtil.post("/mdm-admin/policies", payload, function(){
+
+    console.log(payload);
+
+    //invokerUtil.post("/iotserver/policy-api/policy/add", payload, function(){
     //    $(".policy-message").removeClass("hidden");
     //    $(".add-policy").addClass("hidden");
     //}, function(){
@@ -116,30 +103,13 @@ $(document).ready(function(){
         //All data is collected. Policy can now be created.
         savePolicy();
     };
-    stepperRegistry['policy-criteria']  = function (actionButton){
-        $( "input[type='radio'].user-select-radio").each(function(){
-           if ( $(this).is(':radio')){
-               if ($(this).is(":checked")){
-                   if($(this).val() == "userSelectField"){
-                       policy.selectedUsers = $("#users-input").val();
-                   }else if($(this).val() == "userRoleSelectField"){
-                       policy.selectedUserRoles = $("#user-roles-input").val();
-                   }
-               }
-           }
-        });
-        policy.selectedAction = $("#action-input").find(":selected").data("action");
-        policy.selectedOwnership = $("#ownership-input").val();
-
-    };
     stepperRegistry['policy-profile']  = function (actionButton){
-        var deviceType = policy.platform;
-        var generatedProfile = operationModule.generateProfile(deviceType, configuredProfiles);
-        policy.profile = generatedProfile;
+        var deviceType = policy.devicetype;
+        policy.policyDefinition = $("#policy-definition-input").val();
     };
-    stepperRegistry['policy-platform'] = function (actionButton){
-        policy.platform = $(actionButton).data("platform");
-        policy.platformId = $(actionButton).data("platform-id");
+    stepperRegistry['policy-devicetype'] = function (actionButton){
+        policy.devicetype = $(actionButton).data("devicetype");
+        policy.devicetypeId = $(actionButton).data("devicetype-id");
 
     };
     $(".uu").click(function(){

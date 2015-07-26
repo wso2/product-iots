@@ -59,6 +59,7 @@ function loadDeviceTypes() {
             } else {
                 var content = template(viewModel);
                 $("#ast-container").html(content);
+                initStepper(".wizard-stepper");
             }
         };
         invokerUtil.get(serviceURL,

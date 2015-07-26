@@ -26,6 +26,10 @@ policyModule = function () {
     var publicMethods = {};
     var privateMethods = {};
 
+    publicMethods.addPolicy = function (name, deviceType, policyDefinition) {
+
+    };
+
     publicMethods.getPolicies = function () {
 
         //TODO-This method returns includes dummy policy data
