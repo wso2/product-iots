@@ -147,6 +147,7 @@ deviceModule = function () {
             if (deviceUnit.isExists()) {
                 deviceTypeObject = {};
                 deviceTypeObject["name"] = deviceType.getName();
+                deviceTypeObject["id"] = deviceType.getId();
                 var storeProperties = privateMethods.getStoreDefinition(deviceType.getName());
                 if (storeProperties) {
                     deviceTypeObject["storeTitle"] = storeProperties.title;
