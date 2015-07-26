@@ -137,6 +137,8 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 		result = 403;
 	}
 
+} else if (uriMatcher.match("/{context}/api/users")) {
+	result = userModule.getUsers();
 }
 
 // returning the result.

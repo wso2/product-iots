@@ -67,6 +67,10 @@
 	content: "\e656";
 }
 
+.fw-group:before {
+	content: "\e611";
+}
+
 .fw-dots:before {
 	content: "\e615";
 }

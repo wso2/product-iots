@@ -596,3 +596,38 @@ header{background-color: #2a2a2a;}
     padding-top:0px;
     display:inline-block;
 }
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #b2b2b2;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #b2b2b2;
+    opacity:  1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #b2b2b2;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #b2b2b2;
+}
+
+input[type=checkbox] {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+}
+
+.checkbox-text
+{
+    /* Checkbox text */
+    display: inline;
+    padding-left: 15px;
+    text-indent: -15px;
+}

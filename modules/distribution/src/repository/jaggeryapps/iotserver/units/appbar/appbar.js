@@ -7,6 +7,7 @@ function onRequest(context) {
         "policies": [],
         "profiles": [],
         "device-mgt": [],
+        "group-mgt": [],
         "store": [],
         "dashboard": [],
         "analytics" : []
@@ -37,6 +38,7 @@ function onRequest(context) {
     links.store.push(storeLink);
     links.analytics.push(deviceMgtLink);
     links['device-mgt'].push(dashboardLink);
+    links['group-mgt'].push(dashboardLink);
 
     if (!carbonUser) {
         //user is not logged in
@@ -72,6 +74,14 @@ function onRequest(context) {
                 title: "Add Device",
                 icon: "fw-add",
                 url: "/iotserver/devices/add-device"
+            });
+        }
+        if (permissions.ADD_DEVICE) {
+            links["group-mgt"].push({
+                title: "Add Group",
+                icon: "fw-add",
+                url: "#",
+                class: "add-group-link"
             });
         }
     }// end-if-user

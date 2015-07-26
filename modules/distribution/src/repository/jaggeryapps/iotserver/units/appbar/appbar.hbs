@@ -12,7 +12,7 @@
                 </a><a class="cu-btn page-title" href='javascript:location.reload();'>
                 <span class="fw-stack"></span>
                 {{title}}
-            </a>{{#each currentActions}}<a href="{{url}}" class="cu-btn">
+            </a>{{#each currentActions}}<a href="{{url}}" class="cu-btn {{class}}">
                         <span class="fw-stack">
                             <i class="fw fw-ring fw-stack-2x"></i>
                             <i class="fw {{icon}} fw-stack-1x"></i>
@@ -41,7 +41,8 @@
     <!-- common navigation -->
 	<div id="hiddenNav" class="wr-hidden-nav">
         <ul>
-			<li><a href="/iotserver/devices"><i class="fw fw-mobile"></i>My Devices</a></li>
+            <li><a href="/iotserver/devices"><i class="fw fw-mobile"></i>My Devices</a></li>
+            <li><a href="/iotserver/groups"><i class="fw fw-group"></i>My Groups</a></li>
             {{#if permissions.ADD_USER}}
             <li><a href="/iotserver/users"><i class="fw fw-user"></i>User Management</a></li>
             {{/if}}
