@@ -250,16 +250,25 @@ userModule = function () {
             log.error("User object was not found in the session");
             throw constants.ERRORS.USER_NOT_FOUND;
         }
+        var carbon = require('carbon');
+        var tenantId = carbon.server.tenantId();
+        var url = carbon.server.address('https') + "/admin/services";
+        var server = new carbon.server.Server(url);
         var userManager = new carbon.user.UserManager(server, tenantId);
         var userList = userManager.listUsers();
-
-        var i, userObject;
-        for (i = 0; i < userList.size(); i++) {
-            userObject = userList.get(i);
-            var userObj = {
-                "username" : userObject.getUserName(),
-                "email" : userObject.getEmail(),
-                "name" : userObject.getFirstName() + " " + userObject.getLastName()
+        var i, userObject, email, firstname, lastname;
+        for (i = 0; i < userList.length; i++) {
+            userObject = userManager.getUser(userList[i]);
+            email = userManager.getClaim(userList[i],"http://wso2.org/claims/emailaddress", null);
+            firstname = userManager.getClaim(userList[i],"http://wso2.org/claims/givenname", null);
+            lastname = userManager.getClaim(userList[i],"http://wso2.org/claims/lastname", null);
+            //log.info(userManager.getClaimsForSet(userList[i], new Array("http://wso2.org/claims/emailaddress",
+            //    "http://wso2.org/claims/givenname",
+            //    "http://wso2.org/claims/lastname"), null));
+            userObj = {
+                "username" : userObject.username,
+                "email" : email,
+                "name" : firstname + " " + lastname
             };
             if(userObj.username == "admin"){
                 userObj.name = "admin";

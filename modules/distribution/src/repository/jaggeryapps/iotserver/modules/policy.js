@@ -23,8 +23,6 @@ policyModule = function () {
     var constants = require("/modules/constants.js");
     var utility = require("/modules/utility.js").utility;
 
-    var userManagementService = utility.getUserManagementService();
-
     var publicMethods = {};
     var privateMethods = {};
 
