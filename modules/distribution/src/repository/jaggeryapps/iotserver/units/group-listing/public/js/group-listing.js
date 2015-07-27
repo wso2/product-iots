@@ -255,7 +255,7 @@ function attachGroupAdding() {
                             $(modalPopupContent).html($('#add-group-200-content').html());
                             $("a#add-group-200-link").click(function () {
                                 hidePopup();
-                                location.reload();
+                                window.location.href = '/iotserver/groups';
                             });
                         } else {
                             $(modalPopupContent).html($('#group-400-content').html());
@@ -427,7 +427,6 @@ function attachEvents() {
                             $('div[data-group="' + groupId + '"]').remove();
                             $("a#remove-group-200-link").click(function () {
                                 hidePopup();
-                                location.reload();
                             });
                         } else {
                             $(modalPopupContent).html($('#group-409-content').html());
@@ -485,6 +484,7 @@ function attachEvents() {
                             $("div[data-groupid='" + groupId + "'] .ast-name").html(newGroupName);
                             $("a#edit-group-200-link").click(function () {
                                 hidePopup();
+                                window.location.href = '/iotserver/groups';
                             });
                         } else {
                             $(modalPopupContent).html($('#group-409-content').html());
