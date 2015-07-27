@@ -57,9 +57,11 @@ function savePolicy(){
         profile: {
             profileName: policy.policyName,
             deviceType: {
-                id: policy.devicetypeId
+                id: policy.devicetypeId,
+                name: policy.devicetype
             },
-            policyDefinition: policy.policyDefinition
+            policyDefinition: policy.policyDefinition,
+            policyDescription: policy.policyDescription
         }
     };
 
@@ -102,8 +104,6 @@ $(document).ready(function(){
         savePolicy();
     };
     stepperRegistry['policy-profile']  = function (actionButton){
-        var deviceType = policy.devicetype;
-        console.log(window.queryEditor.getValue());
         policy.policyDefinition = window.queryEditor.getValue();
     };
     stepperRegistry['policy-devicetype'] = function (actionButton){
