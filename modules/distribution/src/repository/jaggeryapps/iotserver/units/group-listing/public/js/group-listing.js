@@ -300,7 +300,8 @@ function attachEvents() {
      * on Group Management page in WSO2 IoT Server Console.
      */
     $("a.view-group-link").click(function () {
-        $("#group_data").closest('form').submit();
+        var groupId = $(this).data("groupid");
+        $("#group-data-form-" + groupId).closest('form').submit();
     });
 
     /**
