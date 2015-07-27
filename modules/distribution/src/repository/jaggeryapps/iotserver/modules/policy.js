@@ -82,17 +82,12 @@ policyModule = function () {
 
                 //loop through all device types
                 for (var i = 0; i < allPolicies.content.length; i++) {
-                    log.info("Policies for device types: " + allPolicies.content);
-                    log.info("");
                     var deviceType = allPolicies.content[i].replace(constants.POLICY_REGISTRY_PATH, "");
-                    log.info("##### deviceType:" + deviceType);
                     var deviceTypePolicies = registry.get(allPolicies.content[i]);
 
                     //loop through policies
                     for (var j = 0; j < deviceTypePolicies.content.length; j++) {
-                        log.info("Policies:" + deviceTypePolicies.content);
                         var deviceTypePolicy = registry.get(deviceTypePolicies.content[j]);
-                        log.info(deviceTypePolicy);
                         var policyObj = {
                             "id": deviceTypePolicy.uuid,                         // Identifier of the policy.
                             //"priorityId": 1,                 // Priority of the policies. This will be used only for simple evaluation.
@@ -116,9 +111,7 @@ policyModule = function () {
                         };
 
                         policies.push(policyObj);
-                        log.info("");
                     }//end of policy loop
-                    log.info("");
                 }//end of device type policy loop
             }
         }
