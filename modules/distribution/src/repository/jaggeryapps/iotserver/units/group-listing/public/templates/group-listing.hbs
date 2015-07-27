@@ -1,6 +1,6 @@
 {{#each groups}}
 	{{groupMap this}}
-    <form action="/iotserver/group/{{id}}" method="POST" id="group_data" >
+    <form id="group-data-form-{{id}}" action="/iotserver/group/{{id}}" method="POST" >
         <input type="hidden" name="name" value="{{name}}">
         <input type="hidden" name="deviceCount" value="{{deviceCount}}">
         <input type="hidden" name="dateOfCreation" value="{{dateOfCreation}}">
@@ -28,7 +28,7 @@
                     <span class="ast-ver">Shared with: {{users}}</span>
 
                     <div href="#" class="ast-btn-group">
-                        <a class="view-group-link" data-group="{{this}}">
+                        <a class="view-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-view fw-stack-1x"></i>
