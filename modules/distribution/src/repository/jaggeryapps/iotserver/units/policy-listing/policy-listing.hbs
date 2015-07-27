@@ -173,7 +173,6 @@
     <!--Later add the navigation menu from here-->
 {{/zone}}
 {{#zone "action-bar"}}
-	{{#if permissions.ADD_POLICY}}
         <a href="/iotserver/policies/add-policy" class="cu-btn">
             <span class="fw-stack">
                 <i class="fw fw-ring fw-stack-2x"></i>
@@ -181,7 +180,6 @@
             </span>
             Add Policy
         </a>
-	{{/if}}
 {{/zone}}
 {{#zone "bottomJs"}}
     <script src="{{self.publicURL}}/js/policy-listing.js"></script>
