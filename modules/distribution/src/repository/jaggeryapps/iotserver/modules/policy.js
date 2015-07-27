@@ -54,7 +54,7 @@ policyModule = function () {
             var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
             var mqttsender = new mqttsenderClass();
 
-            var result = mqttsender.pushToMQTT("/iot/policymgt/govern", policyDefinition, "tcp://10.100.0.104:1883", "Raspberry-Policy-sender");
+            var result = mqttsender.pushToMQTT("/iot/policymgt/govern", policyDefinition, "tcp://localhost:1883", "Raspberry-Policy-sender");
 
             mqttsender = null;
 
