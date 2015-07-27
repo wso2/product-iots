@@ -29,8 +29,8 @@ var getScope = function (unit,configs) {
             //a warning as the unit author may have forgotten to return a data object
             if(cbResult===undefined){
                 cbResult = {}; //Give an empty data object
-                log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
-                    +'unit not been rendered correctly.');
+                //log.warn('[' + requestId + '] unit "' + unit + '" has a onRequest method which does not return a value.This may lead to the '
+                //    +'unit not been rendered correctly.');
             }
             viewModel = cbResult;
         }
@@ -72,7 +72,7 @@ Handlebars.registerHelper('defineZone', function (zoneName, zoneContent) {
         var unit = unitsToRender[i];
         if (Handlebars.innerZonesFromUnit == null || Handlebars.innerZonesFromUnit.unitName == unit.unitName) {
             var template = fuse.getFile(unit.originUnitName || unit.unitName, '', '.hbs');
-            log.debug('[' + requestId + '] for zone "' + zone + '" including template :"' + template.getPath() + '"');
+            //log.debug('[' + requestId + '] for zone "' + zone + '" including template :"' + template.getPath() + '"');
             result += Handlebars.compileFile(template)(getScope(unit.unitName, zoneContent.data.root));
         }
     }
@@ -157,7 +157,7 @@ Handlebars.registerHelper('unit', function (unitName,options) {
     //TODO warn when unspecified decencies are included.
     fuseState.currentZone.push('main');
     var template = fuse.getFile(baseUnit, '', '.hbs');
-    log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
+    //log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
     var result = new Handlebars.SafeString(Handlebars.compileFile(template)(getScope(baseUnit,templateConfigs)));
     fuseState.currentZone.pop();
     return result;
@@ -176,7 +176,7 @@ Handlebars.compileFile = function (file) {
     }
 
     f.open('r');
-    log.debug('[' + requestId + '] reading file "' + f.getPath() + '"');
+    //log.debug('[' + requestId + '] reading file "' + f.getPath() + '"');
     var content = f.readAll().trim();
     f.close();
     var compiled = Handlebars.compile(content);
