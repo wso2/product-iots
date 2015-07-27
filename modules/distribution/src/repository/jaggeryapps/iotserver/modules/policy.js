@@ -27,39 +27,42 @@ policyModule = function () {
     var privateMethods = {};
 
     publicMethods.addPolicy = function (policyName, deviceType, policyDefinition, policyDescription) {
-        if(policyName && deviceType){
+        if (policyName && deviceType) {
+
+            var carbonModule = require("carbon");
+            var carbonServer = application.get("carbonServer");
+            var options = {system: true};
+            var carbonUser = session.get(constants.USER_SESSION_KEY);
+
+            var resource = {
+                name: policyName,
+                mediaType: 'text/plain',
+                content: policyDefinition,
+                description: policyDescription
+            };
+
+            if (carbonUser) {
+                options.tenantId = carbonUser.tenantId;
+                var registry = new carbonModule.registry.Registry(carbonServer, options);
+                log.info("########### Policy name : " + policyName);
+                log.info("########### Policy type : " + deviceType);
+                log.info("########### Policy Declaration : " + policyDefinition);
+                log.info("########### Policy policyDescription: " + policyDescription);
+                registry.put(constants.POLICY_REGISTRY_PATH + deviceType + "/" + policyName, resource);
+            }
+
+            var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
+            var mqttsender = new mqttsenderClass();
+
+            var result = mqttsender.pushToMQTT("/iot/policymgt/govern", policyDefinition, "tcp://10.100.0.104:1883", "Raspberry-Policy-sender");
+
+            mqttsender = null;
+
+            return true;
+
+        } else {
             return false;
         }
-
-        var carbonModule = require("carbon");
-        var carbonServer = application.get("carbonServer");
-        var options = {system: true};
-        var carbonUser = session.get(constants.USER_SESSION_KEY);
-
-        var resource = {
-            name: policyName,
-            mediaType: 'text/plain',
-            content: policyDefinition,
-            description: policyDescription
-        };
-
-        if (carbonUser) {
-            options.tenantId = carbonUser.tenantId;
-            var registry = new carbonModule.registry.Registry(carbonServer, options);
-            log.info("########### Policy name : " + policyName);
-            log.info("########### Policy type : " + deviceType);
-            log.info("########### Policy Declaration : " + policyDefinition);
-            log.info("########### Policy policyDescription: " + policyDescription);
-            registry.put(constants.POLICY_REGISTRY_PATH + deviceType + "/" + policyName, resource);
-        }
-
-        var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
-        var mqttsender = new mqttsenderClass();
-
-        var result = mqttsender.pushToMQTT("/iot/policymgt/govern", policyDefinition, "tcp://10.100.0.104:1883", "Raspberry-Policy-sender");
-
-        mqttsender = null;
-        return true;
     };
 
     publicMethods.getPolicies = function () {
@@ -82,7 +85,7 @@ policyModule = function () {
                     log.info("Policies for device types: " + allPolicies.content);
                     log.info("");
                     var deviceType = allPolicies.content[i].replace(constants.POLICY_REGISTRY_PATH, "");
-                    log.info("##### deviceType:"+deviceType);
+                    log.info("##### deviceType:" + deviceType);
                     var deviceTypePolicies = registry.get(allPolicies.content[i]);
 
                     //loop through policies
@@ -96,7 +99,7 @@ policyModule = function () {
                             //"profile": {},                   // Profile
                             "policyName": deviceTypePolicy.name,  // Name of the policy.
                             "updated": deviceTypePolicy.updated.time,
-                            "deviceType":deviceType
+                            "deviceType": deviceType
                             //"generic": true,                 // If true, this should be applied to all related device.
                             //"roles": {},                     // Roles which this policy should be applied.
                             //"ownershipType": {},             // Ownership type (COPE, BYOD, CPE)
@@ -139,7 +142,7 @@ policyModule = function () {
             try {
                 registry.remove(constants.POLICY_REGISTRY_PATH + deviceType + "/" + name);
                 bool = true;
-            }catch(err){
+            } catch (err) {
                 log.error("Error while trying to remove policy :" + name);
             }
         }

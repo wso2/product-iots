@@ -32,7 +32,7 @@ if (uriMatcher.match("/{context}/api/policies/update")) {
 	policyModule.updatePolicyPriorities(payload);
 } else if (uriMatcher.match("/{context}/api/policies/add")) {
 	var content = request.getContent();
-	var id = content.policyName;
+	var policyName = content.policyName;
 	var policyDefinition = content.profile.policyDefinition;
 	var policyDescription = content.profile.policyDescription;
 	var deviceType = content.profile.deviceType.name;
@@ -40,7 +40,7 @@ if (uriMatcher.match("/{context}/api/policies/update")) {
 	log.info("@@@@@ Policy Declaration : " + stringify(content));
 
 	try {
-		result = policyModule.addPolicy(id, deviceType, policyDefinition, policyDescription);
+		result = policyModule.addPolicy(policyName, deviceType, policyDefinition, policyDescription);
 	} catch (e) {
 		log.error("Exception occurred while trying to add new policy under name:" + id, e);
 		// http status code 500 refers to - Internal Server Error.
