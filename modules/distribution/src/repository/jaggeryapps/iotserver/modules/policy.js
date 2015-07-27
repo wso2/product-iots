@@ -27,10 +27,45 @@ policyModule = function () {
     var privateMethods = {};
 
     publicMethods.addPolicy = function (name, deviceType, policyDefinition) {
+        var carbonModule = require("carbon");
+        var carbonServer = application.get("carbonServer");
+        var options = {system: true};
+        var carbonUser = session.get(constants.USER_SESSION_KEY);
 
+        resource = {
+            name : name,
+            mediaType: 'text/plain',
+            content : policyDefinition
+        };
+
+        if (carbonUser) {
+            options.tenantId = carbonUser.tenantId;
+            var registry = new carbonModule.registry.Registry(carbonServer, options);
+            log.info("########### Policy name : "+name);
+            log.info("########### Policy type : "+deviceType);
+            log.info("########### Policy Declarationsss : "+policyDefinition);
+            registry.put("/_system/governance/policy_declarations/" + deviceType + "/" + name, resource);
+        }
+
+        var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
+        var mqttsender = new mqttsenderClass();
+
+        var result = mqttsender.pushToMQTT("/iot/policymgt/govern",policyDefinition,"tcp://10.100.0.104:1883","Raspberry-Policy-sender");
+
+        mqttsender = null;
     };
 
     publicMethods.getPolicies = function () {
+        var carbonModule = require("carbon");
+        var carbonServer = application.get("carbonServer");
+        var options = {system: true};
+        var carbonUser = session.get(constants.USER_SESSION_KEY);
+
+        if (carbonUser) {
+            options.tenantId = carbonUser.tenantId;
+            var registry = new carbonModule.registry.Registry(carbonServer, options);
+            log.info(registry.get("/_system/governance/policy_declarations/firealarm/"));
+        }
 
         //TODO-This method returns includes dummy policy data
 

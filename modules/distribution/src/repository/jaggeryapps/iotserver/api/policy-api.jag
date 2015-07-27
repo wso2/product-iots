@@ -40,6 +40,37 @@ if (uriMatcher.match("/{context}/api/policies/update")) {
         // http status code 500 refers to - Internal Server Error.
         result = 500;
     }
+}else if (uriMatcher.match("/{context}/api/policies/update")) {
+    payload = request.getContent();
+    policyModule.updatePolicyPriorities(payload);
+} else if (uriMatcher.match("/{context}/api/policies/add")) {
+    var content = request.getContent();
+    var id = content.policyName;
+    var policyDefinition = content.profile.policyDefinition;
+    var deviceType = content.profile.deviceType.id;
+
+    log.info("@@@@@ Policy Declaration : "+stringify(content));
+
+    try {
+        result = policyModule.addPolicy(id,deviceType,policyDefinition);
+    } catch (e) {
+        log.error("Exception occurred while trying to add new policy under name:" + id, e);
+        // http status code 500 refers to - Internal Server Error.
+        result = 500;
+    }
+} else if (uriMatcher.match("/{context}/api/policies/get")) {
+    var id = request.getParameter("policyName");
+    var deviceType = request.getParameter("deviceTypeId");
+
+    log.info("@@@@@ Policy Declaration : "+stringify(content));
+
+    try {
+        result = policyModule.getPolicy(id,deviceType);
+    } catch (e) {
+        log.error("Exception occurred while trying to add new policy under name:" + id, e);
+        // http status code 500 refers to - Internal Server Error.
+        result = 500;
+    }
 }
 
 // returning the result.

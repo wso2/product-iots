@@ -63,14 +63,12 @@ function savePolicy(){
         }
     };
 
-    console.log(payload);
+    invokerUtil.post("/iotserver/api/policies/add", payload, function(){
+        $(".policy-message").removeClass("hidden");
+        $(".add-policy").addClass("hidden");
+    }, function(){
 
-    //invokerUtil.post("/iotserver/policy-api/policy/add", payload, function(){
-    //    $(".policy-message").removeClass("hidden");
-    //    $(".add-policy").addClass("hidden");
-    //}, function(){
-    //
-    //});
+    });
 }
 
 $(document).ready(function(){
@@ -105,7 +103,8 @@ $(document).ready(function(){
     };
     stepperRegistry['policy-profile']  = function (actionButton){
         var deviceType = policy.devicetype;
-        policy.policyDefinition = $("#policy-definition-input").val();
+        console.log(window.queryEditor.getValue());
+        policy.policyDefinition = window.queryEditor.getValue();
     };
     stepperRegistry['policy-devicetype'] = function (actionButton){
         policy.devicetype = $(actionButton).data("devicetype");
