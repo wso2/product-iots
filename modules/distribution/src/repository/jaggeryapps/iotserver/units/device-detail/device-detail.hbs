@@ -1,22 +1,22 @@
 {{#zone "main"}}
     <div class="row wr-device-board">
         <div class="col-lg-12 wr-secondary-bar">
-            <label class="device-id device-select" data-deviceid="{{device.deviceIdentifier}}" data-type="{{device.type}}">
+            <label class="device-id device-select" data-deviceid="{{device.deviceIdentifier}}"
+                   data-type="{{device.type}}">
                 Device {{device.name}}
                 <span class="lbl-device">
-                    {{#if device.viewModel.vendor}}
+					{{#if device.viewModel.vendor}}
                         ({{device.viewModel.vendor}} {{device.viewModel.model}})
-                    {{/if}}
+					{{/if}}
                 </span>
             </label>
         </div>
     </div>
     <div class="wr-device-list row">
         <div class="wr-hidden-operations wr-advance-operations">
-
         </div>
         <div class="col-md-12 wr-page-content">
-            {{unit "operation-bar" deviceType=device.type}}
+			{{unit "operation-bar" deviceType=device.type}}
             <div class="row">
                 <div class="col-md-12 wr-stats-board">
 
@@ -25,11 +25,12 @@
                     <div class="col-lg-2 ast-desc-image">
                         <div class="row">
                             <div class="col-lg-12 col-sm-4">
-                                <img src="{{self.publicURL}}/img/device_icons/{{device.type}}.png" style="width:200px" />
+                                <img src="{{self.publicURL}}/img/device_icons/{{device.type}}.png" style="width:200px"/>
                             </div>
                             <div class="col-lg-12 col-sm-4 ast-desc">
                                 <div class="ast-device-desc"><b>Owner:</b> {{device.owner}}</div>
-                                <div class="ast-device-desc"><b>Date of Enrollment:</b><br/> <span class="formatDate">{{device.enrollment}}</span></div>
+                                <div class="ast-device-desc"><b>Date of Enrollment:</b><br/> <span
+                                        class="formatDate">{{device.dateOfEnrolment}}</span></div>
                                 <!--<div class="ast-device-desc"><b>Device:</b> {{device.viewModel.vendor}} {{device.properties.model}}</div>-->
                                 <!--<div class="ast-device-desc"><b>Model:</b>  {{device.viewModel.model}}</div>-->
                                 <!--<div class="ast-device-desc"><b>IMEI:</b>  {{device.viewModel.imei}}</div>-->
@@ -45,7 +46,7 @@
                         <div class="row">
 
                             <div class="col-lg-6 col-md-6">
-                                {{#if device.viewModel.BatteryLevel}}
+								{{#if device.viewModel.BatteryLevel}}
                                     <div class="col-lg-4">
                                         <div class="wr-stats-board-tile">
                                             <div class="tile-name">BATTERY</div>
@@ -55,41 +56,47 @@
                                             </div>
                                         </div>
                                     </div>
-                                {{/if}}
+								{{/if}}
 
-                                {{#if device.viewModel.DeviceCapacity}}
+								{{#if device.viewModel.DeviceCapacity}}
                                     <div class="col-lg-4">
                                         <div class="wr-stats-board-tile">
                                             <div class="tile-name">STORAGE</div>
                                             <div>
                                                 <div class="tile-icon"><i class="fw fw-hdd"></i></div>
-                                                <div class="tile-stats">{{device.viewModel.DeviceCapacityPercentage}}%<span class="tile-stats-free">{{device.viewModel.DeviceCapacityUsed}} GB Free</span></div>
+                                                <div class="tile-stats">{{device.viewModel.DeviceCapacityPercentage}}
+                                                    %<span class="tile-stats-free">{{device.viewModel.DeviceCapacityUsed}}
+                                                        GB Free</span></div>
                                             </div>
                                         </div>
                                     </div>
-                                {{/if}}
-                                {{#if device.viewModel.internal_memory.FreeCapacity}}
+								{{/if}}
+								{{#if device.viewModel.internal_memory.FreeCapacity}}
                                     <div class="col-lg-4">
                                         <div class="wr-stats-board-tile">
                                             <div class="tile-name">LOCAL STORAGE</div>
                                             <div>
                                                 <div class="tile-icon"><i class="fw fw-hdd"></i></div>
-                                                <div class="tile-stats">{{device.viewModel.internal_memory.DeviceCapacityPercentage}}%<span class="tile-stats-free">{{device.viewModel.internal_memory.FreeCapacity}} GB Free</span></div>
+                                                <div class="tile-stats">{{device.viewModel.internal_memory.DeviceCapacityPercentage}}
+                                                    %<span class="tile-stats-free">{{device.viewModel.internal_memory.FreeCapacity}}
+                                                        GB Free</span></div>
                                             </div>
                                         </div>
                                     </div>
-                                {{/if}}
-                                {{#if device.viewModel.external_memory.FreeCapacity}}
+								{{/if}}
+								{{#if device.viewModel.external_memory.FreeCapacity}}
                                     <div class="col-lg-4">
                                         <div class="wr-stats-board-tile">
                                             <div class="tile-name">EXTERNAL STORAGE</div>
                                             <div>
                                                 <div class="tile-icon"><i class="fw fw-hdd"></i></div>
-                                                <div class="tile-stats">{{device.viewModel.external_memory.DeviceCapacityPercentage}}%<span class="tile-stats-free">{{device.viewModel.external_memory.FreeCapacity}} GB Free</span></div>
+                                                <div class="tile-stats">{{device.viewModel.external_memory.DeviceCapacityPercentage}}
+                                                    %<span class="tile-stats-free">{{device.viewModel.external_memory.FreeCapacity}}
+                                                        GB Free</span></div>
                                             </div>
                                         </div>
                                     </div>
-                                {{/if}}
+								{{/if}}
                             </div>
 
                         </div>
@@ -101,7 +108,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingFour">
                                     <h2 class="sub-title panel-title">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                         <span class="fw-stack">
                                             <i class="fw fw-ring fw-stack-2x"></i>
                                             <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
@@ -110,9 +118,11 @@
                                         </a>
                                     </h2>
                                 </div>
-                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingFour">
                                     <div class="panel-body">
-                                        <a href="../../devices/analytics?deviceId={{deviceId}}&deviceType={{deviceType}}" ><i class="fw fw-charts"></i> Show Statistics</a>
+                                        <a href="../../devices/analytics?deviceId={{deviceId}}&deviceType={{deviceType}}"><i
+                                                class="fw fw-charts"></i> Show Statistics</a>
                                     </div>
                                 </div>
                             </div>
@@ -120,22 +130,22 @@
 
                             <!-- device location -->
                             <!--<div class="panel panel-default">-->
-                                <!--<div class="panel-heading" role="tab" id="headingOne">-->
-                                    <!--<h2 class="sub-title panel-title">-->
-                                        <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
-                                        <!--<span class="fw-stack">-->
-                                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
-                                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
-                                        <!--</span>-->
-                                            <!--Device Location-->
-                                        <!--</a>-->
-                                    <!--</h2>-->
-                                <!--</div>-->
-                                <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
-                                    <!--<div id="device-location" style="height:400px" class="panel-body">-->
+                            <!--<div class="panel-heading" role="tab" id="headingOne">-->
+                            <!--<h2 class="sub-title panel-title">-->
+                            <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+                            <!--<span class="fw-stack">-->
+                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
+                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
+                            <!--</span>-->
+                            <!--Device Location-->
+                            <!--</a>-->
+                            <!--</h2>-->
+                            <!--</div>-->
+                            <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
+                            <!--<div id="device-location" style="height:400px" class="panel-body">-->
 
-                                    <!--</div>-->
-                                <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
                             <!--</div>-->
                             <!-- /device location -->
 
@@ -143,7 +153,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h2 class="sub-title panel-title">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         <span class="fw-stack">
                                             <i class="fw fw-ring fw-stack-2x"></i>
                                             <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
@@ -152,7 +163,8 @@
                                         </a>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingTwo">
                                     <div class="panel-body">
                                         Not available yet
                                     </div>
@@ -162,25 +174,24 @@
 
                             <!-- installed applications -->
                             <!--<div class="panel panel-default">-->
-                                <!--<div class="panel-heading" role="tab" id="headingThree">-->
-                                    <!--<h2 class="sub-title panel-title">-->
-                                        <!--<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
-                                        <!--<span class="fw-stack">-->
-                                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
-                                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
-                                        <!--</span>-->
-                                            <!--Installed Applications-->
-                                        <!--</a>-->
-                                    <!--</h2>-->
-                                <!--</div>-->
-                                <!--<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">-->
-                                    <!--<div class="panel-body">-->
-                                        <!--Not available yet-->
-                                    <!--</div>-->
-                                <!--</div>-->
+                            <!--<div class="panel-heading" role="tab" id="headingThree">-->
+                            <!--<h2 class="sub-title panel-title">-->
+                            <!--<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+                            <!--<span class="fw-stack">-->
+                            <!--<i class="fw fw-ring fw-stack-2x"></i>-->
+                            <!--<i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>-->
+                            <!--</span>-->
+                            <!--Installed Applications-->
+                            <!--</a>-->
+                            <!--</h2>-->
+                            <!--</div>-->
+                            <!--<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">-->
+                            <!--<div class="panel-body">-->
+                            <!--Not available yet-->
+                            <!--</div>-->
+                            <!--</div>-->
                             <!--</div>-->
                             <!-- /installed applications -->
-
 
 
                         </div>

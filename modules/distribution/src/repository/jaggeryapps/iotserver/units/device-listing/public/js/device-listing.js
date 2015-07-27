@@ -187,7 +187,7 @@ function loadDevices(searchType, searchParam) {
                     addDeviceSelectedClass(this);
                 });
                 attachEvents();
-                //formatDates();
+                formatDates();
             }
         };
         invokerUtil.get(serviceURL,
@@ -374,81 +374,86 @@ function attachEvents() {
      * when a user clicks on "Group" link
      * on Device Management page in WSO2 MDM Console.
      */
-    $("a.group-device-link").click(function () {
-        var deviceId = $(this).data("deviceid");
-        var deviceType = $(this).data("devicetype");
-        var endPoint = "/iotserver/api/group/all";
+    if (groupId && groupId != "0") {
+        $("a.group-device-link").remove();
+    }else{
+        $("a.group-device-link").click(function () {
+            var deviceId = $(this).data("deviceid");
+            var deviceType = $(this).data("devicetype");
+            var endPoint = "/iotserver/api/group/all";
 
-        $(modalPopupContent).html($('#group-device-modal-content').html());
-        $('#user-groups').html("Loading...");
-        $("a#group-device-yes-link").hide();
-        showPopup();
+            $(modalPopupContent).html($('#group-device-modal-content').html());
+            $('#user-groups').html("Loading...");
+            $("a#group-device-yes-link").hide();
+            showPopup();
 
-        invokerUtil.get(endPoint,
-            function (data, txtStatus, jqxhr) {
-                var groups = JSON.parse(data);
-                var status = jqxhr.status;
-                if (status == 200) {
-                    if (groups.length <= 0) {
-                        $('#user-groups').html("There is no any groups available");
-                        return;
-                    }
-                    var str = '<br /><select id="assign-group-selector" style="color:#3f3f3f;padding:5px;width:250px;">';
-                    for (var group in groups) {
-                        str += '<option value="' + groups[group].id + '">' + groups[group].name + '</option>';
-                    }
-                    str += '</select>';
-                    $('#user-groups').html(str);
-                    $("a#group-device-yes-link").show();
-                    $("a#group-device-yes-link").click(function () {
-                        var selectedGroupId = $('#assign-group-selector').val();
-                        endPoint = "/iotserver/api/group/id/" + selectedGroupId + "/assign";
-                        var device = {"deviceId": deviceId, "deviceType": deviceType};
-                        invokerUtil.post(
-                            endPoint,
-                            device,
-                            function (data, txtStatus, jqxhr) {
-                                var status = jqxhr.status;
-                                if (status == 200) {
-                                    $(modalPopupContent).html($('#group-associate-device-200-content').html());
-                                    $("a#group-associate-device-200-link").click(function () {
+            invokerUtil.get(endPoint,
+                function (data, txtStatus, jqxhr) {
+                    var groups = JSON.parse(data);
+                    var status = jqxhr.status;
+                    if (status == 200) {
+                        if (groups.length <= 0) {
+                            $('#user-groups').html("There is no any groups available");
+                            return;
+                        }
+                        var str = '<br /><select id="assign-group-selector" style="color:#3f3f3f;padding:5px;width:250px;">';
+                        for (var group in groups) {
+                            str += '<option value="' + groups[group].id + '">' + groups[group].name + '</option>';
+                        }
+                        str += '</select>';
+                        $('#user-groups').html(str);
+                        $("a#group-device-yes-link").show();
+                        $("a#group-device-yes-link").click(function () {
+                            var selectedGroupId = $('#assign-group-selector').val();
+                            endPoint = "/iotserver/api/group/id/" + selectedGroupId + "/assign";
+                            var device = {"deviceId": deviceId, "deviceType": deviceType};
+                            invokerUtil.post(
+                                endPoint,
+                                device,
+                                function (data, txtStatus, jqxhr) {
+                                    var status = jqxhr.status;
+                                    if (status == 200) {
+                                        $(modalPopupContent).html($('#group-associate-device-200-content').html());
+                                        $("a#group-associate-device-200-link").click(function () {
+                                            hidePopup();
+                                        });
+                                    } else if (status == 400) {
+                                        $(modalPopupContent).html($('#device-400-content').html());
+                                        $("a#device-400-link").click(function () {
+                                            hidePopup();
+                                        });
+                                    } else if (status == 403) {
+                                        $(modalPopupContent).html($('#device-403-content').html());
+                                        $("a#device-403-link").click(function () {
+                                            hidePopup();
+                                        });
+                                    } else if (status == 409) {
+                                        $(modalPopupContent).html($('#device-409-content').html());
+                                        $("a#device-409-link").click(function () {
+                                            hidePopup();
+                                        });
+                                    }
+                                },
+                                function () {
+                                    $(modalPopupContent).html($('#device-unexpected-error-content').html());
+                                    $("a#device-unexpected-error-link").click(function () {
                                         hidePopup();
                                     });
-                                } else if (status == 400) {
-                                    $(modalPopupContent).html($('#device-400-content').html());
-                                    $("a#device-400-link").click(function () {
-                                        hidePopup();
-                                    });
-                                } else if (status == 403) {
-                                    $(modalPopupContent).html($('#device-403-content').html());
-                                    $("a#device-403-link").click(function () {
-                                        hidePopup();
-                                    });
-                                } else if (status == 409) {
-                                    $(modalPopupContent).html($('#device-409-content').html());
-                                    $("a#device-409-link").click(function () {
-                                        hidePopup();
-                                    });
-                                }
-                            },
-                            function () {
-                                $(modalPopupContent).html($('#device-unexpected-error-content').html());
-                                $("a#device-unexpected-error-link").click(function () {
-                                    hidePopup();
                                 });
-                            });
+                        });
+                    }
+                },
+                function () {
+                    $(modalPopupContent).html($('#device-unexpected-error-content').html());
+                    $("a#device-unexpected-error-link").click(function () {
+                        hidePopup();
                     });
-                }
-            },
-            function () {
-                $(modalPopupContent).html($('#device-unexpected-error-content').html());
-                $("a#device-unexpected-error-link").click(function () {
-                    hidePopup();
                 });
-            });
 
-        $("a#group-device-cancel-link").click(function () {
-            hidePopup();
+            $("a#group-device-cancel-link").click(function () {
+                hidePopup();
+            });
         });
-    });
+
+    }
 }

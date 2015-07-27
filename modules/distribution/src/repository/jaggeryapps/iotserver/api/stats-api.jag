@@ -79,6 +79,7 @@ function getFireAlarmData(user, deviceId, from, to) {
     result['temperatureData'] = getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, deviceId, from, to);
     result['fanData'] = getSensorData("DEVICE_FAN_USAGE_SUMMARY", "status", user, deviceId, from, to);
     result['bulbData'] = getSensorData("DEVICE_BULB_USAGE_SUMMARY", "status", user, deviceId, from, to);
+    result['sonarData'] = getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, deviceId, from, to);
     return result;
 }
 
