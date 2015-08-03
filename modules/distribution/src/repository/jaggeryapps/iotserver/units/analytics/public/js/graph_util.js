@@ -5,17 +5,60 @@ var currentDay = new Date();
 var startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
 var endDate = new Date(currentDay.getTime());
 
-// create a custom bar renderer that has no gaps
-Rickshaw.Graph.Renderer.BarNoGap = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
-    name: 'bar_no_gap',
-    barWidth: function (series) {
-        var frequentInterval = this._frequentInterval(series.stack);
-        var barWidth = this.graph.x(series.stack[0].x + frequentInterval.magnitude * 1);
-        return barWidth;
+var groupId;
+
+var color = ['#c05020','#30c020', '#6060c0', '#170B3B','#5E610B', '#2F0B3A', '#FF4000', '#2F0B3A', 'steelblue'];
+
+// create a custom bar renderer that shift bars
+Rickshaw.Graph.Renderer.BinaryBar = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
+    name: 'binary_bar',
+    render: function(args) {
+
+        args = args || {};
+
+        var graph = this.graph;
+        var series = args.series || graph.series;
+
+        var vis = args.vis || graph.vis;
+        vis.selectAll('*').remove();
+
+        var barWidth = this.barWidth(series.active()[0]);
+        var barXOffset = 0;
+
+        var activeSeriesCount = series.filter( function(s) { return !s.disabled; } ).length;
+        var seriesBarWidth = this.unstack ? barWidth / activeSeriesCount : barWidth;
+
+        var transform = function(d) {
+            // add a matrix transform for negative values
+            var matrix = [ 1, 0, 0, (d.y < 0 ? -1 : 1), 0, (d.y < 0 ? graph.y.magnitude(Math.abs(d.y)) * 2 : 0) ];
+            return "matrix(" + matrix.join(',') + ")";
+        };
+
+        var index = 0;
+        series.forEach( function(series) {
+            if (series.disabled) return;
+
+            var nodes = vis.selectAll("path")
+                .data(series.stack.filter( function(d) { return d.y !== null } ))
+                .enter().append("svg:rect")
+                .attr("x", function(d) { return graph.x(d.x) + barXOffset })
+                .attr("y", function(d) { return ((graph.y(index + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 )) })
+                .attr("width", seriesBarWidth)
+                .attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)) })
+                .attr("transform", transform);
+
+            index++;
+            Array.prototype.forEach.call(nodes[0], function(n) {
+                n.setAttribute('fill', series.color);
+            } );
+
+            if (this.unstack) barXOffset += seriesBarWidth;
+
+        }, this );
     }
 });
 
-function initDate(){
+function initDate() {
     currentDay = new Date();
     startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
     endDate = new Date(currentDay.getTime());
@@ -44,6 +87,9 @@ var DateRange = convertDate(startDate) + " " + configObject.separator + " " + co
 
 $(document).ready(function () {
     initDate();
+    groupId = $("#request-group-id").data("groupid");
+
+    $('#date-range').html(DateRange);
     $('#date-range').dateRangePicker(configObject)
         .bind('datepicker-apply', function (event, dateRange) {
             $(this).addClass('active');
@@ -53,28 +99,19 @@ $(document).ready(function () {
             getStats(fromDate, toDate);
         }
     );
-});
-
-$(document).ready(function () {
-    $('#date-range').html(DateRange);
-    $('#date-range').trigger('datepicker-apply',
-        {
-            'value': DateRange,
-            'date1': startDate,
-            'date2': endDate
-        });
-});
-
-//day picker
-$('#today-btn').on('click', function () {
-    initDate();
-    getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
+    getDateTime(startDate.getTime(), endDate.getTime());
 });
 
 //hour picker
 $('#hour-btn').on('click', function () {
     initDate();
     getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
+});
+
+//day picker
+$('#today-btn').on('click', function () {
+    initDate();
+    getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
 });
 
 //week picker
@@ -100,39 +137,38 @@ function getDateTime(from, to) {
     DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
     console.log(DateRange);
     $('#date-range').html(DateRange);
-    $('#date-range').trigger('datepicker-apply',
-        {
-            'value': DateRange,
-            'date1': startDate,
-            'date2': endDate
-        }
-    );
     getStats(from / 1000, to / 1000);
 }
 
 function getStats(from, to) {
-    var deviceId = getUrlParameter('deviceId');
-    var deviceType = getUrlParameter('deviceType');
-
     var requestData = new Object();
-
-    requestData['deviceId'] = deviceId;
-    requestData['deviceType'] = deviceType;
-
+    var getStatsRequest;
     if (from) {
         requestData['from'] = from;
     }
-
     if (to) {
         requestData['to'] = to;
     }
+    if (groupId && groupId != "0") {
+        requestData['groupId'] = groupId;
+        getStatsRequest = $.ajax({
+            url: "api/stats/group",
+            method: "GET",
+            data: requestData
+        });
+    } else {
+        var deviceId = getUrlParameter('deviceId');
+        var deviceType = getUrlParameter('deviceType');
 
-    var getStatsRequest = $.ajax({
-        url: "../api/stats",
-        method: "GET",
-        data: requestData
-    });
+        requestData['deviceId'] = deviceId;
+        requestData['deviceType'] = deviceType;
 
+        getStatsRequest = $.ajax({
+            url: "api/stats",
+            method: "GET",
+            data: requestData
+        });
+    }
     getStatsRequest.done(function (stats) {
         updateGraphs(JSON.parse(stats));
     });
@@ -140,7 +176,6 @@ function getStats(from, to) {
     getStatsRequest.fail(function (jqXHR, textStatus) {
         alert("Request failed: " + textStatus);
     });
-
 }
 
 function getUrlParameter(paramName) {
@@ -160,7 +195,7 @@ function updateGraphs(stats) {
     var temperatureData = stats['temperatureData'];
     if (typeof temperatureData != 'undefined') {
         $('#div-temperatureData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Temperature</h2><hr><div id='canvas-wrapper1'></div></div><hr></div>");
-        updateTemperatureGraph(convertStatsToGraphData(temperatureData));
+        drawLineGraph(1, temperatureData);
     } else {
         $('#div-temperatureData').html("");
     }
@@ -168,7 +203,7 @@ function updateGraphs(stats) {
     var lightData = stats['lightData'];
     if (typeof lightData != 'undefined') {
         $('#div-lightData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Light</h2><hr><div id='canvas-wrapper2'></div></div><hr></div>");
-        updateLightGraph(convertStatsToGraphData(lightData));
+        drawBarGraph(2, lightData);
     } else {
         $('#div-lightData').html("");
     }
@@ -176,7 +211,7 @@ function updateGraphs(stats) {
     var motionData = stats['motionData'];
     if (typeof motionData != 'undefined') {
         $('#div-motionData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Motion</h2><hr><div id='canvas-wrapper3'></div></div><hr></div>");
-        updateMotionGraph(convertStatsToGraphData(motionData));
+        drawBarGraph(3, motionData);
     } else {
         $('#div-motionData').html("");
     }
@@ -184,7 +219,7 @@ function updateGraphs(stats) {
     var sonarData = stats['sonarData'];
     if (typeof sonarData != 'undefined') {
         $('#div-sonarData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Sonar</h2><hr><div id='canvas-wrapper4'></div></div><hr></div>");
-        updateSonarGraph(convertStatsToGraphData(sonarData));
+        drawLineGraph(4, sonarData);
     } else {
         $('#div-sonarData').html("");
     }
@@ -192,7 +227,7 @@ function updateGraphs(stats) {
     var fanData = stats['fanData'];
     if (typeof fanData != 'undefined') {
         $('#div-fanData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Fan Status</h2><hr><div id='canvas-wrapper5'></div></div><hr></div>");
-        updateFanGraph(convertStateStatsToGraphData(fanData));
+        drawBarGraph(5, fanData);
     } else {
         $('#div-fanData').html("");
     }
@@ -200,7 +235,7 @@ function updateGraphs(stats) {
     var bulbData = stats['bulbData'];
     if (typeof bulbData != 'undefined') {
         $('#div-bulbData').html("").html("<div class='row margin-double'><div><h2 class='grey'>Bulb Status</h2><hr><div id='canvas-wrapper6'></div></div><hr></div>");
-        updateBulbGraph(convertStateStatsToGraphData(bulbData));
+        drawBarGraph(6, bulbData);
     } else {
         $('#div-bulbData').html("");
     }
@@ -208,7 +243,7 @@ function updateGraphs(stats) {
     var cpuData = stats['cpuData'];
     if (typeof cpuData != 'undefined') {
         $('#div-CPUData').html("").html("<div class='row margin-double'><div><h2 class='grey'>CPU Load</h2><hr><div id='canvas-wrapper7'></div></div><hr></div>");
-        updateCPUGraph(convertStateStatsToGraphData(cpuData));
+        drawLineGraph(7, cpuData);
     } else {
         $('#div-CPUData').html("");
     }
@@ -216,7 +251,7 @@ function updateGraphs(stats) {
     var ramData = stats['ramData'];
     if (typeof ramData != 'undefined') {
         $('#div-RAMData').html("").html("<div class='row margin-double'><div><h2 class='grey'>RAM Usage</h2><hr><div id='canvas-wrapper8'></div></div><hr></div>");
-        updateRAMGraph(convertStateStatsToGraphData(ramData));
+        drawLineGraph(8, ramData);
     } else {
         $('#div-RAMData').html("");
     }
@@ -224,12 +259,179 @@ function updateGraphs(stats) {
     var cpuTemperatureData = stats['cpuTemperatureData'];
     if (typeof cpuTemperatureData != 'undefined') {
         $('#div-cpuTemperatureData').html("").html("<div class='row margin-double'><div><h2 class='grey'>CPU Temperature</h2><hr><div id='canvas-wrapper9'></div></div><hr></div>");
-        updateCPUTemperatureGraph(convertStatsToGraphData(cpuTemperatureData));
+        drawLineGraph(9, cpuTemperatureData);
     } else {
         $('#div-cpuTemperatureData').html("");
     }
 
     scaleGraphs();
+}
+
+function drawLineGraph(graphId, chartDataRaw){
+    var chartWrapperElmId = "#canvas-wrapper" + graphId;
+    var graphWidth = $(chartWrapperElmId).width() - 50;
+    if (chartDataRaw.length == 0) {
+        $(chartWrapperElmId).html("No data available...");
+        return;
+    }
+
+    var chartDiv = "chart" + graphId;
+    var sliderDiv = "slider" + graphId;
+    var x_axis = "x_axis" + graphId;
+    var y_axis = "y_axis" + graphId;
+    $(chartWrapperElmId).html("").html('<div id="' + y_axis
+        + '" class="custom_y_axis"></div><div id="' + chartDiv
+        + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
+        + '" class="custom_x_axis"></div><div id="' + sliderDiv
+        + '" class="custom_slider"></div>');
+
+    var graphConfig = {
+        element: document.getElementById(chartDiv),
+        width: graphWidth,
+        height: 400,
+        strokeWidth: 1,
+        renderer: 'line',
+        unstack: true,
+        stack: false,
+        xScale: d3.time.scale(),
+        padding: {top: 0.2, left: 0.02, right: 0.02, bottom: 0},
+        series:[]
+    };
+
+    var k = 0;
+    for (var i = 0; i < chartDataRaw.length; i++){
+        var chartData = [];
+        if (chartDataRaw[i].stats.length > 0){
+            for (var j = 0; j < chartDataRaw[i].stats.length; j++){
+                chartData.push({x:parseInt(chartDataRaw[i].stats[j].x), y:parseInt(chartDataRaw[i].stats[j].y)});
+            }
+            graphConfig['series'].push({ 'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device });
+        }
+        if (++k == color.length){
+            k = 0;
+        }
+    }
+
+    if (graphConfig['series'].length == 0) {
+        $(chartWrapperElmId).html("No data available...");
+        return;
+    }
+
+    var graph = new Rickshaw.Graph(graphConfig);
+
+    graph.render();
+
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph
+    } );
+
+    var xAxis = new Rickshaw.Graph.Axis.X({
+        graph: graph,
+        orientation: 'bottom',
+        element: document.getElementById(x_axis),
+        tickFormat: graph.x.tickFormat()
+    });
+
+    xAxis.render();
+
+    var yAxis = new Rickshaw.Graph.Axis.Y({
+        graph: graph,
+        orientation: 'left',
+        element: document.getElementById(y_axis),
+        width: 40,
+        height: 410
+    });
+
+    yAxis.render();
+
+    var slider = new Rickshaw.Graph.RangeSlider.Preview({
+        graph: graph,
+        element: document.getElementById(sliderDiv)
+    });
+}
+
+
+function drawBarGraph(graphId, chartDataRaw){
+    var chartWrapperElmId = "#canvas-wrapper" + graphId;
+    var graphWidth = $(chartWrapperElmId).width() - 50;
+    if (chartDataRaw.length == 0) {
+        $(chartWrapperElmId).html("No data available...");
+        return;
+    }
+
+    var chartDiv = "chart" + graphId;
+    var sliderDiv = "slider" + graphId;
+    var x_axis = "x_axis" + graphId;
+    var y_axis = "y_axis" + graphId;
+    $(chartWrapperElmId).html("").html('<div id="' + y_axis
+        + '" class="custom_y_axis"></div><div id="' + chartDiv
+        + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
+        + '" class="custom_x_axis"></div><div id="' + sliderDiv
+        + '" class="custom_slider"></div>');
+
+    var graphConfig = {
+        element: document.getElementById(chartDiv),
+        width: graphWidth,
+        height: 150,
+        strokeWidth: 0.5,
+        renderer: 'binary_bar',
+        offset: 'zero',
+        xScale: d3.time.scale(),
+        padding: {top: 0.2, left: 0.02, right: 0.02, bottom: 0},
+        series:[]
+    };
+
+    var k = 0;
+    for (var i = 0; i < chartDataRaw.length; i++){
+        var chartData = [];
+        if (chartDataRaw[i].stats.length > 0){
+            for (var j = 0; j < chartDataRaw[i].stats.length; j++){
+                chartData.push({x:parseInt(chartDataRaw[i].stats[j].x), y:parseInt(chartDataRaw[i].stats[j].y)});
+            }
+            graphConfig['series'].push({ 'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device });
+        }
+        if (++k == color.length){
+            k = 0;
+        }
+    }
+
+    if (graphConfig['series'].length == 0) {
+        $(chartWrapperElmId).html("No data available...");
+        return;
+    }
+
+    var graph = new Rickshaw.Graph(graphConfig);
+
+    graph.registerRenderer(new Rickshaw.Graph.Renderer.BinaryBar({graph: graph}));
+
+    graph.render();
+
+    var xAxis = new Rickshaw.Graph.Axis.X({
+        graph: graph,
+        orientation: 'bottom',
+        element: document.getElementById(x_axis),
+        tickFormat: graph.x.tickFormat()
+    });
+
+    xAxis.render();
+
+    var yAxis = new Rickshaw.Graph.Axis.Y({
+        graph: graph,
+        orientation: 'left',
+        element: document.getElementById(y_axis),
+        width: 40,
+        height: 160,
+        tickFormat: function (y) {
+            return '';
+        }
+    });
+
+    yAxis.render();
+
+    var slider = new Rickshaw.Graph.RangeSlider.Preview({
+        graph: graph,
+        element: document.getElementById(sliderDiv)
+    });
 }
 
 function scaleGraphs() {
@@ -238,14 +440,14 @@ function scaleGraphs() {
         return;
     }
     var graphWidth = 0;
-    for (var i = 1; i < 10; i++){
-        if ($('#canvas-wrapper' + i).length){
+    for (var i = 1; i < 10; i++) {
+        if ($('#canvas-wrapper' + i).length) {
             graphWidth = $('#canvas-wrapper' + i).width() - 50;
             break;
         }
     }
 
-    if (graphWidth <= 0){
+    if (graphWidth <= 0) {
         return;
     }
 
@@ -270,42 +472,6 @@ function scaleGraphs() {
             document.dispatchEvent(eup);
         }
     }
-}
-
-function convertStatsToGraphData(stats) {
-
-    var graphData = new Array();
-    if (!stats) {
-        return graphData;
-    }
-    for (var i = 0; i < stats.length; i++) {
-        graphData.push({x: parseInt(stats[i]['time']) * 1000, y: stats[i]['value']})
-    }
-
-    return graphData;
-}
-
-
-function convertStateStatsToGraphData(stats) {
-
-    var graphData = new Array();
-    if (!stats) {
-        return graphData;
-    }
-    var yValue;
-    for (var i = 0; i < stats.length; i++) {
-        yValue = -1;
-
-        if (stats[i]['value'].toUpperCase() == 'ON') {
-            yValue = 1;
-        } else if (stats[i]['value'].toUpperCase() == 'OFF') {
-            yValue = 0;
-        }
-
-        graphData.push({x: parseInt(stats[i]['time']) * 1000, y: yValue})
-    }
-
-    return graphData;
 }
 
 function convertDate(date) {

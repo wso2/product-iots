@@ -1,3 +1,6 @@
+div, span, p, td {
+	font-family: Arial, sans-serif;
+}
 #chart {
 	display: inline-block;
 }

@@ -232,7 +232,7 @@ deviceModule = function () {
         deviceManagementService.addOperation(operationInstance, deviceList);
     };
 
-    privateMethods.getDevice = function (type, deviceId) {
+    publicMethods.getDevice = function (type, deviceId) {
         var deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setType(type);
         deviceIdentifier.setId(deviceId);
@@ -240,7 +240,7 @@ deviceModule = function () {
     };
 
     publicMethods.viewDevice = function (type, deviceId) {
-        var device = privateMethods.getDevice(type, deviceId);
+        var device = publicMethods.getDevice(type, deviceId);
         if (device) {
             var propertiesList = DeviceManagerUtil.convertDevicePropertiesToMap(device.getProperties());
             var entries = propertiesList.entrySet();
