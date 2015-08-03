@@ -7,12 +7,12 @@ var endDate = new Date(currentDay.getTime());
 
 var groupId;
 
-var color = ['#c05020','#30c020', '#6060c0', '#170B3B','#5E610B', '#2F0B3A', '#FF4000', '#2F0B3A', 'steelblue'];
+var color = ['#c05020', '#30c020', '#6060c0', '#170B3B', '#5E610B', '#2F0B3A', '#FF4000', '#2F0B3A', 'steelblue'];
 
 // create a custom bar renderer that shift bars
 Rickshaw.Graph.Renderer.BinaryBar = Rickshaw.Class.create(Rickshaw.Graph.Renderer.Bar, {
     name: 'binary_bar',
-    render: function(args) {
+    render: function (args) {
 
         args = args || {};
 
@@ -25,36 +25,46 @@ Rickshaw.Graph.Renderer.BinaryBar = Rickshaw.Class.create(Rickshaw.Graph.Rendere
         var barWidth = this.barWidth(series.active()[0]);
         var barXOffset = 0;
 
-        var activeSeriesCount = series.filter( function(s) { return !s.disabled; } ).length;
+        var activeSeriesCount = series.filter(function (s) {
+            return !s.disabled;
+        }).length;
         var seriesBarWidth = this.unstack ? barWidth / activeSeriesCount : barWidth;
 
-        var transform = function(d) {
+        var transform = function (d) {
             // add a matrix transform for negative values
-            var matrix = [ 1, 0, 0, (d.y < 0 ? -1 : 1), 0, (d.y < 0 ? graph.y.magnitude(Math.abs(d.y)) * 2 : 0) ];
+            var matrix = [1, 0, 0, (d.y < 0 ? -1 : 1), 0, (d.y < 0 ? graph.y.magnitude(Math.abs(d.y)) * 2 : 0)];
             return "matrix(" + matrix.join(',') + ")";
         };
 
         var index = 0;
-        series.forEach( function(series) {
+        series.forEach(function (series) {
             if (series.disabled) return;
 
             var nodes = vis.selectAll("path")
-                .data(series.stack.filter( function(d) { return d.y !== null } ))
+                .data(series.stack.filter(function (d) {
+                    return d.y !== null
+                }))
                 .enter().append("svg:rect")
-                .attr("x", function(d) { return graph.x(d.x) + barXOffset })
-                .attr("y", function(d) { return ((graph.y(index + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 )) })
+                .attr("x", function (d) {
+                    return graph.x(d.x) + barXOffset
+                })
+                .attr("y", function (d) {
+                    return ((graph.y(index + Math.abs(d.y))) * (d.y < 0 ? -1 : 1 ))
+                })
                 .attr("width", seriesBarWidth)
-                .attr("height", function(d) { return graph.y.magnitude(Math.abs(d.y)) })
+                .attr("height", function (d) {
+                    return graph.y.magnitude(Math.abs(d.y))
+                })
                 .attr("transform", transform);
 
             index++;
-            Array.prototype.forEach.call(nodes[0], function(n) {
+            Array.prototype.forEach.call(nodes[0], function (n) {
                 n.setAttribute('fill', series.color);
-            } );
+            });
 
             if (this.unstack) barXOffset += seriesBarWidth;
 
-        }, this );
+        }, this);
     }
 });
 
@@ -267,7 +277,7 @@ function updateGraphs(stats) {
     scaleGraphs();
 }
 
-function drawLineGraph(graphId, chartDataRaw){
+function drawLineGraph(graphId, chartDataRaw) {
     var chartWrapperElmId = "#canvas-wrapper" + graphId;
     var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
@@ -279,8 +289,10 @@ function drawLineGraph(graphId, chartDataRaw){
     var sliderDiv = "slider" + graphId;
     var x_axis = "x_axis" + graphId;
     var y_axis = "y_axis" + graphId;
-    $(chartWrapperElmId).html("").html('<div id="' + y_axis
-        + '" class="custom_y_axis"></div><div id="' + chartDiv
+    $(chartWrapperElmId).html("").html('<div id = "' + y_axis
+        + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
+        + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
+        + graphId + '"></div></div><div id="' + chartDiv
         + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
         + '" class="custom_x_axis"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
@@ -289,25 +301,25 @@ function drawLineGraph(graphId, chartDataRaw){
         element: document.getElementById(chartDiv),
         width: graphWidth,
         height: 400,
-        strokeWidth: 1,
+        strokeWidth: 2,
         renderer: 'line',
         unstack: true,
         stack: false,
         xScale: d3.time.scale(),
         padding: {top: 0.2, left: 0.02, right: 0.02, bottom: 0},
-        series:[]
+        series: []
     };
 
     var k = 0;
-    for (var i = 0; i < chartDataRaw.length; i++){
+    for (var i = 0; i < chartDataRaw.length; i++) {
         var chartData = [];
-        if (chartDataRaw[i].stats.length > 0){
-            for (var j = 0; j < chartDataRaw[i].stats.length; j++){
-                chartData.push({x:parseInt(chartDataRaw[i].stats[j].x), y:parseInt(chartDataRaw[i].stats[j].y)});
+        if (chartDataRaw[i].stats.length > 0) {
+            for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
+                chartData.push({x: parseInt(chartDataRaw[i].stats[j].x), y: parseInt(chartDataRaw[i].stats[j].y)});
             }
-            graphConfig['series'].push({ 'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device });
+            graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
         }
-        if (++k == color.length){
+        if (++k == color.length) {
             k = 0;
         }
     }
@@ -321,9 +333,9 @@ function drawLineGraph(graphId, chartDataRaw){
 
     graph.render();
 
-    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+    var hoverDetail = new Rickshaw.Graph.HoverDetail({
         graph: graph
-    } );
+    });
 
     var xAxis = new Rickshaw.Graph.Axis.X({
         graph: graph,
@@ -348,10 +360,16 @@ function drawLineGraph(graphId, chartDataRaw){
         graph: graph,
         element: document.getElementById(sliderDiv)
     });
+
+    var legend = new Rickshaw.Graph.Legend( {
+        graph: graph,
+        element: document.getElementById('legend' + graphId)
+
+    } );
 }
 
 
-function drawBarGraph(graphId, chartDataRaw){
+function drawBarGraph(graphId, chartDataRaw) {
     var chartWrapperElmId = "#canvas-wrapper" + graphId;
     var graphWidth = $(chartWrapperElmId).width() - 50;
     if (chartDataRaw.length == 0) {
@@ -363,8 +381,10 @@ function drawBarGraph(graphId, chartDataRaw){
     var sliderDiv = "slider" + graphId;
     var x_axis = "x_axis" + graphId;
     var y_axis = "y_axis" + graphId;
-    $(chartWrapperElmId).html("").html('<div id="' + y_axis
-        + '" class="custom_y_axis"></div><div id="' + chartDiv
+    $(chartWrapperElmId).html("").html('<div id = "' + y_axis
+        + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
+        + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
+        + graphId + '"></div></div><div id="' + chartDiv
         + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
         + '" class="custom_x_axis"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
@@ -372,25 +392,25 @@ function drawBarGraph(graphId, chartDataRaw){
     var graphConfig = {
         element: document.getElementById(chartDiv),
         width: graphWidth,
-        height: 150,
+        height: 50 * chartDataRaw.length,
         strokeWidth: 0.5,
         renderer: 'binary_bar',
         offset: 'zero',
         xScale: d3.time.scale(),
         padding: {top: 0.2, left: 0.02, right: 0.02, bottom: 0},
-        series:[]
+        series: []
     };
 
     var k = 0;
-    for (var i = 0; i < chartDataRaw.length; i++){
+    for (var i = 0; i < chartDataRaw.length; i++) {
         var chartData = [];
-        if (chartDataRaw[i].stats.length > 0){
-            for (var j = 0; j < chartDataRaw[i].stats.length; j++){
-                chartData.push({x:parseInt(chartDataRaw[i].stats[j].x), y:parseInt(chartDataRaw[i].stats[j].y)});
+        if (chartDataRaw[i].stats.length > 0) {
+            for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
+                chartData.push({x: parseInt(chartDataRaw[i].stats[j].x), y: parseInt(chartDataRaw[i].stats[j].y)});
             }
-            graphConfig['series'].push({ 'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device });
+            graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
         }
-        if (++k == color.length){
+        if (++k == color.length) {
             k = 0;
         }
     }
@@ -420,7 +440,7 @@ function drawBarGraph(graphId, chartDataRaw){
         orientation: 'left',
         element: document.getElementById(y_axis),
         width: 40,
-        height: 160,
+        height: 55 * chartDataRaw.length,
         tickFormat: function (y) {
             return '';
         }
@@ -432,6 +452,12 @@ function drawBarGraph(graphId, chartDataRaw){
         graph: graph,
         element: document.getElementById(sliderDiv)
     });
+
+    var legend = new Rickshaw.Graph.Legend( {
+        graph: graph,
+        element: document.getElementById('legend' + graphId)
+
+    } );
 }
 
 function scaleGraphs() {
