@@ -142,10 +142,9 @@ while true; do
     fi
 done
 
-
 cd /usr/local/src/RaspberryAgent/
 sudo chmod +x RaspberryStats.py
-sudo nohup ./RaspberryStats.py -i $input < /dev/null &
+sudo nohup ./RaspberryStats.py -i $input </dev/null &
 
 if [ $? -ne 0 ]; then
 	echo "Could not start the service..."
@@ -154,14 +153,12 @@ else
 	echo "Running the RaspberryAgent service...."
 fi
 
-
 echo "--------------------------------------------------------------------------"
 echo "|			Successfully Started		"
 echo "|		   --------------------------		"
 echo "|  cd to /usr/local/src/RaspberryAgent"
-echo "|	 run 'sudo nohup ./RaspberryStats.py -i time > /dev/null 2>&1 &'to start service manually."
+echo "|	 run 'sudo nohup ./RaspberryStats.py -i time  </dev/null &'to start service manually."
 echo "|  Relapce time with the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute)"
-#echo "|		   --------------------------		"
 echo "|	 Find logs at: /usr/local/src/RaspberryAgent/logs/RaspberryStats.log"
 echo "---------------------------------------------------------------------------"
 
