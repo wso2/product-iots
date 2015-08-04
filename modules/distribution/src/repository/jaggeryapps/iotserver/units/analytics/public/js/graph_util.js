@@ -287,14 +287,12 @@ function drawLineGraph(graphId, chartDataRaw) {
 
     var chartDiv = "chart" + graphId;
     var sliderDiv = "slider" + graphId;
-    var x_axis = "x_axis" + graphId;
     var y_axis = "y_axis" + graphId;
     $(chartWrapperElmId).html("").html('<div id = "' + y_axis
         + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
         + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
         + graphId + '"></div></div><div id="' + chartDiv
-        + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
-        + '" class="custom_x_axis"></div><div id="' + sliderDiv
+        + '" class="custom_rickshaw_graph"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
 
     var graphConfig = {
@@ -337,11 +335,8 @@ function drawLineGraph(graphId, chartDataRaw) {
         graph: graph
     });
 
-    var xAxis = new Rickshaw.Graph.Axis.X({
-        graph: graph,
-        orientation: 'bottom',
-        element: document.getElementById(x_axis),
-        tickFormat: graph.x.tickFormat()
+    var xAxis = new Rickshaw.Graph.Axis.Time({
+        graph: graph
     });
 
     xAxis.render();
@@ -379,14 +374,12 @@ function drawBarGraph(graphId, chartDataRaw) {
 
     var chartDiv = "chart" + graphId;
     var sliderDiv = "slider" + graphId;
-    var x_axis = "x_axis" + graphId;
     var y_axis = "y_axis" + graphId;
     $(chartWrapperElmId).html("").html('<div id = "' + y_axis
         + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
         + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
         + graphId + '"></div></div><div id="' + chartDiv
-        + '" class="custom_rickshaw_graph"></div><div id="' + x_axis
-        + '" class="custom_x_axis"></div><div id="' + sliderDiv
+        + '" class="custom_rickshaw_graph"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
 
     var graphConfig = {
@@ -426,11 +419,8 @@ function drawBarGraph(graphId, chartDataRaw) {
 
     graph.render();
 
-    var xAxis = new Rickshaw.Graph.Axis.X({
-        graph: graph,
-        orientation: 'bottom',
-        element: document.getElementById(x_axis),
-        tickFormat: graph.x.tickFormat()
+    var xAxis = new Rickshaw.Graph.Axis.Time({
+        graph: graph
     });
 
     xAxis.render();

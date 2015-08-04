@@ -25,7 +25,7 @@
 	opacity: 0.5;
 	white-space: nowrap;
 	margin-left: 3px;
-	bottom: 1px;
+	bottom: -17px;
 }
 
 /* annotations */
@@ -187,11 +187,6 @@
 }
 
 .custom_slider {
+	top: 20px;
 	left: 40px;
-}
-
-.custom_x_axis {
-	position: relative;
-	left: 40px;
-	height: 40px;
 }
