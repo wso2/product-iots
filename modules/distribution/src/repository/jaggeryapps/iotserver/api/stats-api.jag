@@ -101,26 +101,22 @@ function getDeviceData(deviceType, deviceId){
 }
 
 function getFireAlarmData(user, device, from, to) {
-	if (stats['cpuTemperatureData'] == null){
-		stats['cpuTemperatureData'] = [];
-	}
 	if (stats['temperatureData'] == null){
 		stats['temperatureData'] = [];
-	}
-	if (stats['fanData'] == null){
-		stats['fanData'] = [];
-	}
-	if (stats['bulbData'] == null){
-		stats['bulbData'] = [];
 	}
 	if (stats['sonarData'] == null){
 		stats['sonarData'] = [];
 	}
-	stats['cpuTemperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_CPU_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
+	if (stats['motionData'] == null){
+		stats['motionData'] = [];
+	}
+	if (stats['lightData'] == null){
+		stats['lightData'] = [];
+	}
 	stats['temperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
-	stats['fanData'].push({"device": device.name, "stats" : getSensorData("DEVICE_FAN_USAGE_SUMMARY", "status", user, device.deviceIdentifier, from, to)});
-	stats['bulbData'].push({"device": device.name, "stats" : getSensorData("DEVICE_BULB_USAGE_SUMMARY", "status", user, device.deviceIdentifier, from, to)});
 	stats['sonarData'].push({"device": device.name, "stats" : getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)});
+	stats['motionData'].push({"device": device.name, "stats" : getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
+	stats['lightData'].push({"device": device.name, "stats" : getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
 }
 
 function getSensebotData(user, device, from, to) {

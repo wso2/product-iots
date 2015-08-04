@@ -315,7 +315,7 @@ function drawLineGraph(graphId, chartDataRaw) {
         var chartData = [];
         if (chartDataRaw[i].stats.length > 0) {
             for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
-                chartData.push({x: parseInt(chartDataRaw[i].stats[j].x), y: parseInt(chartDataRaw[i].stats[j].y)});
+                chartData.push({x: parseInt(chartDataRaw[i].stats[j].time), y: parseInt(chartDataRaw[i].stats[j].value)});
             }
             graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
         }
@@ -406,7 +406,7 @@ function drawBarGraph(graphId, chartDataRaw) {
         var chartData = [];
         if (chartDataRaw[i].stats.length > 0) {
             for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
-                chartData.push({x: parseInt(chartDataRaw[i].stats[j].x), y: parseInt(chartDataRaw[i].stats[j].y)});
+                chartData.push({x: parseInt(chartDataRaw[i].stats[j].time), y: parseInt(chartDataRaw[i].stats[j].value)});
             }
             graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
         }
