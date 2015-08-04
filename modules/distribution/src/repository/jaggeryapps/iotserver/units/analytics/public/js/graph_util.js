@@ -142,6 +142,8 @@ $('body').on('click', '.btn-group button', function (e) {
 });
 
 function getDateTime(from, to) {
+    fromDate = from;
+    toDate = to;
     startDate = new Date(from);
     endDate = new Date(to);
     DateRange = convertDate(startDate) + " " + configObject.separator + " " + convertDate(endDate);
@@ -292,7 +294,7 @@ function drawLineGraph(graphId, chartDataRaw) {
         + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
         + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
         + graphId + '"></div></div><div id="' + chartDiv
-        + '" class="custom_rickshaw_graph"></div><div id="' + sliderDiv
+        + '" class="custom_rickshaw_graph"></div><div class="custom_x_axis"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
 
     var graphConfig = {
@@ -379,7 +381,7 @@ function drawBarGraph(graphId, chartDataRaw) {
         + '" class="custom_y_axis"></div><div class="legend_container" id="legend_container'
         + graphId + '"><div id="smoother' + graphId + '" title="Smoothing"></div><div class="legend" id="legend'
         + graphId + '"></div></div><div id="' + chartDiv
-        + '" class="custom_rickshaw_graph"></div><div id="' + sliderDiv
+        + '" class="custom_rickshaw_graph"></div><div class="custom_x_axis"></div><div id="' + sliderDiv
         + '" class="custom_slider"></div>');
 
     var graphConfig = {
