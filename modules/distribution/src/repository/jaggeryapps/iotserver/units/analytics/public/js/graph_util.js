@@ -84,7 +84,7 @@ var configObject = {
     },
     shortcuts: 'hide',
     endDate: currentDay,
-
+    maxDays: 2,
     getValue: function () {
         return this.value;
     },
@@ -112,28 +112,28 @@ $(document).ready(function () {
     getDateTime(startDate.getTime(), endDate.getTime());
 });
 
-//hour picker
+//hour
 $('#hour-btn').on('click', function () {
     initDate();
     getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
 });
 
-//day picker
-$('#today-btn').on('click', function () {
+//12 hours
+$('#h12-btn').on('click', function () {
     initDate();
-    getDateTime(currentDay.getTime() - 86400000, currentDay.getTime());
+    getDateTime(currentDay.getTime() - (3600000 * 12), currentDay.getTime());
 });
 
-//week picker
-$('#week-btn').on('click', function () {
+//24 hours
+$('#h24-btn').on('click', function () {
     initDate();
-    getDateTime(currentDay.getTime() - 604800000, currentDay.getTime());
+    getDateTime(currentDay.getTime() - (3600000 * 24), currentDay.getTime());
 });
 
-//month picker
-$('#month-btn').on('click', function () {
+//48 hours
+$('#h48-btn').on('click', function () {
     initDate();
-    getDateTime(currentDay.getTime() - (604800000 * 4), currentDay.getTime());
+    getDateTime(currentDay.getTime() - (3600000 * 48), currentDay.getTime());
 });
 
 $('body').on('click', '.btn-group button', function (e) {
@@ -315,9 +315,16 @@ function drawLineGraph(graphId, chartDataRaw) {
         var chartData = [];
         if (chartDataRaw[i].stats.length > 0) {
             for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
-                chartData.push({x: parseInt(chartDataRaw[i].stats[j].time), y: parseInt(chartDataRaw[i].stats[j].value)});
+                chartData.push({
+                    x: parseInt(chartDataRaw[i].stats[j].time),
+                    y: parseInt(chartDataRaw[i].stats[j].value)
+                });
             }
-            graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
+            graphConfig['series'].push({
+                'color': color[k],
+                'data': summerize(chartData),
+                'name': chartDataRaw[i].device
+            });
         }
         if (++k == color.length) {
             k = 0;
@@ -358,11 +365,11 @@ function drawLineGraph(graphId, chartDataRaw) {
         element: document.getElementById(sliderDiv)
     });
 
-    var legend = new Rickshaw.Graph.Legend( {
+    var legend = new Rickshaw.Graph.Legend({
         graph: graph,
         element: document.getElementById('legend' + graphId)
 
-    } );
+    });
 }
 
 
@@ -401,9 +408,16 @@ function drawBarGraph(graphId, chartDataRaw) {
         var chartData = [];
         if (chartDataRaw[i].stats.length > 0) {
             for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
-                chartData.push({x: parseInt(chartDataRaw[i].stats[j].time), y: parseInt(chartDataRaw[i].stats[j].value)});
+                chartData.push({
+                    x: parseInt(chartDataRaw[i].stats[j].time),
+                    y: parseInt(chartDataRaw[i].stats[j].value)
+                });
             }
-            graphConfig['series'].push({'color': color[k], 'data': chartData, 'name': chartDataRaw[i].device});
+            graphConfig['series'].push({
+                'color': color[k],
+                'data': summerize(chartData),
+                'name': chartDataRaw[i].device
+            });
         }
         if (++k == color.length) {
             k = 0;
@@ -445,11 +459,11 @@ function drawBarGraph(graphId, chartDataRaw) {
         element: document.getElementById(sliderDiv)
     });
 
-    var legend = new Rickshaw.Graph.Legend( {
+    var legend = new Rickshaw.Graph.Legend({
         graph: graph,
         element: document.getElementById('legend' + graphId)
 
-    } );
+    });
 }
 
 function scaleGraphs() {
@@ -470,11 +484,11 @@ function scaleGraphs() {
     }
 
     //Scale graphs
-    var sliderX = graphWidth * 60 * 60 / (toDate - fromDate);
+    var sliderX = graphWidth * 60 * 60000 / (toDate - fromDate);
     if (sliderX < graphWidth) {
         // fake handle move
-        if (sliderX < 100) {
-            sliderX = 100;
+        if (sliderX < 50) {
+            sliderX = 50;
         }
         var edown = document.createEvent("HTMLEvents");
         edown.initEvent("mousedown", true, true);
@@ -500,4 +514,20 @@ function convertDate(date) {
     return date.getFullYear() + '-' + (('' + month).length < 2 ? '0' : '')
         + month + '-' + (('' + day).length < 2 ? '0' : '') + day + " " + (('' + hour).length < 2 ? '0' : '')
         + hour + ":" + (('' + minute).length < 2 ? '0' : '') + minute;
+}
+
+function summerize(data) {
+    if (data.length > 1500) {
+        var nData = [];
+        var i = 1;
+        while (i < data.length) {
+            var t_avg = (data[i - 1].x + data[i].x) / 2;
+            var v_avg = (data[i - 1].y + data[i].y) / 2;
+            nData.push({x: t_avg, y: v_avg});
+            i += 2;
+        }
+        return summerize(nData);
+    } else {
+        return data;
+    }
 }

@@ -81,7 +81,7 @@
     float: right;
     padding-right: 10px;
     width: 0;
-    z-index: 999;
+    z-index: 1;
     position: relative;
     opacity: 0.7;
 }
