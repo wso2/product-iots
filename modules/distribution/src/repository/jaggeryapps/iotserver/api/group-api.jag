@@ -76,7 +76,6 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}
 	endPoint = deviceCloudService + "/group/id/" + groupId;
-	log.info(endPoint);
 	data = {"username": user.username};
 	result = get(endPoint, data, "json");
 
@@ -226,10 +225,17 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 
 	groupId = uriMatcher.elements().groupId;
 
+	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}
+	endPoint = deviceCloudService + "/group/id/" + groupId;
+	data = {"username": user.username};
+	var group = get(endPoint, data, "json").data;
+
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
 	endPoint = deviceCloudService + "/group/id/" + groupId + "/device/all";
 	data = {"username": user.username};
 	result = get(endPoint, data, "json");
+	group.devices = result.data;
+	result.data = {group: group}
 
 } else if (uriMatcher.match("/{context}/api/group/id/{groupId}/assign")) {
 
