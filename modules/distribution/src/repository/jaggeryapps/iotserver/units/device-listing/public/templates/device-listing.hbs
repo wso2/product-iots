@@ -28,13 +28,15 @@
 											</span>
                                 <span class="lbl-action">View</span>
                             </a>
-                            <a href="#" class="group-device-link" data-deviceid="{{deviceIdentifier}}" data-devicetype="{{type}}" data-devicename="{{name}}">
+							{{#if_owner enrolmentInfo.owner }}
+                                <a href="#" class="group-device-link" data-deviceid="{{deviceIdentifier}}" data-devicetype="{{type}}" data-devicename="{{name}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-group fw-stack-1x"></i>
 											</span>
-                                <span class="lbl-action">Group</span>
-                            </a>
+                                    <span class="lbl-action">Group</span>
+                                </a>
+							{{/if_owner}}
                             <a href="#" class="edit-device-link" data-deviceid="{{deviceIdentifier}}" data-devicetype="{{type}}" data-devicename="{{name}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>

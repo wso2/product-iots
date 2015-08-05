@@ -1,8 +1,8 @@
 {{#zone "main"}}
-    <span id="permission" data-permission="{{permissions}}"></span>
+    <span id="permission" data-user="{{user}}" data-permission="{{permissions}}"></span>
     <span id="request-group-id" data-groupid="{{groupId}}"></span>
     <!-- form content placeholder -->
-    <div id="ast-container" class="ast-container list-view">
+    <div id="ast-container-parent" class="ast-container list-view">
         <!-- no devices found -->
         <div class="container-fluid wr-content-alt">
             <div class="ctrl-info-panel col-md-6 col-centered">
@@ -47,6 +47,16 @@
                     Associate Existing Device
                 </a>
                 </p>
+            </div>
+        </div>
+        <!-- /no devices found -->
+    </div>
+
+    <div id="no-devices-in-group-div-content" class="hide">
+        <!-- no devices found -->
+        <div class="container-fluid">
+            <div class="ctrl-info-panel col-md-6 col-centered">
+                <h3>You don't have any associated devices here.</h3>
             </div>
         </div>
         <!-- /no devices found -->
@@ -248,6 +258,8 @@
     </div>
 {{/zone}}
 {{#zone "bottomJs"}}
+    <script id="group-listing" src="{{self.publicURL}}/templates/group-listing.hbs"
+            type="text/x-handlebars-template"></script>
     <script id="device-listing" data-image-resource="{{self.publicURL}}/images/"
             src="{{self.publicURL}}/templates/device-listing.hbs" type="text/x-handlebars-template"></script>
     <script src="{{self.publicURL}}/js/device-listing.js"></script>

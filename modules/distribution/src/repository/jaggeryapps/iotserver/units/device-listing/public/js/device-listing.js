@@ -16,12 +16,17 @@
  * under the License.
  */
 
+var groupId, user;
+
 (function () {
     var cache = {};
     var permissionSet = {};
     var validateAndReturn = function (value) {
         return (value == undefined || value == null) ? "Unspecified" : value;
     };
+    Handlebars.registerHelper("groupMap", function (group) {
+        group.id = validateAndReturn(group.id);
+    });
     Handlebars.registerHelper("deviceMap", function (device) {
         device.owner = validateAndReturn(device.owner);
         device.ownership = validateAndReturn(device.ownership);
@@ -31,6 +36,13 @@
                 total[current.name] = validateAndReturn(current.value);
                 return total;
             }, {});
+        }
+    });
+    Handlebars.registerHelper("if_owner", function (owner, opts) {
+        if (owner == user){
+            return opts.fn(this);
+        }else{
+            opts.inverse(this);
         }
     });
 
@@ -47,13 +59,12 @@
 /*
  * Setting-up global variables.
  */
-var deviceCheckbox = "#ast-container .ctrl-wr-asset .itm-select input[type='checkbox']";
-var assetContainer = "#ast-container";
+var deviceCheckbox = "#ast-container-parent .ctrl-wr-asset .itm-select input[type='checkbox']";
+var assetContainerParent = "#ast-container-parent";
 
 /*
  * DOM ready functions.
  */
-var groupId;
 $(document).ready(function () {
     /* Adding selected class for selected devices */
     $(deviceCheckbox).each(function () {
@@ -61,6 +72,7 @@ $(document).ready(function () {
     });
 
     var i;
+    user = $("#permission").data("user");
     var permissionList = $("#permission").data("permission");
     for (i = 0; i < permissionList.length; i++) {
         $.setPermission(permissionList[i]);
@@ -113,9 +125,9 @@ function changeDeviceView(view, selection) {
     });
     $(selection).addClass("selected");
     if (view == "list") {
-        $(assetContainer).addClass("list-view");
+        $(assetContainerParent).addClass("list-view");
     } else {
-        $(assetContainer).removeClass("list-view");
+        $(assetContainerParent).removeClass("list-view");
     }
 }
 
@@ -131,63 +143,60 @@ function addDeviceSelectedClass(checkbox) {
         $(checkbox).closest(".ctrl-wr-asset").removeClass("selected device-select");
     }
 }
-function loadDevices(searchType, searchParam) {
-    var deviceListing = $("#device-listing");
-    var deviceListingSrc = deviceListing.attr("src");
-    var imageResource = deviceListing.data("image-resource");
-    $.template("device-listing", deviceListingSrc, function (template) {
+
+function loadDevices() {
+    var groupListing = $("#group-listing");
+    var groupListingSrc = groupListing.attr("src");
+    $.template("group-listing", groupListingSrc, function (template) {
         var serviceURL;
-        if ($.hasPermission("LIST_DEVICES")) {
-            if (groupId && groupId != "0") {
-                serviceURL = "/iotserver/api/group/id/" + groupId + "/device/all";
-            } else {
-                serviceURL = "/iotserver/api/devices/all";
-            }
-        } else if ($.hasPermission("LIST_OWN_DEVICES")) {
-            //Get authenticated users devices
-            if (groupId && groupId != "0") {
-                serviceURL = "/iotserver/api/group/id/" + groupId + "/device/all";
-            } else {
-                serviceURL = "/iotserver/api/devices/all";
-            }
+        if (groupId && groupId != "0") {
+            serviceURL = "/iotserver/api/group/id/" + groupId + "/device/all";
         } else {
-            $("#ast-container").html("Permission denied");
-            return;
-        }
-        if (searchParam) {
-            if (searchType == "users") {
-                serviceURL = serviceURL + "?user=" + searchParam;
-            } else if (searchType == "user-roles") {
-                serviceURL = serviceURL + "?role=" + searchParam;
-            } else {
-                serviceURL = serviceURL + "?type=" + searchParam;
-            }
+            serviceURL = "/iotserver/api/devices/all";
         }
         var successCallback = function (data) {
             data = JSON.parse(data);
             var viewModel = {};
+            var groups;
             if (groupId && groupId != "0") {
-                data.data = data;
+                groups = data;
+            } else {
+                groups = data.data;
             }
-            viewModel.devices = data.data;
-            viewModel.imageLocation = imageResource;
-            if (!data.data || data.data.length <= 0) {
+            viewModel.groups = groups;
+            if (!groups || groups.length <= 0) {
                 if (groupId && groupId != "0") {
-                    $("#ast-container").html($("#no-grouped-devices-div-content").html());
+                    $("#ast-container-parent").html($("#no-grouped-devices-div-content").html());
                 } else {
-                    $("#ast-container").html($("#no-devices-div-content").html());
+                    $("#ast-container-parent").html($("#no-devices-div-content").html());
                 }
             } else {
                 var content = template(viewModel);
-                $("#ast-container").html(content);
-                /*
-                 * On device checkbox select add parent selected style class
-                 */
-                $(deviceCheckbox).click(function () {
-                    addDeviceSelectedClass(this);
+                $("#ast-container-parent").html(content);
+                var deviceListing = $("#device-listing");
+                var deviceListingSrc = deviceListing.attr("src");
+                var imageResource = deviceListing.data("image-resource");
+                $.template("device-listing", deviceListingSrc, function (template) {
+                    for (var g in groups) {
+                        if (groups[g].devices && groups[g].devices.length > 0){
+                            viewModel = {};
+                            viewModel.devices = groups[g].devices;
+                            viewModel.imageLocation = imageResource;
+                            content = template(viewModel);
+                        }else{
+                            content = $("#no-devices-in-group-div-content").html();
+                        }
+                        $("#ast-container-" + groups[g].id).html(content);
+                    }
+                    /*
+                     * On device checkbox select add parent selected style class
+                     */
+                    $(deviceCheckbox).click(function () {
+                        addDeviceSelectedClass(this);
+                    });
+                    attachEvents();
+                    formatDates();
                 });
-                attachEvents();
-                formatDates();
             }
         };
         invokerUtil.get(serviceURL,
@@ -376,7 +385,7 @@ function attachEvents() {
      */
     if (groupId && groupId != "0") {
         $("a.group-device-link").remove();
-    }else{
+    } else {
         $("a.group-device-link").click(function () {
             var deviceId = $(this).data("deviceid");
             var deviceType = $(this).data("devicetype");
