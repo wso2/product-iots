@@ -70,8 +70,6 @@ Rickshaw.Graph.Renderer.BinaryBar = Rickshaw.Class.create(Rickshaw.Graph.Rendere
 
 function initDate() {
     currentDay = new Date();
-    startDate = new Date(currentDay.getTime() - (60 * 60 * 24 * 100));
-    endDate = new Date(currentDay.getTime());
 }
 
 var configObject = {
@@ -109,7 +107,8 @@ $(document).ready(function () {
             getStats(fromDate, toDate);
         }
     );
-    getDateTime(startDate.getTime(), endDate.getTime());
+    getDateTime(currentDay.getTime() - 3600000, currentDay.getTime());
+    $('#hour-btn').addClass('active');
 });
 
 //hour
@@ -311,19 +310,37 @@ function drawLineGraph(graphId, chartDataRaw) {
     };
 
     var k = 0;
+    var min = Number.MAX_VALUE;
+    var max = Number.MIN_VALUE;
+    var range_min = 99999, range_max = 0;
     for (var i = 0; i < chartDataRaw.length; i++) {
         var chartData = [];
         if (chartDataRaw[i].stats.length > 0) {
+            var max_val = parseInt(chartDataRaw[i].stats[0].value);
+            var min_val = max_val;
             for (var j = 0; j < chartDataRaw[i].stats.length; j++) {
+                var y_val = parseInt(chartDataRaw[i].stats[j].value);
+                if (y_val > max_val) {
+                    max_val = y_val;
+                    if (range_max < max_val) {
+                        range_max = max_val;
+                    }
+                } else if (y_val < min_val) {
+                    min_val = y_val;
+                    if (range_min > min_val) {
+                        range_min = min_val;
+                    }
+                }
                 chartData.push({
                     x: parseInt(chartDataRaw[i].stats[j].time),
-                    y: parseInt(chartDataRaw[i].stats[j].value)
+                    y: y_val
                 });
             }
             graphConfig['series'].push({
                 'color': color[k],
                 'data': summerizeLine(chartData),
-                'name': chartDataRaw[i].device
+                'name': chartDataRaw[i].device,
+                'scale': d3.scale.linear().domain([Math.min(min, min_val), Math.max(max, max_val)]).nice()
             });
         }
         if (++k == color.length) {
@@ -340,22 +357,19 @@ function drawLineGraph(graphId, chartDataRaw) {
 
     graph.render();
 
-    var hoverDetail = new Rickshaw.Graph.HoverDetail({
-        graph: graph
-    });
-
     var xAxis = new Rickshaw.Graph.Axis.Time({
         graph: graph
     });
 
     xAxis.render();
 
-    var yAxis = new Rickshaw.Graph.Axis.Y({
+    var yAxis = new Rickshaw.Graph.Axis.Y.Scaled({
         graph: graph,
         orientation: 'left',
         element: document.getElementById(y_axis),
         width: 40,
-        height: 410
+        height: 410,
+        'scale': d3.scale.linear().domain([Math.min(min, range_min), Math.max(max, range_max)]).nice()
     });
 
     yAxis.render();
@@ -369,6 +383,25 @@ function drawLineGraph(graphId, chartDataRaw) {
         graph: graph,
         element: document.getElementById('legend' + graphId)
 
+    });
+
+    var hoverDetail = new Rickshaw.Graph.HoverDetail({
+        graph: graph
+    });
+
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+        graph: graph,
+        legend: legend
+    });
+
+    var order = new Rickshaw.Graph.Behavior.Series.Order({
+        graph: graph,
+        legend: legend
+    });
+
+    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+        graph: graph,
+        legend: legend
     });
 }
 
@@ -464,6 +497,21 @@ function drawBarGraph(graphId, chartDataRaw) {
         element: document.getElementById('legend' + graphId)
 
     });
+
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+        graph: graph,
+        legend: legend
+    });
+
+    var order = new Rickshaw.Graph.Behavior.Series.Order({
+        graph: graph,
+        legend: legend
+    });
+
+    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+        graph: graph,
+        legend: legend
+    });
 }
 
 function scaleGraphs() {
@@ -538,7 +586,7 @@ function summerizeBar(data) {
         var i = 1;
         while (i < data.length - 1) {
             var t_avg = (data[i - 1].x + data[i].x) / 2;
-            var v_avg = (data[i - 1].y + data[i].y + data[i+1].y) / 3;
+            var v_avg = (data[i - 1].y + data[i].y + data[i + 1].y) / 3;
             nData.push({x: t_avg, y: Math.round(v_avg)});
             i += 2;
         }
