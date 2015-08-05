@@ -322,7 +322,7 @@ function drawLineGraph(graphId, chartDataRaw) {
             }
             graphConfig['series'].push({
                 'color': color[k],
-                'data': summerize(chartData),
+                'data': summerizeLine(chartData),
                 'name': chartDataRaw[i].device
             });
         }
@@ -415,7 +415,7 @@ function drawBarGraph(graphId, chartDataRaw) {
             }
             graphConfig['series'].push({
                 'color': color[k],
-                'data': summerize(chartData),
+                'data': summerizeBar(chartData),
                 'name': chartDataRaw[i].device
             });
         }
@@ -516,7 +516,7 @@ function convertDate(date) {
         + hour + ":" + (('' + minute).length < 2 ? '0' : '') + minute;
 }
 
-function summerize(data) {
+function summerizeLine(data) {
     if (data.length > 1500) {
         var nData = [];
         var i = 1;
@@ -526,7 +526,23 @@ function summerize(data) {
             nData.push({x: t_avg, y: v_avg});
             i += 2;
         }
-        return summerize(nData);
+        return summerizeLine(nData);
+    } else {
+        return data;
+    }
+}
+
+function summerizeBar(data) {
+    if (data.length > 1500) {
+        var nData = [];
+        var i = 1;
+        while (i < data.length - 1) {
+            var t_avg = (data[i - 1].x + data[i].x) / 2;
+            var v_avg = (data[i - 1].y + data[i].y + data[i+1].y) / 3;
+            nData.push({x: t_avg, y: Math.round(v_avg)});
+            i += 2;
+        }
+        return summerizeBar(nData);
     } else {
         return data;
     }
