@@ -1,13 +1,18 @@
 function onRequest(context){
-    context.sketchPath = "api/device/sketch";
     var groupId = request.getParameter("groupId");
+    var title;
     if (groupId){
         context.groupId = groupId;
-        context.title = "Group Analytics";
+        title = request.getParameter("name");
     }else{
         context.groupId = 0;
-        context.title = "Device Analytics";
+        var deviceModule = require("/modules/device.js").deviceModule;
+        var deviceId = request.getParameter("deviceId");
+        var deviceType = request.getParameter("deviceType");
+
+        title = deviceModule.getDevice(deviceType, deviceId).name;
     }
+    context.title = title + " Analytics";
 
     return context;
 }
