@@ -64,7 +64,7 @@ $(document).ready(function () {
             return $("#content-filter-types").html();
         }
     });
-    changeGroupView('grid', this);
+    changeGroupView('grid', $('a.ctrl-filter-grid'));
 });
 
 /*
