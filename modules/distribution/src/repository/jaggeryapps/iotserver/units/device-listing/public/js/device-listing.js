@@ -164,39 +164,42 @@ function loadDevices() {
             } else {
                 groups = data.data;
             }
-            viewModel.groups = groups;
-            var content = template(viewModel);
-            $("#ast-container-parent").html(content);
-            var deviceListing = $("#device-listing");
-            var deviceListingSrc = deviceListing.attr("src");
-            var imageResource = deviceListing.data("image-resource");
-            $.template("device-listing", deviceListingSrc, function (template) {
-                for (var g in groups) {
-                    if (groups[g].devices && groups[g].devices.length > 0) {
-                        viewModel = {};
-                        viewModel.devices = groups[g].devices;
-                        viewModel.imageLocation = imageResource;
-                        content = template(viewModel);
-                    } else {
-                        if (groupId && groupId != "0") {
-                            content = $("#no-grouped-devices-div-content").html();
-                        } else if (groups[g].id == 0 && g == 0) {
-                            content = $("#no-devices-div-content").html();
+            if (groups.length == 1 && groups[0].id == 0) {
+                $("#ast-container-parent").html($("#no-devices-div-content").html());
+            } else {
+                viewModel.groups = groups;
+                var content = template(viewModel);
+                $("#ast-container-parent").html(content);
+                var deviceListing = $("#device-listing");
+                var deviceListingSrc = deviceListing.attr("src");
+                var imageResource = deviceListing.data("image-resource");
+                $.template("device-listing", deviceListingSrc, function (template) {
+                    for (var g in groups) {
+                        if (groups[g].devices && groups[g].devices.length > 0) {
+                            viewModel = {};
+                            viewModel.devices = groups[g].devices;
+                            viewModel.imageLocation = imageResource;
+                            content = template(viewModel);
                         } else {
-                            content = $("#no-devices-in-group-div-content").html();
+                            if (groupId && groupId != "0") {
+                                content = $("#no-grouped-devices-div-content").html();
+                            } else {
+                                content = $("#no-devices-in-group-div-content").html();
+                            }
                         }
+                        $("#ast-container-" + groups[g].id).html(content);
                     }
-                    $("#ast-container-" + groups[g].id).html(content);
-                }
-                /*
-                 * On device checkbox select add parent selected style class
-                 */
-                $(deviceCheckbox).click(function () {
-                    addDeviceSelectedClass(this);
+                    /*
+                     * On device checkbox select add parent selected style class
+                     */
+                    $(deviceCheckbox).click(function () {
+                        addDeviceSelectedClass(this);
+                    });
+                    attachGroupEvents();
+                    attachDeviceEvents();
+                    formatDates();
                 });
-                attachEvents();
-                formatDates();
-            });
+            }
         };
         invokerUtil.get(serviceURL,
             successCallback, function (message) {
@@ -260,7 +263,7 @@ function hidePopup() {
 /**
  * Following functions should be triggered after AJAX request is made.
  */
-function attachEvents() {
+function attachDeviceEvents() {
     /**
      * Following click function would execute
      * when a user clicks on "Remove" link
@@ -535,7 +538,7 @@ function attachGroupAdding() {
 /**
  * Following functions should be triggered after AJAX request is made.
  */
-function attachEvents() {
+function attachGroupEvents() {
 
     /**
      * Following click function would execute
