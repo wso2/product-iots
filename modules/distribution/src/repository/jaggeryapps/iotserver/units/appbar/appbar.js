@@ -86,6 +86,12 @@ function onRequest(context) {
                 icon: "fw-add",
                 url: "/iotserver/devices/add-device"
             });
+            links["device-mgt"].push({
+                title: "Add Group",
+                icon: "fw-add",
+                url: "#",
+                class: "add-group-link"
+            });
         }
         if (permissions.ADD_DEVICE) {
             links["group-mgt"].push({
