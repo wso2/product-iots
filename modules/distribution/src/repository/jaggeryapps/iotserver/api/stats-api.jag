@@ -49,7 +49,6 @@ if (uriMatcher.match("/{context}/api/stats")) {
     deviceId = request.getParameter("deviceId");
     deviceType = request.getParameter("deviceType");
 
-    log.info("deviceId : " + deviceId + " from : " + from + " to : " + to);
 	getDeviceData(deviceType, deviceId);
 
 }else if (uriMatcher.match("/{context}/api/stats/group")){
@@ -58,7 +57,6 @@ if (uriMatcher.match("/{context}/api/stats")) {
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
 	var endPoint = deviceCloudService + "/group/id/" + groupId + "/device/all";
 	var data = {"username": user.username};
-	log.info("ep: " + endPoint);
 	var devices = get(endPoint, data, "json");
 
 	for (var device in devices.data){
@@ -132,6 +130,46 @@ function getSensebotData(user, device, from, to) {
 	if (stats['temperatureData'] == null){
 		stats['temperatureData'] = [];
 	}
+
+	//Uncomment below section to emulate data
+	/*
+	var timeInterval = 30;
+	var i, rnd, chartData;
+	chartData = [];
+	var i = parseInt(from);
+	while (i < parseInt(to)) {
+	    rnd = rnd = Math.random() * 50;
+		chartData.push({time: i, value: rnd});
+	    i += timeInterval;
+	}
+	stats['sonarData'].push({"device": device.name, "stats" : chartData});
+	chartData = [];
+	var i = parseInt(from);
+	while (i < parseInt(to)) {
+		rnd = Math.round(Math.random());
+		chartData.push({time: i, value: rnd});
+		i += timeInterval;
+	}
+	stats['motionData'].push({"device": device.name, "stats" : chartData});
+	chartData = [];
+	var i = parseInt(from);
+	while (i < parseInt(to)) {
+		rnd = Math.round(Math.random());
+		chartData.push({time: i, value: rnd});
+		i += timeInterval;
+	}
+	stats['lightData'].push({"device": device.name, "stats" : chartData});
+	chartData = [];
+	var i = parseInt(from);
+	while (i < parseInt(to)) {
+		rnd = Math.random() * (27 - 24) + 24;
+		chartData.push({time: i, value: rnd});
+		i += timeInterval;
+	}
+	stats['temperatureData'].push({"device": device.name, "stats" : chartData});
+	*/
+
+	//Comment below section to emulate data
 	stats['sonarData'].push({"device": device.name, "stats" : getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)});
 	stats['motionData'].push({"device": device.name, "stats" : getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
 	stats['lightData'].push({"device": device.name, "stats" : getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
