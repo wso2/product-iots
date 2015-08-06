@@ -9,7 +9,7 @@
         <input type="hidden" name="users" value="{{users}}">
     </form>
 
-    <div class="ctrl-wr-asset" data-groupid="{{id}}">
+    <div class="ctrl-wr-asset view-group-link" data-groupid="{{id}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
                 <input type="checkbox"/>
@@ -34,6 +34,20 @@
 												<i class="fw fw-view fw-stack-1x"></i>
 											</span>
                             <span class="lbl-action">View</span>
+                        </a>
+                        <a href="/iotserver/devices?groupId={{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-devices fw-stack-1x"></i>
+											</span>
+                            <span class="lbl-action">Devices</span>
+                        </a>
+                        <a href="/iotserver/analytics?groupId={{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-sequence fw-stack-1x"></i>
+											</span>
+                            <span class="lbl-action">Stats</span>
                         </a>
                         <a href="#" class="share-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">

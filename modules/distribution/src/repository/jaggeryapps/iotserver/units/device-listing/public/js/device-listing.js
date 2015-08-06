@@ -39,9 +39,9 @@ var groupId, user;
         }
     });
     Handlebars.registerHelper("if_owner", function (owner, opts) {
-        if (owner == user){
+        if (owner == user) {
             return opts.fn(this);
-        }else{
+        } else {
             opts.inverse(this);
         }
     });
@@ -164,40 +164,38 @@ function loadDevices() {
                 groups = data.data;
             }
             viewModel.groups = groups;
-            if (!groups || groups.length <= 0) {
-                if (groupId && groupId != "0") {
-                    $("#ast-container-parent").html($("#no-grouped-devices-div-content").html());
-                } else {
-                    $("#ast-container-parent").html($("#no-devices-div-content").html());
-                }
-            } else {
-                var content = template(viewModel);
-                $("#ast-container-parent").html(content);
-                var deviceListing = $("#device-listing");
-                var deviceListingSrc = deviceListing.attr("src");
-                var imageResource = deviceListing.data("image-resource");
-                $.template("device-listing", deviceListingSrc, function (template) {
-                    for (var g in groups) {
-                        if (groups[g].devices && groups[g].devices.length > 0){
-                            viewModel = {};
-                            viewModel.devices = groups[g].devices;
-                            viewModel.imageLocation = imageResource;
-                            content = template(viewModel);
-                        }else{
+            var content = template(viewModel);
+            $("#ast-container-parent").html(content);
+            var deviceListing = $("#device-listing");
+            var deviceListingSrc = deviceListing.attr("src");
+            var imageResource = deviceListing.data("image-resource");
+            $.template("device-listing", deviceListingSrc, function (template) {
+                for (var g in groups) {
+                    if (groups[g].devices && groups[g].devices.length > 0) {
+                        viewModel = {};
+                        viewModel.devices = groups[g].devices;
+                        viewModel.imageLocation = imageResource;
+                        content = template(viewModel);
+                    } else {
+                        if (groupId && groupId != "0") {
+                            content = $("#no-grouped-devices-div-content").html();
+                        } else if (groups[g].id == 0 && g == 0) {
+                            content = $("#no-devices-div-content").html();
+                        } else {
                             content = $("#no-devices-in-group-div-content").html();
                         }
-                        $("#ast-container-" + groups[g].id).html(content);
                     }
-                    /*
-                     * On device checkbox select add parent selected style class
-                     */
-                    $(deviceCheckbox).click(function () {
-                        addDeviceSelectedClass(this);
-                    });
-                    attachEvents();
-                    formatDates();
+                    $("#ast-container-" + groups[g].id).html(content);
+                }
+                /*
+                 * On device checkbox select add parent selected style class
+                 */
+                $(deviceCheckbox).click(function () {
+                    addDeviceSelectedClass(this);
                 });
-            }
+                attachEvents();
+                formatDates();
+            });
         };
         invokerUtil.get(serviceURL,
             successCallback, function (message) {
@@ -283,9 +281,9 @@ function attachEvents() {
                     if (status == 200) {
                         $(modalPopupContent).html($('#remove-device-200-content').html());
                         $('div[data-deviceid="' + deviceId + '"]').remove();
-                        $("a#remove-device-200-link").click(function () {
+                        setTimeout(function () {
                             hidePopup();
-                        });
+                        }, 2000);
                     } else if (status == 400) {
                         $(modalPopupContent).html($('#remove-device-400-content').html());
                         $("a#remove-device-400-link").click(function () {
@@ -344,9 +342,9 @@ function attachEvents() {
                     if (status == 200) {
                         $(modalPopupContent).html($('#edit-device-200-content').html());
                         $("div[data-deviceid='" + deviceId + "'] .ast-name").html(newDeviceName);
-                        $("a#edit-device-200-link").click(function () {
+                        setTimeout(function () {
                             hidePopup();
-                        });
+                        }, 2000);
                     } else if (status == 400) {
                         $(modalPopupContent).html($('#device-400-content').html());
                         $("a#device-400-link").click(function () {
@@ -383,9 +381,7 @@ function attachEvents() {
      * when a user clicks on "Group" link
      * on Device Management page in WSO2 MDM Console.
      */
-    if (groupId && groupId != "0") {
-        $("a.group-device-link").remove();
-    } else {
+    if ($("a.group-device-link").length > 0) {
         $("a.group-device-link").click(function () {
             var deviceId = $(this).data("deviceid");
             var deviceType = $(this).data("devicetype");
@@ -423,9 +419,10 @@ function attachEvents() {
                                     var status = jqxhr.status;
                                     if (status == 200) {
                                         $(modalPopupContent).html($('#group-associate-device-200-content').html());
-                                        $("a#group-associate-device-200-link").click(function () {
+                                        loadDevices();
+                                        setTimeout(function () {
                                             hidePopup();
-                                        });
+                                        }, 2000);
                                     } else if (status == 400) {
                                         $(modalPopupContent).html($('#device-400-content').html());
                                         $("a#device-400-link").click(function () {

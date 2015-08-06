@@ -14,10 +14,10 @@
                     <div class="ast-title">
                         <h3 class="ast-name">{{name}}</h3>
                         <span class="ast-auth">Device Type: {{type}}</span>
-                        <span class="ast-auth">Date of Enrollment: <span class="formatDate">{{enrolmentInfo.dateOfEnrolment}}</span></span>
+                        <span class="ast-auth">Enrolled On: <span class="formatDate">{{enrolmentInfo.dateOfEnrolment}}</span></span>
                     </div>
                     <div class="ast-model">
-                        <span class="ast-ver">{{enrolmentInfo.owner}}</span>
+                        <span class="ast-ver">Owner: {{enrolmentInfo.owner}}</span>
                         <span class="ast-published">{{status}}</span>
 
                         <div class="ast-btn-group">
@@ -27,6 +27,13 @@
 												<i class="fw fw-view fw-stack-1x"></i>
 											</span>
                                 <span class="lbl-action">View</span>
+                            </a>
+                            <a href="/iotserver/analytics?deviceId={{deviceIdentifier}}&deviceType={{type}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-sequence fw-stack-1x"></i>
+											</span>
+                                <span class="lbl-action">Stats</span>
                             </a>
 							{{#if_owner enrolmentInfo.owner }}
                                 <a href="#" class="group-device-link" data-deviceid="{{deviceIdentifier}}" data-devicetype="{{type}}" data-devicename="{{name}}">

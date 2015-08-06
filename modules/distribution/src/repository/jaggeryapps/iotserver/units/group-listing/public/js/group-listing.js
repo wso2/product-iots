@@ -253,10 +253,10 @@ function attachGroupAdding() {
                     if (status == 200) {
                         if (data != "false") {
                             $(modalPopupContent).html($('#add-group-200-content').html());
-                            $("a#add-group-200-link").click(function () {
+                            loadGroups();
+                            setTimeout(function () {
                                 hidePopup();
-                                window.location.href = '/iotserver/groups';
-                            });
+                            }, 2000);
                         } else {
                             $(modalPopupContent).html($('#group-400-content').html());
                             $("a#group-400-link").click(function () {
@@ -299,7 +299,7 @@ function attachEvents() {
      * when a user clicks on "Share" link
      * on Group Management page in WSO2 IoT Server Console.
      */
-    $("a.view-group-link").click(function () {
+    $(".view-group-link").click(function () {
         var groupId = $(this).data("groupid");
         $("#group-data-form-" + groupId).closest('form').submit();
     });
@@ -367,7 +367,7 @@ function attachEvents() {
                                     $("a#share-group-yes-link").click(function () {
                                         var updatedRoleMap = [];
                                         for (var role in roleMap) {
-                                            if ($('#user-role-' + roleMap[role].role).is(':checked') != roleMap[role].assigned){
+                                            if ($('#user-role-' + roleMap[role].role).is(':checked') != roleMap[role].assigned) {
                                                 roleMap[role].assigned = $('#user-role-' + roleMap[role].role).is(':checked');
                                                 updatedRoleMap.push(roleMap[role]);
                                             }
@@ -378,10 +378,11 @@ function attachEvents() {
                                                 var status = jqxhr.status;
                                                 if (status == 200) {
                                                     $(modalPopupContent).html($('#share-group-200-content').html());
-                                                    $("a#share-group-200-link").click(function () {
+                                                    loadGroups();
+                                                    setTimeout(function () {
                                                         hidePopup();
-                                                    });
-                                                }else {
+                                                    }, 2000);
+                                                } else {
                                                     displayErrors(status);
                                                 }
                                             }, errorHandler);
@@ -423,18 +424,11 @@ function attachEvents() {
                 function (data, txtStatus, jqxhr) {
                     var status = jqxhr.status;
                     if (status == 200) {
-                        if (data != "false") {
-                            $(modalPopupContent).html($('#remove-group-200-content').html());
-                            $('div[data-group="' + groupId + '"]').remove();
-                            $("a#remove-group-200-link").click(function () {
-                                hidePopup();
-                            });
-                        } else {
-                            $(modalPopupContent).html($('#group-409-content').html());
-                            $("a#group-409-link").click(function () {
-                                hidePopup();
-                            });
-                        }
+                        $(modalPopupContent).html($('#remove-group-200-content').html());
+                        loadGroups();
+                        setTimeout(function () {
+                            hidePopup();
+                        }, 2000);
                     } else {
                         displayErrors(status);
                     }
@@ -483,10 +477,9 @@ function attachEvents() {
                         if (data != "false") {
                             $(modalPopupContent).html($('#edit-group-200-content').html());
                             $("div[data-groupid='" + groupId + "'] .ast-name").html(newGroupName);
-                            $("a#edit-group-200-link").click(function () {
+                            setTimeout(function () {
                                 hidePopup();
-                                window.location.href = '/iotserver/groups';
-                            });
+                            }, 2000);
                         } else {
                             $(modalPopupContent).html($('#group-409-content').html());
                             $("a#group-409-link").click(function () {
