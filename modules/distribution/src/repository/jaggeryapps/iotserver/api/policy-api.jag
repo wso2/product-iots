@@ -58,6 +58,9 @@ if (uriMatcher.match("/{context}/api/policies/update")) {
 		// http status code 500 refers to - Internal Server Error.
 		result = 500;
 	}
+} else if (uriMatcher.match("/{context}/api/policies/count")) {
+	result = {}
+	result.data = policyModule.getPolicies().length;
 }
 
 // returning the result.

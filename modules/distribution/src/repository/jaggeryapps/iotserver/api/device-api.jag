@@ -152,6 +152,49 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 	allDevices.push({id: 0, devices: unsharedDevices});
 	result.data = allDevices;
 
+} else if (uriMatcher.match("/{context}/api/devices/count")) {
+
+	var user = session.get(constants.USER_SESSION_KEY);
+	if (!user) {
+		response.sendRedirect(dcProps.appContext + "login?#login-required");
+		exit();//stop execution
+	}
+
+	//URL: https://localhost:9443/devicecloud/manager/devices/username/{username}
+	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/device_manager";
+	listAllDevicesEndPoint = deviceCloudService + "/devices/username/" + user.username;
+	result = get(listAllDevicesEndPoint, {}, "json");
+	var ownDevices = result.data;
+
+	var allDevices = [];
+	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
+	var endPoint = deviceCloudService + "/group/all";
+	var data = {"username": user.username};
+	var groups = get(endPoint, data, "json").data;
+
+	var count = 0;
+	for (var g in groups) {
+		endPoint = deviceCloudService + "/group/id/" + groups[g].id + "/device/all";
+		data = {"username": user.username};
+		var deviceInGroup = get(endPoint, data, "json").data;
+		groups[g].devices = deviceInGroup;
+		allDevices.push(groups[g]);
+		for (var od in ownDevices) {
+			for (var gd in deviceInGroup) {
+				if (deviceInGroup[gd].deviceIdentifier == ownDevices[od].deviceIdentifier) {
+					ownDevices[od].deviceIdentifier = -1;
+				}
+			}
+		}
+		count += deviceInGroup.length;
+	}
+	for (var od in ownDevices) {
+		if (ownDevices[od].deviceIdentifier != -1){
+			count++;
+		}
+	}
+	result.data = count;
+
 } else if (uriMatcher.match("/{context}/api/devices/types")) {
 
 	result = deviceModule.listDeviceTypes();

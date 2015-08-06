@@ -139,6 +139,10 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 
 } else if (uriMatcher.match("/{context}/api/users")) {
 	result = userModule.getUsers();
+
+} else if (uriMatcher.match("/{context}/api/users/count")) {
+	result = {};
+	result.data = userModule.getUsers().length;
 }
 
 // returning the result.
