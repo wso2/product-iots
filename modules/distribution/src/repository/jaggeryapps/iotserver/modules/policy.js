@@ -38,7 +38,8 @@ policyModule = function () {
                 name: policyName,
                 mediaType: 'text/plain',
                 content: policyDefinition,
-                description: policyDescription
+                description: policyDescription,
+                properties:{owner: carbonUser.username}
             };
 
             if (carbonUser) {
@@ -54,7 +55,7 @@ policyModule = function () {
             var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
             var mqttsender = new mqttsenderClass();
 
-            var result = mqttsender.pushToMQTT("/iot/policymgt/govern", policyDefinition, "tcp://localhost:1883", "Raspberry-Policy-sender");
+            var result = mqttsender.pushToMQTT("/iot/policymgt/govern/" + deviceType + "/" + carbonUser.username, policyDefinition, "tcp://localhost:1883", "Raspberry-Policy-sender");
 
             mqttsender = null;
 
@@ -88,6 +89,12 @@ policyModule = function () {
                     //loop through policies
                     for (var j = 0; j < deviceTypePolicies.content.length; j++) {
                         var deviceTypePolicy = registry.get(deviceTypePolicies.content[j]);
+
+                        if(stringify(registry.properties(deviceTypePolicies.content[j]).owner) != '["'+carbonUser.username+'"]'){
+                            //not owned by current user, skip it
+                            continue;
+                        }
+
                         var policyObj = {
                             "id": deviceTypePolicy.uuid,                         // Identifier of the policy.
                             //"priorityId": 1,                 // Priority of the policies. This will be used only for simple evaluation.
@@ -136,7 +143,7 @@ policyModule = function () {
                 registry.remove(constants.POLICY_REGISTRY_PATH + deviceType + "/" + name);
                 bool = true;
             } catch (err) {
-                log.error("Error while trying to remove policy :" + name);
+                log.error("Error while trying to remove policy :" + name, err);
             }
         }
 
