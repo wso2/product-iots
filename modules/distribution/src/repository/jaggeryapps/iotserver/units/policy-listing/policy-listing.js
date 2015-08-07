@@ -5,7 +5,7 @@ function onRequest(context) {
     //log.info((allPolicies));
     if (!allPolicies || allPolicies.length == 0) {
         context.policies = [];
-        context.listPolicyStatus = "Oops, Sorry, No other Policies found.";
+        context.listPolicyStatus = "";
     } else {
         var i, filteredPoliciesList = [];
         for (i = 0; i < allPolicies.length; i++) {

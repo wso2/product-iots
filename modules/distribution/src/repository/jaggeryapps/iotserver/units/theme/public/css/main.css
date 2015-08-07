@@ -631,3 +631,7 @@ input[type=checkbox] {
     padding-left: 15px;
     text-indent: -15px;
 }
+
+.CodeMirror pre{
+    padding-left: 45px !important;
+}

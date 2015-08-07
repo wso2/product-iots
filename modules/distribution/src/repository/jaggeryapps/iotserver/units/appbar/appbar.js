@@ -39,7 +39,7 @@ function onRequest(context) {
     links.users.push(dashboardLink);
     links.policies.push(dashboardLink);
     links.profiles.push(dashboardLink);
-    links.store.push(dashboardLink);
+    //links.store.push(dashboardLink);
     links.store.push(storeLink);
     links['group-mgt'].push(dashboardLink);
     var groupId = request.getParameter("groupId");

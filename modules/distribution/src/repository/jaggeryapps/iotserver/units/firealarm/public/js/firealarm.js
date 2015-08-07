@@ -73,12 +73,20 @@ function attachEvents() {
                 payload,
                 function (data, textStatus, jqxhr) {
                     if(jqxhr.status == 200) {
-                        $(modalPopupContent).html($('#download-device-modal-content-links').html());
-                        $("#download-device-url").val(data);
-                        $("#download-device-url").focus(function () {
-                            $(this).select();
-                        });
-                        showPopup();
+                        if(data == "403"){
+                            $(modalPopupContent).html($('#device-403-content').html());
+                            $("#device-403-link").click(function () {
+                                window.location = "/iotserver/login";
+                            });
+                            showPopup();
+                        }else {
+                            $(modalPopupContent).html($('#download-device-modal-content-links').html());
+                            $("#download-device-url").val(data);
+                            $("#download-device-url").focus(function () {
+                                $(this).select();
+                            });
+                            showPopup();
+                        }
                     }else{
                         $(modalPopupContent).html($('#device-403-content').html());
                         $("#device-403-link").click(function () {
