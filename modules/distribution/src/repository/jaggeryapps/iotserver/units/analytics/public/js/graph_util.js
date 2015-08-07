@@ -322,19 +322,19 @@ function drawLineGraph(graphId, chartDataRaw) {
                 var y_val = parseInt(chartDataRaw[i].stats[j].value);
                 if (y_val > max_val) {
                     max_val = y_val;
-                    if (range_max < max_val) {
-                        range_max = max_val;
-                    }
                 } else if (y_val < min_val) {
                     min_val = y_val;
-                    if (range_min > min_val) {
-                        range_min = min_val;
-                    }
                 }
                 chartData.push({
                     x: parseInt(chartDataRaw[i].stats[j].time),
                     y: y_val
                 });
+            }
+            if (range_max < max_val) {
+                range_max = max_val;
+            }
+            if (range_min > min_val) {
+                range_min = min_val;
             }
             graphConfig['series'].push({
                 'color': color[k],
