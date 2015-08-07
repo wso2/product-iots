@@ -105,7 +105,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 
 			sketchGenerateLinkEndPoint = deviceManagerService + "/device/" + sketchType + "/generate_link";
 			var fileId = get(sketchGenerateLinkEndPoint + "?owner=" + user.username, null, "text");
-			result = "curl -k " + carbonHttpsServletTransport + constants.WEB_APP_CONTEXT + "/api/device/sketch/download/" + fileId.data + " > agent.zip";
+			result = "curl -k " + carbonHttpsServletTransport + constants.WEB_APP_CONTEXT + "/api/device/sketch/download/" + fileId.data;
 		}
 	}
 
@@ -193,7 +193,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 			count++;
 		}
 	}
-	result.data = count;
+	result = count.toString();
 
 } else if (uriMatcher.match("/{context}/api/devices/types")) {
 

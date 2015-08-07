@@ -59,8 +59,7 @@ if (uriMatcher.match("/{context}/api/policies/update")) {
 		result = 500;
 	}
 } else if (uriMatcher.match("/{context}/api/policies/count")) {
-	result = {}
-	result.data = policyModule.getPolicies().length;
+	result = policyModule.getPolicies().length.toString();
 }
 
 // returning the result.
