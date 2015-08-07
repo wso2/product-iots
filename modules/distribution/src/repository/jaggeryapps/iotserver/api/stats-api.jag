@@ -73,27 +73,28 @@ if (stats) {
 
 function getDeviceData(deviceType, deviceId){
 	var device = deviceModule.getDevice(deviceType, deviceId);
+	var uname = device.enrolmentInfo.owner;
 	if (!device){
 		return;
 	}
 	switch (deviceType) {
 		case "firealarm":
-			getFireAlarmData(user.username, device, from, to);
+			getFireAlarmData(uname, device, from, to);
 			break;
 		case "sensebot":
-			getSensebotData(user.username, device, from, to);
+			getSensebotData(uname, device, from, to);
 			break;
 		case "arduino":
-			getArduinoData(user.username, device, from, to);
+			getArduinoData(uname, device, from, to);
 			break;
 		case "digital_display":
-			getDigitalDisplayData(user.username, device, from, to);
+			getDigitalDisplayData(uname, device, from, to);
 			break;
 		case "android_sense":
-			getAndroidSenseData(user.username, device, from, to);
+			getAndroidSenseData(uname, device, from, to);
 			break;
 		case "raspberrypi":
-			getDigitalDisplayData(user.username, device, from, to);
+			getDigitalDisplayData(uname, device, from, to);
 			break;
 	}
 }
