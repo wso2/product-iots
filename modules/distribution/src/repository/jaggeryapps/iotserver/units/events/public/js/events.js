@@ -20,3 +20,10 @@ var displayEvents = function () {
             });
     });
 };
+
+function formatDates() {
+    $(".formatDate").each(function () {
+        var timeStamp = $(this).html();
+        $(this).html(new Date(parseInt(timeStamp)).toUTCString());
+    });
+}
