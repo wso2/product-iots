@@ -29,6 +29,8 @@ var carbon = require('carbon');
 var carbonHttpsServletTransport = carbon.server.address('https');
 var deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
 
+var statsClient = new Packages.org.wso2.carbon.device.mgt.iot.common.analytics.statistics.IoTEventsStatisticsClient;
+
 var user = session.get(constants.USER_SESSION_KEY);
 if (!user) {
 	response.sendRedirect(dcProps.appContext + "login?#login-required");
@@ -41,12 +43,15 @@ var data;
 var groupId;
 
 if (uriMatcher.match("/{context}/api/event/list")) {
-
+	try {
+		fetchedData = statsClient.getRecentDeviceStats(user, 10);
+	} catch (error) {
+		log.error(error);
+	}
 }
 
 // returning the result.
 if (result) {
-	response.status = result.xhr.status;
-	print(result.data);
+	print(result);
 }
 %>

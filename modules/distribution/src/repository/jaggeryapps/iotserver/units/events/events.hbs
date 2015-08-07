@@ -1,0 +1,20 @@
+{{#zone "main"}}
+    <div class="container container-bg  white-bg">
+        <div class=" margin-top-double">
+            <div class="row row padding-top-double padding-bottom-double margin-bottom-double">
+                <div class="col-lg-12  margin-top-double">
+                    <h1 class="grey ">Events</h1>
+                    <hr>
+                    <p class="margin-bottom-double light-grey ">Events Analyzer </p>
+                </div>
+                <div id="event-stream-place-holder" style="padding-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+{{/zone}}
+{{#zone "bottomJs"}}
+    <script src="{{self.publicURL}}/js/events.js"></script>
+    <script id="event-stream" src="{{self.publicURL}}/templates/event-stream.hbs"
+            type="text/x-handlebars-template"></script>
+{{/zone}}
