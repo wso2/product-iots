@@ -48,6 +48,26 @@ if (uriMatcher.match("/{context}/api/event/list")) {
 	} catch (error) {
 		log.error(error);
 	}
+
+	var eventsData = [];
+
+	if (fetchedData == null) return [];
+
+	for (var i = 0; i < fetchedData.size(); i++) {
+		//eventsData.push({
+		//	time: fetchedData.get(i).getTime(),
+		//	deviceName: fetchedData.get(i).getDeviceName(),
+		//	activity: fetchedData.get(i).getDeviceActivity()
+		//});
+
+		eventsData.push({
+			time: 234234,
+			deviceName: "my device",
+			activity: "test"
+		});
+	}
+
+	return eventsData;
 }
 
 // returning the result.
