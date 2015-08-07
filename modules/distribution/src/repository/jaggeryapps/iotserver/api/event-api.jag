@@ -43,8 +43,23 @@ var data;
 var groupId;
 
 if (uriMatcher.match("/{context}/api/event/list")) {
+	/*
+	var timeInterval = 30;
+	var i, rnd;
+	result = [];
+	var currentDay = new Date();
+	var startDate = currentDay.getTime() - (60 * 60 * 24 * 100);
+	var endDate = currentDay.getTime();
+
+	var i = parseInt(startDate / 1000);
+	while (i < parseInt(endDate / 1000)) {
+		rnd = rnd = Math.random() * 50;
+		result.push({time: i, deviceName: 'device' + rnd, activity:'Event number ' + rnd});
+		i += timeInterval;
+	}
+	*/
 	try {
-		fetchedData = statsClient.getRecentDeviceStats(user, 10);
+		result = statsClient.getRecentDeviceStats(user, 10);
 	} catch (error) {
 		log.error(error);
 	}
