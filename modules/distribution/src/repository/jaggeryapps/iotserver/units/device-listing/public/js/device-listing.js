@@ -164,7 +164,7 @@ function loadDevices() {
             } else {
                 groups = data.data;
             }
-            if (groups.length == 1 && groups[0].id == 0) {
+            if (groups.length == 1 && groups[0].id == 0 && groups[0].devices.length == 0) {
                 $("#ast-container-parent").html($("#no-devices-div-content").html());
             } else {
                 viewModel.groups = groups;
