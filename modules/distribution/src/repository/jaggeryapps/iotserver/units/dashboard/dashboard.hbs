@@ -118,9 +118,11 @@
         </div>
     </div>
     <!-- /dashboard -->
-    <div id="event-stream" style="padding-top: 20px;">
+    <div id="event-stream-place-holder" style="padding-top: 20px;">
 	</div>
 {{/zone}}
 {{#zone "bottomJs"}}
     <script src="{{self.publicURL}}/js/dashboard.js"></script>
+    <script id="event-stream" src="{{self.publicURL}}/templates/event-stream.hbs"
+            type="text/x-handlebars-template"></script>
 {{/zone}}

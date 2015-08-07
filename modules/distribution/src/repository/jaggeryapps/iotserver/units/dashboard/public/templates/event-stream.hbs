@@ -1,6 +1,6 @@
 <div class="col-lg-12 wr-secondary-bar" style="width: inherit;">
     <label class="device-id device-select" style="font-size: 20px; margin-bottom: 0px;">
-        Device Data Stream
+        Device Events Stream
     </label>
 </div>
 <br/>
@@ -17,8 +17,8 @@
         <tbody>
 		{{#each data}}
             <tr>
-                <td width="20%">{{time}}</td>
-                <td width="20%">{{deviceIdentifier}}</td>
+                <td width="20%" class="formatDate">{{time}}</td>
+                <td width="20%">{{deviceName}}</td>
                 <td>{{activity}}</td>
             </tr>
 		{{/each}}
