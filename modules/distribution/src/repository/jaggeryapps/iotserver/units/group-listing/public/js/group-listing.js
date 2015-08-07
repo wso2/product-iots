@@ -64,7 +64,14 @@ $(document).ready(function () {
             return $("#content-filter-types").html();
         }
     });
+
+    loadGroups();
     changeGroupView('grid', $('a.ctrl-filter-grid'));
+
+    var path = window.location.pathname;
+    if (path == '/iotserver/groups/add-group'){
+        addNewGroup();
+    }
 });
 
 /*
@@ -168,9 +175,6 @@ function loadGroups(searchType, searchParam) {
             });
     });
 }
-$(document).ready(function () {
-    loadGroups();
-});
 
 function formatDates() {
     $(".formatDate").each(function () {
@@ -236,58 +240,60 @@ function attachGroupAdding() {
      * when a user clicks on "Remove" link
      * on Group Management page in WSO2 IoT Server Console.
      */
-    $("a.add-group-link").click(function () {
-        var addGroupApi = "/iotserver/api/group/add";
-        $(modalPopupContent).html($('#add-group-modal-content').html());
-        showPopup();
+    $("a.add-group-link").click(addNewGroup);
+}
 
-        $("a#add-group-yes-link").click(function () {
-            var newGroupName = $('#add-group-name').val();
-            var newGroupDescription = $('#add-group-description').val();
-            var group = {"name": newGroupName, "description": newGroupDescription};
-            invokerUtil.post(
-                addGroupApi,
-                group,
-                function (data, txtStatus, jqxhr) {
-                    var status = jqxhr.status;
-                    if (status == 200) {
-                        if (data != "false") {
-                            $(modalPopupContent).html($('#add-group-200-content').html());
-                            loadGroups();
-                            setTimeout(function () {
-                                hidePopup();
-                            }, 2000);
-                        } else {
-                            $(modalPopupContent).html($('#group-400-content').html());
-                            $("a#group-400-link").click(function () {
-                                hidePopup();
-                            });
-                        }
-                    } else if (status == 400) {
+var addNewGroup = function () {
+    var addGroupApi = "/iotserver/api/group/add";
+    $(modalPopupContent).html($('#add-group-modal-content').html());
+    showPopup();
+
+    $("a#add-group-yes-link").click(function () {
+        var newGroupName = $('#add-group-name').val();
+        var newGroupDescription = $('#add-group-description').val();
+        var group = {"name": newGroupName, "description": newGroupDescription};
+        invokerUtil.post(
+            addGroupApi,
+            group,
+            function (data, txtStatus, jqxhr) {
+                var status = jqxhr.status;
+                if (status == 200) {
+                    if (data != "false") {
+                        $(modalPopupContent).html($('#add-group-200-content').html());
+                        loadGroups();
+                        setTimeout(function () {
+                            hidePopup();
+                        }, 2000);
+                    } else {
                         $(modalPopupContent).html($('#group-400-content').html());
                         $("a#group-400-link").click(function () {
                             hidePopup();
                         });
-                    } else if (status == 403) {
-                        $(modalPopupContent).html($('#agroup-403-content').html());
-                        $("a#group-403-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 409) {
-                        $(modalPopupContent).html($('#group-409-content').html());
-                        $("a#group-409-link").click(function () {
-                            hidePopup();
-                        });
                     }
-                }, errorHandler
-            );
-        });
-
-        $("a#add-group-cancel-link").click(function () {
-            hidePopup();
-        });
-
+                } else if (status == 400) {
+                    $(modalPopupContent).html($('#group-400-content').html());
+                    $("a#group-400-link").click(function () {
+                        hidePopup();
+                    });
+                } else if (status == 403) {
+                    $(modalPopupContent).html($('#agroup-403-content').html());
+                    $("a#group-403-link").click(function () {
+                        hidePopup();
+                    });
+                } else if (status == 409) {
+                    $(modalPopupContent).html($('#group-409-content').html());
+                    $("a#group-409-link").click(function () {
+                        hidePopup();
+                    });
+                }
+            }, errorHandler
+        );
     });
+
+    $("a#add-group-cancel-link").click(function () {
+        hidePopup();
+    });
+
 }
 
 /**
