@@ -25,60 +25,17 @@ var log = new Log("api/event-api.jag");
 var constants = require("/modules/constants.js");
 var dcProps = require('/config/dc-props.js').config();
 
-var user = session.get(constants.USER_SESSION_KEY);
-if (!user) {
-	response.sendRedirect(dcProps.appContext + "login?#login-required");
-	exit();//stop execution
-}
+var eventModule = require("/modules/event.js").eventModule;
 
 var result;
-
 if (uriMatcher.match("/{context}/api/event/list")) {
-
-	/*
-	 var timeInterval = 30;
-	 var i, rnd;
-	 result = [];
-	 var currentDay = new Date();
-	 var startDate = currentDay.getTime() - (60 * 60 * 24 * 100);
-	 var endDate = currentDay.getTime();
-
-	 var i = parseInt(startDate / 1000);
-	 while (i < parseInt(endDate / 1000)) {
-	 rnd = rnd = Math.random() * 50;
-	 result.push({time: i * 1000, deviceName: 'device' + rnd, activity:'Event number ' + rnd});
-	 i += timeInterval;
-	 }
-	 */
-
-	try {
-		result = statsClient.getRecentDeviceStats(user, 10);
-	} catch (error) {
-		log.error(error);
+	var user = session.get(constants.USER_SESSION_KEY);
+	if (!user) {
+		response.sendRedirect(dcProps.appContext + "login?#login-required");
+		exit();//stop execution
 	}
 
-<<<<<<< HEAD
-	var eventsData = [];
-
-	if (fetchedData == null) return [];
-
-	for (var i = 0; i < fetchedData.size(); i++) {
-		//eventsData.push({
-		//	time: fetchedData.get(i).getTime(),
-		//	deviceName: fetchedData.get(i).getDeviceName(),
-		//	activity: fetchedData.get(i).getDeviceActivity()
-		//});
-
-		eventsData.push({
-			time: 234234,
-			deviceName: "my device",
-			activity: "test"
-		});
-	}
-
-	return eventsData;
-=======
->>>>>>> 91ab732dba19d87bc74860cfc7eca8953beb2120
+	result = eventModule.getEventsData(user.username, 10);
 }
 
 // returning the result.
