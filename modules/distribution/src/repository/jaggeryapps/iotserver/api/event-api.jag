@@ -25,12 +25,6 @@ var log = new Log("api/event-api.jag");
 var constants = require("/modules/constants.js");
 var dcProps = require('/config/dc-props.js').config();
 
-var carbon = require('carbon');
-var carbonHttpsServletTransport = carbon.server.address('https');
-var deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
-
-var statsClient = new Packages.org.wso2.carbon.device.mgt.iot.common.analytics.statistics.IoTEventsStatisticsClient;
-
 var user = session.get(constants.USER_SESSION_KEY);
 if (!user) {
 	response.sendRedirect(dcProps.appContext + "login?#login-required");
@@ -38,31 +32,31 @@ if (!user) {
 }
 
 var result;
-var endPoint;
-var data;
-var groupId;
 
 if (uriMatcher.match("/{context}/api/event/list")) {
-	/*
-	var timeInterval = 30;
-	var i, rnd;
-	result = [];
-	var currentDay = new Date();
-	var startDate = currentDay.getTime() - (60 * 60 * 24 * 100);
-	var endDate = currentDay.getTime();
 
-	var i = parseInt(startDate / 1000);
-	while (i < parseInt(endDate / 1000)) {
-		rnd = rnd = Math.random() * 50;
-		result.push({time: i, deviceName: 'device' + rnd, activity:'Event number ' + rnd});
-		i += timeInterval;
-	}
-	*/
+	/*
+	 var timeInterval = 30;
+	 var i, rnd;
+	 result = [];
+	 var currentDay = new Date();
+	 var startDate = currentDay.getTime() - (60 * 60 * 24 * 100);
+	 var endDate = currentDay.getTime();
+
+	 var i = parseInt(startDate / 1000);
+	 while (i < parseInt(endDate / 1000)) {
+	 rnd = rnd = Math.random() * 50;
+	 result.push({time: i * 1000, deviceName: 'device' + rnd, activity:'Event number ' + rnd});
+	 i += timeInterval;
+	 }
+	 */
+
 	try {
 		result = statsClient.getRecentDeviceStats(user, 10);
 	} catch (error) {
 		log.error(error);
 	}
+
 }
 
 // returning the result.
