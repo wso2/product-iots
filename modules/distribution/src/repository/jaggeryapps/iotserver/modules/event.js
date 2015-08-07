@@ -39,30 +39,13 @@ eventModule = function () {
 
         var eventsData = [];
 
-        // -- start of dummy data
-
-        var timeInterval = 30;
-        var i, rnd;
-        var currentDay = new Date();
-        var startDate = currentDay.getTime() - (60 * 60 * 24 * 5);
-        var endDate = currentDay.getTime();
-
-        var i = parseInt(startDate / 1000);
-        while (i < parseInt(endDate / 1000)) {
-            rnd = rnd = Math.random() * 50;
-            eventsData.push({time: i*1000, deviceName: 'device' + rnd, activity:'Event number ' + rnd});
-            i += timeInterval;
-        }
-
-        // -- end of dummy data
-
-        //	for (var i = 0; i < fetchedData.size(); i++) {
-        //		eventsData.push({
-        //			time: fetchedData.get(i).getTime(),
-        //			deviceName: fetchedData.get(i).getDeviceName(),
-        //			activity: fetchedData.get(i).getDeviceActivity()
-        //		});
-        //	};
+        	for (var i = 0; i < fetchedData.size(); i++) {
+        		eventsData.push({
+        			time: fetchedData.get(i).getTime(),
+        			deviceId: fetchedData.get(i).getDeviceId(),
+        			activity: fetchedData.get(i).getDeviceActivity()
+        		});
+        	};
 
         return eventsData;
     };
