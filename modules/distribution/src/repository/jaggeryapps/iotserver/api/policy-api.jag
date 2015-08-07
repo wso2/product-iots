@@ -28,22 +28,42 @@ var policyModule = require("/modules/policy.js").policyModule;
 
 var result;
 if (uriMatcher.match("/{context}/api/policies/update")) {
-    payload = request.getContent();
-    policyModule.updatePolicyPriorities(payload);
-} else if (uriMatcher.match("/{context}/api/policies/{id}/delete")) {
-    elements = uriMatcher.elements();
-    policyId = elements.id;
-    try {
-        result = policyModule.deletePolicy(policyId);
-    } catch (e) {
-        log.error("Exception occurred while trying to delete policy for id:" + policyId, e);
-        // http status code 500 refers to - Internal Server Error.
-        result = 500;
-    }
+	payload = request.getContent();
+	policyModule.updatePolicyPriorities(payload);
+} else if (uriMatcher.match("/{context}/api/policies/add")) {
+	var content = request.getContent();
+	var policyName = content.policyName;
+	var policyDefinition = content.profile.policyDefinition;
+	var policyDescription = content.profile.policyDescription;
+	var deviceType = content.profile.deviceType.name;
+
+	log.info("@@@@@ Policy Declaration : " + stringify(content));
+
+	try {
+		result = policyModule.addPolicy(policyName, deviceType, policyDefinition, policyDescription);
+	} catch (e) {
+		log.error("Exception occurred while trying to add new policy under name:" + id, e);
+		// http status code 500 refers to - Internal Server Error.
+		result = 500;
+	}
+} else if (uriMatcher.match("/{context}/api/policies/{deviceType}/{policyName}/remove")) {
+	elements = uriMatcher.elements();
+	var id = elements.policyName;
+	var deviceType = elements.deviceType;
+
+	try {
+		result = policyModule.removePolicy(id, deviceType);
+	} catch (e) {
+		log.error("Exception occurred while trying to remove policy under name:" + id, e);
+		// http status code 500 refers to - Internal Server Error.
+		result = 500;
+	}
+} else if (uriMatcher.match("/{context}/api/policies/count")) {
+	result = policyModule.getPolicies().length.toString();
 }
 
 // returning the result.
 if (result) {
-    response.content = result;
+	response.content = result;
 }
 %>

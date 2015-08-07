@@ -10,12 +10,13 @@ function onRequest(context) {
         "group-mgt": [],
         "store": [],
         "dashboard": [],
-        "analytics" : []
+        "analytics" : [],
+        "events" : []
     };
     var dashboardLink = {
         title: "Go back to Dashboard",
         icon: "fw-left-arrow",
-        url: "/iotserver"
+        url: "/iotserver/dashboard"
     };
 
     var deviceMgtLink = {
@@ -24,21 +25,35 @@ function onRequest(context) {
         url: "/iotserver/devices"
     };
 
+    var groupMgtLink = {
+        title: "Go back to Groups",
+        icon: "fw-left-arrow",
+        url: "/iotserver/groups"
+    };
+
     var storeLink = {
         title: "Go back to Store",
         icon: "fw-left-arrow",
         url: "/iotserver"
     };
 
-
     links.users.push(dashboardLink);
     links.policies.push(dashboardLink);
     links.profiles.push(dashboardLink);
-    links.store.push(dashboardLink);
+    links.events.push(dashboardLink);
+
+    //links.store.push(dashboardLink);
     links.store.push(storeLink);
-    links.analytics.push(deviceMgtLink);
-    links['device-mgt'].push(dashboardLink);
+
     links['group-mgt'].push(dashboardLink);
+    var groupId = request.getParameter("groupId");
+    if (groupId){
+        links.analytics.push(groupMgtLink);
+        links['device-mgt'].push(groupMgtLink);
+    }else{
+        links.analytics.push(deviceMgtLink);
+        links['device-mgt'].push(dashboardLink);
+    }
 
     if (!carbonUser) {
         //user is not logged in
@@ -74,6 +89,12 @@ function onRequest(context) {
                 title: "Add Device",
                 icon: "fw-add",
                 url: "/iotserver/devices/add-device"
+            });
+            links["device-mgt"].push({
+                title: "Add Group",
+                icon: "fw-add",
+                url: "#",
+                class: "add-group-link"
             });
         }
         if (permissions.ADD_DEVICE) {

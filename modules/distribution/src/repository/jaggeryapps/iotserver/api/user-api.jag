@@ -42,13 +42,7 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 			if (log.isDebugEnabled()) {
 				log.debug("User Logged In : " + user);
 			}
-			var hasDevcies = (deviceManagementService.getDevicesOfUser(username).size() >= 1);
-
-			if(hasDevcies){
-				response.sendRedirect(constants.WEB_APP_CONTEXT+"/devices");
-			}else{
-				response.sendRedirect(constants.WEB_APP_CONTEXT);
-			}
+			response.sendRedirect(constants.WEB_APP_CONTEXT+"/dashboard");
 
 		}, function () {
 			response.sendRedirect(dcProps.appContext + "login?#auth-failed");
@@ -139,6 +133,9 @@ if (uriMatcher.match("/{context}/api/user/login/")) {
 
 } else if (uriMatcher.match("/{context}/api/users")) {
 	result = userModule.getUsers();
+
+} else if (uriMatcher.match("/{context}/api/users/count")) {
+	result = userModule.getUsers().length;
 }
 
 // returning the result.

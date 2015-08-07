@@ -170,6 +170,10 @@ a {
     vertical-align:baseline;
     background:transparent;
 }
+
+a:hover {
+    text-decoration: none;
+}
 /* change colours to suit your needs */
 ins {
     background-color:#ff9;
@@ -630,4 +634,8 @@ input[type=checkbox] {
     display: inline;
     padding-left: 15px;
     text-indent: -15px;
+}
+
+.CodeMirror pre{
+    padding-left: 45px !important;
 }

@@ -83,7 +83,7 @@ var route;
 
     var renderStatic = function (unit, path) {
         if (log.isDebugEnabled()) {
-            log.debug('[' + requestId + '] for unit "' + unit + '" a request received for a static file "' + path + '"');
+            //log.debug('[' + requestId + '] for unit "' + unit + '" a request received for a static file "' + path + '"');
         }
         var staticFile = fuse.getFile(unit, 'public' + path);
         if (staticFile.isExists() && !staticFile.isDirectory()) {
@@ -149,9 +149,9 @@ var route;
         if (layout !== null) {
             if (log.isDebugEnabled()) {
                 log.debug(
-                    '[' + requestId + '] request for "' + path + '" will be rendered using layout "' +
-                    layout + '" (defined in "' + mainUnit + '") and zones ' +
-                    stringify(zones)
+                    //'[' + requestId + '] request for "' + path + '" will be rendered using layout "' +
+                    //layout + '" (defined in "' + mainUnit + '") and zones ' +
+                    //stringify(zones)
                 );
             }
 
@@ -161,9 +161,9 @@ var route;
             return true;
         } else {
             if (log.isDebugEnabled()) {
-                log.debug(
-                    '[' + requestId + '] request for "' + path + '" will can\'t be rendered, since no layout is defined' +
-                    'in any of the units ' + stringify(zones));
+                //log.debug(
+                //    '[' + requestId + '] request for "' + path + '" will can\'t be rendered, since no layout is defined' +
+                //    'in any of the units ' + stringify(zones));
             }
             return false;
         }
@@ -181,7 +181,7 @@ var route;
     function renderLess(unit, path) {
         //TODO: fix - incorrect less files makes it respond the old less even if it is nocahce.
         if (log.isDebugEnabled()) {
-            log.debug('[' + requestId + '] for unit "' + unit + '" a request received for a less file "' + path + '"');
+            //log.debug('[' + requestId + '] for unit "' + unit + '" a request received for a less file "' + path + '"');
         }
         var cacheKey = '/tmp/cached_' + unit + path.replace(/[^\w\.-]/g, '_');
         fuseState.currentUnit = unit;
@@ -197,7 +197,7 @@ var route;
                 var x = require('less-rhino-1.7.5.js');
                 x.compile([lessFile.getPath(), cacheKey]);
                 if (log.isDebugEnabled()) {
-                    log.debug('[' + requestId + '] for unit "' + unit + '" request for "' + path + '" is cached as "' + cacheKey + '"');
+                    //log.debug('[' + requestId + '] for unit "' + unit + '" request for "' + path + '" is cached as "' + cacheKey + '"');
                 }
             }
         }

@@ -26,59 +26,128 @@ policyModule = function () {
     var publicMethods = {};
     var privateMethods = {};
 
-    publicMethods.addPolicy = function (name, deviceType, policyDefinition) {
+    publicMethods.addPolicy = function (policyName, deviceType, policyDefinition, policyDescription) {
+        if (policyName && deviceType) {
 
+            var carbonModule = require("carbon");
+            var carbonServer = application.get("carbonServer");
+            var options = {system: true};
+            var carbonUser = session.get(constants.USER_SESSION_KEY);
+
+            var resource = {
+                name: policyName,
+                mediaType: 'text/plain',
+                content: policyDefinition,
+                description: policyDescription,
+                properties:{owner: carbonUser.username}
+            };
+
+            if (carbonUser) {
+                options.tenantId = carbonUser.tenantId;
+                var registry = new carbonModule.registry.Registry(carbonServer, options);
+                log.info("########### Policy name : " + policyName);
+                log.info("########### Policy type : " + deviceType);
+                log.info("########### Policy Declaration : " + policyDefinition);
+                log.info("########### Policy policyDescription: " + policyDescription);
+                registry.put(constants.POLICY_REGISTRY_PATH + deviceType + "/" + policyName, resource);
+            }
+
+            var mqttsenderClass = Packages.org.wso2.device.mgt.mqtt.policy.push.MqttPush;
+            var mqttsender = new mqttsenderClass();
+
+            var result = mqttsender.pushToMQTT("/iot/policymgt/govern/" + deviceType + "/" + carbonUser.username, policyDefinition, "tcp://localhost:1883", "Raspberry-Policy-sender");
+
+            mqttsender = null;
+
+            return true;
+
+        } else {
+            return false;
+        }
     };
 
     publicMethods.getPolicies = function () {
-
-        //TODO-This method returns includes dummy policy data
+        var carbonModule = require("carbon");
+        var carbonServer = application.get("carbonServer");
+        var options = {system: true};
+        var carbonUser = session.get(constants.USER_SESSION_KEY);
 
         var policies = [];
-        var policyObj = {
-            "id":1,                         // Identifier of the policy.
-            "priorityId":1,                 // Priority of the policies. This will be used only for simple evaluation.
-            "profile":{},                   // Profile
-            "policyName":"Turn off light",  // Name of the policy.
-            "generic":true,                 // If true, this should be applied to all related device.
-            "roles":{},                     // Roles which this policy should be applied.
-            "ownershipType":{},             // Ownership type (COPE, BYOD, CPE)
-            "devices":{},                   // Individual devices this policy should be applied
-            "users":{},                     // Individual users this policy should be applied
-            "Compliance":{},
-            "policyCriterias":{},
-            "startTime":283468236,          // Start time to apply the policy.
-            "endTime":283468236,            // After this time policy will not be applied
-            "startDate":"",                 // Start date to apply the policy
-            "endDate":"",                   // After this date policy will not be applied.
-            "tenantId":-1234,
-            "profileId":1
-        };
 
-        policies.push(policyObj);
+        if (carbonUser) {
+            options.tenantId = carbonUser.tenantId;
+            var registry = new carbonModule.registry.Registry(carbonServer, options);
+            var allPolicies = registry.get(constants.POLICY_REGISTRY_PATH);
 
-        policyObj = {
-            "id":2,                         // Identifier of the policy.
-            "priorityId":1,                 // Priority of the policies. This will be used only for simple evaluation.
-            "profile":{},                   // Profile
-            "policyName":"Turn on Buzzer",  // Name of the policy.
-            "generic":false,                 // If true, this should be applied to all related device.
-            "roles":{},                     // Roles which this policy should be applied.
-            "ownershipType":{},             // Ownership type (COPE, BYOD, CPE)
-            "devices":{},                   // Individual devices this policy should be applied
-            "users":{},                     // Individual users this policy should be applied
-            "Compliance":{},
-            "policyCriterias":{},
-            "startTime":283468236,          // Start time to apply the policy.
-            "endTime":283468236,            // After this time policy will not be applied
-            "startDate":"",                 // Start date to apply the policy
-            "endDate":"",                   // After this date policy will not be applied.
-            "tenantId":-1234,
-            "profileId":2
-        };
+            if (allPolicies) {
 
-        policies.push(policyObj);
+                //loop through all device types
+                for (var i = 0; i < allPolicies.content.length; i++) {
+                    var deviceType = allPolicies.content[i].replace(constants.POLICY_REGISTRY_PATH, "");
+                    var deviceTypePolicies = registry.get(allPolicies.content[i]);
+
+                    //loop through policies
+                    for (var j = 0; j < deviceTypePolicies.content.length; j++) {
+                        var deviceTypePolicy = registry.get(deviceTypePolicies.content[j]);
+
+                        if(stringify(registry.properties(deviceTypePolicies.content[j]).owner) != '["'+carbonUser.username+'"]'){
+                            //not owned by current user, skip it
+                            continue;
+                        }
+
+                        var policyObj = {
+                            "id": deviceTypePolicy.uuid,                         // Identifier of the policy.
+                            //"priorityId": 1,                 // Priority of the policies. This will be used only for simple evaluation.
+                            //"profile": {},                   // Profile
+                            "policyName": deviceTypePolicy.name,  // Name of the policy.
+                            "updated": deviceTypePolicy.updated.time,
+                            "deviceType": deviceType
+                            //"generic": true,                 // If true, this should be applied to all related device.
+                            //"roles": {},                     // Roles which this policy should be applied.
+                            //"ownershipType": {},             // Ownership type (COPE, BYOD, CPE)
+                            //"devices": {},                   // Individual devices this policy should be applied
+                            //"users": {},                     // Individual users this policy should be applied
+                            //"Compliance": {},
+                            //"policyCriterias": {},
+                            //"startTime": 283468236,          // Start time to apply the policy.
+                            //"endTime": 283468236,            // After this time policy will not be applied
+                            //"startDate": "",                 // Start date to apply the policy
+                            //"endDate": "",                   // After this date policy will not be applied.
+                            //"tenantId": -1234,
+                            //"profileId": 1
+                        };
+
+                        policies.push(policyObj);
+                    }//end of policy loop
+                }//end of device type policy loop
+            }
+        }
+
         return policies;
+
+    };
+
+    publicMethods.removePolicy = function (name, deviceType) {
+        var carbonModule = require("carbon");
+        var carbonServer = application.get("carbonServer");
+        var options = {system: true};
+        var carbonUser = session.get(constants.USER_SESSION_KEY);
+        var bool = false;
+
+        if (carbonUser) {
+            options.tenantId = carbonUser.tenantId;
+            var registry = new carbonModule.registry.Registry(carbonServer, options);
+            log.info("########### Policy name : " + name);
+            log.info("########### Policy type : " + deviceType);
+            try {
+                registry.remove(constants.POLICY_REGISTRY_PATH + deviceType + "/" + name);
+                bool = true;
+            } catch (err) {
+                log.error("Error while trying to remove policy :" + name, err);
+            }
+        }
+
+        return bool;
     };
 
     return publicMethods;

@@ -57,20 +57,20 @@ function savePolicy(){
         profile: {
             profileName: policy.policyName,
             deviceType: {
-                id: policy.devicetypeId
+                id: policy.devicetypeId,
+                name: policy.devicetype
             },
-            policyDefinition: policy.policyDefinition
+            policyDefinition: policy.policyDefinition,
+            policyDescription: policy.policyDescription
         }
     };
 
-    console.log(payload);
+    invokerUtil.post("/iotserver/api/policies/add", payload, function(){
+        $(".policy-message").removeClass("hidden");
+        $(".add-policy").addClass("hidden");
+    }, function(){
 
-    //invokerUtil.post("/iotserver/policy-api/policy/add", payload, function(){
-    //    $(".policy-message").removeClass("hidden");
-    //    $(".add-policy").addClass("hidden");
-    //}, function(){
-    //
-    //});
+    });
 }
 
 $(document).ready(function(){
@@ -104,8 +104,7 @@ $(document).ready(function(){
         savePolicy();
     };
     stepperRegistry['policy-profile']  = function (actionButton){
-        var deviceType = policy.devicetype;
-        policy.policyDefinition = $("#policy-definition-input").val();
+        policy.policyDefinition = window.queryEditor.getValue();
     };
     stepperRegistry['policy-devicetype'] = function (actionButton){
         policy.devicetype = $(actionButton).data("devicetype");

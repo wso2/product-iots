@@ -3,42 +3,47 @@
         <div class="col-md-12">
             <!-- content -->
             <div class="wr-content">
-                <p class="page-sub-title">Policies</p>
                 <p>{{listPolicyStatus}}</p>
+
                 <div class="wr-list-group wr-sortable">
-                    {{#if policies}}
-                    {{#each policies}}
-                        <span id="{{id}}" class="list-group-item">
-                            <i class="wr-sortable-icon fw fw-sort hide"></i>
-                            <i class="wr-list-icon fw fw-user"></i>
-                            <div class="wr-list-desc">
-                                <h3 class="wr-list-name">{{policyName}}</h3>
-                                <span class="wr-list-username">{{policyName}}</span>
-                            </div>
-                            <span class="list-group-item-actions">
-                                <!--a href="#" class="invite-user-link cu-btn-inner" data-policyname="{{policyName}}">
+					{{#if policies}}
+						{{#each policies}}
+                            <span id="{{id}}" class="list-group-item">
+                                <i class="wr-sortable-icon fw fw-sort hide"></i>
+                                <i class="wr-list-icon fw fw-user"></i>
+                                <div class="wr-list-desc">
+                                    <h3 class="wr-list-name">{{policyName}}</h3>
+                                    <span class="wr-list-username">{{deviceType}} | Last Updated: <span
+                                            class="formatDate">{{updated}}</span></span>
+                                </div>
+                                <span class="list-group-item-actions">
+                                    <!--a href="#" class="invite-user-link cu-btn-inner" data-policyname="{{policyName}}">
+                                        <span class="fw-stack">
+                                            <i class="fw fw-ring fw-stack-2x"></i>
+                                            <i class="fw fw-invitation fw-stack-1x"></i>
+                                        </span>
+                                        Invite
+                                    </a-->
+                                    <a href="#" class="remove-policy-link cu-btn-inner"
+                                       data-devicetype="{{deviceType}}"
+                                       data-policyname="{{policyName}}"
+                                       data-policyuuid="{{id}}">
                                     <span class="fw-stack">
                                         <i class="fw fw-ring fw-stack-2x"></i>
-                                        <i class="fw fw-invitation fw-stack-1x"></i>
+                                        <i class="fw fw-delete fw-stack-1x"></i>
                                     </span>
-                                    Invite
-                                </a-->
-                                <a href="#" class="remove-user-link cu-btn-inner" data-policyname="{{policyName}}">
-                                <span class="fw-stack">
-                                    <i class="fw fw-ring fw-stack-2x"></i>
-                                    <i class="fw fw-delete fw-stack-1x"></i>
+                                        Remove
+                                    </a>
                                 </span>
-                                    Remove
-                                </a>
+                                <div class="clearfix"></div>
                             </span>
-                            <div class="clearfix"></div>
-                        </span>
-                    {{/each}}
-                    {{else}}
+						{{/each}}
+					{{else}}
                         <!-- no policies found -->
                         <div class="container-fluid wr-content-alt">
                             <div class="ctrl-info-panel col-md-6 col-centered">
                                 <h2>You don't have any Policies added at the moment.</h2>
+
                                 <p>
                                     </a><a href="/iotserver/policies/add-policy" class="cu-btn">
                                     <span class="fw-stack">
@@ -51,10 +56,111 @@
                             </div>
                         </div>
                         <!-- /no policies found -->
-                    {{/if}}
+					{{/if}}
                 </div>
             </div>
             <!-- /content -->
+        </div>
+    </div>
+
+
+    <div id="remove-policy-modal-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Do you really want to remove this policy from IoT Server?</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-yes-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="remove-policy-cancel-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-policy-200-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Policy was successfully removed.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-200-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-policy-400-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Exception at backend. Try Later.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-400-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-policy-403-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Action not permitted.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-403-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-policy-409-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Policy does not exist.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-409-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="remove-policy-unexpected-error-content" class="hide">
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-centered">
+                    <h3>Policy does not exist.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="remove-policy-unexpected-error-link" class="btn-operations">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -65,7 +171,6 @@
     <!--Later add the navigation menu from here-->
 {{/zone}}
 {{#zone "action-bar"}}
-    {{#if permissions.ADD_POLICY}}
         <a href="/iotserver/policies/add-policy" class="cu-btn">
             <span class="fw-stack">
                 <i class="fw fw-ring fw-stack-2x"></i>
@@ -73,7 +178,6 @@
             </span>
             Add Policy
         </a>
-    {{/if}}
 {{/zone}}
 {{#zone "bottomJs"}}
     <script src="{{self.publicURL}}/js/policy-listing.js"></script>

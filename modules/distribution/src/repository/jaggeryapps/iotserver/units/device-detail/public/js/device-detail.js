@@ -16,54 +16,13 @@
  * under the License.
  */
 
-function formatDates(){
-    $(".formatDate").each(function(){
+function formatDates() {
+    $(".formatDate").each(function () {
         var timeStamp = $(this).html();
         $(this).html(new Date(parseInt(timeStamp)).toUTCString());
     });
 }
 
-(function () {
-    var deviceId = $(".device-id");
-    var deviceIdentifier = deviceId.data("deviceid");
-    var deviceType = deviceId.data("type");
-    var payload = [deviceIdentifier];
-    if (deviceType == "ios") {
-        var serviceUrl = "/ios/operation/deviceinfo";
-    } else if (deviceType == "android") {
-        var serviceUrl = "/mdm-android-agent/operation/device-info";
-    }
-    invokerUtil.post(serviceUrl, payload,
-        function(message){
-            console.log(message);
-        }, function (message) {
-            console.log(message);
-        });
-    $(document).ready(function(){
-        loadOperationBar(deviceType);
-        loadMap();
-        formatDates();
-    });
-    function loadMap(){
-        var map;
-        function initialize() {
-            var mapOptions = {
-                zoom: 18
-            };
-            var lat = 6.9098591;
-            var long = 79.8523753;
-            map = new google.maps.Map(document.getElementById('device-location'),
-                mapOptions);
-
-            var pos = new google.maps.LatLng(lat,
-                long);
-            var marker = new google.maps.Marker({
-                position: pos,
-                map: map
-            });
-
-            map.setCenter(pos);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    }
-}());
+$(document).ready(function () {
+    formatDates();
+});

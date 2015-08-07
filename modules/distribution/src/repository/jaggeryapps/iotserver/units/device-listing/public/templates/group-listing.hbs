@@ -1,0 +1,54 @@
+{{#each groups}}
+	{{groupMap this}}
+    <div class="ast-container list-view">
+        <div class="row wr-device-board list-view" style="font-size: inherit; background: #fff;">
+            <div class="col-lg-12 wr-secondary-bar" style="width: inherit;">
+                <label class="device-id device-select" style="font-size: 20px; margin-bottom: 0px;">
+					{{#if name}}
+						{{name}} Devices
+					{{else}}
+                        Ungrouped Devices
+					{{/if}}
+                </label>
+            </div>
+			{{#if name}}
+                <div class="ast-model">
+                    <a href="/iotserver/analytics?groupId={{id}}&name={{name}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-statistics fw-stack-1x"></i>
+											</span>
+                        <span class="lbl-action">Stats</span>
+                    </a>
+                    <a href="#" class="share-group-link" data-groupid="{{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-share fw-stack-1x"></i>
+											</span>
+                        <span class="lbl-action">Share</span>
+                    </a>
+                    <a href="#" class="edit-group-link" data-groupid="{{id}}" data-groupname="{{name}}"
+                       data-groupdescription="{{description}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-edit fw-stack-1x"></i>
+											</span>
+                        <span class="lbl-action">Edit</span>
+                    </a>
+                    <a href="#" class="remove-group-link" data-groupid="{{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-delete fw-stack-1x"></i>
+											</span>
+                        <span class="lbl-action">Delete</span>
+                    </a>
+                </div>
+			{{/if}}
+        </div>
+    </div>
+    <hr/>
+    <div id="ast-container-{{id}}" class="ast-container devices-set list-view">
+    </div>
+    <br/>
+{{/each}}
+

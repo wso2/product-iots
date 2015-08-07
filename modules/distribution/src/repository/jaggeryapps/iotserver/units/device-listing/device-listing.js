@@ -1,6 +1,7 @@
 var log = new Log("modules/device-listing.js");
 
 function onRequest(context){
+    var constants = require("/modules/constants.js");
     var userModule = require("/modules/user.js").userModule;
     var permissions = [];
     if(userModule.isAuthorized("/permission/device-mgt/admin/devices/list")){
@@ -19,6 +20,6 @@ function onRequest(context){
     }else{
         context.groupId = 0;
     }
-
+    context.user = session.get(constants.USER_SESSION_KEY).username;
     return context;
 }

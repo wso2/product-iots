@@ -93,10 +93,10 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
                     layout = model.layout;
                     mainUnit = model.name;
                 } else {
-                    log.warn(
-                        '[' + requestId + '] multiple layouts ' + mainUnit + ':' +
-                        layout + ' vs ' + model.name + ':' + model.layout
-                    );
+                    //log.warn(
+                    //    '[' + requestId + '] multiple layouts ' + mainUnit + ':' +
+                    //    layout + ' vs ' + model.name + ':' + model.layout
+                    //);
                 }
             }
         };
@@ -152,8 +152,8 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         initLookUp(definitions);
         var model = definitions[lookUpTable[unit]];
         if (!model) {
-            log.warn('[' + requestId + '] unit "' + unit + '" does not exits');
-            throw '[' + requestId + '] unit "' + unit + '" does not exits';
+            //log.warn('[' + requestId + '] unit "' + unit + '" does not exits');
+            //throw '[' + requestId + '] unit "' + unit + '" does not exits';
         }
         return model;
     };
@@ -219,7 +219,7 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
 
                     var path = definitionFile.getPath();
                     if (log.isDebugEnabled()) {
-                        log.debug('[' + requestId + '] reading file "' + path + '"');
+                        //log.debug('[' + requestId + '] reading file "' + path + '"');
                     }
                     unitModel.definition = require(path);
 
@@ -351,10 +351,10 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         while (len--) {
             if (toDelete[units[len]]) {
                 if (log.isDebugEnabled()) {
-                    log.debug(
-                        '[' + requestId + '] unit "' + units[len] +
-                        '" is overridden by "' + toDelete[units[len]] + '"'
-                    );
+                    //log.debug(
+                    //    '[' + requestId + '] unit "' + units[len] +
+                    //    '" is overridden by "' + toDelete[units[len]] + '"'
+                    //);
                 }
                 units.splice(len, 1);
             }
@@ -412,10 +412,10 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
         var selfFile = new File(getUnitPath(unitName) + slashPath + selfFileName);
         if (selfFile.isExists()) {
             if (log.isDebugEnabled()) {
-                log.debug(
-                    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                    + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-                );
+                //log.debug(
+                //    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                //    + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+                //);
             }
 
             return selfFile;
@@ -434,19 +434,19 @@ var getHbsFile, getFile, toRelativePath, cleanupAncestors,
             var file = new File(getUnitPath(ancestorName) + slashPath + fileName);
             if (file.isExists()) {
                 if (log.isDebugEnabled()) {
-                    log.debug(
-                        '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
-                        + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
-                    );
+                    //log.debug(
+                    //    '[' + requestId + '] for unit "' + unitName + '" file resolved : "'
+                    //    + slashPath + selfFileName + '" -> "' + file.getPath() + '"'
+                    //);
                 }
                 return file;
             }
         }
         if (log.isDebugEnabled()) {
-            log.debug(
-                '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
-                + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
-            );
+            //log.debug(
+            //    '[' + requestId + '] for unit "' + unitName + '" (non-excising) file resolved : "'
+            //    + slashPath + selfFileName + '" -> "' + selfFile.getPath() + '"'
+            //);
         }
         return selfFile;
     };

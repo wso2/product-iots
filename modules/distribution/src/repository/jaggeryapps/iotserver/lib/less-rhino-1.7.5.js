@@ -14,7 +14,7 @@ function readFile(name) {
         var pathInfo = fuse.toRelativePath(name);
         f = fuse.getFile(pathInfo.unit, pathInfo.path);
     }
-    log.debug('[' + requestId + '] opening less file : "' + f.getPath() + '"');
+    //log.debug('[' + requestId + '] opening less file : "' + f.getPath() + '"');
     f.open('r');
     return f.readAll();
 }

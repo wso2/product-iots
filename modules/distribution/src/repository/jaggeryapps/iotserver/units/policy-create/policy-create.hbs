@@ -68,7 +68,7 @@
                     <h1 class="wr-title">Policy creation is successful</h1>
                     Please click <b>"Finish"</b> to complete the process and go back to the policy list
                     <hr />
-                    <button class="wr-btn wizard-stepper" data-current="policy-message" data-direct="/mdm/policies/" onclick="window.location.href=''">
+                    <button class="wr-btn wizard-stepper" data-current="policy-message" data-direct="/iotserver/policies/" onclick="window.location.href='/iotserver/policies/'">
                         &nbsp;&nbsp;&nbsp;&nbsp;Finish&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
 
@@ -92,7 +92,7 @@
                                 </label>
                                 <div class="wr-input-control">
                                     <div class="cus-col-50">
-                                        <input id="policy-name-input"  type="text" value="" placeholder="input text"/>
+                                        <input id="policy-name-input"  type="text" value="" placeholder="Policy name here" required/>
                                     </div>
                                     <br class="c-both" />
                                 </div>
@@ -103,7 +103,7 @@
                                 </label>
                                 <div class="wr-input-control">
                                     <div class="cus-col-50">
-                                        <textarea id="policy-description-input" placeholder="description"></textarea>
+                                        <textarea id="policy-description-input" placeholder="Policy description here" required></textarea>
                                     </div>
                                     <br class="c-both" />
                                 </div>
@@ -134,7 +134,7 @@
                                 </label>
                                 <div class="wr-input-control">
                                     <div class="cus-col-100">
-                                        <textarea id="policy-definition-input" placeholder="Enter the policy" style="width: 100%;"></textarea>
+                                        <textarea id="policy-definition-input" placeholder="Enter the policy" style="width: 100%;" required></textarea>
                                     </div>
                                     <br class="c-both" />
                                 </div>
@@ -155,7 +155,7 @@
 
                     <div class="row wr-wizard">
                         <div class="col-md-4 col-xs-4">
-                            <div class="itm-wiz itm-wiz-current" data-step="policy-devicetype"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Platform</span></div></div>
+                            <div class="itm-wiz itm-wiz-current" data-step="policy-devicetype"><div class="wiz-no">1</div><div class="wiz-lbl hidden-xs"><span>Select Device Type</span></div></div>
                             <br class="c-both" />
                         </div>
                         <div class="col-md-4 col-xs-4">

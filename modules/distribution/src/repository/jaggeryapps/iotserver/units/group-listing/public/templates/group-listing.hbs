@@ -1,6 +1,6 @@
 {{#each groups}}
 	{{groupMap this}}
-    <form action="/iotserver/group/{{id}}" method="POST" id="group_data" >
+    <form id="group-data-form-{{id}}" action="/iotserver/group/{{id}}" method="POST">
         <input type="hidden" name="name" value="{{name}}">
         <input type="hidden" name="deviceCount" value="{{deviceCount}}">
         <input type="hidden" name="dateOfCreation" value="{{dateOfCreation}}">
@@ -9,7 +9,7 @@
         <input type="hidden" name="users" value="{{users}}">
     </form>
 
-    <div class="ctrl-wr-asset" data-groupid="{{id}}">
+    <div href="#" class="ctrl-wr-asset" data-groupid="{{id}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
                 <input type="checkbox"/>
@@ -17,23 +17,37 @@
             </label>
         </div>
         <div class="itm-ast">
-            <div class="ast-img"><img src="{{../imageLocation}}group-icon.png"/></div>
+            <div class="ast-img view-group-link" data-groupid="{{id}}"><img src="{{../imageLocation}}group-icon.png"/></div>
             <div class="ast-desc">
-                <div class="ast-title">
+                <div class="ast-title view-group-link" data-groupid="{{id}}">
                     <h3 class="ast-name">{{name}}</h3>
                     <span class="ast-auth">Device Count: {{deviceCount}}</span>
                     <span class="ast-auth">Created On: <span class="formatDate">{{dateOfCreation}}</span></span>
+                    <span class="ast-ver">Shared with: {{users}}</span>
                 </div>
                 <div class="ast-model">
-                    <span class="ast-ver">Shared with: {{users}}</span>
 
-                    <div href="#" class="ast-btn-group">
-                        <a class="view-group-link" data-group="{{this}}">
+                    <div class="ast-btn-group">
+                        <a href="#" data-groupid="{{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-view fw-stack-1x"></i>
 											</span>
                             <span class="lbl-action">View</span>
+                        </a>
+                        <a href="/iotserver/devices?groupId={{id}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-devices fw-stack-1x"></i>
+											</span>
+                            <span class="lbl-action">Devices</span>
+                        </a>
+                        <a href="/iotserver/analytics?groupId={{id}}&name={{name}}">
+											<span class="fw-stack">
+												<i class="fw fw-ring fw-stack-2x"></i>
+												<i class="fw fw-statistics fw-stack-1x"></i>
+											</span>
+                            <span class="lbl-action">Stats</span>
                         </a>
                         <a href="#" class="share-group-link" data-groupid="{{id}}">
 											<span class="fw-stack">
