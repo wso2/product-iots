@@ -6,9 +6,7 @@
         <div class="wr-action-container">
             <div class="wr-action-btn-bar">
                 <a href="javascript:openCollapsedNav()" class="cu-btn wr-hidden-nav-toggle-btn">
-                    <span class="fw-stack">
-                        <i class="fw fw-tiles fw-stack-1-5x"></i>
-                    </span>
+                     <i class="fw fw-tiles fw-2x"></i>
                 </a><a class="cu-btn page-title" href='javascript:location.reload();'>
                 <span class="fw-stack"></span>
                 {{title}}
@@ -42,8 +40,8 @@
 	<div id="hiddenNav" class="wr-hidden-nav">
         <ul>
             <li><a href="/iotserver/dashboard"><i class="fw fw-dashboard"></i>Dashboard</a></li>
-            <li><a href="/iotserver/devices"><i class="fw fw-mobile"></i>My Devices</a></li>
-            <li><a href="/iotserver/groups"><i class="fw fw-grid"></i>My Groups</a></li>
+            <li><a href="/iotserver/devices"><i class="fw fw-devices"></i>My Devices</a></li>
+            <li><a href="/iotserver/groups"><i class="fw fw-grouping"></i>My Groups</a></li>
             {{#if permissions.ADD_USER}}
             <li><a href="/iotserver/users"><i class="fw fw-user"></i>User Management</a></li>
             {{/if}}
