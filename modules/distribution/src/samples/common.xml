@@ -1,0 +1,5 @@
+<project>
+    <property name="database_dir" value="../../repository/database"/>
+    <property name="sketches_dir" value="../../repository/resources/sketches"/>
+    <property name="units_dir" value="../../repository/deployment/server/jaggeryapps/iotserver/units"/>
+</project>

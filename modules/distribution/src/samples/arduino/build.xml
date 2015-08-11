@@ -1,0 +1,24 @@
+<project name="Arduino" basedir="." default="deploy">
+
+    <import file="../common.xml"/>
+
+    <property name="sample_type" value="arduino"/>
+    <property name="data_source" value="ArduinoDM_DB.h2.db"/>
+
+    <target name="deploy" depends="clean">
+        <copy file="database/${data_source}" toDir="${database_dir}" overwrite="yes"/>
+        <copy toDir="${sketches_dir}/${sample_type}">
+            <fileset dir="sketch"/>
+        </copy>
+        <copy toDir="${units_dir}/${sample_type}">
+            <fileset dir="units"/>
+        </copy>
+    </target>
+
+    <target name="clean">
+        <delete file="${database_dir}/${data_source}"/>
+        <delete dir="${sketches_dir}/${sample_type}"/>
+        <delete dir="${units_dir}/${sample_type}"/>
+    </target>
+
+</project>
