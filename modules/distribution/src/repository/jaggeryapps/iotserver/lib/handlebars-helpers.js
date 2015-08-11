@@ -12,7 +12,7 @@ var getScope = function (unit,configs) {
     var cbResult;
     if (jsFile.isExists()) {
         script = require(jsFile.getPath());
-        //Eagerly make the viewModel the template configs
+        //Eagerly make the viewModel the template org.wso2.carbon.device.mgt.iot.common.config.server.configs
         viewModel = templateConfigs;
         //Check if the unit author has specified an onRequest
         //callback
@@ -24,7 +24,7 @@ var getScope = function (unit,configs) {
             };
             onRequestCb = script.onRequest;
             cbResult = onRequestCb(templateConfigs);
-            log.debug("passing configs to unit "+unit+" configs: "+stringify(templateConfigs));
+            log.debug("passing org.wso2.carbon.device.mgt.iot.common.config.server.configs to unit "+unit+" org.wso2.carbon.device.mgt.iot.common.config.server.configs: "+stringify(templateConfigs));
             //If the execution does not yield an object we will print
             //a warning as the unit author may have forgotten to return a data object
             if(cbResult===undefined){
@@ -157,7 +157,7 @@ Handlebars.registerHelper('unit', function (unitName,options) {
     //TODO warn when unspecified decencies are included.
     fuseState.currentZone.push('main');
     var template = fuse.getFile(baseUnit, '', '.hbs');
-    //log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with configs "+stringify(templateConfigs));
+    //log.debug('[' + requestId + '] including "' + baseUnit + '"'+" with org.wso2.carbon.device.mgt.iot.common.config.server.configs "+stringify(templateConfigs));
     var result = new Handlebars.SafeString(Handlebars.compileFile(template)(getScope(baseUnit,templateConfigs)));
     fuseState.currentZone.pop();
     return result;

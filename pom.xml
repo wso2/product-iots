@@ -364,38 +364,6 @@
             </dependency>
 
 
-
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.arduino.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.android.sense.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.digitaldisplay.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.sensebot.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.iot</groupId>
-                <artifactId>org.wso2.carbon.device.mgt.iot.raspberrypi.impl</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
-
             <!--Osgi dependencies-->
             <dependency>
                 <groupId>org.eclipse.osgi</groupId>
