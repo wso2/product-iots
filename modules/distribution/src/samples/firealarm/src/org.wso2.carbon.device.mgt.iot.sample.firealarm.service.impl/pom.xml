@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>devicecloud-api</artifactId>
-        <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-        <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <artifactId>iot-server-samples</artifactId>
+        <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+        <version>${carbon.iot.device.mgt.version}</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.api</artifactId>
-    <version>1.0.0</version>
+    <artifactId>org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl</artifactId>
+    <version>${carbon.iot.device.mgt.version}</version>
 
     <packaging>war</packaging>
-    <name>WSO2 Carbon - Device Cloud API - Firealarm API</name>
+    <name>WSO2 Carbon - IoT Server API - Firealarm API</name>
 
     <dependencies>
         <!-- CDM -->
@@ -59,8 +59,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
+            <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.impl</artifactId>
             <scope>provided</scope>
         </dependency>
         <!--JAX-RS -->

@@ -38,7 +38,7 @@ function loadDeviceTypes() {
 
                 //setting defaults
                 var storeTitle = deviceType.name;
-                var storeDescription = "Connect your " + deviceType.name + " into the WSO2 Device Cloud Platform.";
+                var storeDescription = "Connect your " + deviceType.name + " into the WSO2 IoT Server.";
 
                 if (deviceType.storeTitle != null) {
                     storeTitle = deviceType.storeTitle;

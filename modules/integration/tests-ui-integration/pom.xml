@@ -20,15 +20,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.dc</groupId>
-        <artifactId>wso2dc-integration</artifactId>
+        <groupId>org.wso2.iot</groupId>
+        <artifactId>wso2iot-integration</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <name>WSO2 DC - Integration Test UI Module</name>
-    <artifactId>org.wso2.carbon.dc.integration.test.ui.integration</artifactId>
+    <name>WSO2 IoT Server - Integration Test UI Module</name>
+    <artifactId>org.wso2.carbon.iot.integration.test.ui.integration</artifactId>
     <packaging>jar</packaging>
 
     <build>
@@ -62,7 +62,7 @@
                         <property>
                             <name>carbon.zip</name>
                             <value>
-                                ${basedir}/../../distribution/target/wso2dc-${project.version}.zip
+                                ${basedir}/../../distribution/target/wso2iot-${project.version}.zip
                             </value>
                         </property>
                         <property>
@@ -130,8 +130,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.wso2.dc</groupId>
-                                    <artifactId>wso2dc</artifactId>
+                                    <groupId>org.wso2.iot</groupId>
+                                    <artifactId>wso2iot</artifactId>
                                     <version>${project.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
@@ -192,7 +192,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2dc-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -213,7 +213,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2dc-${project.version}/repository/conf/axis2/
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/conf/axis2/
                                     </directory>
                                     <includes>
                                         <include>**/*.xml</include>
@@ -234,7 +234,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2dc-${project.version}/repository/deployment/client/modules
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/deployment/client/modules
                                     </directory>
                                     <includes>
                                         <include>**/*.mar</include>
@@ -250,8 +250,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.wso2.dc</groupId>
-            <artifactId>org.wso2.carbon.dc.integration.ui.pages</artifactId>
+            <groupId>org.wso2.iot</groupId>
+            <artifactId>org.wso2.carbon.iot.integration.ui.pages</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.automation</groupId>

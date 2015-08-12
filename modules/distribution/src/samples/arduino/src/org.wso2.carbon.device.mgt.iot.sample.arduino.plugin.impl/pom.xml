@@ -11,131 +11,109 @@
 	~ under the License. -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>devicecloud-mgt</artifactId>
-    <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>iot-server-samples</artifactId>
+		<groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+		<version>${carbon.iot.device.mgt.version}</version>
+		<relativePath>../../../pom.xml</relativePath>
+	</parent>
 
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>org.wso2.carbon.device.mgt.iot.arduino.impl</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>bundle</packaging>
-  <name>WSO2 Carbon - Arduino Management Impl</name>
-  <description>WSO2 Carbon - Arduino Management and Control Implementation</description>
-  <url>http://wso2.org</url>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.impl</artifactId>
+	<version>${carbon.iot.device.mgt.version}</version>
+	<packaging>bundle</packaging>
+	<name>WSO2 Carbon - Arduino Management Impl</name>
+	<description>WSO2 Carbon - Arduino Management and Control Implementation</description>
+	<url>http://wso2.org</url>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-scr-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-        <version>2.3.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>1.4.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Bundle-Name>${project.artifactId}</Bundle-Name>
-            <Bundle-Version>${carbon.iot.device.mgt.version}</Bundle-Version>
-            <Bundle-Description>Device Cloud Impl Bundle</Bundle-Description>
-            <Private-Package>org.wso2.carbon.device.mgt.iot.arduino.internal</Private-Package>
-            <Import-Package>
-              org.osgi.framework,
-              org.osgi.service.component,
-              org.apache.commons.logging,
-              javax.xml.bind.*,
-              javax.naming,
-              javax.sql,
-              javax.xml.bind.annotation.*,
-              javax.xml.parsers,
-              javax.net,
-              javax.net.ssl,
-              org.w3c.dom,
-              org.wso2.carbon.device.mgt.common.*,
-              org.wso2.carbon.device.mgt.common,
-              org.wso2.carbon.context.*,
-              org.wso2.carbon.ndatasource.core,
-              org.wso2.carbon.device.mgt.iot.common.*
-            </Import-Package>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-scr-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+				<version>2.3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>1.4.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.artifactId}</Bundle-Name>
+						<Bundle-Version>${carbon.iot.device.mgt.version}</Bundle-Version>
+						<Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
+						<Private-Package>org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.internal</Private-Package>
+						<Import-Package>
+							org.osgi.framework,
+							org.osgi.service.component,
+							org.apache.commons.logging,
+							javax.xml.bind.*,
+							javax.naming,
+							javax.sql,
+							javax.xml.bind.annotation.*,
+							javax.xml.parsers,
+							javax.net,
+							javax.net.ssl,
+							org.w3c.dom,
+							org.wso2.carbon.device.mgt.common.*,
+							org.wso2.carbon.device.mgt.common,
+							org.wso2.carbon.context.*,
+							org.wso2.carbon.ndatasource.core,
+							org.wso2.carbon.device.mgt.iot.common.*,
+						</Import-Package>
 
-            <Export-Package>
-              !org.wso2.carbon.device.mgt.iot.arduino.internal,
-              org.wso2.carbon.device.mgt.iot.arduino.*
-            </Export-Package>
+						<Export-Package>
+							!org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.internal,
+							org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.*
+						</Export-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-          </instructions>
-        </configuration>
-      </plugin>
-      <!--<plugin>-->
-      <!--<groupId>org.apache.maven.plugins</groupId>-->
-      <!--<artifactId>maven-surefire-plugin</artifactId>-->
-      <!--<version>2.18</version>-->
-      <!--<configuration>-->
-      <!--<systemPropertyVariables>-->
-      <!--<log4j.configuration>file:src/test/resources/log4j.properties-->
-      <!--</log4j.configuration>-->
-      <!--</systemPropertyVariables>-->
-      <!--<suiteXmlFiles>-->
-      <!--<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
-      <!--</suiteXmlFiles>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
-    </plugins>
-  </build>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.osgi</groupId>
+			<artifactId>org.eclipse.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.osgi</groupId>
+			<artifactId>org.eclipse.osgi.services</artifactId>
+		</dependency>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.eclipse.osgi</groupId>
-      <artifactId>org.eclipse.osgi</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.osgi</groupId>
-      <artifactId>org.eclipse.osgi.services</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>org.wso2.carbon</groupId>
+			<artifactId>org.wso2.carbon.logging</artifactId>
+		</dependency>
 
-    <dependency>
-      <groupId>org.wso2.carbon</groupId>
-      <artifactId>org.wso2.carbon.logging</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.device.mgt.common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon</groupId>
+			<artifactId>org.wso2.carbon.ndatasource.core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.wso2.carbon.device.mgt.iot</groupId>
+			<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
+		</dependency>
 
-    <dependency>
-      <groupId>org.wso2.carbon.devicemgt</groupId>
-      <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.wso2.carbon</groupId>
-      <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
-    </dependency>
 
-    <!--<dependency>-->
-    <!--<groupId>org.testng</groupId>-->
-    <!--<artifactId>testng</artifactId>-->
-    <!--</dependency>-->
 
-    <!--<dependency>-->
-    <!--<groupId>com.h2database.wso2</groupId>-->
-    <!--<artifactId>h2-database-engine</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <dependency>
-      <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-      <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
-    </dependency>
+	</dependencies>
 
-  </dependencies>
 
 </project>

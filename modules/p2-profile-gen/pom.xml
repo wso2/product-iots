@@ -20,15 +20,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.dc</groupId>
-        <artifactId>wso2dc-parent</artifactId>
+        <groupId>org.wso2.iot</groupId>
+        <artifactId>wso2iot-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2dc-profile-gen</artifactId>
-    <name>WSO2 Device Cloud (DC) - P2 Profile Gen</name>
+    <artifactId>wso2iot-profile-gen</artifactId>
+    <name>WSO2 IoT Server - P2 Profile Gen</name>
     <packaging>pom</packaging>
 
     <build>

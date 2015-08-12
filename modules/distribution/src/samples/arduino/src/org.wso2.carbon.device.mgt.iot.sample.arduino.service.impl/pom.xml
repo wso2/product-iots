@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>devicecloud-api</artifactId>
-    <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-    <version>1.0.0</version>
-    <relativePath>../pom.xml</relativePath>
+    <artifactId>iot-server-samples</artifactId>
+    <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+    <version>${carbon.iot.device.mgt.version}</version>
+    <relativePath>../../../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>org.wso2.carbon.device.mgt.iot.arduino.api</artifactId>
-  <version>1.0.0</version>
+  <artifactId>org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl</artifactId>
+  <version>${carbon.iot.device.mgt.version}</version>
 
   <packaging>war</packaging>
-  <name>WSO2 Carbon - Device Cloud API - Arduiono API</name>
+  <name>WSO2 Carbon - IoT Server API - Arduino API</name>
 
   <dependencies>
     <!-- CDM -->
@@ -23,7 +23,6 @@
       <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
       <scope>provided</scope>
     </dependency>
-
 
     <!--CXF -->
     <dependency>
@@ -49,15 +48,19 @@
     </dependency>
 
     <!--IOT -->
-
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpasyncclient</artifactId>
+      <version>4.1</version>
+    </dependency>
     <dependency>
       <groupId>org.wso2.carbon.device.mgt.iot</groupId>
       <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.wso2.carbon.device.mgt.iot</groupId>
-      <artifactId>org.wso2.carbon.device.mgt.iot.arduino.impl</artifactId>
+      <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+      <artifactId>org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.impl</artifactId>
       <scope>provided</scope>
     </dependency>
     <!--JAX-RS -->

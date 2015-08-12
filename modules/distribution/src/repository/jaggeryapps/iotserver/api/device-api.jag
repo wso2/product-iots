@@ -118,13 +118,13 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 	}
 
 	//URL: https://localhost:9443/devicecloud/manager/devices/username/{username}
-	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/device_manager";
+	deviceCloudService = carbonHttpsServletTransport + "/common/device_manager";
 	listAllDevicesEndPoint = deviceCloudService + "/devices/username/" + user.username;
 	result = get(listAllDevicesEndPoint, {}, "json");
 	var ownDevices = result.data;
 
 	var allDevices = [];
-	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
+	deviceCloudService = carbonHttpsServletTransport + "/common/group_manager";
 	var endPoint = deviceCloudService + "/group/all";
 	var data = {"username": user.username};
 	var groups = get(endPoint, data, "json").data;
@@ -161,13 +161,13 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 	}
 
 	//URL: https://localhost:9443/devicecloud/manager/devices/username/{username}
-	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/device_manager";
+	deviceCloudService = carbonHttpsServletTransport + "/common/device_manager";
 	listAllDevicesEndPoint = deviceCloudService + "/devices/username/" + user.username;
 	result = get(listAllDevicesEndPoint, {}, "json");
 	var ownDevices = result.data;
 
 	var allDevices = [];
-	deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
+	deviceCloudService = carbonHttpsServletTransport + "/common/group_manager";
 	var endPoint = deviceCloudService + "/group/all";
 	var data = {"username": user.username};
 	var groups = get(endPoint, data, "json").data;

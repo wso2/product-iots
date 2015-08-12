@@ -13,15 +13,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>devicecloud-mgt</artifactId>
-		<groupId>org.wso2.carbon.device.mgt.iot</groupId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<artifactId>iot-server-samples</artifactId>
+		<groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+		<version>${carbon.iot.device.mgt.version}</version>
+		<relativePath>../../../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.wso2.carbon.device.mgt.iot.firealarm.impl</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.impl</artifactId>
+	<version>${carbon.iot.device.mgt.version}</version>
 	<packaging>bundle</packaging>
 	<name>WSO2 Carbon - Firealarm Management Impl</name>
 	<description>WSO2 Carbon - Firealarm Management and Control Implementation</description>
@@ -51,8 +51,8 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>${project.artifactId}</Bundle-Name>
 						<Bundle-Version>${carbon.iot.device.mgt.version}</Bundle-Version>
-						<Bundle-Description>Device Cloud Impl Bundle</Bundle-Description>
-						<Private-Package>org.wso2.carbon.device.mgt.iot.firealarm.internal</Private-Package>
+						<Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
+						<Private-Package>org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.internal</Private-Package>
 						<Import-Package>
 							org.osgi.framework,
 							org.osgi.service.component,
@@ -73,26 +73,12 @@
 						</Import-Package>
 
 						<Export-Package>
-							!org.wso2.carbon.device.mgt.iot.firealarm.internal,
-							org.wso2.carbon.device.mgt.iot.firealarm.*
+							!org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.internal,
+							org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.*
 						</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
-			<!--<plugin>-->
-			<!--<groupId>org.apache.maven.plugins</groupId>-->
-			<!--<artifactId>maven-surefire-plugin</artifactId>-->
-			<!--<version>2.18</version>-->
-			<!--<configuration>-->
-			<!--<systemPropertyVariables>-->
-			<!--<log4j.configuration>file:src/test/resources/log4j.properties-->
-			<!--</log4j.configuration>-->
-			<!--</systemPropertyVariables>-->
-			<!--<suiteXmlFiles>-->
-			<!--<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>-->
-			<!--</suiteXmlFiles>-->
-			<!--</configuration>-->
-			<!--</plugin>-->
 		</plugins>
 	</build>
 
@@ -119,16 +105,7 @@
 			<groupId>org.wso2.carbon</groupId>
 			<artifactId>org.wso2.carbon.ndatasource.core</artifactId>
 		</dependency>
-		<!--<dependency>-->
-		<!--<groupId>org.testng</groupId>-->
-		<!--<artifactId>testng</artifactId>-->
-		<!--</dependency>-->
-
-		<!--<dependency>-->
-		<!--<groupId>com.h2database.wso2</groupId>-->
-		<!--<artifactId>h2-database-engine</artifactId>-->
-		<!--<scope>test</scope>-->
-		<!--</dependency>-->
+		
 		<dependency>
 			<groupId>org.wso2.carbon.device.mgt.iot</groupId>
 			<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
@@ -140,13 +117,3 @@
 
 
 </project>
-<!--<repositories>-->
-<!--<repository>-->
-	<!--<id>Eclipse Paho Repo</id>-->
-	<!--<url>http://repo.spring.io/plugins-release/</url>-->
-<!--</repository>-->
-<!--</repositories>-->
-<!--<dependency>-->
-<!--<groupId>org.eclipse.paho</groupId>-->
-<!--<artifactId>mqtt-client</artifactId>-->
-<!--</dependency>-->

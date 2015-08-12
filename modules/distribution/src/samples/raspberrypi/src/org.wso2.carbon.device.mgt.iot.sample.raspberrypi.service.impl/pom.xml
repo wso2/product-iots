@@ -1,101 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>devicecloud-api</artifactId>
-		<groupId>org.wso2.carbon.device.mgt.iot</groupId>
-		<version>1.0.0</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>iot-server-samples</artifactId>
+        <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+        <version>${carbon.iot.device.mgt.version}</version>
+        <relativePath>../../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-	<artifactId>org.wso2.carbon.device.mgt.iot.raspberrypi.api</artifactId>
-	<version>1.0.0</version>
+    <artifactId>org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl</artifactId>
+    <version>${carbon.iot.device.mgt.version}</version>
 
-	<packaging>war</packaging>
-	<name>WSO2 Carbon - Device Cloud API - Raspberrypi API</name>
+    <packaging>war</packaging>
+    <name>WSO2 Carbon - IoT Server API - RaspberryPi API</name>
 
-	<dependencies>
-		<!-- CDM -->
-		<dependency>
-			<groupId>org.wso2.carbon.devicemgt</groupId>
-			<artifactId>org.wso2.carbon.device.mgt.common</artifactId>
-			<scope>provided</scope>
-		</dependency>
+    <dependencies>
+        <!-- CDM -->
+        <dependency>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<!--CXF -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <!--CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--MQTT -->
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>mqtt-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<!--IOT -->
-
-		<dependency>
-			<groupId>org.wso2.carbon.device.mgt.iot</groupId>
-			<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.wso2.carbon.device.mgt.iot</groupId>
-			<artifactId>org.wso2.carbon.device.mgt.iot.raspberrypi.impl</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!--JAX-RS -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-	</dependencies>
-
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>${wso2.maven.compiler.source}</source>
-					<target>${wso2.maven.compiler.target}</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warName>raspberrypi</warName><!--devices.war-->
-					<!--<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>-->
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+        <!--IOT -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.device.mgt.iot</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.iot.sample.raspberrypi.plugin.impl</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--JAX-RS -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>${wso2.maven.compiler.source}</source>
+                    <target>${wso2.maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>raspberrypi</warName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

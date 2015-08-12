@@ -27,7 +27,7 @@ var dcProps = require('/config/dc-props.js').config();
 
 var carbon = require('carbon');
 var carbonHttpsServletTransport = carbon.server.address('https');
-var deviceCloudService = carbonHttpsServletTransport + "/devicecloud/group_manager";
+var deviceCloudService = carbonHttpsServletTransport + "/common/group_manager";
 
 var user = session.get(constants.USER_SESSION_KEY);
 if (!user) {

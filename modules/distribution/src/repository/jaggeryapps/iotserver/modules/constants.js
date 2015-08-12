@@ -16,7 +16,7 @@
  * under the License.
  */
 
-var WEB_APP_TITLE = "WSO2 DC - Device Cloud";
+var WEB_APP_TITLE = "WSO2 IoT - IoT Server";
 var WEB_APP_CONTEXT = "/iotserver";
 var USER_SESSION_KEY = "USER";
 var UNSPECIFIED = "Unspecified";

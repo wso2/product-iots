@@ -25,11 +25,11 @@
     <fileSets>
         <fileSet>
             <directory>target/site</directory>
-            <outputDirectory>wso2dc-${pom.version}-docs</outputDirectory>
+            <outputDirectory>wso2iot-${pom.version}-docs</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>../../modules/documentation/src/site/xdoc/user-core</directory>
-            <outputDirectory>wso2dc-${pom.version}-docs/user-core</outputDirectory>
+            <outputDirectory>wso2iot-${pom.version}-docs/user-core</outputDirectory>
             <fileMode>755</fileMode>
             <includes>
                 <include>user-mgt-actdir.xml</include>
