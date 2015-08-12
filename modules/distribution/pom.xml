@@ -413,7 +413,6 @@
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts"/>
 
                                 <!--Default sample-->
-                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics"/>
 
@@ -429,12 +428,6 @@
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
                                       overwrite="true">
                                     <fileset dir="src/samples"/>
-                                </copy>
-
-                                <!--Default sample-->
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"
-                                      overwrite="true">
-                                    <fileset file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches"
@@ -477,12 +470,20 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+
                     <!--Default sample-->
                     <execution>
                         <id>install_samples</id>
                         <phase>package</phase>
                         <configuration>
                             <tasks>
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>
+
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"
+                                      overwrite="true">
+                                    <fileset file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>
+                                </copy>
+
                                 <subant target="deploy">
                                     <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino" includes="build.xml"/>
                                 </subant>
@@ -493,6 +494,8 @@
                                       overwrite="true">
                                     <fileset file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>
                                 </copy>
+                                <move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml" toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
+                                <move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml" toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
                             </tasks>
                         </configuration>
                         <goals>
