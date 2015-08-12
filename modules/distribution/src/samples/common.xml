@@ -1,5 +1,10 @@
 <project>
-    <property name="database_dir" value="../../repository/database"/>
-    <property name="sketches_dir" value="../../repository/resources/sketches"/>
-    <property name="units_dir" value="../../repository/deployment/server/jaggeryapps/iotserver/units"/>
+    <property name="lib.dir" value="../../repository/components/plugins"/>
+    <property name="target.db.dir" value="../../repository/database"/>
+    <property name="target.sketch.dir" value="../../repository/resources/sketches"/>
+    <property name="target.unit.dir" value="../../repository/deployment/server/jaggeryapps/iotserver/units"/>
+    <property name="db.username" value="wso2carbon"/>
+    <property name="db.password" value="wso2carbon"/>
+    <property name="db.dir" value="database"/>
+    <property name="db.type" value="h2"/>
 </project>

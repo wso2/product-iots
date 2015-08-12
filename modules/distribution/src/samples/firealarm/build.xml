@@ -3,22 +3,34 @@
     <import file="../common.xml"/>
 
     <property name="sample_type" value="firealarm"/>
-    <property name="data_source" value="FireAlarmDM_DB.h2.db"/>
+    <property name="data_source" value="FireAlarmDM_DB"/>
 
-    <target name="deploy" depends="clean">
-        <copy file="database/${data_source}" toDir="${database_dir}" overwrite="yes"/>
-        <copy toDir="${sketches_dir}/${sample_type}">
+    <target name="create-db" depends="clean">
+        <mkdir dir="${db.dir}"/>
+        <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
+
+        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
+            <classpath>
+                <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
+            </classpath>
+            <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
+        </sql>
+    </target>
+
+    <target name="deploy" depends="create-db">
+        <copy file="database/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
+        <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
-        <copy toDir="${units_dir}/${sample_type}">
+        <copy toDir="${target.unit.dir}/${sample_type}">
             <fileset dir="units"/>
         </copy>
     </target>
 
     <target name="clean">
-        <delete file="${database_dir}/${data_source}"/>
-        <delete dir="${sketches_dir}/${sample_type}"/>
-        <delete dir="${units_dir}/${sample_type}"/>
+        <delete file="${target.db.dir}/${data_source}.h2.db"/>
+        <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete dir="${target.unit.dir}/${sample_type}"/>
     </target>
 
 </project>

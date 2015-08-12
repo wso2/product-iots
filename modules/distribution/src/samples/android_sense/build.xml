@@ -2,8 +2,8 @@
 
     <import file="../common.xml"/>
 
-    <property name="sample_type" value="arduino"/>
-    <property name="data_source" value="ArduinoDM_DB"/>
+    <property name="sample_type" value="android_sense"/>
+    <property name="data_source" value="AndroidSenseDM_DB"/>
 
     <target name="create-db" depends="clean">
         <mkdir dir="${db.dir}"/>
