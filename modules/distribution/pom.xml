@@ -412,6 +412,9 @@
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts"/>
 
+                                <!--Default sample-->
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>
+
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics"/>
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches"/>
@@ -420,12 +423,18 @@
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps"
                                       overwrite="true">
-                                    <fileset dir="src/repository/jaggeryapps"></fileset>
+                                    <fileset dir="src/repository/jaggeryapps"/>
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
                                       overwrite="true">
                                     <fileset dir="src/samples"/>
+                                </copy>
+
+                                <!--Default sample-->
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"
+                                      overwrite="true">
+                                    <fileset file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches"
@@ -468,6 +477,28 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    <!--Default sample-->
+                    <execution>
+                        <id>install_samples</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <subant target="deploy">
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino" includes="build.xml"/>
+                                </subant>
+                                <subant target="deploy">
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi" includes="build.xml"/>
+                                </subant>
+                                <copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"
+                                      overwrite="true">
+                                    <fileset file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>clean_target</id>
                         <phase>install</phase>
@@ -478,7 +509,6 @@
                                 <delete dir="target/archive-tmp"/>
                                 <delete dir="target/dependency-maven-plugin-markers"/>
                                 <delete dir="target/maven-archiver"/>
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
                                 <delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
                                 <delete file="target/wso2dc-${project.version}.jar"/>
                                 <delete dir="target/sources"/>
