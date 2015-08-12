@@ -18,7 +18,7 @@
                 <exclude>**/axis2services/sample01.aar</exclude>
                 <exclude>**/axis2services/echo/**</exclude>
                 <exclude>**/axis2services/version/**</exclude>
-                <exclude>**/pom.xml</exclude>
+                <!--<exclude>**/pom.xml</exclude>-->
                 <exclude>**/version.txt</exclude>
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/carbon.xml</exclude>
