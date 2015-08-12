@@ -797,7 +797,7 @@
 
         <!-- IOT Device Management -->
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
-        <mdm.version>1.0.0-SNAPSHOT</mdm.version>
+
 
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
 
