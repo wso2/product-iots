@@ -304,7 +304,11 @@
 
                                 <!--Device Cloud Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.device.mgt.iot:org.wso2.carbon.device.mgt.iot.feature:1.0.0-SNAPSHOT
+                                    org.wso2.carbon.device.mgt.iot:org.wso2.carbon.device.mgt.iot.feature:${carbon.iot.device.mgt.version}
+                                </featureArtifactDef>
+
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
 
                             </featureArtifacts>
@@ -330,10 +334,10 @@
                                     <id>org.wso2.carbon.device.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-                                <!--feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
-                                </feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.policy.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -595,7 +599,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.feature.group</id>
-                                    <version>1.0.0-SNAPSHOT</version>
+                                    <version>${carbon.iot.device.mgt.version}</version>
                                 </feature>
                             </features>
                         </configuration>
