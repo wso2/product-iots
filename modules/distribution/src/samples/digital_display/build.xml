@@ -15,10 +15,21 @@
             </classpath>
             <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
         </sql>
+        <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
+
+        <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
+            <insert path="/IoTDeviceTypeConfigManager[1]">
+                <![CDATA[
+    <IotDeviceTypeConfig type="${sample_type}">
+		<DatasourceName>jdbc/${data_source}</DatasourceName>
+	</IotDeviceTypeConfig>
+	            ]]>
+            </insert>
+        </xmltask>
+
     </target>
 
     <target name="deploy" depends="create-db">
-        <copy file="database/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>

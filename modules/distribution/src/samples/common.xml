@@ -1,5 +1,6 @@
 <project>
     <property name="lib.dir" value="../../repository/components/plugins"/>
+    <property name="iot.conf" value="../../repository/conf/iot/iot-config.xml"/>
     <property name="target.db.dir" value="../../repository/database"/>
     <property name="target.sketch.dir" value="../../repository/resources/sketches"/>
     <property name="target.unit.dir" value="../../repository/deployment/server/jaggeryapps/iotserver/units"/>
@@ -7,4 +8,11 @@
     <property name="db.password" value="wso2carbon"/>
     <property name="db.dir" value="database"/>
     <property name="db.type" value="h2"/>
+
+    <taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask">
+        <classpath>
+            <pathelement location="../lib/xmltask.jar"/>
+        </classpath>
+    </taskdef>
+
 </project>

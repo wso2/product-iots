@@ -9,16 +9,28 @@
         <mkdir dir="${db.dir}"/>
         <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
 
-        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
+        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}" autocommit="true"
+             onerror="continue">
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>
             <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
         </sql>
+        <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
+
+        <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
+            <insert path="/IoTDeviceTypeConfigManager[1]">
+                <![CDATA[
+    <IotDeviceTypeConfig type="${sample_type}">
+		<DatasourceName>jdbc/${data_source}</DatasourceName>
+	</IotDeviceTypeConfig>
+	            ]]>
+            </insert>
+        </xmltask>
+
     </target>
 
     <target name="deploy" depends="create-db">
-        <copy file="database/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
@@ -31,6 +43,9 @@
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
+        <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
+            <remove path="/IoTDeviceTypeConfigManager/IotDeviceTypeConfig[type='${sample_type}']"/>
+        </xmltask>
     </target>
 
 </project>
