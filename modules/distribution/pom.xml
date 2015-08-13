@@ -410,13 +410,12 @@
                             <tasks>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps"/>
 
+                                <!--Make samples directory for distribution-->
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples"/>
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches"/>
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts"/>
-
-                                <!--Default sample-->
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics"/>
 
@@ -429,9 +428,14 @@
                                     <fileset dir="src/repository/jaggeryapps"/>
                                 </copy>
 
+                                <!--Copy samples to distribution-->
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
                                       overwrite="true">
-                                    <fileset dir="src/samples"/>
+                                    <fileset dir="src/samples">
+                                        <exclude name="**/*.iml"/>
+                                        <exclude name="**/.DS_Store"/>
+                                        <exclude name="**/target/"/>
+                                    </fileset>
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches"
@@ -475,7 +479,7 @@
                         </goals>
                     </execution>
 
-                    <!--Default sample-->
+                    <!--Install default samples-->
                     <execution>
                         <id>install_samples</id>
                         <phase>package</phase>
@@ -500,6 +504,7 @@
                                 </copy>
                                 <move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml" toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
                                 <move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml" toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
+                                <move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml" toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml" overwrite="true"/>
                             </tasks>
                         </configuration>
                         <goals>
