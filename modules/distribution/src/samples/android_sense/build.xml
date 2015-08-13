@@ -4,6 +4,7 @@
 
     <property name="sample_type" value="android_sense"/>
     <property name="data_source" value="AndroidSenseDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.android.sense"/>
 
     <target name="create-db" depends="clean">
         <mkdir dir="${db.dir}"/>
@@ -27,13 +28,20 @@
 	            ]]>
             </insert>
         </xmltask>
-
     </target>
 
-    <target name="deploy" depends="create-db">
+    <target name="build">
+        <exec dir="src" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+    </target>
+
+    <target name="deploy" depends="create-db,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
+        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
             <fileset dir="units"/>
         </copy>

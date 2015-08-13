@@ -4,6 +4,7 @@
 
     <property name="sample_type" value="sensebot"/>
     <property name="data_source" value="SensebotDM_DB.h2.db"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.sensebot"/>
 
     <target name="create-db" depends="clean">
         <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
@@ -25,16 +26,23 @@
 	            ]]>
             </insert>
         </xmltask>
-
     </target>
 
-    <target name="deploy" depends="create-db">
+    <target name="build">
+        <exec dir="src" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+    </target>
+
+    <target name="deploy" depends="create-db,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
         <copy toDir="${target.sketch.dir}/${sample_type}_wifi">
             <fileset dir="sketch_wifi"/>
         </copy>
+        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
             <fileset dir="units"/>
         </copy>

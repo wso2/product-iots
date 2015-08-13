@@ -39,7 +39,8 @@
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
-        <copy file="src/${package}.service.impl/target/${package}/service/impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
             <fileset dir="units"/>
         </copy>
