@@ -36,18 +36,12 @@
 	</parent>
 
 	<modules>
-		<module>firealarm/src/org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.impl</module>
-		<module>firealarm/src/org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl</module>
-		<module>android_sense/src/org.wso2.carbon.device.mgt.iot.sample.android.sense.plugin.impl</module>
-		<module>android_sense/src/org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl</module>
-		<module>arduino/src/org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.impl</module>
-		<module>arduino/src/org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl</module>
-		<module>digital_display/src/org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.plugin.impl</module>
-		<module>digital_display/src/org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl</module>
-		<module>raspberrypi/src/org.wso2.carbon.device.mgt.iot.sample.raspberrypi.plugin.impl</module>
-		<module>raspberrypi/src/org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl</module>
-		<module>sensebot/src/org.wso2.carbon.device.mgt.iot.sample.sensebot.plugin.impl</module>
-		<module>sensebot/src/org.wso2.carbon.device.mgt.iot.sample.sensebot.service.impl</module>
+		<module>firealarm/src</module>
+		<module>android_sense/src</module>
+		<module>arduino/src</module>
+		<module>digital_display/src</module>
+		<module>raspberrypi/src</module>
+		<module>sensebot/src</module>
 	</modules>
 
 	<dependencyManagement>
@@ -86,27 +80,29 @@
 			<dependency>
 				<groupId>org.wso2.carbon.devicemgt</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.core</artifactId>
-				<version>${carbon.device.mgt.version}</version>
 				<scope>system</scope>
-				<systemPath>${basedir}/../repository/components/plugins/org.wso2.carbon.device.mgt.core_0.9.2.SNAPSHOT.jar</systemPath>
+				<version>${carbon.device.mgt.version}</version>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_0.9.2.SNAPSHOT.jar</systemPath>
 			</dependency>
 			<dependency>
 				<groupId>org.wso2.carbon.devicemgt</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.common</artifactId>
-				<version>${carbon.device.mgt.version}</version>
 				<scope>system</scope>
-				<systemPath>${basedir}/../repository/components/plugins/org.wso2.carbon.device.mgt.common_0.9.2.SNAPSHOT.jar</systemPath>
+				<version>${carbon.device.mgt.version}</version>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.common_0.9.2.SNAPSHOT.jar</systemPath>
 			</dependency>
 
 			<!--IOT dependencies-->
+
 
 			<dependency>
 				<groupId>org.wso2.carbon.device.mgt.iot</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
 				<version>${carbon.iot.device.mgt.version}</version>
 				<scope>system</scope>
-				<systemPath>${basedir}/../repository/components/plugins/org.wso2.carbon.device.mgt.iot.common_1.0.0.SNAPSHOT.jar</systemPath>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot.common_1.0.0.SNAPSHOT.jar</systemPath>
 			</dependency>
+
 
 			<dependency>
 				<groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
@@ -204,13 +200,11 @@
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
 				<version>${jackson.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-jaxrs</artifactId>
 				<version>${jackson.version}</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!--Osgi dependencies-->
@@ -308,6 +302,76 @@
 				<scope>provided</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.wso2.carbon</groupId>
+				<artifactId>org.wso2.carbon.utils</artifactId>
+				<version>${carbon.kernel.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.bouncycastle.wso2</groupId>
+						<artifactId>bcprov-jdk15on</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.wso2.carbon</groupId>
+						<artifactId>org.wso2.carbon.user.api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.wso2.carbon</groupId>
+						<artifactId>org.wso2.carbon.queuing</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.wso2.carbon</groupId>
+						<artifactId>org.wso2.carbon.base</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.axis2.wso2</groupId>
+						<artifactId>axis2</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.igniterealtime.smack.wso2</groupId>
+						<artifactId>smack</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.igniterealtime.smack.wso2</groupId>
+						<artifactId>smackx</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>jaxen</groupId>
+						<artifactId>jaxen</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-fileupload.wso2</groupId>
+						<artifactId>commons-fileupload</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.ant.wso2</groupId>
+						<artifactId>ant</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.ant.wso2</groupId>
+						<artifactId>ant</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-httpclient.wso2</groupId>
+						<artifactId>commons-httpclient</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.eclipse.equinox</groupId>
+						<artifactId>javax.servlet</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.wso2.carbon</groupId>
+						<artifactId>org.wso2.carbon.registry.api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${google.gson.version}</version>
+			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>
@@ -361,7 +425,7 @@
 
 		<commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
 		<commons-json.version>3.0.0.wso2v1</commons-json.version>
-
+		<google.gson.version>2.3.1</google.gson.version>
 
 
 		<!-- Source code -->
@@ -574,6 +638,8 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+
+
 
 	</repositories>
 
