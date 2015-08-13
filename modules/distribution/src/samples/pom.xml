@@ -36,18 +36,12 @@
     </parent>
 
     <modules>
-        <module>firealarm/src/org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.impl</module>
-        <module>firealarm/src/org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl</module>
-        <module>android_sense/src/org.wso2.carbon.device.mgt.iot.sample.android.sense.plugin.impl</module>
-        <module>android_sense/src/org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl</module>
-        <module>arduino/src/org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.impl</module>
-        <module>arduino/src/org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl</module>
-        <module>digital_display/src/org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.plugin.impl</module>
-        <module>digital_display/src/org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl</module>
-        <module>raspberrypi/src/org.wso2.carbon.device.mgt.iot.sample.raspberrypi.plugin.impl</module>
-        <module>raspberrypi/src/org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl</module>
-        <module>sensebot/src/org.wso2.carbon.device.mgt.iot.sample.sensebot.plugin.impl</module>
-        <module>sensebot/src/org.wso2.carbon.device.mgt.iot.sample.sensebot.service.impl</module>
+        <module>firealarm/src</module>
+        <module>android_sense/src</module>
+        <module>arduino/src</module>
+        <module>digital_display/src</module>
+        <module>raspberrypi/src</module>
+        <module>sensebot/src</module>
     </modules>
 
     <dependencyManagement>

@@ -3,10 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>iot-server-samples</artifactId>
+        <artifactId>org.wso2.carbon.device.mgt.iot.sample.android.sense</artifactId>
         <groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
         <version>${carbon.iot.device.mgt.version}</version>
-        <relativePath>../../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
