@@ -195,13 +195,13 @@
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-core-asl</artifactId>
                 <version>${jackson.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-jaxrs</artifactId>
                 <version>${jackson.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
 
             <!--Osgi dependencies-->
@@ -263,25 +263,25 @@
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-jaxws</artifactId>
                 <version>${cxf.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-jaxrs</artifactId>
                 <version>${cxf.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-transports-http</artifactId>
                 <version>${cxf.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>jsr311-api</artifactId>
                 <version>${javax.ws.rs.version}</version>
-                <scope>provided</scope>
+                <!--<scope>provided</scope>-->
             </dependency>
 
 
@@ -365,11 +365,8 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>${google.gson.version}</version>
-            </dependency>
+
+
 
 
 
@@ -425,7 +422,7 @@
 
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
-        <google.gson.version>2.3.1</google.gson.version>
+        <jackson.fasterxml.version>2.6.1</jackson.fasterxml.version>
 
 
 
