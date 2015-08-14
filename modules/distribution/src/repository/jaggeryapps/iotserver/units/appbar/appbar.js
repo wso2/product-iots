@@ -90,19 +90,17 @@ function onRequest(context) {
                 icon: "fw-add",
                 url: "/iotserver/devices/add-device"
             });
+        }
+        if (permissions.ADD_DEVICE) {
             links["device-mgt"].push({
                 title: "Add Group",
                 icon: "fw-add",
-                url: "#",
-                class: "add-group-link"
+                url: "/iotserver/groups/add-group"
             });
-        }
-        if (permissions.ADD_DEVICE) {
             links["group-mgt"].push({
                 title: "Add Group",
                 icon: "fw-add",
-                url: "#",
-                class: "add-group-link"
+                url: "/iotserver/groups/add-group"
             });
         }
     }// end-if-user
