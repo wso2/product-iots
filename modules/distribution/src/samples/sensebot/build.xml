@@ -3,7 +3,7 @@
     <import file="../common.xml"/>
 
     <property name="sample_type" value="sensebot"/>
-    <property name="data_source" value="SensebotDM_DB.h2.db"/>
+    <property name="data_source" value="SensebotDM_DB"/>
     <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.sensebot"/>
 
     <target name="create-db" depends="clean">
