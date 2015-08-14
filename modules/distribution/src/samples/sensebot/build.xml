@@ -43,6 +43,7 @@
         </copy>
         <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
         <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
             <fileset dir="units"/>
         </copy>
@@ -52,6 +53,7 @@
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
         <delete dir="${target.sketch.dir}/${sample_type}_wifi"/>
+        <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
             <remove path="/IoTDeviceTypeConfigManager/IotDeviceTypeConfig[type='${sample_type}']"/>
