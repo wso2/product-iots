@@ -1,5 +1,5 @@
 {{#each groups}}
-	{{groupMap this}}
+    {{groupMap this}}
     <form id="group-data-form-{{id}}" action="/iotserver/group/{{id}}" method="POST">
         <input type="hidden" name="name" value="{{name}}">
         <input type="hidden" name="deviceCount" value="{{deviceCount}}">
@@ -9,7 +9,7 @@
         <input type="hidden" name="users" value="{{users}}">
     </form>
 
-    <div href="#" class="ctrl-wr-asset" data-groupid="{{id}}">
+    <div class="ctrl-wr-asset" data-groupid="{{id}}">
         <div class="itm-select">
             <label class="wr-input-control checkbox">
                 <input type="checkbox"/>
@@ -17,13 +17,16 @@
             </label>
         </div>
         <div class="itm-ast">
-            <div class="ast-img view-group-link" data-groupid="{{id}}"><img src="{{../imageLocation}}group-icon.png"/></div>
+            <div class="ast-img view-group-link" data-groupid="{{id}}"><img src="{{../imageLocation}}group-icon.png"/>
+            </div>
             <div class="ast-desc">
                 <div class="ast-title view-group-link" data-groupid="{{id}}">
                     <h3 class="ast-name">{{name}}</h3>
-                    <span class="ast-auth">Device Count: {{deviceCount}}</span>
+                    <span class="ast-auth">Device Count: {{devices.length}}</span>
                     <span class="ast-auth">Created On: <span class="formatDate">{{dateOfCreation}}</span></span>
-                    <span class="ast-ver">Shared with: {{users}}</span>
+                    <span class="ast-ver">Owner: {{owner}}</span>
+                    <br/>
+                    <span class="ast-ver">Shared with: {{#each users}}{{username}}, {{/each}}</span>
                 </div>
                 <div class="ast-model">
 
