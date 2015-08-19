@@ -108,15 +108,15 @@ utility = function () {
 
         userModule.addPermissions([{key: "groups", name: "Groups"}], "device-mgt/user", type);
         userModule.addPermissions([{
-            key: "groups/monitor",
+            key: "groups/device_monitor",
             name: "Monitor Devices in Group"
         }], "device-mgt/user", type);
         userModule.addPermissions([{
-            key: "groups/operation",
+            key: "groups/device_operation",
             name: "Perform Device Operation"
         }], "device-mgt/user", type);
         userModule.addPermissions([{
-            key: "groups/list",
+            key: "groups/device_list",
             name: "List Groups of User"
         }], "device-mgt/user", type);
     };
