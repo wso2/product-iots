@@ -141,7 +141,7 @@ public class FireAlarmControllerService {
 		String callUrlPattern = BULB_CONTEXT + switchToState;
 
 		log.info("Sending command: '" + callUrlPattern + "' to firealarm at: " + deviceIP + " " +
-						 "via" + " " + protocol);
+						 "via" + " " + protocolString);
 
 		try {
 			switch (protocolString) {
