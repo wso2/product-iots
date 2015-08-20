@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 """
-import getpass
 import logging
 import sys
 from optparse import OptionParser
@@ -34,12 +33,14 @@ from sleekxmpp.exceptions import IqError, IqTimeout
 # ourselves to UTF-8.
 if sys.version_info < (3, 0):
     from sleekxmpp.util.misc_ops import setdefaultencoding
+
     setdefaultencoding('utf8')
 else:
     raw_input = input
 
 # from sleekxmpp.plugins.xep_0323.device import Device
 PRINT_HEADER_LENGTH = 40
+
 
 class IoT_TestDevice(sleekxmpp.ClientXMPP):
     """
@@ -53,15 +54,17 @@ class IoT_TestDevice(sleekxmpp.ClientXMPP):
     python xmpp_client.py -j "bob@yourdomain.com" -p "password" -c "alice@yourdomain.com/device1" {--[debug|quiet]}
     python xmpp_client.py -j "bob@127.0.0.1" -p "password" -c "alice@127.0.0.1/device1" {--[debug|quiet]}
     """
-    def __init__(self, jid, password, sensorjid):
+
+    def __init__(self, jid, password, sensorjid, sensorType):
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
         self.add_event_handler("session_start", self.session_start)
         self.add_event_handler("message", self.message)
-        self.device=None
-        self.releaseMe=False
+        self.device = None
+        self.releaseMe = False
         self.target_jid = sensorjid
-        #self.beServer=True
-        #self.clientJID=None
+        self.requestType = sensorType
+        # self.beServer=True
+        # self.clientJID=None
 
     def datacallback(self, from_jid, result, nodeId=None, timestamp=None, fields=None,
                      error_msg=None):
@@ -70,24 +73,28 @@ class IoT_TestDevice(sleekxmpp.ClientXMPP):
         se script below for the registration of the callback
         """
         logging.debug("we got data %s from %s", str(result), from_jid)
-        if(result=="fields"):
+        if (result == "fields"):
             header = 'XEP 302 Sensor Data'
             logging.info('-' * PRINT_HEADER_LENGTH)
 
-            gap = ' '* ((PRINT_HEADER_LENGTH - len(header)) / 2)
+            gap = ' ' * ((PRINT_HEADER_LENGTH - len(header)) / 2)
 
             logging.info(gap + header)
             logging.info('-' * PRINT_HEADER_LENGTH)
 
-            logging.debug("RECV:"+str(fields))
+            logging.debug("RECV:" + str(fields))
 
             if len(fields) > 0:
                 logging.info("Name\t\tType\tValue\tUnit")
             for field in fields:
-                logging.info("  - " + field["name"] + "\t" + field["typename"] + "\t" + field["value"] + "\t" + field["unit"])
+                logging.info("  - " + field["name"] + "\t" + field["typename"] + "\t" + field[
+                    "value"] + "\t" + field["unit"])
+
+                if self.requestType in ("/" + field["name"].upper() + "/."):
+                    print field["value"]
+
             logging.info('-' * PRINT_HEADER_LENGTH)
             self.disconnect()
-            print field["value"]
 
     def testForRelease(self):
         # todo thread safe
@@ -95,20 +102,20 @@ class IoT_TestDevice(sleekxmpp.ClientXMPP):
 
     def doReleaseMe(self):
         # todo thread safe
-        self.releaseMe=True
+        self.releaseMe = True
 
     def addDevice(self, device):
-        self.device=device
+        self.device = device
 
     def session_start(self, event):
         self.send_presence()
         self.get_roster()
         # tell your preffered friend that you are alive using generic xmpp chat protocol
-        #self.send_message(mto='jocke@jabber.sust.se', mbody=self.boundjid.bare +' is now online use xep_323 stanza to talk to me')
+        # self.send_message(mto='jocke@jabber.sust.se', mbody=self.boundjid.bare +' is now online use xep_323 stanza to talk to me')
 
-        #-------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         #   Service Discovery
-        #-------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         try:
             # By using block=True, the result stanza will be
             # returned. Execution will block until the reply is
@@ -125,7 +132,7 @@ class IoT_TestDevice(sleekxmpp.ClientXMPP):
         else:
             header = 'XMPP Service Discovery'
             logging.info('-' * PRINT_HEADER_LENGTH)
-            gap = ' '* ((PRINT_HEADER_LENGTH - len(header)) / 2)
+            gap = ' ' * ((PRINT_HEADER_LENGTH - len(header)) / 2)
             logging.info(gap + header)
             logging.info('-' * PRINT_HEADER_LENGTH)
 
@@ -134,41 +141,35 @@ class IoT_TestDevice(sleekxmpp.ClientXMPP):
             for feature in info['disco_info']['features']:
                 logging.info('  - %s' % feature)
 
-        #-------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------
         #   Requesting data through XEP0323
-        #-------------------------------------------------------------------------------------------
-        session = self['xep_0323'].request_data(self.boundjid.full, self.target_jid,
-                                                self.datacallback, flags={"momentary": "true"})
+        # -------------------------------------------------------------------------------------------
+
+        logging.info('-' * PRINT_HEADER_LENGTH)
+        logging.info("Sending Request: %s to %s", self.requestType, self.target_jid)
+
+        if self.requestType in ('/TEMPERATURE/.', '/SONAR/.'):
+            session = self['xep_0323'].request_data(self.boundjid.full, self.target_jid,
+                                                    self.datacallback, flags={"momentary": "true"})
+        else:
+            self.send_message(mto=self.target_jid,
+                              mbody=self.requestType,
+                              mtype='chat')
+
+            # Using wait=True ensures that the send queue will be
+            # emptied before ending the session.
+            self.disconnect(wait=True)
+            print ("Bulb state switched - " + self.requestType)
 
     def message(self, msg):
         if msg['type'] in ('chat', 'normal'):
-            logging.debug("got normal chat message" + str(msg))
+            logging.info("got normal chat message" + str(msg))
             ipPublic = urlopen('http://icanhazip.com').read()
             ipSocket = socket.gethostbyname(socket.gethostname())
-            msg.reply("Hi I am " + self.boundjid.full + " and I am on IP " + ipSocket + " use xep_323 stanza to talk to me").send()
+            msg.reply(
+                "Hi I am " + self.boundjid.full + " and I am on IP " + ipSocket + " use xep_323 stanza to talk to me").send()
         else:
-            logging.debug("got unknown message type %s", str(msg['type']))
-
-# class TheDevice(Device):
-#     """
-#     This is the actual device object that you will use to get information from your real hardware
-#     You will be called in the refresh method when someone is requesting information from you
-#     """
-#     def __init__(self,nodeId):
-#         Device.__init__(self,nodeId)
-#         self.counter=0
-#
-#     def refresh(self,fields):
-#         """
-#         the implementation of the refresh method
-#         """
-#         #self._set_momentary_timestamp(self._get_timestamp())
-#         self.counter+=1
-#         #self._add_field_momentary_data(self, "Temperature", self.counter)
-#
-#         self._add_field(name="Temperature", typename="numeric", unit="C")
-#         self._set_momentary_timestamp(self._get_timestamp())
-#         self._add_field_momentary_data("Temperature", str(self.counter), flags={"automaticReadout": "true"})
+            logging.info("got unknown message type %s", str(msg['type']))
 
 if __name__ == '__main__':
 
@@ -206,36 +207,42 @@ if __name__ == '__main__':
     optp.add_option("-c", "--sensorjid", dest="sensorjid",
                     help="Another device to call for data on", default=None)
 
+    optp.add_option("-r", "--sensorType", dest="sensorType",
+                    help="The type of the sensor info requested", default="/TEMPERATURE/")
+
+    optp.add_option("-s", "--sensorState", dest="sensorState",
+                    help="The state of the sensor to switch to", default="")
+
     opts, args = optp.parse_args()
 
-     # Setup logging.
+    # Setup logging.
     logging.basicConfig(level=opts.loglevel,
                         format='%(levelname)-8s %(message)s')
 
     if opts.jid is None:
-        #opts.jid = raw_input("Username: ")
-        opts.jid = "admin@204.232.188.215/raspi"
+        opts.jid = "admin@204.232.188.215/admin"
     if opts.password is None:
-        opts.password = "wso2iot123"
-        #opts.password = getpass.getpass("Password: ")
-    if opts.sensorjid is None:
-        opts.sensorjid = "1hrdqr4r2ymhy@204.232.188.215/raspi"
-        #opts.sensorjid = getpass.getpass("Sensor JID: ")
+        opts.password = "admin"
+    # if opts.sensorjid is None:
+    #     opts.sensorjid = "t4ibkqs8t7ox@204.232.188.215/admin"
 
-    #-------------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------------
     #   Starting XMPP with XEP0030, XEP0323, XEP0325
-    #-------------------------------------------------------------------------------------------
-    xmpp = IoT_TestDevice(opts.jid, opts.password, opts.sensorjid)
+    # -------------------------------------------------------------------------------------------
+
+    requestState = opts.sensorType + opts.sensorState
+
+    xmpp = IoT_TestDevice(opts.jid, opts.password, opts.sensorjid, requestState)
     xmpp.register_plugin('xep_0030')
     xmpp.register_plugin('xep_0323')
     xmpp.register_plugin('xep_0325')
 
     if opts.sensorjid:
-        logging.debug("will try to call another device for data")
+        logging.debug("Will try to call another device for data")
         # xmpp.beClientOrServer(server=False,clientJID=opts.sensorjid)
         xmpp.connect()
         xmpp.process(block=True)
         logging.debug("ready ending")
 
     else:
-       print "noopp didn't happen"
+        print "ID of the client to communicate-to not given..."
