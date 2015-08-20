@@ -165,8 +165,8 @@ function loadGroups(searchType, searchParam) {
             }
         };
         invokerUtil.get(serviceURL,
-            successCallback, function (message) {
-                console.log(message);
+            successCallback, function (jqXHR) {
+                displayErrors(jqXHR);
             });
     });
 }
@@ -221,13 +221,6 @@ function hidePopup() {
     $(modalPopupContent).html('');
     $(modalPopup).hide();
 }
-
-var errorHandler = function () {
-    $(modalPopupContent).html($('#add-group-unexpected-error-content').html());
-    $("a#group-unexpected-error-link").click(function () {
-        hidePopup();
-    });
-};
 
 /**
  * Following functions should be triggered after AJAX request is made.
@@ -324,12 +317,18 @@ function attachEvents() {
                                                 } else {
                                                     displayErrors(status);
                                                 }
-                                            }, errorHandler);
+                                            }, function (jqXHR) {
+                                                displayErrors(jqXHR);
+                                            }
+                                        );
                                     });
                                 } else {
                                     displayErrors(status);
                                 }
-                            }, errorHandler);
+                            }, function (jqXHR) {
+                                displayErrors(jqXHR);
+                            }
+                        );
                         $("a#share-group-w2-cancel-link").click(function () {
                             hidePopup();
                         });
@@ -337,7 +336,10 @@ function attachEvents() {
                 } else {
                     displayErrors(status);
                 }
-            }, errorHandler);
+            }, function (jqXHR) {
+                displayErrors(jqXHR);
+            }
+        );
 
         $("a#share-group-w1-cancel-link").click(function () {
             hidePopup();
@@ -372,11 +374,8 @@ function attachEvents() {
                         displayErrors(status);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
-                    $("a#group-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayErrors(jqXHR);
                 }
             );
         });
@@ -429,11 +428,8 @@ function attachEvents() {
                         displayErrors(status);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
-                    $("a#group-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayErrors(jqXHR);
                 }
             );
         });
@@ -444,21 +440,28 @@ function attachEvents() {
     });
 }
 
-function displayErrors(status) {
-    if (status == 400) {
+function displayErrors(jqXHR) {
+    showPopup();
+    if (jqXHR.status == 400) {
         $(modalPopupContent).html($('#group-400-content').html());
         $("a#group-400-link").click(function () {
             hidePopup();
         });
-    } else if (status == 403) {
+    } else if (jqXHR.status == 403) {
         $(modalPopupContent).html($('#group-403-content').html());
         $("a#group-403-link").click(function () {
             hidePopup();
         });
-    } else if (status == 409) {
+    } else if (jqXHR.status == 409) {
         $(modalPopupContent).html($('#group-409-content').html());
         $("a#group-409-link").click(function () {
             hidePopup();
         });
+    } else {
+        $(modalPopupContent).html($('#group-unexpected-error-content').html());
+        $("a#group-unexpected-error-link").click(function () {
+            hidePopup();
+        });
+        console.log("Error code: " + jqXHR.status);
     }
 }

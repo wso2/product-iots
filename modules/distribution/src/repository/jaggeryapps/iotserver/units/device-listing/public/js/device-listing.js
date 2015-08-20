@@ -200,8 +200,8 @@ function loadDevices() {
             }
         };
         invokerUtil.get(serviceURL,
-            successCallback, function (message) {
-                console.log(message);
+            successCallback, function (jqXHR) {
+                displayDeviceErrors(jqXHR);
             });
     });
 }
@@ -286,28 +286,12 @@ function attachDeviceEvents() {
                         setTimeout(function () {
                             hidePopup();
                         }, 2000);
-                    } else if (status == 400) {
-                        $(modalPopupContent).html($('#remove-device-400-content').html());
-                        $("a#remove-device-400-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 403) {
-                        $(modalPopupContent).html($('#remove-device-403-content').html());
-                        $("a#remove-device-403-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 409) {
-                        $(modalPopupContent).html($('#remove-device-409-content').html());
-                        $("a#remove-device-409-link").click(function () {
-                            hidePopup();
-                        });
+                    } else {
+                        displayDeviceErrors(jqXHR);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#remove-device-unexpected-error-content').html());
-                    $("a#remove-device-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayDeviceErrors(jqXHR);
                 }
             );
         });
@@ -347,28 +331,12 @@ function attachDeviceEvents() {
                         setTimeout(function () {
                             hidePopup();
                         }, 2000);
-                    } else if (status == 400) {
-                        $(modalPopupContent).html($('#device-400-content').html());
-                        $("a#device-400-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 403) {
-                        $(modalPopupContent).html($('#device-403-content').html());
-                        $("a#device-403-link").click(function () {
-                            hidePopup();
-                        });
-                    } else if (status == 409) {
-                        $(modalPopupContent).html($('#device-409-content').html());
-                        $("a#device-409-link").click(function () {
-                            hidePopup();
-                        });
+                    } else {
+                        displayDeviceErrors(jqXHR);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#device-unexpected-error-content').html());
-                    $("a#device-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayDeviceErrors(jqXHR);
                 }
             );
         });
@@ -425,39 +393,21 @@ function attachDeviceEvents() {
                                         setTimeout(function () {
                                             hidePopup();
                                         }, 2000);
-                                    } else if (status == 400) {
-                                        $(modalPopupContent).html($('#device-400-content').html());
-                                        $("a#device-400-link").click(function () {
-                                            hidePopup();
-                                        });
-                                    } else if (status == 403) {
-                                        $(modalPopupContent).html($('#device-403-content').html());
-                                        $("a#device-403-link").click(function () {
-                                            hidePopup();
-                                        });
-                                    } else if (status == 409) {
-                                        $(modalPopupContent).html($('#device-409-content').html());
-                                        $("a#device-409-link").click(function () {
-                                            hidePopup();
-                                        });
+                                    } else {
+                                        displayDeviceErrors(jqXHR);
                                     }
                                 },
-                                function () {
-                                    $(modalPopupContent).html($('#device-unexpected-error-content').html());
-                                    $("a#device-unexpected-error-link").click(function () {
-                                        hidePopup();
-                                    });
-                                });
+                                function (jqXHR) {
+                                    displayDeviceErrors(jqXHR);
+                                }
+                            );
                         });
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#device-unexpected-error-content').html());
-                    $("a#device-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
-                });
-
+                function (jqXHR) {
+                    displayDeviceErrors(jqXHR);
+                }
+            );
             $("a#group-device-cancel-link").click(function () {
                 hidePopup();
             });
@@ -465,13 +415,6 @@ function attachDeviceEvents() {
 
     }
 }
-
-var errorHandler = function () {
-    $(modalPopupContent).html($('#add-group-unexpected-error-content').html());
-    $("a#group-unexpected-error-link").click(function () {
-        hidePopup();
-    });
-};
 
 /**
  * Following functions should be triggered after AJAX request is made.
@@ -556,22 +499,31 @@ function attachGroupEvents() {
                                                         hidePopup();
                                                     }, 2000);
                                                 } else {
-                                                    displayErrors(status);
+                                                    displayGroupErrors(status);
                                                 }
-                                            }, errorHandler);
+                                            }, function (jqXHR) {
+                                                displayGroupErrors(jqXHR);
+                                            }
+                                        );
                                     });
                                 } else {
-                                    displayErrors(status);
+                                    displayGroupErrors(status);
                                 }
-                            }, errorHandler);
+                            }, function (jqXHR) {
+                                displayGroupErrors(jqXHR);
+                            }
+                        );
                         $("a#share-group-w2-cancel-link").click(function () {
                             hidePopup();
                         });
                     });
                 } else {
-                    displayErrors(status);
+                    displayGroupErrors(status);
                 }
-            }, errorHandler);
+            }, function (jqXHR) {
+                displayGroupErrors(jqXHR);
+            }
+        );
 
         $("a#share-group-w1-cancel-link").click(function () {
             hidePopup();
@@ -603,14 +555,11 @@ function attachGroupEvents() {
                             hidePopup();
                         }, 2000);
                     } else {
-                        displayErrors(status);
+                        displayGroupErrors(status);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
-                    $("a#group-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayGroupErrors(jqXHR);
                 }
             );
         });
@@ -660,14 +609,11 @@ function attachGroupEvents() {
                             });
                         }
                     } else {
-                        displayErrors(status);
+                        displayGroupErrors(status);
                     }
                 },
-                function () {
-                    $(modalPopupContent).html($('#group-unexpected-error-content').html());
-                    $("a#group-unexpected-error-link").click(function () {
-                        hidePopup();
-                    });
+                function (jqXHR) {
+                    displayGroupErrors(jqXHR);
                 }
             );
         });
@@ -678,21 +624,55 @@ function attachGroupEvents() {
     });
 }
 
-function displayErrors(status) {
-    if (status == 400) {
+function displayDeviceErrors(jqXHR) {
+    showPopup();
+    if (jqXHR.status == 400) {
         $(modalPopupContent).html($('#group-400-content').html());
         $("a#group-400-link").click(function () {
             hidePopup();
         });
-    } else if (status == 403) {
+    } else if (jqXHR.status == 403) {
         $(modalPopupContent).html($('#group-403-content').html());
         $("a#group-403-link").click(function () {
             hidePopup();
         });
-    } else if (status == 409) {
+    } else if (jqXHR.status == 409) {
         $(modalPopupContent).html($('#group-409-content').html());
         $("a#group-409-link").click(function () {
             hidePopup();
         });
+    } else {
+        $(modalPopupContent).html($('#group-unexpected-error-content').html());
+        $("a#group-unexpected-error-link").click(function () {
+            hidePopup();
+        });
+        console.log("Error code: " + jqXHR.status);
+    }
+}
+
+
+function displayGroupErrors(jqXHR) {
+    showPopup();
+    if (jqXHR.status == 400) {
+        $(modalPopupContent).html($('#group-400-content').html());
+        $("a#group-400-link").click(function () {
+            hidePopup();
+        });
+    } else if (jqXHR.status == 403) {
+        $(modalPopupContent).html($('#group-403-content').html());
+        $("a#group-403-link").click(function () {
+            hidePopup();
+        });
+    } else if (jqXHR.status == 409) {
+        $(modalPopupContent).html($('#group-409-content').html());
+        $("a#group-409-link").click(function () {
+            hidePopup();
+        });
+    } else {
+        $(modalPopupContent).html($('#group-unexpected-error-content').html());
+        $("a#group-unexpected-error-link").click(function () {
+            hidePopup();
+        });
+        console.log("Error code: " + jqXHR.status);
     }
 }
