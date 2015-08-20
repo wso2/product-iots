@@ -125,7 +125,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 
 	var allDevices = [];
 	deviceCloudService = carbonHttpsServletTransport + "/common/group_manager";
-	var endPoint = deviceCloudService + "/group/all";
+	var endPoint = deviceCloudService + "/group/user/" + user.username + "/all";
 	var data = {"username": user.username};
 	var groups = get(endPoint, data, "json").data;
 
@@ -168,7 +168,7 @@ if (uriMatcher.match("/{context}/api/device/sketch/download/{downloadId}")) {
 
 	var allDevices = [];
 	deviceCloudService = carbonHttpsServletTransport + "/common/group_manager";
-	var endPoint = deviceCloudService + "/group/all";
+	var endPoint = deviceCloudService + "/group/user/" + user.username + "/all";
 	var data = {"username": user.username};
 	var groups = get(endPoint, data, "json").data;
 

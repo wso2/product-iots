@@ -89,14 +89,14 @@ if (uriMatcher.match("/{context}/api/group/add")) {
 } else if (uriMatcher.match("/{context}/api/group/all")) {
 
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/all
-	endPoint = deviceCloudService + "/group/all";
+	endPoint = deviceCloudService + "/group/user/" + user.username + "/all";
 	data = {"username": user.username};
 	result = get(endPoint, data, "json");
 
 } else if (uriMatcher.match("/{context}/api/group/all/count")) {
 
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/all/count
-	endPoint = deviceCloudService + "/group/all/count";
+	endPoint = deviceCloudService + "/group/user/" + user.username + "/all/count";
 	data = {"username": user.username};
 	result = get(endPoint, data, "json");
 

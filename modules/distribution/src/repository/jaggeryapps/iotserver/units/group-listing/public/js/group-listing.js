@@ -163,7 +163,6 @@ function loadGroups(searchType, searchParam) {
                 attachEvents();
                 formatDates();
             }
-            attachGroupAdding();
         };
         invokerUtil.get(serviceURL,
             successCallback, function (message) {
