@@ -16,7 +16,7 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl;
 
-import org.apache.commons.httpclient.HttpStatus;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.common.Device;
@@ -59,19 +59,24 @@ public class FireAlarmManagerService {
 
 	private static Log log = LogFactory.getLog(FireAlarmManagerService.class);
 
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
+
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
 							@QueryParam("name") String name, @QueryParam("owner") String owner) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(FireAlarmConstants.DEVICE_TYPE);
 		try {
 			if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-				Response.status(HttpStatus.SC_CONFLICT).build();
+				response.setStatus(Response.Status.CONFLICT.getStatusCode());
 				return false;
 			}
 
@@ -91,15 +96,17 @@ public class FireAlarmManagerService {
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
 
 			if (added) {
-				Response.status(HttpStatus.SC_OK).build();
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				Response.status(HttpStatus.SC_EXPECTATION_FAILED).build();
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 
 			return added;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 	}
 
@@ -108,7 +115,7 @@ public class FireAlarmManagerService {
 	public void removeDevice(@PathParam("device_id") String deviceId,
 							 @Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(FireAlarmConstants.DEVICE_TYPE);
@@ -116,15 +123,16 @@ public class FireAlarmManagerService {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
 					deviceIdentifier);
 			if (removed) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
-
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -135,7 +143,7 @@ public class FireAlarmManagerService {
 								@QueryParam("name") String name,
 								@Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
@@ -155,16 +163,18 @@ public class FireAlarmManagerService {
 					device);
 
 			if (updated) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 			return updated;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -175,7 +185,7 @@ public class FireAlarmManagerService {
 	@Produces("application/json")
 	public Device getDevice(@PathParam("device_id") String deviceId) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(FireAlarmConstants.DEVICE_TYPE);
@@ -183,9 +193,11 @@ public class FireAlarmManagerService {
 		try {
 			return deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
 
-		} catch (DeviceManagementException ex) {
-			log.error("Error occurred while retrieving device with Id " + deviceId + "\n" + ex);
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -196,7 +208,7 @@ public class FireAlarmManagerService {
 	@Produces("application/json")
 	public Device[] getFirealarmDevices(@PathParam("username") String username) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		try {
 			List<Device> userDevices =
@@ -214,9 +226,11 @@ public class FireAlarmManagerService {
 			}
 
 			return userDevicesforFirealarm.toArray(new Device[]{});
-		} catch (DeviceManagementException ex) {
-			log.error("Error occurred while retrieving devices for " + username);
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -332,7 +346,7 @@ public class FireAlarmManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 
-		zipFile = ziputil.downloadSketch(owner, sketchType, deviceId, accessToken, refreshToken);
+		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, accessToken, refreshToken);
 		zipFile.setDeviceId(deviceId);
 		return zipFile;
 	}

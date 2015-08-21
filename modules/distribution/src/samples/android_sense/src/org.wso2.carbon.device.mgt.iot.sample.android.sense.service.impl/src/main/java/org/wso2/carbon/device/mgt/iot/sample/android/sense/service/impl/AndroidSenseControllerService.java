@@ -15,8 +15,6 @@
  */
 
 package org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl;
-
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.util.DeviceJSON;
@@ -27,11 +25,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class AndroidSenseControllerService {
 
 	private static Log log = LogFactory.getLog(AndroidSenseControllerService.class);
-
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
 
 	/*    Service to push all the sensor data collected by the Android
 		   Called by the Android device  */
@@ -57,7 +57,8 @@ public class AndroidSenseControllerService {
 //													   temperature, "TEMPERATURE");
 
 			if (!result) {
-				response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
 			}
 			//return result;
 //		} catch (UnauthorizedException e) {

@@ -16,7 +16,6 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.common.Device;
@@ -49,19 +48,24 @@ public class RaspberrypiManagerService {
 
 	private static Log log = LogFactory.getLog(RaspberrypiManagerService.class);
 
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
+
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
 							@QueryParam("name") String name, @QueryParam("owner") String owner) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
 		try {
 			if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-				Response.status(HttpStatus.SC_CONFLICT).build();
+				response.setStatus(Response.Status.CONFLICT.getStatusCode());
 				return false;
 			}
 
@@ -77,13 +81,9 @@ public class RaspberrypiManagerService {
 			enrolmentInfo.setOwner(owner);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
 			if (added) {
-				Response.status(HttpStatus.SC_OK).build();
-
-
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				Response.status(HttpStatus.SC_EXPECTATION_FAILED).build();
-
-
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 
 			return added;
@@ -98,18 +98,16 @@ public class RaspberrypiManagerService {
 	public void removeDevice(@PathParam("device_id") String deviceId,
 							 @Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
 		try {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(deviceIdentifier);
 			if (removed) {
-				response.setStatus(HttpStatus.SC_OK);
-
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
-
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 		} catch (DeviceManagementException e) {
 			log.error(e.getErrorMessage());
@@ -125,7 +123,7 @@ public class RaspberrypiManagerService {
 								@QueryParam("name") String name,
 								@Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
@@ -144,10 +142,10 @@ public class RaspberrypiManagerService {
 
 
 			if (updated) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 			return updated;
@@ -164,7 +162,7 @@ public class RaspberrypiManagerService {
 	@Produces("application/json")
 	public Device getDevice(@PathParam("device_id") String deviceId) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
@@ -211,7 +209,7 @@ public class RaspberrypiManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 		try {
-			zipFile = ziputil.downloadSketch(owner, sketchType, deviceId,
+			zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId,
 											 token,refreshToken);
 		} catch (DeviceManagementException ex) {
 			return Response.status(500).entity("Error occurred while creating zip file").build();

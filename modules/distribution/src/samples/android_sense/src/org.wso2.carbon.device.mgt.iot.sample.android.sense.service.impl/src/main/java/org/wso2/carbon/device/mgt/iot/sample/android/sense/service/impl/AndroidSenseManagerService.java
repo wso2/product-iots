@@ -15,8 +15,6 @@
  */
 
 package org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl;
-
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.common.Device;
@@ -42,7 +40,13 @@ import java.util.Date;
 
 public class AndroidSenseManagerService {
 
+
+
 	private static Log log = LogFactory.getLog(AndroidSenseManagerService.class);
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
 
 	@Path("/device")
 	@PUT
@@ -50,7 +54,7 @@ public class AndroidSenseManagerService {
 							@FormParam("owner") String owner) {
 
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
@@ -74,19 +78,17 @@ public class AndroidSenseManagerService {
 			device.setType(AndroidSenseConstants.DEVICE_TYPE);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
 			if (added) {
-				Response.status(HttpStatus.SC_OK).build();
-
-
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				Response.status(HttpStatus.SC_EXPECTATION_FAILED).build();
-
-
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 
 			return added;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 	}
 
@@ -95,20 +97,22 @@ public class AndroidSenseManagerService {
 	public void removeDevice(@PathParam("device_id") String deviceId,
 							 @Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(AndroidSenseConstants.DEVICE_TYPE);
 		try {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(deviceIdentifier);
 			if (removed) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 
@@ -120,7 +124,7 @@ public class AndroidSenseManagerService {
 								@FormParam("name") String name,
 								@Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
@@ -128,8 +132,6 @@ public class AndroidSenseManagerService {
 		try {
 			Device device = deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
 			device.setDeviceIdentifier(deviceId);
-
-			// device.setDeviceTypeId(deviceTypeId);
 			device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
 
 			device.setName(name);
@@ -139,16 +141,18 @@ public class AndroidSenseManagerService {
 
 
 			if (updated) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 			return updated;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -159,7 +163,7 @@ public class AndroidSenseManagerService {
 	@Produces("application/json")
 	public Device getDevice(@PathParam("device_id") String deviceId) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(AndroidSenseConstants.DEVICE_TYPE);
@@ -168,9 +172,11 @@ public class AndroidSenseManagerService {
 			return deviceManagement.getDeviceManagementService().getDevice(
 					deviceIdentifier);
 
-		} catch (DeviceManagementException ex) {
-			log.error("Error occurred while retrieving device with Id " + deviceId + "\n" + ex);
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}

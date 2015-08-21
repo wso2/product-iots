@@ -15,8 +15,6 @@
  */
 
 package org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl;
-
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.iot.common.datastore.impl.DataStreamDefinitions;
@@ -32,10 +30,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class RaspberrypiControllerService {
 
 	private static Log log = LogFactory.getLog(RaspberrypiControllerService.class);
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
+
 
 	/*    Service to push all the sensor data collected by the Arduino
 		   Called by the Arduino device  */
@@ -61,11 +63,11 @@ public class RaspberrypiControllerService {
 														  DataStreamDefinitions.StreamTypeLabel.TEMPERATURE);
 
 			if (!result) {
-				response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 
 		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+			response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 
 		}
 	}

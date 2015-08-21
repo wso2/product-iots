@@ -16,7 +16,6 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -46,6 +45,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +61,11 @@ import java.util.concurrent.Future;
 public class FireAlarmControllerService {
 
 	private static Log log = LogFactory.getLog(FireAlarmControllerService.class);
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
+
 
 	private static final String URL_PREFIX = "http://";
 	private static final String BULB_CONTEXT = "/BULB/";
@@ -89,7 +94,7 @@ public class FireAlarmControllerService {
 		deviceToIpMap.put(deviceId, deviceIP);
 
 		result = "Device-IP Registered";
-		response.setStatus(HttpStatus.SC_OK);
+		response.setStatus(Response.Status.OK.getStatusCode());
 
 		if (log.isDebugEnabled()) {
 			log.debug(result);
@@ -111,15 +116,14 @@ public class FireAlarmControllerService {
 
 		try {
 			DeviceValidator deviceValidator = new DeviceValidator();
-			if (!deviceValidator.isExist(owner, new DeviceIdentifier(deviceId,
-																	 FireAlarmConstants
-																			 .DEVICE_TYPE))) {
-				response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
+																				   FireAlarmConstants.DEVICE_TYPE))) {
+				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return;
 			}
 		} catch (DeviceManagementException e) {
 			log.error("DeviceValidation Failed for deviceId: " + deviceId + " of user: " + owner);
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return;
 		}
 
@@ -128,13 +132,13 @@ public class FireAlarmControllerService {
 		if (!switchToState.equals(FireAlarmConstants.STATE_ON) && !switchToState.equals(
 				FireAlarmConstants.STATE_OFF)) {
 			log.error("The requested state change shoud be either - 'ON' or 'OFF'");
-			response.setStatus(HttpStatus.SC_BAD_REQUEST);
+			response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
 			return;
 		}
 
 		String deviceIP = deviceToIpMap.get(deviceId);
 		if (deviceIP == null) {
-			response.setStatus(HttpStatus.SC_PRECONDITION_FAILED);
+			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
 			return;
 		}
 
@@ -161,7 +165,7 @@ public class FireAlarmControllerService {
 					if (protocolString == null) {
 						sendCommandViaHTTP(deviceIP, 80, callUrlPattern, true);
 					} else {
-						response.setStatus(HttpStatus.SC_NOT_IMPLEMENTED);
+						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return;
 					}
 					break;
@@ -169,11 +173,11 @@ public class FireAlarmControllerService {
 		} catch (DeviceManagementException e) {
 			log.error("Failed to send command '" + callUrlPattern + "' to: " + deviceIP + " via" +
 							  " " + protocol);
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return;
 		}
 
-		response.setStatus(HttpStatus.SC_OK);
+		response.setStatus(Response.Status.OK.getStatusCode());
 	}
 
 
@@ -187,15 +191,15 @@ public class FireAlarmControllerService {
 
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
-			if (!deviceValidator.isExist(owner, new DeviceIdentifier(deviceId,
-																	 FireAlarmConstants
-																			 .DEVICE_TYPE))) {
-				response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
+																				   FireAlarmConstants
+																						   .DEVICE_TYPE))) {
+				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return "Unauthorized Access";
 			}
 		} catch (DeviceManagementException e) {
 			replyMsg = e.getErrorMessage();
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return replyMsg;
 		}
 
@@ -203,7 +207,7 @@ public class FireAlarmControllerService {
 
 		if (deviceIp == null) {
 			replyMsg = "IP not registered for device: " + deviceId + " of owner: " + owner;
-			response.setStatus(HttpStatus.SC_PRECONDITION_FAILED);
+			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
 			return replyMsg;
 		}
 
@@ -231,18 +235,18 @@ public class FireAlarmControllerService {
 						replyMsg = sendCommandViaHTTP(deviceIp, 80, SONAR_CONTEXT, false);
 					} else {
 						replyMsg = "Requested protocol '" + protocol + "' is not supported";
-						response.setStatus(HttpStatus.SC_NOT_IMPLEMENTED);
+						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return replyMsg;
 					}
 					break;
 			}
 		} catch (DeviceManagementException e) {
 			replyMsg = e.getErrorMessage();
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return replyMsg;
 		}
 
-		response.setStatus(HttpStatus.SC_OK);
+		response.setStatus(Response.Status.OK.getStatusCode());
 		replyMsg = "The current sonar reading of the device is " + replyMsg;
 		return replyMsg;
 	}
@@ -258,15 +262,15 @@ public class FireAlarmControllerService {
 
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
-			if (!deviceValidator.isExist(owner, new DeviceIdentifier(deviceId,
-																	 FireAlarmConstants
-																			 .DEVICE_TYPE))) {
-				response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
+																				   FireAlarmConstants
+																						   .DEVICE_TYPE))) {
+				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return "Unauthorized Access";
 			}
 		} catch (DeviceManagementException e) {
 			replyMsg = e.getErrorMessage();
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return replyMsg;
 		}
 
@@ -274,7 +278,7 @@ public class FireAlarmControllerService {
 
 		if (deviceIp == null) {
 			replyMsg = "IP not registered for device: " + deviceId + " of owner: " + owner;
-			response.setStatus(HttpStatus.SC_PRECONDITION_FAILED);
+			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
 			return replyMsg;
 		}
 
@@ -303,18 +307,18 @@ public class FireAlarmControllerService {
 						replyMsg = sendCommandViaHTTP(deviceIp, 80, TEMPERATURE_CONTEXT, false);
 					} else {
 						replyMsg = "Requested protocol '" + protocol + "' is not supported";
-						response.setStatus(HttpStatus.SC_NOT_IMPLEMENTED);
+						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return replyMsg;
 					}
 					break;
 			}
 		} catch (DeviceManagementException e) {
 			replyMsg = e.getErrorMessage();
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return replyMsg;
 		}
 
-		response.setStatus(HttpStatus.SC_OK);
+		response.setStatus(Response.Status.OK.getStatusCode());
 		replyMsg = "The current temperature of the device is " + replyMsg;
 		return replyMsg;
 	}
@@ -385,14 +389,14 @@ public class FireAlarmControllerService {
 					"Unregistered IP: Temperature Data Received from an un-registered IP " +
 							deviceIp +
 							" for device ID - " + deviceId);
-			response.setStatus(HttpStatus.SC_PRECONDITION_FAILED);
+			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
 			return;
 		} else if (!registeredIp.equals(deviceIp)) {
 			log.warn("Conflicting IP: Received IP is " + deviceIp + ". Device with ID " +
 							 deviceId +
 							 " is already registered under some other IP. Re-registration " +
 							 "required");
-			response.setStatus(HttpStatus.SC_CONFLICT);
+			response.setStatus(Response.Status.CONFLICT.getStatusCode());
 			return;
 		}
 
@@ -408,10 +412,10 @@ public class FireAlarmControllerService {
 
 
 			if (!result) {
-				response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			log.error("Data Push Attempt Failed for BAM Publisher: " + e.getMessage());
 		}
 
@@ -427,10 +431,10 @@ public class FireAlarmControllerService {
 
 
 			if (!result) {
-				response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			log.error("Data Push Attempt Failed for CEP Publisher: " + e.getMessage());
 		}
 	}
@@ -465,7 +469,7 @@ public class FireAlarmControllerService {
 													  temperature, "TEMPERATURE");
 
 				if (!result) {
-					response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 					log.error("Error whilst pushing temperature: " + sensorValues);
 					return;
 				}
@@ -478,7 +482,7 @@ public class FireAlarmControllerService {
 													  "BULB");
 
 				if (!result) {
-					response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 					log.error("Error whilst pushing Bulb data: " + sensorValues);
 					return;
 				}
@@ -491,7 +495,7 @@ public class FireAlarmControllerService {
 													  "SONAR");
 
 				if (!result) {
-					response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 					log.error("Error whilst pushing Sonar data: " + sensorValues);
 				}
 
@@ -503,13 +507,13 @@ public class FireAlarmControllerService {
 													  System.currentTimeMillis(), "DeviceData",
 													  dataMsg.value, dataMsg.reply);
 				if (!result) {
-					response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 					log.error("Error whilst pushing sensor data: " + sensorValues);
 				}
 			}
 
 		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			log.error("Data Push Attempt Failed at Publisher: " + e.getMessage());
 		}
 	}
@@ -544,10 +548,12 @@ public class FireAlarmControllerService {
 		String scriptPath = CarbonUtils.getCarbonHome() + seperator + scriptsFolder + seperator
 				+ "xmpp_client.py ";
 
-		scriptArguments = "-j " + xmppAdminUserLogin + " -p " + xmppAdminPass + " -c " + clientToConnect + " -r " + resource + " -s " + state;
+		scriptArguments =
+				"-j " + xmppAdminUserLogin + " -p " + xmppAdminPass + " -c " + clientToConnect +
+						" -r " + resource + " -s " + state;
 		command = "python " + scriptPath + scriptArguments;
 
-		if (log.isDebugEnabled()){
+		if (log.isDebugEnabled()) {
 			log.debug("Connecting to XMPP Server via Admin credentials: " + xmppAdminUserLogin);
 			log.debug("Trying to contact xmpp device account: " + clientToConnect);
 			log.debug("Arguments used for the scripts: '" + scriptArguments + "'");

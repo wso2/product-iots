@@ -19,7 +19,6 @@ package org.wso2.carbon.device.mgt.iot.sample.sensebot.service.impl;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -35,7 +34,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 public class SensebotControllerService {
 
@@ -340,7 +338,7 @@ public class SensebotControllerService {
 			log.debug(urlString);
 		}
 		HttpGet request = new HttpGet(urlString);
-		Future<HttpResponse> future = httpclient.execute(request, null);
+		httpclient.execute(request, null);
 	}
 
 }

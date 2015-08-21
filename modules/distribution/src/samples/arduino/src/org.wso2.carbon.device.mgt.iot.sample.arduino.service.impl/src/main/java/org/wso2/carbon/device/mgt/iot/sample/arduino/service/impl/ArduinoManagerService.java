@@ -16,7 +16,6 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.common.Device;
@@ -41,19 +40,24 @@ public class ArduinoManagerService {
 
 	private static Log log = LogFactory.getLog(ArduinoManagerService.class);
 
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
+	@Context  //injected response proxy supporting multiple thread
+	private HttpServletResponse response;
+
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
 							@QueryParam("name") String name, @QueryParam("owner") String owner) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(ArduinoConstants.DEVICE_TYPE);
 		try {
 			if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-				Response.status(HttpStatus.SC_CONFLICT).build();
+				response.setStatus(Response.Status.CONFLICT.getStatusCode());
 				return false;
 			}
 
@@ -70,19 +74,17 @@ public class ArduinoManagerService {
 			device.setEnrolmentInfo(enrolmentInfo);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
 			if (added) {
-				Response.status(HttpStatus.SC_OK).build();
-
-
+				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
-				Response.status(HttpStatus.SC_EXPECTATION_FAILED).build();
-
-
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 			}
 
 			return added;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 	}
 
@@ -91,22 +93,23 @@ public class ArduinoManagerService {
 	public void removeDevice(@PathParam("device_id") String deviceId,
 							 @Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(ArduinoConstants.DEVICE_TYPE);
 		try {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(deviceIdentifier);
 			if (removed) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
-
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 
@@ -118,7 +121,7 @@ public class ArduinoManagerService {
 								@QueryParam("name") String name,
 								@Context HttpServletResponse response) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
@@ -137,16 +140,18 @@ public class ArduinoManagerService {
 
 
 			if (updated) {
-				response.setStatus(HttpStatus.SC_OK);
+				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
-				response.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 
 			}
 			return updated;
 		} catch (DeviceManagementException e) {
-			log.error(e.getErrorMessage());
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -157,7 +162,7 @@ public class ArduinoManagerService {
 	@Produces("application/json")
 	public Device getDevice(@PathParam("device_id") String deviceId) {
 
-		DeviceManagement deviceManagement = new DeviceManagement();
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(ArduinoConstants.DEVICE_TYPE);
@@ -166,9 +171,11 @@ public class ArduinoManagerService {
 			Device device = deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
 
 			return device;
-		} catch (DeviceManagementException ex) {
-			log.error("Error occurred while retrieving device with Id " + deviceId + "\n" + ex);
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
 		}
 
 	}
@@ -237,7 +244,7 @@ public class ArduinoManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 
-		zipFile = ziputil.downloadSketch(owner, sketchType, deviceId, token, refreshToken);
+		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, token, refreshToken);
 		zipFile.setDeviceId(deviceId);
 		return zipFile;
 	}
