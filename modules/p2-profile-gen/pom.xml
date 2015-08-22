@@ -188,9 +188,25 @@
 
                                 <!-- Carbon Multi-tenancy Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.server.feature:${carbon.multitenancy.version}
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.core.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.mgt.server.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.usage.agent.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.throttling.agent.feature:${carbon.multitenancy.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.deployment.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
                                 <!-- End of Carbon Multi-tenancy Features -->
+
 
                                 <!-- Identity Features -->
                                 <featureArtifactDef>
@@ -438,7 +454,27 @@
 
                                 <!-- Carbon Multi-tenancy Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.tenant.common.server.feature.group</id>
+                                    <id>org.wso2.carbon.tenant.common.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.mgt.core.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.mgt.server.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.usage.agent.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.throttling.agent.feature.group</id>
+                                    <version>${carbon.multitenancy.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.tenant.deployment.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
                                 <!-- End of Carbon Multi-tenancy Features -->
@@ -592,6 +628,9 @@
                                     <version>${carbon.governance.version}</version>
                                 </feature>
                                 <!-- End of Governance Features -->
+
+
+
                                 <!-- Notification Support: Mail -->
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
