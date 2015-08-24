@@ -1,6 +1,6 @@
 {{#each groups}}
     {{groupMap this}}
-    <form id="group-data-form-{{id}}" action="/iotserver/group/{{id}}" method="POST">
+    <form id="group-data-form-{{id}}" action="{{../appContext}}group/{{id}}" method="POST">
         <input type="hidden" name="name" value="{{name}}">
         <input type="hidden" name="deviceCount" value="{{deviceCount}}">
         <input type="hidden" name="dateOfCreation" value="{{dateOfCreation}}">
@@ -38,14 +38,14 @@
 											</span>
                             <span class="lbl-action">View</span>
                         </a>
-                        <a href="/iotserver/devices?groupId={{id}}">
+                        <a href="{{../appContext}}devices?groupId={{id}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-devices fw-stack-1x"></i>
 											</span>
                             <span class="lbl-action">Devices</span>
                         </a>
-                        <a href="/iotserver/analytics?groupId={{id}}&name={{name}}">
+                        <a href="{{../appContext}}analytics?groupId={{id}}&name={{name}}">
 											<span class="fw-stack">
 												<i class="fw fw-ring fw-stack-2x"></i>
 												<i class="fw fw-statistics fw-stack-1x"></i>

@@ -1,6 +1,10 @@
 var log = new Log("modules/group-listing.js");
 
 function onRequest(context){
+
+    var dcProps = require('/config/dc-props.js').config();
+    context.appContext = dcProps.appContext;
+
     var constants = require("/modules/constants.js");
     var permissions = [];
     //var userModule = require("/modules/user.js").userModule;

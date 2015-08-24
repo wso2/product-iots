@@ -1,6 +1,7 @@
 {{#zone "main"}}
     <span id="permission" data-permission="{{permissions}}"></span>
     <span id="user-details" data-username="{{user.username}}"></span>
+    <input type="hidden" id="app-context" value="{{appContext}}">
     <!-- form content placeholder -->
     <div id="ast-container" class="ast-container list-view">
         <!-- no devices found -->
@@ -18,7 +19,7 @@
             <div class="ctrl-info-panel col-md-6 col-centered">
                 <h2>You don't have any Groups registered at the moment.</h2>
                 <p>
-                    <a href="/iotserver/groups/add-group" class="cu-btn add-group-link">
+                    <a href="{{appContext}}groups/add-group" class="cu-btn add-group-link">
                     <span class="fw-stack">
                         <i class="fw fw-ring fw-stack-2x"></i>
                         <i class="fw fw-add fw-stack-1x"></i>

@@ -10,7 +10,7 @@ $(function () {
             return false;
         } else {
 
-            var addGroupAPI = "/iotserver/api/group/add";
+            var addGroupAPI = $("#group-api-ep").val();
 
             var group = {"name": name, "description": description};
             invokerUtil.post(

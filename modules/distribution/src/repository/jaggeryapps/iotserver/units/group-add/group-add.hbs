@@ -10,8 +10,9 @@
 		</span>
 
         <hr />
+        <input type="hidden" id="group-api-ep" value="{{appContext}}api/group/add">
 
-        <form method="GET" class="form-login-box" action="/iotserver/groups">
+        <form method="GET" class="form-login-box" action="{{appContext}}groups">
             <label class="wr-input-label">Group Name</label>
             <div class="wr-input-control">
                 <input type="text right" id="name" placeholder="Group Name">

@@ -42,6 +42,8 @@
 var groupCheckbox = "#ast-container .ctrl-wr-asset .itm-select input[type='checkbox']";
 var assetContainer = "#ast-container";
 
+var app_context = $("#app-context").val();
+
 /*
  * DOM ready functions.
  */
@@ -130,7 +132,7 @@ function loadGroups(searchType, searchParam) {
     $.template("group-listing", groupListingSrc, function (template) {
         var serviceURL;
         if ($.hasPermission("LIST_GROUPS")) {
-            serviceURL = "/iotserver/api/group/all";
+            serviceURL = app_context + "api/group/all";
         } else {
             $("#ast-container").html("Permission denied");
             return;
@@ -148,6 +150,7 @@ function loadGroups(searchType, searchParam) {
             data = JSON.parse(data);
             var viewModel = {};
             viewModel.groups = data;
+            viewModel.appContext = app_context;
             viewModel.imageLocation = imageResource;
             if (!data || data.length <= 0) {
                 $("#ast-container").html($("#no-groups-div-content").html());
@@ -248,7 +251,7 @@ function attachEvents() {
         $('#user-names').html('Loading...');
         showPopup();
         $("a#share-group-next-link").hide();
-        invokerUtil.get("/iotserver/api/users",
+        invokerUtil.get(app_context+ "api/users",
             function (data, txtStatus, jqxhr) {
                 var users = JSON.parse(data);
                 var status = jqxhr.status;
@@ -274,7 +277,7 @@ function attachEvents() {
                         $(modalPopupContent).html($('#share-group-w2-modal-content').html());
                         $('#user-roles').html('Loading...');
                         $("a#share-group-yes-link").hide();
-                        invokerUtil.get("/iotserver/api/group/id/" + groupId + "/" + selectedUser + "/rolemapping",
+                        invokerUtil.get(app_context+"api/group/id/" + groupId + "/" + selectedUser + "/rolemapping",
                             function (data, txtStatus, jqxhr) {
                                 var roleMap = JSON.parse(data);
                                 var status = jqxhr.status;
@@ -304,7 +307,7 @@ function attachEvents() {
                                                 updatedRoleMap.push(roleMap[role]);
                                             }
                                         }
-                                        invokerUtil.post("/iotserver/api/group/id/" + groupId + "/" + selectedUser + "/roleupdate",
+                                        invokerUtil.post(app_context+ "api/group/id/" + groupId + "/" + selectedUser + "/roleupdate",
                                             updatedRoleMap,
                                             function (data, txtStatus, jqxhr) {
                                                 var status = jqxhr.status;
@@ -354,7 +357,7 @@ function attachEvents() {
      */
     $("a.remove-group-link").click(function () {
         var groupId = $(this).data("groupid");
-        var removeGroupApi = "/iotserver/api/group/id/" + groupId + "/remove";
+        var removeGroupApi = app_context+ "api/group/id/" + groupId + "/remove";
 
         $(modalPopupContent).html($('#remove-group-modal-content').html());
         showPopup();
@@ -395,7 +398,7 @@ function attachEvents() {
         var groupId = $(this).data("groupid");
         var groupName = $(this).data("groupname");
         var groupDescription = $(this).data("groupdescription");
-        var editGroupApi = "/iotserver/api/group/id/" + groupId + "/update";
+        var editGroupApi = app_context + "api/group/id/" + groupId + "/update";
 
         $(modalPopupContent).html($('#edit-group-modal-content').html());
         $('#edit-group-name').val(groupName);
