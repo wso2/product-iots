@@ -673,7 +673,8 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/repository/conf/etc/launch.ini</source>
+            <!--<source>src/repository/conf/etc/launch.ini</source>-->
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/launch.ini</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/
             </outputDirectory>
             <filtered>true</filtered>
