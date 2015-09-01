@@ -1,4 +1,4 @@
-<project name="Arduino" basedir="." default="deploy">
+<project name="Arduino" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 

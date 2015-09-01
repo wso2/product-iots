@@ -29,10 +29,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot</groupId>
     <artifactId>org.wso2.carbon.iot.integration.ui.pages</artifactId>
     <packaging>jar</packaging>
-    <name>WSO2 MDM - Integration Test UI Pages</name>
+    <name>WSO2 IoT Server - Integration Test Common UI Pages</name>
 
     <dependencies>
         <dependency>

@@ -34,10 +34,6 @@
     <name>WSO2 IoT Server - Distribution</name>
     <description>WSO2 IoT Server Distribution</description>
 
-    <modules>
-        <module>src/samples</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>com.h2database.wso2</groupId>
@@ -431,7 +427,7 @@
                                 <!--Copy samples to distribution-->
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
                                       overwrite="true">
-                                    <fileset dir="src/samples">
+                                    <fileset dir="../samples">
                                         <exclude name="**/*.iml"/>
                                         <exclude name="**/.DS_Store"/>
                                         <exclude name="**/target/"/>

@@ -27,8 +27,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot</groupId>
     <artifactId>org.wso2.carbon.iot.integration.common.clients</artifactId>
     <packaging>jar</packaging>
-    <name>WSO2 MDM - Integration Admin Clients</name>
+    <name>WSO2 IoT Server - Integration Test Common Admin Clients</name>
+
 </project>

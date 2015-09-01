@@ -16,17 +16,17 @@
 *under the License.
 */
 
-package org.wso2.emm.integration.ui.pages.login;
+package org.wso2.carbon.iot.integration.ui.pages.login;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.wso2.emm.integration.ui.pages.UIElementMapper;
+import org.wso2.carbon.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
-import org.wso2.emm.integration.ui.pages.home.HomePage;
+import org.wso2.carbon.iot.integration.ui.pages.home.HomePage;
 
 /**
  * Login page class - contains methods to login to wso2 products.

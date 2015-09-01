@@ -16,7 +16,8 @@
  ~ under the License.
  -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2.iot</groupId>
@@ -26,12 +27,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot</groupId>
     <artifactId>tests-artifacts</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT Server Integration Test Common</name>
-
-    <modules>
-    </modules>
+    <name>WSO2 IoT Server - Integration Test Artifacts</name>
 
 </project>

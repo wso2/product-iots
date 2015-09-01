@@ -16,16 +16,16 @@
 *under the License.
 */
 
-package org.wso2.emm.integration.ui.pages.home;
+package org.wso2.carbon.iot.integration.ui.pages.home;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.wso2.emm.integration.ui.pages.UIElementMapper;
+import org.wso2.carbon.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.carbon.iot.integration.ui.pages.login.LoginPage;
 
 import java.io.IOException;
-import org.wso2.emm.integration.ui.pages.login.LoginPage;
 
 /**
  * Home page class holds the information of product page you got once login

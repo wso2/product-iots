@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package org.wso2.emm.integration.ui.pages;
+package org.wso2.carbon.iot.integration.ui.pages;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

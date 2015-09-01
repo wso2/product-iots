@@ -28,9 +28,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.carbon.iot.integration.common.utils</artifactId>
-    <groupId>org.wso2.iot</groupId>
     <packaging>jar</packaging>
-    <name>WSO2 IoT Server - Integration Test Utils</name>
+    <name>WSO2 IoT Server - Integration Test Common Utils</name>
 
     <licenses>
         <license>

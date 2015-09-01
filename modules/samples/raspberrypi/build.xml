@@ -1,10 +1,10 @@
-<project name="FireAlarm" basedir="." default="deploy">
+<project name="Arduino" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
-    <property name="sample_type" value="firealarm"/>
-    <property name="data_source" value="FireAlarmDM_DB"/>
-    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.firealarm"/>
+    <property name="sample_type" value="raspberrypi"/>
+    <property name="data_source" value="RaspberrypiDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.raspberrypi"/>
 
     <target name="create-db" depends="clean">
         <mkdir dir="${db.dir}"/>
@@ -23,7 +23,6 @@
                 <![CDATA[
     <IotDeviceTypeConfig type="${sample_type}">
 		<DatasourceName>jdbc/${data_source}</DatasourceName>
-		<ApiApplicationName>firealarm</ApiApplicationName>
 	</IotDeviceTypeConfig>
 	            ]]>
             </insert>

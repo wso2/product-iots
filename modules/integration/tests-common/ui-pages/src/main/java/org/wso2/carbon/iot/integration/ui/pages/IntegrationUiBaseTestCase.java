@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package org.wso2.emm.integration.ui.pages;
+package org.wso2.carbon.iot.integration.ui.pages;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,13 +31,13 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-public class EMMIntegrationUiBaseTestCase {
+public class IntegrationUiBaseTestCase {
 
-    private static final Log log = LogFactory.getLog(EMMIntegrationUiBaseTestCase.class);
+    private static final Log log = LogFactory.getLog(IntegrationUiBaseTestCase.class);
     protected AutomationContext automationContext;
 
     protected void init() throws IOException, XMLStreamException, XPathExpressionException {
-        automationContext = new AutomationContext("EMM", "emm001", TestUserMode.SUPER_TENANT_ADMIN);
+        automationContext = new AutomationContext("IoTServer", "IoT001", TestUserMode.SUPER_TENANT_ADMIN);
     }
 
     protected String getBackendURL() throws XPathExpressionException {

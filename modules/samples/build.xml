@@ -1,9 +1,9 @@
-<project name="IoTServerSamples" basedir="." default="deploy">
+<project name="IoTServerSamples" basedir="" default="deploy">
     <macrodef name="iterate">
         <attribute name="target"/>
         <sequential>
             <subant target="@{target}">
-                <fileset dir="." includes="*/build.xml"/>
+                <fileset dir="" includes="*/build.xml"/>
             </subant>
         </sequential>
     </macrodef>

@@ -1,16 +1,17 @@
-<project name="DigitalDisplay" basedir="." default="deploy">
+<project name="Arduino" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
-    <property name="sample_type" value="digital_display"/>
-    <property name="data_source" value="DigitalDisplayDM_DB"/>
-    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay"/>
+    <property name="sample_type" value="android_sense"/>
+    <property name="data_source" value="AndroidSenseDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.android.sense"/>
 
     <target name="create-db" depends="clean">
         <mkdir dir="${db.dir}"/>
         <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
 
-        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
+        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}" autocommit="true"
+             onerror="continue">
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>

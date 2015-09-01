@@ -26,12 +26,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot</groupId>
     <artifactId>tests-integration</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT Server Integration Tests</name>
-
-    <modules>
-    </modules>
+    <name>WSO2 IoT Server - Integration Test</name>
 
 </project>

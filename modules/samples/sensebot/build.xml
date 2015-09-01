@@ -1,17 +1,15 @@
-<project name="Arduino" basedir="." default="deploy">
+<project name="Arduino" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
-    <property name="sample_type" value="android_sense"/>
-    <property name="data_source" value="AndroidSenseDM_DB"/>
-    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.android.sense"/>
+    <property name="sample_type" value="sensebot"/>
+    <property name="data_source" value="SensebotDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.sensebot"/>
 
     <target name="create-db" depends="clean">
-        <mkdir dir="${db.dir}"/>
         <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
 
-        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}" autocommit="true"
-             onerror="continue">
+        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>
@@ -40,6 +38,9 @@
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
+        <copy toDir="${target.sketch.dir}/${sample_type}_wifi">
+            <fileset dir="sketch_wifi"/>
+        </copy>
         <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
         <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
@@ -51,6 +52,7 @@
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete dir="${target.sketch.dir}/${sample_type}_wifi"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">

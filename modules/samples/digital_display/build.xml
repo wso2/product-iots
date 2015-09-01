@@ -1,10 +1,10 @@
-<project name="Arduino" basedir="." default="deploy">
+<project name="DigitalDisplay" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
-    <property name="sample_type" value="raspberrypi"/>
-    <property name="data_source" value="RaspberrypiDM_DB"/>
-    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.raspberrypi"/>
+    <property name="sample_type" value="digital_display"/>
+    <property name="data_source" value="DigitalDisplayDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay"/>
 
     <target name="create-db" depends="clean">
         <mkdir dir="${db.dir}"/>
