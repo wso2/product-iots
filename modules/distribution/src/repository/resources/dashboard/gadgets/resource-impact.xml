@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Module>
+	<ModulePrefs title="Resource Impact" height="300"
+		description="Shows all dependencies and used-by associations of a particular resource/service"
+		author="Tharindu Mathew" author_email="carbon-dev@wso2.org"
+		author_affiliation="WSO2" author_location="Colombo, Sri Lanka">
+		<Require feature="setprefs" />
+		<Require feature="tabs" />
+		<Require feature="dynamic-height" />
+		<Require feature="views" />
+	</ModulePrefs>
+	<UserPref name="path" display_name="path"
+		default_value="" datatype="string" required="true"></UserPref>
+	<UserPref name="selectedFlag" default_value="false" datatype="bool" required="true"></UserPref>
+	<Content type="html" view="default, home">
+    <![CDATA[
+
+<script language="javascript" type="text/javascript" src="js/excanvas.js"></script>
+<script type="text/javascript" src="js/wso2vis.js"></script>
+<script type="text/javascript" src="js/retrieve-data.js"></script>
+<!--<script type="text/javascript" src="js/jit.js"></script>-->
+<style>
+div#qTip {
+  padding: 3px;
+  border: 1px solid #666;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  display: none;
+  background: #999;
+  color: #FFF;
+  font: bold 10px Verdana, Arial, sans-serif;
+  text-align: left;
+  position: absolute;
+  z-index: 1000;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="css/gadgets.css"/>
+<link rel="stylesheet" type="text/css" href="css/help.css"/>
+
+<p>Path:<input id="path-text" type="text" style="width:200px;margin:0 auto;" onkeypress="handleEnter(this, event)"></input>
+<input type="button" onclick="pullData()" value="View"></input></p>
+<div id="infovis" style="margin:0 auto; text-align:center;height:270px;width:300px;"></div>
+<div id="log"></div>
+<script type="text/javascript">
+
+var pullData = function() {
+var path = document.getElementById("path-text").value;
+var URL = "carbon/gauges/gadgets/flash/flashdata-ajaxprocessor.jsp?funcName=getResourceImpact&path=" + path;
+dataProvider.url = URL;
+                dataProvider.initialize();
+                var prefs = new gadgets.Prefs();
+
+                prefs.set("path", path);
+                prefs.set("selectedFlag", true);
+	gadgets.window.adjustHeight(300);
+	setTimeout("gadgets.window.adjustHeight(300)",100);
+}
+
+function handleEnter(inField, e) {
+    var charCode;
+    var prefs = new gadgets.Prefs();
+    prefs.set("path", document.getElementById("path-text").value);
+    if(e && e.which){
+        charCode = e.which;
+    }else if(window.event){
+        e = window.event;
+        charCode = e.keyCode;
+    }
+
+    if(charCode == 13) {
+        pullData();
+    }
+}
+
+//document.write(json);
+
+
+var dataProvider = new wso2vis.p.ProviderGETJSON("");
+
+
+
+
+		var treeDiv = document.getElementById("infovis");
+		var logDiv = document.getElementById("log");
+                var hyperTree = new wso2vis.s.chart.infovis.HyperTree(logDiv,"infovis","Dependency Tree","Impact Analysis of resources");
+			hyperTree.dataField(["children"])
+				.dataLabel(["name"])
+				.width(300)
+				.height(270);
+
+                hyperTree.load();
+
+
+                //spaceTree.onTooltip = barTooltip;
+                //spaceTree.onClick = barClick;
+
+                dataProvider.addDataReceiver(hyperTree);
+                var prefs = new gadgets.Prefs();
+        document.getElementById("path-text").value = prefs.getString("path");
+        if (prefs.getBool("selectedFlag")) {
+			pullData();
+		}
+
+
+</script>
+
+]]>
+
+	</Content>
+	<Content type="html" view="canvas">
+    <![CDATA[
+
+<script language="javascript" type="text/javascript" src="js/excanvas.js"></script>
+<script type="text/javascript" src="js/wso2vis.js"></script>
+<script type="text/javascript" src="js/retrieve-data.js"></script>
+<!--<script type="text/javascript" src="js/jit.js"></script>-->
+<style>
+div#qTip {
+  padding: 3px;
+  border: 1px solid #666;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  display: none;
+  background: #999;
+  color: #FFF;
+  font: bold 10px Verdana, Arial, sans-serif;
+  text-align: left;
+  position: absolute;
+  z-index: 1000;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="css/gadgets.css"/>
+<link rel="stylesheet" type="text/css" href="css/help.css"/>
+
+<p>Path:<input id="path-text" type="text" style="width:200px;margin:0 auto;" onkeypress="handleEnter(this, event)"></input>
+<input type="button" onclick="pullData()" value="View"></input></p>
+<div id="infovis" style="margin:0 auto; text-align:center;height:450px;width:1000px;"></div>
+<div id="log"></div>
+<script type="text/javascript">
+
+var pullData = function() {
+var path = document.getElementById("path-text").value;
+var URL = "carbon/gauges/gadgets/flash/flashdata-ajaxprocessor.jsp?funcName=getResourceImpact&path=" + path;
+dataProvider.url = URL;
+                dataProvider.initialize();
+                 var prefs = new gadgets.Prefs();
+
+                prefs.set("path", path);
+                prefs.set("selectedFlag", true);
+	gadgets.window.adjustHeight(500);
+
+setTimeout("gadgets.window.adjustHeight(500)",100);
+}
+
+function handleEnter(inField, e) {
+    var charCode;
+    var prefs = new gadgets.Prefs();
+    prefs.set("path", document.getElementById("path-text").value);
+    if(e && e.which){
+        charCode = e.which;
+    }else if(window.event){
+        e = window.event;
+        charCode = e.keyCode;
+    }
+
+    if(charCode == 13) {
+        pullData();
+    }
+}
+
+//document.write(json);
+
+
+var dataProvider = new wso2vis.p.ProviderGETJSON("");
+
+
+
+		var treeDiv = document.getElementById("infovis");
+		var logDiv = document.getElementById("log");
+                var hyperTree = new wso2vis.s.chart.infovis.HyperTree(logDiv,"infovis","Dependency Tree","Impact Analysis of resources");
+			hyperTree.dataField(["children"])
+				.dataLabel(["name"])
+				.width(1000)
+				.height(450);
+
+                hyperTree.load();
+
+
+                //spaceTree.onTooltip = barTooltip;
+                //spaceTree.onClick = barClick;
+
+        dataProvider.addDataReceiver(hyperTree);
+		var prefs = new gadgets.Prefs();
+		document.getElementById("path-text").value = prefs.getString("path");
+        if (prefs.getBool("selectedFlag")) {
+			pullData();
+		}
+
+</script>
+
+]]>
+
+	</Content>
+
+
+</Module>
+

@@ -1,0 +1,63 @@
+body {
+    background-color: white;
+    padding: 0px;
+    margin: 0px;
+    font-family: "Lucida Grande","Lucida Sans","Microsoft Sans Serif", "Lucida Sans Unicode","Verdana","Sans-serif","trebuchet ms" !important;
+    color: #111;
+    font-size:12px;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    line-height:1.25em;
+}
+.main-table {
+	border: 0px;
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.main-table thead tr th{
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+	border: 0px;
+}
+.main-table tbody tr td {
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+	border: 0px;
+}
+.main-table tr td {
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+	border: 0px;
+}
+.tablib_selected {
+    color: #2F7ABD;
+    font-weight: normal;
+}
+.pleaseText {
+    margin-top: 5px;
+    text-align: center;    
+}
+.titleText {
+    margin-top: 5px;
+    text-align: center;    
+}
+select {
+    font-size: 10px;
+    margin-bottom: 2px;
+}
+input {
+    font-size: 10px;
+    margin-bottom: 2px;
+}
+span.userNameText {
+    font-size: 11px;
+}

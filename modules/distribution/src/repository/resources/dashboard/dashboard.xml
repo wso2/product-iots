@@ -1,0 +1,162 @@
+<!--
+ ~ Copyright (c) 2005-2010, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~
+ ~ WSO2 Inc. licenses this file to you under the Apache License,
+ ~ Version 2.0 (the "License"); you may not use this file except
+ ~ in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~    http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing,
+ ~ software distributed under the License is distributed on an
+ ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~ KIND, either express or implied.  See the License for the
+ ~ specific language governing permissions and limitations
+ ~ under the License.
+ -->
+<resource path="/repository/dashboards" isCollection="true">
+	<mediaType />
+	<description />
+	<children>
+		<resource path="/repository/dashboards/governance"
+			isCollection="true">
+			<mediaType />
+			<description />
+			<children>
+				<resource path="/repository/dashboards/governance/gadgets"
+					isCollection="true">
+					<mediaType />
+					<description />
+					<children>
+						<resource path="/repository/dashboards/governance/gadgets/10"
+							isCollection="true">
+							<mediaType />
+							<description />
+							<properties>
+								<property key="gadgetUrl">
+									/registry/resource/_system/config/repository/dashboards/gadgets/impact-analysis.xml
+								</property>
+							</properties>
+							<children>
+								<resource
+									path="/repository/dashboards/governance/gadgets/10/gadgetprefs"
+									isCollection="true">
+									<mediaType />
+									<description />
+									<properties>
+										<property key="gadgetUserPrefs-10" />
+									</properties>
+									<children />
+								</resource>
+							</children>
+						</resource>
+						<resource path="/repository/dashboards/governance/gadgets/20"
+							isCollection="true">
+							<mediaType />
+							<description />
+							<properties>
+								<property key="gadgetUrl">/carbon/impactAnalysis/impact.xml</property>
+							</properties>
+							<children>
+								<resource
+									path="/repository/dashboards/governance/gadgets/20/gadgetprefs"
+									isCollection="true">
+									<mediaType />
+									<description />
+									<properties>
+										<property key="gadgetUserPrefs-20" />
+									</properties>
+									<children />
+								</resource>
+							</children>
+						</resource>
+						<resource path="/repository/dashboards/governance/gadgets/30"
+							isCollection="true">
+							<mediaType />
+							<description />
+							<properties>
+								<property key="gadgetUrl">
+									/registry/resource/_system/config/repository/dashboards/gadgets/life-cycle-info.xml
+								</property>
+							</properties>
+							<children>
+								<resource
+									path="/repository/dashboards/governance/gadgets/30/gadgetprefs"
+									isCollection="true">
+									<mediaType />
+									<description />
+									<properties>
+										<property key="gadgetUserPrefs-30" />
+									</properties>
+									<children />
+								</resource>
+							</children>
+						</resource>
+					</children>
+				</resource>
+				<resource path="/repository/dashboards/governance/nextGadgetId"
+					isCollection="true">
+					<mediaType />
+					<description />
+					<properties>
+						<property key="nextGadgetId">200</property>
+					</properties>
+					<children />
+				</resource>
+				<resource path="/repository/dashboards/governance/tabs"
+					isCollection="true">
+					<mediaType />
+					<description />
+					<properties>
+						<property key="nextTabId">200</property>
+						<property key="currentTabLayout">0,3</property>
+					</properties>
+					<children>
+						<resource path="/repository/dashboards/governance/tabs/0"
+							isCollection="true">
+							<mediaType />
+							<description />
+							<properties>
+								<property key="tabTitle">Impact Data</property>
+							</properties>
+							<children>
+								<resource
+									path="/repository/dashboards/governance/tabs/0/currentGadgetLayout"
+									isCollection="true">
+									<mediaType />
+									<description />
+									<properties>
+										<property key="currentGadgetLayout">{"layout":[{"id":"","width":"50%","layout":[{"id":"10","type":"gadget"}],"type":"columnContainer"},{"id":"","width":"50%","layout":[{"id":"20","type":"gadget"}],"type":"columnContainer"}]}</property>
+									</properties>
+									<children />
+								</resource>
+							</children>
+						</resource>
+						<resource path="/repository/dashboards/governance/tabs/3"
+							isCollection="true">
+							<mediaType />
+							<description />
+							<properties>
+								<property key="tabTitle">Lifecycle Data</property>
+							</properties>
+							<children>
+								<resource
+									path="/repository/dashboards/governance/tabs/3/currentGadgetLayout"
+									isCollection="true">
+									<mediaType />
+									<description />
+									<properties>
+										<property key="currentGadgetLayout">G1#30</property>
+									</properties>
+									<children />
+								</resource>
+							</children>
+						</resource>
+					</children>
+				</resource>
+			</children>
+		</resource>
+	</children>
+</resource>
+	

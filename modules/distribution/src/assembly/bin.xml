@@ -20,16 +20,32 @@
                 <exclude>**/axis2services/version/**</exclude>
                 <!--<exclude>**/pom.xml</exclude>-->
                 <exclude>**/version.txt</exclude>
-                <exclude>**/master-datasources.xml</exclude>
+                <!--<exclude>**/master-datasources.xml</exclude>-->
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/client-truststore.jks</exclude>
                 <exclude>**/wso2carbon.jks</exclude>
                 <exclude>**/WSO2AM_DB.h2.db</exclude>
-                <!--<exclude>**/FireAlarmDM_DB.h2.db</exclude>-->
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/conf/axis2/axis2_client.xml</exclude>
                 <exclude>**/conf/etc/launch.ini</exclude>
+                <exclude>**/client-truststore.jks</exclude>
+                <exclude>**/wso2carbon.jks</exclude>
+
+                <!-- Store Features -->
+                <exclude>**/registry.xml</exclude>
+                <exclude>**/axis2/axis2.xml</exclude>
+                <exclude>**/org.wso2.carbon.identity.relyingparty.ui-3.1.0.SNAPSHOT.jar</exclude>
+                <exclude>**/org.wso2.carbon.identity.user.registration.ui-3.1.0.SNAPSHOT.jar
+                </exclude>
+                <exclude>**/log4j.properties</exclude>
+                <exclude>**/email/email-admin-config.xml</exclude>
+                <exclude>**/claim-config.xml</exclude>
+                <exclude>**/ciphertool.bat</exclude>
+                <exclude>**/ciphertool.sh</exclude>
+                <exclude>**/cipher-text.properties</exclude>
+                <exclude>**/cipher-tool.properties</exclude>
+                <exclude>**/lib/org.wso2.ciphertool-1.0.0-wso2v3.jar</exclude>
             </excludes>
         </fileSet>
 
@@ -63,9 +79,15 @@
                 <include>**/stratos.xml</include>
                 <include>**/multitenancy-packages.xml</include>
                 <include>**/usage-throttling-agent-config.xml</include>
-                <include>**/cloud-services-desc.xml</include>
+                <!--Commented out in order to add ES specific xml file-->
+                <!--<include>**/cloud-services-desc.xml</include>-->
+                <!--============ Added with ES Features ===============-->
             </includes>
-            <filtered>true</filtered>
+            <!--============ Added with ES Features ===============-->
+            <excludes>
+                <exclude>**/tenant-mgt.xml</exclude>
+            </excludes>
+            <!--============ Added with ES Features ===============-->
         </fileSet>
         <fileSet>
             <directory>
@@ -75,6 +97,15 @@
             <includes>
                 <include>**/tenant-mgt.xml</include>
             </includes>
+        </fileSet>
+        <!-- End of Multitenancy related file -->
+
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
+            </outputDirectory>
         </fileSet>
         <fileSet>
             <directory>src/repository/resources/styles/css</directory>
@@ -113,11 +144,7 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
-                <include>**/carbon/</include>
-                <include>**/jaggery-test/</include>
-                <include>**/process/</include>
-                <include>**/uuid/</include>
-                <include>**/i18n/</include>
+                <include>*/**</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -125,8 +152,7 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <includes>
                 <include>**/api-manager.xml</include>
-                <include>**/security/</include>
-                <!-- <include>**/emm-config.xml</include>-->
+                <include>**/sso-idp-config.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -137,6 +163,11 @@
             <includes>
                 <include>**/entitlement.properties</include>
                 <include>**/trusted-idp-config.xml</include>
+                <!--============ Added with ES Features ===============-->
+                <include>**/cipher-text.properties</include>
+                <include>**/cipher-tool.properties</include>
+                <include>**/cipher-standalone-config.properties</include>
+                <!--============ Added with ES Features ===============-->
             </includes>
         </fileSet>
         <fileSet>
@@ -148,15 +179,16 @@
                 <include>**/**</include>
             </includes>
         </fileSet>
-        <fileSet>
-            <directory>src/repository/conf/datasources</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources
-            </outputDirectory>
-            <includes>
-                <include>**/master-datasources.xml</include>
-                <include>**/cdm-datasources.xml</include>
-            </includes>
-        </fileSet>
+        <!-- Moved to distribution pom to copy before install samples-->
+        <!--<fileSet>-->
+            <!--<directory>src/repository/conf/datasources</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/master-datasources.xml</include>-->
+                <!--<include>**/cdm-datasources.xml</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
         <fileSet>
             <directory>src/repository/resources</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
@@ -269,6 +301,165 @@
             <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
             <!--</outputDirectory>-->
         <!--</fileSet>-->
+
+        <!--========================================================================================================-->
+        <!-- Enterprise Store Features -->
+
+        <!--============ Added with ES Features ===============-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
+            </outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <!-- copy the landing page webapp -->
+        <fileSet>
+            <directory>lib/home</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps/STRATOS_ROOT
+            </outputDirectory>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/client</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <!--copy jaxrs web app for OAuth feature-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaxwebapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaxwebapps
+            </outputDirectory>
+            <includes>
+                <include>oauth2endpoints.war</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>target/jaxwebapps</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaxwebapps
+            </outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
+            <includes>
+                <include>**/ciphertool.sh</include>
+                <include>**/ciphertool.bat</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/lib/</outputDirectory>
+            <includes>
+                <include>**/org.wso2.ciphertool-1.0.0-wso2v3.jar</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>src/repository/conf/etc</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <!--Copied to ANOTHER DIR (conf/ folder) in CDMF-->
+        <fileSet>
+            <directory>src/repository/conf</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/sso-idp-config.xml</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>src/repository/conf/identity</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>src/repository/conf/bam</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/bam</outputDirectory>
+            <includes>
+                <include>**/es-bam.xml</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources/security/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security/
+            </outputDirectory>
+            <includes>
+                <include>**/sso_redirect.html</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <includes>
+                <include>shindig.war</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>src/repository/bam</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/bam/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <!--============ Added with ES Features ===============-->
+
+        <fileSet>
+            <directory>src/repository/conf/security</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/application-authenticators.xml</include>
+                <!-- Replacement for application-authenticators.xml -->
+                <include>**/application-authentication.xml</include>
+            </includes>
+        </fileSet>
+
+        <!--========================================================================================================-->
+        <!-- End of Enterprise Store Features -->
 
         <!--copy web app for devices-->
         <fileSet>
@@ -576,15 +767,16 @@
             <fileMode>644</fileMode>
         </file>
 
+        <!-- TODO: Verify this feature is needed -->
         <!--Webapp Authenticator Config file-->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
 
         <!--notifications config file-->
         <file>
@@ -657,7 +849,7 @@
             <fileMode>644</fileMode>
         </file>
 
-        
+
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
@@ -680,6 +872,126 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
+        <!--========================================================================================================-->
+        <!-- Enterprise Store Features -->
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>src/repository/conf/registry.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>src/repository/conf/multitenancy/cloud-services-desc.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/multitenancy/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/log4j.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/
+            </outputDirectory>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/axis2/axis2.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-mgt.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/email/email-admin-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/email</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/claim-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>src/repository/database/WSO2IDENTITY_DB.h2.db</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/social-datasources.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/association-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--============ Added with ES Features ===============-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/shindig.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!--========================================================================================================-->
+        <!-- End of Enterprise Store Features -->
 
     </files>
 </assembly>

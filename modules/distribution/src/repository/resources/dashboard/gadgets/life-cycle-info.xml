@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs
+            title="Lifecycle Stage Monitor"
+            height="240"
+            description="Allows to monitor messages received per hour by a service"
+            author="Tyrell Perera" author_email="tyrell@wso2.com" author_affiliation="WSO2"
+            author_location="Colombo, Sri Lanka">
+        <Require feature="setprefs"/>
+    </ModulePrefs>
+    <Content type="html" view="default">
+        <![CDATA[
+
+
+        <script type="text/javascript"
+                src="swfobject1-5/swfobject.js"></script>
+        <script type="text/javascript"
+                src="js/retrieve-data.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/gadgets.css"/>
+
+        <p>Select Lifecycle: <select id="selectbox" style="text-align:left;width:200px;margin:0px auto;"
+                                     onchange="populateChart()">
+
+        </select></p>
+
+        <div id="chart" style="text-align:center;"></div>
+        <script type="text/javascript">
+        if (!(navigator.mimeTypes && navigator.mimeTypes["application/x-shockwave-flash"])){
+            document.getElementById('chart').innerHTML = '<div style="padding-top:20px;margin-bottom:20px;">You need to upgrade your Adobe Flash Player to display this Gadget.</div> <a href="http://get.adobe.com/flashplayer/" target="_blank">Download it from Adobe.</a>';
+        }
+        </SCRIPT>
+        <script type="text/javascript">
+            function init() {
+                var selectBox = document.getElementById('selectbox');
+                var lifecycleNames = getLifeCycleNames().split(";");
+                for (var i = 0; i < (lifecycleNames.length - 1); i++) {
+                    addOption(selectBox, lifecycleNames[i], lifecycleNames[i]);
+                }
+                populateChart();
+            }
+            function addOption(selectedBox, text, value)
+            {
+                var optn = document.createElement("OPTION");
+                optn.text = text;
+                optn.value = value;
+                selectedBox.options.add(optn);
+            }
+
+            function populateChart() {
+                var select = document.getElementById('selectbox');
+                var selectValue = select.options[select.selectedIndex].value;
+                var so = new SWFObject("registry/resource/_system/config/repository/dashboards/gadgets/flash/open-flash-chart.swf", "chart", "300", "180", "9", "#ffffff");
+                so.addVariable("data", "carbon/gauges/gadgets/flash/flashdata-ajaxprocessor.jsp?name=" + selectValue + "%26funcName=lifeCyclePieChartData");
+                so.addParam("lifeCycleName", selectValue);
+                so.addParam("allowScriptAccess", "sameDomain");
+                so.write("chart");
+            }
+            gadgets.util.registerOnLoadHandler(init);
+        </script>
+
+        ]]>
+    </Content>
+</Module>

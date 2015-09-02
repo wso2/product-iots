@@ -35,4 +35,16 @@
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
 
+    <!-- APIPublisherLifecycleListener listens to webapp deployment events and publish JAX-RS services packaged into each of the aforesaid
+         web applications that are configured to be made available as 'Managed APIs'. Given below are the parameters that need to be congigured
+         in the form of 'context-param's in web.xml of each applicable web application.
+
+         'managed-api-enabled'    - Indicates that the web application being processed needs to be published as a 'Managed API'.
+         'managed-api-context'    - Context of the 'Managed API'.
+         'managed-api-version'    - Version of the 'Managed API'.
+         'managed-api-owner'      - Owner of the 'Managed API'.
+         'managed-api-isSecured'  - Indicates if the 'Managed API' needs to be exposed over a secured channel.
+         'managed-api-transports' - Transports through which the 'Managed API' is exposed.
+     -->
+    <Listener className="org.wso2.carbon.apimgt.webapp.publisher.lifecycle.listener.APIPublisherLifecycleListener"/>
 </Context>
