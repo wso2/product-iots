@@ -30,6 +30,60 @@
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/conf/axis2/axis2_client.xml</exclude>
                 <exclude>**/conf/etc/launch.ini</exclude>
+
+                <!--&lt;!&ndash;//API manager excludes&ndash;&gt;-->
+                <!--<exclude>**/conf/axis2/axis2.xml</exclude>-->
+                <!--<exclude>**/conf/axis2/axis2.xml_NHTTP</exclude>-->
+                <!--<exclude>**/conf/axis2/axis2.xml_PT</exclude>-->
+                <!--<exclude>**/conf/axis2/tenant-axis2.xml</exclude>-->
+                <!--<exclude>**/conf/synapse.xml</exclude>-->
+                <!--<exclude>**/log4j.properties</exclude>-->
+                <!--<exclude>**/services/sample01.aar</exclude>-->
+                <!--<exclude>**/repository/services/version/**</exclude>-->
+                <!--<exclude>**/version.txt</exclude>-->
+                <!--<exclude>**/wso2server.bat</exclude>-->
+                <!--<exclude>**/README.txt</exclude>-->
+                <!--<exclude>**/LICENSE.txt</exclude>-->
+                <!--<exclude>**/INSTALL.txt</exclude>-->
+                <!--<exclude>**/release-notes.html</exclude>-->
+                <!--<exclude>**/carbon.xml</exclude>-->
+                <!--<exclude>**/registry.xml</exclude>-->
+                <!--<exclude>**/identity.xml</exclude>-->
+                <!--<exclude>**/master-datasources.xml</exclude>-->
+                <!--<exclude>**/dbscripts/mysql.sql</exclude>-->
+                <!--<exclude>**/dbscripts/db2.sql</exclude>-->
+                <!--<exclude>**/dbscripts/mysql_cluster.sql</exclude>-->
+                <!--<exclude>**/repository/components/plugins/woden_${woden.version}.jar</exclude>-->
+                <!--<exclude>**/lib/org.wso2.ciphertool-1.0.0-wso2v2.jar</exclude>-->
+                <!--<exclude>**/secret-conf.properties</exclude>-->
+                <!--<exclude>**/repository/components/plugins/saxon*.jar</exclude>-->
+                <!--<exclude>**/lib/endorsed/xalan*.jar</exclude>-->
+                <!--<exclude>**/conf/thrift-authentication.xml</exclude>-->
+                <!--<exclude>**/repository/components/features/org.wso2.carbon.apimgt.store_${apim.feature.version}/store/**</exclude>-->
+                <!--<exclude>**/repository/components/features/org.wso2.carbon.apimgt.store_${apim.feature.version}/admin-dashboard/**</exclude>-->
+                <!--<exclude>**/repository/components/features/org.wso2.carbon.apimgt.store_${apim.feature.version}/workflow-admin/**</exclude>-->
+                <!--<exclude>**/repository/components/features/org.wso2.carbon.apimgt.publisher_${apim.feature.version}/publisher/**</exclude>-->
+                <!--<exclude>**/repository/components/features/org.wso2.carbon.apimgt.core_${apim.feature.version}/libs/**</exclude>-->
+                <!--&lt;!&ndash;DAS excludes&ndash;&gt;-->
+                <!--<exclude>**/repository/deployment/server/axis2services/*</exclude>-->
+                <!--<exclude>**/*.sh</exclude>-->
+                <!--<exclude>**/wso2server.bat</exclude>-->
+                <!--<exclude>**/axis2services/sample01.aar</exclude>-->
+                <!--<exclude>**/axis2services/echo/**</exclude>-->
+                <!--<exclude>**/axis2services/version/**</exclude>-->
+                <!--<exclude>**/pom.xml</exclude>-->
+                <!--<exclude>**/version.txt</exclude>-->
+                <!--<exclude>**/README*</exclude>-->
+                <!--<exclude>**/LICENSE.txt</exclude>-->
+                <!--<exclude>**/INSTALL.txt</exclude>-->
+                <!--<exclude>**/release-notes.html</exclude>-->
+                <!--<exclude>**/carbon.xml</exclude>-->
+                <!--<exclude>**/axis2/axis2.xml</exclude>-->
+                <!--<exclude>**/log4j.properties</exclude>-->
+                <!--<exclude>**/wso2server.sh</exclude>  &lt;!&ndash;adding a custom DAS server.sh file&ndash;&gt;-->
+                <!--<exclude>**/registry.xml</exclude>-->
+                <!--<exclude>**/repository/conf/security/cipher-text.properties</exclude>-->
+                <!--<exclude>**/repository/conf/security/cipher-tool.properties</exclude>-->
             </excludes>
         </fileSet>
 
@@ -248,7 +302,7 @@
         <!-- Copying Mobile plugin management related dbscripts -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.mobile.device.mgt.version}/dbscripts/cdm/plugins
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.iot.device.mgt.version}/dbscripts/cdm/plugins
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm/plugins</outputDirectory>
             <includes>
@@ -342,45 +396,14 @@
     </dependencySets>
 
     <files>
-        <!--file>
-            <source>../mobile-agents/android/jax-rs/target/mdm-android-agent.war</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
+
+        <file>
+            <source>src/repository/conf/tomcat/context.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../mobile-agents/windows/jax-rs/target/mdm-windows-agent.war</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../rest-api/target/mdm-admin.war</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>
-                ../tools/mdm-android-agent-archetype/target/mdm-android-agent-archetype-${mdm.android.agent.archetype.version}.jar
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/android-agent.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file-->
-        <!-- <file>
              <source>
                  ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading.xml
              </source>
@@ -395,13 +418,7 @@
              <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
              <filtered>true</filtered>
              <fileMode>644</fileMode>
-         </file>-->
-        <file>
-            <source>src/repository/conf/tomcat/context.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+         </file>
 	    <file>
              <source>
                  ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml
@@ -435,13 +452,7 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--        <file>
-                    <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
-                    </source>
-                    <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
-                    <filtered>true</filtered>
-                    <fileMode>644</fileMode>
-                </file>-->
+
         <file>
             <source>INSTALL.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
@@ -502,9 +513,9 @@
         <!-- Copying application-authentication.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/security/application-authentication.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -516,12 +527,6 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/thrift-authentication.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/repository/conf/application-authenticators.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -606,17 +611,6 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!--cdm plugin config file-->
-        <!--file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/mobile-config.xml
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/conf/etc/device-mgt-plugin-org.wso2.carbon.device.mgt.iot.common.config.server.configs/mobile
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file-->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml
@@ -636,17 +630,6 @@
             <destName>WSO2AM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--target/wso2carbon-core-${carbon.kernel.version}/repository/database/FireAlarmDM_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>FireAlarmDM_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!-- Copying H2 database related files corresponding to default Device management repository schema -->
 
         <file>
             <source>
@@ -681,5 +664,22 @@
             <fileMode>644</fileMode>
         </file>
 
+        <!-- Copying governance.xml -->
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--identity related-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/msg-mgt.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
     </files>
 </assembly>

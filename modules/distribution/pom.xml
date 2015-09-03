@@ -124,33 +124,7 @@
                         </configuration>
                     </execution>
 
-                    <execution>
-                        <!-- Creating IDP Management schema -->
-                        <id>create-idp-mgt-schema</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <property name="db.dir"
-                                          value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
-                                <property name="userid" value="wso2carbon"/>
-                                <property name="password" value="wso2carbon"/>
-                                <property name="dbURL"
-                                          value="jdbc:h2:file:${basedir}/${db.dir}/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE"/>
 
-                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"
-                                     autocommit="true" onerror="continue">
-                                    <classpath refid="maven.dependency.classpath"/>
-                                    <classpath refid="maven.compile.classpath"/>
-                                    <classpath refid="maven.runtime.classpath"/>
-                                    <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/application-mgt/h2.sql"/>
-                                </sql>
-                            </tasks>
-                        </configuration>
-                    </execution>
                     <execution>
                         <!-- Creating API Management schema -->
                         <id>create-api-mgt-schema</id>
@@ -178,6 +152,8 @@
                             </tasks>
                         </configuration>
                     </execution>
+
+
                     <!--<execution>-->
                         <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
                         <!--<id>create-firealarm-schema</id>-->
