@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Module>
+	<ModulePrefs title="Service Impact" height="300"
+		description="Shows all dependencies and used-by associations of a particular service"
+		author="Tharindu Mathew" author_email="carbon-dev@wso2.org"
+		author_affiliation="WSO2" author_location="Colombo, Sri Lanka">
+		<Require feature="setprefs" />
+		<Require feature="tabs" />
+		<Require feature="dynamic-height" />
+		<Require feature="views" />
+	</ModulePrefs>
+	<UserPref name="selection" display_name="selection"
+		default_value="[]" datatype="list" required="true"></UserPref>
+	<UserPref name="selectedFlag" default_value="false" datatype="bool" required="true"></UserPref>
+	<Content type="html" view="default, home">
+    <![CDATA[
+    
+
+<script type="text/javascript" src="js/wso2vis.js"></script>
+<!--<script type="text/javascript" src="js/jit.js"></script>-->
+<style>
+div#qTip {
+  padding: 3px;
+  border: 1px solid #666;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  display: none;
+  background: #999;
+  color: #FFF;
+  font: bold 10px Verdana, Arial, sans-serif;
+  text-align: left;
+  position: absolute;
+  z-index: 1000;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="css/gadgets.css"/>
+<link rel="stylesheet" type="text/css" href="css/help.css"/>
+
+    	<div id="filter" style="margin:0 auto; text-align:center;width:300px;"></div>
+
+    	<div id="infovis" style="margin:0 auto; text-align:center;height:300px;width:300px"></div>
+<div id="log"></div>
+<div id="error"></div>
+<script type="text/javascript">
+      var dataProvider = new wso2vis.p.ProviderGETJSON("carbon/gauges/gadgets/flash/flashdata-ajaxprocessor.jsp?funcName=getImpactAnalysis");
+//            var dataFilter = new wso2vis.f.BasicFilter(["services", "service"], ["@name"]);
+
+            
+
+            function pullData() {
+                dataProvider.pullData();
+                var prefs = new gadgets.Prefs();
+                var filterSelection = dataFilter.filterArray();
+                prefs.set("selection", filterSelection);
+                prefs.set("selectedFlag", true);
+gadgets.window.adjustHeight(300);
+setTimeout("gadgets.window.adjustHeight(300)",100);
+            }
+	    var dataFilter = new wso2vis.f.form.Select()
+                             .canvas("filter")
+                             .dataField(["children"])
+                             .dataLabel(["name"])
+                             .defaultText("- Select Service -");
+
+dataFilter.onChange = function(text) {
+       pullData();
+};
+
+function errorMsg() {
+	return "No services present";
+}
+            var init = function () {
+		var treeDiv = document.getElementById("infovis");
+		var logDiv = document.getElementById("log");
+var spaceTree = new wso2vis.s.chart.raphael.DependencyTree(treeDiv,"Dependency Tree","Used to show data in tree structures");
+			spaceTree.dataField(["children"])
+				.dataLabel(["name"])
+				.width(500)
+				.height(300)
+                .nodelength(80)
+                .nodeheight(15)
+                .sx(50)
+                .sy(800);
+
+//                var spaceTree = new wso2vis.s.chart.infovis.SpaceTree(logDiv,"infovis","Dependency Tree","Impact Analysis of Services");
+//			spaceTree.dataField(["children"])
+//				.dataLabel(["name"])
+//				.width(300)
+//				.height(300)
+//				.msgDiv("error");
+		
+				
+				spaceTree.messageInterceptFunction = errorMsg;
+                spaceTree.load();
+
+
+                //spaceTree.onTooltip = barTooltip;
+                //spaceTree.onClick = barClick;
+
+                dataProvider.addDataReceiver(dataFilter);
+                dataFilter.addDataReceiver(spaceTree);
+
+                
+                var prefs = new gadgets.Prefs();
+                if (prefs.getBool("selectedFlag")) {
+                	dataFilter.filterArray(prefs.getArray("selection"));
+                }
+                dataProvider.initialize();
+				dataFilter.load();
+				gadgets.window.adjustHeight(300);
+
+				setTimeout("gadgets.window.adjustHeight(300)",100);
+}
+
+
+    gadgets.util.registerOnLoadHandler(init);
+    
+</script>
+
+]]>
+
+	</Content>
+	<Content type="html" view="canvas">
+    <![CDATA[
+    
+
+<script type="text/javascript" src="js/wso2vis.js"></script>
+<!--<script type="text/javascript" src="js/jit.js"></script>-->
+<style>
+div#qTip {
+  padding: 3px;
+  border: 1px solid #666;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  display: none;
+  background: #999;
+  color: #FFF;
+  font: bold 10px Verdana, Arial, sans-serif;
+  text-align: left;
+  position: absolute;
+  z-index: 1000;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="css/gadgets.css"/>
+<link rel="stylesheet" type="text/css" href="css/help.css"/>
+
+    	<div id="filter" style="margin:0 auto; text-align:center;width:300px;">Available Services : </div>
+	
+    	<div id="infovis" style="margin:0 auto; text-align:center;height:300px;width:1000px"></div>
+<div id="log"></div>
+
+<script type="text/javascript">
+      var dataProvider = new wso2vis.p.ProviderGETJSON("carbon/gauges/gadgets/flash/flashdata-ajaxprocessor.jsp?funcName=getImpactAnalysis");
+//            var dataFilter = new wso2vis.f.BasicFilter(["services", "service"], ["@name"]);
+
+           
+
+            function pullData() {
+                dataProvider.pullData();
+                var prefs = new gadgets.Prefs();
+                var filterSelection = dataFilter.filterArray();
+                prefs.set("selection", filterSelection);
+                prefs.set("selectedFlag", true);
+                gadgets.window.adjustHeight(300);
+	setTimeout("gadgets.window.adjustHeight(300)",100);
+            }
+	    var dataFilter = new wso2vis.f.form.Select()
+                             .canvas("filter")
+                             .dataField(["children"])
+                             .dataLabel(["name"])
+                             .defaultText("- Select Service -");
+
+dataFilter.onChange = function(text) {
+pullData();
+};
+          
+            var init = function () {
+		var treeDiv = document.getElementById("infovis");
+		var logDiv = document.getElementById("log");
+              var spaceTree = new wso2vis.s.chart.raphael.DependencyTree(treeDiv,"Dependency Tree","Used to show data in tree structures");
+			spaceTree.dataField(["children"])
+				.dataLabel(["name"])
+				.width(1000)
+				.height(300)
+                .nodelength(80)
+                .nodeheight(15)
+                .sx(50)
+                .sy(800);
+
+//                var spaceTree = new wso2vis.s.chart.infovis.SpaceTree(logDiv,"infovis","Dependency Tree","Impact Analysis of Services");
+//			spaceTree.dataField(["children"])
+//				.dataLabel(["name"])
+//				.width(300)
+//				.height(300)
+//				.msgDiv("error");
+                spaceTree.load();
+
+
+                //spaceTree.onTooltip = barTooltip;
+                //spaceTree.onClick = barClick;
+
+                dataProvider.addDataReceiver(dataFilter);
+                dataFilter.addDataReceiver(spaceTree);
+
+              
+                var prefs = new gadgets.Prefs();
+                if (prefs.getBool("selectedFlag")) {
+                	dataFilter.filterArray(prefs.getArray("selection"));
+                }
+                dataProvider.initialize();
+				dataFilter.load();
+}
+
+
+    gadgets.util.registerOnLoadHandler(init);
+</script>
+
+]]>
+
+	</Content>
+
+</Module>
+

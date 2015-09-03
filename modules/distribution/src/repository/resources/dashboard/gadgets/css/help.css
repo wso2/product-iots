@@ -1,0 +1,58 @@
+div#help-wrapper {
+background-color:white;
+color:#111111;
+font-family:"Lucida Grande","Lucida Sans","Microsoft Sans Serif","Lucida Sans Unicode","Verdana","Sans-serif","trebuchet ms";
+font-size:12px;
+font-size-adjust:none;
+font-stretch:normal;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+line-height:1.25em;
+margin:0;
+padding:0;
+}
+div#help-wrapper p {
+margin-left:0;
+margin-right:0;
+}
+td {
+}
+a:link {
+}
+a:visited {
+}
+a:hover {
+}
+a:active {
+}
+div#help-wrapper h1 {
+color:#F47B20;
+font-size:16px;
+font-weight:bold;
+}
+
+div#help-wrapper h2 {
+color:#111111;
+font-size:14px;
+font-weight:bold;
+}
+a img {
+border:0 none;
+}
+table.styled {
+border:0 solid #CCCCCC;
+border-collapse:collapse;
+}
+table.styled tr td {
+border:1px solid #CCCCCC;
+padding:3px;
+}
+table.styled tr td.subHeader {
+border:0 solid #CCCCCC;
+font-size:125%;
+font-weight:bold;
+padding-bottom:5px;
+padding-top:10px;
+}
+

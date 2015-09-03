@@ -28,6 +28,32 @@
 	            ]]>
             </insert>
         </xmltask>
+        <xmltask source="${datasources.conf}" dest="${datasources.conf}" report="true">
+            <insert path="/datasources-configuration/datasources[1]">
+                <![CDATA[
+        <datasource>
+            <name>${data_source}</name>
+            <description>The datasource used for Arduino database</description>
+            <jndiConfig>
+                <name>jdbc/${data_source}</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/${data_source};DB_CLOSE_ON_EXIT=FALSE</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        	            ]]>
+            </insert>
+        </xmltask>
     </target>
 
     <target name="build">
@@ -55,6 +81,9 @@
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
             <remove path="/IoTDeviceTypeConfigManager/IotDeviceTypeConfig[type='${sample_type}']"/>
+        </xmltask>
+        <xmltask source="${datasources.conf}" dest="${datasources.conf}" report="true">
+            <remove path="/datasources-configuration/datasources/datasource[name='${data_source}']"/>
         </xmltask>
     </target>
 

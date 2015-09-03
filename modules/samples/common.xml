@@ -1,6 +1,7 @@
 <project>
     <property name="lib.dir" value="../../repository/components/plugins"/>
     <property name="iot.conf" value="../../repository/conf/iot/iot-config.xml"/>
+    <property name="datasources.conf" value="../../repository/conf/datasources/master-datasources.xml"/>
     <property name="target.db.dir" value="../../repository/database"/>
     <property name="target.dropins.dir" value="../../repository/components/dropins"/>
     <property name="target.webapp.dir" value="../../repository/deployment/server/webapps"/>
