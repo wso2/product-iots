@@ -153,180 +153,6 @@
                         </configuration>
                     </execution>
 
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-firealarm-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/firealarm/database"/>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/firealarm/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/FireAlarmDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_firealarm.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-sensebot-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/sensebot/database"/>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/sensebot/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/SensebotDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_sensebot.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-arduino-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/database"/>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/ArduinoDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_arduino.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-android-sense-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/AndroidSenseDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_android_sense.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-raspberrypi-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/RaspberrypiDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberrypi.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-                        <!--<id>create-digitaldisply-schema</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/digital_display/database"/>-->
-                                <!--<property name="db.dir"-->
-                                          <!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/digital_display/database"/>-->
-                                <!--<property name="userid" value="wso2carbon"/>-->
-                                <!--<property name="password" value="wso2carbon"/>-->
-                                <!--<property name="dbURL"-->
-                                          <!--value="jdbc:h2:file:${basedir}/${db.dir}/DigitalDisplayDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-                                <!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-                                     <!--autocommit="true" onerror="continue">-->
-                                    <!--<classpath refid="maven.dependency.classpath"/>-->
-                                    <!--<classpath refid="maven.compile.classpath"/>-->
-                                    <!--<classpath refid="maven.runtime.classpath"/>-->
-                                    <!--<fileset-->
-                                            <!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_digital_display.sql"/>-->
-                                <!--</sql>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-
-
                     <execution>
                         <id>3-extract-apps-from-components</id>
                         <phase>package</phase>
@@ -565,7 +391,35 @@
                        </execution>
                    </executions>
                </plugin>-->
+
+            <!-- Replace datasource used in application-authentication.xml -->
+            <!--<plugin>-->
+                <!--<groupId>com.google.code.maven-replacer-plugin</groupId>-->
+                <!--<artifactId>replacer</artifactId>-->
+                <!--<version>1.5.2</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>prepare-package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>replace</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<file>${basedir}/../../p2-profile/product/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/application-authentication.xml</file>-->
+                    <!--<replacements>-->
+                        <!--<replacement>-->
+                            <!--<xpath>/ApplicationAuthentication/JDBCPersistenceManager/DataSource/Name</xpath>-->
+                            <!--<token>(jdbc/WSO2CarbonDB)</token>-->
+                            <!--<value>jdbc/WSO2AM_DB</value>-->
+                        <!--</replacement>-->
+                    <!--</replacements>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
         </plugins>
+
+
     </build>
 
 </project>
