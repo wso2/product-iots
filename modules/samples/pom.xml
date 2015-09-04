@@ -379,7 +379,7 @@
 
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.0</carbon.kernel.version>
+        <carbon.kernel.version>4.4.1</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <!--<carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>-->

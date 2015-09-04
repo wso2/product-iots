@@ -210,13 +210,20 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/</outputDirectory>
             <includes>
-                <include>**/entitlement.properties</include>
-                <include>**/trusted-idp-config.xml</include>
                 <!--============ Added with ES Features ===============-->
                 <include>**/cipher-text.properties</include>
                 <include>**/cipher-tool.properties</include>
                 <include>**/cipher-standalone-config.properties</include>
                 <!--============ Added with ES Features ===============-->
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/**</include>
             </includes>
         </fileSet>
         <fileSet>
