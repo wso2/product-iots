@@ -413,15 +413,6 @@
         </fileSet>
         <!--============ Added with ES Features ===============-->
 
-        <fileSet>
-            <directory>src/repository/conf/etc</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
-            <includes>
-                <include>**/**</include>
-            </includes>
-        </fileSet>
-        <!--============ Added with ES Features ===============-->
-
         <!--Copied to ANOTHER DIR (conf/ folder) in CDMF-->
         <fileSet>
             <directory>src/repository/conf</directory>
@@ -818,6 +809,16 @@
             <fileMode>644</fileMode>
         </file>
 
+        <!-- Copying bam.xml -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <!-- Copying event-broker.xml -->
         <file>
             <source>
@@ -1115,14 +1116,6 @@
             <!--commented since this tag causes issues in maven assembly plugin when copying zip formats-->
             <!--filtered>true</filtered-->
             <fileMode>644</fileMode>
-        </file>
-
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/
-            </outputDirectory>
         </file>
 
         <!--loads spark environment variables-->
