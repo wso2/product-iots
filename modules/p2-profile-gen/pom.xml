@@ -2203,6 +2203,21 @@
                                 </feature>
                                 <!--========================================================================================================-->
                                 <!-- End of Enterprise Store Features -->
+
+                                <!--//features required for both profiles-->
+                                <feature>
+                                    <id>org.wso2.carbon.datasource.reader.hadoop.server.feature.group</id>
+                                    <version>${carbon.data.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.datasource.reader.cassandra.server.feature.group</id>
+                                    <version>${carbon.data.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.ndatasource.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
+                                </feature>
+                                
                             </features>
                         </configuration>
                     </execution>
