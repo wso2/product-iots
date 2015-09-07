@@ -97,46 +97,46 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
 
-                    <!--============ Added with ES Features ===============-->
-                    <execution>
-                        <id>2-identity-h2-table-gen</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <echo message="########### Create Identity Database ##############"/>
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity"
-                                      overwrite="false">
-                                    <fileset
-                                            dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/">
-                                    </fileset>
-                                </copy>
-                                <path id="h2.classpath">
-                                    <path refid="maven.compile.classpath"/>
-                                </path>
-                                <echo message="########### Create Identity Database ##############"/>
-                                <sql driver="org.h2.Driver"
-                                     url="jdbc:h2:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2CARBON_DB"
-                                     userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">
-                                    <classpath>
-                                        <path refid="h2.classpath"/>
-                                    </classpath>
-                                    <fileset
-                                            file="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/h2.sql"/>
-                                </sql>
-                                <!--sql driver="org.h2.Driver" url="jdbc:h2:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2CARBON_DB" userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">
-                                    <classpath>
-                                        <path refid="h2.classpath" />
-                                    </classpath>
-                                    <fileset file="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/h2.sql" />
+                    <!--&lt;!&ndash;============ Added with ES Features ===============&ndash;&gt;-->
+                    <!--<execution>-->
+                        <!--<id>2-identity-h2-table-gen</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<configuration>-->
+                            <!--<target>-->
+                                <!--<echo message="########### Create Identity Database ##############"/>-->
+                                <!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity"-->
+                                      <!--overwrite="false">-->
+                                    <!--<fileset-->
+                                            <!--dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/">-->
+                                    <!--</fileset>-->
+                                <!--</copy>-->
+                                <!--<path id="h2.classpath">-->
+                                    <!--<path refid="maven.compile.classpath"/>-->
+                                <!--</path>-->
+                                <!--<echo message="########### Create Identity Database ##############"/>-->
+                                <!--<sql driver="org.h2.Driver"-->
+                                     <!--url="jdbc:h2:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2CARBON_DB"-->
+                                     <!--userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">-->
+                                    <!--<classpath>-->
+                                        <!--<path refid="h2.classpath"/>-->
+                                    <!--</classpath>-->
+                                    <!--<fileset-->
+                                            <!--file="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/h2.sql"/>-->
+                                <!--</sql>-->
+                                <!--&lt;!&ndash;sql driver="org.h2.Driver" url="jdbc:h2:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2CARBON_DB" userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">-->
+                                    <!--<classpath>-->
+                                        <!--<path refid="h2.classpath" />-->
+                                    <!--</classpath>-->
+                                    <!--<fileset file="target/wso2carbon-core-${carbon.kernel.version}/dbscripts/identity/h2.sql" />-->
 
-                                </sql-->
-                                <echo message="##################### END ########################"/>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
+                                <!--</sql&ndash;&gt;-->
+                                <!--<echo message="##################### END ########################"/>-->
+                            <!--</target>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>run</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
 
                     <!--============ Added with ES Features ===============-->
 
@@ -514,10 +514,6 @@
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/statistics"
                                       overwrite="true">
                                     <fileset dir="src/statistics"/>
-                                </copy>
-
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/patches">
-                                    <fileset dir="src/patches"/>
                                 </copy>
 
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib">

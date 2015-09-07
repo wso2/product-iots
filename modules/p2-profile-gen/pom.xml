@@ -225,13 +225,13 @@
 
                                 <!-- Identity Features -->
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.oauth.common.feature:${carbon.identity.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.oauth.common.feature:${carbon.identity.version}
+                                </featureArtifactDef>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.idp.mgt.feature:${carbon.identity.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.idp.mgt.feature:${carbon.identity.version}
+                                </featureArtifactDef>
                                 <!-- SSO -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.version}
@@ -251,26 +251,26 @@
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${carbon.identity.version}
                                 </feaureArtifactDef>
-                                <!--feaureArtifactDef>
-                                    org.wso2.carbon:org.wso2.stratos.identity.saml2.sso.mgt.feature:${carbon.platform.version}
-                                </feaureArtifactDef-->
+                                <!--<feaureArtifactDef>-->
+                                    <!--org.wso2.carbon:org.wso2.stratos.identity.saml2.sso.mgt.feature:${carbon.identity.version}-->
+                                <!--</feaureArtifactDef>-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.user.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.claim.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
-                                <!--<featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.identity.user.profile.server.feature:${carbon.platform.version}
-                                </featureArtifactDef>-->
-                                <!-- TODO: Verify this feature is needed -->
                                 <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${carbon.identity.version}-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.identity.user.profile.server.feature:${carbon.identity.version}-->
                                 <!--</featureArtifactDef>-->
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feaureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${carbon.identity.version}-->
-                                <!--</feaureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${carbon.identity.version}
+                                </featureArtifactDef>
+                                <!-- TODO: Verify this feature is needed -->
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${carbon.identity.version}
+                                </feaureArtifactDef>
                                 <!-- SSO Fix-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.user.profile.feature:${carbon.identity.version}
@@ -285,13 +285,13 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.application.mgt.feature:${carbon.identity.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.mgt.feature:${carbon.identity.version}
+                                </featureArtifactDef>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.claim.mgt.server.feature:${carbon.identity.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.claim.mgt.server.feature:${carbon.identity.version}
+                                </featureArtifactDef>
                                 <!-- End of SSO Fixes -->
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.feature:${carbon.identity.version}
@@ -574,7 +574,9 @@
 
 								<!-- End of Enterprise Store Features -->
 								<!--=====================================================================================================-->
-
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.apache.synapse.wso2.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -777,36 +779,36 @@
                                     <version>${carbon.platform.version}</version>
                                 </feature-->
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.oauth.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.oauth.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.oauth.common.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.oauth.common.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.idp.mgt.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.idp.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- SSO Features -->
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.authenticator.saml2.sso.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.authenticator.saml2.sso.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- SSO Fix-->
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
@@ -825,20 +827,20 @@
                                     <version>${carbon.identity.version}</version>
                                 </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.application.mgt.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.claim.mgt.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.claim.mgt.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.claim.mgt.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.claim.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <!-- End of SSO Fix -->
                                 <!--Commented to remove SAML SSO menu item-->
                                 <!--<feature>
@@ -1083,7 +1085,10 @@
 								<!--========================================================================================================-->
 								<!-- End of Enterprise Store Features -->
 
-
+                                <feature>
+                                <id>org.apache.synapse.wso2.feature.group</id>
+                                <version>${carbon.mediation.version}</version>
+                                </feature>
 							</features>
                         </configuration>
                     </execution>

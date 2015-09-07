@@ -484,6 +484,16 @@
             </includes>
         </fileSet>
 
+        <!--============ Added with API Features ===============-->
+        <fileSet>
+            <directory>apim-resources/customsequences</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/customsequences</outputDirectory>
+            <includes>
+                <include>**/**.xml</include>
+            </includes>
+        </fileSet>
+        <!-- End of api Features -->
+
         <!-- Copying API Manager Publisher and Store Jaggery apps -->
         <!--fileSet>
             <directory>
@@ -992,6 +1002,8 @@
         </file>
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
+
+
 
     </files>
 </assembly>
