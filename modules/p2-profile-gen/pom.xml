@@ -577,6 +577,20 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.apache.synapse.wso2.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+
+                                <!--added das features-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.lite.feature:${carbon.analytics.version}
+                                </featureArtifactDef>
+
+                                <!--APIM feature-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.commons:org.wso2.carbon.system.statistics.feature:${carbon.commons.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.deployment:org.wso2.carbon.bam.service.agent.feature:${carbon.deployment.version}
+                                </featureArtifactDef>
+                                <!--End of APIM Feature-->
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -1085,9 +1099,25 @@
 								<!--========================================================================================================-->
 								<!-- End of Enterprise Store Features -->
 
+                                <!--<feature>-->
+                                    <!--<id>org.apache.synapse.wso2.feature.group</id>-->
+                                    <!--<version>${carbon.mediation.version}</version>-->
+                                <!--</feature>-->
+
+                                <!--APIM feature-->
                                 <feature>
-                                <id>org.apache.synapse.wso2.feature.group</id>
-                                <version>${carbon.mediation.version}</version>
+                                    <id>org.wso2.carbon.system.statistics.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
+                                    <version>${carbon.deployment.version}</version>
+                                </feature>
+                                <!--End of APIM Feature-->
+                                <!--DAS Feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.lite.feature.group</id>
+                                    <version>${carbon.analytics.version}</version>
                                 </feature>
 							</features>
                         </configuration>

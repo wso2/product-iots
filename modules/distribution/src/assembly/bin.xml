@@ -1003,6 +1003,15 @@
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
 
+        <!-- Copying apim feature - bam.xml -->
+        <file>
+        <source>
+        ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml
+        </source>
+        <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+        <filtered>true</filtered>
+        <fileMode>644</fileMode>
+        </file>
 
 
     </files>
