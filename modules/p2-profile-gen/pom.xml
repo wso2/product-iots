@@ -158,9 +158,6 @@
 
                                 <!-- Carbon Deployment Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.deployment:org.wso2.carbon.module.mgt.feature:${carbon.deployment.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.deployment:org.wso2.carbon.webapp.mgt.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -354,6 +351,15 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.governance:org.wso2.carbon.registry.extensions.feature:${carbon.governance.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.governance:org.wso2.carbon.registry.extensions.server.feature:${carbon.governance.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.governance:org.wso2.carbon.governance.lifecycle.management.server.feature:${carbon.governance.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.governance:org.wso2.carbon.governance.metadata.server.feature:${carbon.governance.version}
                                 </featureArtifactDef>
 
                                 <!-- API Management Features -->
@@ -679,7 +685,7 @@
 
                                 <!-- Carbon Deployment Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.module.mgt.feature.group</id>
+                                    <id>org.wso2.carbon.module.mgt.server.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
@@ -956,6 +962,18 @@
 									<id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
 									<version>${carbon.registry.version}</version>
 								</feature>
+                                <feature>
+                                    <id>org.wso2.carbon.registry.extensions.server.feature.group</id>
+                                    <version>${carbon.governance.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.governance.lifecycle.management.server.feature.group</id>
+                                    <version>${carbon.governance.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
+                                    <version>${carbon.governance.version}</version>
+                                </feature>
                                 <!-- End of Governance Features -->
 
                                 <!-- API Management Features -->

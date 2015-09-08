@@ -983,14 +983,15 @@
         </file>
 
         <!--============ Added with ES Features ===============-->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/association-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+        <!-- Removed with version 2.3.5-SNAPSHOT-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/association-config.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
 
         <!--============ Added with ES Features ===============-->
         <file>
