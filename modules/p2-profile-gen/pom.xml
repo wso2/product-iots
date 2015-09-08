@@ -1001,6 +1001,10 @@
 
 								<!--========================================================================================================-->
 								<!-- Enterprise Store Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.enterprise.store.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
 
 								<!-- Jaggery Features -->
 								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->

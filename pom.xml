@@ -851,10 +851,10 @@
         <carbon.commons.version>4.4.7</carbon.commons.version>
 
         <!-- Carbon Deployment -->
-        <carbon.deployment.version>4.5.0</carbon.deployment.version>
+        <carbon.deployment.version>4.5.2</carbon.deployment.version>
 
         <!-- Carbon Identity -->
-        <carbon.identity.version>4.5.5</carbon.identity.version>
+        <carbon.identity.version>4.5.6</carbon.identity.version>
 
         <!-- Carbon Multi-tenancy -->
         <carbon.multitenancy.version>4.4.1</carbon.multitenancy.version>
