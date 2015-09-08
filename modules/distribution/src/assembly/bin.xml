@@ -523,6 +523,21 @@
                 <exclude>styles-layout.css</exclude>
             </excludes>
         </fileSet-->
+
+        <!-- Analytics related config -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics</outputDirectory>
+            <includes>
+                <include>**/analytics-config.xml</include>
+                <include>**/rdbms-config.xml</include>
+                <include>**/hbase-analytics-config.xml</include>
+                <include>**/analytics-data-config.xml</include>
+                <include>**/analytics-eventsink-config.xml</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -1006,13 +1021,24 @@
 
         <!-- Copying apim feature - bam.xml -->
         <file>
-        <source>
-        ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml
-        </source>
-        <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-        <filtered>true</filtered>
-        <fileMode>644</fileMode>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
+
+        <!-- Analytics datasources -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/analytics-datasources.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
 
 
     </files>

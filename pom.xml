@@ -790,8 +790,6 @@
                 <artifactId>commons-httpclient</artifactId>
                 <version>${orbit.version.commons-httpclient}</version>
             </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
@@ -894,6 +892,13 @@
 
         <!--DAS-->
         <carbon.analytics.version>1.0.3-SNAPSHOT</carbon.analytics.version>
+        <carbon.analytics.common.version>5.0.1-SNAPSHOT</carbon.analytics.common.version>
+        <das.release.version>3.0.0-SNAPSHOT</das.release.version>
+        <carbon.data.version>4.3.1-SNAPSHOT</carbon.data.version>
+        <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
+        <shindig.version>1.0.0</shindig.version>
+        <carbon.dashboard.version>1.0.1-SNAPSHOT</carbon.dashboard.version>
+        <carbon.event-processing.version>2.0.4-SNAPSHOT</carbon.event-processing.version>
 
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
