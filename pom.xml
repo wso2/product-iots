@@ -819,8 +819,8 @@
         <markdown.feature.version>1.4.0</markdown.feature.version>
 
         <!-- Store Features -->
-        <carbon.store.version>2.3.5-SNAPSHOT</carbon.store.version>
-        <carbon.social.version>2.3.5-SNAPSHOT</carbon.social.version>
+        <carbon.store.version>2.3.6</carbon.store.version>
+        <carbon.social.version>2.3.6</carbon.social.version>
 
         <!-- Additional Stuff from ES Features -->
         <carbon.dashboards.version>1.0.0</carbon.dashboards.version>
