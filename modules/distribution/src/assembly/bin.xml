@@ -312,9 +312,9 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
             </outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
+            <excludes>
+                <exclude>store/extensions/app/store-device/*</exclude>
+            </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
 
