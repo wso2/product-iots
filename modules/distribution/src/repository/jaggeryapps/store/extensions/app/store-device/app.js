@@ -29,14 +29,15 @@ app.server = function(ctx) {
                 url: 'devices',
                 path: 'device_top_assets.jag'
             }, {
-                title: 'Store | Device Analytics page',
+                title: 'Store | Analytics',
                 url: 'analytics',
-                path: 'device-analytics.jag'
+                path: 'device-analytics.jag',
+                secured:true
             }],
             apis: [{
                 url: 'stats',
                 path: 'stats-api.jag',
-                secured:false
+                secured:true
             }]
         },
         configs: {

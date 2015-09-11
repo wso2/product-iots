@@ -95,7 +95,7 @@ var DateRange = convertDate(startDate) + " " + configObject.separator + " " + co
 
 $(document).ready(function () {
     initDate();
-    groupId = $("#request-group-id").data("groupid");
+    groupId = getQueryParams().groupId;
 
     $('#date-range').html(DateRange);
     $('#date-range').dateRangePicker(configObject)
@@ -152,7 +152,7 @@ function getDateTime(from, to) {
 }
 
 function getStats(from, to) {
-    var requestData = new Object();
+    var requestData = {};
     var getStatsRequest;
     if (from) {
         requestData['from'] = from;
@@ -168,8 +168,8 @@ function getStats(from, to) {
             data: requestData
         });
     } else {
-        var deviceId = getUrlParameter('deviceId');
-        var deviceType = getUrlParameter('deviceType');
+        var deviceId = getQueryParams().deviceId;
+        var deviceType = getQueryParams().deviceType;
 
         requestData['deviceId'] = deviceId;
         requestData['deviceType'] = deviceType;
@@ -181,23 +181,12 @@ function getStats(from, to) {
         });
     }
     getStatsRequest.done(function (stats) {
-        updateGraphs(JSON.parse(stats));
+        updateGraphs(stats);
     });
 
     getStatsRequest.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
+        alert("Request failed: " + jqXHR.statusText);
     });
-}
-
-function getUrlParameter(paramName) {
-    var pageURL = window.location.search.substring(1);
-    var urlVariables = pageURL.split('&');
-    for (var i = 0; i < urlVariables.length; i++) {
-        var parameterName = urlVariables[i].split('=');
-        if (parameterName[0] == paramName) {
-            return parameterName[1];
-        }
-    }
 }
 
 function updateGraphs(stats) {
@@ -594,4 +583,18 @@ function summerizeBar(data) {
     } else {
         return data;
     }
+}
+
+function getQueryParams() {
+    var qs = document.location.search.split('+').join(' ');
+
+    var params = {},
+        tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
+
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+
+    return params;
 }

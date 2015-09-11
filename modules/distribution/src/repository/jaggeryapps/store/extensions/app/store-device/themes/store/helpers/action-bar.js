@@ -16,20 +16,9 @@
  *  under the License.
  *
  */
-var render = function(theme, data, meta, require) {
-    theme('3-column-right', {
-        title: data.meta.title,
-        header: [{
-            partial: 'header',
-            context: data
-        }],
-        action: [{
-            partial: 'action-bar',
-            context: data
-        }],
-        body: [{
-            partial: 'analytics',
-            context: data
-        }]
-    });
+
+var resources = function (page, meta) {
+    return {
+        css: ['custom-desktop.css']
+    };
 };
