@@ -455,7 +455,6 @@
                                     <fileset dir="src/repository/conf/datasources"/>
                                     <!-- Copy master-datasources.xml and cdm-datasources.xml to target -->
                                 </copy>
-
                                 <!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/modules" overwrite="true">
                                     <fileset dir="src/repository/modules"></fileset>
                                 </copy>

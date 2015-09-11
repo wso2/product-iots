@@ -6,6 +6,7 @@
     <property name="target.dropins.dir" value="../../repository/components/dropins"/>
     <property name="target.webapp.dir" value="../../repository/deployment/server/webapps"/>
     <property name="target.sketch.dir" value="../../repository/resources/sketches"/>
+    <property name="target.sample.device.dir" value="../../repository/deployment/server/jaggeryapps/publisher/samples/assets/devices"/>
     <property name="target.page.dir" value="../../repository/deployment/server/jaggeryapps/iotserver/pages/devices"/>
     <property name="target.unit.dir" value="../../repository/deployment/server/jaggeryapps/iotserver/units"/>
     <property name="target.version" value="1.0.0-SNAPSHOT"/>

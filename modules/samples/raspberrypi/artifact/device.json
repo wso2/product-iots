@@ -1,0 +1,18 @@
+{
+  "name": "Raspberry Pi",
+  "tags": "WSO2, IoT, RaspberryPi, RaspberryPi-B Plus",
+  "rate": 3,
+  "attributes": {
+    "overview_status": "PUBLISHED",
+    "overview_provider": "admin",
+    "overview_name": "Raspberry Pi",
+    "overview_version": "1.0.0",
+    "overview_board": "RaspberryPi",
+    "overview_url": "https://204.232.188.214:9443/iotserver/devices/raspberrypi",
+    "overview_model": "RaspberryPi B+",
+    "overview_defaultOs": "Cross-Platform",
+    "overview_description": "This is a bare-board Raspberry Pi Device-Type. The board used here is RPi B+.",
+    "images_thumbnail": "/raspberrypi/raspberryPi_thumbnail.png",
+    "images_banner": "/raspberrypi/raspberryPi_banner.png"
+  }
+}
