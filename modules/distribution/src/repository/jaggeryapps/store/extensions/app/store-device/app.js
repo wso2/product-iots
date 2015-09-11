@@ -29,18 +29,67 @@ app.server = function(ctx) {
                 url: 'devices',
                 path: 'device_top_assets.jag'
             }, {
-                title: 'Store | Device Analytics page',
+                title: 'Store | Analytics',
                 url: 'analytics',
-                path: 'device-analytics.jag'
+                path: 'device-analytics.jag',
+                secured:true
             }],
             apis: [{
                 url: 'stats',
                 path: 'stats-api.jag',
-                secured:false
+                secured:true
             }]
         },
         configs: {
             disabledAssets: ['ebook', 'api', 'wsdl', 'servicex','policy','proxy','schema','sequence','uri','wadl','endpoint', 'swagger','restservice','comments','soapservice', 'service', 'license', 'gadget', 'site']
+        }
+    }
+};
+
+app.pageHandlers = function (ctx) {
+    return {
+        onPageLoad: function () {
+            if ((ctx.isAnonContext) && (ctx.endpoint.secured)) {
+                ctx.res.sendRedirect(ctx.appContext + '/login');
+                return false;
+            }
+            return true;
+        }
+    }
+};
+
+app.apiHandlers = function (ctx) {
+    return {
+        onApiLoad: function () {
+            if ((ctx.isAnonContext) && (ctx.endpoint.secured)) {
+                ctx.res.status = '401';
+                ctx.res.sendRedirect(ctx.appContext + '/login');
+                return false;
+            }
+            return true;
+        }
+    }
+};
+
+app.renderer = function(ctx) {
+    var decoratorApi = require('/modules/page-decorators.js').pageDecorators;
+    return {
+        pageDecorators: {
+            navigationBar: function(page) {
+                return decoratorApi.navigationBar(ctx, page, this);
+            },
+            searchBar: function(page) {
+                return decoratorApi.searchBar(ctx, page, this);
+            },
+            authenticationDetails: function(page) {
+                return decoratorApi.authenticationDetails(ctx, page, this);
+            },
+            recentAssetsOfActivatedTypes: function(page) {
+                return decoratorApi.recentAssetsOfActivatedTypes(ctx, page, this);
+            },
+            popularAssets:function(page){
+                return decoratorApi.popularAssets(ctx,page,this);
+            }
         }
     }
 };

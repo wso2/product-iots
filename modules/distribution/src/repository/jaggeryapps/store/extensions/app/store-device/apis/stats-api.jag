@@ -35,46 +35,50 @@ var stats = {};
 var deviceId;
 var deviceType;
 
+var responseProcessor = require('utils').response;
+response.contentType = 'application/json';
+
 var server = require('store').server;
-var user = server.current(session).um;
+var user = server.current(session);
 
-log.info(server);
-log.info(session);
-log.info(user);
+if (!user) {
+	response = responseProcessor.buildErrorResponse(response, 401, "Unauthorized");
+} else {
+	user = user.um;
+	if (uriMatcher.match("/{context}/apis/stats")) {
 
-if (uriMatcher.match("/{context}/apis/stats")) {
+		deviceId = request.getParameter("deviceId");
+		deviceType = request.getParameter("deviceType");
 
-	deviceId = request.getParameter("deviceId");
-	deviceType = request.getParameter("deviceType");
-
-	getDeviceData(deviceType, deviceId);
-
-}else if (uriMatcher.match("/{context}/apis/stats/group")){
-	var groupId = request.getParameter("groupId");
-
-	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
-	var endPoint = deviceCloudGroupService + "/group/id/" + groupId + "/device/all";
-	var data = {"username": user.username};
-	var devices = get(endPoint, data, "json");
-
-	for (var device in devices.data){
-		deviceId = devices.data[device].deviceIdentifier;
-		deviceType = devices.data[device].type;
 		getDeviceData(deviceType, deviceId);
+
+	} else if (uriMatcher.match("/{context}/apis/stats/group")) {
+		var groupId = request.getParameter("groupId");
+
+		//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
+		var endPoint = deviceCloudGroupService + "/group/id/" + groupId + "/device/all";
+		var data = {"username": user.username};
+		var devices = get(endPoint, data, "json").data;
+
+		for (var device in devices) {
+			deviceId = devices[device].deviceIdentifier;
+			deviceType = devices[device].type;
+			getDeviceData(deviceType, deviceId);
+		}
+	}
+
+	// returning the result.
+	if (stats) {
+		print(stats);
 	}
 }
 
-// returning the result.
-if (stats) {
-	print(stats);
-}
-
-function getDeviceData(deviceType, deviceId){
+function getDeviceData(deviceType, deviceId) {
 	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
 	var endPoint = deviceCloudDeviceService + "/devices/" + deviceType + "/" + deviceId;
 	var data = {"username": user.username};
 	var device = get(endPoint, data, "json").data;
-	if (!device){
+	if (!device) {
 		return;
 	}
 	var uname = device.enrolmentInfo.owner;
@@ -103,35 +107,47 @@ function getDeviceData(deviceType, deviceId){
 }
 
 function getFireAlarmData(user, device, from, to) {
-	if (stats['temperatureData'] == null){
+	if (stats['temperatureData'] == null) {
 		stats['temperatureData'] = [];
 	}
-	if (stats['sonarData'] == null){
+	if (stats['sonarData'] == null) {
 		stats['sonarData'] = [];
 	}
-	if (stats['motionData'] == null){
+	if (stats['motionData'] == null) {
 		stats['motionData'] = [];
 	}
-	if (stats['lightData'] == null){
+	if (stats['lightData'] == null) {
 		stats['lightData'] = [];
 	}
-	stats['temperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
-	stats['sonarData'].push({"device": device.name, "stats" : getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)});
-	stats['motionData'].push({"device": device.name, "stats" : getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
-	stats['lightData'].push({"device": device.name, "stats" : getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
+	stats['temperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
+	stats['sonarData'].push({
+		"device": device.name,
+		"stats": getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)
+	});
+	stats['motionData'].push({
+		"device": device.name,
+		"stats": getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
+	stats['lightData'].push({
+		"device": device.name,
+		"stats": getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)
+	});
 }
 
 function getSensebotData(user, device, from, to) {
-	if (stats['sonarData'] == null){
+	if (stats['sonarData'] == null) {
 		stats['sonarData'] = [];
 	}
-	if (stats['motionData'] == null){
+	if (stats['motionData'] == null) {
 		stats['motionData'] = [];
 	}
-	if (stats['lightData'] == null){
+	if (stats['lightData'] == null) {
 		stats['lightData'] = [];
 	}
-	if (stats['temperatureData'] == null){
+	if (stats['temperatureData'] == null) {
 		stats['temperatureData'] = [];
 	}
 
@@ -145,7 +161,7 @@ function getSensebotData(user, device, from, to) {
 		chartData.push({time: i, value: rnd});
 		i += timeInterval;
 	}
-	stats['sonarData'].push({"device": device.name, "stats" : chartData});
+	stats['sonarData'].push({"device": device.name, "stats": chartData});
 	chartData = [];
 	var i = parseInt(from);
 	while (i < parseInt(to)) {
@@ -153,7 +169,7 @@ function getSensebotData(user, device, from, to) {
 		chartData.push({time: i, value: rnd});
 		i += timeInterval;
 	}
-	stats['motionData'].push({"device": device.name, "stats" : chartData});
+	stats['motionData'].push({"device": device.name, "stats": chartData});
 	chartData = [];
 	var i = parseInt(from);
 	while (i < parseInt(to)) {
@@ -161,7 +177,7 @@ function getSensebotData(user, device, from, to) {
 		chartData.push({time: i, value: rnd});
 		i += timeInterval;
 	}
-	stats['lightData'].push({"device": device.name, "stats" : chartData});
+	stats['lightData'].push({"device": device.name, "stats": chartData});
 	chartData = [];
 	var i = parseInt(from);
 	while (i < parseInt(to)) {
@@ -169,7 +185,7 @@ function getSensebotData(user, device, from, to) {
 		chartData.push({time: i, value: rnd});
 		i += timeInterval;
 	}
-	stats['temperatureData'].push({"device": device.name, "stats" : chartData});
+	stats['temperatureData'].push({"device": device.name, "stats": chartData});
 
 	/*
 	 //Comment below section to emulate data
@@ -182,75 +198,120 @@ function getSensebotData(user, device, from, to) {
 }
 
 function getArduinoData(user, device, from, to) {
-	if (stats['temperatureData'] == null){
+	if (stats['temperatureData'] == null) {
 		stats['temperatureData'] = [];
 	}
-	stats['temperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
+	stats['temperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
 }
 
 function getAndroidSenseData(user, device, from, to) {
-	if (stats['ramData'] == null){
+	if (stats['ramData'] == null) {
 		stats['ramData'] = [];
 	}
-	if (stats['cpuData'] == null){
+	if (stats['cpuData'] == null) {
 		stats['cpuData'] = [];
 	}
-	if (stats['temperatureData'] == null){
+	if (stats['temperatureData'] == null) {
 		stats['temperatureData'] = [];
 	}
-	if (stats['motionData'] == null){
+	if (stats['motionData'] == null) {
 		stats['motionData'] = [];
 	}
-	stats['ramData'].push({"device": device.name, "stats" : getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
-	stats['cpuData'].push({"device": device.name, "stats" : getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
-	stats['temperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
-	stats['motionData'].push({"device": device.name, "stats" : getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
+	stats['ramData'].push({
+		"device": device.name,
+		"stats": getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
+	stats['cpuData'].push({
+		"device": device.name,
+		"stats": getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)
+	});
+	stats['temperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
+	stats['motionData'].push({
+		"device": device.name,
+		"stats": getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
 }
 
 function getDigitalDisplayData(user, device, from, to) {
-	if (stats['ramData'] == null){
+	if (stats['ramData'] == null) {
 		stats['ramData'] = [];
 	}
-	if (stats['cpuData'] == null){
+	if (stats['cpuData'] == null) {
 		stats['cpuData'] = [];
 	}
-	if (stats['cpuTemperatureData'] == null){
+	if (stats['cpuTemperatureData'] == null) {
 		stats['cpuTemperatureData'] = [];
 	}
-	stats['ramData'].push({"device": device.name, "stats" : getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
-	stats['cpuData'].push({"device": device.name, "stats" : getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
-	stats['cpuTemperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_CPU_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
+	stats['ramData'].push({
+		"device": device.name,
+		"stats": getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
+	stats['cpuData'].push({
+		"device": device.name,
+		"stats": getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)
+	});
+	stats['cpuTemperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_CPU_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
 }
 
 function getAllDeviceData(user, device, from, to) {
-	if (stats['ramData'] == null){
+	if (stats['ramData'] == null) {
 		stats['ramData'] = [];
 	}
-	if (stats['cpuData'] == null){
+	if (stats['cpuData'] == null) {
 		stats['cpuData'] = [];
 	}
-	if (stats['temperatureData'] == null){
+	if (stats['temperatureData'] == null) {
 		stats['temperatureData'] = [];
 	}
-	if (stats['sonarData'] == null){
+	if (stats['sonarData'] == null) {
 		stats['sonarData'] = [];
 	}
-	if (stats['motionData'] == null){
+	if (stats['motionData'] == null) {
 		stats['motionData'] = [];
 	}
-	if (stats['lightData'] == null){
+	if (stats['lightData'] == null) {
 		stats['lightData'] = [];
 	}
-	if (stats['cpuTemperatureData'] == null){
+	if (stats['cpuTemperatureData'] == null) {
 		stats['cpuTemperatureData'] = [];
 	}
-	stats['ramData'].push({"device": device.name, "stats" : getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
-	stats['cpuData'].push({"device": device.name, "stats" : getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
-	stats['sonarData'].push({"device": device.name, "stats" : getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)});
-	stats['motionData'].push({"device": device.name, "stats" : getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)});
-	stats['lightData'].push({"device": device.name, "stats" : getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)});
-	stats['temperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
-	stats['cpuTemperatureData'].push({"device": device.name, "stats" : getSensorData("DEVICE_CPU_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)});
+	stats['ramData'].push({
+		"device": device.name,
+		"stats": getSensorData("RAM_USAGE_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
+	stats['cpuData'].push({
+		"device": device.name,
+		"stats": getSensorData("CPU_LOAD_SUMMARY", "light", user, device.deviceIdentifier, from, to)
+	});
+	stats['sonarData'].push({
+		"device": device.name,
+		"stats": getSensorData("SONAR_SENSOR_SUMMARY", "sonar", user, device.deviceIdentifier, from, to)
+	});
+	stats['motionData'].push({
+		"device": device.name,
+		"stats": getSensorData("PIR_MOTION_SENSOR_SUMMARY", "motion", user, device.deviceIdentifier, from, to)
+	});
+	stats['lightData'].push({
+		"device": device.name,
+		"stats": getSensorData("LDR_LIGHT_SENSOR_SUMMARY", "light", user, device.deviceIdentifier, from, to)
+	});
+	stats['temperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
+	stats['cpuTemperatureData'].push({
+		"device": device.name,
+		"stats": getSensorData("DEVICE_CPU_TEMPERATURE_SUMMARY", "TEMPERATURE", user, device.deviceIdentifier, from, to)
+	});
 }
 
 

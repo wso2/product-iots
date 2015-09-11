@@ -21,13 +21,29 @@ var caramel;
 require('/modules/store.js').exec(function(ctx) {
 	caramel = require('caramel');
 	var app = require('rxt').app;
-	var constants = require('rxt').constants;
 	var server = require('store').server;
 	var user = server.current(ctx.session);
 	var ui = require('rxt').ui;
 	var page = ui.buildPage(ctx.session, ctx.request);
 	var appManager;
-	page.title ="test";
+	var groupId = request.getParameter("groupId");
+	var title;
+	if (groupId){
+		title = request.getParameter("name");
+	}else{
+		var carbon = require('carbon');
+		var carbonHttpsServletTransport = carbon.server.address('https');
+		var deviceCloudDeviceService = carbonHttpsServletTransport + "/common/device_manager";
+
+		var deviceId = request.getParameter("deviceId");
+		var deviceType = request.getParameter("deviceType");
+		var endPoint = deviceCloudDeviceService + "/devices/" + deviceType + "/" + deviceId;
+		var data = {"username": user.um.username};
+		var device = get(endPoint, data, "json").data;
+		title = device.name;
+	}
+	page.title = title + " Analytics";
+	page.page_title = "Analytics";
 	appManager = app.createUserAppManager(session);
 	var output = appManager.render([], page);
 	caramel.render(output);

@@ -26,6 +26,8 @@
 	white-space: nowrap;
 	margin-left: 3px;
 	bottom: -20px;
+	height: auto;
+    border-bottom: none;
 }
 
 /* annotations */

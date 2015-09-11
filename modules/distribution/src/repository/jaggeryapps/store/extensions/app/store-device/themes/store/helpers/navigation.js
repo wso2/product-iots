@@ -16,20 +16,10 @@
  *  under the License.
  *
  */
-var render = function(theme, data, meta, require) {
-    theme('2-column-right', {
-        title: data.meta.title,
-        header: [{
-            partial: 'header',
-            context: data
-        }],
-        navigation: [{
-            partial: 'navigation',
-            context: data
-        }],
-        body: [{
-            partial: 'analytics',
-            context: data
-        }]
-    });
+
+var resources = function (page, meta) {
+    return {
+        js: ['asset-helpers.js','navigation.js','popover.js'],
+        css: ['navigation.css','custom-desktop.css']
+    };
 };
