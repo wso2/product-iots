@@ -138,7 +138,9 @@ deviceModule = function () {
      * @returns {Array}
      */
     publicMethods.listDeviceTypes = function () {
+        deviceManagementDAOFactory.openConnection();
         var deviceTypes = deviceManagementDAOFactory.getDeviceTypeDAO().getDeviceTypes();
+        deviceManagementDAOFactory.closeConnection();
         var deviceTypesList = [];
         var i, deviceType, deviceTypeObject;
         for (i = 0; i < deviceTypes.size(); i++) {
