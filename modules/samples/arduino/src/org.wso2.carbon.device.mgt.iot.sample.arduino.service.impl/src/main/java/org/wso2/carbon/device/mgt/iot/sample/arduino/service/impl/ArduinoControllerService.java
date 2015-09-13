@@ -166,4 +166,23 @@ public class ArduinoControllerService {
 
 		}
 	}
+
+	@Path("/test/{value}")
+	@POST
+	public void pushtData( @PathParam("value") String value,@Context HttpServletResponse response) {
+
+
+		try {
+			DeviceController deviceController = new DeviceController();
+			deviceController.pushBamData("ayyoob", "firealarm", "deviceID1",
+										 System.currentTimeMillis(), "DeviceData" ,value, DataStreamDefinitions.StreamTypeLabel
+												 .TEMPERATURE);
+
+
+
+		} catch (UnauthorizedException e) {
+			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+
+		}
+	}
 }

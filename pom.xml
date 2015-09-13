@@ -852,7 +852,7 @@
         <carbon.deployment.version>4.5.2</carbon.deployment.version>
 
         <!-- Carbon Identity -->
-        <carbon.identity.version>4.5.6</carbon.identity.version>
+        <carbon.identity.version>4.5.10-SNAPSHOT</carbon.identity.version>
 
         <!-- Carbon Multi-tenancy -->
         <carbon.multitenancy.version>4.4.1</carbon.multitenancy.version>
@@ -892,13 +892,13 @@
 
         <!--DAS-->
         <carbon.analytics.version>1.0.3-SNAPSHOT</carbon.analytics.version>
-        <carbon.analytics.common.version>5.0.1-SNAPSHOT</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.2-SNAPSHOT</carbon.analytics.common.version>
         <das.release.version>3.0.0-SNAPSHOT</das.release.version>
         <carbon.data.version>4.3.1-SNAPSHOT</carbon.data.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>1.0.0</shindig.version>
         <carbon.dashboard.version>1.0.1-SNAPSHOT</carbon.dashboard.version>
-        <carbon.event-processing.version>2.0.4-SNAPSHOT</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.4</carbon.event-processing.version>
 
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>

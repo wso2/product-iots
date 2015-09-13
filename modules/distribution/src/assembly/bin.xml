@@ -197,12 +197,12 @@
             </includes>
         </fileSet>
         <!--data-bridge configuration-->
-        <fileSet>
-            <directory>src/repository/conf/data-bridge</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </fileSet>
+        <!--<fileSet>-->
+            <!--<directory>src/repository/conf/data-bridge</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</fileSet>-->
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/service-provider
@@ -718,9 +718,9 @@
         <!-- Copying application-authentication.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/security/application-authentication.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -729,9 +729,9 @@
         <!-- Copying thrift-authentication.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/thrift-authentication.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -749,7 +749,7 @@
         </file>
         <file>
             <source>src/repository/conf/identity.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
@@ -792,16 +792,16 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!-- TODO: Verify this feature is needed -->
+
         <!--Webapp Authenticator Config file-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
 
         <!--notifications config file-->
         <file>
@@ -1020,14 +1020,14 @@
         <!-- End of Enterprise Store Features -->
 
         <!-- Copying apim feature - bam.xml -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
 
         <!-- Analytics datasources -->
         <file>
@@ -1038,6 +1038,79 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
+
+        <!--DAS Files-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-processor.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/
+            </outputDirectory>
+            <filtered>true</filtered>
+        </file>
+
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- ************* Data bridge related files ********** -->
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/repository/conf/data-bridge/stream-definitions.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
+        </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- ************* Data bridge related files end ********** -->
+        <!--spark udf conf file-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/spark/spark-udf-config.xml
+            </source>
+
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/spark/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <!--spark defaults file-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/spark/spark-defaults.conf
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/spark/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
 
 
 
