@@ -312,9 +312,9 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
             </outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
+            <excludes>
+                <exclude>store/extensions/app/store-device/*</exclude>
+            </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
 
@@ -458,6 +458,15 @@
             </includes>
         </fileSet>
 
+        <!--============ Added with ES Features ===============-->
+			<!--Copies publisher specific config files that needs to be overriden for the CDMF-STORE. -->
+				<!--These files are already provided in the CDMF-Store feature too. -->
+				<!--However, given that the order of feature installation cannot be controlled, they are recopied at the product level.-->
+
+        <fileSet>
+            <directory>src/publisher/config</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
+        </fileSet>
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
 

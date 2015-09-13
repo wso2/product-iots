@@ -1,0 +1,18 @@
+{
+  "name": "Arduino",
+  "tags": "WSO2, IoT, Arduino, ArduinoUno",
+  "rate": 3,
+  "attributes": {
+    "overview_status": "PUBLISHED",
+    "overview_provider": "admin",
+    "overview_name": "Arduino",
+    "overview_version": "1.0.0",
+    "overview_board": "Arduino",
+    "overview_url": "https://204.232.188.214:9443/iotserver/devices/arduino",
+    "overview_model": "Arduino Uno",
+    "overview_defaultOs": "Cross-Platform",
+    "overview_description": "This is a bare-board Arduino Device-Type. The board used here is Arduino Uno.",
+    "images_thumbnail": "/arduino/arduino_thumbnail.png",
+    "images_banner": "/arduino/arduino_banner.png"
+  }
+}
