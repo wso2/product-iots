@@ -801,16 +801,15 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!-- TODO: Verify this feature is needed -->
         <!--Webapp Authenticator Config file-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
 
         <!--notifications config file-->
         <file>

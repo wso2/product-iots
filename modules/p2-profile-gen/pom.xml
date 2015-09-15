@@ -125,10 +125,18 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.group.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-                                <!-- TODO: Verify this feature is needed -->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.devicemgt:org.wso2.carbon.webapp.authenticator.framework.server.feature:${carbon.device.mgt.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.enterprise.store.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.server.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.dynamic.client.registration.server.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.webapp.authenticator.framework.server.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of Device Management Features -->
 
                                 <!-- Jaggery Features -->
@@ -388,15 +396,6 @@
                                 </featureArtifactDef>
 
 
-
-								<!--========================================================================================================-->
-								<!-- Enterprise Store Features -->
-
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.enterprise.store.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
-
-
 								<!-- Jaggery Features -->
 								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->
 								<featureArtifactDef>
@@ -647,11 +646,22 @@
                                     <id>org.wso2.carbon.device.mgt.group.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-                                <!-- TODO: Verify this feature is needed -->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.webapp.authenticator.framework.server.feature.group</id>-->
-                                    <!--<version>${carbon.device.mgt.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.enterprise.store.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dynamic.client.registration.server.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.webapp.authenticator.framework.server.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
                                 <!-- End of Device Management Features -->
 
                                 <!-- Jaggery Features -->
@@ -999,14 +1009,6 @@
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
                                     <version>${axis2-transports.wso2.version}</version>
-                                </feature>
-
-
-								<!--========================================================================================================-->
-								<!-- Enterprise Store Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.enterprise.store.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
                                 </feature>
 
 								<!-- Jaggery Features -->
