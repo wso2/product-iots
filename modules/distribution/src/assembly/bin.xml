@@ -314,6 +314,7 @@
             </outputDirectory>
             <excludes>
                 <exclude>store/extensions/app/store-device/*</exclude>
+                <exclude>publisher/config/publisher-tenant.json</exclude>
             </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
@@ -463,10 +464,10 @@
 				<!--These files are already provided in the CDMF-Store feature too. -->
 				<!--However, given that the order of feature installation cannot be controlled, they are recopied at the product level.-->
 
-        <fileSet>
-            <directory>src/publisher/config</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
-        </fileSet>
+        <!--<fileSet>-->
+            <!--<directory>src/publisher/config</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>-->
+        <!--</fileSet>-->
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
 
