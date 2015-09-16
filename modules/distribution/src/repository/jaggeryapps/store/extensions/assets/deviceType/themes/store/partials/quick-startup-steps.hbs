@@ -1,0 +1,23 @@
+<style>
+	.circle {
+        background: none repeat scroll 0 0 #191919;
+        border-radius: 50px;
+        height: 50px;
+        padding: 10px;
+        width: 50px;
+        color: #fff;
+    }
+    .padding-top-double {
+        padding-top: 20px;
+    }
+
+</style>
+{{#if quickStartupSteps_stepDescription}}
+	<br /><br />
+	<h3>Quick Startup Steps</h3>
+	<div>
+	{{#itr quickStartupSteps_stepDescription}}
+        <p class="padding-top-double"><span class="circle">0{{key}}</span> {{value}}</p>
+	{{/itr}}
+	</div>
+{{/if}}

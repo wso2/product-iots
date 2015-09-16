@@ -21,18 +21,16 @@ app.server = function(ctx) {
     return {
         endpoints: {
             pages: [{
-                title: 'Store | Device Page',
-                url: 'device_global',
-                path: 'device_global.jag'
-            }, {
-                title: 'Store | Device Splash page',
-                url: 'devices',
-                path: 'device_top_assets.jag'
-            }, {
                 title: 'Store | Analytics',
                 url: 'analytics',
                 path: 'device-analytics.jag',
                 secured:true
+            },{
+                title: 'Store | My Devices Page',
+                url: 'my-items',
+                path: 'my_items.jag',
+                secured:true,
+                permission:'APP_MYITEMS'
             }],
             apis: [{
                 url: 'stats',
@@ -41,7 +39,7 @@ app.server = function(ctx) {
             }]
         },
         configs: {
-            disabledAssets: ['ebook', 'api', 'wsdl', 'servicex','policy','proxy','schema','sequence','uri','wadl','endpoint', 'swagger','restservice','comments','soapservice', 'service', 'license', 'gadget', 'site']
+            disabledAssets: ['ebook', 'api', 'wsdl', 'servicex','policy','proxy','schema','sequence','uri','wadl','endpoint', 'swagger','restservice','comments','soapservice', 'service', 'license', 'gadget', 'site','server']
         }
     }
 };

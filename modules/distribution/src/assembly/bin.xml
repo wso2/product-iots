@@ -313,8 +313,8 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
             </outputDirectory>
             <excludes>
-                <exclude>store/extensions/app/store-device/*</exclude>
                 <exclude>store/themes/store/partials/product-title.hbs</exclude>
+                <exclude>store/extensions/app/store-device-type/*</exclude>
                 <exclude>publisher/config/publisher-tenant.json</exclude>
             </excludes>
         </fileSet>

@@ -1,0 +1,49 @@
+<div id="myasset-container">
+    <h2 class="padding-top-lg">My Devices</h2>
+    {{#if assets.device}}
+        {{#itr assets}}
+            <div class="ast-container">
+                <div class="container-fluid ">
+                    <div class="title">
+                        <a class="asset-type-{{rxt.shortName}}" href="{{url "/assets"}}/{{key}}/list">{{value.meta.pluralLabel}}</a>
+                    </div><!--title-->
+                    <hr />
+                </div>
+            </div>
+                {{#each value.assets}}
+                    {{#attributes}}
+                        <div class="ctrl-wr-asset margin-top-lg">
+                            <div class="itm-ast">
+                                <a class="ast-img " href="{{tenantedUrl "/assets"}}/{{../type}}/details/{{../id}}">
+                                    {{> asset-thumbnail ..}}
+                                </a>
+                                <div class="ast-content">
+                                    <div class="ast-title padding">
+                                        <a class="ast-name truncate" href="{{tenantedUrl "/assets"}}/{{../type}}/details/{{../id}}" title="{{overview_name}}">{{overview_name}}</a>
+                                        <span class="ast-auth" title="{{overview_provider}}">{{overview_provider}}</span>
+                                    </div>
+                                    <div class="pull-left asset-rating-container">
+                                        <span class="asset-rating">
+                                            <div style="width:{{../ratingPx}}px"></div>
+                                        </span>
+                                    </div>
+                                    <div class="clearfix padding-bottom-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/attributes}}
+                {{/each}}
+        {{/itr}}
+    {{else}}
+        <div id="no-data-my-items" class="no-data">
+            <i class="icon-inbox"></i>
+            <p>
+            {{t "You still haven't any devices from the Store."}}
+            </p>
+            <p>
+                <a href="{{url "/assets/device/list"}}" class="btn btn-primary">{{t "Add a Device"}}</a>
+            </p>
+        </div>
+    {{/if}}
+    </div>
+</div>
