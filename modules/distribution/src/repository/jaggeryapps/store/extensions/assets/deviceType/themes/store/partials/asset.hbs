@@ -1,0 +1,112 @@
+<script>
+    var isSocial = ('{{features.social.enabled}}' == 'true');
+    var guestDomain = '{{guestDomain}}';
+</script>
+<div class="asset-description">
+
+    {{#with assets}}
+
+
+        {{#with attributes}}
+            <div class="asset-description-header">
+                <div class="col-lg-12 white-bg left ">
+                    <h3 >{{../../rxt.singularLabel}} Details</h3>
+                    <div class="clear"></div>
+                    <hr>
+                </div>
+            </div>
+            <!-- asset details folder-->
+            <div class="asset-details-header ">
+                <!-- aset details -->
+             <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 white-bg">
+                <div class=" details-image white-bg">
+                    {{> asset-thumbnail ..}}
+                </div>
+                <div class="details-container">
+                    <div class="pull-left">
+                        <h4 class="margin-none ">{{overview_name}}</h4>
+                        <p class="grey padding-none margin-none">{{t "Version"}} {{overview_version}}</p>
+                        <p class="light-blue padding-none margin-none">{{t "by"}} {{overview_provider}}</p>
+                    </div>
+                    <div class="pull-right">
+                        <span class = "pull-right rating-count"> ( <i class="fa fa-users"></i> {{../count}} )</span>
+                        <span class="asset-rating pull-right">
+                        <div style="width:{{../ratingPx}}px"></div>
+                        </span>
+                        <div class="clearfix"></div>
+                        {{!#hasAssetPermission . key="ASSET_BOOKMARK" type=../../rxt.shortName username=../../cuser.username tenantId=../../cuser.tenantId}}
+                        {{!>asset-utilization ../../..}}
+                        {{!/hasAssetPermission}}
+                        {{>assert-action-link}}
+                        {{> asset-version-info ../..}}
+                    </div>
+                </div>
+             </div>
+                <!-- end of asset details-->
+            </div>
+            <div class="white-bg asset-details-wrapper ">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Summary</h4>
+                    <p>{{>overview .}}</p>
+                    <hr>
+                    {{>tags ../../.}}
+            </div><!-- description column-->
+        </div>
+        </div>
+            <div>
+            <!-- asset description -->
+                <div class="assetp-properties">
+                    <hr class="margin-bottom-double">
+                    <ul class="nav nav-tabs" id="assetp-tabs" data-aid="{{../path}}">
+                        <li class="active">
+                            <a href="#tab-properties" data-toggle="tab" data-type="basic">{{t "Description"}}</a>
+                        </li>
+                        <li>
+                            <a href="#tab-setup" data-toggle="tab" data-type="basic">{{t "Hardware Setup"}}</a>
+                        </li>
+                        {{#hasAssetPermission . key="ASSET_REVIEWS" type=../../rxt.shortName username=../../cuser.username tenantId=../../cuser.tenantId}}
+                        <li>
+                            <a href="#tab-reviews" data-toggle="tab" data-type="comments">{{t "User Reviews"}}</a>
+                        </li>
+                        {{/hasAssetPermission}}
+                        <li>
+                            <a href="#tab-share" data-toggle="tab" data-type="basic">{{t "Share"}}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-properties">
+                            <div class="content">
+                                {{>overview .}}
+                                {{>quick-startup-steps}}
+                                {{>assert-action-link}}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-setup">
+                            <div class="content">
+                                {{>hardware-setup}}
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-share">
+                            <div class="content">
+                                {{>share ../..}}
+                            </div>
+                        </div>
+                        {{#hasAssetPermission . key="ASSET_REVIEWS" type=../../rxt.shortName username=../../cuser.username tenantId=../../cuser.tenantId}}
+                        <div class="tab-pane" id="tab-reviews">
+                             {{#if ../../../features.social.enabled}}
+                                <iframe name="socialIfr" id="socialIfr"
+                                    src="{{../../../../features.social.keys.socialAppUrl}}?target={{../../../../rxt.shortName}}:{{../../../id}}&user={{../../../../cuser.username}}&urlDomain={{../../../../features.social.keys.urlDomain}}"
+                                    width="100%" height="100%" style="min-height: 500px;" data-script="{{../../../../features.social.keys.socialScriptSource}}" data-script-type="{{../../../../features.social.keys.socialScriptType}}"></iframe>
+                             {{/if}}
+                            {{#if ../../../inDashboard}}
+                                 <div id="comment-content" class="content"></div>
+                            {{else}}
+                                <div id="comment-content" class="content user-review"></div>
+                            {{/if}}
+                        </div>
+                        {{/hasAssetPermission}}
+                    </div>
+                </div>
+        {{/with}}
+    {{/with}}
+</div>
