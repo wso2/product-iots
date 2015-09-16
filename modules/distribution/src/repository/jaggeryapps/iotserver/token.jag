@@ -1,4 +1,0 @@
-<%
-var apiWrapperUtil = require("/modules/api-wrapper-util.js").apiWrapperUtil;
-apiWrapperUtil.refreshToken();
-%>

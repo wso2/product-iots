@@ -416,11 +416,6 @@
 
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib"/>
 
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps"
-                                      overwrite="true">
-                                    <fileset dir="src/repository/jaggeryapps"/>
-                                </copy>
-
                                 <!--Copy samples to distribution-->
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
                                       overwrite="true">
