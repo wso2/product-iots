@@ -314,6 +314,7 @@
             </outputDirectory>
             <excludes>
                 <exclude>store/extensions/app/store-device/*</exclude>
+                <exclude>store/themes/store/partials/product-title.hbs</exclude>
                 <exclude>publisher/config/publisher-tenant.json</exclude>
             </excludes>
         </fileSet>

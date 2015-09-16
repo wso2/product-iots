@@ -74,8 +74,8 @@ if (!user) {
 }
 
 function getDeviceData(deviceType, deviceId) {
-	//URL: GET https://localhost:9443/devicecloud/group_manager/group/id/{groupId}/device/all
-	var endPoint = deviceCloudDeviceService + "/devices/" + deviceType + "/" + deviceId;
+	//URL: GET https://localhost:9443/devicecloud/device_manager/device/type/{type}/identifier/{identifier}
+	var endPoint = deviceCloudDeviceService + "/device/type/" + deviceType + "/identifier/" + deviceId;
 	var data = {"username": user.username};
 	var device = get(endPoint, data, "json").data;
 	if (!device) {
