@@ -3,21 +3,22 @@
   "tags": "WSO2, IoT, Arduino, ArduinoUno",
   "rate": 3,
   "attributes": {
-    "overview_thumbnail":"/arduino/arduino_thumbnail.png",
+    "overview_status": "CREATED",
+    "overview_provider":"admin",
+    "overview_version":"1.0.0",
     "overview_name":"Arduino",
+    "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
     "overview_actionName":"Download",
-    "overview_actionUrl":"http://www.google.lk",
     "ingredients_ingredients":[
       "Arduino Uno",
       "Arduino Ethernet / WiFi Shield"
     ],
     "overview_description":"Connect your Arduino Uno device to the WSO2 IoT Server.This is a bare-board Arduino Device-Type. The board used here is Arduino Uno.",
-    "overview_actionUrl":"http://www.google.lk",
     "setupGuide_description":"sfd",
     "quickStartupSteps_stepDescription":["Install the Sketch program","Install the Sketch program","Install the Sketch program"],
     "quickStartupSteps_stepLabel":["1","2","3"],
-    "overview_version":"1.0.0",
-    "overview_provider":"admin"
+    "images_thumbnail":"/arduino/arduino_thumbnail.png",
+    "images_banner":"/arduino/arduino_banner.png"
   }
 }
