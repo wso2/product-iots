@@ -278,14 +278,20 @@
 
 
         <!-- Copying Mobile plugin management related dbscripts -->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.mobile.device.mgt.version}/dbscripts/cdm/plugins-->
+            <!--</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm/plugins</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>*/**</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
         <fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.mobile.device.mgt.version}/dbscripts/cdm/plugins
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm/plugins</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
+            <directory>src/statistics/carbonapps/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <!-- Copying MDM Jaggery app -->
@@ -885,7 +891,9 @@
 
 
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>
+            <!--Added Server Roles-->
+            <!--<source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>-->
+            <source>src/repository/conf/carbon.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
         </file>
@@ -1081,7 +1089,9 @@
 
         <!-- ************* Data bridge related files ********** -->
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
+            <!--<source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>-->
+            <!--STORE-1101-->
+            <source>src/repository/conf/data-bridge/data-bridge-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1118,6 +1128,17 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/spark/
             </outputDirectory>
             <fileMode>755</fileMode>
+        </file>
+
+        <!-- Analytics REST APIs WebApp -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/analytics.war
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
+            <!--commented since this tag causes issues in maven assembly plugin when copying zip formats-->
+            <!--filtered>true</filtered-->
+            <fileMode>644</fileMode>
         </file>
 
 

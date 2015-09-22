@@ -19,6 +19,9 @@ package org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
+import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl.util.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl.util.MqttArduinoSubscriber;
@@ -169,20 +172,26 @@ public class ArduinoControllerService {
 
 	@Path("/test/{value}")
 	@POST
-	public void pushtData( @PathParam("value") String value,@Context HttpServletResponse response) {
+	public void pushtData(@PathParam("value") double value, @Context HttpServletResponse
+			response) {
 
 
+		PrivilegedCarbonContext.startTenantFlow();
+		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		ctx.setTenantDomain("carbon.super", true);
+		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
+				.getOSGiService(
+						DeviceAnalyticsService.class, null);
+		Object metdaData[] = {"ayyoob", "firealarm", "123", System.currentTimeMillis()};
+		Object payloadData[] = {value};
 		try {
-			DeviceController deviceController = new DeviceController();
-			deviceController.pushBamData("ayyoob", "firealarm", "deviceID1",
-										 System.currentTimeMillis(), "DeviceData" ,value, DataStreamDefinitions.StreamTypeLabel
-												 .TEMPERATURE);
+			deviceAnalyticsService.publishEvent("org.wso2.iot.devices.temperature", "1.0.0",
+												metdaData, new Object[0], payloadData);
+		} catch (DataPublisherConfigurationException e) {
+			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
 
-
-
-		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-
+		} finally {
+			PrivilegedCarbonContext.endTenantFlow();
 		}
 	}
 }
