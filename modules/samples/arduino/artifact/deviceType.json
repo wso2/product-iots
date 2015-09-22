@@ -1,12 +1,12 @@
 {
-  "name": "Arduino",
+  "name": "arduino",
   "tags": "WSO2, IoT, Arduino, ArduinoUno",
   "rate": 3,
   "attributes": {
-    "overview_status": "CREATED",
+    "overview_status": "PUBLISHED",
     "overview_provider":"admin",
     "overview_version":"1.0.0",
-    "overview_name":"Arduino",
+    "overview_name":"arduino",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
     "overview_actionName":"Download",

@@ -1,12 +1,12 @@
 {
-  "name": "RaspberryPi",
+  "name": "raspberrypi",
   "tags": "WSO2, IoT, RaspberryPi",
   "rate": 3,
   "attributes": {
-    "overview_status": "CREATED",
+    "overview_status": "PUBLISHED",
     "overview_provider":"admin",
     "overview_version":"1.0.0",
-    "overview_name":"RaspberryPi",
+    "overview_name":"raspberrypi",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
     "overview_actionName":"Download",
