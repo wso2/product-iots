@@ -1,23 +1,24 @@
 {
-  "name": "Raspberry Pi",
+  "name": "raspberrypi",
   "tags": "WSO2, IoT, RaspberryPi",
   "rate": 3,
   "attributes": {
-    "overview_thumbnail":"/raspberrypi/raspberryPi_thumbnail.png",
-    "overview_name":"Raspberry Pi",
+    "overview_status": "PUBLISHED",
+    "overview_provider":"admin",
+    "overview_version":"1.0.0",
+    "overview_name":"raspberrypi",
+    "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
     "overview_actionName":"Download",
-    "overview_actionUrl":"http://www.google.lk",
     "ingredients_ingredients":[
       "Raspberry Pi",
       "WiFi Adapter / Ethernet"
     ],
     "overview_description":"Connect your Raspberry Pi device to the WSO2 IoT Server.This is a bare-board Raspberry Pi Device-Type. The board used here is RPi B+.",
-    "overview_actionUrl":"http://www.google.lk",
     "setupGuide_description":"sfd",
     "quickStartupSteps_stepDescription":["Install the Sketch program","Install the Sketch program","Install the Sketch program"],
     "quickStartupSteps_stepLabel":["1","2","3"],
-    "overview_version":"1.0.0",
-    "overview_provider":"admin"
+    "images_thumbnail":"/raspberrypi/raspberryPi_thumbnail.png",
+    "images_banner":"/raspberrypi/raspberryPi_banner.png"
   }
 }
