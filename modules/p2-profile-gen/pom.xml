@@ -584,9 +584,9 @@
                                 </featureArtifactDef>
 
                                 <!--added das features-->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.lite.feature:${carbon.analytics.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.analytics:org.wso2.carbon.analytics.lite.feature:${carbon.analytics.version}-->
+                                <!--</featureArtifactDef>-->
 
                                 <!--APIM feature-->
                                 <featureArtifactDef>
@@ -1146,10 +1146,10 @@
                                 <!--</feature>-->
                                 <!--End of APIM Feature-->
                                 <!--DAS Feature-->
-                                <feature>
-                                    <id>org.wso2.carbon.analytics.lite.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.analytics.lite.feature.group</id>-->
+                                    <!--<version>${carbon.analytics.version}</version>-->
+                                <!--</feature>-->
 							</features>
                         </configuration>
                     </execution>
