@@ -127,6 +127,24 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 
+					<execution>
+						<id>1-replace-datasource-property-thrift-authentication</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="Replace DataSource to WSO2AM_DB"/>
+								<replace
+										file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/thrift-authentication.xml"
+										token="jdbc/WSO2CarbonDB"
+										value="jdbc/WSO2AM_DB"
+										/>
+							</tasks>
+						</configuration>
+					</execution>
+
 					<!--============ Added with ES Features ===============-->
 
 					<execution>

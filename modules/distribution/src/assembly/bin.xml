@@ -501,7 +501,7 @@
 
         <!--============ Added with API Features ===============-->
         <fileSet>
-            <directory>apim-resources/customsequences</directory>
+            <directory>src/repository/conf/resources/customsequences</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/customsequences</outputDirectory>
             <includes>
                 <include>**/**.xml</include>
@@ -538,6 +538,18 @@
                 <exclude>styles-layout.css</exclude>
             </excludes>
         </fileSet-->
+
+        <fileSet>
+            <directory>src/repository/conf/synapse-configs</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs</outputDirectory>
+            <excludes>
+                <exclude>**/empty.txt</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>src/repository/conf/synapse-configs/default/sequences</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
+        </fileSet>
 
         <!-- Analytics related config -->
         <fileSet>
@@ -740,13 +752,21 @@
             <fileMode>644</fileMode>
         </file>
 
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/msg-mgt.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
 
         <!-- Copying thrift-authentication.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/thrift-authentication.xml
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -764,7 +784,7 @@
         </file>
         <file>
             <source>src/repository/conf/identity.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
@@ -907,6 +927,13 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>src/repository/conf/axis2/axis2.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
             <!--<source>src/repository/conf/etc/launch.ini</source>-->
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/launch.ini</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/
@@ -949,14 +976,6 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/
             </outputDirectory>
-        </file>
-
-        <!--============ Added with ES Features ===============-->
-        <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/axis2/axis2.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
         </file>
 
         <file>
@@ -1037,14 +1056,15 @@
         <!-- End of Enterprise Store Features -->
 
         <!-- Copying apim feature - bam.xml -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+        <file>
+            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml-->
+            <source>
+                src/repository/conf/etc/bam.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
 
         <!-- Analytics datasources -->
         <file>

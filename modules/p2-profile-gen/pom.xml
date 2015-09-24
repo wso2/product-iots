@@ -135,7 +135,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-                                <!-- End of Device Management Features -->
+                                 End of Device Management Features
 
                                 <!-- Jaggery Features -->
                                 <featureArtifactDef>
@@ -291,7 +291,7 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.feature:${carbon.identity.version}
                                 </feaureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.user.registration.server.feature:${carbon.identity.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.self.registration.server.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.um.ws.service.server.feature:${carbon.identity.version}
@@ -302,9 +302,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.provider.server.feature:${carbon.identity.version}
                                 </featureArtifactDef>
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.relying.party.server.feature:${carbon.identity.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.relying.party.server.feature:${carbon.identity.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.um.ws.service.client.feature:${carbon.identity.version}
                                 </featureArtifactDef>
@@ -375,6 +375,14 @@
                                 <featureArtifactDef>
                                     org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2-transports.wso2.version}
                                 </featureArtifactDef>
+
+
+                                <!--- TCP Transport -->
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.tcp.feature:${axis2-transports.wso2.version}
+                                </featureArtifactDef>
+
+
 
                                 <!-- Registry task feature and dependencies -->
                                 <featureArtifactDef>
@@ -497,14 +505,34 @@
 									org.wso2.ciphertool:org.wso2.ciphertool.feature:${ciphertool.version}
 								</feaureArtifactDef>
 
-								<!--<axis2-transports.wso2.version>1.1.0-wso2v12</axis2-transports.wso2.version>-->
 
 								<!-- End of Enterprise Store Features -->
 								<!--=====================================================================================================-->
+
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.apache.synapse.wso2.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
-
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediation.initializer.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.task.server.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.apache.synapse.transport.nhttp.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.inbound.endpoints.server.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediation.ntask.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.mediation:org.wso2.carbon.mediation.admin.feature:${carbon.mediation.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.deployment:org.wso2.carbon.service.mgt.server.feature:${carbon.deployment.version}-->
+                                <!--</featureArtifactDef>-->
 
                                 <!--APIM feature-->
                                 <featureArtifactDef>
@@ -919,10 +947,10 @@
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.self.registration.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.self.registration.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -931,10 +959,10 @@
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
                                 </feature>
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.relying.party.server.feature.group</id>-->
-                                    <!--<version>${carbon.identity.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.relying.party.server.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -1033,6 +1061,43 @@
                                     <id>org.wso2.carbon.apimgt.store.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.initializer.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.task.server.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.synapse.transport.nhttp.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.synapse.wso2.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <!-- TCP transport Synapse -->
+                                <feature>
+                                    <id>org.apache.axis2.transport.tcp.feature.group</id>
+                                    <version>${axis2-transports.wso2.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.inbound.endpoints.server.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediation.ntask.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.mediation.admin.feature.group</id>-->
+                                    <!--<version>${carbon.mediation.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.service.mgt.server.feature.group</id>-->
+                                    <!--<version>${carbon.deployment.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of API Management Features -->
 
                                 <!-- Notification Support: Mail -->
@@ -1040,6 +1105,9 @@
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
                                     <version>${axis2-transports.wso2.version}</version>
                                 </feature>
+
+
+
 
                                 <!-- Device  Store Features -->
                                 <feature>

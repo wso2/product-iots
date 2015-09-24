@@ -93,9 +93,7 @@
     <parameter name="manageTransportSession">true</parameter>
 
     <!-- Synapse Configuration file -->
-    <parameter name="SynapseConfig.ConfigurationFile" locked="false">
-        ./repository/deployment/server/synapse-configs
-    </parameter>
+    <parameter name="SynapseConfig.ConfigurationFile" locked="false">repository/deployment/server/synapse-configs</parameter>
 
     <!-- Synapse Home parameter -->
     <parameter name="SynapseConfig.HomeDirectory" locked="false">.</parameter>
@@ -577,7 +575,7 @@
         <phase name="PolicyDetermination"/>
         <phase name="MessageOut"/>
         <phase name="Security"/>
-	<phase name="Transport"/>
+        <phase name="Transport"/>
         <!--
            The MsgOutObservation phase is used to observe messages just before the
            responses are sent out. In this phase, we could do some things such as SOAP message
