@@ -9,7 +9,8 @@
     "overview_name":"raspberrypi",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
-    "overview_actionName":"Download",
+    "overview_actionLabel":"Download",
+    "sketches_Sketches":"raspberrypi",
     "ingredients_ingredients":[
       "Raspberry Pi",
       "WiFi Adapter / Ethernet"
@@ -18,7 +19,8 @@
     "setupGuide_description":"sfd",
     "quickStartupSteps_stepDescription":["Install the Sketch program","Install the Sketch program","Install the Sketch program"],
     "quickStartupSteps_stepLabel":["1","2","3"],
-    "images_thumbnail":"/raspberrypi/raspberryPi_thumbnail.png",
-    "images_banner":"/raspberrypi/raspberryPi_banner.png"
+    "images_thumbnail":"raspberrypi/raspberryPi_thumbnail.png",
+    "images_banner":"raspberrypi/raspberryPi_banner.png",
+    "overview_thumbnail": "images_thumbnail"
   }
 }

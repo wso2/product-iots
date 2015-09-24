@@ -9,7 +9,8 @@
     "overview_name":"arduino",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
-    "overview_actionName":"Download",
+    "overview_actionLabel":"Download",
+    "sketches_Sketches":"arduino",
     "ingredients_ingredients":[
       "Arduino Uno",
       "Arduino Ethernet / WiFi Shield"
@@ -18,7 +19,8 @@
     "setupGuide_description":"sfd",
     "quickStartupSteps_stepDescription":["Install the Sketch program","Install the Sketch program","Install the Sketch program"],
     "quickStartupSteps_stepLabel":["1","2","3"],
-    "images_thumbnail":"/arduino/arduino_thumbnail.png",
-    "images_banner":"/arduino/arduino_banner.png"
+    "images_thumbnail":"arduino/arduino_thumbnail.png",
+    "images_banner":"arduino/arduino_banner.png",
+    "overview_thumbnail": "images_thumbnail"
   }
 }
