@@ -93,57 +93,12 @@
 				</executions>
 			</plugin>
 
-			<!--============ Add Server Roles for DAS ===============-->
 
-			<!--<execution>-->
-			<!--<id>add-server-roles</id>-->
-			<!--<phase>prepare-package</phase>-->
-			<!--<configuration>-->
-			<!--<target>-->
-			<!--<echo message="Using xml task to add server roles"/>-->
-			<!--&lt;!&ndash;<taskdef name="xmltask"&ndash;&gt;-->
-			<!--&lt;!&ndash;classname="com.oopsconsultancy.xmltask.ant.XmlTask"&ndash;&gt;-->
-			<!--&lt;!&ndash;classpathref="maven.plugin.classpath"/>&ndash;&gt;-->
-			<!--<xmltask-->
-			<!--source="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml"-->
-			<!--dest="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml"-->
-			<!--preserveType="true">-->
-			<!--<insert path="/Server/ServerRoles/">-->
-			<!--<![CDATA[-->
-			<!--<Role>DataAnalyticsServer</Role>-->
-			<!--<Role>ComplexEventProcessor</Role>-->
-			<!--]]>-->
-			<!--</insert>-->
-			<!--</xmltask>-->
-			<!--</target>-->
-			<!--</configuration>-->
-			<!--<goals>-->
-			<!--<goal>run</goal>-->
-			<!--</goals>-->
-			<!--</execution>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
-
-					<execution>
-						<id>1-replace-datasource-property-thrift-authentication</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<echo message="Replace DataSource to WSO2AM_DB"/>
-								<replace
-										file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/thrift-authentication.xml"
-										token="jdbc/WSO2CarbonDB"
-										value="jdbc/WSO2AM_DB"
-										/>
-							</tasks>
-						</configuration>
-					</execution>
 
 					<!--============ Added with ES Features ===============-->
 
@@ -227,179 +182,6 @@
 							</tasks>
 						</configuration>
 					</execution>
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-firealarm-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/firealarm/database"/>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/firealarm/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/FireAlarmDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_firealarm.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-sensebot-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/sensebot/database"/>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/sensebot/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/SensebotDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_sensebot.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-arduino-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/database"/>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/ArduinoDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_arduino.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-android-sense-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/AndroidSenseDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_android_sense.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-raspberrypi-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/RaspberrypiDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_raspberrypi.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-					<!--<execution>-->
-					<!--&lt;!&ndash; Creating IOT Management schema &ndash;&gt;-->
-					<!--<id>create-digitaldisply-schema</id>-->
-					<!--<phase>package</phase>-->
-					<!--<goals>-->
-					<!--<goal>run</goal>-->
-					<!--</goals>-->
-					<!--<configuration>-->
-					<!--<tasks>-->
-					<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples/digital_display/database"/>-->
-					<!--<property name="db.dir"-->
-					<!--value="target/wso2carbon-core-${carbon.kernel.version}/samples/digital_display/database"/>-->
-					<!--<property name="userid" value="wso2carbon"/>-->
-					<!--<property name="password" value="wso2carbon"/>-->
-					<!--<property name="dbURL"-->
-					<!--value="jdbc:h2:file:${basedir}/${db.dir}/DigitalDisplayDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>-->
-
-					<!--<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}"-->
-					<!--autocommit="true" onerror="continue">-->
-					<!--<classpath refid="maven.dependency.classpath"/>-->
-					<!--<classpath refid="maven.compile.classpath"/>-->
-					<!--<classpath refid="maven.runtime.classpath"/>-->
-					<!--<fileset-->
-					<!--file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/h2_digital_display.sql"/>-->
-					<!--</sql>-->
-					<!--</tasks>-->
-					<!--</configuration>-->
-					<!--</execution>-->
-
-
 					<execution>
 						<id>3-extract-apps-from-components</id>
 						<phase>package</phase>
@@ -525,65 +307,75 @@
 					</execution>
 
 					<!--Install default samples-->
-					<execution>
-						<id>install_samples</id>
-						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>
+					<!--<execution>-->
+						<!--<id>install_samples</id>-->
+						<!--<phase>package</phase>-->
+						<!--<configuration>-->
+							<!--<tasks>-->
+								<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>-->
 
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"
-									  overwrite="true">
-									<fileset
-											file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>
-								</copy>
+								<!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"-->
+									  <!--overwrite="true">-->
+									<!--<fileset-->
+											<!--file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>-->
+								<!--</copy>-->
 
-								<subant target="deploy">
-									<fileset
-											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino"
-											includes="build.xml"/>
-								</subant>
-								<subant target="deploy">
-									<fileset
-											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi"
-											includes="build.xml"/>
-								</subant>
-								<copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"
-									  overwrite="true">
-									<fileset
-											file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>
-								</copy>
-								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
-								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
-								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"
-									  overwrite="true"/>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
+								<!--<subant target="deploy">-->
+									<!--<fileset-->
+											<!--dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino"-->
+											<!--includes="build.xml"/>-->
+								<!--</subant>-->
+								<!--<subant target="deploy">-->
+									<!--<fileset-->
+											<!--dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi"-->
+											<!--includes="build.xml"/>-->
+								<!--</subant>-->
+								<!--<copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"-->
+									  <!--overwrite="true">-->
+									<!--<fileset-->
+											<!--file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>-->
+								<!--</copy>-->
+								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"-->
+									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>-->
+								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"-->
+									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>-->
+								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"-->
+									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"-->
+									  <!--overwrite="true"/>-->
+							<!--</tasks>-->
+						<!--</configuration>-->
+						<!--<goals>-->
+							<!--<goal>run</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
 					<execution>
 						<id>clean_target</id>
 						<phase>install</phase>
 						<configuration>
+							<!--<tasks>-->
+								<!--<delete dir="target/jars"/>-->
+								<!--<delete dir="target/*.xml"/>-->
+								<!--<delete dir="target/archive-tmp"/>-->
+								<!--<delete dir="target/dependency-maven-plugin-markers"/>-->
+								<!--<delete dir="target/maven-archiver"/>-->
+								<!--<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>-->
+								<!--<delete file="target/wso2iot-${project.version}.jar"/>-->
+								<!--<delete dir="target/sources"/>-->
+								<!--<delete dir="target/site"/>-->
+								<!--<delete dir="target/antrun"/>-->
+								<!--<delete dir="src/site"/>-->
+								<!--&lt;!&ndash;<delete dir="target/shindig" />&ndash;&gt;-->
+								<!--<delete dir="target/jaxwebapps"/>-->
+							<!--</tasks>-->
+
 							<tasks>
-								<delete dir="target/jars"/>
-								<delete dir="target/*.xml"/>
 								<delete dir="target/archive-tmp"/>
 								<delete dir="target/dependency-maven-plugin-markers"/>
 								<delete dir="target/maven-archiver"/>
-								<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
-								<delete file="target/wso2iot-${project.version}.jar"/>
+								<delete dir="target/wso2carbon-core-${carbon.platform.version}"/>
 								<delete dir="target/sources"/>
 								<delete dir="target/site"/>
-								<delete dir="target/antrun"/>
 								<delete dir="src/site"/>
-								<!--<delete dir="target/shindig" />-->
-								<delete dir="target/jaxwebapps"/>
 							</tasks>
 						</configuration>
 						<goals>
@@ -630,6 +422,105 @@
 							<descriptors>
 								<descriptor>${basedir}/src/assembly/bin.xml</descriptor>
 							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<!-- Replace Datasource, Scope mpl classes and OAuth callback class in identity.xml -->
+					<execution>
+						<id>replace-for-identity</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/identity.xml</file>
+							<replacements>
+								<replacement>
+									<xpath>/Server/JDBCPersistenceManager/DataSource/Name</xpath>
+									<token>(jdbc/WSO2CarbonDB)</token>
+									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+								<!--<replacement>-->
+									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
+									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.AuthorizationCodeGrantHandler)</token>-->
+									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedAuthorizationCodeGrantHandler</value>-->
+								<!--</replacement>-->
+								<!--<replacement>-->
+									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
+									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler)</token>-->
+									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</value>-->
+								<!--</replacement>-->
+								<!--<replacement>-->
+									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
+									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.ClientCredentialsGrantHandler)</token>-->
+									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedClientCredentialsGrantHandler</value>-->
+								<!--</replacement>-->
+								<!--<replacement>-->
+									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
+									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.saml.SAML2BearerGrantHandler)</token>-->
+									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedSAML2BearerGrantHandler</value>-->
+								<!--</replacement>-->
+								<!--<replacement>-->
+									<!--<xpath>/Server/OAuth/OAuthCallbackHandlers</xpath>-->
+									<!--<token>(org.wso2.carbon.identity.oauth.callback.DefaultCallbackHandler)</token>-->
+									<!--<value>org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler</value>-->
+								<!--</replacement>-->
+
+							</replacements>
+						</configuration>
+					</execution>
+					<!-- Replace the Datasource in the thrift-authentication.xml file -->
+					<execution>
+						<id>replace-for-thrift</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/thrift-authentication.xml</file>
+							<replacements>
+								<replacement>
+									<xpath>/Server/JDBCPersistenceManager/DataSource/Name</xpath>
+									<token>(jdbc/WSO2CarbonDB)</token>
+									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Add the scope validator to the identity.xml file -->
+			<plugin>
+				<groupId>com.google.code.maven-config-processor-plugin</groupId>
+				<artifactId>config-processor-maven-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>add-scope-validator</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/identity.xml</input>
+									<output>../../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/identity.xml</output>
+									<config>identity_config_change.xml</config>
+								</transformation>
+							</transformations>
+							<namespaceContexts>
+								<s>http://wso2.org/projects/carbon/carbon.xml</s>
+							</namespaceContexts>
 						</configuration>
 					</execution>
 				</executions>
