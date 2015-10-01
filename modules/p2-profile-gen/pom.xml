@@ -391,8 +391,6 @@
                                     org.apache.axis2.transport:org.apache.axis2.transport.tcp.feature:${axis2-transports.wso2.version}
                                 </featureArtifactDef>
 
-
-
                                 <!-- Registry task feature and dependencies -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.ntask.feature:${carbon.commons.version}
@@ -400,7 +398,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.task.feature:${carbon.registry.version}
                                 </featureArtifactDef>
-
 								<!-- Jaggery Features -->
 								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->
 								<featureArtifactDef>

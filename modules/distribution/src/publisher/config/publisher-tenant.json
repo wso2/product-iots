@@ -19,7 +19,7 @@
       "enabled": false
     }
   },
-  "assets":["gadget","site", "device"],
+  "assets":["gadget","site", "deviceType"],
   "disabledAssets":[],
   "userRoles": ["Internal/publisher"],
   "permissions": {
@@ -30,7 +30,7 @@
   "userSpace": "/_system/governance/users",
   "accessible": [{
     "context": "/_system/governance",
-    "collections": ["gadgets", "sites", "ebooks", "devices"],
+    "collections": ["gadgets", "sites", "ebooks", "deviceTypes"],
     "actions": ["http://www.wso2.org/projects/registry/actions/get", "http://www.wso2.org/projects/registry/actions/add", "http://www.wso2.org/projects/registry/actions/delete", "authorize"]
   }],
   "app": {
@@ -59,7 +59,7 @@
     }, {
       "type": "sites"
     }, {
-      "type": "devices"
+      "type": "deviceTypes"
     }]
   },
   "router": {

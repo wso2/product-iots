@@ -330,9 +330,6 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
             </outputDirectory>
-            <excludes>
-                <exclude>store/extensions/app/store-device/*</exclude>
-            </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
 
@@ -784,6 +781,7 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
 
 
         <!--Webapp Authenticator Config file-->

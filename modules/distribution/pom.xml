@@ -249,11 +249,6 @@
 
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib"/>
 
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps"
-									  overwrite="true">
-									<fileset dir="src/repository/jaggeryapps"/>
-								</copy>
-
 								<!--Copy samples to distribution-->
 								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
 									  overwrite="true">
@@ -307,76 +302,76 @@
 					</execution>
 
 					<!--Install default samples-->
-					<!--<execution>-->
-						<!--<id>install_samples</id>-->
-						<!--<phase>package</phase>-->
-						<!--<configuration>-->
-							<!--<tasks>-->
-								<!--<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>-->
+					<execution>
+						<id>install_samples</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/conf/iot"/>
 
-								<!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"-->
-									  <!--overwrite="true">-->
-									<!--<fileset-->
-											<!--file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>-->
-								<!--</copy>-->
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot"
+									  overwrite="true">
+									<fileset
+											file="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml"/>
+								</copy>
 
-								<!--<subant target="deploy">-->
-									<!--<fileset-->
-											<!--dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino"-->
-											<!--includes="build.xml"/>-->
-								<!--</subant>-->
-								<!--<subant target="deploy">-->
-									<!--<fileset-->
-											<!--dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi"-->
-											<!--includes="build.xml"/>-->
-								<!--</subant>-->
-								<!--<copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"-->
-									  <!--overwrite="true">-->
-									<!--<fileset-->
-											<!--file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>-->
-								<!--</copy>-->
-								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"-->
-									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>-->
-								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"-->
-									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>-->
-								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"-->
-									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"-->
-									  <!--overwrite="true"/>-->
-							<!--</tasks>-->
-						<!--</configuration>-->
-						<!--<goals>-->
-							<!--<goal>run</goal>-->
-						<!--</goals>-->
-					<!--</execution>-->
+								<subant target="deploy">
+									<fileset
+											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino"
+											includes="build.xml"/>
+								</subant>
+								<subant target="deploy">
+									<fileset
+											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi"
+											includes="build.xml"/>
+								</subant>
+								<copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"
+									  overwrite="true">
+									<fileset
+											file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>
+								</copy>
+								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
+								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
+								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"
+									  overwrite="true"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>clean_target</id>
 						<phase>install</phase>
 						<configuration>
-							<!--<tasks>-->
-								<!--<delete dir="target/jars"/>-->
-								<!--<delete dir="target/*.xml"/>-->
-								<!--<delete dir="target/archive-tmp"/>-->
-								<!--<delete dir="target/dependency-maven-plugin-markers"/>-->
-								<!--<delete dir="target/maven-archiver"/>-->
-								<!--<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>-->
-								<!--<delete file="target/wso2iot-${project.version}.jar"/>-->
-								<!--<delete dir="target/sources"/>-->
-								<!--<delete dir="target/site"/>-->
-								<!--<delete dir="target/antrun"/>-->
-								<!--<delete dir="src/site"/>-->
-								<!--&lt;!&ndash;<delete dir="target/shindig" />&ndash;&gt;-->
-								<!--<delete dir="target/jaxwebapps"/>-->
-							<!--</tasks>-->
-
 							<tasks>
+								<delete dir="target/jars"/>
+								<delete dir="target/*.xml"/>
 								<delete dir="target/archive-tmp"/>
 								<delete dir="target/dependency-maven-plugin-markers"/>
 								<delete dir="target/maven-archiver"/>
-								<delete dir="target/wso2carbon-core-${carbon.platform.version}"/>
+								<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
+								<delete file="target/wso2iot-${project.version}.jar"/>
 								<delete dir="target/sources"/>
 								<delete dir="target/site"/>
+								<delete dir="target/antrun"/>
 								<delete dir="src/site"/>
+								&lt;!&ndash;<delete dir="target/shindig" />&ndash;&gt;
+								<delete dir="target/jaxwebapps"/>
 							</tasks>
+
+<!--							<tasks>-->
+<!--								<delete dir="target/archive-tmp"/>-->
+<!--								<delete dir="target/dependency-maven-plugin-markers"/>-->
+<!--								<delete dir="target/maven-archiver"/>-->
+<!--								<delete dir="target/wso2carbon-core-${carbon.platform.version}"/>-->
+<!--								<delete dir="target/sources"/>-->
+<!--								<delete dir="target/site"/>-->
+<!--								<delete dir="src/site"/>-->
+<!--							</tasks>-->
 						</configuration>
 						<goals>
 							<goal>run</goal>
