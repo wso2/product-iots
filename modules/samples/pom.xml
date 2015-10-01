@@ -89,6 +89,12 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
 
             <!--IOT dependencies-->
 

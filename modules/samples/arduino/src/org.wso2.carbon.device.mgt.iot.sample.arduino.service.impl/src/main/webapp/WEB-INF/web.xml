@@ -4,8 +4,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          metadata-complete="true">
-	<display-name>DigitalDisplay </display-name>
-	<description>DigitalDisplay</description>
+	<display-name>Arduino</display-name>
+	<description>Arduino</description>
 
 	<servlet>
 		<servlet-name>CXFServlet</servlet-name>
