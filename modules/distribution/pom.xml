@@ -227,7 +227,7 @@
 								</concat>
 
 								<delete file="target/wso2iot-${project.version}.zip"/>
-								<delete dir="${tempdir}"/>
+								<!--<delete dir="${tempdir}"/>-->
 							</tasks>
 						</configuration>
 					</execution>
@@ -347,31 +347,31 @@
 						<id>clean_target</id>
 						<phase>install</phase>
 						<configuration>
+							<!--<tasks>-->
+								<!--<delete dir="target/jars"/>-->
+								<!--<delete dir="target/*.xml"/>-->
+								<!--<delete dir="target/archive-tmp"/>-->
+								<!--<delete dir="target/dependency-maven-plugin-markers"/>-->
+								<!--<delete dir="target/maven-archiver"/>-->
+								<!--<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>-->
+								<!--<delete file="target/wso2iot-${project.version}.jar"/>-->
+								<!--<delete dir="target/sources"/>-->
+								<!--<delete dir="target/site"/>-->
+
+								<!--<delete dir="target/shindig" />-->
+								<!--<delete dir="target/jaxwebapps"/>-->
+							<!--</tasks>-->
+
 							<tasks>
-								<delete dir="target/jars"/>
-								<delete dir="target/*.xml"/>
 								<delete dir="target/archive-tmp"/>
 								<delete dir="target/dependency-maven-plugin-markers"/>
 								<delete dir="target/maven-archiver"/>
-								<delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
-								<delete file="target/wso2iot-${project.version}.jar"/>
+								<delete dir="target/wso2carbon-core-${carbon.platform.version}"/>
 								<delete dir="target/sources"/>
 								<delete dir="target/site"/>
-								<delete dir="target/antrun"/>
 								<delete dir="src/site"/>
-								&lt;!&ndash;<delete dir="target/shindig" />&ndash;&gt;
-								<delete dir="target/jaxwebapps"/>
+								<delete dir="target/antrun"/>
 							</tasks>
-
-<!--							<tasks>-->
-<!--								<delete dir="target/archive-tmp"/>-->
-<!--								<delete dir="target/dependency-maven-plugin-markers"/>-->
-<!--								<delete dir="target/maven-archiver"/>-->
-<!--								<delete dir="target/wso2carbon-core-${carbon.platform.version}"/>-->
-<!--								<delete dir="target/sources"/>-->
-<!--								<delete dir="target/site"/>-->
-<!--								<delete dir="src/site"/>-->
-<!--							</tasks>-->
 						</configuration>
 						<goals>
 							<goal>run</goal>

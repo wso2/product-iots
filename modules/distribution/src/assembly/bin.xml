@@ -68,9 +68,6 @@
                 <!--<exclude>**/repository/components/plugins/compass_2.0.1.wso2v2.jar</exclude>-->
                 <!--<exclude>**/repository/components/plugins/poi_3.9.0.wso2v1.jar</exclude>-->
 
-                <exclude>**/lib/endorsed/xalan*.jar</exclude>
-                <exclude>**/lib/endorsed/xercesImpl*.jar</exclude>
-                <exclude>**/lib/endorsed/xml-apis*.jar</exclude>
                 <exclude>**/conf/thrift-authentication.xml</exclude>
                 <exclude>**/repository/components/features/org.wso2.carbon.apimgt.store_${apim.feature.version}/store/**</exclude>
                 <exclude>**/repository/components/features/org.wso2.carbon.apimgt.store_${apim.feature.version}/admin-dashboard/**</exclude>
@@ -78,6 +75,7 @@
                 <exclude>**/repository/components/features/org.wso2.carbon.apimgt.publisher_${apim.feature.version}/publisher/**</exclude>
                 <exclude>**/repository/components/features/org.wso2.carbon.apimgt.core_${apim.feature.version}/libs/**</exclude>
 
+                <!--below dependency fails synapse startup-->
                 <exclude>**/repository/components/plugins/asm-all_4.1.0.wso2v1.jar</exclude>
 
 
@@ -128,10 +126,6 @@
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
-            <includes>
-                <include>**/identity.xml</include>
-                <include>**/entitlement.properties</include>
-            </includes>
         </fileSet>
 
 
@@ -209,7 +203,7 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <includes>
                 <include>**/api-manager.xml</include>
-                <include>**/sso-idp-config.xml</include>
+                <!--<include>**/sso-idp-config.xml</include>-->
             </includes>
         </fileSet>
         <fileSet>
@@ -889,36 +883,6 @@
         <!--========================================================================================================-->
         <!-- Enterprise Store Features -->
 
-
-
-
-        <!--============ Added with ES Features ===============-->
-        <!--<file>-->
-            <!--<source>src/repository/conf/registry.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-        <!--</file>-->
-
-        <!--&lt;!&ndash;============ Added with ES Features ===============&ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>src/repository/conf/multitenancy/cloud-services-desc.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/multitenancy/</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-        <!--</file>-->
-
-        <!--&lt;!&ndash;============ Added with ES Features ===============&ndash;&gt;-->
-
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-mgt.properties-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--&lt;!&ndash;============ Added with ES Features ===============&ndash;&gt;-->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/email/email-admin-config.xml
@@ -938,14 +902,6 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!--&lt;!&ndash;============ Added with ES Features ===============&ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>src/repository/database/WSO2IDENTITY_DB.h2.db</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--============ Added with ES Features ===============-->
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml
             </source>
@@ -964,16 +920,6 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!--============ Added with ES Features ===============-->
-        <!-- Removed with version 2.3.5-SNAPSHOT-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/association-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
 
         <!--============ Added with ES Features ===============-->
         <file>
@@ -1087,18 +1033,23 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/analytics.war
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
-            <!--commented since this tag causes issues in maven assembly plugin when copying zip formats-->
-            <!--filtered>true</filtered-->
             <fileMode>644</fileMode>
         </file>
 
         <file>
             <source>src/repository/conf/synapse.properties</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <destName>synapse.properties</destName>
             <filtered>true</filtered>
         </file>
 
+        <!--copy idp config of es-->
+        <file>
+            <source>src/repository/conf/identity/sso-idp-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
 
 
 

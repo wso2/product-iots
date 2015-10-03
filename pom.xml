@@ -812,19 +812,19 @@
 
         <!--Jaggery -->
         <jaggery.version>0.12.0-M1</jaggery.version>
-        <jaggery.extensions.version>1.4.0</jaggery.extensions.version>
-        <jaggery.extensions.sso.version>1.4.0</jaggery.extensions.sso.version>
-        <jaggery.extensions.carbon.version>1.4.0</jaggery.extensions.carbon.version>
-        <jaggery.extensions.test.version>1.4.0</jaggery.extensions.test.version>
+        <jaggery.extensions.version>1.5.0-M1</jaggery.extensions.version>
+        <jaggery.extensions.sso.version>1.5.0-M1</jaggery.extensions.sso.version>
+        <jaggery.extensions.carbon.version>1.5.0-M1</jaggery.extensions.carbon.version>
+        <jaggery.extensions.test.version>1.5.0-M1</jaggery.extensions.test.version>
 
         <!--Additional Jaggery Stuff-->
-        <caramel.feature.version>1.4.0</caramel.feature.version>
-        <handlebars.feature.version>1.4.0</handlebars.feature.version>
-        <markdown.feature.version>1.4.0</markdown.feature.version>
+        <caramel.feature.version>1.5.0-M1</caramel.feature.version>
+        <handlebars.feature.version>1.5.0-M1</handlebars.feature.version>
+        <markdown.feature.version>1.5.0-M1</markdown.feature.version>
 
         <!-- Store Features -->
-        <carbon.store.version>2.3.8-SNAPSHOT</carbon.store.version>
-        <carbon.social.version>2.3.8-SNAPSHOT</carbon.social.version>
+        <carbon.store.version>2.3.9-SNAPSHOT</carbon.store.version>
+        <carbon.social.version>2.3.9-SNAPSHOT</carbon.social.version>
 
         <!-- Additional Stuff from ES Features -->
         <carbon.dashboards.version>1.0.0</carbon.dashboards.version>
