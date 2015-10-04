@@ -45,12 +45,12 @@
 	   This is will become part of the End Point Reference of the
 	   services deployed on this server instance.
 	-->
-	<!--HostName>www.wso2.org</HostName-->
+	<HostName>localhost</HostName>
 
 	<!--
 	Host name to be used for the Carbon management console
 	-->
-	<!--MgtHostName>mgt.wso2.org</MgtHostName-->
+	<MgtHostName>localhost</MgtHostName>
 
 	<!--
 		The URL of the back end server. This is where the admin services are hosted and

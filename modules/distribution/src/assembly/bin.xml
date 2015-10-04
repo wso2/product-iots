@@ -78,7 +78,7 @@
                 <!--below dependency fails synapse startup-->
                 <exclude>**/repository/components/plugins/asm-all_4.1.0.wso2v1.jar</exclude>
 
-
+                <exclude>**/conf/identity/sso-idp-config.xml</exclude>
             </excludes>
         </fileSet>
 
