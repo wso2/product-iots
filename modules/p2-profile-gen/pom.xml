@@ -1165,14 +1165,14 @@
                                     <id>org.wso2.carbon.social.feature.group</id>
                                     <version>${carbon.social.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.store.extensions.assets.gadget.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.store.extensions.assets.site.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.store.extensions.assets.gadget.feature.group</id>-->
+                                    <!--<version>${carbon.store.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.store.extensions.assets.site.feature.group</id>-->
+                                    <!--<version>${carbon.store.version}</version>-->
+                                <!--</feature>-->
 
                                 <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
                                 <!-- End of Store Features -->

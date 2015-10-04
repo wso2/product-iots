@@ -210,6 +210,16 @@
                 <!--<scope>provided</scope>-->
             </dependency>
 
+            <!--Analytics dependencies-->
+
+            <dependency>
+                <groupId>org.wso2.carbon.analytics</groupId>
+                <artifactId>org.wso2.carbon.analytics.datasource.commons</artifactId>
+                <version>${carbon.analytics.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+
             <!--Osgi dependencies-->
             <dependency>
                 <groupId>org.eclipse.osgi</groupId>
@@ -305,8 +315,6 @@
                 <scope>provided</scope>
             </dependency>
 
-
-
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
@@ -369,6 +377,7 @@
                         <artifactId>org.wso2.carbon.registry.api</artifactId>
                     </exclusion>
                 </exclusions>
+                <scope>provided</scope>
             </dependency>
 
 
@@ -435,6 +444,7 @@
         <!-- Source code -->
         <wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
         <wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>
+        <carbon.analytics.version>1.0.3</carbon.analytics.version>
 
     </properties>
 

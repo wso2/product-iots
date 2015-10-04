@@ -29,7 +29,6 @@
             <Issuer>social</Issuer>
             <AssertionConsumerServiceURLs><AssertionConsumerServiceURL>https://localhost:9443/store/acs</AssertionConsumerServiceURL></AssertionConsumerServiceURLs>
             <DefaultAssertionConsumerServiceURL>https://localhost:9443/social/acs</DefaultAssertionConsumerServiceURL>
-            <AssertionConsumerService>https://localhost:9443/social/acs</AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/social/login</CustomLoginPage>
         </ServiceProvider>
@@ -37,7 +36,6 @@
             <Issuer>publisher</Issuer>
             <AssertionConsumerServiceURLs><AssertionConsumerServiceURL>https://localhost:9443/store/acs</AssertionConsumerServiceURL></AssertionConsumerServiceURLs>
             <DefaultAssertionConsumerServiceURL>https://localhost:9443/publisher/acs</DefaultAssertionConsumerServiceURL>
-            <AssertionConsumerService>https://localhost:9443/publisher/acs</AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
         </ServiceProvider>

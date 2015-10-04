@@ -23,6 +23,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
+import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.DeviceController;
@@ -65,7 +68,7 @@ public class FireAlarmControllerService {
 	private final String SUPER_TENANT = "carbon.super";
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
-
+	private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
 
 	private static final String URL_PREFIX = "http://";
 	private static final String BULB_CONTEXT = "/BULB/";
@@ -380,143 +383,121 @@ public class FireAlarmControllerService {
 		boolean result;
 		String deviceId = dataMsg.deviceId;
 		String deviceIp = dataMsg.reply;
-		String temperature = dataMsg.value;
+		float temperature = dataMsg.value;
 
 		String registeredIp = deviceToIpMap.get(deviceId);
 
 		if (registeredIp == null) {
-			log.warn(
-					"Unregistered IP: Temperature Data Received from an un-registered IP " +
-							deviceIp +
-							" for device ID - " + deviceId);
+			log.warn("Unregistered IP: Temperature Data Received from an un-registered IP " +
+							deviceIp + " for device ID - " + deviceId);
 			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
 			return;
 		} else if (!registeredIp.equals(deviceIp)) {
 			log.warn("Conflicting IP: Received IP is " + deviceIp + ". Device with ID " +
-							 deviceId +
-							 " is already registered under some other IP. Re-registration " +
-							 "required");
+			deviceId + " is already registered under some other IP. Re-registration " + "required");
 			response.setStatus(Response.Status.CONFLICT.getStatusCode());
 			return;
 		}
 
+		PrivilegedCarbonContext.startTenantFlow();
+		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		ctx.setTenantDomain(SUPER_TENANT, true);
+		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
+				.getOSGiService(DeviceAnalyticsService.class, null);
+		Object metdaData[] = {dataMsg.owner, FireAlarmConstants.DEVICE_TYPE, dataMsg.deviceId,
+				System.currentTimeMillis()};
+		Object payloadData[] = {temperature};
 		try {
-			DeviceController deviceController = new DeviceController();
-			result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-														  .DEVICE_TYPE,
-												  dataMsg.deviceId,
-												  System.currentTimeMillis(), "DeviceData",
-												  temperature,
-												  DataStreamDefinitions.StreamTypeLabel
-														  .TEMPERATURE);
-
-
-			if (!result) {
-				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			}
-		} catch (UnauthorizedException e) {
+			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0",
+												metdaData, new Object[0], payloadData);
+		} catch (DataPublisherConfigurationException e) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			log.error("Data Push Attempt Failed for BAM Publisher: " + e.getMessage());
+
+		} finally {
+			PrivilegedCarbonContext.endTenantFlow();
 		}
 
-		try {
-			DeviceController deviceController = new DeviceController();
-			result = deviceController.pushCepData(dataMsg.owner, FireAlarmConstants
-														  .DEVICE_TYPE,
-												  dataMsg.deviceId,
-												  System.currentTimeMillis(), "DeviceData",
-												  temperature,
-												  DataStreamDefinitions.StreamTypeLabel
-														  .TEMPERATURE);
 
-
-			if (!result) {
-				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			}
-		} catch (UnauthorizedException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			log.error("Data Push Attempt Failed for CEP Publisher: " + e.getMessage());
-		}
 	}
 
 
 	/*    Service to push all the sensor data collected by the FireAlarm
 		   Called by the FireAlarm device  */
 
-	@Path("/pushalarmdata")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void pushAlarmData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
-		boolean result;
-		String sensorValues = dataMsg.value;
-		log.info("Recieved Sensor Data Values: " + sensorValues);
+//	@Path("/pushalarmdata")
+//	@POST
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public void pushAlarmData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
+//		boolean result;
+//		String sensorValues = dataMsg.value;
+//		log.info("Recieved Sensor Data Values: " + sensorValues);
+//
+//		String sensors[] = sensorValues.split(":");
+//		try {
+//			if (sensors.length == 3) {
+//				String temperature = sensors[0];
+//				String bulb = sensors[1];
+//				String sonar = sensors[2];
 
-		String sensors[] = sensorValues.split(":");
-		try {
-			if (sensors.length == 3) {
-				String temperature = sensors[0];
-				String bulb = sensors[1];
-				String sonar = sensors[2];
-
-				sensorValues = "Temperature:" + temperature + "C\tBulb Status:" + bulb +
-						"\t\tSonar Status:" + sonar;
-				log.info(sensorValues);
-				DeviceController deviceController = new DeviceController();
-				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-															  .DEVICE_TYPE,
-													  dataMsg.deviceId,
-													  System.currentTimeMillis(), "DeviceData",
-													  temperature, "TEMPERATURE");
-
-				if (!result) {
-					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-					log.error("Error whilst pushing temperature: " + sensorValues);
-					return;
-				}
-
-				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-															  .DEVICE_TYPE,
-													  dataMsg.deviceId,
-													  System.currentTimeMillis(), "DeviceData",
-													  bulb,
-													  "BULB");
-
-				if (!result) {
-					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-					log.error("Error whilst pushing Bulb data: " + sensorValues);
-					return;
-				}
-
-				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-															  .DEVICE_TYPE,
-													  dataMsg.deviceId,
-													  System.currentTimeMillis(), "DeviceData",
-													  sonar,
-													  "SONAR");
-
-				if (!result) {
-					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-					log.error("Error whilst pushing Sonar data: " + sensorValues);
-				}
-
-			} else {
-				DeviceController deviceController = new DeviceController();
-				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-															  .DEVICE_TYPE,
-													  dataMsg.deviceId,
-													  System.currentTimeMillis(), "DeviceData",
-													  dataMsg.value, dataMsg.reply);
-				if (!result) {
-					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-					log.error("Error whilst pushing sensor data: " + sensorValues);
-				}
-			}
-
-		} catch (UnauthorizedException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			log.error("Data Push Attempt Failed at Publisher: " + e.getMessage());
-		}
-	}
+//				sensorValues = "Temperature:" + temperature + "C\tBulb Status:" + bulb +
+//						"\t\tSonar Status:" + sonar;
+//				log.info(sensorValues);
+//				DeviceController deviceController = new DeviceController();
+//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
+//															  .DEVICE_TYPE,
+//													  dataMsg.deviceId,
+//													  System.currentTimeMillis(), "DeviceData",
+//													  temperature, "TEMPERATURE");
+//
+//				if (!result) {
+//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+//					log.error("Error whilst pushing temperature: " + sensorValues);
+//					return;
+//				}
+//
+//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
+//															  .DEVICE_TYPE,
+//													  dataMsg.deviceId,
+//													  System.currentTimeMillis(), "DeviceData",
+//													  bulb,
+//													  "BULB");
+//
+//				if (!result) {
+//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+//					log.error("Error whilst pushing Bulb data: " + sensorValues);
+//					return;
+//				}
+//
+//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
+//															  .DEVICE_TYPE,
+//													  dataMsg.deviceId,
+//													  System.currentTimeMillis(), "DeviceData",
+//													  sonar,
+//													  "SONAR");
+//
+//				if (!result) {
+//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+//					log.error("Error whilst pushing Sonar data: " + sensorValues);
+//				}
+//
+//			} else {
+//				DeviceController deviceController = new DeviceController();
+//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
+//															  .DEVICE_TYPE,
+//													  dataMsg.deviceId,
+//													  System.currentTimeMillis(), "DeviceData",
+//													  dataMsg.value, dataMsg.reply);
+//				if (!result) {
+//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+//					log.error("Error whilst pushing sensor data: " + sensorValues);
+//				}
+//			}
+//
+//		} catch (UnauthorizedException e) {
+//			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+//			log.error("Data Push Attempt Failed at Publisher: " + e.getMessage());
+//		}
+//	}
 
 
 	private String sendCommandViaXMPP(String deviceOwner, String deviceId, String resource,

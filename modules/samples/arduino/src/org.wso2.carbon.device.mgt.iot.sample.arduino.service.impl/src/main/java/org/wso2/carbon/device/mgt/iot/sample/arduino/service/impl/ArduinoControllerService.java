@@ -27,9 +27,7 @@ import org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl.util.DeviceJSO
 import org.wso2.carbon.device.mgt.iot.sample.arduino.service.impl.util.MqttArduinoSubscriber;
 import org.wso2.carbon.device.mgt.iot.sample.arduino.plugin.constants.ArduinoConstants;
 import org.wso2.carbon.device.mgt.iot.common.DeviceController;
-import org.wso2.carbon.device.mgt.iot.common.datastore.impl.DataStreamDefinitions;
 import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.common.exception.UnauthorizedException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
@@ -44,7 +42,8 @@ public class ArduinoControllerService {
 	private static Map<String, LinkedList<String>> replyMsgQueue = new HashMap<>();
 	private static Map<String, LinkedList<String>> internalControlsQueue = new HashMap<>();
 	private static MqttArduinoSubscriber mqttArduinoSubscriber;
-
+	private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
+	private final String SUPER_TENANT = "carbon.super";
 
 	public void setMqttArduinoSubscriber(MqttArduinoSubscriber mqttArduinoSubscriber) {
 		ArduinoControllerService.mqttArduinoSubscriber = mqttArduinoSubscriber;
@@ -137,57 +136,32 @@ public class ArduinoControllerService {
 	}
 
 
-	/*    Service to push all the sensor data collected by the Arduino
+	/*Service to push all the sensor data collected by the Arduino
 		   Called by the Arduino device  */
 	@Path("/pushdata")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void pushData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
 
-		String temperature = dataMsg.value;                            //TEMP
-		log.info("Recieved Sensor Data Values: " + temperature);
+		float temperature = dataMsg.value;
 
 		if (log.isDebugEnabled()) {
 			log.debug("Recieved Temperature Data Value: " + temperature + " degrees C");
 		}
-		try {
-			DeviceController deviceController = new DeviceController();
-			boolean result = deviceController.pushBamData(dataMsg.owner,
-														  ArduinoConstants.DEVICE_TYPE,
-														  dataMsg.deviceId,
-														  System.currentTimeMillis(), "DeviceData",
-														  temperature,
-														  DataStreamDefinitions.StreamTypeLabel
-																  .TEMPERATURE);
-
-			if (!result) {
-				response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-			}
-
-		} catch (UnauthorizedException e) {
-			response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-
-		}
-	}
-
-	@Path("/test/{value}")
-	@POST
-	public void pushtData(@PathParam("value") double value, @Context HttpServletResponse
-			response) {
-
 
 		PrivilegedCarbonContext.startTenantFlow();
 		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-		ctx.setTenantDomain("carbon.super", true);
+		ctx.setTenantDomain(SUPER_TENANT, true);
 		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
-				.getOSGiService(
-						DeviceAnalyticsService.class, null);
-		Object metdaData[] = {"ayyoob", "firealarm", "123", System.currentTimeMillis()};
-		Object payloadData[] = {value};
+				.getOSGiService(DeviceAnalyticsService.class, null);
+		Object metdaData[] = {dataMsg.owner, ArduinoConstants.DEVICE_TYPE, dataMsg.deviceId,
+				System.currentTimeMillis()};
+		Object payloadData[] = {temperature};
 		try {
-			deviceAnalyticsService.publishEvent("org.wso2.iot.devices.temperature", "1.0.0",
+			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0",
 												metdaData, new Object[0], payloadData);
 		} catch (DataPublisherConfigurationException e) {
+			log.error("Error on connecting to data publisher");
 			response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
 
 		} finally {
