@@ -78,7 +78,7 @@
                 <!--below dependency fails synapse startup-->
                 <exclude>**/repository/components/plugins/asm-all_4.1.0.wso2v1.jar</exclude>
 
-                <exclude>**/conf/identity/sso-idp-config.xml</exclude>
+                <exclude>**/sso-idp-config.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -126,6 +126,9 @@
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/conf/identity/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
+            <excludes>
+                <exclude>**/sso-idp-config.xml</exclude>
+            </excludes>
         </fileSet>
 
 
@@ -203,7 +206,7 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <includes>
                 <include>**/api-manager.xml</include>
-                <!--<include>**/sso-idp-config.xml</include>-->
+                <include>**/sso-idp-config.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -1042,16 +1045,6 @@
             <destName>synapse.properties</destName>
             <filtered>true</filtered>
         </file>
-
-        <!--copy idp config of es-->
-        <file>
-            <source>src/repository/conf/identity/sso-idp-config.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-
-
 
     </files>
 </assembly>
