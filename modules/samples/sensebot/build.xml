@@ -1,4 +1,4 @@
-<project name="Arduino" basedir="" default="deploy">
+<project name="Sensebot" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
@@ -7,6 +7,7 @@
     <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.sensebot"/>
 
     <target name="create-db" depends="clean">
+        <mkdir dir="${db.dir}"/>
         <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
 
         <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
@@ -67,6 +68,11 @@
         <copy toDir="${target.sketch.dir}/${sample_type}_wifi">
             <fileset dir="sketch_wifi"/>
         </copy>
+        <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
+        <copy toDir="${target.sample.device.dir}/${sample_type}">
+            <fileset dir="artifact/"/>
+        </copy>
+
         <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
         <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>

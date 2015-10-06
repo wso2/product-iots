@@ -1,0 +1,26 @@
+{
+  "name": "digital_display",
+  "tags": "WSO2, IoT, Raspberry",
+  "rate": 3,
+  "attributes": {
+    "overview_status": "PUBLISHED",
+    "overview_provider":"admin",
+    "overview_version":"1.0.0",
+    "overview_name":"digital_display",
+    "overview_url":"http://www.google.lk",
+    "setupGuide_guideImage":"undefined",
+    "overview_actionLabel":"Download",
+    "sketches_Sketches":"digital_display",
+    "ingredients_ingredients":[
+      "Raspberry",
+      "Ethernet / WiFi Shield"
+    ],
+    "overview_description":"Connect your Arduino Uno device to the WSO2 IoT Server.This is a bare-board Arduino Device-Type. The board used here is Arduino Uno.",
+    "setupGuide_description":"sfd",
+    "quickStartupSteps_stepDescription":["Install the Sketch program","Install the Sketch program","Install the Sketch program"],
+    "quickStartupSteps_stepLabel":["1","2","3"],
+    "images_thumbnail":"digital_display/digital_display_thumbnail.png",
+    "images_banner":"digital_display/digital_display_banner.png",
+    "overview_thumbnail": "images_thumbnail"
+  }
+}

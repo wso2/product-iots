@@ -1,4 +1,4 @@
-<project name="Arduino" basedir="" default="deploy">
+<project name="AndroidSense" basedir="" default="deploy">
 
     <import file="../common.xml"/>
 
@@ -66,6 +66,11 @@
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
+        <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
+        <copy toDir="${target.sample.device.dir}/${sample_type}">
+            <fileset dir="artifact/"/>
+        </copy>
+
         <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
         <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
         <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
