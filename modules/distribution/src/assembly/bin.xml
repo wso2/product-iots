@@ -226,13 +226,6 @@
 
 
         <fileSet>
-            <directory>src/repository/resources</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-        </fileSet>
-        <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/service-provider
             </directory>
@@ -291,13 +284,13 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-        <fileSet>
+        <!--fileSet>
             <directory>src/repository/modules/sso</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules/sso</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
-        </fileSet>
+        </fileSet-->
 
         <!-- Copying Device Management related dbscripts -->
         <fileSet>
@@ -306,13 +299,6 @@
             <includes>
                 <include>*/**</include>
             </includes>
-        </fileSet>
-        <fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
-            </outputDirectory>
         </fileSet>
         <fileSet>
             <directory>src/statistics/carbonapps/</directory>
@@ -440,10 +426,10 @@
 				<!--These files are already provided in the CDMF-Store feature too. -->
 				<!--However, given that the order of feature installation cannot be controlled, they are recopied at the product level.-->
 
-        <fileSet>
+<!--         <fileSet>
             <directory>src/publisher/config</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
-        </fileSet>
+        </fileSet> -->
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
 
@@ -624,14 +610,14 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-	    <file>
+	    <!--file>
              <source>
                  ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml
              </source>
              <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
              <filtered>true</filtered>
              <fileMode>644</fileMode>
-         </file>
+         </file-->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xsd
@@ -715,33 +701,33 @@
         </file>
 
         <!-- Copying application-authentication.xml -->
-        <file>
+<!--         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
-        </file>
+        </file> -->
 
-        <file>
+<!--         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/msg-mgt.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
             <fileMode>644</fileMode>
-        </file>
+        </file> -->
 
 
         <!-- Copying thrift-authentication.xml -->
-        <file>
+<!--         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
-        </file>
+        </file> -->
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
@@ -936,15 +922,15 @@
         <!-- End of Enterprise Store Features -->
 
         <!-- Copying apim feature - bam.xml -->
-        <file>
+        <!--file-->
             <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bam.xml-->
-            <source>
+            <!--source>
                 src/repository/conf/etc/bam.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
-        </file>
+        </file-->
 
         <!-- Analytics datasources -->
         <file>
