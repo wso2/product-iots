@@ -30,7 +30,6 @@
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/conf/axis2/axis2_client.xml</exclude>
                 <exclude>**/conf/etc/launch.ini</exclude>
-                <exclude>**/client-truststore.jks</exclude>
                 <exclude>**/wso2carbon.jks</exclude>
 
                 <!-- Store Features -->
@@ -79,6 +78,8 @@
                 <exclude>**/repository/components/plugins/asm-all_4.1.0.wso2v1.jar</exclude>
 
                 <exclude>**/sso-idp-config.xml</exclude>
+                <exclude>**/application-authentication.xml</exclude>
+                <exclude>**/sso/jaggery.conf</exclude>
             </excludes>
         </fileSet>
 
@@ -128,6 +129,7 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <excludes>
                 <exclude>**/sso-idp-config.xml</exclude>
+                <exclude>**/application-authentication.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -207,6 +209,7 @@
             <includes>
                 <include>**/api-manager.xml</include>
                 <include>**/sso-idp-config.xml</include>
+                <include>**/application-authentication.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -315,6 +318,7 @@
             </outputDirectory>
             <excludes>
                 <exclude>**/publisher/config/publisher-tenant.json</exclude>
+                <exclude>**/sso/jaggery.conf</exclude>
             </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
@@ -416,23 +420,25 @@
 
         <!--<fileSet>-->
             <!--<directory>src/repository/conf/security</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/-->
+            <!--</outputDirectory>-->
             <!--<includes>-->
                 <!--<include>**/application-authenticators.xml</include>-->
-                <!--&lt;!&ndash; Replacement for application-authenticators.xml &ndash;&gt;-->
+                <!--Replacement for application-authenticators.xml-->
                 <!--<include>**/application-authentication.xml</include>-->
             <!--</includes>-->
         <!--</fileSet>-->
 
         <!--============ Added with ES Features ===============-->
-			<!--Copies publisher specific config files that needs to be overriden for the CDMF-STORE. -->
-				<!--These files are already provided in the CDMF-Store feature too. -->
-				<!--However, given that the order of feature installation cannot be controlled, they are recopied at the product level.-->
+        <!--Copies publisher specific config files that needs to be overriden for the CDMF-STORE. -->
+        <!--These files are already provided in the CDMF-Store feature too. -->
+        <!--However, given that the order of feature installation cannot be controlled, they are recopied at the product level.-->
 
-<!--         <fileSet>
-            <directory>src/publisher/config</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
-        </fileSet> -->
+        <!--<fileSet>-->
+            <!--<directory>src/publisher/config</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>-->
+        <!--</fileSet>-->
+
         <!--========================================================================================================-->
         <!-- End of Enterprise Store Features -->
 
@@ -613,14 +619,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-	    <!--file>
-             <source>
-                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xml
-             </source>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
-             <filtered>true</filtered>
-             <fileMode>644</fileMode>
-         </file-->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-config.xsd
@@ -704,33 +702,33 @@
         </file>
 
         <!-- Copying application-authentication.xml -->
-<!--         <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file> -->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
 
-<!--         <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/msg-mgt.properties
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file> -->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/msg-mgt.properties-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
 
 
         <!-- Copying thrift-authentication.xml -->
-<!--         <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file> -->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
@@ -759,7 +757,7 @@
         </file>
 
         <!--License Config file-->
-	<file>
+        <file>
             <source>
                 src/repository/conf/license-config.xml
             </source>
@@ -1026,7 +1024,7 @@
             <fileMode>755</fileMode>
         </file>
 
-         <!--Analytics REST APIs WebApp -->
+        <!--Analytics REST APIs WebApp -->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/analytics.war
@@ -1048,6 +1046,12 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
             <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/sso/jaggery.conf</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/sso</outputDirectory>
+            <filtered>true</filtered>
         </file>
 
     </files>
