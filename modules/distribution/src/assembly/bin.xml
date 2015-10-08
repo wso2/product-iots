@@ -313,6 +313,9 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
             </outputDirectory>
+            <excludes>
+                <exclude>**/publisher/config/publisher-tenant.json</exclude>
+            </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
 
@@ -756,7 +759,7 @@
         </file>
 
         <!--License Config file-->
-	    <file>
+	<file>
             <source>
                 src/repository/conf/license-config.xml
             </source>
@@ -765,7 +768,14 @@
             <fileMode>644</fileMode>
         </file>
 
-
+	   <file>
+            <source>
+                src/repository/conf/multitenancy/cloud-services-desc.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/multitenancy</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
 
         <!--Webapp Authenticator Config file-->
         <file>
@@ -1030,6 +1040,14 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <destName>synapse.properties</destName>
             <filtered>true</filtered>
+        </file>
+
+        <file>
+            <source>
+                src/publisher/config/publisher-tenant.json
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
 
     </files>
