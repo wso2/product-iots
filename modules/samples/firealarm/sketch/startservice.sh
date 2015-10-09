@@ -7,6 +7,11 @@ echo "|	       ----------------				"
 echo "|    ....initializing startup-script	"
 echo "----------------------------------------------------------------"
 
+
+unzip firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar.zip
+java -jar firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+
 #while true; do
 #    read -p "Do you wish to run 'apt-get update' and continue? [Yes/No] " yn
 #    case $yn in
@@ -71,94 +76,94 @@ echo "----------------------------------------------------------------"
 #	exit;
 #fi
 
-sudo killall -9 python
-
-for f in ./RaspberryAgent.zip; do
-    ## Check if the glob gets expanded to existing files.
-    ## If not, f here will be exactly the pattern above
-    ## and the exists test will evaluate to false.
-    # [ -e "$f" ] && echo "'wso2-raspi-alarm_1.0_armhf.deb' file found and installing" || echo "'wso2-raspi-alarm_1.0_armhf.deb' file does not exist in current path"; exit;
-    if [ -e "$f" ]; then
-    	echo "Agent files found......"
-	sudo rm -rf /usr/local/src/RaspberryAgent
-	sudo unzip RaspberryAgent.zip -d /usr/local/src/
-    else
-    	echo "'RaspberryAgent.zip' file does not exist in current path. \nInstalling without upgrading agent..."; 
-     fi
-    ## This is all we needed to know, so we can break after the first iteration
-    break
-done
-
-for f in /usr/local/src/RaspberryAgent/rc.local; do
-    ## Check if the glob gets expanded to existing files.
-    ## If not, f here will be exactly the pattern above
-    ## and the exists test will evaluate to false.
-    if [ -e "$f" ]; then
-    	echo "Copying boot script"
-	sudo mv /usr/local/src/RaspberryAgent/rc.local /etc/rc.local
-	sudo chmod +x /etc/rc.local
-    else
-    	echo "Unable to set agent statup on boot"; 
-    fi
-    ## This is all we needed to know, so we can break after the first iteration
-    break
-done
-
-for f in ./deviceConfigs.cfg; do
-    ## Check if the glob gets expanded to existing files.
-    ## If not, f here will be exactly the pattern above
-    ## and the exists test will evaluate to false.
-    if [ -e "$f" ]; then
-    	echo "Configuration file found......"
-    else
-    	echo "'deviceConfigs.cfg' file does not exist in current path. \nExiting installation..."; 
-    	exit;
-    fi
-    ## This is all we needed to know, so we can break after the first iteration
-    break
-done
-
-echo "Altering Configuration file"
-sed -i 's|[/,]||g' deviceConfigs.cfg
-
-echo "Copying configurations file to /usr/local/src/RaspberryAgent"
-sudo cp ./deviceConfigs.cfg /usr/local/src/RaspberryAgent/
-
-if [ $? -ne 0 ]; then
-	echo "Copying configuration file failed...."
-	exit;
-fi
-
-while true; do
-    read -p "Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute) > " input
-
-    if [ $input -eq $input 2>/dev/null ]
-    then
-        echo "Setting data-push interval to $input seconds."
-        echo $input > /usr/local/src/RaspberryAgent/time-interval
-        break;
-    else
-        echo "Input needs to be an integer indicating the number seconds between successive data-pushes."
-    fi
-done
-
-cd /usr/local/src/RaspberryAgent/
-sudo chmod +x RaspberryStats.py
-sudo nohup ./RaspberryStats.py -i $input </dev/null &
-
-if [ $? -ne 0 ]; then
-	echo "Could not start the service..."
-	exit;
-else
-	echo "Running the RaspberryAgent service...."
-fi
-
-echo "--------------------------------------------------------------------------"
-echo "|			Successfully Started		"
-echo "|		   --------------------------		"
-echo "|  cd to /usr/local/src/RaspberryAgent"
-echo "|	 run 'sudo nohup ./RaspberryStats.py -i time  </dev/null &'to start service manually."
-echo "|  Relapce time with the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute)"
-echo "|	 Find logs at: /usr/local/src/RaspberryAgent/logs/RaspberryStats.log"
-echo "---------------------------------------------------------------------------"
+#sudo killall -9 python
+#
+#for f in ./RaspberryAgent.zip; do
+#    ## Check if the glob gets expanded to existing files.
+#    ## If not, f here will be exactly the pattern above
+#    ## and the exists test will evaluate to false.
+#    # [ -e "$f" ] && echo "'wso2-raspi-alarm_1.0_armhf.deb' file found and installing" || echo "'wso2-raspi-alarm_1.0_armhf.deb' file does not exist in current path"; exit;
+#    if [ -e "$f" ]; then
+#    	echo "Agent files found......"
+#	sudo rm -rf /usr/local/src/RaspberryAgent
+#	sudo unzip RaspberryAgent.zip -d /usr/local/src/
+#    else
+#    	echo "'RaspberryAgent.zip' file does not exist in current path. \nInstalling without upgrading agent...";
+#     fi
+#    ## This is all we needed to know, so we can break after the first iteration
+#    break
+#done
+#
+#for f in /usr/local/src/RaspberryAgent/rc.local; do
+#    ## Check if the glob gets expanded to existing files.
+#    ## If not, f here will be exactly the pattern above
+#    ## and the exists test will evaluate to false.
+#    if [ -e "$f" ]; then
+#    	echo "Copying boot script"
+#	sudo mv /usr/local/src/RaspberryAgent/rc.local /etc/rc.local
+#	sudo chmod +x /etc/rc.local
+#    else
+#    	echo "Unable to set agent statup on boot";
+#    fi
+#    ## This is all we needed to know, so we can break after the first iteration
+#    break
+#done
+#
+#for f in ./deviceConfigs.cfg; do
+#    ## Check if the glob gets expanded to existing files.
+#    ## If not, f here will be exactly the pattern above
+#    ## and the exists test will evaluate to false.
+#    if [ -e "$f" ]; then
+#    	echo "Configuration file found......"
+#    else
+#    	echo "'deviceConfigs.cfg' file does not exist in current path. \nExiting installation...";
+#    	exit;
+#    fi
+#    ## This is all we needed to know, so we can break after the first iteration
+#    break
+#done
+#
+#echo "Altering Configuration file"
+#sed -i 's|[/,]||g' deviceConfigs.cfg
+#
+#echo "Copying configurations file to /usr/local/src/RaspberryAgent"
+#sudo cp ./deviceConfigs.cfg /usr/local/src/RaspberryAgent/
+#
+#if [ $? -ne 0 ]; then
+#	echo "Copying configuration file failed...."
+#	exit;
+#fi
+#
+#while true; do
+#    read -p "Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute) > " input
+#
+#    if [ $input -eq $input 2>/dev/null ]
+#    then
+#        echo "Setting data-push interval to $input seconds."
+#        echo $input > /usr/local/src/RaspberryAgent/time-interval
+#        break;
+#    else
+#        echo "Input needs to be an integer indicating the number seconds between successive data-pushes."
+#    fi
+#done
+#
+#cd /usr/local/src/RaspberryAgent/
+#sudo chmod +x RaspberryStats.py
+#sudo nohup ./RaspberryStats.py -i $input </dev/null &
+#
+#if [ $? -ne 0 ]; then
+#	echo "Could not start the service..."
+#	exit;
+#else
+#	echo "Running the RaspberryAgent service...."
+#fi
+#
+#echo "--------------------------------------------------------------------------"
+#echo "|			Successfully Started		"
+#echo "|		   --------------------------		"
+#echo "|  cd to /usr/local/src/RaspberryAgent"
+#echo "|	 run 'sudo nohup ./RaspberryStats.py -i time  </dev/null &'to start service manually."
+#echo "|  Relapce time with the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute)"
+#echo "|	 Find logs at: /usr/local/src/RaspberryAgent/logs/RaspberryStats.log"
+#echo "---------------------------------------------------------------------------"
 

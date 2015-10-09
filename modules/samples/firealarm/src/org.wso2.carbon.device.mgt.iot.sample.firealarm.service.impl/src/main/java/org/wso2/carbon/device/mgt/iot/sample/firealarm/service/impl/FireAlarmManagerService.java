@@ -51,7 +51,10 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 //@Path("/FireAlarmDeviceManager")
@@ -302,6 +305,13 @@ public class FireAlarmManagerService {
 		//adding registering data
 
 
+		Properties props = System.getProperties();
+		Enumeration e = props.propertyNames();
+
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			log.info(key + " -- " + props.getProperty(key));
+		}
 
 		XmppAccount newXmppAccount = new XmppAccount();
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
