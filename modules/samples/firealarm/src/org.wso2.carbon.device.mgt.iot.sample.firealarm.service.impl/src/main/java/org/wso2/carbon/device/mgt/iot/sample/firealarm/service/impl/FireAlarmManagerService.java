@@ -303,15 +303,15 @@ public class FireAlarmManagerService {
 		String accessToken = accessTokenInfo.getAccess_token();
 		String refreshToken = accessTokenInfo.getRefresh_token();
 		//adding registering data
-
-
-		Properties props = System.getProperties();
-		Enumeration e = props.propertyNames();
-
-		while (e.hasMoreElements()) {
-			String key = (String) e.nextElement();
-			log.info(key + " -- " + props.getProperty(key));
-		}
+//
+//
+//		Properties props = System.getProperties();
+//		Enumeration e = props.propertyNames();
+//
+//		while (e.hasMoreElements()) {
+//			String key = (String) e.nextElement();
+//			log.info(key + " -- " + props.getProperty(key));
+//		}
 
 		XmppAccount newXmppAccount = new XmppAccount();
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
