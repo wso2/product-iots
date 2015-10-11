@@ -23,7 +23,8 @@
                 <![CDATA[
     <IotDeviceTypeConfig type="${sample_type}">
 		<DatasourceName>jdbc/${data_source}</DatasourceName>
-		<ApiApplicationName>virtual_firealarm</ApiApplicationName>
+		<!--TODO: Uncomment this to work with apim @ 192.168.67.21 -->
+		<!--ApiApplicationName>firealarm</ApiApplicationName-->
 	</IotDeviceTypeConfig>
 	            ]]>
             </insert>
@@ -94,6 +95,8 @@
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete file="${target.page.dir}/${sample_type}.hbs"/>
+        <delete dir="${target.unit.dir}/${sample_type}"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
