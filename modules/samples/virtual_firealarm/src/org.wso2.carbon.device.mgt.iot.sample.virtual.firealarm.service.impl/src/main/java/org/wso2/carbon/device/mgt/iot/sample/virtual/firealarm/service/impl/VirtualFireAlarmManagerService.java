@@ -292,7 +292,7 @@ public class VirtualFireAlarmManagerService {
 		//create new device id
 		String deviceId = shortUUID();
 
-		TokenClient accessTokenClient = new TokenClient(VirtualFireAlarmConstants.DEVICE_TYPE);
+		TokenClient accessTokenClient = new TokenClient("firealarm");
 		AccessTokenInfo accessTokenInfo = null;
 
 		accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
