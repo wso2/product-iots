@@ -1,0 +1,95 @@
+<project name="VirtualFireAlarm" basedir="" default="deploy">
+
+    <import file="../common.xml"/>
+
+    <property name="sample_type" value="virtual_firealarm"/>
+    <property name="data_source" value="VirtualFireAlarmDM_DB"/>
+    <property name="package" value="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm"/>
+
+    <target name="create-db" depends="clean">
+        <mkdir dir="${db.dir}"/>
+        <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/${data_source};DB_CLOSE_ON_EXIT=FALSE"/>
+
+        <sql driver="org.h2.Driver" url="${dbURL}" userid="${db.username}" password="${db.password}"  autocommit="true" onerror="continue">
+            <classpath>
+                <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
+            </classpath>
+            <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
+        </sql>
+        <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
+
+        <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
+            <insert path="/IoTDeviceTypeConfigManager[1]">
+                <![CDATA[
+    <IotDeviceTypeConfig type="${sample_type}">
+		<DatasourceName>jdbc/${data_source}</DatasourceName>
+		<ApiApplicationName>virtual_firealarm</ApiApplicationName>
+	</IotDeviceTypeConfig>
+	            ]]>
+            </insert>
+        </xmltask>
+        <xmltask source="${datasources.conf}" dest="${datasources.conf}" report="true">
+            <insert path="/datasources-configuration/datasources[1]">
+                <![CDATA[
+        <datasource>
+            <name>${data_source}</name>
+            <description>The datasource used for the Virtual-Firealarm database</description>
+            <jndiConfig>
+                <name>jdbc/${data_source}</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/${data_source};DB_CLOSE_ON_EXIT=FALSE</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        	            ]]>
+            </insert>
+        </xmltask>
+    </target>
+
+    <target name="build">
+        <exec dir="src" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+    </target>
+
+    <target name="deploy" depends="create-db,build">
+        <copy toDir="${target.sketch.dir}/${sample_type}">
+            <fileset dir="sketch"/>
+        </copy>
+        <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
+        <copy toDir="${target.sample.device.dir}/${sample_type}">
+            <fileset dir="artifact/"/>
+        </copy>
+
+        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
+        <copy toDir="${target.unit.dir}/${sample_type}">
+            <fileset dir="units"/>
+        </copy>
+    </target>
+
+    <target name="clean">
+        <delete file="${target.db.dir}/${data_source}.h2.db"/>
+        <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete file="${target.page.dir}/${sample_type}.hbs"/>
+        <delete dir="${target.unit.dir}/${sample_type}"/>
+        <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
+            <remove path="/IoTDeviceTypeConfigManager/IotDeviceTypeConfig[type='${sample_type}']"/>
+        </xmltask>
+        <xmltask source="${datasources.conf}" dest="${datasources.conf}" report="true">
+            <remove path="/datasources-configuration/datasources/datasource[name='${data_source}']"/>
+        </xmltask>
+    </target>
+
+</project>

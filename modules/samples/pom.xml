@@ -42,6 +42,7 @@
         <module>digital_display/src</module>
         <module>raspberrypi/src</module>
         <module>sensebot/src</module>
+        <module>virtual_firealarm/src</module>
     </modules>
 
     <dependencyManagement>
