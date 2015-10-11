@@ -33,7 +33,7 @@
                 <![CDATA[
         <datasource>
             <name>${data_source}</name>
-            <description>The datasource used for Arduino database</description>
+            <description>The datasource used for Firealarm database</description>
             <jndiConfig>
                 <name>jdbc/${data_source}</name>
             </jndiConfig>

@@ -2,13 +2,45 @@
 
 echo "----------------------------------------------------------------"
 echo "|		WSO2 IOT Sample				"
-echo "|		  RaspiAlarm				"
+echo "|	   Virtual RaspiAlarm			"
 echo "|	       ----------------				"
 echo "|    ....initializing startup-script	"
 echo "----------------------------------------------------------------"
 
 
 unzip firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar.zip
+
+while true; do
+    read -p "What is the network-interface of your PC that the Agent should use (find from ifconfig. ex: wlan0,en0,eth0..) > " interface
+
+    if [ $interface -eq $interface 2>/dev/null ]
+    then
+        echo "Setting the network-interface to " $interface
+        sed s/^network-interface=.*/network-interface=$interface/ deviceConfig.properties > myTmp
+        mv -f myTmp deviceConfig.properties
+        rm myTmp
+        break;
+    else
+        echo "Please select an appropriate interface from those which are listed on ifconfig."
+    fi
+done
+
+while true; do
+    read -p "Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-IoT-Server (ex: '60' indicates 1 minute) > " interval
+
+    if [ $interval -eq $interval 2>/dev/null ]
+    then
+        echo "Setting data-push interval to " $interval " seconds."
+        sed s/^push-interval=.*/push-interval=$interval/ deviceConfig.properties > myTmp
+        mv -f myTmp deviceConfig.properties
+        rm myTmp
+        break;
+    else
+        echo "Input needs to be an integer indicating the number seconds between successive data-pushes."
+    fi
+done
+
+
 java -jar firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 
