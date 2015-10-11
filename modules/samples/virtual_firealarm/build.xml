@@ -62,7 +62,19 @@
         </exec>
     </target>
 
-    <target name="deploy" depends="create-db,build">
+    <target name="build-agent">
+        <echo message="Downloading agent source...." />
+        <exec dir="." executable="sh">
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent'" />
+        </exec>
+        <echo message="building agent from source" />
+        <exec dir="FireAlarmVirtualAgent" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+        <copy file="FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="sketch"/>
+    </target>
+
+    <target name="deploy" depends="create-db,build-agent,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
