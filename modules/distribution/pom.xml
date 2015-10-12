@@ -348,6 +348,32 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
+					<!--Install default samples-->
+					<execution>
+						<id>install_libs</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<echo message="Downloading lib source...." />
+								<mkdir dir="target/libs-temp"/>
+								<exec dir="target/libs-temp" executable="sh">
+									<arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-appliances/trunk/org.wso2.carbon.devicemgt.grant --non-interactive --trust-server-cert'" />
+								</exec>
+								<echo message="building libraries from source" />
+								<exec dir="target/libs-temp/org.wso2.carbon.devicemgt.grant" executable="sh">
+									<arg line="-c 'mvn clean install'" />
+								</exec>
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib/"
+                                      overwrite="true">
+                                    <fileset
+                                            dir="target/libs-temp/org.wso2.carbon.devicemgt.grant/target/" includes="*.jar"/>
+                                </copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>clean_target</id>
 						<phase>install</phase>
