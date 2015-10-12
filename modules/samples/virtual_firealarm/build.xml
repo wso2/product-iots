@@ -66,7 +66,7 @@
     <target name="build-agent">
         <echo message="Downloading agent source...." />
         <exec dir="." executable="sh">
-            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent'" />
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent --non-interactive --trust-server-cert'" />
         </exec>
         <echo message="building agent from source" />
         <exec dir="FireAlarmVirtualAgent" executable="sh">
