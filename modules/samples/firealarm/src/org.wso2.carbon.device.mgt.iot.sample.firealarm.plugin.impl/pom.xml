@@ -67,9 +67,12 @@
 							org.w3c.dom,
 							org.wso2.carbon.device.mgt.common.*,
 							org.wso2.carbon.device.mgt.common,
+							org.wso2.carbon.policy.mgt.common,
+							org.wso2.carbon.policy.mgt.common.*,
 							org.wso2.carbon.context.*,
 							org.wso2.carbon.ndatasource.core,
 							org.wso2.carbon.device.mgt.iot.common.*,
+							com.google.gson.*
 						</Import-Package>
 
 						<Export-Package>
@@ -99,6 +102,17 @@
 
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.policy.mgt.core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.device.mgt.common</artifactId>
 		</dependency>
 		<dependency>
@@ -111,6 +125,10 @@
 			<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 
 
 	</dependencies>

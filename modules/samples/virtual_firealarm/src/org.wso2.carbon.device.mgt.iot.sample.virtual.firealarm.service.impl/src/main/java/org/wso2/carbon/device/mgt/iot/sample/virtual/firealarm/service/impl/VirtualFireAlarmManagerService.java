@@ -306,15 +306,6 @@ public class VirtualFireAlarmManagerService {
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
 		newXmppAccount.setUsername(deviceId);
 		newXmppAccount.setPassword(accessToken);
-
-		String xmppEndPoint = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
-
-		int indexOfChar = xmppEndPoint.lastIndexOf('/');
-
-		if (indexOfChar != -1) {
-			xmppEndPoint = xmppEndPoint.substring((indexOfChar + 1), xmppEndPoint.length());
-		}
-
 		newXmppAccount.setEmail(deviceId + "@wso2.com");
 
 		XmppServerClient xmppServerClient = new XmppServerClient();
