@@ -114,46 +114,46 @@ public class VirtualFireAlarmService {
 	private static final String mqttServerSubscribeTopic = "wso2/iot/+/" + VirtualFireAlarmConstants.DEVICE_TYPE + "/+/reply";
 	private static final String iotServerSubscriber = "IoT-Server";
 
-	static{
-		String xmppServer = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
-		int indexOfChar = xmppServer.lastIndexOf('/');
-		if (indexOfChar != -1) {
-			xmppServer = xmppServer.substring((indexOfChar + 1), xmppServer.length());
-		}
-
-		int xmppPort = Integer.parseInt(XmppConfig.getInstance().getSERVER_CONNECTION_PORT());
-		xmppClient = new XMPPClient(xmppServer, xmppPort) {
-			@Override
-			protected void processXMPPMessage(Message xmppMessage) {
-
-			}
-		};
-
-		String xmppUsername = XmppConfig.getInstance().getXmppUsername();
-		String xmppPassword = XmppConfig.getInstance().getXmppPassword();
-
-		try {
-			xmppClient.connectAndLogin(xmppUsername, xmppPassword, "iotServer");
-		} catch (DeviceManagementException e) {
-			e.printStackTrace();
-		}
-
-		xmppClient.setMessageFilterAndListener("");
-
-		String mqttEndpoint = MqttConfig.getInstance().getMqttQueueEndpoint();
-		mqttClient = new MQTTClient(iotServerSubscriber, VirtualFireAlarmConstants.DEVICE_TYPE, mqttEndpoint, mqttServerSubscribeTopic) {
-			@Override
-			protected void postMessageArrived(String topic, MqttMessage message) {
-
-			}
-		};
-
-		try {
-			mqttClient.connectAndSubscribe();
-		} catch (DeviceManagementException e) {
-			e.printStackTrace();
-		}
-	}
+//	static{
+//		String xmppServer = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
+//		int indexOfChar = xmppServer.lastIndexOf('/');
+//		if (indexOfChar != -1) {
+//			xmppServer = xmppServer.substring((indexOfChar + 1), xmppServer.length());
+//		}
+//
+//		int xmppPort = Integer.parseInt(XmppConfig.getInstance().getSERVER_CONNECTION_PORT());
+//		xmppClient = new XMPPClient(xmppServer, xmppPort) {
+//			@Override
+//			protected void processXMPPMessage(Message xmppMessage) {
+//
+//			}
+//		};
+//
+//		String xmppUsername = XmppConfig.getInstance().getXmppUsername();
+//		String xmppPassword = XmppConfig.getInstance().getXmppPassword();
+//
+//		try {
+//			xmppClient.connectAndLogin(xmppUsername, xmppPassword, "iotServer");
+//		} catch (DeviceManagementException e) {
+//			e.printStackTrace();
+//		}
+//
+//		xmppClient.setMessageFilterAndListener("");
+//
+//		String mqttEndpoint = MqttConfig.getInstance().getMqttQueueEndpoint();
+//		mqttClient = new MQTTClient(iotServerSubscriber, VirtualFireAlarmConstants.DEVICE_TYPE, mqttEndpoint, mqttServerSubscribeTopic) {
+//			@Override
+//			protected void postMessageArrived(String topic, MqttMessage message) {
+//
+//			}
+//		};
+//
+//		try {
+//			mqttClient.connectAndSubscribe();
+//		} catch (DeviceManagementException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 
 	@Path("manager/device/register")
