@@ -325,6 +325,11 @@
 											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi"
 											includes="build.xml"/>
 								</subant>
+								<subant target="deploy">
+									<fileset
+											dir="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm"
+											includes="build.xml"/>
+								</subant>
 								<copy todir="../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/"
 									  overwrite="true">
 									<fileset

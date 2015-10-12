@@ -23,7 +23,8 @@
                 <![CDATA[
     <IotDeviceTypeConfig type="${sample_type}">
 		<DatasourceName>jdbc/${data_source}</DatasourceName>
-		<ApiApplicationName>virtual_firealarm</ApiApplicationName>
+		<!--TODO: Uncomment this to work with apim @ 192.168.67.21 -->
+		<!--ApiApplicationName>firealarm</ApiApplicationName-->
 	</IotDeviceTypeConfig>
 	            ]]>
             </insert>
@@ -62,7 +63,19 @@
         </exec>
     </target>
 
-    <target name="deploy" depends="create-db,build">
+    <target name="build-agent">
+        <echo message="Downloading agent source...." />
+        <exec dir="." executable="sh">
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent'" />
+        </exec>
+        <echo message="building agent from source" />
+        <exec dir="FireAlarmVirtualAgent" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+        <copy file="FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="sketch"/>
+    </target>
+
+    <target name="deploy" depends="create-db,build-agent,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
@@ -82,6 +95,8 @@
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete file="${target.page.dir}/${sample_type}.hbs"/>
+        <delete dir="${target.unit.dir}/${sample_type}"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">

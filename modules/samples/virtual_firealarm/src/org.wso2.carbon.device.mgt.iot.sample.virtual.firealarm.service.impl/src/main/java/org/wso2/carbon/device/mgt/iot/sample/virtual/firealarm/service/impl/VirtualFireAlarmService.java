@@ -24,6 +24,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.jivesoftware.smack.packet.Message;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
@@ -37,6 +39,7 @@ import org.wso2.carbon.device.mgt.iot.common.DeviceValidator;
 import org.wso2.carbon.device.mgt.iot.common.apimgt.AccessTokenInfo;
 import org.wso2.carbon.device.mgt.iot.common.apimgt.TokenClient;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppAccount;
+import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppServerClient;
 import org.wso2.carbon.device.mgt.iot.common.exception.AccessTokenException;
@@ -46,6 +49,8 @@ import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
 		.VirtualFireAlarmConstants;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.mqtt.MQTTClient;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.xmpp.XMPPClient;
 import org.wso2.carbon.utils.CarbonUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -86,8 +91,9 @@ public class VirtualFireAlarmService {
 
 	private static Log log = LogFactory.getLog(VirtualFireAlarmService.class);
 
-	//TODO; replace this tenant domain
+//TODO; replace this tenant domain
 	private final String SUPER_TENANT = "carbon.super";
+
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
 
@@ -102,9 +108,53 @@ public class VirtualFireAlarmService {
 	public static final String HTTP_PROTOCOL = "HTTP";
 	public static final String MQTT_PROTOCOL = "MQTT";
 
+	private static ConcurrentHashMap<String, String> deviceToIpMap = new ConcurrentHashMap<String, String>();
+	private static XMPPClient xmppClient;
+	private static MQTTClient mqttClient;
+	private static final String mqttServerSubscribeTopic = "wso2/iot/+/" + VirtualFireAlarmConstants.DEVICE_TYPE + "/+/reply";
+	private static final String iotServerSubscriber = "IoT-Server";
 
-	private static ConcurrentHashMap<String, String> deviceToIpMap =
-			new ConcurrentHashMap<String, String>();
+	static{
+		String xmppServer = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
+		int indexOfChar = xmppServer.lastIndexOf('/');
+		if (indexOfChar != -1) {
+			xmppServer = xmppServer.substring((indexOfChar + 1), xmppServer.length());
+		}
+
+		int xmppPort = Integer.parseInt(XmppConfig.getInstance().getSERVER_CONNECTION_PORT());
+		xmppClient = new XMPPClient(xmppServer, xmppPort) {
+			@Override
+			protected void processXMPPMessage(Message xmppMessage) {
+
+			}
+		};
+
+		String xmppUsername = XmppConfig.getInstance().getXmppUsername();
+		String xmppPassword = XmppConfig.getInstance().getXmppPassword();
+
+		try {
+			xmppClient.connectAndLogin(xmppUsername, xmppPassword, "iotServer");
+		} catch (DeviceManagementException e) {
+			e.printStackTrace();
+		}
+
+		xmppClient.setMessageFilterAndListener("");
+
+		String mqttEndpoint = MqttConfig.getInstance().getMqttQueueEndpoint();
+		mqttClient = new MQTTClient(iotServerSubscriber, VirtualFireAlarmConstants.DEVICE_TYPE, mqttEndpoint, mqttServerSubscribeTopic) {
+			@Override
+			protected void postMessageArrived(String topic, MqttMessage message) {
+
+			}
+		};
+
+		try {
+			mqttClient.connectAndSubscribe();
+		} catch (DeviceManagementException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	@Path("manager/device/register")
 	@PUT
@@ -333,7 +383,7 @@ public class VirtualFireAlarmService {
 		//create new device id
 		String deviceId = shortUUID();
 
-		TokenClient accessTokenClient = new TokenClient("firealarm");
+		TokenClient accessTokenClient = new TokenClient(VirtualFireAlarmConstants.DEVICE_TYPE);
 		AccessTokenInfo accessTokenInfo = null;
 
 		accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);

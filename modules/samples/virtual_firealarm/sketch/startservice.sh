@@ -34,7 +34,7 @@ while true; do
 done
 
 
-java -jar firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar wso2-firealarm-virtual-agent.jar
 
 #while true; do
 #    read -p "Do you wish to run 'apt-get update' and continue? [Yes/No] " yn

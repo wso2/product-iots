@@ -99,6 +99,13 @@
                 <scope>system</scope>
 				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.analytics_0.9.2.SNAPSHOT.jar</systemPath>
 			</dependency>
+			<dependency>
+				<groupId>org.wso2.carbon.devicemgt</groupId>
+				<artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
+				<version>${carbon.device.mgt.version}</version>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.policy.mgt.common_0.9.2.SNAPSHOT.jar</systemPath>
+			</dependency>
 
 			<!--IOT dependencies-->
 
