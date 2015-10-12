@@ -98,6 +98,16 @@
 			<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
 		</dependency>
 
+		<!--Dependencies on XMPP Client Library-->
+		<dependency>
+			<groupId>org.igniterealtime.smack.wso2</groupId>
+			<artifactId>smack</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.igniterealtime.smack.wso2</groupId>
+			<artifactId>smackx</artifactId>
+		</dependency>
+
 	</dependencies>
 
 
