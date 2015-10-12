@@ -102,6 +102,15 @@
             <fileMode>755</fileMode>
         </fileSet>
 
+        <!--copy api related rxts-->
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/rxts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/rxts/</outputDirectory>
+            <includes>
+                <include>*.rxt</include>
+            </includes>
+        </fileSet>
+
         <!-- Multi-tenancy related file -->
         <fileSet>
             <directory>
@@ -381,6 +390,8 @@
                 <include>**/org.wso2.ciphertool-1.0.0-wso2v3.jar</include>
             </includes>
         </fileSet>
+
+
         <!--============ Added with ES Features ===============-->
 
         <fileSet>
@@ -390,6 +401,8 @@
                 <include>**/**</include>
             </includes>
         </fileSet>
+
+
 
         <!--============ Added with ES Features ===============-->
 

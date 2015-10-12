@@ -23,22 +23,22 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
-    <jaxrs:server id="FireAlarmController" address="/controller">
-        <jaxrs:serviceBeans>
-            <bean id="VirtualFireAlarmControllerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmControllerService">
-                <!--<property name="mqttFireAlarmSubscriber" ref="mqttSubscriber"/>-->
-            </bean>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
-        </jaxrs:providers>
-    </jaxrs:server>
+    <!--<jaxrs:server id="FireAlarmController" address="/controller">-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<bean id="VirtualFireAlarmControllerService"-->
+                  <!--class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmControllerService">-->
+                <!--&lt;!&ndash;<property name="mqttFireAlarmSubscriber" ref="mqttSubscriber"/>&ndash;&gt;-->
+            <!--</bean>-->
+        <!--</jaxrs:serviceBeans>-->
+        <!--<jaxrs:providers>-->
+            <!--<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />-->
+        <!--</jaxrs:providers>-->
+    <!--</jaxrs:server>-->
 
-    <jaxrs:server id="VirtualFireAlarmManager" address="/manager">
+    <jaxrs:server id="VirtualFireAlarm" address="/">
         <jaxrs:serviceBeans>
-            <bean id="VirtualFireAlarmManagerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmManagerService"/>
+            <bean id="VirtualFireAlarmService"
+                  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />

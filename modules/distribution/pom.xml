@@ -442,31 +442,31 @@
 									<token>(jdbc/WSO2CarbonDB)</token>
 									<value>jdbc/WSO2AM_DB</value>
 								</replacement>
-								<!--<replacement>-->
-									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
-									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.AuthorizationCodeGrantHandler)</token>-->
-									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedAuthorizationCodeGrantHandler</value>-->
-								<!--</replacement>-->
-								<!--<replacement>-->
-									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
-									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler)</token>-->
-									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</value>-->
-								<!--</replacement>-->
-								<!--<replacement>-->
-									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
-									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.ClientCredentialsGrantHandler)</token>-->
-									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedClientCredentialsGrantHandler</value>-->
-								<!--</replacement>-->
-								<!--<replacement>-->
-									<!--<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>-->
-									<!--<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.saml.SAML2BearerGrantHandler)</token>-->
-									<!--<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedSAML2BearerGrantHandler</value>-->
-								<!--</replacement>-->
-								<!--<replacement>-->
-									<!--<xpath>/Server/OAuth/OAuthCallbackHandlers</xpath>-->
-									<!--<token>(org.wso2.carbon.identity.oauth.callback.DefaultCallbackHandler)</token>-->
-									<!--<value>org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler</value>-->
-								<!--</replacement>-->
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.AuthorizationCodeGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedAuthorizationCodeGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.ClientCredentialsGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedClientCredentialsGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.saml.SAML2BearerGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedSAML2BearerGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/OAuthCallbackHandlers</xpath>
+									<token>(org.wso2.carbon.identity.oauth.callback.DefaultCallbackHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler</value>
+								</replacement>
 
 							</replacements>
 						</configuration>
@@ -485,6 +485,39 @@
 									<xpath>/Server/JDBCPersistenceManager/DataSource/Name</xpath>
 									<token>(jdbc/WSO2CarbonDB)</token>
 									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>replace-for-api-publisher</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/deployment/server/jaggeryapps/api-publisher/site/conf/site.json</file>
+							<replacements>
+								<replacement>
+									<token>(/publisher)</token>
+									<value>/api-publisher</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+					<execution>
+						<id>replace-for-api-store</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.platform.version}/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json</file>
+							<replacements>
+								<replacement>
+									<token>(/store)</token>
+									<value>/api-store</value>
 								</replacement>
 							</replacements>
 						</configuration>
