@@ -49,7 +49,6 @@ public class VirtualFireAlarmManager implements DeviceManager {
     private static final Log log = LogFactory.getLog(VirtualFireAlarmManager.class);
 
 
-
     @Override
     public FeatureManager getFeatureManager() {
         return null;

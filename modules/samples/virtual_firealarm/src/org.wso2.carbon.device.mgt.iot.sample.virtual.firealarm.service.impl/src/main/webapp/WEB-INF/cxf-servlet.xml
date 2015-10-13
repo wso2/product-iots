@@ -23,11 +23,12 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
-    <jaxrs:server id="FireAlarmController" address="/controller">
+    <jaxrs:server id="VirtualFireAlarmController" address="/controller">
         <jaxrs:serviceBeans>
             <bean id="VirtualFireAlarmControllerService"
                   class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmControllerService">
-                <!--<property name="mqttFireAlarmSubscriber" ref="mqttSubscriber"/>-->
+                <property name="virtualFireAlarmMqttSubscriber" ref="mqttSubscriberBean"/>
+                <property name="virtualFireAlarmXmppConnector" ref="xmppConnectorBean"/>
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
@@ -46,6 +47,12 @@
     </jaxrs:server>
 
 
+    <bean id="mqttSubscriberBean" class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMqttSubscriber" >
+
+    </bean>
+    <bean id="xmppConnectorBean" class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmXmppConnector" >
+
+    </bean>
     <!--<bean id="mqttSubscriber" class="org.wso2.carbon.device.mgt.iot.firealarm.api.util.MQTTFirealarmSubscriber" >-->
         <!-- -->
     <!--</bean>-->

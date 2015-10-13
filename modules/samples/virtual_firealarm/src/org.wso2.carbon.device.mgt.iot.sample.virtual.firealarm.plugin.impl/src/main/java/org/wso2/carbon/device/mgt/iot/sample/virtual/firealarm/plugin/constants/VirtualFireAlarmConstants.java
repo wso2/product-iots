@@ -22,4 +22,9 @@ public class VirtualFireAlarmConstants {
     public final static String DEVICE_PLUGIN_DEVICE_ID = "VIRTUAL_FIREALARM_DEVICE_ID";
     public final static String STATE_ON = "ON";
     public final static String STATE_OFF = "OFF";
+
+	public static final String URL_PREFIX = "http://";
+	public static final String BULB_CONTEXT = "/BULB/";
+	public static final String SONAR_CONTEXT = "/HUMIDITY/";
+	public static final String TEMPERATURE_CONTEXT = "/TEMPERATURE/";
 }
