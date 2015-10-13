@@ -22,23 +22,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
-
-    <jaxrs:server id="FireAlarmController" address="/controller">
+    <jaxrs:server id="FireAlarm" address="/">
         <jaxrs:serviceBeans>
-            <bean id="FireAlarmControllerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmControllerService">
-                <!--<property name="mqttFireAlarmSubscriber" ref="mqttSubscriber"/>-->
-            </bean>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
-        </jaxrs:providers>
-    </jaxrs:server>
-
-    <jaxrs:server id="FireAlarmManager" address="/manager">
-        <jaxrs:serviceBeans>
-            <bean id="FireAlarmManagerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmManagerService"/>
+            <bean id="FireAlarmService"
+                  class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />

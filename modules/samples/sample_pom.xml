@@ -42,6 +42,7 @@
 		<module>digital_display/src</module>
 		<module>raspberrypi/src</module>
 		<module>sensebot/src</module>
+		<module>virtual_firealarm/src</module>
 	</modules>
 
 	<dependencyManagement>
@@ -80,29 +81,41 @@
 			<dependency>
 				<groupId>org.wso2.carbon.devicemgt</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.core</artifactId>
-				<scope>system</scope>
 				<version>${carbon.device.mgt.version}</version>
-				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_0.9.2.SNAPSHOT.jar</systemPath>
+                <scope>system</scope>
+                <systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_0.9.2.SNAPSHOT.jar</systemPath>
 			</dependency>
 			<dependency>
 				<groupId>org.wso2.carbon.devicemgt</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.common</artifactId>
-				<scope>system</scope>
 				<version>${carbon.device.mgt.version}</version>
+				<scope>system</scope>
 				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.common_0.9.2.SNAPSHOT.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>org.wso2.carbon.devicemgt</groupId>
+				<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+				<version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.analytics_0.9.2.SNAPSHOT.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>org.wso2.carbon.devicemgt</groupId>
+				<artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
+				<version>${carbon.device.mgt.version}</version>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.policy.mgt.common_0.9.2.SNAPSHOT.jar</systemPath>
 			</dependency>
 
 			<!--IOT dependencies-->
-
 
 			<dependency>
 				<groupId>org.wso2.carbon.device.mgt.iot</groupId>
 				<artifactId>org.wso2.carbon.device.mgt.iot.common</artifactId>
 				<version>${carbon.iot.device.mgt.version}</version>
-				<scope>system</scope>
+                <scope>system</scope>
 				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot.common_1.0.0.SNAPSHOT.jar</systemPath>
 			</dependency>
-
 
 			<dependency>
 				<groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
@@ -188,7 +201,8 @@
 				<groupId>org.eclipse.paho</groupId>
 				<artifactId>mqtt-client</artifactId>
 				<version>${eclipse.paho.version}</version>
-				<scope>provided</scope>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/lib/mqtt-push-1.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>
 			</dependency>
 			<dependency>
 				<groupId>javax</groupId>
@@ -206,6 +220,17 @@
 				<artifactId>jackson-jaxrs</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+
+			<!--Analytics dependencies-->
+
+			<dependency>
+				<groupId>org.wso2.carbon.analytics</groupId>
+				<artifactId>org.wso2.carbon.analytics.datasource.commons</artifactId>
+				<version>${carbon.analytics.version}</version>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.analytics.datasource.commons_1.0.3.jar</systemPath>
+			</dependency>
+
 
 			<!--Osgi dependencies-->
 			<dependency>
@@ -252,13 +277,15 @@
 				<groupId>com.h2database.wso2</groupId>
 				<artifactId>h2-database-engine</artifactId>
 				<version>${orbit.h2.engine.version}</version>
-				<scope>provided</scope>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/h2-database-engine_1.2.140.wso2v3.jar</systemPath>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.tomcat.wso2</groupId>
 				<artifactId>jdbc-pool</artifactId>
 				<version>${orbit.tomcat.jdbc.pooling.version}</version>
-				<scope>provided</scope>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/jdbc-pool_7.0.34.wso2v2.jar</systemPath>
 			</dependency>
 
 			<!-- CXF dependencies -->
@@ -266,25 +293,25 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
 				<version>${cxf.version}</version>
-				<scope>provided</scope>
+				<!--<scope>provided</scope>-->
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 				<version>${cxf.version}</version>
-				<scope>provided</scope>
+				<!--<scope>provided</scope>-->
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http</artifactId>
 				<version>${cxf.version}</version>
-				<scope>provided</scope>
+				<!--<scope>provided</scope>-->
 			</dependency>
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>jsr311-api</artifactId>
 				<version>${javax.ws.rs.version}</version>
-				<scope>provided</scope>
+				<!--<scope>provided</scope>-->
 			</dependency>
 
 
@@ -292,14 +319,16 @@
 				<groupId>commons-httpclient.wso2</groupId>
 				<artifactId>commons-httpclient</artifactId>
 				<version>${commons-httpclient.orbit.version}</version>
-				<scope>provided</scope>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/commons-httpclient_3.1.0.wso2v2.jar</systemPath>
 			</dependency>
 
 			<dependency>
 				<groupId>org.json.wso2</groupId>
 				<artifactId>json</artifactId>
 				<version>${commons-json.version}</version>
-				<scope>provided</scope>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/json_2.0.0.wso2v1.jar</systemPath>				
 			</dependency>
 
 			<dependency>
@@ -364,12 +393,16 @@
 						<artifactId>org.wso2.carbon.registry.api</artifactId>
 					</exclusion>
 				</exclusions>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_4.4.1.jar</systemPath>		
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
 				<version>${google.gson.version}</version>
+				<scope>system</scope>
+				<systemPath>${basedir}/../../../../repository/components/plugins/com.google.gson_2.3.1.jar</systemPath>
 			</dependency>
 
 
@@ -424,13 +457,14 @@
 
 
 		<commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
-		<commons-json.version>3.0.0.wso2v1</commons-json.version>
+		<commons-json.version>2.0.0.wso2v1</commons-json.version>
 		<google.gson.version>2.3.1</google.gson.version>
 
 
 		<!-- Source code -->
 		<wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
 		<wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>
+		<carbon.analytics.version>1.0.3</carbon.analytics.version>
 
 	</properties>
 

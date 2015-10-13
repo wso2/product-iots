@@ -301,8 +301,6 @@ public class FireAlarmManagerService {
 		String refreshToken = accessTokenInfo.getRefresh_token();
 		//adding registering data
 
-
-
 		XmppAccount newXmppAccount = new XmppAccount();
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
 		newXmppAccount.setUsername(deviceId);

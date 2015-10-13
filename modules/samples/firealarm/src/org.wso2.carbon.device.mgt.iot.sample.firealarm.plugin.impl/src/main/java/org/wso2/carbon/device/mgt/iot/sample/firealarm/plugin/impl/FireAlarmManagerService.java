@@ -19,6 +19,22 @@ public class FireAlarmManagerService implements DeviceManagementService{
 		return FireAlarmConstants.DEVICE_TYPE;
 	}
 
+
+	@Override
+	public String getProviderTenantDomain() {
+		return "carbon.super";
+	}
+
+	@Override
+	public boolean isSharedWithAllTenants() {
+		return true;
+	}
+
+	@Override
+	public String[] getSharedTenantsDomain() {
+		return new String[0];
+	}
+
 	@Override
 	public void init() throws DeviceManagementException {
 		this.deviceManager=new FireAlarmManager();

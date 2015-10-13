@@ -17,6 +17,9 @@
 package org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
+import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.iot.common.datastore.impl.DataStreamDefinitions;
 import org.wso2.carbon.device.mgt.iot.sample.raspberrypi.service.impl.util.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.raspberrypi.plugin.constants.RaspberrypiConstants;
@@ -35,6 +38,9 @@ import javax.ws.rs.core.Response;
 public class RaspberrypiControllerService {
 
 	private static Log log = LogFactory.getLog(RaspberrypiControllerService.class);
+	private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
+	//TODO; replace this tenant domain
+	private final String SUPER_TENANT = "carbon.super";
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
 
@@ -46,29 +52,29 @@ public class RaspberrypiControllerService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void pushData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
 
-		String temperature = dataMsg.value;                            //TEMP
+		float temperature = dataMsg.value;                            //TEMP
 		log.info("Recieved Sensor Data Values: " + temperature);
 
 		if (log.isDebugEnabled()) {
 			log.debug("Recieved Temperature Data Value: " + temperature + " degrees C");
 		}
+
+		PrivilegedCarbonContext.startTenantFlow();
+		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		ctx.setTenantDomain(SUPER_TENANT, true);
+		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
+				.getOSGiService(DeviceAnalyticsService.class, null);
+		Object metdaData[] = {dataMsg.owner, RaspberrypiConstants.DEVICE_TYPE, dataMsg.deviceId,
+				System.currentTimeMillis()};
+		Object payloadData[] = {temperature};
 		try {
+			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0",
+												metdaData, new Object[0], payloadData);
+		} catch (DataPublisherConfigurationException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 
-			DeviceController deviceController = new DeviceController();
-			boolean result = deviceController.pushBamData(dataMsg.owner,
-														  RaspberrypiConstants.DEVICE_TYPE,
-														  dataMsg.deviceId,
-														  System.currentTimeMillis(), "DeviceData",
-														  temperature,
-														  DataStreamDefinitions.StreamTypeLabel.TEMPERATURE);
-
-			if (!result) {
-				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			}
-
-		} catch (UnauthorizedException e) {
-			response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-
+		} finally {
+			PrivilegedCarbonContext.endTenantFlow();
 		}
 	}
 }

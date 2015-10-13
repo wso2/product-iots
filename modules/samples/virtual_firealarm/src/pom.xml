@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>iot-server-samples</artifactId>
+		<groupId>org.wso2.carbon.device.mgt.iot.server.sample</groupId>
+		<version>${carbon.iot.device.mgt.version}</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm</artifactId>
+	<packaging>pom</packaging>
+	<version>${carbon.iot.device.mgt.version}</version>
+	<name>WSO2 Carbon - Virtual Firealarm Sample</name>
+	<url>http://wso2.org</url>
+	<description>WSO2 Carbon - IoT Server Sample</description>
+
+	<modules>
+		<module>org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.impl</module>
+		<module>org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl</module>
+	</modules>
+
+</project>

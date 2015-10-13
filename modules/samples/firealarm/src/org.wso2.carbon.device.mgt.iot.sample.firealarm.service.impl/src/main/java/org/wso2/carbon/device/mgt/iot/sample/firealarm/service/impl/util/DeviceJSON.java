@@ -14,5 +14,5 @@ public class DeviceJSON {
     @XmlElement(required = true) public String reply;
     @XmlElement public Long time;
     @XmlElement public String key;
-    @XmlElement public String value;
+    @XmlElement public float value;
 }

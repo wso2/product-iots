@@ -14,6 +14,22 @@ import java.util.List;
 
 public class SensebotManagerService implements DeviceManagementService {
 	private DeviceManager deviceManager;
+
+	@Override
+	public String getProviderTenantDomain() {
+		return "carbon.super";
+	}
+
+	@Override
+	public boolean isSharedWithAllTenants() {
+		return true;
+	}
+
+	@Override
+	public String[] getSharedTenantsDomain() {
+		return new String[0];
+	}
+
 	@Override
 	public String getType() {
 		return SensebotConstants.DEVICE_TYPE;

@@ -1,0 +1,25 @@
+{
+  "name": "virtual_firealarm",
+  "tags": "WSO2, IoT, Raspberry, Fire Alarm, Virtual",
+  "rate": 3,
+  "attributes": {
+    "overview_status": "PUBLISHED",
+    "overview_provider":"admin",
+    "overview_version":"1.0.0",
+    "overview_name":"virtual_firealarm",
+    "overview_url":"http://www.google.lk",
+    "setupGuide_guideImage":"undefined",
+    "overview_actionLabel":"Download",
+    "sketches_Sketches":"virtual_firealarm",
+    "ingredients_ingredients":[
+      "Virtual Agent that simulates an actual firealarm"
+    ],
+    "overview_description":"Download our Virtual Agent and try-it out for close to real simulation of the FireAlarm Device-Type",
+    "setupGuide_description":"sfd",
+    "quickStartupSteps_stepDescription":["Download the Virtual Agent","Run the 'startservice.sh' script","Provide the push-interval and network-interface"],
+    "quickStartupSteps_stepLabel":["1","2","3"],
+    "images_thumbnail":"virtual_firealarm/virtual_firealarm_thumbnail.png",
+    "images_banner":"virtual_firealarm/virtual_firealarm_banner.png",
+    "overview_thumbnail": "images_thumbnail"
+  }
+}

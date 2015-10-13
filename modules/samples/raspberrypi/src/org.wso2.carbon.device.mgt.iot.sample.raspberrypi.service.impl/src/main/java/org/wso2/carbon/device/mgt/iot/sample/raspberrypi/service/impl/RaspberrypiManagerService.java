@@ -79,6 +79,7 @@ public class RaspberrypiManagerService {
 			device.setName(name);
 			device.setType(RaspberrypiConstants.DEVICE_TYPE);
 			enrolmentInfo.setOwner(owner);
+			device.setEnrolmentInfo(enrolmentInfo);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
 			if (added) {
 				response.setStatus(Response.Status.OK.getStatusCode());

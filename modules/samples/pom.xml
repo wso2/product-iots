@@ -42,6 +42,7 @@
         <module>digital_display/src</module>
         <module>raspberrypi/src</module>
         <module>sensebot/src</module>
+        <module>virtual_firealarm/src</module>
     </modules>
 
     <dependencyManagement>
@@ -86,6 +87,24 @@
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
                 <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.policy.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
                 <version>${carbon.device.mgt.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -204,6 +223,22 @@
                 <!--<scope>provided</scope>-->
             </dependency>
 
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${google.gson.version}</version>
+            </dependency>
+
+            <!--Analytics dependencies-->
+
+            <dependency>
+                <groupId>org.wso2.carbon.analytics</groupId>
+                <artifactId>org.wso2.carbon.analytics.datasource.commons</artifactId>
+                <version>${carbon.analytics.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+
             <!--Osgi dependencies-->
             <dependency>
                 <groupId>org.eclipse.osgi</groupId>
@@ -299,8 +334,6 @@
                 <scope>provided</scope>
             </dependency>
 
-
-
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
@@ -363,12 +396,20 @@
                         <artifactId>org.wso2.carbon.registry.api</artifactId>
                     </exclusion>
                 </exclusions>
+                <scope>provided</scope>
             </dependency>
 
-
-
-
-
+			<!--Dependencies on XMPP Client Library-->
+			<dependency>
+				<groupId>org.igniterealtime.smack.wso2</groupId>
+				<artifactId>smack</artifactId>
+				<version>${smack.wso2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.igniterealtime.smack.wso2</groupId>
+				<artifactId>smackx</artifactId>
+				<version>${smackx.wso2.version}</version>
+			</dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -401,34 +442,33 @@
         <orbit.tomcat.jdbc.pooling.version>7.0.34.wso2v2</orbit.tomcat.jdbc.pooling.version>
 
         <eclipse.paho.version>0.4.0</eclipse.paho.version>
+        <google.gson.version>2.2.4</google.gson.version>
 
 
-
-        <!-- CXF version -->
-        <cxf.version>2.6.1</cxf.version>
+        <!-- CXF version -->        <cxf.version>2.6.1</cxf.version>
         <jackson.version>1.9.0</jackson.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
-
-
         <!-- Device Management -->
-
         <carbon.device.mgt.version>0.9.2-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
-
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <jackson.fasterxml.version>2.6.1</jackson.fasterxml.version>
 
-
-
         <!-- Source code -->
         <wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
         <wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>
+        <carbon.analytics.version>1.0.3</carbon.analytics.version>
+
+		<!--XMPP/MQTT Version-->
+		<smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
+		<smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
+		<paho.mqtt.version>0.4.0</paho.mqtt.version>
 
     </properties>
 
