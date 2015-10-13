@@ -7,8 +7,8 @@ import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConnector;
 
-public class VirtualFireAlarmXmppConnector extends XmppConnector {
-	private static Log log = LogFactory.getLog(VirtualFireAlarmXmppConnector.class);
+public class VirtualFireAlarmXMPPConnector extends XmppConnector {
+	private static Log log = LogFactory.getLog(VirtualFireAlarmXMPPConnector.class);
 
 	private static String xmppServerIP;
 	//	private static int xmppServerPort;
@@ -16,7 +16,7 @@ public class VirtualFireAlarmXmppConnector extends XmppConnector {
 	private static String xmppAdminPassword;
 	private static String xmppAdminAccountJID;
 
-	private VirtualFireAlarmXmppConnector() {
+	private VirtualFireAlarmXMPPConnector() {
 		super(XmppConfig.getInstance().getXmppServerIP(),
 		      XmppConfig.getInstance().getSERVER_CONNECTION_PORT());
 	}
@@ -57,10 +57,10 @@ public class VirtualFireAlarmXmppConnector extends XmppConnector {
 						}
 
 						try {
-							VirtualFireAlarmXmppConnector.super.connectAndLogin(xmppAdminUsername,
+							VirtualFireAlarmXMPPConnector.super.connectAndLogin(xmppAdminUsername,
 							                                                    xmppAdminPassword,
 							                                                    null);
-							VirtualFireAlarmXmppConnector.super.setMessageFilterOnReceiver(
+							VirtualFireAlarmXMPPConnector.super.setMessageFilterOnReceiver(
 									xmppAdminAccountJID);
 						} catch (DeviceManagementException e1) {
 							if (log.isDebugEnabled()) {

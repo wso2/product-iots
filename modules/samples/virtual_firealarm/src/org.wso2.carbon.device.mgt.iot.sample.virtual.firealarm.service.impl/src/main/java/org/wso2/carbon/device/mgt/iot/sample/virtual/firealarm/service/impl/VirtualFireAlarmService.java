@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl;
+package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl;
+
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,26 +27,43 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
+import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
+import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
 import org.wso2.carbon.device.mgt.iot.common.DeviceController;
+import org.wso2.carbon.device.mgt.iot.common.DeviceManagement;
 import org.wso2.carbon.device.mgt.iot.common.DeviceValidator;
+import org.wso2.carbon.device.mgt.iot.common.apimgt.AccessTokenInfo;
+import org.wso2.carbon.device.mgt.iot.common.apimgt.TokenClient;
+import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppAccount;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
-import org.wso2.carbon.device.mgt.iot.common.datastore.impl.DataStreamDefinitions;
+import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppServerClient;
+import org.wso2.carbon.device.mgt.iot.common.exception.AccessTokenException;
 import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.common.exception.UnauthorizedException;
-import org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.constants.FireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.util.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
+import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
+		.VirtualFireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util
+		.VirtualFireAlarmMQTTSubscriber;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util
+		.VirtualFireAlarmXMPPConnector;
 import org.wso2.carbon.utils.CarbonUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -57,33 +75,350 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
-public class FireAlarmControllerService {
+//@Path("/VirtualFireAlarmDeviceManager")
+public class VirtualFireAlarmService {
 
-	private static Log log = LogFactory.getLog(FireAlarmControllerService.class);
-	//TODO; replace this tenant domain
+	private static Log log = LogFactory.getLog(VirtualFireAlarmService.class);
+
+//TODO; replace this tenant domain
 	private final String SUPER_TENANT = "carbon.super";
+
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
+
 	private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
-
-	private static final String URL_PREFIX = "http://";
-	private static final String BULB_CONTEXT = "/BULB/";
-	private static final String SONAR_CONTEXT = "/SONAR/";
-	private static final String TEMPERATURE_CONTEXT = "/TEMPERATURE/";
-
 	public static final String XMPP_PROTOCOL = "XMPP";
 	public static final String HTTP_PROTOCOL = "HTTP";
 	public static final String MQTT_PROTOCOL = "MQTT";
 
-
+	private static VirtualFireAlarmMQTTSubscriber virtualFireAlarmMQTTSubscriber;
+	private static VirtualFireAlarmXMPPConnector virtualFireAlarmXMPPConnector;
 	private static ConcurrentHashMap<String, String> deviceToIpMap =
 			new ConcurrentHashMap<String, String>();
 
-	@Path("/register/{owner}/{deviceId}/{ip}")
+	public void setVirtualFireAlarmXMPPConnector(
+			VirtualFireAlarmXMPPConnector virtualFireAlarmXMPPConnector) {
+		this.virtualFireAlarmXMPPConnector = virtualFireAlarmXMPPConnector;
+		virtualFireAlarmXMPPConnector.initConnector();
+		virtualFireAlarmXMPPConnector.connectAndLogin();
+	}
+
+	public void setVirtualFireAlarmMQTTSubscriber(
+			VirtualFireAlarmMQTTSubscriber virtualFireAlarmMQTTSubscriber) {
+		this.virtualFireAlarmMQTTSubscriber = virtualFireAlarmMQTTSubscriber;
+		virtualFireAlarmMQTTSubscriber.initConnector();
+		virtualFireAlarmMQTTSubscriber.connectAndSubscribe();
+	}
+
+	public VirtualFireAlarmXMPPConnector getVirtualFireAlarmXMPPConnector() {
+		return virtualFireAlarmXMPPConnector;
+	}
+
+	public VirtualFireAlarmMQTTSubscriber getVirtualFireAlarmMQTTSubscriber() {
+		return virtualFireAlarmMQTTSubscriber;
+	}
+
+	@Path("manager/device/register")
+	@PUT
+	public boolean register(@QueryParam("deviceId") String deviceId,
+							@QueryParam("name") String name, @QueryParam("owner") String owner) {
+
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+
+		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+		deviceIdentifier.setId(deviceId);
+		deviceIdentifier.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+		try {
+			if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+				response.setStatus(Response.Status.CONFLICT.getStatusCode());
+				return false;
+			}
+			Device device = new Device();
+			device.setDeviceIdentifier(deviceId);
+			EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+
+			enrolmentInfo.setDateOfEnrolment(new Date().getTime());
+			enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
+			enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+			enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
+
+			device.setName(name);
+			device.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+			enrolmentInfo.setOwner(owner);
+			device.setEnrolmentInfo(enrolmentInfo);
+			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
+
+			if (added) {
+				response.setStatus(Response.Status.OK.getStatusCode());
+			} else {
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+			}
+
+			return added;
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
+		}
+	}
+
+	@Path("manager/device/remove/{device_id}")
+	@DELETE
+	public void removeDevice(@PathParam("device_id") String deviceId,
+							 @Context HttpServletResponse response) {
+
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+		deviceIdentifier.setId(deviceId);
+		deviceIdentifier.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+		try {
+			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
+					deviceIdentifier);
+			if (removed) {
+				response.setStatus(Response.Status.OK.getStatusCode());
+
+			} else {
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
+			}
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+		} finally {
+			deviceManagement.endTenantFlow();
+		}
+
+	}
+
+	@Path("manager/device/update/{device_id}")
+	@POST
+	public boolean updateDevice(@PathParam("device_id") String deviceId,
+								@QueryParam("name") String name,
+								@Context HttpServletResponse response) {
+
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+
+		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+		deviceIdentifier.setId(deviceId);
+		deviceIdentifier.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+		try {
+			Device device = deviceManagement.getDeviceManagementService().getDevice(
+					deviceIdentifier);
+			device.setDeviceIdentifier(deviceId);
+
+			// device.setDeviceTypeId(deviceTypeId);
+			device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
+
+			device.setName(name);
+			device.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+
+			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
+					device);
+
+			if (updated) {
+				response.setStatus(Response.Status.OK.getStatusCode());
+
+			} else {
+				response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
+			}
+			return updated;
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+			return false;
+		} finally {
+			deviceManagement.endTenantFlow();
+		}
+
+	}
+
+	@Path("manager/device/{device_id}")
+	@GET
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Device getDevice(@PathParam("device_id") String deviceId) {
+
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+		deviceIdentifier.setId(deviceId);
+		deviceIdentifier.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
+
+		try {
+			return deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
+
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
+		}
+
+	}
+
+	@Path("manager/devices/{username}")
+	@GET
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Device[] getFirealarmDevices(@PathParam("username") String username) {
+
+		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+
+		try {
+			List<Device> userDevices =
+					deviceManagement.getDeviceManagementService().getDevicesOfUser(
+							username);
+			ArrayList<Device> userDevicesforFirealarm = new ArrayList<Device>();
+			for (Device device : userDevices) {
+
+				if (device.getType().equals(VirtualFireAlarmConstants.DEVICE_TYPE) &&
+						device.getEnrolmentInfo().getStatus().equals(
+								EnrolmentInfo.Status.ACTIVE)) {
+					userDevicesforFirealarm.add(device);
+
+				}
+			}
+
+			return userDevicesforFirealarm.toArray(new Device[]{});
+		} catch (DeviceManagementException e) {
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+			return null;
+		} finally {
+			deviceManagement.endTenantFlow();
+		}
+
+	}
+
+	@Path("manager/device/{sketch_type}/download")
+	@GET
+	@Produces("application/octet-stream")
+	public Response downloadSketch(@QueryParam("owner") String owner,
+								   @PathParam("sketch_type") String sketchType) {
+
+		ZipArchive zipFile = null;
+		try {
+			zipFile = createDownloadFile(owner, sketchType);
+			Response.ResponseBuilder rb = Response.ok(zipFile.getZipFile());
+			rb.header("Content-Disposition",
+					  "attachment; filename=\"" + zipFile.getFileName() + "\"");
+			return rb.build();
+		} catch (IllegalArgumentException ex) {
+			return Response.status(400).entity(ex.getMessage()).build();//bad request
+		} catch (DeviceManagementException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		} catch (AccessTokenException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		} catch (DeviceControllerException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		}
+
+	}
+
+	@Path("manager/device/{sketch_type}/generate_link")
+	@GET
+	public Response generateSketchLink(@QueryParam("owner") String owner,
+									   @PathParam("sketch_type") String sketchType) {
+
+		ZipArchive zipFile = null;
+		try {
+			zipFile = createDownloadFile(owner, sketchType);
+			Response.ResponseBuilder rb = Response.ok(zipFile.getDeviceId());
+			return rb.build();
+		} catch (IllegalArgumentException ex) {
+			return Response.status(400).entity(ex.getMessage()).build();//bad request
+		} catch (DeviceManagementException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		} catch (AccessTokenException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		} catch (DeviceControllerException ex) {
+			return Response.status(500).entity(ex.getMessage()).build();
+		}
+
+	}
+
+	private ZipArchive createDownloadFile(String owner, String sketchType)
+			throws DeviceManagementException, AccessTokenException, DeviceControllerException {
+		if (owner == null) {
+			throw new IllegalArgumentException("Error on createDownloadFile() Owner is null!");
+		}
+
+		//create new device id
+		String deviceId = shortUUID();
+
+		TokenClient accessTokenClient = new TokenClient(VirtualFireAlarmConstants.DEVICE_TYPE);
+		AccessTokenInfo accessTokenInfo = null;
+
+		accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
+
+		//create token
+		String accessToken = accessTokenInfo.getAccess_token();
+		String refreshToken = accessTokenInfo.getRefresh_token();
+		//adding registering data
+
+		XmppAccount newXmppAccount = new XmppAccount();
+		newXmppAccount.setAccountName(owner + "_" + deviceId);
+		newXmppAccount.setUsername(deviceId);
+		newXmppAccount.setPassword(accessToken);
+
+		String xmppEndPoint = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
+
+		int indexOfChar = xmppEndPoint.lastIndexOf('/');
+
+		if (indexOfChar != -1) {
+			xmppEndPoint = xmppEndPoint.substring((indexOfChar + 1), xmppEndPoint.length());
+		}
+
+		newXmppAccount.setEmail(deviceId + "@wso2.com");
+
+		XmppServerClient xmppServerClient = new XmppServerClient();
+		xmppServerClient.initControlQueue();
+		boolean status;
+		if(XmppConfig.getInstance().isEnabled()) {
+			status = xmppServerClient.createXMPPAccount(newXmppAccount);
+
+			if (!status) {
+				String msg =
+						"XMPP Account was not created for device - " + deviceId + " of owner - " +
+								owner +
+								". XMPP might have been disabled in org.wso2.carbon.device.mgt.iot.common.config.server.configs";
+				log.warn(msg);
+				throw new DeviceManagementException(msg);
+			}
+		}
+		status = register(deviceId, owner + "s_" + sketchType + "_" + deviceId.substring(0,
+																								 3),
+								  owner);
+		if (!status) {
+			String msg = "Error occurred while registering the device with " + "id: " + deviceId
+					+ " owner:" + owner;
+			throw new DeviceManagementException(msg);
+		}
+
+
+		ZipUtil ziputil = new ZipUtil();
+		ZipArchive zipFile = null;
+
+		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, accessToken, refreshToken);
+		zipFile.setDeviceId(deviceId);
+		return zipFile;
+	}
+
+	private static String shortUUID() {
+		UUID uuid = UUID.randomUUID();
+		long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
+		return Long.toString(l, Character.MAX_RADIX);
+	}
+
+	@Path("controller/register/{owner}/{deviceId}/{ip}")
 	@POST
 	public String registerDeviceIP(@PathParam("owner") String owner,
 								   @PathParam("deviceId") String deviceId,
@@ -107,9 +442,9 @@ public class FireAlarmControllerService {
 	}
 
 
-	/*    Service to switch "ON" and "OFF" the FireAlarm bulb
-		   Called by an external client intended to control the FireAlarm bulb */
-	@Path("/bulb/{state}")
+	/*    Service to switch "ON" and "OFF" the Virtual FireAlarm bulb
+		   Called by an external client intended to control the Virtual FireAlarm bulb */
+	@Path("controller/bulb/{state}")
 	@POST
 	public void switchBulb(@HeaderParam("owner") String owner,
 						   @HeaderParam("deviceId") String deviceId,
@@ -120,7 +455,7 @@ public class FireAlarmControllerService {
 		try {
 			DeviceValidator deviceValidator = new DeviceValidator();
 			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
-																				   FireAlarmConstants.DEVICE_TYPE))) {
+																				   VirtualFireAlarmConstants.DEVICE_TYPE))) {
 				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return;
 			}
@@ -132,8 +467,8 @@ public class FireAlarmControllerService {
 
 		String switchToState = state.toUpperCase();
 
-		if (!switchToState.equals(FireAlarmConstants.STATE_ON) && !switchToState.equals(
-				FireAlarmConstants.STATE_OFF)) {
+		if (!switchToState.equals(VirtualFireAlarmConstants.STATE_ON) && !switchToState.equals(
+				VirtualFireAlarmConstants.STATE_OFF)) {
 			log.error("The requested state change shoud be either - 'ON' or 'OFF'");
 			response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
 			return;
@@ -146,27 +481,26 @@ public class FireAlarmControllerService {
 		}
 
 		String protocolString = protocol.toUpperCase();
-		String callUrlPattern = BULB_CONTEXT + switchToState;
+		String callUrlPattern = VirtualFireAlarmConstants.BULB_CONTEXT + switchToState;
 
-		log.info("Sending command: '" + callUrlPattern + "' to firealarm at: " + deviceIP + " " +
+		log.info("Sending command: '" + callUrlPattern + "' to virtual-firealarm at: " + deviceIP + " " +
 						 "via" + " " + protocolString);
 
 		try {
 			switch (protocolString) {
 				case HTTP_PROTOCOL:
-					sendCommandViaHTTP(deviceIP, 80, callUrlPattern, true);
+					sendCommandViaHTTP(deviceIP, 9090, callUrlPattern, true);
 					break;
 				case MQTT_PROTOCOL:
-					sendCommandViaMQTT(owner, deviceId, BULB_CONTEXT.replace("/", ""),
-									   switchToState);
+					sendCommandViaMQTT(owner, deviceId, VirtualFireAlarmConstants.BULB_CONTEXT.replace("/", ""),
+					                   switchToState);
 					break;
 				case XMPP_PROTOCOL:
-//					requestBulbChangeViaXMPP(switchToState, response);
-					sendCommandViaXMPP(owner, deviceId, BULB_CONTEXT, switchToState);
+					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.BULB_CONTEXT, switchToState);
 					break;
 				default:
 					if (protocolString == null) {
-						sendCommandViaHTTP(deviceIP, 80, callUrlPattern, true);
+						sendCommandViaHTTP(deviceIP, 9090, callUrlPattern, true);
 					} else {
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return;
@@ -175,7 +509,7 @@ public class FireAlarmControllerService {
 			}
 		} catch (DeviceManagementException e) {
 			log.error("Failed to send command '" + callUrlPattern + "' to: " + deviceIP + " via" +
-							  " " + protocol);
+					          " " + protocol);
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return;
 		}
@@ -184,7 +518,7 @@ public class FireAlarmControllerService {
 	}
 
 
-	@Path("/readsonar")
+	@Path("controller/readsonar")
 	@GET
 	public String requestSonarReading(@HeaderParam("owner") String owner,
 									  @HeaderParam("deviceId") String deviceId,
@@ -195,7 +529,7 @@ public class FireAlarmControllerService {
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
 			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
-																				   FireAlarmConstants
+																				   VirtualFireAlarmConstants
 																						   .DEVICE_TYPE))) {
 				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return "Unauthorized Access";
@@ -217,25 +551,24 @@ public class FireAlarmControllerService {
 		try {
 			switch (protocol) {
 				case HTTP_PROTOCOL:
-					log.info("Sending request to read sonar value at : " + deviceIp +
-									 " via " + HTTP_PROTOCOL);
+					log.info("Sending request to read sonar value at : " + deviceIp + " via " + HTTP_PROTOCOL);
+					replyMsg = sendCommandViaHTTP(deviceIp, 9090, VirtualFireAlarmConstants.SONAR_CONTEXT, false);
+					break;
 
-					replyMsg = sendCommandViaHTTP(deviceIp, 80, SONAR_CONTEXT, false);
+				case MQTT_PROTOCOL:
+					log.info("Sending request to read sonar value at : " + deviceIp + " via " + MQTT_PROTOCOL);
+					sendCommandViaMQTT(owner, deviceId, VirtualFireAlarmConstants.SONAR_CONTEXT.replace("/", ""), "");
 					break;
 
 				case XMPP_PROTOCOL:
-					log.info("Sending request to read sonar value at : " + deviceIp +
-									 " via " +
-									 XMPP_PROTOCOL);
-					replyMsg = sendCommandViaXMPP(owner, deviceId, SONAR_CONTEXT, ".");
+					log.info("Sending request to read sonar value at : " + deviceIp + " via " + XMPP_PROTOCOL);
+					replyMsg = sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.SONAR_CONTEXT, ".");
 					break;
 
 				default:
 					if (protocol == null) {
-						log.info("Sending request to read sonar value at : " + deviceIp +
-										 " via " + HTTP_PROTOCOL);
-
-						replyMsg = sendCommandViaHTTP(deviceIp, 80, SONAR_CONTEXT, false);
+						log.info("Sending request to read sonar value at : " + deviceIp + " via " + HTTP_PROTOCOL);
+						replyMsg = sendCommandViaHTTP(deviceIp, 9090, VirtualFireAlarmConstants.SONAR_CONTEXT, false);
 					} else {
 						replyMsg = "Requested protocol '" + protocol + "' is not supported";
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
@@ -255,7 +588,7 @@ public class FireAlarmControllerService {
 	}
 
 
-	@Path("/readtemperature")
+	@Path("controller/readtemperature")
 	@GET
 	public String requestTemperature(@HeaderParam("owner") String owner,
 									 @HeaderParam("deviceId") String deviceId,
@@ -266,8 +599,8 @@ public class FireAlarmControllerService {
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
 			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
-																				   FireAlarmConstants
-																						   .DEVICE_TYPE))) {
+			                                                                       VirtualFireAlarmConstants
+					                                                                       .DEVICE_TYPE))) {
 				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
 				return "Unauthorized Access";
 			}
@@ -288,26 +621,24 @@ public class FireAlarmControllerService {
 		try {
 			switch (protocol) {
 				case HTTP_PROTOCOL:
-					log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-									 " via " + HTTP_PROTOCOL);
+					log.info("Sending request to read virtual-firealarm-temperature at : " + deviceIp + " via " + HTTP_PROTOCOL);
+					replyMsg = sendCommandViaHTTP(deviceIp, 9090, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, false);
+					break;
 
-					replyMsg = sendCommandViaHTTP(deviceIp, 80, TEMPERATURE_CONTEXT, false);
+				case MQTT_PROTOCOL:
+					log.info("Sending request to read virtual-firealarm-temperature at : " + deviceIp + " via " + MQTT_PROTOCOL);
+					sendCommandViaMQTT(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT.replace("/", ""), "");
 					break;
 
 				case XMPP_PROTOCOL:
-					log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-									 " via " +
-									 XMPP_PROTOCOL);
-					replyMsg = sendCommandViaXMPP(owner, deviceId, TEMPERATURE_CONTEXT, ".");
-//					replyMsg = requestTemperatureViaXMPP(response);
+					log.info("Sending request to read virtual-firealarm-temperature at : " + deviceIp + " via " + XMPP_PROTOCOL);
+					replyMsg = sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, ".");
 					break;
 
 				default:
 					if (protocol == null) {
-						log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-										 " via " + HTTP_PROTOCOL);
-
-						replyMsg = sendCommandViaHTTP(deviceIp, 80, TEMPERATURE_CONTEXT, false);
+						log.info("Sending request to read virtual-firealarm-temperature at : " + deviceIp + " via " + HTTP_PROTOCOL);
+						replyMsg = sendCommandViaHTTP(deviceIp, 9090, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, false);
 					} else {
 						replyMsg = "Requested protocol '" + protocol + "' is not supported";
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
@@ -326,56 +657,7 @@ public class FireAlarmControllerService {
 		return replyMsg;
 	}
 
-
-//	public String requestTemperatureViaXMPP(@Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Temperature";
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-
-//	public String requestSonarViaXMPP(@Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Sonar";
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-
-//	public String requestBulbChangeViaXMPP(String state,
-//										   @Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Bulb -s " + state;
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-	@Path("/push_temperature")
+	@Path("controller/push_temperature")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void pushTemperatureData(
@@ -404,7 +686,7 @@ public class FireAlarmControllerService {
 		ctx.setTenantDomain(SUPER_TENANT, true);
 		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
 				.getOSGiService(DeviceAnalyticsService.class, null);
-		Object metdaData[] = {dataMsg.owner, FireAlarmConstants.DEVICE_TYPE, dataMsg.deviceId,
+		Object metdaData[] = {dataMsg.owner, VirtualFireAlarmConstants.DEVICE_TYPE, dataMsg.deviceId,
 				System.currentTimeMillis()};
 		Object payloadData[] = {temperature};
 		try {
@@ -593,7 +875,7 @@ public class FireAlarmControllerService {
 
 		try {
 			result = deviceController.publishMqttControl(deviceOwner,
-														 FireAlarmConstants.DEVICE_TYPE,
+			                                             VirtualFireAlarmConstants.DEVICE_TYPE,
 														 deviceId, resource, state);
 		} catch (DeviceControllerException e) {
 			String errorMsg = "Error whilst trying to publish to MQTT Queue";
@@ -610,11 +892,11 @@ public class FireAlarmControllerService {
 			throws DeviceManagementException {
 
 		if (deviceServerPort == 0) {
-			deviceServerPort = 80;
+			deviceServerPort = 9090;
 		}
 
 		String responseMsg = "";
-		String urlString = URL_PREFIX + deviceIp + ":" + deviceServerPort + callUrlPattern;
+		String urlString = VirtualFireAlarmConstants.URL_PREFIX + deviceIp + ":" + deviceServerPort + callUrlPattern;
 
 		if (log.isDebugEnabled()) {
 			log.debug(urlString);
@@ -753,5 +1035,4 @@ public class FireAlarmControllerService {
 
 		return completeResponse.toString();
 	}
-
 }

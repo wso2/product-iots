@@ -12,8 +12,8 @@ import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
 import java.io.File;
 import java.util.UUID;
 
-public class VirtualFireAlarmMqttSubscriber extends MqttSubscriber {
-	private static Log log = LogFactory.getLog(VirtualFireAlarmMqttSubscriber.class);
+public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
+	private static Log log = LogFactory.getLog(VirtualFireAlarmMQTTSubscriber.class);
 
 	private static final String subscribeTopic =
 			"wso2" + File.separator + "iot" + File.separator + "+" + File.separator +
@@ -22,7 +22,7 @@ public class VirtualFireAlarmMqttSubscriber extends MqttSubscriber {
 	private static final String iotServerSubscriber = UUID.randomUUID().toString().substring(0, 5);
 	private static String mqttEndpoint;
 
-	private VirtualFireAlarmMqttSubscriber() {
+	private VirtualFireAlarmMQTTSubscriber() {
 		super(iotServerSubscriber, VirtualFireAlarmConstants.DEVICE_TYPE,
 		      MqttConfig.getInstance().getMqttQueueEndpoint(), subscribeTopic);
 	}
@@ -56,7 +56,7 @@ public class VirtualFireAlarmMqttSubscriber extends MqttSubscriber {
 						}
 
 						try {
-							VirtualFireAlarmMqttSubscriber.super.connectAndSubscribe();
+							VirtualFireAlarmMQTTSubscriber.super.connectAndSubscribe();
 						} catch (DeviceManagementException e1) {
 							if (log.isDebugEnabled()) {
 								log.debug("Attempt to re-connect to MQTT-Queue failed");

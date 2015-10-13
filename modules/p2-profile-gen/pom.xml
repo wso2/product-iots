@@ -100,6 +100,10 @@
 
                             <featureArtifacts>
 
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon:org.wso2.carbon.core.feature:${carbon.kernel.version}-->
+                                <!--</featureArtifactDef>-->
+
 
                                 <!--Device Cloud Features -->
                                 <featureArtifactDef>
@@ -378,6 +382,15 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.startup.publisher.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.authenticator.oidc.feature:${carbon.api.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.hostobjects.oidc.feature:${carbon.api.mgt.version}
+                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.apimgt:org.wso2.carbon.forum.server.feature:${carbon.api.mgt.version}-->
+                                <!--</featureArtifactDef>-->
                                 <!-- End of API Management Features -->
 
                                 <!--- Notification Support: Mail -->
@@ -689,6 +702,11 @@
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
+
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.core.feature.group</id>-->
+                                    <!--<version>${carbon.kernel.version}</version>-->
+                                <!--</feature>-->
 
                                 <!-- IoT Features -->
                                 <feature>
@@ -1022,6 +1040,18 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.startup.publisher.feature.group</id>
+                                    <version>${carbon.api.mgt.version}</version>
+                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.forum.server.feature.group</id>-->
+                                    <!--<version>${carbon.api.mgt.version}</version>-->
+                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.apimgt.authenticator.oidc.feature.group</id>
+                                    <version>${carbon.api.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.apimgt.hostobjects.oidc.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
                                 <feature>

@@ -19,5 +19,55 @@
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
+	<context-param>
+		<param-name>isAdminService</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>doAuthentication</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<!--publish to apim-->
+	<context-param>
+        <param-name>managed-api-enabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-owner</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-name</param-name>
+        <param-value>firealarm</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-endpoint</param-name>
+        <param-value>http://localhost:9763/firealarm</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-version</param-name>
+        <param-value>1.0.0</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-context</param-name>
+        <param-value>/firealarm</param-value>
+    </context-param>
+    <context-param>
+        <param-name>managed-api-isSecured</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+	<!-- Below configuration is used to redirect http requests to https -->
+	<!--<security-constraint>-->
+		<!--<web-resource-collection>-->
+			<!--<web-resource-name>IoT</web-resource-name>-->
+			<!--<url-pattern>/*</url-pattern>-->
+		<!--</web-resource-collection>-->
+		<!--<user-data-constraint>-->
+			<!--<transport-guarantee>CONFIDENTIAL</transport-guarantee>-->
+		<!--</user-data-constraint>-->
+	<!--</security-constraint>-->
+
 
 </web-app>
