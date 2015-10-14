@@ -25,11 +25,13 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 import org.wso2.carbon.device.mgt.iot.common.service.DeviceTypeService;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.impl.VirtualFireAlarmManagerService;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.impl
+        .VirtualFireAlarmManagerService;
 
 
 /**
- * @scr.component name="org.wso2.carbon.device.mgt.iot.firealarm.internal.VirtualFirealarmManagementServiceComponent"
+ * @scr.component name="org.wso2.carbon.device.mgt.iot.firealarm.internal
+ * .VirtualFirealarmManagementServiceComponent"
  * immediate="true"
  * @scr.reference name="wso2.carbon.device.mgt.iot.common.DeviceTypeService"
  * interface="org.wso2.carbon.device.mgt.iot.common.service.DeviceTypeService"
@@ -39,66 +41,69 @@ import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.impl.Virtu
  * unbind="unsetDeviceTypeService"
  */
 public class VirtualFirealarmManagementServiceComponent {
-	
-
-    private ServiceRegistration firealarmServiceRegRef;
 
 
+	private ServiceRegistration firealarmServiceRegRef;
 
-    private static final Log log = LogFactory.getLog(VirtualFirealarmManagementServiceComponent.class);
-    protected void activate(ComponentContext ctx) {
-    	if (log.isDebugEnabled()) {
-            log.debug("Activating Virtual Firealarm Device Management Service Component");
-        }
-        try {
-            BundleContext bundleContext = ctx.getBundleContext();
+	private static final Log log = LogFactory.getLog(
+			VirtualFirealarmManagementServiceComponent.class);
 
+	protected void activate(ComponentContext ctx) {
+		if (log.isDebugEnabled()) {
+			log.debug("Activating Virtual Firealarm Device Management Service Component");
+		}
+		try {
+			BundleContext bundleContext = ctx.getBundleContext();
+			firealarmServiceRegRef =
+					bundleContext.registerService(DeviceManagementService.class.getName(),
+					                              new VirtualFireAlarmManagerService(), null);
 
-            firealarmServiceRegRef =
-                    bundleContext.registerService(DeviceManagementService.class.getName(),
-                                                 new VirtualFireAlarmManagerService(),
-												  null);
+			if (log.isDebugEnabled()) {
+				log.debug(
+						"Virtual Firealarm Device Management Service Component has been " +
+								"successfully activated");
+			}
+		} catch (Throwable e) {
+			log.error(
+					"Error occurred while activating Virtual Firealarm Device Management Service " +
+                            "Component",
+					e);
+		}
+	}
 
+	protected void deactivate(ComponentContext ctx) {
+		if (log.isDebugEnabled()) {
+			log.debug("De-activating Virtual Firealarm Device Management Service Component");
+		}
+		try {
+			if (firealarmServiceRegRef != null) {
+				firealarmServiceRegRef.unregister();
+			}
 
+			if (log.isDebugEnabled()) {
+				log.debug(
+						"Virtual Firealarm Device Management Service Component has been " +
+                                "successfully de-activated");
+			}
+		} catch (Throwable e) {
+			log.error(
+					"Error occurred while de-activating Virtual Firealarm Device Management " +
+                            "bundle",
+					e);
+		}
+	}
 
-            if (log.isDebugEnabled()) {
-                log.debug("Virtual Firealarm Device Management Service Component has been successfully activated");
-            }
-        } catch (Throwable e) {
-            log.error("Error occurred while activating Virtual Firealarm Device Management Service Component", e);
-        }
-    }
-
-    protected void deactivate(ComponentContext ctx) {
-        if (log.isDebugEnabled()) {
-            log.debug("De-activating Virtual Firealarm Device Management Service Component");
-        }
-        try {
-            if (firealarmServiceRegRef != null) {
-                firealarmServiceRegRef.unregister();
-            }
-
-            if (log.isDebugEnabled()) {
-                log.debug(
-                        "Virtual Firealarm Device Management Service Component has been successfully de-activated");
-            }
-        } catch (Throwable e) {
-            log.error("Error occurred while de-activating Virtual Firealarm Device Management bundle", e);
-        }
-    }
-
-    protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
+	protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
 		/* This is to avoid this component getting initialized before the
 		common registered */
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service set to mobile service component");
-        }
-    }
+		if (log.isDebugEnabled()) {
+			log.debug("Data source service set to mobile service component");
+		}
+	}
 
-    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService)  {
-        //do nothing
-    }
+	protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService) {
+		//do nothing
+	}
 
 
-    
 }
