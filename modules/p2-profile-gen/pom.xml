@@ -604,6 +604,9 @@
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.restapi.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <!-- END - Analytics features -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.data:org.wso2.carbon.datasource.reader.hadoop.server.feature:${carbon.data.version}
+                                </featureArtifactDef>
 
 
 
@@ -1257,6 +1260,10 @@
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <!-- END - Analytics features -->
+                                <feature>
+                                    <id>org.wso2.carbon.datasource.reader.hadoop.server.feature.group</id>
+                                    <version>${carbon.data.version}</version>
+                                </feature>
 
                                 <feature>
                                     <id>org.wso2.carbon.analytics.messageconsole.feature.group</id>

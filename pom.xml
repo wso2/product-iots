@@ -904,11 +904,12 @@
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
 
         <!--DAS-->
-        <carbon.analytics.version>1.0.3</carbon.analytics.version>
-        <carbon.analytics.common.version>5.0.2</carbon.analytics.common.version>
+        <carbon.analytics.version>1.0.4-SNAPSHOT</carbon.analytics.version>
+        <carbon.analytics.common.version>5.0.5-SNAPSHOT</carbon.analytics.common.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.5</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.7</carbon.event-processing.version>
+        <carbon.data.version>4.3.2</carbon.data.version>
 
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
