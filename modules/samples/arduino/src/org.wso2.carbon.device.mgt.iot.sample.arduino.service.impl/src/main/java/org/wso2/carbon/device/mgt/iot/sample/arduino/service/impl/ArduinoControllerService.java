@@ -48,7 +48,7 @@ public class ArduinoControllerService {
 	public void setMqttArduinoSubscriber(MqttArduinoSubscriber mqttArduinoSubscriber) {
 		ArduinoControllerService.mqttArduinoSubscriber = mqttArduinoSubscriber;
 		try {
-			mqttArduinoSubscriber.subscribe();
+			mqttArduinoSubscriber.connectAndSubscribe();
 		} catch (DeviceManagementException e) {
 			log.error(e.getErrorMessage());
 		}

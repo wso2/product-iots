@@ -804,6 +804,19 @@
                 <artifactId>commons-httpclient</artifactId>
                 <version>${orbit.version.commons-httpclient}</version>
             </dependency>
+
+			<!--Dependencies on XMPP Client Library-->
+			<dependency>
+				<groupId>org.igniterealtime.smack.wso2</groupId>
+				<artifactId>smack</artifactId>
+				<version>${smack.wso2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.igniterealtime.smack.wso2</groupId>
+				<artifactId>smackx</artifactId>
+				<version>${smackx.wso2.version}</version>
+			</dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -928,6 +941,10 @@
         <commons-io.version>2.4</commons-io.version>
         <jsr311-api.version>1.1.1</jsr311-api.version>
         <commons-json.version>2.0.0.wso2v1</commons-json.version>
+
+		<!--XMPP/MQTT Version-->
+		<smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
+		<smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
     </properties>
 
     <scm>

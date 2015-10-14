@@ -201,7 +201,7 @@
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
                 <artifactId>mqtt-client</artifactId>
-                <version>${eclipse.paho.version}</version>
+                <version>${paho.mqtt.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -441,7 +441,6 @@
         <orbit.tomcat.version>7.0.52.wso2v5</orbit.tomcat.version>
         <orbit.tomcat.jdbc.pooling.version>7.0.34.wso2v2</orbit.tomcat.jdbc.pooling.version>
 
-        <eclipse.paho.version>0.4.0</eclipse.paho.version>
         <google.gson.version>2.2.4</google.gson.version>
 
 
