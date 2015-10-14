@@ -9,7 +9,7 @@
     "overview_name":"virtual_firealarm",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"undefined",
-    "overview_actionLabel":"Download",
+    "overview_actionLabel":"Download Agent",
     "sketches_Sketches":"virtual_firealarm",
     "ingredients_ingredients":[
       "Virtual Agent that simulates an actual firealarm"
