@@ -302,12 +302,12 @@ public class VirtualFireAlarmService {
 	@GET
 	@Produces("application/octet-stream")
 	public Response downloadSketch(@QueryParam("owner") String owner,
-//	                               @QueryParam("deviceName") String customDeviceName,
+	                               @QueryParam("deviceName") String customDeviceName,
                                    @PathParam("sketch_type") String sketchType) {
 
 		ZipArchive zipFile = null;
 		try {
-			zipFile = createDownloadFile(owner, "SMEANS FireAlarm", sketchType);
+			zipFile = createDownloadFile(owner, customDeviceName, sketchType);
 			Response.ResponseBuilder rb = Response.ok(zipFile.getZipFile());
 			rb.header("Content-Disposition",
 			          "attachment; filename=\"" + zipFile.getFileName() + "\"");
