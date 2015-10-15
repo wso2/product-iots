@@ -180,7 +180,7 @@ public class SensebotManagerService {
 	@Path("/device/{sketch_type}/download")
 	@GET
 	@Produces("application/octet-stream")
-	public Response downloadSketch(@QueryParam("owner") String owner, @PathParam("sketch_type") String
+	public Response downloadSketch(@QueryParam("owner") String owner, @QueryParam("deviceName") String customDeviceName, @PathParam("sketch_type") String
 			sketchType) {
 
 		if (owner == null) {
@@ -195,9 +195,8 @@ public class SensebotManagerService {
 		String refreshToken = UUID.randomUUID().toString();
 		//adding registering data
 
-		boolean status = register(deviceId,
-								  owner + "s_" + sketchType + "_" + deviceId.substring(0, 3),
-								  owner);
+		String deviceName = customDeviceName + "_" + deviceId;
+		boolean status = register(deviceId, deviceName, owner);
 		if (!status) {
 			return Response.status(500).entity(
 					"Error occurred while registering the device with " + "id: " + deviceId
@@ -208,7 +207,7 @@ public class SensebotManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 		try {
-			zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId,
+			zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, deviceName,
 											 token,refreshToken);
 		} catch (DeviceManagementException ex) {
 			return Response.status(500).entity("Error occurred while creating zip file").build();
