@@ -56,7 +56,7 @@ public class RaspberrypiManagerService {
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
-							@QueryParam("name") String name, @QueryParam("owner") String owner) {
+	                        @QueryParam("name") String name, @QueryParam("owner") String owner) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
@@ -97,14 +97,15 @@ public class RaspberrypiManagerService {
 	@Path("/device/remove/{device_id}")
 	@DELETE
 	public void removeDevice(@PathParam("device_id") String deviceId,
-							 @Context HttpServletResponse response) {
+	                         @Context HttpServletResponse response) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
 		try {
-			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(deviceIdentifier);
+			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
+					deviceIdentifier);
 			if (removed) {
 				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
@@ -121,8 +122,8 @@ public class RaspberrypiManagerService {
 	@Path("/device/update/{device_id}")
 	@POST
 	public boolean updateDevice(@PathParam("device_id") String deviceId,
-								@QueryParam("name") String name,
-								@Context HttpServletResponse response) {
+	                            @QueryParam("name") String name,
+	                            @Context HttpServletResponse response) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
@@ -130,7 +131,8 @@ public class RaspberrypiManagerService {
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
 		try {
-			Device device = deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
+			Device device = deviceManagement.getDeviceManagementService().getDevice(
+					deviceIdentifier);
 			device.setDeviceIdentifier(deviceId);
 
 			// device.setDeviceTypeId(deviceTypeId);
@@ -139,7 +141,8 @@ public class RaspberrypiManagerService {
 			device.setName(name);
 			device.setType(RaspberrypiConstants.DEVICE_TYPE);
 
-			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(device);
+			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
+					device);
 
 
 			if (updated) {
@@ -169,7 +172,8 @@ public class RaspberrypiManagerService {
 		deviceIdentifier.setType(RaspberrypiConstants.DEVICE_TYPE);
 
 		try {
-			Device device = deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
+			Device device = deviceManagement.getDeviceManagementService().getDevice(
+					deviceIdentifier);
 
 			return device;
 		} catch (DeviceManagementException ex) {
@@ -182,8 +186,10 @@ public class RaspberrypiManagerService {
 	@Path("/device/{sketch_type}/download")
 	@GET
 	@Produces("application/octet-stream")
-	public Response downloadSketch(@QueryParam("owner") String owner, @PathParam("sketch_type") String
-			sketchType) {
+	public Response downloadSketch(@QueryParam("owner") String owner,
+	                               @QueryParam("deviceName") String customDeviceName,
+	                               @PathParam("sketch_type") String
+			                               sketchType) {
 
 		if (owner == null) {
 			return Response.status(400).build();//bad request
@@ -197,9 +203,8 @@ public class RaspberrypiManagerService {
 		String refreshToken = UUID.randomUUID().toString();
 		//adding registering data
 
-		boolean status = register(deviceId,
-								  owner + "s_" + sketchType + "_" + deviceId.substring(0, 3),
-								  owner);
+		String deviceName = customDeviceName + "_" + deviceId;
+		boolean status = register(deviceId, deviceName, owner);
 		if (!status) {
 			return Response.status(500).entity(
 					"Error occurred while registering the device with " + "id: " + deviceId
@@ -210,8 +215,8 @@ public class RaspberrypiManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 		try {
-			zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId,
-											 token,refreshToken);
+			zipFile = ziputil.downloadSketch(owner, SUPER_TENANT, sketchType, deviceId, deviceName,
+			                                 token, refreshToken);
 		} catch (DeviceManagementException ex) {
 			return Response.status(500).entity("Error occurred while creating zip file").build();
 		}

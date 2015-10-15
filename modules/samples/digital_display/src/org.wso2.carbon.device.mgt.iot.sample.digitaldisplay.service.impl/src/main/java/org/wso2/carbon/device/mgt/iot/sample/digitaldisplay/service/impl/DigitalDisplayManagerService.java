@@ -15,6 +15,7 @@
  */
 
 package org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.mgt.common.Device;
@@ -24,7 +25,8 @@ import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
 import org.wso2.carbon.device.mgt.iot.common.DeviceManagement;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
-import org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.plugin.constants.DigitalDisplayConstants;
+import org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.plugin.constants
+		.DigitalDisplayConstants;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -50,10 +52,11 @@ public class DigitalDisplayManagerService {
 	private final String SUPER_TENANT = "carbon.super";
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
+
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
-							@QueryParam("name") String name, @QueryParam("owner") String owner) {
+	                        @QueryParam("name") String name, @QueryParam("owner") String owner) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
@@ -98,7 +101,7 @@ public class DigitalDisplayManagerService {
 	@Path("/device/remove/{device_id}")
 	@DELETE
 	public void removeDevice(@PathParam("device_id") String deviceId,
-							 @Context HttpServletResponse response) {
+	                         @Context HttpServletResponse response) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
@@ -126,8 +129,8 @@ public class DigitalDisplayManagerService {
 	@Path("/device/update/{device_id}")
 	@POST
 	public boolean updateDevice(@PathParam("device_id") String deviceId,
-								@QueryParam("name") String name,
-								@Context HttpServletResponse response) {
+	                            @QueryParam("name") String name,
+	                            @Context HttpServletResponse response) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
@@ -145,7 +148,8 @@ public class DigitalDisplayManagerService {
 			device.setName(name);
 			device.setType(DigitalDisplayConstants.DEVICE_TYPE);
 
-			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(device);
+			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
+					device);
 
 
 			if (updated) {
@@ -177,7 +181,8 @@ public class DigitalDisplayManagerService {
 		deviceIdentifier.setType(DigitalDisplayConstants.DEVICE_TYPE);
 
 		try {
-			Device device = deviceManagement.getDeviceManagementService().getDevice(deviceIdentifier);
+			Device device = deviceManagement.getDeviceManagementService().getDevice(
+					deviceIdentifier);
 
 			return device;
 		} catch (DeviceManagementException e) {
@@ -193,8 +198,9 @@ public class DigitalDisplayManagerService {
 	@GET
 	@Produces("application/octet-stream")
 	public Response downloadSketch(@QueryParam("owner") String owner,
-								   @PathParam("sketch_type") String
-										   sketchType) {
+	                               @QueryParam("deviceName") String customDeviceName,
+	                               @PathParam("sketch_type") String
+			                               sketchType) {
 
 		if (owner == null) {
 			return Response.status(400).build();//bad request
@@ -208,9 +214,8 @@ public class DigitalDisplayManagerService {
 		String refreshToken = UUID.randomUUID().toString();
 		//adding registering data
 
-		boolean status = register(deviceId,
-								  owner + "s_" + sketchType + "_" + deviceId.substring(0, 3),
-								  owner);
+		String deviceName = customDeviceName + "_" + deviceId;
+		boolean status = register(deviceId, customDeviceName, owner);
 		if (!status) {
 			return Response.status(500).entity(
 					"Error occurred while registering the device with " + "id: " + deviceId
@@ -221,8 +226,7 @@ public class DigitalDisplayManagerService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 		try {
-			zipFile = ziputil.downloadSketch(owner, SUPER_TENANT,sketchType, deviceId,
-											 token, refreshToken);
+			zipFile = ziputil.downloadSketch(owner, SUPER_TENANT, sketchType, deviceId, customDeviceName, token, refreshToken);
 		} catch (DeviceManagementException ex) {
 			return Response.status(500).entity("Error occurred while creating zip file").build();
 		}

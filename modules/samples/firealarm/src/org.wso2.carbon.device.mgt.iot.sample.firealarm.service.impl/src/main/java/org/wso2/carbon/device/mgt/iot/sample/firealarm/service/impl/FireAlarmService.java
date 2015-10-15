@@ -279,11 +279,12 @@ public class FireAlarmService {
 	@GET
 	@Produces("application/octet-stream")
 	public Response downloadSketch(@QueryParam("owner") String owner,
+	                               @QueryParam("deviceName") String customDeviceName,
 								   @PathParam("sketch_type") String sketchType) {
 
 		ZipArchive zipFile = null;
 		try {
-			zipFile = createDownloadFile(owner, sketchType);
+			zipFile = createDownloadFile(owner, customDeviceName, sketchType);
 			Response.ResponseBuilder rb = Response.ok(zipFile.getZipFile());
 			rb.header("Content-Disposition",
 					  "attachment; filename=\"" + zipFile.getFileName() + "\"");
@@ -303,11 +304,12 @@ public class FireAlarmService {
 	@Path("manager/device/{sketch_type}/generate_link")
 	@GET
 	public Response generateSketchLink(@QueryParam("owner") String owner,
+	                                   @QueryParam("deviceName") String customDeviceName,
 									   @PathParam("sketch_type") String sketchType) {
 
 		ZipArchive zipFile = null;
 		try {
-			zipFile = createDownloadFile(owner, sketchType);
+			zipFile = createDownloadFile(owner, customDeviceName, sketchType);
 			Response.ResponseBuilder rb = Response.ok(zipFile.getDeviceId());
 			return rb.build();
 		} catch (IllegalArgumentException ex) {
@@ -322,7 +324,7 @@ public class FireAlarmService {
 
 	}
 
-	private ZipArchive createDownloadFile(String owner, String sketchType)
+	private ZipArchive createDownloadFile(String owner, String customDeviceName, String sketchType)
 			throws DeviceManagementException, AccessTokenException, DeviceControllerException {
 		if (owner == null) {
 			throw new IllegalArgumentException("Error on createDownloadFile() Owner is null!");
@@ -347,15 +349,6 @@ public class FireAlarmService {
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
 		newXmppAccount.setUsername(deviceId);
 		newXmppAccount.setPassword(accessToken);
-
-		String xmppEndPoint = XmppConfig.getInstance().getXmppControlQueue().getServerURL();
-
-		int indexOfChar = xmppEndPoint.lastIndexOf('/');
-
-		if (indexOfChar != -1) {
-			xmppEndPoint = xmppEndPoint.substring((indexOfChar + 1), xmppEndPoint.length());
-		}
-
 		newXmppAccount.setEmail(deviceId + "@wso2.com");
 
 		XmppServerClient xmppServerClient = new XmppServerClient();
@@ -373,9 +366,9 @@ public class FireAlarmService {
 				throw new DeviceManagementException(msg);
 			}
 		}
-		status = register(deviceId, owner + "s_" + sketchType + "_" + deviceId.substring(0,
-																								 3),
-								  owner);
+
+		String deviceName = customDeviceName + "_" + deviceId;
+		status = register(deviceId, deviceName, owner);
 		if (!status) {
 			String msg = "Error occurred while registering the device with " + "id: " + deviceId
 					+ " owner:" + owner;
@@ -386,7 +379,7 @@ public class FireAlarmService {
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
 
-		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, accessToken, refreshToken);
+		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, deviceName, accessToken, refreshToken);
 		zipFile.setDeviceId(deviceId);
 		return zipFile;
 	}
