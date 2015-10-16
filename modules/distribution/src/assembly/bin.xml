@@ -1076,6 +1076,16 @@
             <fileMode>755</fileMode>
         </file>
 
+        <!--spark fair scheduler xml file-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/fairscheduler.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <!--spark udf conf file-->
         <file>
             <source>
