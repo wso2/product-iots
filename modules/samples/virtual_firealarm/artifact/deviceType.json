@@ -8,8 +8,8 @@
     "overview_version":"1.0.0",
     "overview_name":"virtual_firealarm",
     "overview_url":"http://www.google.lk",
-    "setupGuide_guideImage":"undefined",
-    "overview_actionLabel":"Download Agent",
+    "setupGuide_guideImage":"virtual_firealarm/guide.png",
+    "overview_actionLabel":"Download a virtual device",
     "sketches_Sketches":"virtual_firealarm",
     "ingredients_ingredients":[
       "Virtual Agent that simulates an actual firealarm"
