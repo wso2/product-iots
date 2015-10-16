@@ -304,8 +304,8 @@ public class VirtualFireAlarmService {
 	public Response downloadSketch(@QueryParam("owner") String owner,
 	                               @QueryParam("deviceName") String customDeviceName,
                                    @PathParam("sketch_type") String sketchType) {
-
-		ZipArchive zipFile = null;
+				//TODO:: null check customDeviceName at UI level
+ 		ZipArchive zipFile = null;
 		try {
 			zipFile = createDownloadFile(owner, customDeviceName, sketchType);
 			Response.ResponseBuilder rb = Response.ok(zipFile.getZipFile());
@@ -391,8 +391,7 @@ public class VirtualFireAlarmService {
 		//Register the device with CDMF
 		String deviceName = customDeviceName + "_" + deviceId;
 		status = register(deviceId, deviceName, owner);
-//		status = register(deviceId, owner + "s_" + sketchType + "_" + deviceId.substring(0, 3),
-// owner);
+
 		if (!status) {
 			String msg = "Error occurred while registering the device with " + "id: " + deviceId
 					+ " owner:" + owner;
