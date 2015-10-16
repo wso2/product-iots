@@ -315,7 +315,7 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/statistics/carbonapps/</directory>
+            <directory>src/statistics/carbonapps/target</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
             </outputDirectory>
             <fileMode>755</fileMode>
@@ -546,6 +546,34 @@
                 <include>**/analytics-eventsink-config.xml</include>
             </includes>
         </fileSet>
+
+        <!--creating an empty event sink directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/eventsink
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <!-- Start UES related artifacts -->
+
+
+        <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/portal
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <!-- END UES related dashboard artifacts -->
+
     </fileSets>
 
     <dependencySets>
@@ -965,6 +993,15 @@
             <fileMode>644</fileMode>
         </file>
 
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cep/storm/storm.yaml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/cep/storm/
+            </outputDirectory>
+            <filtered>true</filtered>
+        </file>
+
 
         <!--DAS Files-->
         <file>
@@ -1022,19 +1059,29 @@
         <!--spark udf conf file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/spark/spark-udf-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/spark-defaults.conf
             </source>
-
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/spark/
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-        <!--spark defaults file-->
+
+        <!--spark classpath config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/spark/spark-defaults.conf
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/external-spark-classpath.conf
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/spark/
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <!--spark udf conf file-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/spark-udf-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
