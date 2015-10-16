@@ -471,9 +471,6 @@
 
     </properties>
 
-
-
-
     <build>
         <extensions>
             <extension>

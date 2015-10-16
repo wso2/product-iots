@@ -103,12 +103,10 @@
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.policy.mgt.core</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.policy.mgt.common</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
