@@ -11,7 +11,7 @@ echo "----------------------------------------------------------------"
 unzip firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar.zip
 
 while true; do
-    read -p "What is the network-interface of your PC that the Agent should use (find from ifconfig. ex: wlan0,en0,eth0..) > " interface
+    read -p "What is the network-interface of your device that the Agent should use (find from ifconfig. ex: wlan0,en0,eth0..) > " interface
 
     echo "Setting the network-interface to " $interface
     sed s/^network-interface=.*/network-interface=$interface/ deviceConfig.properties > myTmp
