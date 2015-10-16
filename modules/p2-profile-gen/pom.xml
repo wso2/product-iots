@@ -507,7 +507,7 @@
 
 
 								<feaureArtifactDef>
-									org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboards.version}
+									org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboard.version}
 								</feaureArtifactDef>
 
 								<feaureArtifactDef>
@@ -685,7 +685,14 @@
                                     org.wso2.ciphertool:org.wso2.ciphertool.feature:${cipher.tool.version}
                                 </featureArtifactDef>
                                 <!-- END - Tools -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
+                                </featureArtifactDef>
                                 <!--End of DAS Feature-->
+
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
 
                             </featureArtifacts>
                         </configuration>
@@ -1225,7 +1232,7 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
-                                    <version>${carbon.dashboards.version}</version>
+                                    <version>${carbon.dashboard.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.ciphertool.feature.group</id>
@@ -1260,10 +1267,10 @@
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <!-- END - Analytics features -->
-                                <feature>
-                                    <id>org.wso2.carbon.datasource.reader.hadoop.server.feature.group</id>
-                                    <version>${carbon.data.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.datasource.reader.hadoop.server.feature.group</id>-->
+                                    <!--<version>${carbon.data.version}</version>-->
+                                <!--</feature>-->
 
                                 <feature>
                                     <id>org.wso2.carbon.analytics.messageconsole.feature.group</id>
@@ -1386,6 +1393,10 @@
                                     <version>${carbon.event-processing.version}</version>
                                 </feature>
                                 <!--END - Tools-->
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>

@@ -850,7 +850,7 @@
         <carbon.social.version>2.3.9-SNAPSHOT</carbon.social.version>
 
         <!-- Additional Stuff from ES Features -->
-        <carbon.dashboards.version>1.0.0</carbon.dashboards.version>
+        <carbon.dashboard.version>1.0.5</carbon.dashboard.version>
         <ciphertool.version>1.0.0-wso2v3</ciphertool.version>
         <el.api.version>2.2</el.api.version>
 
@@ -899,7 +899,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- carbon mediation -->
-        <carbon.mediation.version>4.4.10</carbon.mediation.version>
+        <carbon.mediation.version>4.4.11-SNAPSHOT</carbon.mediation.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>4.3.0-SNAPSHOT</carbon.api.mgt.version>
