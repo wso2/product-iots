@@ -15,10 +15,12 @@ import java.util.UUID;
 public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 	private static Log log = LogFactory.getLog(VirtualFireAlarmMQTTSubscriber.class);
 
+//	wso2/iot/shabirmean/virtual_firealarm/t4ctwq8qfl11/publisher
 	private static final String subscribeTopic =
 			"wso2" + File.separator + "iot" + File.separator + "+" + File.separator +
 					VirtualFireAlarmConstants.DEVICE_TYPE + File.separator + "+" + File.separator +
-					"reply";
+					"publisher";
+
 	private static final String iotServerSubscriber = UUID.randomUUID().toString().substring(0, 5);
 	private static String mqttEndpoint;
 
@@ -42,7 +44,20 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 
 	@Override
 	protected void postMessageArrived(String topic, MqttMessage message) {
-		log.info("Message " + message.toString() + " was received for topic: " + topic);
+		String ownerAndId = topic.replace("wso2" + File.separator + "iot" + File.separator, "");
+		ownerAndId = ownerAndId.replace(File.separator + VirtualFireAlarmConstants.DEVICE_TYPE + File.separator, ":");
+		ownerAndId = ownerAndId.replace(File.separator + "publisher", "");
+
+		String owner = ownerAndId.split(":")[0];
+		String deviceId = ownerAndId.split(":")[1];
+
+		log.info("Received MQTT message for: {OWNER-" + owner + "} & {DEVICE.ID-" + deviceId + "}");
+
+		if (message.toString().contains("PUBLISHER")) {
+			log.info("Received MQTT publisher message [" + message.toString() + "] topic: [" + topic + "]");
+		} else {
+			log.info("Received MQTT reply message [" + message.toString() + "] topic: [" + topic + "]");
+		}
 	}
 
 	private void retryMQTTSubscription() {

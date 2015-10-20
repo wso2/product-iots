@@ -41,8 +41,25 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 	@Override
 	protected void processXMPPMessage(Message xmppMessage) {
 		String from = xmppMessage.getFrom();
+		String subject = xmppMessage.getSubject();
 		String message = xmppMessage.getBody();
-		log.info("Received XMPP message '" + message + "' from " + from);
+
+		int indexOfAt = from.indexOf("@");
+		int indexOfSlash = from.indexOf("/");
+
+		String deviceId = from.substring(0, indexOfAt);
+		String owner = from.substring(indexOfSlash + 1, from.length());
+
+		log.info("Received XMPP message for: {OWNER-" + owner + "} & {DEVICE.ID-" + deviceId + "}");
+
+		if (subject.equals("PUBLISHER")) {
+			log.info("Received XMPP publisher message [" + message + "] from [" + from + "]");
+		} else if(subject.equals("CONTROL-REPLY")) {
+			log.info("Received XMPP reply message [" + message + "] from [" + from + "]");
+		} else {
+			log.info("Received SOME XMPP message [" + message + "] from " + from + "]");
+		}
+
 	}
 
 	private void retryXMPPConnection() {
