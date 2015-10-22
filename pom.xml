@@ -823,9 +823,9 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.1</carbon.kernel.version>
+        <carbon.kernel.version>4.4.2</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.1, 4.5.0)</carbon.kernel.version.range>
-        <carbon.platform.version>4.4.1</carbon.platform.version>
+        <carbon.platform.version>4.4.2</carbon.platform.version>
 
         <!--Carbon p2 version-->
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
