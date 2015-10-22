@@ -80,6 +80,7 @@
                 <exclude>**/sso-idp-config.xml</exclude>
                 <exclude>**/application-authentication.xml</exclude>
                 <exclude>**/sso/jaggery.conf</exclude>
+                <exclude>**/sso/views/register_new_user.jag</exclude>
             </excludes>
         </fileSet>
 
@@ -330,6 +331,7 @@
             <excludes>
                 <exclude>**/publisher/config/publisher-tenant.json</exclude>
                 <exclude>**/sso/jaggery.conf</exclude>
+                <exclude>**/sso/views/register_new_user.jag</exclude>
             </excludes>
         </fileSet>
         <!--============ Added with ES Features ===============-->
@@ -574,6 +576,15 @@
 
         <!-- END UES related dashboard artifacts -->
 
+        <fileSet>
+            <directory>src/sso</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/sso
+            </outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -1119,12 +1130,5 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
-        <file>
-            <source>src/sso/jaggery.conf</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/sso</outputDirectory>
-            <filtered>true</filtered>
-        </file>
-
     </files>
 </assembly>
