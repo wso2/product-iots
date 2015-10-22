@@ -43,14 +43,12 @@ import org.wso2.carbon.device.mgt.iot.common.exception.AccessTokenException;
 import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
-		.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DeviceJSON;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util
-		.VirtualFireAlarmMQTTSubscriber;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util
-		.VirtualFireAlarmXMPPConnector;
-import org.wso2.carbon.utils.CarbonUtils;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.TemperatureRecord;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DataHolder;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMQTTSubscriber;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmXMPPConnector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,6 +77,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -209,8 +208,8 @@ public class VirtualFireAlarmService {
 		deviceIdentifier.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
 		try {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
-					deviceIdentifier);
-			if (removed) {
+                    deviceIdentifier);
+            if (removed) {
 				response.setStatus(Response.Status.OK.getStatusCode());
 
 			} else {
@@ -505,7 +504,9 @@ public class VirtualFireAlarmService {
 		String protocolString = protocol.toUpperCase();
 		String callUrlPattern = VirtualFireAlarmConstants.BULB_CONTEXT + switchToState;
 
-		log.info("Sending request to switch-bulb of device [" + deviceId + "] via " + protocolString);
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to switch-bulb of device [" + deviceId + "] via " + protocolString);
+        }
 
 		try {
 			switch (protocolString) {
@@ -559,9 +560,12 @@ public class VirtualFireAlarmService {
 		}
 
 		String protocolString = protocol.toUpperCase();
-		log.info("Sending request to read sonar value of device [" + deviceId + "] via " + protocolString);
 
-		try {
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to read sonar value of device [" + deviceId + "] via " + protocolString);
+        }
+
+        try {
 			switch (protocolString) {
 				case HTTP_PROTOCOL:
 					String deviceHTTPEndpoint = deviceToIpMap.get(deviceId);
@@ -601,40 +605,40 @@ public class VirtualFireAlarmService {
 
 	@Path("controller/readtemperature")
 	@GET
-	public String requestTemperature(@HeaderParam("owner") String owner,
+    @Consumes("application/json")
+    @Produces("application/json")
+	public TemperatureRecord requestTemperature(@HeaderParam("owner") String owner,
 	                                 @HeaderParam("deviceId") String deviceId,
 	                                 @HeaderParam("protocol") String protocol,
 	                                 @Context HttpServletResponse response) {
-		String replyMsg = "";
+        TemperatureRecord temperatureRecord = null;
 
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
 			if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId, VirtualFireAlarmConstants.DEVICE_TYPE))) {
 				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-				return "Unauthorized Access";
 			}
 		} catch (DeviceManagementException e) {
-			replyMsg = e.getErrorMessage();
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			return replyMsg;
 		}
 
 		String protocolString = protocol.toUpperCase();
 
-		log.info("Sending request to read virtual-firealarm-temperature of device [" + deviceId + "] via " + protocolString);
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to read virtual-firealarm-temperature of device [" + deviceId + "] via " + protocolString);
+        }
 
 		try {
 			switch (protocolString) {
 				case HTTP_PROTOCOL:
 					String deviceHTTPEndpoint = deviceToIpMap.get(deviceId);
 					if (deviceHTTPEndpoint == null) {
-						replyMsg = "IP not registered for device: " + deviceId + " of owner: " + owner;
 						response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
-						return replyMsg;
-					}
-
-					replyMsg = sendCommandViaHTTP(deviceHTTPEndpoint, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, false);
-					break;
+                    }
+					String tString = sendCommandViaHTTP(deviceHTTPEndpoint, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, false);
+                    float temperature = Float.parseFloat(tString);
+                    DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+                    break;
 
 				case MQTT_PROTOCOL:
 					sendCommandViaMQTT(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT.replace("/", ""), "");
@@ -645,20 +649,16 @@ public class VirtualFireAlarmService {
 					break;
 
 				default:
-					replyMsg = "Requested protocol '" + protocolString + "' is not supported";
-					response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-					return replyMsg;
-			}
+                    response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+            }
+            temperatureRecord = DataHolder.getThisInstance().getTemperature(deviceId);
 		} catch (DeviceManagementException e) {
-			replyMsg = e.getErrorMessage();
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			return replyMsg;
-		}
+        }
 
 		response.setStatus(Response.Status.OK.getStatusCode());
-		replyMsg = "The current temperature of the device is " + replyMsg;
-		return replyMsg;
-	}
+        return temperatureRecord;
+    }
 
 	@Path("controller/push_temperature")
 	@POST
@@ -684,7 +684,7 @@ public class VirtualFireAlarmService {
 			response.setStatus(Response.Status.CONFLICT.getStatusCode());
 			return;
 		}
-
+        DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
 		if (!publishToDAS(dataMsg.owner, dataMsg.deviceId, dataMsg.value)) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
