@@ -3,18 +3,14 @@ package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.uti
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.wso2.carbon.context.PrivilegedCarbonContext;
-import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
-import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttSubscriber;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
-		.VirtualFireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
 
-import javax.ws.rs.core.Response;
 import java.io.File;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
@@ -68,10 +64,14 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 			if(log.isDebugEnabled()) {
 				log.debug("MQTT Subscriber: Published data to DAS successfully.");
 			}
-		} else {
-			log.info("MQTT: Reply Message [" + message.toString() + "] topic: [" + topic + "]");
-		}
-	}
+        } else if (message.toString().contains("TEMPERATURE")) {
+            log.info("MQTT: Reply Message [" + message.toString() + "] topic: [" + topic + "]");
+            float temperature = Float.parseFloat(message.toString().split(":")[1]);
+            DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+        } else {
+            log.info("MQTT: Message [" + message.toString() + "] topic: [" + topic + "]");
+        }
+    }
 
 	private void retryMQTTSubscription() {
 		Thread retryToSubscribe = new Thread() {
