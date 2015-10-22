@@ -9,13 +9,13 @@
     "overview_name":"virtual_firealarm",
     "overview_url":"http://www.google.lk",
     "setupGuide_guideImage":"virtual_firealarm/guide.png",
-    "overview_actionLabel":"Download a virtual device",
+    "overview_actionLabel":"Create a virtual device",
     "sketches_Sketches":"virtual_firealarm",
     "ingredients_ingredients":[
       "Virtual Agent that simulates an actual firealarm"
     ],
     "overview_description":"Download our Virtual Agent and try-it out for close to real simulation of the FireAlarm Device-Type",
-    "setupGuide_description":"sfd",
+    "setupGuide_description":"Extract the downloaded agent and run startservice.sh to start agent",
     "quickStartupSteps_stepDescription":["Download the Virtual Agent","Run the 'startservice.sh' script","Provide the push-interval and network-interface"],
     "quickStartupSteps_stepLabel":["1","2","3"],
     "images_thumbnail":"virtual_firealarm/virtual_firealarm_thumbnail.png",
