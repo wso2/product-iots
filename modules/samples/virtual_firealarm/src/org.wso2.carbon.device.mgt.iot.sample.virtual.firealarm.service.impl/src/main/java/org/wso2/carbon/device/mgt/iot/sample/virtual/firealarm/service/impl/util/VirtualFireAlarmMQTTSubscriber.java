@@ -66,8 +66,8 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 			}
         } else if (message.toString().contains("TEMPERATURE")) {
             log.info("MQTT: Reply Message [" + message.toString() + "] topic: [" + topic + "]");
-            float temperature = Float.parseFloat(message.toString().split(":")[1]);
-            DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+            String temperatureValue = message.toString().split(":")[1];
+            DataHolder.getInstance().setSensorRecord(deviceId, VirtualFireAlarmConstants.SENSOR_TEMPERATURE, temperatureValue, Calendar.getInstance().getTimeInMillis());
         } else {
             log.info("MQTT: Message [" + message.toString() + "] topic: [" + topic + "]");
         }

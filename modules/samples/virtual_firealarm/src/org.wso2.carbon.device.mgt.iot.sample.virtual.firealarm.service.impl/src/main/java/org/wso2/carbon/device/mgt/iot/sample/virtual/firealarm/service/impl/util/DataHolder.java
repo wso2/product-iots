@@ -16,30 +16,69 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util;
 
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.TemperatureRecord;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.DeviceRecord;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.SensorRecord;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DataHolder {
 
-    private static DataHolder thisInstance = new DataHolder();
-    private Map<String, TemperatureRecord> temperatureMap = new HashMap<>();
+    private static DataHolder instance = new DataHolder();
+    private Map<String, DeviceRecord> deviceMap = new HashMap<>();
 
     private DataHolder() {
-
     }
 
-    public static DataHolder getThisInstance() {
-        return thisInstance;
+    public static DataHolder getInstance() {
+        return instance;
     }
 
-    public TemperatureRecord getTemperature(String deviceId) {
-        return temperatureMap.get(deviceId);
+    public boolean setSensorRecord(String deviceId, String sensorName, String sensorValue, long time){
+        DeviceRecord deviceRecord = new DeviceRecord(sensorName, sensorValue, time);
+        deviceMap.put(deviceId, deviceRecord);
+        return true;
     }
 
-    public void setTemperature(String deviceId, double temperature, long time){
-        temperatureMap.put(deviceId, new TemperatureRecord(temperature, time));
+    /**
+     * Returns last updated sensor records list for a device
+     * @param deviceId
+     * @return
+     */
+    public SensorRecord[] getSensorRecords(String deviceId){
+        Collection<SensorRecord> list = deviceMap.get(deviceId).getSensorDataList().values();
+        return list.toArray(new SensorRecord[list.size()]);
+    }
+
+    /**
+     * Returns last updated sensor record for a device's sensor
+     * @param deviceId
+     * @param sensorName
+     * @return
+     */
+    public SensorRecord getSensorRecord(String deviceId, String sensorName){
+        return deviceMap.get(deviceId).getSensorDataList().get(sensorName);
+    }
+
+    /**
+     * Returns last updated sensor value for a device's sensor
+     * @param deviceId
+     * @param sensorName
+     * @return
+     */
+    public String getSensorRecordValue(String deviceId, String sensorName){
+        return deviceMap.get(deviceId).getSensorDataList().get(sensorName).getSensorValue();
+    }
+
+    /**
+     * Returns last updated sensor value reading time for a device's sensor
+     * @param deviceId
+     * @param sensorName
+     * @return
+     */
+    public long getSensorRecordTime(String deviceId, String sensorName){
+        return deviceMap.get(deviceId).getSensorDataList().get(sensorName).getTime();
     }
 
 }
