@@ -20,11 +20,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TemperatureRecord {
+public class DeviceRecord {
     private double temperature;
     private long time;
 
-    public TemperatureRecord(double temperature, long time) {
+    public DeviceRecord(double temperature, long time) {
         this.temperature = temperature;
         this.time = time;
     }
