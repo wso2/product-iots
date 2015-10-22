@@ -27,4 +27,6 @@ public class VirtualFireAlarmConstants {
 	public static final String BULB_CONTEXT = "/BULB/";
 	public static final String SONAR_CONTEXT = "/HUMIDITY/";
 	public static final String TEMPERATURE_CONTEXT = "/TEMPERATURE/";
+
+    public static final String SENSOR_TEMPERATURE = "temperature";
 }

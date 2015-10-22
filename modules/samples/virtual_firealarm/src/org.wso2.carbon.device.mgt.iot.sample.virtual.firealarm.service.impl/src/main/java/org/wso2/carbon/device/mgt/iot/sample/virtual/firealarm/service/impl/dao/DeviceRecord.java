@@ -18,24 +18,21 @@ package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashMap;
+import java.util.Map;
 
 @XmlRootElement
-public class TemperatureRecord {
-    private double temperature;
-    private long time;
+public class DeviceRecord {
+    //all int, float, boolean should be converted into string
+    //when saving on the map
+    private Map<String, SensorRecord> sensorDataList = new HashMap<>();
 
-    public TemperatureRecord(double temperature, long time) {
-        this.temperature = temperature;
-        this.time = time;
+    public DeviceRecord(String sensorName, String sensorValue, long time) {
+        sensorDataList.put(sensorName, new SensorRecord(sensorValue, time));
     }
 
     @XmlElement
-    public double getTemperature() {
-        return temperature;
-    }
-
-    @XmlElement
-    public long getTime() {
-        return time;
+    public Map<String, SensorRecord> getSensorDataList() {
+        return sensorDataList;
     }
 }
