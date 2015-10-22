@@ -92,7 +92,7 @@ public class VirtualFireAlarmService {
 	private static Log log = LogFactory.getLog(VirtualFireAlarmService.class);
 
 	//TODO; replace this tenant domain
-	private final String SUPER_TENANT = "carbon.super";
+	private static final String SUPER_TENANT = "carbon.super";
 
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
@@ -579,7 +579,7 @@ public class VirtualFireAlarmService {
 					break;
 
 				case XMPP_PROTOCOL:
-					replyMsg = sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.SONAR_CONTEXT, "");
+					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.SONAR_CONTEXT, "");
 					break;
 
 				default:
@@ -641,7 +641,7 @@ public class VirtualFireAlarmService {
 					break;
 
 				case XMPP_PROTOCOL:
-					replyMsg = sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, "");
+					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, "");
 					break;
 
 				default:
@@ -685,44 +685,9 @@ public class VirtualFireAlarmService {
 			return;
 		}
 
-		PrivilegedCarbonContext.startTenantFlow();
-		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-		ctx.setTenantDomain(SUPER_TENANT, true);
-		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-				DeviceAnalyticsService.class, null);
-		Object metdaData[] = {dataMsg.owner, VirtualFireAlarmConstants.DEVICE_TYPE, dataMsg.deviceId, System.currentTimeMillis()};
-		Object payloadData[] = {temperature};
-		try {
-			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0",
-			                                    metdaData, new Object[0], payloadData);
-		} catch (DataPublisherConfigurationException e) {
+		if (!publishToDAS(dataMsg.owner, dataMsg.deviceId, dataMsg.value)) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-
-		} finally {
-			PrivilegedCarbonContext.endTenantFlow();
 		}
-	}
-
-	private String executeCommand(String command) {
-		StringBuffer output = new StringBuffer();
-
-		Process p;
-		try {
-			p = Runtime.getRuntime().exec(command);
-			p.waitFor();
-			BufferedReader reader =
-					new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				output.append(line + "\n");
-			}
-
-		} catch (Exception e) {
-			log.info(e.getMessage(), e);
-		}
-
-		return output.toString();
 
 	}
 
@@ -816,66 +781,23 @@ public class VirtualFireAlarmService {
 		return result;
 	}
 
-	private String sendCommandViaXMPP(String deviceOwner, String deviceId, String resource, String state) throws DeviceManagementException {
+	private void sendCommandViaXMPP(String deviceOwner, String deviceId, String resource, String state) throws DeviceManagementException {
 
-		String replyMsg = "";
-//		String scriptArguments = "";
-//		String command = "";
-
-		String seperator = File.separator;
-		String xmppServerURL = XmppConfig.getInstance().getXmppEndpoint();
-		int indexOfChar = xmppServerURL.lastIndexOf(seperator);
+		String xmppServerDomain = XmppConfig.getInstance().getXmppEndpoint();
+		int indexOfChar = xmppServerDomain.lastIndexOf(File.separator);
 		if (indexOfChar != -1) {
-			xmppServerURL = xmppServerURL.substring((indexOfChar + 1), xmppServerURL.length());
+			xmppServerDomain = xmppServerDomain.substring((indexOfChar + 1), xmppServerDomain.length());
 		}
 
-		indexOfChar = xmppServerURL.indexOf(":");
+		indexOfChar = xmppServerDomain.indexOf(":");
 		if (indexOfChar != -1) {
-			xmppServerURL = xmppServerURL.substring(0, indexOfChar);
+			xmppServerDomain = xmppServerDomain.substring(0, indexOfChar);
 		}
 
-//		String xmppAdminUName = XmppConfig.getInstance().getXmppUsername();
-//		String xmppAdminPass = XmppConfig.getInstance().getXmppPassword();
-//		String xmppAdminUserLogin = xmppAdminUName + "@" + xmppServerURL + seperator + deviceOwner;
-//		String clientToConnect = deviceId + "@" + xmppServerURL + seperator + deviceOwner;
-		String clientToConnect = deviceId + "@" + xmppServerURL + seperator + deviceOwner;
+		String clientToConnect = deviceId + "@" + xmppServerDomain + File.separator + deviceOwner;
 		String message = resource.replace("/","") + ":" + state;
 
 		virtualFireAlarmXMPPConnector.sendXMPPMessage(clientToConnect, message, "CONTROL-REQUEST");
-
-//		String scriptsFolder = "repository" + seperator + "resources" + seperator + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + seperator + scriptsFolder + seperator
-//				+ "xmpp_client.py ";
-//
-//		scriptArguments =
-//				"-j " + xmppAdminUserLogin + " -p " + xmppAdminPass + " -c " + clientToConnect +
-//						" -r " + resource + " -s " + state;
-//		command = "python " + scriptPath + scriptArguments;
-//
-//		if (log.isDebugEnabled()) {
-//			log.debug("Connecting to XMPP Server via Admin credentials: " + xmppAdminUserLogin);
-//			log.debug("Trying to contact xmpp device account: " + clientToConnect);
-//			log.debug("Arguments used for the scripts: '" + scriptArguments + "'");
-//			log.debug("Command exceuted: '" + command + "'");
-//		}
-
-//		switch (resource) {
-//			case BULB_CONTEXT:
-//				scriptArguments = "-r Bulb -s " + state;
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//			case SONAR_CONTEXT:
-//				scriptArguments = "-r Sonar";
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//			case TEMPERATURE_CONTEXT:
-//				scriptArguments = "-r Temperature";
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//		}
-
-//		replyMsg = executeCommand(command);
-		return replyMsg;
 	}
 
 	/*	---------------------------------------------------------------------------------------
@@ -947,5 +869,24 @@ public class VirtualFireAlarmService {
 		}
 
 		return completeResponse.toString();
+	}
+
+	public static boolean publishToDAS(String owner, String deviceId, float temperature){
+		PrivilegedCarbonContext.startTenantFlow();
+		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		ctx.setTenantDomain(SUPER_TENANT, true);
+		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
+				DeviceAnalyticsService.class, null);
+		Object metdaData[] = {owner, VirtualFireAlarmConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
+		Object payloadData[] = {temperature};
+
+		try {
+			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0", metdaData, new Object[0], payloadData);
+		} catch (DataPublisherConfigurationException e) {
+			return false;
+		} finally {
+			PrivilegedCarbonContext.endTenantFlow();
+		}
+		return true;
 	}
 }

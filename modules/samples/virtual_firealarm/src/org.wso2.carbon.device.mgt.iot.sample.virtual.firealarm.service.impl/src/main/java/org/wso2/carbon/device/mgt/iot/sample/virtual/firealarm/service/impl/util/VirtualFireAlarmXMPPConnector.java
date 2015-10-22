@@ -3,9 +3,15 @@ package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.uti
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.packet.Message;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
+import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConnector;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
+		.VirtualFireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
 
 public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 	private static Log log = LogFactory.getLog(VirtualFireAlarmXMPPConnector.class);
@@ -53,11 +59,20 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 		log.info("Received XMPP message for: {OWNER-" + owner + "} & {DEVICE.ID-" + deviceId + "}");
 
 		if (subject.equals("PUBLISHER")) {
-			log.info("Received XMPP publisher message [" + message + "] from [" + from + "]");
+			log.info("XMPP: Publisher Message [" + message + "] from [" + from + "]");
+
+			float temperature = Float.parseFloat(message.split(":")[1]);
+			if(!VirtualFireAlarmService.publishToDAS(owner, deviceId, temperature)) {
+				log.error("XMPP Connector: Publishing data to DAS failed.");
+			}
+
+			if(log.isDebugEnabled()) {
+				log.debug("XMPP Connector: Published data to DAS successfully.");
+			}
 		} else if(subject.equals("CONTROL-REPLY")) {
-			log.info("Received XMPP reply message [" + message + "] from [" + from + "]");
+			log.info("XMPP: Reply Message [" + message + "] from [" + from + "]");
 		} else {
-			log.info("Received SOME XMPP message [" + message + "] from " + from + "]");
+			log.info("SOME XMPP Message [" + message + "] from " + from + "]");
 		}
 
 	}
@@ -100,6 +115,4 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 		retryToConnect.setDaemon(true);
 		retryToConnect.start();
 	}
-
-
 }

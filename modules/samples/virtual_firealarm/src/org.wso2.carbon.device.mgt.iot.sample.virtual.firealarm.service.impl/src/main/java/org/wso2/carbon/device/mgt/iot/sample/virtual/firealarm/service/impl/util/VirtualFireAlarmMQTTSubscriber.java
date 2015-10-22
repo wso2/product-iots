@@ -3,19 +3,23 @@ package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.uti
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
+import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
+import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttSubscriber;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
 		.VirtualFireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
 
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.UUID;
 
 public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 	private static Log log = LogFactory.getLog(VirtualFireAlarmMQTTSubscriber.class);
 
-//	wso2/iot/shabirmean/virtual_firealarm/t4ctwq8qfl11/publisher
 	private static final String subscribeTopic =
 			"wso2" + File.separator + "iot" + File.separator + "+" + File.separator +
 					VirtualFireAlarmConstants.DEVICE_TYPE + File.separator + "+" + File.separator +
@@ -54,9 +58,18 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
 		log.info("Received MQTT message for: {OWNER-" + owner + "} & {DEVICE.ID-" + deviceId + "}");
 
 		if (message.toString().contains("PUBLISHER")) {
-			log.info("Received MQTT publisher message [" + message.toString() + "] topic: [" + topic + "]");
+			log.info("MQTT: Publisher Message [" + message.toString() + "] topic: [" + topic + "]");
+
+			float temperature = Float.parseFloat(message.toString().split(":")[2]);
+			if(!VirtualFireAlarmService.publishToDAS(owner, deviceId, temperature)) {
+				log.error("MQTT Subscriber: Publishing data to DAS failed.");
+			}
+
+			if(log.isDebugEnabled()) {
+				log.debug("MQTT Subscriber: Published data to DAS successfully.");
+			}
 		} else {
-			log.info("Received MQTT reply message [" + message.toString() + "] topic: [" + topic + "]");
+			log.info("MQTT: Reply Message [" + message.toString() + "] topic: [" + topic + "]");
 		}
 	}
 
