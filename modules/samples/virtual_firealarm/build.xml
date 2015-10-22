@@ -75,7 +75,20 @@
         <copy file="FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="sketch"/>
     </target>
 
-    <target name="deploy" depends="create-db,build-agent,build">
+    <target name="build-api">
+        <echo message="Downloading api source...."/>
+        <exec dir="." executable="sh">
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-appliances/trunk/firealarm-webapp --non-interactive --trust-server-cert'"/>
+        </exec>
+        <echo message="building api from source"/>
+        <exec dir="firealarm-webapp" executable="sh">
+            <arg line="-c 'mvn clean install'"/>
+        </exec>
+        <copy file="firealarm-webapp/target/firealarm-webapp.war" todir="${target.webapp.dir}"/>
+        <copy file="firealarm-webapp/src/main/resources/firealarmApp.properties" todir="${iot.conf.dir}"/>
+    </target>
+
+    <target name="deploy" depends="create-db,build-agent,build-api,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
@@ -99,6 +112,10 @@
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
+        <delete dir="${target.webapp.dir}/${sample_type}"/>
+        <delete file="${target.webapp.dir}/${sample_type}.war"/>
+        <delete dir="${target.webapp.dir}/firealarm-webapp"/>
+        <delete file="${target.webapp.dir}/firealarm-webapp.war"/>
         <xmltask source="${iot.conf}" dest="${iot.conf}" report="true">
             <remove path="/IoTDeviceTypeConfigManager/IotDeviceTypeConfig[type='${sample_type}']"/>
         </xmltask>
