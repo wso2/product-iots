@@ -16,7 +16,7 @@
 
 package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util;
 
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.TemperatureRecord;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.TemperatureRecord;
 
 import java.util.HashMap;
 import java.util.Map;

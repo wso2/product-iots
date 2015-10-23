@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao;
+package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

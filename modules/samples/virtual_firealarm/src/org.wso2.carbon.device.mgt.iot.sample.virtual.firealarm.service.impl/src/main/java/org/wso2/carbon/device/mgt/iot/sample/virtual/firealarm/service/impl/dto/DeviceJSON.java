@@ -1,4 +1,4 @@
-package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao;
+package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

@@ -44,9 +44,9 @@ import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.TemperatureRecord;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.TemperatureRecord;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DataHolder;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMQTTSubscriber;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmXMPPConnector;
 
