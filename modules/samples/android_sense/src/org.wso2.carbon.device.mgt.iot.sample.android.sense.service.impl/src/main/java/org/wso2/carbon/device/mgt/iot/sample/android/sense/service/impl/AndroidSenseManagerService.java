@@ -61,22 +61,24 @@ public class AndroidSenseManagerService {
 		deviceIdentifier.setType(AndroidSenseConstants.DEVICE_TYPE);
 		try {
 			if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+				response.setStatus(Response.Status.CONFLICT.getStatusCode());
 				return true;
 			}
-
 			Device device = new Device();
 			device.setDeviceIdentifier(deviceId);
 			EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+
 			enrolmentInfo.setDateOfEnrolment(new Date().getTime());
 			enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
 			enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
 			enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
-			device.setEnrolmentInfo(enrolmentInfo);
-
-			String name = "android_sense" + deviceId;
+			String name = owner + " android " + deviceId;
 			device.setName(name);
 			device.setType(AndroidSenseConstants.DEVICE_TYPE);
+			enrolmentInfo.setOwner(owner);
+			device.setEnrolmentInfo(enrolmentInfo);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
+
 			if (added) {
 				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {

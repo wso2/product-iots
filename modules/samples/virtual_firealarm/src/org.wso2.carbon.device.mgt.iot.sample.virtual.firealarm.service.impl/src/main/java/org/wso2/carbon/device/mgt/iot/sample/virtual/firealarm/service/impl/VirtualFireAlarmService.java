@@ -44,7 +44,9 @@ import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.TemperatureRecord;
+
+
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.DataHolder;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMQTTSubscriber;
@@ -246,8 +248,7 @@ public class VirtualFireAlarmService {
 			device.setName(name);
 			device.setType(VirtualFireAlarmConstants.DEVICE_TYPE);
 
-			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
-					device);
+			boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(device);
 
 			if (updated) {
 				response.setStatus(Response.Status.OK.getStatusCode());
@@ -607,11 +608,11 @@ public class VirtualFireAlarmService {
 	@GET
     @Consumes("application/json")
     @Produces("application/json")
-	public TemperatureRecord requestTemperature(@HeaderParam("owner") String owner,
+	public SensorRecord requestTemperature(@HeaderParam("owner") String owner,
 	                                 @HeaderParam("deviceId") String deviceId,
 	                                 @HeaderParam("protocol") String protocol,
 	                                 @Context HttpServletResponse response) {
-        TemperatureRecord temperatureRecord = null;
+        SensorRecord sensorRecord = null;
 
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
@@ -636,8 +637,13 @@ public class VirtualFireAlarmService {
 						response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
                     }
 					String tString = sendCommandViaHTTP(deviceHTTPEndpoint, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, false);
-                    float temperature = Float.parseFloat(tString);
-                    DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+					String temperatureValue = tString;
+					DataHolder.getInstance().setSensorRecord(deviceId,
+					                                         VirtualFireAlarmConstants
+							                                         .SENSOR_TEMPERATURE,
+					                                         temperatureValue,
+					                                         Calendar.getInstance()
+							                                         .getTimeInMillis());
                     break;
 
 				case MQTT_PROTOCOL:
@@ -645,19 +651,21 @@ public class VirtualFireAlarmService {
 					break;
 
 				case XMPP_PROTOCOL:
-					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, "");
+					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants
+							.TEMPERATURE_CONTEXT, "");
 					break;
 
 				default:
                     response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
             }
-            temperatureRecord = DataHolder.getThisInstance().getTemperature(deviceId);
+			sensorRecord = DataHolder.getInstance().getSensorRecord(deviceId,
+			                                                        VirtualFireAlarmConstants.SENSOR_TEMPERATURE);
 		} catch (DeviceManagementException e) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
 
 		response.setStatus(Response.Status.OK.getStatusCode());
-        return temperatureRecord;
+        return sensorRecord;
     }
 
 	@Path("controller/push_temperature")
@@ -684,11 +692,36 @@ public class VirtualFireAlarmService {
 			response.setStatus(Response.Status.CONFLICT.getStatusCode());
 			return;
 		}
-        DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+		DataHolder.getInstance().setSensorRecord(deviceId,
+		                                         VirtualFireAlarmConstants.SENSOR_TEMPERATURE,
+		                                         String.valueOf(temperature),
+		                                         Calendar.getInstance().getTimeInMillis());
 		if (!publishToDAS(dataMsg.owner, dataMsg.deviceId, dataMsg.value)) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
 
+	}
+
+	@Path("controller/set_sensor")
+	@POST
+	@Consumes("application/json")
+	@Produces("application/json")
+	public boolean setSensorReading(@HeaderParam("deviceId") String deviceId,
+										 @HeaderParam("sensorName") String sensorName,
+										@HeaderParam("sensorValue") String sensorValue,
+										 @Context HttpServletResponse response) {
+
+		return DataHolder.getInstance().setSensorRecord(deviceId, sensorName, sensorValue, Calendar.getInstance().getTimeInMillis());
+	}
+
+	@Path("controller/read_sensor")
+	@GET
+	@Consumes("application/json")
+	@Produces("application/json")
+	public SensorRecord readSensorReading(@HeaderParam("deviceId") String deviceId,
+									 @HeaderParam("sensorName") String sensorName,
+									 @Context HttpServletResponse response) {
+		return DataHolder.getInstance().getSensorRecord(deviceId, sensorName);
 	}
 
 	private String sendCommandViaHTTP(final String deviceHTTPEndpoint, String urlContext, boolean fireAndForgot) throws DeviceManagementException {
@@ -763,6 +796,8 @@ public class VirtualFireAlarmService {
 
 		return responseMsg;
 	}
+
+
 
 	private boolean sendCommandViaMQTT(String deviceOwner, String deviceId, String resource, String state) throws DeviceManagementException {
 

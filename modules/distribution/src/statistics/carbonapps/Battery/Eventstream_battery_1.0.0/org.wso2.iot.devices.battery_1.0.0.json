@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.battery",
+  "version": "1.0.0",
+  "nickName": "battery Data",
+  "description": "battery data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},     
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},  
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "battery","type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		
