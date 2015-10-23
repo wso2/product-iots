@@ -6,6 +6,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.mqtt.MqttSubscriber;
+import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
 
@@ -67,7 +68,7 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
         } else if (message.toString().contains("TEMPERATURE")) {
             log.info("MQTT: Reply Message [" + message.toString() + "] topic: [" + topic + "]");
             String temperatureValue = message.toString().split(":")[1];
-            DataHolder.getInstance().setSensorRecord(deviceId, VirtualFireAlarmConstants.SENSOR_TEMPERATURE, temperatureValue, Calendar.getInstance().getTimeInMillis());
+            SensorDataManager.getInstance().setSensorRecord(deviceId, VirtualFireAlarmConstants.SENSOR_TEMPERATURE, temperatureValue, Calendar.getInstance().getTimeInMillis());
         } else {
             log.info("MQTT: Message [" + message.toString() + "] topic: [" + topic + "]");
         }
