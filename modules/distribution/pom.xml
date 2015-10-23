@@ -340,11 +340,11 @@
 											file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/iot-config.xml"/>
 								</copy>
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml"/>
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"/>
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml"/>
+									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml.disable"/>
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"
 									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"
 									  overwrite="true"/>
