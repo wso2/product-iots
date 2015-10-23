@@ -297,7 +297,7 @@ public class VirtualFireAlarmService {
 				}
 			}
 
-			return userDevicesforFirealarm.toArray(new Device[]{});
+			return userDevicesforFirealarm.toArray(new Device[] {});
 		} catch (DeviceManagementException e) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
@@ -641,7 +641,9 @@ public class VirtualFireAlarmService {
 			sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId, VirtualFireAlarmConstants.SENSOR_TEMPERATURE);
 		} catch (DeviceManagementException e) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-        }
+        } catch (DeviceControllerException e){
+			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+		}
 
 		response.setStatus(Response.Status.OK.getStatusCode());
         return sensorRecord;
