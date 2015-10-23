@@ -9,6 +9,7 @@ import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConnector;
+import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
 		.VirtualFireAlarmConstants;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
@@ -73,8 +74,8 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 			}
 		} else if(subject.equals("CONTROL-REPLY")) {
 			log.info("XMPP: Reply Message [" + message + "] from [" + from + "]");
-			float temperature = Float.parseFloat(message.split(":")[1]);
-			DataHolder.getThisInstance().setTemperature(deviceId, temperature, Calendar.getInstance().getTimeInMillis());
+			String temperature = message.split(":")[1];
+			SensorDataManager.getInstance().setSensorRecord(deviceId,VirtualFireAlarmConstants.SENSOR_TEMPERATURE, temperature, Calendar.getInstance().getTimeInMillis());
 		} else {
 			log.info("SOME XMPP Message [" + message + "] from " + from + "]");
 		}
