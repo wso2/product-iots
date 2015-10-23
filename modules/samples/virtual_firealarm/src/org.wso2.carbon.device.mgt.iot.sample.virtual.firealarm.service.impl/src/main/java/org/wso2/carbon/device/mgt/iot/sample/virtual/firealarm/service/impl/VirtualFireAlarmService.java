@@ -45,7 +45,8 @@ import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dao.DeviceJSON;
+
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.dto.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMQTTSubscriber;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmXMPPConnector;
 
@@ -296,7 +297,7 @@ public class VirtualFireAlarmService {
 				}
 			}
 
-			return userDevicesforFirealarm.toArray(new Device[] {});
+			return userDevicesforFirealarm.toArray(new Device[]{});
 		} catch (DeviceManagementException e) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return null;
@@ -630,7 +631,8 @@ public class VirtualFireAlarmService {
 					break;
 
 				case XMPP_PROTOCOL:
-					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants.TEMPERATURE_CONTEXT, "");
+					sendCommandViaXMPP(owner, deviceId, VirtualFireAlarmConstants
+							.TEMPERATURE_CONTEXT, "");
 					break;
 
 				default:
@@ -670,9 +672,10 @@ public class VirtualFireAlarmService {
 			return;
 		}
 		SensorDataManager.getInstance().setSensorRecord(deviceId,
-												 VirtualFireAlarmConstants.SENSOR_TEMPERATURE,
-												 String.valueOf(temperature),
-												 Calendar.getInstance().getTimeInMillis());
+														VirtualFireAlarmConstants.SENSOR_TEMPERATURE,
+														String.valueOf(temperature),
+														Calendar.getInstance().getTimeInMillis());
+
 		if (!publishToDAS(dataMsg.owner, dataMsg.deviceId, dataMsg.value)) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
