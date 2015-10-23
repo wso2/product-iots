@@ -400,7 +400,7 @@
 					</exclusion>
 				</exclusions>
 				<scope>system</scope>
-				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_4.4.1.jar</systemPath>		
+				<systemPath>${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_4.4.2.jar</systemPath>
 			</dependency>
 
 			<dependency>

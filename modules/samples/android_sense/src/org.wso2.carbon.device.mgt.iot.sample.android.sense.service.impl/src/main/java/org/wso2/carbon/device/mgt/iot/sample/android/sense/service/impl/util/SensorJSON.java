@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DeviceJSON {
-    @XmlElement(required = true) public String owner;
-    @XmlElement(required = true) public String deviceId;
-    @XmlElement public SensorJSON[] values;
+public class SensorJSON {
+
+    @XmlElement public Long time;
+    @XmlElement public String key;
+    @XmlElement public String value;
 }

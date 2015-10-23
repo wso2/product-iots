@@ -43,7 +43,7 @@ public class AndroidSenseControllerService {
 
 
 
-		String temperature = dataMsg.value;                            //TEMP
+		String temperature = dataMsg.owner;                            //TEMP
 		log.info("Recieved Sensor Data Values: " + temperature);
 
 		if (log.isDebugEnabled()) {
