@@ -61,6 +61,17 @@
             <arg line="-c 'mvn clean install'" />
         </exec>
     </target>
+    <target name="build-android-agent">
+        <echo message="Downloading android agent source...." />
+        <exec dir="." executable="sh">
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/wso2_sense_agent --non-interactive --trust-server-cert'" />
+        </exec>
+        <echo message="building agent from source" />
+        <exec dir="wso2_sense_agent" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+        <copy file="wso2_sense_agent/app/build/outputs/apk/app-release-unsigned.apk" todir="sketch/android_sense.apk"/>
+    </target>
 
     <target name="deploy" depends="create-db,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
@@ -78,6 +89,8 @@
             <fileset dir="units"/>
         </copy>
     </target>
+
+
 
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>

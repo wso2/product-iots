@@ -155,6 +155,16 @@
 			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.igniterealtime.smack.wso2</groupId>
+			<artifactId>smack</artifactId>
+			<version>${smack.wso2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.igniterealtime.smack.wso2</groupId>
+			<artifactId>smackx</artifactId>
+			<version>${smackx.wso2.version}</version>
+		</dependency>
 
 	</dependencies>
 

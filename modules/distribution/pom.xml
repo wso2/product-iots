@@ -245,6 +245,8 @@
 								<!--Make samples directory for distribution-->
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples"/>
 
+								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics"/>
+
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/sketches"/>
 
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts"/>
@@ -271,7 +273,7 @@
 									<fileset dir="src/scripts"/>
 								</copy>
 
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples/statistics"
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/statistics"
 									  overwrite="true">
 									<fileset dir="src/statistics/carbonapps">
 										<exclude name="**/*.iml"/>

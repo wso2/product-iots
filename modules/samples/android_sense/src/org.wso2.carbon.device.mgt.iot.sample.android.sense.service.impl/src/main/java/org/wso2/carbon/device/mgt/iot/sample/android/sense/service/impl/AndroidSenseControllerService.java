@@ -1,12 +1,12 @@
 /*
  * Copyright (c) 2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,9 +20,6 @@ import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
-import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.sample.android.sense.plugin.constants.AndroidSenseConstants;
 import org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.util.DeviceJSON;
 import org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.util.SensorJSON;
@@ -71,11 +68,9 @@ public class AndroidSenseControllerService {
 			switch (sensor.key){
 				case "light" : streamDef = LIGHT_STREAM_DEFINITION;
 					payloadData = new Object[]{Float.parseFloat(sensor.value)};
-					SensorDataManager.getInstance().setSensorRecord(dataMsg.deviceId,"light",sensor.value,sensor.time);
 					break;
 				case "battery" : streamDef = BATTERY_STREAM_DEFINITION;
 					payloadData = new Object[]{Float.parseFloat(sensor.value)};
-					SensorDataManager.getInstance().setSensorRecord(dataMsg.deviceId,"battery",sensor.value,sensor.time);
 					break;
 				case "GPS" : streamDef = GPS_STREAM_DEFINITION;
 					String gpsValue =sensor.value;
@@ -84,7 +79,6 @@ public class AndroidSenseControllerService {
 					gpsValuesF[0] = Float.parseFloat(gpsValues[0]);
 					gpsValuesF[1] = Float.parseFloat(gpsValues[0]);
 					payloadData = gpsValuesF;
-					SensorDataManager.getInstance().setSensorRecord(dataMsg.deviceId,"gps",sensor.value,sensor.time);
 					break;
 				default :
 					try {
@@ -96,9 +90,10 @@ public class AndroidSenseControllerService {
 							String valuesM[]=value.split(",");
 							Float gValuesF[]= new Float[1];
 							gValuesF[0] = Float.parseFloat(valuesM[0])*Float.parseFloat(valuesM[0])*Float.parseFloat(valuesM[0]);
-
 							payloadData = gValuesF;
-							SensorDataManager.getInstance().setSensorRecord(dataMsg.deviceId,"magnetic",sensor.value,sensor.time);
+						}else if(androidSensorId==5){
+							streamDef = LIGHT_STREAM_DEFINITION;
+							payloadData = new Object[]{Float.parseFloat(sensor.value)};
 						}
 					}catch(NumberFormatException e){
 						continue;
@@ -119,87 +114,5 @@ public class AndroidSenseControllerService {
 		}
 
 	}
-
-	@Path("controller/readgps")
-	@GET
-	@Consumes("application/json")
-	@Produces("application/json")
-	public SensorRecord requestTemperature(@HeaderParam("owner") String owner,
-										   @HeaderParam("deviceId") String deviceId,
-										   @HeaderParam("protocol") String protocol,
-										   @Context HttpServletResponse response) {
-		SensorRecord sensorRecord = null;
-
-		try {
-			return SensorDataManager.getInstance().getSensorRecord(deviceId,"gps");
-		} catch (DeviceControllerException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-		}
-
-
-		return sensorRecord;
-	}
-
-
-	@Path("controller/readlight")
-	@GET
-	@Consumes("application/json")
-	@Produces("application/json")
-	public SensorRecord readLight(@HeaderParam("owner") String owner,
-										   @HeaderParam("deviceId") String deviceId,
-										   @HeaderParam("protocol") String protocol,
-										   @Context HttpServletResponse response) {
-		SensorRecord sensorRecord = null;
-
-		try {
-			return SensorDataManager.getInstance().getSensorRecord(deviceId,"light");
-		} catch (DeviceControllerException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-		}
-
-
-		return sensorRecord;
-	}
-
-	@Path("controller/readmagnetic")
-	@GET
-	@Consumes("application/json")
-	@Produces("application/json")
-	public SensorRecord readMagnetic(@HeaderParam("owner") String owner,
-										   @HeaderParam("deviceId") String deviceId,
-										   @HeaderParam("protocol") String protocol,
-										   @Context HttpServletResponse response) {
-		SensorRecord sensorRecord = null;
-
-		try {
-			return SensorDataManager.getInstance().getSensorRecord(deviceId,"magnetic");
-		} catch (DeviceControllerException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-		}
-
-
-		return sensorRecord;
-	}
-
-	@Path("controller/readbattery")
-	@GET
-	@Consumes("application/json")
-	@Produces("application/json")
-	public SensorRecord readBattery(@HeaderParam("owner") String owner,
-									 @HeaderParam("deviceId") String deviceId,
-									 @HeaderParam("protocol") String protocol,
-									 @Context HttpServletResponse response) {
-		SensorRecord sensorRecord = null;
-
-		try {
-			return SensorDataManager.getInstance().getSensorRecord(deviceId,"battery");
-		} catch (DeviceControllerException e) {
-			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-		}
-
-
-		return sensorRecord;
-	}
-
 
 }
