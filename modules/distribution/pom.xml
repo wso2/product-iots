@@ -249,8 +249,6 @@
 
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/resources/scripts"/>
 
-								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/statistics"/>
-
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib"/>
 
 								<!--Copy samples to distribution-->
@@ -273,10 +271,20 @@
 									<fileset dir="src/scripts"/>
 								</copy>
 
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/statistics"
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples/statistics"
 									  overwrite="true">
-									<fileset dir="src/statistics"/>
+									<fileset dir="src/statistics/carbonapps">
+										<exclude name="**/*.iml"/>
+										<exclude name="**/.DS_Store"/>
+										<exclude name="**/target/"/>
+									</fileset>
 								</copy>
+
+								<fileset dir="../samples">
+									<exclude name="**/*.iml"/>
+									<exclude name="**/.DS_Store"/>
+									<exclude name="**/target/"/>
+								</fileset>
 
 								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/lib">
 									<fileset dir="src/lib"/>
@@ -343,8 +351,8 @@
 									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/arduino/build.xml.disable"/>
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml"
 									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/raspberrypi/build.xml.disable"/>
-								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml"
-									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml.disable"/>
+								<!--<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml"-->
+									  <!--toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/virtual_firealarm/build.xml.disable"/>-->
 								<move file="target/wso2carbon-core-${carbon.kernel.version}/samples/sample_pom.xml"
 									  toFile="target/wso2carbon-core-${carbon.kernel.version}/samples/pom.xml"
 									  overwrite="true"/>

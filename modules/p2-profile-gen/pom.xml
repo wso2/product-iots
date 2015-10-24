@@ -100,9 +100,15 @@
 
                             <featureArtifacts>
 
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon:org.wso2.carbon.core.feature:${carbon.kernel.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.core.feature:${carbon.kernel.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.core.runtime.feature:${carbon.kernel.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.kernel.version}
+                                </featureArtifactDef>
 
 
                                 <!--Device Cloud Features -->
@@ -713,10 +719,18 @@
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
 
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.core.feature.group</id>-->
-                                    <!--<version>${carbon.kernel.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.core.feature.group</id>
+                                    <version>${carbon.kernel.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.core.runtime.feature.group</id>
+                                    <version>${carbon.kernel.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.core.ui.feature.group</id>
+                                    <version>${carbon.kernel.version}</version>
+                                </feature>
 
                                 <!-- IoT Features -->
                                 <feature>

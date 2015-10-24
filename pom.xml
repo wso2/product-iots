@@ -824,7 +824,7 @@
 
         <!--Carbon kernel versions-->
         <carbon.kernel.version>4.4.2</carbon.kernel.version>
-        <carbon.kernel.version.range>[4.4.1, 4.5.0)</carbon.kernel.version.range>
+        <carbon.kernel.version.range>[4.4.2, 4.5.0)</carbon.kernel.version.range>
         <carbon.platform.version>4.4.2</carbon.platform.version>
 
         <!--Carbon p2 version-->
@@ -873,7 +873,7 @@
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
         <!-- Carbon Commons -->
-        <carbon.commons.version>4.4.7</carbon.commons.version>
+        <carbon.commons.version>4.4.8</carbon.commons.version>
 
         <!-- Carbon Deployment -->
         <carbon.deployment.version>4.5.2</carbon.deployment.version>
@@ -886,7 +886,7 @@
 
         <!-- Carbon Registry -->
         <carbon.registry.version>4.4.8</carbon.registry.version>
-        <carbon.registry.package.import.version.range>[4.4.1, 4.5.0)</carbon.registry.package.import.version.range>
+        <carbon.registry.package.import.version.range>[4.4.8, 4.5.0)</carbon.registry.package.import.version.range>
 
         <!-- Carbon Governance -->
         <carbon.governance.version>4.5.8</carbon.governance.version>
@@ -899,7 +899,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- carbon mediation -->
-        <carbon.mediation.version>4.4.10</carbon.mediation.version>
+        <carbon.mediation.version>4.4.11-SNAPSHOT</carbon.mediation.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>4.3.0-SNAPSHOT</carbon.api.mgt.version>
@@ -918,10 +918,10 @@
 
         <!--DAS-->
         <carbon.analytics.version>1.0.4-SNAPSHOT</carbon.analytics.version>
-        <carbon.analytics.common.version>5.0.5-SNAPSHOT</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.5</carbon.analytics.common.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.7</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.8</carbon.event-processing.version>
         <carbon.data.version>4.3.2</carbon.data.version>
 
 
