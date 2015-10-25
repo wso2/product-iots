@@ -7,9 +7,6 @@ echo "|	       ----------------				"
 echo "|    ....initializing startup-script	"
 echo "----------------------------------------------------------------"
 
-
-unzip firealarm-virtual-agent-1.0-SNAPSHOT-jar-with-dependencies.jar.zip
-
 #while true; do
 #    read -p "What is the network-interface of your device that the Agent should use (find from ifconfig. ex: wlan0,en0,eth0..) > " interface
 #
