@@ -24,25 +24,15 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
-    <jaxrs:server id="AndroidSenseController" address="/controller">
+
+    <jaxrs:server id="AndroidSense" address="/">
         <jaxrs:serviceBeans>
-            <bean id="AndroidSenseControllerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.AndroidSenseControllerService">
-            </bean>
+            <bean id="AndroidSenseService"
+                  class="org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.AndroidSenseService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
         </jaxrs:providers>
-    </jaxrs:server>
-
-
-
-    <jaxrs:server id="AndroidSenseManager" address="/manager">
-        <jaxrs:serviceBeans>
-            <bean id="AndroidSenseManagerService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.android.sense.service.impl.AndroidSenseManagerService">
-            </bean>
-        </jaxrs:serviceBeans>
     </jaxrs:server>
 
 </beans>
