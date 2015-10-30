@@ -53,6 +53,10 @@
 		<param-name>managed-api-context</param-name>
 		<param-value>/virtual_firealarm</param-value>
 	</context-param>
+        <context-param>
+                <param-name>managed-api-context-template</param-name>
+                <param-value>/virtual_firealarm/{version}</param-value>
+        </context-param>
 	<context-param>
 		<param-name>managed-api-isSecured</param-name>
 		<param-value>true</param-value>
