@@ -64,15 +64,24 @@
     </target>
 
     <target name="build-agent">
-        <echo message="Downloading agent source...." />
+        <echo message="Downloading simple agent source...." />
         <exec dir="." executable="sh">
             <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent --non-interactive --trust-server-cert'" />
         </exec>
-        <echo message="building agent from source" />
+        <echo message="building simple agent from source" />
         <exec dir="FireAlarmVirtualAgent" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
         <copy file="FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="sketch"/>
+        <echo message="Downloading advance agent source...." />
+        <exec dir="." executable="sh">
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgentAdvanced --non-interactive --trust-server-cert'" />
+        </exec>
+        <echo message="building advanced agent from source" />
+        <exec dir="FireAlarmVirtualAgentAdvanced" executable="sh">
+            <arg line="-c 'mvn clean install'" />
+        </exec>
+        <copy file="FireAlarmVirtualAgentAdvanced/target/wso2-firealarm-virtual-agent-advanced.jar" todir="sketch_advanced"/>
     </target>
 
     <target name="build-api">
@@ -92,6 +101,9 @@
         <copy toDir="${target.sketch.dir}/${sample_type}">
             <fileset dir="sketch"/>
         </copy>
+        <copy toDir="${target.sketch.dir}/${sample_type}_advanced">
+            <fileset dir="sketch_advanced"/>
+        </copy>
         <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
         <copy toDir="${target.sample.device.dir}/${sample_type}">
             <fileset dir="artifact/"/>
@@ -108,6 +120,7 @@
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>
         <delete dir="${target.sketch.dir}/${sample_type}"/>
+        <delete dir="${target.sketch.dir}/${sample_type}_advanced"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
         <delete dir="${target.unit.dir}/${sample_type}"/>
         <delete file="${target.page.dir}/${sample_type}.hbs"/>
