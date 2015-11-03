@@ -50,14 +50,14 @@
     <Resource>
         <AuthType>Any</AuthType>
         <HttpVerb>GET</HttpVerb>
-        <Uri>http://localhost:9763/virtual_firealarm/manager/device</Uri>
-        <UriTemplate>/manager/device/*</UriTemplate>
+        <Uri>http://localhost:9763/virtual_firealarm/manager/device/{device_id}</Uri>
+        <UriTemplate>/manager/device/{device_id}</UriTemplate>
     </Resource>
     <Resource>
         <AuthType>Any</AuthType>
         <HttpVerb>GET</HttpVerb>
-        <Uri>http://localhost:9763/virtual_firealarm/manager/devices</Uri>
-        <UriTemplate>/manager/devices/*</UriTemplate>
+        <Uri>http://localhost:9763/virtual_firealarm/manager/devices/{username}</Uri>
+        <UriTemplate>/manager/devices/{username}</UriTemplate>
     </Resource>
     <Resource>
         <AuthType>Any</AuthType>
