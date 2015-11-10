@@ -14,7 +14,7 @@
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>
-            <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
+            <fileset file="FireAlarm/dbscripts/${db.type}_${sample_type}.sql"/>
         </sql>
         <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
 
@@ -58,62 +58,65 @@
     </target>
 
     <target name="build">
-        <exec dir="src" executable="sh">
+        <exec dir="FireAlarm/api/src" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
     </target>
 
     <target name="build-agent">
         <echo message="Downloading simple agent source...." />
+        <mkdir dir="VirtualAgent/FireAlarmVirtualAgent"/>
         <exec dir="." executable="sh">
-            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent --non-interactive --trust-server-cert'" />
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgent VirtualAgent/FireAlarmVirtualAgent --non-interactive --trust-server-cert'" />
         </exec>
         <echo message="building simple agent from source" />
-        <exec dir="FireAlarmVirtualAgent" executable="sh">
+        <exec dir="VirtualAgent/FireAlarmVirtualAgent" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
-        <copy file="FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="sketch"/>
+        <copy file="VirtualAgent/FireAlarmVirtualAgent/target/wso2-firealarm-virtual-agent.jar" todir="VirtualAgent/sketch"/>
         <echo message="Downloading advance agent source...." />
+        <mkdir dir="VirtualAgent/FireAlarmVirtualAgentAdvanced"/>
         <exec dir="." executable="sh">
-            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgentAdvanced --non-interactive --trust-server-cert'" />
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/FireAlarmVirtualAgentAdvanced VirtualAgent/FireAlarmVirtualAgentAdvanced --non-interactive --trust-server-cert'" />
         </exec>
         <echo message="building advanced agent from source" />
-        <exec dir="FireAlarmVirtualAgentAdvanced" executable="sh">
+        <exec dir="VirtualAgent/FireAlarmVirtualAgentAdvanced" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
-        <copy file="FireAlarmVirtualAgentAdvanced/target/wso2-firealarm-virtual-agent-advanced.jar" todir="sketch_advanced"/>
+        <copy file="VirtualAgent/FireAlarmVirtualAgentAdvanced/target/wso2-firealarm-virtual-agent-advanced.jar" todir="VirtualAgent/sketch_advanced"/>
     </target>
 
-    <target name="build-api">
+    <target name="build-webapp">
         <echo message="Downloading api source...."/>
+        <mkdir dir="webapp/firealarm-webapp"/>
         <exec dir="." executable="sh">
-            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-appliances/trunk/firealarm-webapp --non-interactive --trust-server-cert'"/>
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-appliances/trunk/firealarm-webapp webapp/firealarm-webapp --non-interactive --trust-server-cert'"/>
         </exec>
         <echo message="building api from source"/>
-        <exec dir="firealarm-webapp" executable="sh">
+        <exec dir="webapp/firealarm-webapp" executable="sh">
             <arg line="-c 'mvn clean install'"/>
         </exec>
-        <copy file="firealarm-webapp/target/firealarm-webapp.war" todir="${target.webapp.dir}"/>
-        <copy file="firealarm-webapp/src/main/resources/firealarmApp.properties" todir="${iot.conf.dir}"/>
+        <copy file="webapp/firealarm-webapp/target/firealarm-webapp.war" todir="${target.webapp.dir}"/>
+        <copy file="webapp/firealarm-webapp/src/main/resources/firealarmApp.properties" todir="${iot.conf.dir}"/>
     </target>
 
-    <target name="deploy" depends="create-db,build-agent,build-api,build">
+    <target name="deploy" depends="create-db,build-agent,build-webapp,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
-            <fileset dir="sketch"/>
+            <fileset dir="VirtualAgent/sketch"/>
         </copy>
         <copy toDir="${target.sketch.dir}/${sample_type}_advanced">
-            <fileset dir="sketch_advanced"/>
+            <fileset dir="VirtualAgent/sketch_advanced"/>
         </copy>
         <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
         <copy toDir="${target.sample.device.dir}/${sample_type}">
-            <fileset dir="artifact/"/>
+            <fileset dir="FireAlarm/ui/artifact/"/>
         </copy>
 
-        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
-        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
-        <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
+        <copy file="FireAlarm/api/src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="FireAlarm/api/src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="FireAlarm/ui/page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
-            <fileset dir="units"/>
+            <fileset dir="FireAlarm/ui/units"/>
         </copy>
     </target>
 

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WSO2-SenseAgent</string>
+    <string name="title_activity_sense_settings">Sense Settings</string>
+    <string name="hostname">Server URL https://host:9443</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

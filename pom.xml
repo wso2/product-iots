@@ -876,7 +876,7 @@
         <carbon.commons.version>4.4.8</carbon.commons.version>
 
         <!-- Carbon Deployment -->
-        <carbon.deployment.version>4.5.2</carbon.deployment.version>
+        <carbon.deployment.version>4.6.0</carbon.deployment.version>
 
         <!-- Carbon Identity -->
         <carbon.identity.version>4.6.0-SNAPSHOT</carbon.identity.version>

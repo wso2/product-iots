@@ -36,13 +36,13 @@
     </parent>
 
     <modules>
-        <module>firealarm/src</module>
-        <module>android_sense/src</module>
-        <module>arduino/src</module>
-        <module>digital_display/src</module>
-        <module>raspberrypi/src</module>
-        <module>sensebot/src</module>
-        <module>virtual_firealarm/src</module>
+        <module>firealarm/FireAlarm/api/src</module>
+        <module>android_sense/AndroidSense/api/src</module>
+        <module>arduino/Arduino/api/src</module>
+        <module>digital_display/DigitalDisplay/api/src</module>
+        <module>raspberrypi/Raspberry/api/src</module>
+        <module>sensebot/SenseBot/api/src</module>
+        <module>virtual_firealarm/FireAlarm/api/src</module>
     </modules>
 
     <dependencyManagement>

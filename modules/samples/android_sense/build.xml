@@ -15,7 +15,7 @@
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>
-            <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
+            <fileset file="AndroidSense/dbscripts/${db.type}_${sample_type}.sql"/>
         </sql>
         <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
 
@@ -57,40 +57,39 @@
     </target>
 
     <target name="build">
-        <exec dir="src" executable="sh">
+        <exec dir="AndroidSense/api/src" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
     </target>
     <target name="build-android-agent">
+    	<mkdir dir="Agent/wso2_sense_agent"/>
         <echo message="Downloading android agent source...." />
         <exec dir="." executable="sh">
-            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/wso2_sense_agent --non-interactive --trust-server-cert'" />
+            <arg line="-c 'svn checkout https://github.com/wso2-incubator/iot-server-agents/trunk/wso2_sense_agent Agent/wso2_sense_agent --non-interactive --trust-server-cert'" />
         </exec>
         <echo message="building agent from source" />
-        <exec dir="wso2_sense_agent" executable="sh">
+        <exec dir="Agent/wso2_sense_agent" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
-        <copy file="wso2_sense_agent/app/build/outputs/apk/app-release-unsigned.apk" todir="sketch/android_sense.apk"/>
+        <copy file="Agent/wso2_sense_agent/app/build/outputs/apk/app-release-unsigned.apk" todir="Agent/sketch/android_sense.apk"/>
     </target>
 
     <target name="deploy" depends="create-db,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
-            <fileset dir="sketch"/>
+            <fileset dir="Agent/sketch"/>
         </copy>
         <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
         <copy toDir="${target.sample.device.dir}/${sample_type}">
-            <fileset dir="artifact/"/>
+            <fileset dir="AndroidSense/ui/artifact/"/>
         </copy>
 
-        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
-        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
-        <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
+        <copy file="AndroidSense/api/src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="AndroidSense/api/src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="AndroidSense/ui/page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
-            <fileset dir="units"/>
+            <fileset dir="AndroidSense/ui/units"/>
         </copy>
     </target>
-
-
 
     <target name="clean">
         <delete file="${target.db.dir}/${data_source}.h2.db"/>

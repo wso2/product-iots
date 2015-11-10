@@ -14,7 +14,7 @@
             <classpath>
                 <pathelement location="${lib.dir}/h2-database-engine_1.2.140.wso2v3.jar"/>
             </classpath>
-            <fileset file="dbscripts/${db.type}_${sample_type}.sql"/>
+            <fileset file="Raspberry/dbscripts/${db.type}_${sample_type}.sql"/>
         </sql>
         <copy file="${db.dir}/${data_source}.h2.db" toDir="${target.db.dir}" overwrite="yes"/>
 
@@ -56,25 +56,25 @@
     </target>
 
     <target name="build">
-        <exec dir="src" executable="sh">
+        <exec dir="Raspberry/api/src" executable="sh">
             <arg line="-c 'mvn clean install'" />
         </exec>
     </target>
 
     <target name="deploy" depends="create-db,build">
         <copy toDir="${target.sketch.dir}/${sample_type}">
-            <fileset dir="sketch"/>
+            <fileset dir="Agent/sketch"/>
         </copy>
         <mkdir dir="${target.sample.device.dir}/${sample_type}"/>
         <copy toDir="${target.sample.device.dir}/${sample_type}">
-            <fileset dir="artifact/"/>
+            <fileset dir="Raspberry/ui/artifact/"/>
         </copy>
 
-        <copy file="src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
-        <copy file="src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
-        <copy file="page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
+        <copy file="Raspberry/api/src/${package}.service.impl/target/${sample_type}.war" toDir="${target.webapp.dir}" overwrite="yes"/>
+        <copy file="Raspberry/api/src/${package}.plugin.impl/target/${package}.plugin.impl-${target.version}.jar" toDir="${target.dropins.dir}" overwrite="yes"/>
+        <copy file="Raspberry/ui/page/${sample_type}.hbs" toDir="${target.page.dir}" overwrite="yes"/>
         <copy toDir="${target.unit.dir}/${sample_type}">
-            <fileset dir="units"/>
+            <fileset dir="Raspberry/ui/units"/>
         </copy>
     </target>
 

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-5f37f316d503119e8e940bc6147423a28028938e.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-a49bba393352e40b3a2c77305b4d175131c6035b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/internal_impl-22.0.0-3c739e94ff5c382efc8e190c64b046f8f08548f9.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-a2ac0984c99126a23f2ff9eaee1ad9ea2590428f.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-7cc641f33fbb083914dc34a6f21f017d3100e50a.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-9c4ee3b5d5a65a3cd9a176e67ac7281853e32156.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-f85dea88ee04abe2b44516da321ea168577149e7.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-f85bb224fe40682e29567ed759f0d8147789d99a.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-fc685315c00e30381a68ae1e40e618f5633b148a.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-7b993cace9f2f89ea7878cee3734d43164761324.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-c8073c83524abffdd450dc16bdddbe5e9a2473c9.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-27570a1dd1163b87dda5a680824455c7c0b5e7bb.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-c965435894746702a284be3b219dc7f9890de78b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-bd9210bc6461a94fd375de690573f7692fb8f6ca.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-eea806d1c31c7f035fd293a56b4eddee9896f68b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-b31ab94c7b4f25bba7f50e7db83969c0abb17395.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-5f18676280d30833bd6e2bfc0802c27f7e2a7c90.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-89c8becd4e40d23a240904b0e866e339422193de.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-67f38bb2e0123552baad0942e6ae8f2ecc29e83e.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-f8cdc886172afca7899ddc2d3bc98b881ef0471d.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-06eef0469b7ba17fe99e86a1ff9124f95eca2e22.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-0aa32945d2af5dd313fdf82dfcc6dca7c4a61b17.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-3d021cc2ce59490f31c720e586470122ed3081fb.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-bc85cbe1b3709c53b31a4b4670324bf0714cbb72.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-4bf713786a72281f07dde60a3edbd94854995c4b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/internal_impl-22.2.0-b1ae13d9667717f01e87e38dbf4767cb4a147255.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-b408adab78303a462e4e242268eaa27d6fb68f51.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-818c83a292835cb905b1fc65b1920fcee95185ef.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-15077e775d127c164c0e4724bd0af2dadb8ead83.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-dd36a7cfa280312b0e8f1f9bb4e30d7509180a29.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-c2af74b50463bf6f99827d4bc59971116edf6161.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d405025c600055237c171a0bbabaa49d69696573">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-b0300288a8318525a44e614cb685db1d3b4ead6b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-7bed73ef0e569b49a728e9673620253e0e9f9301.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-cf87780c02ccc07e8d1dc8d4c844d5d32b3e2683.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-6d1942f94bcc0ec99afd8b7ee5ba8f6e9a89bb9b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-9ade1828bea97427006e9c998f42a444280ec927.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-5450e680e7872436414a9548385011f2c8487550.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-f75044418b6dcc7ff2a8d70d7e8cf2a208d6c0e1.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-d10cc88287864f8e0f831e7776e22b9da9685859.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-7d0fbd0b4530d75b7bbc6689c38f1c12734bff26.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-2cbb13942165cbc89aca7bc9e1f777bcbc04c277.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-79fb523ec54f1f40f7369c408490512821a15f50.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-8800f13f43b3b1432fa2889783a68afc980d420b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-2e38d3423be45e0d0b2adb09d8e0065dfba0823c.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-9ce95b9a9877ca5c2e327b16fee4e5f629d4a2ab.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-3efa6e6ec21335ccac2678be64d362c7b9036130.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-d4bc6409918d6a5d4a5a5d98100031f46ef8e160.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/iot-server-agents/wso2_sense_agent/app/build/intermediates/pre-dexed/release/classes-216941976bfed9962f878deb4820b6efeb31478c.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-191fabc4812c8279f59a14d02fff6cde1a9a8c4b.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-3a95e3adf772a9a13406050763e81edacddb99d4.jar" />
+    </item>
+    <item
+        jar="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/Users/ayyoobhamza/Desktop/iot/wso2_sense_agent/app/build/intermediates/pre-dexed/debug/classes-886652be47aab5a3958fdda8eb5716d478c1be98.jar" />
+    </item>
+
+</items>

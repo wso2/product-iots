@@ -1,0 +1,4 @@
+<resources>
+    <string name="username"></string>
+    <bool name="registered">false</bool>
+</resources>
