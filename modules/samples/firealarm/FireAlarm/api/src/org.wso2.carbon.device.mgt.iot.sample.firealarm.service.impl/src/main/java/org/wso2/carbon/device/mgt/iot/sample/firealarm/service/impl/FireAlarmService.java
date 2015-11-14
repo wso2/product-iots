@@ -41,12 +41,19 @@ import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppServerClient;
 import org.wso2.carbon.device.mgt.iot.common.exception.AccessTokenException;
 import org.wso2.carbon.device.mgt.iot.common.exception.DeviceControllerException;
+import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
+import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.common.util.ZipUtil;
 import org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.constants.FireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.util.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.dto.DeviceJSON;
+import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.transport
+		.FireAlarmMQTTSubscriber;
+import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.transport
+		.FireAlarmXMPPConnector;
 import org.wso2.carbon.utils.CarbonUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -73,6 +80,7 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -86,24 +94,67 @@ public class FireAlarmService {
 	private static Log log = LogFactory.getLog(FireAlarmService.class);
 
 	//TODO; replace this tenant domain
-	private final String SUPER_TENANT = "carbon.super";
+	private static final String SUPER_TENANT = "carbon.super";
 	@Context  //injected response proxy supporting multiple thread
 	private HttpServletResponse response;
 
 	private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
 
-	private static final String URL_PREFIX = "http://";
-	private static final String BULB_CONTEXT = "/BULB/";
-	private static final String SONAR_CONTEXT = "/SONAR/";
-	private static final String TEMPERATURE_CONTEXT = "/TEMPERATURE/";
-
 	public static final String XMPP_PROTOCOL = "XMPP";
 	public static final String HTTP_PROTOCOL = "HTTP";
 	public static final String MQTT_PROTOCOL = "MQTT";
 
+	private static FireAlarmMQTTSubscriber fireAlarmMQTTSubscriber;
+	private static FireAlarmXMPPConnector fireAlarmXMPPConnector;
 	private static ConcurrentHashMap<String, String> deviceToIpMap = new ConcurrentHashMap<String, String>();
 
 
+	public void setFireAlarmXMPPConnector(
+			final FireAlarmXMPPConnector fireAlarmXMPPConnector) {
+		this.fireAlarmXMPPConnector = fireAlarmXMPPConnector;
+
+		Runnable mqttStarter = new Runnable() {
+			@Override
+			public void run() {
+				fireAlarmXMPPConnector.initConnector();
+				fireAlarmXMPPConnector.connectAndLogin();
+			}
+		};
+
+		Thread mqttStarterThread = new Thread(mqttStarter);
+		mqttStarterThread.setDaemon(true);
+		mqttStarterThread.start();
+	}
+
+	public void setFireAlarmMQTTSubscriber(
+			final FireAlarmMQTTSubscriber fireAlarmMQTTSubscriber) {
+		this.fireAlarmMQTTSubscriber = fireAlarmMQTTSubscriber;
+
+		Runnable xmppStarter = new Runnable() {
+			@Override
+			public void run() {
+				fireAlarmMQTTSubscriber.initConnector();
+				fireAlarmMQTTSubscriber.connectAndSubscribe();
+			}
+		};
+
+		Thread xmppStarterThread = new Thread(xmppStarter);
+		xmppStarterThread.setDaemon(true);
+		xmppStarterThread.start();
+	}
+
+	public FireAlarmXMPPConnector getFireAlarmXMPPConnector() {
+		return fireAlarmXMPPConnector;
+	}
+
+	public FireAlarmMQTTSubscriber getFireAlarmMQTTSubscriber() {
+		return fireAlarmMQTTSubscriber;
+	}
+
+	/*	---------------------------------------------------------------------------------------
+                                    Device management specific APIs
+                 Also contains utility methods required for the execution of these APIs
+       ---------------------------------------------------------------------------------------	*/
 	@Path("manager/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
@@ -281,7 +332,7 @@ public class FireAlarmService {
 	public Response downloadSketch(@QueryParam("owner") String owner,
 	                               @QueryParam("deviceName") String customDeviceName,
 								   @PathParam("sketch_type") String sketchType) {
-
+        //TODO:: null check customDeviceName at UI level
 		ZipArchive zipFile = null;
 		try {
 			zipFile = createDownloadFile(owner, customDeviceName, sketchType);
@@ -335,15 +386,12 @@ public class FireAlarmService {
 
 		TokenClient accessTokenClient = new TokenClient(FireAlarmConstants.DEVICE_TYPE);
 		AccessTokenInfo accessTokenInfo = null;
-
 		accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
 
 		//create token
 		String accessToken = accessTokenInfo.getAccess_token();
 		String refreshToken = accessTokenInfo.getRefresh_token();
 		//adding registering data
-
-
 
 		XmppAccount newXmppAccount = new XmppAccount();
 		newXmppAccount.setAccountName(owner + "_" + deviceId);
@@ -354,21 +402,24 @@ public class FireAlarmService {
 		XmppServerClient xmppServerClient = new XmppServerClient();
 		xmppServerClient.initControlQueue();
 		boolean status;
+
 		if(XmppConfig.getInstance().isEnabled()) {
 			status = xmppServerClient.createXMPPAccount(newXmppAccount);
-
 			if (!status) {
 				String msg =
 						"XMPP Account was not created for device - " + deviceId + " of owner - " +
 								owner +
-								". XMPP might have been disabled in org.wso2.carbon.device.mgt.iot.common.config.server.configs";
+                                ".XMPP might have been disabled in org.wso2.carbon.device.mgt.iot" +
+                                ".common.config.server.configs";
 				log.warn(msg);
 				throw new DeviceManagementException(msg);
 			}
 		}
 
+        //Register the device with CDMF
 		String deviceName = customDeviceName + "_" + deviceId;
 		status = register(deviceId, deviceName, owner);
+
 		if (!status) {
 			String msg = "Error occurred while registering the device with " + "id: " + deviceId
 					+ " owner:" + owner;
@@ -378,8 +429,8 @@ public class FireAlarmService {
 
 		ZipUtil ziputil = new ZipUtil();
 		ZipArchive zipFile = null;
-
-		zipFile = ziputil.downloadSketch(owner,SUPER_TENANT, sketchType, deviceId, deviceName, accessToken, refreshToken);
+        zipFile = ziputil.downloadSketch(owner, SUPER_TENANT, sketchType, deviceId, deviceName,
+                                         accessToken, refreshToken);
 		zipFile.setDeviceId(deviceId);
 		return zipFile;
 	}
@@ -390,18 +441,27 @@ public class FireAlarmService {
 		return Long.toString(l, Character.MAX_RADIX);
 	}
 
-	@Path("controller/register/{owner}/{deviceId}/{ip}")
+	/*	---------------------------------------------------------------------------------------
+                    Device specific APIs - Control APIs + Data-Publishing APIs
+            Also contains utility methods required for the execution of these APIs
+         ---------------------------------------------------------------------------------------	*/
+	@Path("controller/register/{owner}/{deviceId}/{ip}/{port}")
 	@POST
 	public String registerDeviceIP(@PathParam("owner") String owner,
 								   @PathParam("deviceId") String deviceId,
 								   @PathParam("ip") String deviceIP,
-								   @Context HttpServletResponse response) {
+								   @PathParam("port") String devicePort,
+                                   @Context HttpServletResponse response,
+                                   @Context HttpServletRequest request) {
+
+        //TODO:: Need to get IP from the request itself
 		String result;
 
 		log.info("Got register call from IP: " + deviceIP + " for Device ID: " + deviceId +
 						 " of owner: " + owner);
 
-		deviceToIpMap.put(deviceId, deviceIP);
+		String deviceHttpEndpoint = deviceIP + ":" + devicePort;
+        deviceToIpMap.put(deviceId, deviceHttpEndpoint);
 
 		result = "Device-IP Registered";
 		response.setStatus(Response.Status.OK.getStatusCode());
@@ -413,9 +473,8 @@ public class FireAlarmService {
 		return result;
 	}
 
-
-	/*    Service to switch "ON" and "OFF" the FireAlarm bulb
-		   Called by an external client intended to control the FireAlarm bulb */
+    /*    Service to switch "ON" and "OFF" the Virtual FireAlarm bulb
+           Called by an external client intended to control the Virtual FireAlarm bulb */
 	@Path("controller/bulb/{state}")
 	@POST
 	public void switchBulb(@HeaderParam("owner") String owner,
@@ -446,43 +505,41 @@ public class FireAlarmService {
 			return;
 		}
 
-		String deviceIP = deviceToIpMap.get(deviceId);
-		if (deviceIP == null) {
-			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
-			return;
-		}
-
 		String protocolString = protocol.toUpperCase();
-		String callUrlPattern = BULB_CONTEXT + switchToState;
+        String callUrlPattern = FireAlarmConstants.BULB_CONTEXT + switchToState;
 
-		log.info("Sending command: '" + callUrlPattern + "' to firealarm at: " + deviceIP + " " +
-						 "via" + " " + protocolString);
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to switch-bulb of device [" + deviceId + "] via " +
+                              protocolString);
+        }
 
 		try {
 			switch (protocolString) {
 				case HTTP_PROTOCOL:
-					sendCommandViaHTTP(deviceIP, 80, callUrlPattern, true);
+                    String deviceHTTPEndpoint = deviceToIpMap.get(deviceId);
+                    if (deviceHTTPEndpoint == null) {
+                        response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
+                        return;
+                    }
+
+                    sendCommandViaHTTP(deviceHTTPEndpoint, callUrlPattern, true);
 					break;
 				case MQTT_PROTOCOL:
-					sendCommandViaMQTT(owner, deviceId, BULB_CONTEXT.replace("/", ""),
+                    sendCommandViaMQTT(owner, deviceId,
+                                       FireAlarmConstants.BULB_CONTEXT.replace("/", ""),
 									   switchToState);
 					break;
 				case XMPP_PROTOCOL:
-//					requestBulbChangeViaXMPP(switchToState, response);
-					sendCommandViaXMPP(owner, deviceId, BULB_CONTEXT, switchToState);
+                    sendCommandViaXMPP(owner, deviceId, FireAlarmConstants.BULB_CONTEXT,
+                                       switchToState);
 					break;
 				default:
-					if (protocolString == null) {
-						sendCommandViaHTTP(deviceIP, 80, callUrlPattern, true);
-					} else {
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return;
 					}
-					break;
-			}
 		} catch (DeviceManagementException e) {
-			log.error("Failed to send command '" + callUrlPattern + "' to: " + deviceIP + " via" +
-							  " " + protocol);
+            log.error("Failed to send switch-bulb request to device [" + deviceId + "] via " +
+                              protocolString);
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			return;
 		}
@@ -513,43 +570,44 @@ public class FireAlarmService {
 			return replyMsg;
 		}
 
-		String deviceIp = deviceToIpMap.get(deviceId);
+        String protocolString = protocol.toUpperCase();
 
-		if (deviceIp == null) {
-			replyMsg = "IP not registered for device: " + deviceId + " of owner: " + owner;
-			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
-			return replyMsg;
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to read sonar value of device [" + deviceId + "] via " +
+		                      protocolString);
 		}
 
 		try {
-			switch (protocol) {
+            switch (protocolString) {
 				case HTTP_PROTOCOL:
-					log.info("Sending request to read sonar value at : " + deviceIp +
-									 " via " + HTTP_PROTOCOL);
+                    String deviceHTTPEndpoint = deviceToIpMap.get(deviceId);
+                    if (deviceHTTPEndpoint == null) {
+                        replyMsg =
+                                "IP not registered for device: " + deviceId + " of owner: " + owner;
+                        response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
+                        return replyMsg;
+                    }
 
-					replyMsg = sendCommandViaHTTP(deviceIp, 80, SONAR_CONTEXT, false);
+                    replyMsg = sendCommandViaHTTP(deviceHTTPEndpoint,
+                                                  FireAlarmConstants.SONAR_CONTEXT, false);
 					break;
 
+                case MQTT_PROTOCOL:
+                    sendCommandViaMQTT(owner, deviceId,
+                                       FireAlarmConstants.SONAR_CONTEXT.replace("/", ""),
+                                       "");
+                    break;
+
 				case XMPP_PROTOCOL:
-					log.info("Sending request to read sonar value at : " + deviceIp +
-									 " via " +
-									 XMPP_PROTOCOL);
-					replyMsg = sendCommandViaXMPP(owner, deviceId, SONAR_CONTEXT, ".");
+                    sendCommandViaXMPP(owner, deviceId, FireAlarmConstants.SONAR_CONTEXT,
+                                       "");
 					break;
 
 				default:
-					if (protocol == null) {
-						log.info("Sending request to read sonar value at : " + deviceIp +
-										 " via " + HTTP_PROTOCOL);
-
-						replyMsg = sendCommandViaHTTP(deviceIp, 80, SONAR_CONTEXT, false);
-					} else {
-						replyMsg = "Requested protocol '" + protocol + "' is not supported";
+                    replyMsg = "Requested protocol '" + protocolString + "' is not supported";
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
 						return replyMsg;
 					}
-					break;
-			}
 		} catch (DeviceManagementException e) {
 			replyMsg = e.getErrorMessage();
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -564,11 +622,13 @@ public class FireAlarmService {
 
 	@Path("controller/readtemperature")
 	@GET
-	public String requestTemperature(@HeaderParam("owner") String owner,
+    @Consumes("application/json")
+    @Produces("application/json")
+    public SensorRecord requestTemperature(@HeaderParam("owner") String owner,
 									 @HeaderParam("deviceId") String deviceId,
 									 @HeaderParam("protocol") String protocol,
 									 @Context HttpServletResponse response) {
-		String replyMsg = "";
+        SensorRecord sensorRecord = null;
 
 		DeviceValidator deviceValidator = new DeviceValidator();
 		try {
@@ -576,117 +636,72 @@ public class FireAlarmService {
 																				   FireAlarmConstants
 																						   .DEVICE_TYPE))) {
 				response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-				return "Unauthorized Access";
 			}
 		} catch (DeviceManagementException e) {
-			replyMsg = e.getErrorMessage();
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			return replyMsg;
 		}
 
-		String deviceIp = deviceToIpMap.get(deviceId);
+        String protocolString = protocol.toUpperCase();
 
-		if (deviceIp == null) {
-			replyMsg = "IP not registered for device: " + deviceId + " of owner: " + owner;
-			response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
-			return replyMsg;
+        if (log.isDebugEnabled()) {
+            log.debug(
+		            "Sending request to read virtual-firealarm-temperature of device [" +
+				            deviceId +
+				            "] via " + protocolString);
 		}
 
 		try {
-			switch (protocol) {
+            switch (protocolString) {
 				case HTTP_PROTOCOL:
-					log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-									 " via " + HTTP_PROTOCOL);
-
-					replyMsg = sendCommandViaHTTP(deviceIp, 80, TEMPERATURE_CONTEXT, false);
+                    String deviceHTTPEndpoint = deviceToIpMap.get(deviceId);
+                    if (deviceHTTPEndpoint == null) {
+                        response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
+                    }
+                    String tString = sendCommandViaHTTP(deviceHTTPEndpoint,
+                                                        FireAlarmConstants
+                                                                .TEMPERATURE_CONTEXT,
+                                                        false);
+                    String temperatureValue = tString;
+                    SensorDataManager.getInstance().setSensorRecord(deviceId,
+                                                                    FireAlarmConstants
+		                                                                    .SENSOR_TEMPERATURE,
+                                                                    temperatureValue,
+                                                                    Calendar.getInstance()
+                                                                            .getTimeInMillis());
 					break;
 
+                case MQTT_PROTOCOL:
+                    sendCommandViaMQTT(owner, deviceId,
+                                       FireAlarmConstants.TEMPERATURE_CONTEXT.replace("/",
+                                                                                             ""),
+                                       "");
+                    break;
+
 				case XMPP_PROTOCOL:
-					log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-									 " via " +
-									 XMPP_PROTOCOL);
-					replyMsg = sendCommandViaXMPP(owner, deviceId, TEMPERATURE_CONTEXT, ".");
-//					replyMsg = requestTemperatureViaXMPP(response);
+                    sendCommandViaXMPP(owner, deviceId, FireAlarmConstants
+                            .TEMPERATURE_CONTEXT, "");
 					break;
 
 				default:
-					if (protocol == null) {
-						log.info("Sending request to read firealarm-temperature at : " + deviceIp +
-										 " via " + HTTP_PROTOCOL);
-
-						replyMsg = sendCommandViaHTTP(deviceIp, 80, TEMPERATURE_CONTEXT, false);
-					} else {
-						replyMsg = "Requested protocol '" + protocol + "' is not supported";
 						response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-						return replyMsg;
 					}
-					break;
-			}
+            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
+                                                                           FireAlarmConstants.SENSOR_TEMPERATURE);
 		} catch (DeviceManagementException e) {
-			replyMsg = e.getErrorMessage();
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-			return replyMsg;
+        } catch (DeviceControllerException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 		}
 
 		response.setStatus(Response.Status.OK.getStatusCode());
-		replyMsg = "The current temperature of the device is " + replyMsg;
-		return replyMsg;
+        return sensorRecord;
 	}
 
-
-//	public String requestTemperatureViaXMPP(@Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Temperature";
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-
-//	public String requestSonarViaXMPP(@Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Sonar";
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-
-//	public String requestBulbChangeViaXMPP(String state,
-//										   @Context HttpServletResponse response) {
-//		String replyMsg = "";
-//
-//		String sep = File.separator;
-//		String scriptsFolder = "repository" + sep + "resources" + sep + "scripts";
-//		String scriptPath = CarbonUtils.getCarbonHome() + sep + scriptsFolder + sep
-//				+ "xmpp_client.py -r Bulb -s " + state;
-//		String command = "python " + scriptPath;
-//
-//		replyMsg = executeCommand(command);
-//
-//		response.setStatus(HttpStatus.SC_OK);
-//		return replyMsg;
-//	}
-
-	@Path("/controller/push_temperature")
+    @Path("controller/push_temperature")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void pushTemperatureData(
-			final DeviceJSON dataMsg, @Context HttpServletResponse response) {
+    public void pushTemperatureData(final DeviceJSON dataMsg,
+                                    @Context HttpServletResponse response) {
 		boolean result;
 		String deviceId = dataMsg.deviceId;
 		String deviceIp = dataMsg.reply;
@@ -701,227 +716,29 @@ public class FireAlarmService {
 			return;
 		} else if (!registeredIp.equals(deviceIp)) {
 			log.warn("Conflicting IP: Received IP is " + deviceIp + ". Device with ID " +
-							 deviceId + " is already registered under some other IP. Re-registration " + "required");
+                             deviceId +
+                             " is already registered under some other IP. Re-registration " +
+                             "required");
 			response.setStatus(Response.Status.CONFLICT.getStatusCode());
 			return;
 		}
+        SensorDataManager.getInstance().setSensorRecord(deviceId,
+                                                        FireAlarmConstants
+		                                                        .SENSOR_TEMPERATURE,
+                                                        String.valueOf(temperature),
+                                                        Calendar.getInstance().getTimeInMillis());
 
-		PrivilegedCarbonContext.startTenantFlow();
-		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-		ctx.setTenantDomain(SUPER_TENANT, true);
-		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx
-				.getOSGiService(DeviceAnalyticsService.class, null);
-		Object metdaData[] = {dataMsg.owner, FireAlarmConstants.DEVICE_TYPE, dataMsg.deviceId,
-				System.currentTimeMillis()};
-		Object payloadData[] = {temperature};
-		try {
-			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0",
-												metdaData, new Object[0], payloadData);
-		} catch (DataPublisherConfigurationException e) {
+        if (!publishToDAS(dataMsg.owner, dataMsg.deviceId, dataMsg.value)) {
 			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-
-		} finally {
-			PrivilegedCarbonContext.endTenantFlow();
 		}
-
 
 	}
 
-
-	/*    Service to push all the sensor data collected by the FireAlarm
-		   Called by the FireAlarm device  */
-
-//	@Path("/pushalarmdata")
-//	@POST
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public void pushAlarmData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
-//		boolean result;
-//		String sensorValues = dataMsg.value;
-//		log.info("Recieved Sensor Data Values: " + sensorValues);
-//
-//		String sensors[] = sensorValues.split(":");
-//		try {
-//			if (sensors.length == 3) {
-//				String temperature = sensors[0];
-//				String bulb = sensors[1];
-//				String sonar = sensors[2];
-
-//				sensorValues = "Temperature:" + temperature + "C\tBulb Status:" + bulb +
-//						"\t\tSonar Status:" + sonar;
-//				log.info(sensorValues);
-//				DeviceController deviceController = new DeviceController();
-//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-//															  .DEVICE_TYPE,
-//													  dataMsg.deviceId,
-//													  System.currentTimeMillis(), "DeviceData",
-//													  temperature, "TEMPERATURE");
-//
-//				if (!result) {
-//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//					log.error("Error whilst pushing temperature: " + sensorValues);
-//					return;
-//				}
-//
-//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-//															  .DEVICE_TYPE,
-//													  dataMsg.deviceId,
-//													  System.currentTimeMillis(), "DeviceData",
-//													  bulb,
-//													  "BULB");
-//
-//				if (!result) {
-//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//					log.error("Error whilst pushing Bulb data: " + sensorValues);
-//					return;
-//				}
-//
-//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-//															  .DEVICE_TYPE,
-//													  dataMsg.deviceId,
-//													  System.currentTimeMillis(), "DeviceData",
-//													  sonar,
-//													  "SONAR");
-//
-//				if (!result) {
-//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//					log.error("Error whilst pushing Sonar data: " + sensorValues);
-//				}
-//
-//			} else {
-//				DeviceController deviceController = new DeviceController();
-//				result = deviceController.pushBamData(dataMsg.owner, FireAlarmConstants
-//															  .DEVICE_TYPE,
-//													  dataMsg.deviceId,
-//													  System.currentTimeMillis(), "DeviceData",
-//													  dataMsg.value, dataMsg.reply);
-//				if (!result) {
-//					response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//					log.error("Error whilst pushing sensor data: " + sensorValues);
-//				}
-//			}
-//
-//		} catch (UnauthorizedException e) {
-//			response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-//			log.error("Data Push Attempt Failed at Publisher: " + e.getMessage());
-//		}
-//	}
-
-
-	private String sendCommandViaXMPP(String deviceOwner, String deviceId, String resource,
-									  String state) throws DeviceManagementException {
-
-		String replyMsg = "";
-		String scriptArguments = "";
-		String command = "";
-
-		String seperator = File.separator;
-		String xmppServerURL = XmppConfig.getInstance().getXmppEndpoint();
-		int indexOfChar = xmppServerURL.lastIndexOf(seperator);
-		if (indexOfChar != -1) {
-			xmppServerURL = xmppServerURL.substring((indexOfChar + 1), xmppServerURL.length());
-		}
-
-		indexOfChar = xmppServerURL.indexOf(":");
-		if (indexOfChar != -1) {
-			xmppServerURL = xmppServerURL.substring(0, indexOfChar);
-		}
-
-		String xmppAdminUName = XmppConfig.getInstance().getXmppUsername();
-		String xmppAdminPass = XmppConfig.getInstance().getXmppPassword();
-
-		String xmppAdminUserLogin = xmppAdminUName + "@" + xmppServerURL + seperator + deviceOwner;
-		String clientToConnect = deviceId + "@" + xmppServerURL + seperator + deviceOwner;
-
-		String scriptsFolder = "repository" + seperator + "resources" + seperator + "scripts";
-		String scriptPath = CarbonUtils.getCarbonHome() + seperator + scriptsFolder + seperator
-				+ "xmpp_client.py ";
-
-		scriptArguments =
-				"-j " + xmppAdminUserLogin + " -p " + xmppAdminPass + " -c " + clientToConnect +
-						" -r " + resource + " -s " + state;
-		command = "python " + scriptPath + scriptArguments;
-
-		if (log.isDebugEnabled()) {
-			log.debug("Connecting to XMPP Server via Admin credentials: " + xmppAdminUserLogin);
-			log.debug("Trying to contact xmpp device account: " + clientToConnect);
-			log.debug("Arguments used for the scripts: '" + scriptArguments + "'");
-			log.debug("Command exceuted: '" + command + "'");
-		}
-
-//		switch (resource) {
-//			case BULB_CONTEXT:
-//				scriptArguments = "-r Bulb -s " + state;
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//			case SONAR_CONTEXT:
-//				scriptArguments = "-r Sonar";
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//			case TEMPERATURE_CONTEXT:
-//				scriptArguments = "-r Temperature";
-//				command = "python " + scriptPath + scriptArguments;
-//				break;
-//		}
-
-		replyMsg = executeCommand(command);
-		return replyMsg;
-	}
-
-
-	private String executeCommand(String command) {
-		StringBuffer output = new StringBuffer();
-
-		Process p;
-		try {
-			p = Runtime.getRuntime().exec(command);
-			p.waitFor();
-			BufferedReader reader =
-					new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				output.append(line + "\n");
-			}
-
-		} catch (Exception e) {
-			log.info(e.getMessage(), e);
-		}
-
-		return output.toString();
-
-	}
-
-
-	private boolean sendCommandViaMQTT(String deviceOwner, String deviceId, String resource,
-									   String state) throws DeviceManagementException {
-
-		boolean result = false;
-		DeviceController deviceController = new DeviceController();
-
-		try {
-			result = deviceController.publishMqttControl(deviceOwner,
-														 FireAlarmConstants.DEVICE_TYPE,
-														 deviceId, resource, state);
-		} catch (DeviceControllerException e) {
-			String errorMsg = "Error whilst trying to publish to MQTT Queue";
-			log.error(errorMsg);
-			throw new DeviceManagementException(errorMsg, e);
-		}
-		return result;
-	}
-
-
-	private String sendCommandViaHTTP(final String deviceIp, int deviceServerPort,
-									  String callUrlPattern,
-									  boolean fireAndForgot)
-			throws DeviceManagementException {
-
-		if (deviceServerPort == 0) {
-			deviceServerPort = 80;
-		}
+    private String sendCommandViaHTTP(final String deviceHTTPEndpoint, String urlContext,
+                                      boolean fireAndForgot) throws DeviceManagementException {
 
 		String responseMsg = "";
-		String urlString = URL_PREFIX + deviceIp + ":" + deviceServerPort + callUrlPattern;
+        String urlString = FireAlarmConstants.URL_PREFIX + deviceHTTPEndpoint + urlContext;
 
 		if (log.isDebugEnabled()) {
 			log.debug(urlString);
@@ -986,13 +803,54 @@ public class FireAlarmService {
 					}
 				}
 			}
-
 		}
 
 		return responseMsg;
 	}
 
-    /* Utility methods relevant to creating and sending http requests */
+
+    private boolean sendCommandViaMQTT(String deviceOwner, String deviceId, String resource,
+                                       String state) throws DeviceManagementException {
+
+        boolean result = false;
+        DeviceController deviceController = new DeviceController();
+
+        try {
+            result = deviceController.publishMqttControl(deviceOwner,
+                                                         FireAlarmConstants.DEVICE_TYPE,
+                                                         deviceId, resource, state);
+        } catch (DeviceControllerException e) {
+            String errorMsg = "Error whilst trying to publish to MQTT Queue";
+            log.error(errorMsg);
+            throw new DeviceManagementException(errorMsg, e);
+        }
+        return result;
+    }
+
+    private void sendCommandViaXMPP(String deviceOwner, String deviceId, String resource,
+                                    String state) throws DeviceManagementException {
+
+        String xmppServerDomain = XmppConfig.getInstance().getXmppEndpoint();
+        int indexOfChar = xmppServerDomain.lastIndexOf(File.separator);
+        if (indexOfChar != -1) {
+            xmppServerDomain = xmppServerDomain.substring((indexOfChar + 1),
+                                                          xmppServerDomain.length());
+        }
+
+        indexOfChar = xmppServerDomain.indexOf(":");
+        if (indexOfChar != -1) {
+            xmppServerDomain = xmppServerDomain.substring(0, indexOfChar);
+        }
+
+        String clientToConnect = deviceId + "@" + xmppServerDomain + File.separator + deviceOwner;
+        String message = resource.replace("/", "") + ":" + state;
+
+        fireAlarmXMPPConnector.sendXMPPMessage(clientToConnect, message, "CONTROL-REQUEST");
+    }
+
+	/*	---------------------------------------------------------------------------------------
+					Utility methods relevant to creating and sending http requests
+ 		---------------------------------------------------------------------------------------	*/
 
 	/* This methods creates and returns a http connection object */
 
@@ -1059,6 +917,27 @@ public class FireAlarmService {
 		}
 
 		return completeResponse.toString();
+	}
+
+	public static boolean publishToDAS(String owner, String deviceId, float temperature) {
+		PrivilegedCarbonContext.startTenantFlow();
+		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		ctx.setTenantDomain(SUPER_TENANT, true);
+		DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
+				DeviceAnalyticsService.class, null);
+		Object metdaData[] = {owner, FireAlarmConstants.DEVICE_TYPE, deviceId,
+				System.currentTimeMillis()};
+		Object payloadData[] = {temperature};
+
+		try {
+			deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0", metdaData,
+			                                    new Object[0], payloadData);
+		} catch (DataPublisherConfigurationException e) {
+			return false;
+		} finally {
+			PrivilegedCarbonContext.endTenantFlow();
+		}
+		return true;
 	}
 
 }

@@ -51,10 +51,10 @@
 
 
 	<bean id="mqttSubscriberBean"
-		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmMQTTSubscriber">
+		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.transport.VirtualFireAlarmMQTTSubscriber">
 	</bean>
 	<bean id="xmppConnectorBean"
-		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmXMPPConnector">
+		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.transport.VirtualFireAlarmXMPPConnector">
 	</bean>
 
 </beans>

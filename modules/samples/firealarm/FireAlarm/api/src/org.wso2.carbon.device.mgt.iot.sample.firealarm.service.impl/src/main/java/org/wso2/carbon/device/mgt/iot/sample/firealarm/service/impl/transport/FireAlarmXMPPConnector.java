@@ -1,23 +1,20 @@
-package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util;
+package org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.transport;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.packet.Message;
-import org.wso2.carbon.context.PrivilegedCarbonContext;
-import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
-import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConfig;
 import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConnector;
 import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
-		.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
+import org.wso2.carbon.device.mgt.iot.sample.firealarm.plugin.constants
+		.FireAlarmConstants;
+import org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmService;
 
 import java.util.Calendar;
 
-public class VirtualFireAlarmXMPPConnector extends XmppConnector {
-	private static Log log = LogFactory.getLog(VirtualFireAlarmXMPPConnector.class);
+public class FireAlarmXMPPConnector extends XmppConnector {
+	private static Log log = LogFactory.getLog(FireAlarmXMPPConnector.class);
 
 	private static String xmppServerIP;
 	//	private static int xmppServerPort;
@@ -25,7 +22,7 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 	private static String xmppAdminPassword;
 	private static String xmppAdminAccountJID;
 
-	private VirtualFireAlarmXMPPConnector() {
+	private FireAlarmXMPPConnector() {
 		super(XmppConfig.getInstance().getXmppServerIP(),
 		      XmppConfig.getInstance().getSERVER_CONNECTION_PORT());
 	}
@@ -65,7 +62,7 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 			log.info("XMPP: Publisher Message [" + message + "] from [" + from + "]");
 
 			float temperature = Float.parseFloat(message.split(":")[1]);
-			if(!VirtualFireAlarmService.publishToDAS(owner, deviceId, temperature)) {
+			if(!FireAlarmService.publishToDAS(owner, deviceId, temperature)) {
 				log.error("XMPP Connector: Publishing data to DAS failed.");
 			}
 
@@ -75,7 +72,7 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 		} else if(subject.equals("CONTROL-REPLY")) {
 			log.info("XMPP: Reply Message [" + message + "] from [" + from + "]");
 			String temperature = message.split(":")[1];
-			SensorDataManager.getInstance().setSensorRecord(deviceId,VirtualFireAlarmConstants.SENSOR_TEMPERATURE, temperature, Calendar.getInstance().getTimeInMillis());
+			SensorDataManager.getInstance().setSensorRecord(deviceId,FireAlarmConstants.SENSOR_TEMPERATURE, temperature, Calendar.getInstance().getTimeInMillis());
 		} else {
 			log.info("SOME XMPP Message [" + message + "] from " + from + "]");
 		}
@@ -94,10 +91,10 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 						}
 
 						try {
-							VirtualFireAlarmXMPPConnector.super.connectAndLogin(xmppAdminUsername,
+							FireAlarmXMPPConnector.super.connectAndLogin(xmppAdminUsername,
 							                                                    xmppAdminPassword,
 							                                                    null);
-							VirtualFireAlarmXMPPConnector.super.setMessageFilterOnReceiver(
+							FireAlarmXMPPConnector.super.setMessageFilterOnReceiver(
 									xmppAdminAccountJID);
 						} catch (DeviceManagementException e1) {
 							if (log.isDebugEnabled()) {

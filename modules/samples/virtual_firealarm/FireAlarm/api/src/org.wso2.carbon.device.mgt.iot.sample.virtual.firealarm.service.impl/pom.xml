@@ -25,7 +25,30 @@
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.device.mgt.core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.axis2.wso2</groupId>
+					<artifactId>axis2-client</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.certificate.mgt.core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-codec.wso2</groupId>
+					<artifactId>commons-codec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 
 		<!--CXF -->
 		<dependency>
@@ -151,10 +174,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 		<dependency>
-			<groupId>org.wso2.carbon.devicemgt</groupId>
-			<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.igniterealtime.smack.wso2</groupId>
 			<artifactId>smack</artifactId>

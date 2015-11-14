@@ -109,6 +109,13 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.certificate.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
             <!--IOT dependencies-->
 
             <dependency>
@@ -334,6 +341,7 @@
                 <scope>provided</scope>
             </dependency>
 
+
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
@@ -457,6 +465,7 @@
 
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
+        <commons-codec.version>1.7</commons-codec.version>
         <jackson.fasterxml.version>2.6.1</jackson.fasterxml.version>
 
         <!-- Source code -->

@@ -25,7 +25,10 @@
     <jaxrs:server id="FireAlarm" address="/">
         <jaxrs:serviceBeans>
             <bean id="FireAlarmService"
-                  class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmService"/>
+                  class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.FireAlarmService">
+                <property name="fireAlarmMQTTSubscriber" ref="mqttSubscriberBean"/>
+                <property name="fireAlarmXMPPConnector" ref="xmppConnectorBean"/>
+            </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
@@ -33,8 +36,11 @@
     </jaxrs:server>
 
 
-    <!--<bean id="mqttSubscriber" class="org.wso2.carbon.device.mgt.iot.firealarm.api.util.MQTTFirealarmSubscriber" >-->
-        <!-- -->
-    <!--</bean>-->
+    <bean id="mqttSubscriberBean"
+          class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.transport.FireAlarmMQTTSubscriber">
+    </bean>
+    <bean id="xmppConnectorBean"
+          class="org.wso2.carbon.device.mgt.iot.sample.firealarm.service.impl.transport.FireAlarmXMPPConnector">
+    </bean>
 </beans>
 
