@@ -22,4 +22,6 @@ public class DigitalDisplayConstants {
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "DIGITAL_DISPLAY_DEVICE_ID";
 
+    public final static String TCP_PREFIX = "tcp://";
+
 }

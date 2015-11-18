@@ -24,18 +24,17 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
-
-
-    <!--<jaxrs:server id="DigitalDisplayController" address="controller">-->
-        <!--<jaxrs:serviceBeans>-->
-            <!--<bean id="SenseBotControllerService"-->
-                  <!--class="org.wso2.carbon.device.mgt.iot.digitaldisplay.api.DigitalDisplayControllerService">-->
-            <!--</bean>-->
-        <!--</jaxrs:serviceBeans>-->
-        <!--<jaxrs:providers>-->
-            <!--<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />-->
-        <!--</jaxrs:providers>-->
-    <!--</jaxrs:server>-->
+    <jaxrs:server id="DigitalDisplayController" address="/controller">
+        <jaxrs:serviceBeans>
+            <bean id="DigitalDisplayManagerControllerService"
+                  class="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.DigitalDisplayControllerService">
+                <property name="mqttDigitalDisplaySubscriber" ref="mqttSubscriber"/>
+            </bean>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+        </jaxrs:providers>
+    </jaxrs:server>
 
     <jaxrs:server id="DigitalDisplayManager" address="/manager">
         <jaxrs:serviceBeans>
@@ -48,6 +47,11 @@
         </jaxrs:providers>
     </jaxrs:server>
 
+    <bean
+            id="mqttSubscriber"
+                class="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.util.MqttDigitalDisplaySubscriber" >
+
+    </bean>
 
 
 
