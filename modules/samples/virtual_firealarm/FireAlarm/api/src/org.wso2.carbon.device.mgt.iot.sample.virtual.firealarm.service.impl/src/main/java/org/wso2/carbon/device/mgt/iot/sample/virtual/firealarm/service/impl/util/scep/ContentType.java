@@ -1,4 +1,4 @@
-package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util;
+package org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.scep;
 
 public class ContentType {
     public static final String X_PKI_MESSAGE = "application/x-pki-message";

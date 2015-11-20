@@ -36,6 +36,12 @@
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt</groupId>
 			<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.axis2.wso2</groupId>
+					<artifactId>axis2-client</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -185,11 +191,13 @@
 			<groupId>org.igniterealtime.smack.wso2</groupId>
 			<artifactId>smack</artifactId>
 			<version>${smack.wso2.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.igniterealtime.smack.wso2</groupId>
 			<artifactId>smackx</artifactId>
 			<version>${smackx.wso2.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
