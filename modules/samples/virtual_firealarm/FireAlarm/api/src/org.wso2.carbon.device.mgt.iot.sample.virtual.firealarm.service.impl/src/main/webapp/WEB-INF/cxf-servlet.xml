@@ -40,6 +40,7 @@
 		<jaxrs:serviceBeans>
 			<bean id="VirtualFireAlarmService"
 				  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService">
+				<property name="verificationManager" ref="verificationManagerBean"/>
 				<property name="virtualFireAlarmMQTTSubscriber" ref="mqttSubscriberBean"/>
 				<property name="virtualFireAlarmXMPPConnector" ref="xmppConnectorBean"/>
 			</bean>
@@ -49,7 +50,9 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 
-
+	<bean id="verificationManagerBean"
+		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VerificationManager">
+	</bean>
 	<bean id="mqttSubscriberBean"
 		  class="org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.transport.VirtualFireAlarmMQTTSubscriber">
 	</bean>

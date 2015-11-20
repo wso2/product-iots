@@ -9,7 +9,7 @@ import org.wso2.carbon.device.mgt.iot.common.controlqueue.xmpp.XmppConnector;
 import org.wso2.carbon.device.mgt.iot.common.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.plugin.constants
 		.VirtualFireAlarmConstants;
-import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.VirtualFireAlarmService;
+import org.wso2.carbon.device.mgt.iot.sample.virtual.firealarm.service.impl.util.VirtualFireAlarmServiceUtils;
 
 import java.util.Calendar;
 
@@ -62,7 +62,7 @@ public class VirtualFireAlarmXMPPConnector extends XmppConnector {
 			log.info("XMPP: Publisher Message [" + message + "] from [" + from + "]");
 
 			float temperature = Float.parseFloat(message.split(":")[1]);
-			if(!VirtualFireAlarmService.publishToDAS(owner, deviceId, temperature)) {
+			if(!VirtualFireAlarmServiceUtils.publishToDAS(owner, deviceId, temperature)) {
 				log.error("XMPP Connector: Publishing data to DAS failed.");
 			}
 
