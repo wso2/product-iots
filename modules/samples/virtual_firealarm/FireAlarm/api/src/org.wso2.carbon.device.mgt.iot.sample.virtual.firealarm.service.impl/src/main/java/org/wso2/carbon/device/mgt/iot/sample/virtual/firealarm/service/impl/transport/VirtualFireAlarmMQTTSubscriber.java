@@ -68,6 +68,10 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
             actualMessage = VirtualFireAlarmServiceUtils.extractMessageFromPayload(mqttMessage.toString(),
                                                                                    serverPrivateKey, clientPublicKey);
 
+            if (log.isDebugEnabled()) {
+                log.debug("MQTT: Received Message [" + actualMessage + "] topic: [" + topic + "]");
+            }
+
             if (actualMessage.contains("PUBLISHER")) {
                 float temperature = Float.parseFloat(actualMessage.split(":")[2]);
 
@@ -76,16 +80,10 @@ public class VirtualFireAlarmMQTTSubscriber extends MqttSubscriber {
                 }
 
                 if (log.isDebugEnabled()) {
-                    log.debug("MQTT: Publisher Message [" + actualMessage + "] topic: [" + topic + "]");
                     log.debug("MQTT Subscriber: Published data to DAS successfully.");
                 }
 
             } else if (actualMessage.contains("TEMPERATURE")) {
-
-                if (log.isDebugEnabled()) {
-                    log.debug("MQTT: Reply Message [" + actualMessage + "] topic: [" + topic + "]");
-                }
-
                 String temperatureValue = actualMessage.split(":")[1];
                 SensorDataManager.getInstance().setSensorRecord(deviceId, VirtualFireAlarmConstants.SENSOR_TEMPERATURE,
                                                                 temperatureValue,

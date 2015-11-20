@@ -528,8 +528,7 @@ public class VirtualFireAlarmService {
                     return;
             }
         } catch (DeviceManagementException e) {
-            log.error("Failed to send switch-bulb request to device [" + deviceId + "] via " +
-                              protocolString);
+            log.error("Failed to send switch-bulb request to device [" + deviceId + "] via " + protocolString);
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
             return;
         }
