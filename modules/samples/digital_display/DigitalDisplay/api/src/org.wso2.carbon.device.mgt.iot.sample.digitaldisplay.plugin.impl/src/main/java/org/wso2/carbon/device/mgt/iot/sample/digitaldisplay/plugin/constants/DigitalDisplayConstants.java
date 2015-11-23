@@ -22,6 +22,9 @@ public class DigitalDisplayConstants {
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "DIGITAL_DISPLAY_DEVICE_ID";
 
-    public final static String TCP_PREFIX = "tcp://";
+    public final static String MQTT_BROKER_END_POINT = "tcp://204.232.188.214:1883";
+
+    public final static String DISPLAY_CONTENT = "DISPLAY";
+    public final static String BROWSER_CONTENT = "BROWSER";
 
 }

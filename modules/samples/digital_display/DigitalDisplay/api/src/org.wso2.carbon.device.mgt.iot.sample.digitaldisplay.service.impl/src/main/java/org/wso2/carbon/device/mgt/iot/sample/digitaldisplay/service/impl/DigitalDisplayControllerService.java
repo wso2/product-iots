@@ -10,13 +10,10 @@ import org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.util.Mq
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
  * Created by nuwan on 11/13/15.
@@ -27,14 +24,10 @@ public class DigitalDisplayControllerService {
 
     private static Log log = LogFactory.getLog(DigitalDisplayControllerService.class);
 
-    private static ConcurrentHashMap<String, String> deviceToIpMap =
-            new ConcurrentHashMap<String, String>();
-
     private static MqttDigitalDisplaySubscriber mqttDigitalDisplaySubscriber;
 
     public void setMqttDigitalDisplaySubscriber(MqttDigitalDisplaySubscriber mqttDigitalDisplaySubscriber){
         DigitalDisplayControllerService.mqttDigitalDisplaySubscriber = mqttDigitalDisplaySubscriber;
-
 
         try {
             mqttDigitalDisplaySubscriber.connectAndSubscribe();
@@ -43,63 +36,220 @@ public class DigitalDisplayControllerService {
         }
     }
 
-    public MqttDigitalDisplaySubscriber getMqttDigitalDisplaySubscriber(){
-        return mqttDigitalDisplaySubscriber;
-    }
-
-    @Path("/register/{owner}/{deviceId}/{ip}/{port}")
+    @Path("/restart-browser")
     @POST
-    public String registerDeviceIP(@PathParam("owner") String owner,
-                                   @PathParam("deviceId") String deviceId,
-                                   @PathParam("ip") String deviceIP,
-                                   @PathParam("port") String devicePort,
-                                   @Context HttpServletResponse response,
-                                   @Context HttpServletRequest request) {
+    public void restartBrowser(@QueryParam("deviceId") String deviceId ,
+                               @QueryParam("owner") String owner,
+                               @Context HttpServletResponse response,
+                               @Context HttpServletRequest request){
 
-        //TODO:: Need to get IP from the request itself
-        String result;
+        log.info("Restrat Browser : " + deviceId);
 
-        log.info("Got register call from IP: " + deviceIP + " for Device ID: " + deviceId +
-                " of owner: " + owner);
+        String sessionId = request.getSession().getId();
 
-        String deviceHttpEndpoint = deviceIP + ":" + devicePort;
-        deviceToIpMap.put(deviceId, deviceHttpEndpoint);
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId +":" +
+                                    DigitalDisplayConstants.BROWSER_CONTENT,"RESTART");
 
-        result = "Device-IP Registered";
-        response.setStatus(Response.Status.OK.getStatusCode());
+            if(result){
+                response.setStatus(Response.Status.OK.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
 
-        if (log.isDebugEnabled()) {
-            log.debug(result);
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
         }
 
-        return result;
     }
 
-
-    @Path("/update")
+    @Path("/close-browser")
     @POST
-    public boolean updateDevice(){
+    public void closeBrowser(@QueryParam("deviceId") String deviceId,
+                             @QueryParam("owner") String owner,
+                             @Context HttpServletResponse response,
+                             @Context HttpServletRequest request){
 
-		/*String deviceHttpEndPoint = deviceToIpMap.get(deviceId);
-		String[] deviceEndPontDetails = deviceHttpEndPoint.split(":");
-		String deviceIp = deviceEndPontDetails[0];
-		int port = Integer.parseInt(deviceEndPontDetails[1]);
-		*/
-        //Call publishDataTOQueue(topic,message)
-        log.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa ");
-        return false;
+        log.info("Close Browser : " + deviceId);
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId + ":" +
+                                    DigitalDisplayConstants.BROWSER_CONTENT,"CLOSE");
+
+            if(result){
+                response.setStatus(Response.Status.OK.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
+
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+        }
 
     }
 
-    public static String getEndPoint(String deviceId){
-        return deviceToIpMap.get(deviceId);
+    @Path("/terminate-display")
+    @POST
+    public void terminateDisplay(@QueryParam("deviceId") String deviceId,
+                                 @QueryParam("owner") String owner,
+                                 @Context HttpServletResponse response,
+                                 @Context HttpServletRequest request){
+
+        log.info("Terminate Display : " + deviceId);
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId +":" +
+                                    DigitalDisplayConstants.DISPLAY_CONTENT,"TERMINATE");
+
+            if(result){
+                response.setStatus(Response.Status.OK.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
+
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+        }
+
     }
 
+
+    @Path("/restart-display")
+    @POST
+    public void restartDisplay(@QueryParam("deviceId") String deviceId,
+                               @QueryParam("owner") String owner,
+                               @Context HttpServletResponse response,
+                               @Context HttpServletRequest request){
+
+        log.info("Restrat Display : " + deviceId);
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId +":" +
+                                    DigitalDisplayConstants.DISPLAY_CONTENT,"RESTART");
+
+            if(result){
+                response.setStatus(Response.Status.OK.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
+
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+        }
+
+    }
+
+    @Path("/edit-sequence")
+    @POST
+    public void editSequence(@QueryParam("deviceId") String deviceId){
+
+        log.info("Edit Sequence : " + deviceId);
+    }
+
+    @Path("/add-resource")
+    @POST
+    public void addNewResource(@QueryParam("deviceId") String deviceId){
+        log.info("Add Sequence : " + deviceId);
+    }
+
+    @Path("/delete-resource")
+    @POST
+    public void deleteResource(@QueryParam("deviceId") String deviceId){
+        log.info("Delete Resource : " + deviceId);
+    }
+
+    @Path("/upload-content")
+    @POST
+    public void uploadContent(@QueryParam("deviceId") String deviceId){
+        log.info("Upload Content : " + deviceId);
+    }
+
+    @Path("/remove-content")
+    @POST
+    public void removeContent(@QueryParam("deviceId") String deviceId){
+        log.info("Remove Content : " + deviceId);
+    }
+
+    @Path("/shutdown-display")
+    @POST
+    public void shutDownDisplay(@QueryParam("deviceId") String deviceId,
+                                @QueryParam("owner") String owner,
+                                @Context HttpServletResponse response,
+                                @Context HttpServletRequest request){
+
+        log.info("Shut down display : " + deviceId);
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId +":" +
+                                    DigitalDisplayConstants.DISPLAY_CONTENT,"SHUTDOWN");
+
+            if(result){
+                response.setStatus(Response.Status.OK.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
+
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+        }
+
+    }
+
+    @Path("/shutdown-displays")
+    @POST
+    public void shutdownDisplays(@QueryParam("owner") String owner,
+                                 @FormParam("display")List<String> displays,
+                                 @Context HttpServletResponse response){
+
+        log.info("Shutdown Displays : " + displays.toString());
+
+    }
+
+    @Path("/check-availability")
+    @POST
+    public void getStatus(@QueryParam("deviceId") String deviceId,
+                          @QueryParam("owner") String owner,
+                          @Context HttpServletResponse response,
+                          @Context HttpServletRequest request){
+
+        log.info("Status : " + deviceId);
+
+        String sessionId = request.getSession().getId();
+
+        try {
+            boolean result = sendCommandViaMQTT(owner,deviceId,sessionId + ":" +
+                                DigitalDisplayConstants.DISPLAY_CONTENT,"AVAILABLE");
+
+            if(result){
+                response.setStatus(Response.Status.ACCEPTED.getStatusCode());
+            }else {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            }
+
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+        }
+
+    }
 
     private boolean sendCommandViaMQTT(String deviceOwner, String deviceId, String resource,
                                        String state) throws DeviceManagementException {
 
-        boolean result = false;
+        boolean result;
         DeviceController deviceController = new DeviceController();
 
         try {
@@ -109,10 +259,10 @@ public class DigitalDisplayControllerService {
         } catch (DeviceControllerException e) {
             String errorMsg = "Error whilst trying to publish to MQTT Queue";
             log.error(errorMsg);
+
             throw new DeviceManagementException(errorMsg, e);
         }
         return result;
     }
-
 
 }

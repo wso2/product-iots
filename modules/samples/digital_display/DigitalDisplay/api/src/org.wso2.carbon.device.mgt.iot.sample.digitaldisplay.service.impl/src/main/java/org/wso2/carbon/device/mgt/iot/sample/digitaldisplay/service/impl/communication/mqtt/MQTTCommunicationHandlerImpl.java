@@ -6,27 +6,27 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.communication.CommunicationHandlerException;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 public class MQTTCommunicationHandlerImpl extends MQTTCommunicationHandler {
 
     private static final Log log = LogFactory.getLog(MQTTCommunicationHandlerImpl.class);
 
-    private ScheduledExecutorService service = Executors.newScheduledThreadPool(2);
     private ScheduledFuture<?> dataPushServiceHandler;
 
-    public MQTTCommunicationHandlerImpl(String deviceOwner, String deviceType,
+    private static MQTTCommunicationHandlerImpl mqttCommunicationHandler;
+
+    private MQTTCommunicationHandlerImpl(String deviceOwner, String deviceType,
                                            String mqttBrokerEndPoint, String subscribeTopic) {
         super(deviceOwner, deviceType, mqttBrokerEndPoint, subscribeTopic);
+        connect();
 
     }
 
-    public MQTTCommunicationHandlerImpl(String deviceOwner, String deviceType,
+    private MQTTCommunicationHandlerImpl(String deviceOwner, String deviceType,
                                         String mqttBrokerEndPoint, String subscribeTopic,int intervalInMills){
         super( deviceOwner, deviceType, mqttBrokerEndPoint, subscribeTopic, intervalInMills);
-
+        connect();
     }
 
     public ScheduledFuture<?> getDataPushServiceHandler() {
@@ -40,6 +40,7 @@ public class MQTTCommunicationHandlerImpl extends MQTTCommunicationHandler {
             public void run() {
             while (!isConnected()){
                 try {
+                    log.info("Trying to Connect..");
                     connectToQueue();
                     subscribeToQueue();
 
@@ -55,6 +56,8 @@ public class MQTTCommunicationHandlerImpl extends MQTTCommunicationHandler {
                 }
             }
 
+            log.info("Connected..");
+
             }
         };
 
@@ -67,16 +70,11 @@ public class MQTTCommunicationHandlerImpl extends MQTTCommunicationHandler {
     @Override
     public void processIncomingMessage(MqttMessage message) {
 
-        log.info("New Message Received : " + message);
+        String messageState = message.toString().split(":")[0];
+        String messageContent = message.toString().split(":")[1];
 
-
-        //Add Code what we want to do
-
-        try {
-            publishToQueue("wso2/iot/Nuwan/digital_display/2000/digital_display_subscriber","Sucess");
-        } catch (CommunicationHandlerException e) {
-            log.error(e);
-        }
+        log.info("State : " + messageState);
+        log.info("Content : " + messageContent);
 
     }
 
@@ -109,6 +107,15 @@ public class MQTTCommunicationHandlerImpl extends MQTTCommunicationHandler {
         Thread terminatorThread = new Thread(stopConnection);
         terminatorThread.setDaemon(true);
         terminatorThread.start();
+    }
+
+    public static MQTTCommunicationHandlerImpl getInstance(String deviceOwner, String deviceType,
+                                                           String mqttBrokerEndPoint, String subscribeTopic){
+
+        if(mqttCommunicationHandler == null){
+            mqttCommunicationHandler = new MQTTCommunicationHandlerImpl(deviceOwner, deviceType, mqttBrokerEndPoint, subscribeTopic);
+        }
+        return MQTTCommunicationHandlerImpl.mqttCommunicationHandler;
     }
 
 }
