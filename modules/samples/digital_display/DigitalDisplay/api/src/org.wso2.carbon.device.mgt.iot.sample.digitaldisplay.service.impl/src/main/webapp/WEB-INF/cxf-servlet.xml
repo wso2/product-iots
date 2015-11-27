@@ -28,7 +28,7 @@
         <jaxrs:serviceBeans>
             <bean id="DigitalDisplayManagerControllerService"
                   class="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.DigitalDisplayControllerService">
-                <property name="mqttDigitalDisplaySubscriber" ref="mqttSubscriber"/>
+                <property name="digitalDisplayMqttCommunicationHandler" ref="communicationHandler"/>
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
@@ -48,8 +48,8 @@
     </jaxrs:server>
 
     <bean
-            id="mqttSubscriber"
-                class="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.util.MqttDigitalDisplaySubscriber" >
+            id="communicationHandler"
+                class="org.wso2.carbon.device.mgt.iot.sample.digitaldisplay.service.impl.util.DigitalDisplayMqttCommunicationHandler" >
 
     </bean>
 

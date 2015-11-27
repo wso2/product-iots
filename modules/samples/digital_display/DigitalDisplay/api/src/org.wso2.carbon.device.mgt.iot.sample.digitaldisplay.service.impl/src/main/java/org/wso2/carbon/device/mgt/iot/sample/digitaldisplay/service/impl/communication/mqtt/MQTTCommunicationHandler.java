@@ -296,7 +296,7 @@ public abstract class MQTTCommunicationHandler
 
 		Thread messageProcessorThread = new Thread() {
 			public void run() {
-				processIncomingMessage(mqttMessage);
+				processIncomingMessage(mqttMessage, topic);
 			}
 		};
 		messageProcessorThread.setDaemon(true);

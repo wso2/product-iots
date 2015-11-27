@@ -26,5 +26,10 @@ public class DigitalDisplayConstants {
 
     public final static String DISPLAY_CONTENT = "DISPLAY";
     public final static String BROWSER_CONTENT = "BROWSER";
+    public final static String SHUTDOWN_DISPLAY_CONSTANT = "shutdown_display";
+    public final static String RESTART_DISPLAY_CONSTANT = "restart_display";
+    public final static String REMOVE_DIRECTORY_CONSTANT = "remove_dir_and_content";
+
+    public final static String PUBLISH_TOPIC = "wso2/iot/%s/digital_display/%s";
 
 }

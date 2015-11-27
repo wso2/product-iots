@@ -7,7 +7,9 @@ public interface CommunicationHandler<T> {
 
 	boolean isConnected();
 
-	void processIncomingMessage(T message);
-	
+	void processIncomingMessage(T message, String... messageParams);
+
+	void processIncomingMessage();
+
 	void disconnect();
 }
