@@ -254,6 +254,9 @@
                 <include>**/cipher-standalone-config.properties</include>
                 <!--============ Added with ES Features ===============-->
             </includes>
+            <excludes>
+                <exclude>authenticators.xml</exclude>
+            </excludes>
         </fileSet>
 
 
@@ -352,6 +355,8 @@
                 <exclude>**/devicemgt/*</exclude>
             </excludes>
         </fileSet>
+
+
 
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
@@ -814,6 +819,16 @@
             <fileMode>644</fileMode>
         </file>
 
+        <!-- Copying remote-appmanager-config.xml -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/remote-appmanager-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <!--app management config file-->
         <!--<file>-->
         <!--<source>-->
@@ -1142,6 +1157,16 @@
                 src/publisher/config/publisher-tenant.json
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- Copying authenticators.xml -->
+        <file>
+            <source>
+                src/repository/conf/security/authenticators.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/</outputDirectory>
+            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
     </files>
