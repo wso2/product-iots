@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
- ~ Copyright (c) 2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- ~
- ~ WSO2 Inc. licenses this file to you under the Apache License,
- ~ Version 2.0 (the "License"); you may not use this file except
- ~ in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~    http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing,
- ~ software distributed under the License is distributed on an
- ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- ~ KIND, either express or implied.  See the License for the
- ~ specific language governing permissions and limitations
- ~ under the License.
- -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
@@ -110,16 +111,12 @@
                                     org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.kernel.version}
                                 </featureArtifactDef>
 
-
-                                <!--Device Cloud Features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.device.mgt.iot:org.wso2.carbon.device.mgt.iot.feature:${carbon.iot.device.mgt.version}
-                                </featureArtifactDef>
-
-                                <!--=====================================================================================================-->
                                 <!-- Device Management Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.server.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.group.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.feature:${carbon.device.mgt.version}
@@ -128,27 +125,30 @@
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.policy.mgt.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.webapp.publisher.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.group.server.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.webapp.authenticator.framework.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.server.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.dynamic.client.registration.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.server.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.oauth.extensions.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.server.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.webapp.publisher.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.enterprise.store.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.devicemgt.ui.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-                                 <!--End of Device Management Features-->
+                                <!--<featureArtifactDef>-->
+                                <!--org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.server.feature:${carbon.device.mgt.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef>-->
+                                <!--org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.common.api.feature:${carbon.device.mgt.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!-- End of Device Management Features -->
 
                                 <!-- Jaggery Features -->
                                 <featureArtifactDef>
@@ -440,61 +440,8 @@
 								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->
 								<!-- End of Carbon Deployment Features -->
 
-
-								<!-- Store Features -->
-								<featureArtifactDef>
-									org.wso2.carbon.store:org.wso2.carbon.store.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:event.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:login.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:permission.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:registration.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:bampublisher.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:store.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:ues.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:account-management.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:rxt.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:utils.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:lifecycle.feature:${carbon.store.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.store:org.wso2.carbon.social.feature:${carbon.social.version}
-								</featureArtifactDef>
-								<feaureArtifactDef>
-									org.wso2.carbon.store:org.wso2.carbon.store.extensions.assets.gadget.feature:${carbon.store.version}
-								</feaureArtifactDef>
-								<feaureArtifactDef>
-									org.wso2.carbon.store:org.wso2.carbon.store.extensions.assets.site.feature:${carbon.store.version}
-								</feaureArtifactDef>
-
+                                <!-- Registry Features -->
 								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->
-								<!-- End of Store Features -->
-
-
-								<!--&lt;!&ndash; Registry Features &ndash;&gt;-->
-								<!--&lt;!&ndash;+++++++++++++++++++++++++++++++++++++++++++++++&ndash;&gt;-->
-
 								<!--<featureArtifactDef>-->
 									<!--org.wso2.carbon.registry:org.wso2.carbon.registry.task.feature:${carbon.registry.version}-->
 								<!--</featureArtifactDef>-->
@@ -520,8 +467,6 @@
 									org.wso2.ciphertool:org.wso2.ciphertool.feature:${ciphertool.version}
 								</feaureArtifactDef>
 
-
-								<!-- End of Enterprise Store Features -->
 								<!--=====================================================================================================-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.apache.synapse.wso2.feature:${carbon.mediation.version}
@@ -613,8 +558,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.data:org.wso2.carbon.datasource.reader.hadoop.server.feature:${carbon.data.version}
                                 </featureArtifactDef>
-
-
 
                                 <!-- ************** START - Capp Management ********* -->
                                 <featureArtifactDef>
@@ -732,12 +675,6 @@
                                     <version>${carbon.kernel.version}</version>
                                 </feature>
 
-                                <!-- IoT Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                </feature>
-
                                 <!--========================================================================================================-->
                                 <!-- Device Management Features -->
                                 <feature>
@@ -769,13 +706,28 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.dynamic.client.registration.server.feature.group
+                                    </id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.enterprise.store.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group
+                                    </id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.devicemgt.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <!--<feature>-->
+                                <!--<id>org.wso2.carbon.device.mgt.common.api.feature.group</id>-->
+                                <!--<version>${carbon.device.mgt.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                <!--<id>org.wso2.carbon.device.mgt.analytics.server.feature.group</id>-->
+                                <!--<version>${carbon.device.mgt.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of Device Management Features -->
 
                                 <!-- Jaggery Features -->
@@ -1162,74 +1114,6 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <!-- End of Carbon Deployment Features -->
-
-
-                                <!-- Store Features -->
-                                <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
-
-                                <feature>
-                                    <id>org.wso2.carbon.store.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.event.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.login.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.permission.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.registration.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.bampublisher.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.store.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.ues.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.account-management.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.rxt.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.utils.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.store.modules.lifecycle.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.social.feature.group</id>
-                                    <version>${carbon.social.version}</version>
-                                </feature>
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.store.extensions.assets.gadget.feature.group</id>-->
-                                    <!--<version>${carbon.store.version}</version>-->
-                                <!--</feature>-->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.store.extensions.assets.site.feature.group</id>-->
-                                    <!--<version>${carbon.store.version}</version>-->
-                                <!--</feature>-->
-
-                                <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
-                                <!-- End of Store Features -->
 
                                 <!-- Commons Features -->
                                 <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
