@@ -1151,14 +1151,7 @@
             <destName>synapse.properties</destName>
             <filtered>true</filtered>
         </file>
-
-        <file>
-            <source>
-                src/publisher/config/publisher-tenant.json
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/config</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
+        
 
         <!-- Copying authenticators.xml -->
         <file>

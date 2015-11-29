@@ -815,15 +815,11 @@
 
         <!--Jaggery -->
         <jaggery.version>0.12.0</jaggery.version>
-        <jaggery.extensions.version>1.5.0-M1</jaggery.extensions.version>
-        <jaggery.extensions.sso.version>1.5.0-M1</jaggery.extensions.sso.version>
-        <jaggery.extensions.carbon.version>1.5.0-M1</jaggery.extensions.carbon.version>
-        <jaggery.extensions.test.version>1.5.0-M1</jaggery.extensions.test.version>
+        <jaggery.extensions.version>1.4.3</jaggery.extensions.version>
+        <jaggery.extensions.sso.version>1.3.0</jaggery.extensions.sso.version>
+        <jaggery.extensions.carbon.version>1.3.0</jaggery.extensions.carbon.version>
+        <jaggery.extensions.test.version>1.3.0</jaggery.extensions.test.version>
 
-        <!--Additional Jaggery Stuff-->
-        <caramel.feature.version>1.5.0-M1</caramel.feature.version>
-        <handlebars.feature.version>1.5.0-M1</handlebars.feature.version>
-        <markdown.feature.version>1.5.0-M1</markdown.feature.version>
 
         <!-- Additional Stuff from ES Features -->
         <carbon.dashboard.version>1.0.5</carbon.dashboard.version>

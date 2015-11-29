@@ -417,16 +417,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.task.feature:${carbon.registry.version}
                                 </featureArtifactDef>
-								<!-- Jaggery Features -->
-								<!--+++++++++++++++++++++++++++++++++++++++++++++++-->
-								<featureArtifactDef>
-									org.jaggeryjs.modules:caramel.feature:${caramel.feature.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.jaggeryjs.modules:handlebars.feature:${handlebars.feature.version}
-								</featureArtifactDef>
-								<featureArtifactDef>org.jaggeryjs.modules:markdown.feature:${markdown.feature.version}
-								</featureArtifactDef>
+
 								<!-- End of Jaggery Features -->
 
 								<!-- Carbon Deployment Features -->
@@ -1094,17 +1085,6 @@
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
                                     <version>${axis2-transports.wso2.version}</version>
-                                </feature>
-
-
-                                <!-- Jaggery Features -->
-                                <feature>
-                                    <id>org.jaggeryjs.modules.caramel.feature.group</id>
-                                    <version>${caramel.feature.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.jaggeryjs.modules.handlebars.feature.group</id>
-                                    <version>${handlebars.feature.version}</version>
                                 </feature>
                                 <!-- End of Jaggery Features -->
 
