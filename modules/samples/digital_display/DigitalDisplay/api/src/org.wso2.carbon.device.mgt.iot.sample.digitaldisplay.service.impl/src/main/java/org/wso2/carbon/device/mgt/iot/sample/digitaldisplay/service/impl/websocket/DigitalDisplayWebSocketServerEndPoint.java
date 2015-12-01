@@ -12,9 +12,10 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
-@ServerEndpoint(value = "/digital-display-server-end-point/{owner}")
+@ServerEndpoint(value = "/digital-display-server-end-point")
 @Singleton
 public class DigitalDisplayWebSocketServerEndPoint {
 
@@ -29,10 +30,12 @@ public class DigitalDisplayWebSocketServerEndPoint {
      * @param userSession the userSession which is opened.
      */
     @OnOpen
-    public void onOpen(@PathParam("owner") String owner , Session userSession ){
-        log.info(owner + " Connected with Session Id : " + userSession.getId());
-
-        clientSessions.put(owner,userSession);
+    public void onOpen(Session userSession){
+        UUID uuid = UUID.randomUUID();
+        log.info("Generated Random Id " + uuid.toString());
+        log.info(" Connected with Session Id : " + userSession.getId());
+        clientSessions.put(uuid.toString() , userSession);
+        userSession.getAsyncRemote().sendText("RandomID:" + uuid.toString());
     }
 
     /**
@@ -57,13 +60,13 @@ public class DigitalDisplayWebSocketServerEndPoint {
      * This method will be invoked when a message received from device
      * to send client.
      *
-     * @param deviceOwner the client of message to be sent.
+     * @param randomId the client of message to be sent.
      * @param message the message sent by device to client
      */
-    public static void sendMessage(String deviceOwner , String message){
-        if(clientSessions.keySet().contains(deviceOwner)){
-            clientSessions.get(deviceOwner).getAsyncRemote().sendText(message);
-            log.info("Message : " + message + " send to Session Id : " + deviceOwner);
+    public static void sendMessage(String randomId , String message){
+        if(clientSessions.keySet().contains(randomId)){
+            clientSessions.get(randomId).getAsyncRemote().sendText(message);
+            log.info("Message : " + message + " send to Session Id : " + randomId);
         }else {
             log.error("Client already disconnected.");
         }

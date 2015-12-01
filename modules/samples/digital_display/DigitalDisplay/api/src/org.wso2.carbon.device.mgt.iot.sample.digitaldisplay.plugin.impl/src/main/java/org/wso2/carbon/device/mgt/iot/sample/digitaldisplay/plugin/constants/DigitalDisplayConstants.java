@@ -24,12 +24,18 @@ public class DigitalDisplayConstants {
 
     public final static String MQTT_BROKER_END_POINT = "tcp://204.232.188.214:1883";
 
-    public final static String DISPLAY_CONTENT = "DISPLAY";
-    public final static String BROWSER_CONTENT = "BROWSER";
     public final static String SHUTDOWN_DISPLAY_CONSTANT = "shutdown_display";
     public final static String RESTART_DISPLAY_CONSTANT = "restart_display";
     public final static String REMOVE_DIRECTORY_CONSTANT = "remove_dir_and_content";
+    public final static String REMOVE_CONTENT_CONSTANT = "remove_content";
+    public final static String CLOSE_BROWSER_CONSTANT = "close_browser";
+    public final static String RESTART_BROWSER_CONSTANT = "restart_browser";
+    public final static String TERMINATE_DISPLAY_CONSTANT = "terminate_display";
+    public final static String EDIT_SEQUENCE_CONSTANT = "edit_content_config";
+    public final static String ADD_NEW_RESOURCE_CONSTANT = "add_new_resource";
+    public final static String REMOVE_RESOURCE_CONSTANT = "remove_resources";
+    public final static String GET_STATUS_CONSTANT = "get_status";
 
-    public final static String PUBLISH_TOPIC = "wso2/iot/%s/digital_display/%s";
+    public final static String PUBLISH_TOPIC = "wso2/iot/%s/digital_display/%s/digital_display_subscriber";
 
 }

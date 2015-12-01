@@ -87,21 +87,18 @@ public class DigitalDisplayMqttCommunicationHandler extends MQTTCommunicationHan
         String owner = ownerAndId.split(":")[0];
         String deviceId = ownerAndId.split(":")[1];
 
-        String requestMessage = message.toString().split(":")[0];
-        String result = message.toString().split(":")[1];
+        String [] messageData = message.toString().split(":");
+
 
         log.info("Received MQTT message for: {OWNER-" + owner + "} & {DEVICE.ID-" + deviceId + "}");
-        log.info("Return result " + result + " for Request " + requestMessage);
 
-
-
-        switch (requestMessage){
-
-            case DigitalDisplayConstants.REMOVE_DIRECTORY_CONSTANT :
-                DigitalDisplayWebSocketServerEndPoint.sendMessage(owner, result);
-
+        if(messageData.length == 3){
+                String randomId = messageData[0];
+                String requestMessage = messageData[1];
+                String result = messageData[2];
+                log.info("Return result " + result + " for Request " + requestMessage);
+                DigitalDisplayWebSocketServerEndPoint.sendMessage(randomId, result);
         }
-
 
     }
 
