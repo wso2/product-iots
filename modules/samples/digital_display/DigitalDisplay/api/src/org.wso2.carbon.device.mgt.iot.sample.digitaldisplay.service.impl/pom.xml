@@ -26,6 +26,11 @@
             <groupId>org.wso2.carbon.devicemgt</groupId>
             <artifactId>org.wso2.carbon.device.mgt.core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
 
         <!--CXF -->
         <dependency>
@@ -85,7 +90,6 @@
         </dependency>
 
     </dependencies>
-
 
     <build>
         <plugins>

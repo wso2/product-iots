@@ -56,7 +56,7 @@ public class DigitalDisplayManagerService {
 	@Path("/device/register")
 	@PUT
 	public boolean register(@QueryParam("deviceId") String deviceId,
-	                        @QueryParam("name") String name, @QueryParam("owner") String owner) {
+	                        @QueryParam("name") String name, @QueryParam("owner") String owner ) {
 
 		DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
 
@@ -81,6 +81,7 @@ public class DigitalDisplayManagerService {
 			enrolmentInfo.setOwner(owner);
 			enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
 			boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
+
 			if (added) {
 				response.setStatus(Response.Status.OK.getStatusCode());
 			} else {
@@ -107,6 +108,7 @@ public class DigitalDisplayManagerService {
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(DigitalDisplayConstants.DEVICE_TYPE);
+
 		try {
 			boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
 					deviceIdentifier);
@@ -137,6 +139,7 @@ public class DigitalDisplayManagerService {
 		DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
 		deviceIdentifier.setId(deviceId);
 		deviceIdentifier.setType(DigitalDisplayConstants.DEVICE_TYPE);
+
 		try {
 			Device device = deviceManagement.getDeviceManagementService().getDevice(
 					deviceIdentifier);

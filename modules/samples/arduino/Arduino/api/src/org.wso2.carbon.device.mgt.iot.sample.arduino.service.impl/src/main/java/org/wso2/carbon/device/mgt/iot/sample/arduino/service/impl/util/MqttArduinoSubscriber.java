@@ -43,7 +43,8 @@ public class MqttArduinoSubscriber extends MqttSubscriber {
                 subscribetopic);
     }
 
-    @Override protected void postMessageArrived(final String topic, final MqttMessage message) {
+    @Override
+    protected void postMessageArrived(final String topic, final MqttMessage message) {
         int lastIndex = topic.lastIndexOf("/");
         String deviceId = topic.substring(lastIndex + 1);
 
