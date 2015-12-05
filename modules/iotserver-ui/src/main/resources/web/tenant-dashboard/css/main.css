@@ -1,0 +1,315 @@
+/*
+ * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/* ---------------- template styles ------------------------- */
+
+table#main-table td#header {
+    background-image: none !important;
+    border-bottom: 1px solid #CCC;
+}
+
+table#main-table td#menu-panel {
+    border-right: solid 1px #6F97CD;
+    /*background-image: url(../images/app-server-menu-panel-bg.gif);*/
+    background-position: right top;
+    background-repeat: repeat-y;
+}
+
+/* ---------------- header styles ------------------ */
+div#header-div {
+    background-color: #222222;
+    background-image: none !important;
+}
+
+div#header-div div.left-logo {
+    background-image: url(../images/logo.png);
+    width: 200px;
+    margin: 12px 20px !important;
+}
+
+div#header-div div.right-logo {
+    /*background-image: url( ../images/wsas-mgt-logo.gif);*/
+    color: #FFF;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 0px !important;
+    margin: 18px !important;
+
+}
+
+div#header-div div.header-links {
+    margin-top: 0px;
+    float: right !important;
+}
+
+div#header-div div.header-links div.right-links {
+    margin-right: 0px;
+    height: 35px;
+    padding-top: 0px;
+}
+
+div#header-div div.header-links div.right-links ul {
+
+    background-position: left top;
+    background-repeat: repeat-x;
+    padding-top: 9px;
+    padding-bottom: 7px;
+}
+
+/* ------------- menu styles ---------------------- */
+div#menu {
+}
+
+div#menu ul.main {
+}
+
+div#menu ul.main li {
+}
+
+div#menu ul.main li.normal {
+}
+
+div#menu ul.main li a.menu-home {
+    color: #0067B1;
+    background-image: none;
+    height: 30px;
+    line-height: 30px;
+}
+
+div#menu ul.main li a.menu-home:hover {
+    color: #f47b20;
+    background-image: none;
+    background-color: #ffffff;
+}
+
+div#menu ul.main li.menu-header {
+    /*background-image: url(../images/app-server-menu-header.png);*/
+    background-image: none !important;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    color: #502D16 !important;
+    height: 32px;
+    line-height: 32px;
+    background-color: #F3f3f3;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+div#menu ul.main li.menu-header img {
+    margin-right: -14px;
+    margin-top: 7px;
+}
+
+div#menu ul.main li a.menu-default {
+
+}
+
+div#menu ul.main li a.menu-default:hover {
+    background-color: #ffffff;
+    border-bottom: solid 1px #CCC;
+    border-top: solid 1px #CCC;
+    color: #00447C;
+
+}
+
+div#menu ul.sub {
+}
+
+div#menu ul.main li.menu-disabled-link {
+    background-color: #E9EDF7;
+}
+
+/* -------------- child no-01 styles -------------- */
+
+div#menu ul.sub li.normal {
+
+}
+
+div#menu ul.sub li a.menu-default {
+}
+
+/* ----------- child no-01 (disabled) styles ------------------- */
+
+div#menu ul.sub li a.menu-disabled-link {
+}
+
+div#menu ul.sub li a.menu-disabled-link:hover {
+}
+
+/* -------------- child no-02 styles -------------- */
+
+div#menu ul.sub li.normal ul.sub li a.menu-default {
+
+}
+
+/* -------------- child no-03 styles -------------- */
+
+div#menu ul.sub li.normal ul.sub li.normal ul.sub li a.menu-default {
+}
+
+/* ------------- footer styles -------------------- */
+
+div#footer-div div.footer-content div.poweredby {
+    /*background-image: url( ../images/axis2-powered.gif);*/
+}
+
+/* ---- login styles ----- */
+
+/* --------------- table styles -------------------- */
+
+.tableOddRow {
+    background-color: white;
+}
+
+.tableEvenRow {
+    background-color: #eeeffb;
+}
+
+.button:hover {
+    /*background-image:url(../images/wsas-button-bg-hover.gif);
+    border:solid 1px #9D9FA1;*/
+}
+
+/* -------------- work area ---------------------- */
+
+table#main-table td#middle-content {
+    background-color: none !important;
+    background: transparent !important;
+}
+
+div#middle {
+    background-color: #ffffff;
+}
+
+div#middle h2 {
+    margin-top: 5px;
+}
+
+div#middle div#workArea {
+    background-color: none !important;
+    background: transparent !important;
+    padding: 10px;
+}
+
+div#workArea table.styledLeft thead th {
+    /*background-image:url("../images/app-server-table-header.gif");*/
+    background-image: none;
+    background-color: #efd7a5;
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+    height: 27px;
+    line-height: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+div#workArea table.styledLeft .tableOddRow {
+    background-color: none !important;
+}
+
+div#workArea table.styledLeft .tableEvenRow {
+    background-color: none !important;
+    background: none;
+}
+
+div#workArea table.styledLeft tbody tr td.middle-header {
+    /*background-image:url("../images/app-server-table-header.gif");*/
+    border-bottom: 1px solid #A7A9AC;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+    height: 22px;
+    line-height: 22px;
+}
+
+div#workArea table.styledLeft tbody tr td.buttonRow {
+    /*background-image:url("../images/app-server-buttonRow-bg.gif");*/
+    background-color: #F5F5F6;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.button {
+    /*background-image:url("../images/app-server-button-bg.gif");*/
+    background-position: left bottom;
+    border: 1px solid #666666;
+    padding: 2px 5px;
+}
+
+/** TEAGUE EDITS FOR JAGGERY SERVER ADMIN **/
+
+div#header-div {
+    height: 52px !important;
+}
+
+.left-logo img {
+    display: none !important;
+}
+
+body {
+    /*background-image:url("../images/bg.png");*/
+    font-family: Arial !important;
+}
+
+div.right-links ul a {
+
+}
+
+a {
+    color: #502D16 !important;
+}
+
+a:hover {
+    color: #784421 !important;
+}
+
+table#main-table td#menu-panel {
+    border-right: 1px solid #784421;
+}
+
+div#middle h2 {
+    color: #502D16 !important;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #CCC !important;
+}
+
+div#features tr.feature td {
+    border-top: 1px solid #CCC;
+}
+
+div#features tr.feature-top td {
+    border-top: 0px;
+}
+
+#main-table {
+    background-color: none !important;
+
+}
+
+#middle {
+    background: transparent !important;
+    background-color: none !important;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

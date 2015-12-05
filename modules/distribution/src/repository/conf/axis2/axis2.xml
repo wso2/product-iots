@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-  ~  Copyright (c) 2005-2010, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
-  ~  WSO2 Inc. licenses this file to you under the Apache License,
-  ~  Version 2.0 (the "License"); you may not use this file except
-  ~  in compliance with the License.
-  ~  You may obtain a copy of the License at
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
-  ~  Unless required by applicable law or agreed to in writing,
-  ~  software distributed under the License is distributed on an
-  ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  ~  KIND, either express or implied.  See the License for the
-  ~  specific language governing permissions and limitations
-  ~  under the License.
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
   -->
 
 <axisconfig name="AxisJava2.0">
@@ -58,8 +58,8 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <!-- User agent and the server details to be used in the http communication -->
-    <parameter name="userAgent" locked="true">WSO2 IoTServer 1.0.0</parameter>
-    <parameter name="server" locked="true">WSO2 IoTServer 1.0.0</parameter>
+    <parameter name="userAgent" locked="true">WSO2 ESB 4.9.0</parameter>
+    <parameter name="server" locked="true">WSO2 ESB 4.9.0</parameter>
 
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
@@ -234,7 +234,8 @@
     <!--             Transport Ins (Listeners)             -->
     <!-- ================================================= -->
 
-    <transportReceiver name="http" class="org.apache.synapse.transport.passthru.PassThroughHttpListener">
+    <transportReceiver name="http"
+                       class="org.apache.synapse.transport.passthru.PassThroughHttpListener">
         <parameter name="port" locked="false">8280</parameter>
         <parameter name="non-blocking" locked="false">true</parameter>
         <!--parameter name="bind-address" locked="false">hostname or IP address</parameter-->
@@ -243,7 +244,8 @@
         <!--<parameter name="priorityConfigFile" locked="false">location of priority configuration file</parameter>-->
     </transportReceiver>
 
-    <transportReceiver name="https" class="org.apache.synapse.transport.passthru.PassThroughHttpSSLListener">
+    <transportReceiver name="https"
+                       class="org.apache.synapse.transport.passthru.PassThroughHttpSSLListener">
         <parameter name="port" locked="false">8243</parameter>
         <parameter name="non-blocking" locked="false">true</parameter>
         <parameter name="HttpsProtocols">TLSv1,TLSv1.1,TLSv1.2</parameter>
@@ -275,30 +277,30 @@
 
     <!--<transportReceiver name="mailto" class="org.apache.axis2.transport.mail.MailTransportListener">-->
     <!-- configure any optional POP3/IMAP properties
-	check com.sun.mail.pop3 and com.sun.mail.imap package documentation for more details-->
+    check com.sun.mail.pop3 and com.sun.mail.imap package documentation for more details-->
     <!--</transportReceiver>-->
 
     <!--Uncomment this and configure as appropriate for JMS transport support, after setting up your JMS environment (e.g. ActiveMQ)
     <transportReceiver name="jms" class="org.apache.axis2.transport.jms.JMSListener">
         <parameter name="myTopicConnectionFactory" locked="false">
-            <parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
-            <parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
-            <parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">TopicConnectionFactory</parameter>
-            <parameter name="transport.jms.ConnectionFactoryType" locked="false">topic</parameter>
+        	<parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
+        	<parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
+        	<parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">TopicConnectionFactory</parameter>
+		    <parameter name="transport.jms.ConnectionFactoryType" locked="false">topic</parameter>
         </parameter>
 
         <parameter name="myQueueConnectionFactory" locked="false">
-            <parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
-            <parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
-            <parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">QueueConnectionFactory</parameter>
-            <parameter name="transport.jms.ConnectionFactoryType" locked="false">queue</parameter>
+        	<parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
+        	<parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
+        	<parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">QueueConnectionFactory</parameter>
+		    <parameter name="transport.jms.ConnectionFactoryType" locked="false">queue</parameter>
         </parameter>
 
         <parameter name="default" locked="false">
-            <parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
-            <parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
-            <parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">QueueConnectionFactory</parameter>
-            <parameter name="transport.jms.ConnectionFactoryType" locked="false">queue</parameter>
+        	<parameter name="java.naming.factory.initial" locked="false">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>
+        	<parameter name="java.naming.provider.url" locked="false">tcp://localhost:61616</parameter>
+        	<parameter name="transport.jms.ConnectionFactoryJNDIName" locked="false">QueueConnectionFactory</parameter>
+		    <parameter name="transport.jms.ConnectionFactoryType" locked="false">queue</parameter>
         </parameter>
     </transportReceiver>-->
 
@@ -373,14 +375,14 @@
     </transportReceiver-->
 
     <!-- <transportReceiver name="mqtt" class="org.apache.axis2.transport.mqtt.MqttListener">
-		 <parameter locked="false" name="mqttConFactory">
-			 <parameter locked="false" name="mqtt.server.host.name">localhost</parameter>
-			 <parameter name="mqtt.connection.factory">mqttConFactory</parameter>
-			 <parameter locked="false" name="mqtt.server.port">1883</parameter>
-			 <parameter locked="false" name="mqtt.client.id">client-id-1234</parameter>
-			 <parameter locked="false" name="mqtt.topic.name">esb.test</parameter>
-		 </parameter>
-	 </transportReceiver>-->
+         <parameter locked="false" name="mqttConFactory">
+             <parameter locked="false" name="mqtt.server.host.name">localhost</parameter>
+             <parameter name="mqtt.connection.factory">mqttConFactory</parameter>
+             <parameter locked="false" name="mqtt.server.port">1883</parameter>
+             <parameter locked="false" name="mqtt.client.id">client-id-1234</parameter>
+             <parameter locked="false" name="mqtt.topic.name">esb.test</parameter>
+         </parameter>
+     </transportReceiver>-->
 
     <!-- ================================================= -->
     <!--             Transport Outs (Senders)              -->
@@ -421,7 +423,7 @@
     <!--<transportSender name="local" class="org.apache.axis2.transport.local.NonBlockingLocalTransportSender"/>-->
 
     <!-- uncomment this and configure to use connection pools for sending messages>
-	  <transportSender name="jms" class="org.apache.axis2.transport.jms.JMSSender"/-->
+      <transportSender name="jms" class="org.apache.axis2.transport.jms.JMSSender"/-->
 
     <!--transportSender name="vfs" class="org.apache.synapse.transport.vfs.VFSTransportSender"/-->
 
@@ -554,8 +556,8 @@
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
             <!-- Manger Setup with Port Mapping-->
             <!--property name="port.mapping.8280" value="9764"/>
-				<property name="port.mapping.8243" value="9444"/>
-				<property name="subDomain" value="mgt"/-->
+                <property name="port.mapping.8243" value="9444"/>
+                <property name="subDomain" value="mgt"/-->
 
             <!-- Worker Setup-->
             <!--property name="subDomain" value="worker"/-->
@@ -591,7 +593,7 @@
     <!-- ================================================= -->
 
     <!--
-        Uncomment and configure the following section to enable transactions support
+        Uncomment and configure the following section to enable transactions support 
     -->
     <!--<transaction timeout="30000">
         <parameter name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>

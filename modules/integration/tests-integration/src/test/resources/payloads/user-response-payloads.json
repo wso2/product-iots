@@ -1,0 +1,24 @@
+{
+  "POST": {
+    "statusCode": 201,
+    "messageFromServer": "User by username: PRIMARY/username123 was successfully added."
+  },
+  "PUT": {
+    "statusCode": 201,
+    "messageFromServer": "User by username: username123 was successfully updated."
+  },
+  "GET": {
+    "statusCode": 200,
+    "messageFromServer": "User information was retrieved successfully.",
+    "responseContent": {
+      "username": "username123",
+      "firstname": "userfname",
+      "lastname": "userlname",
+      "emailAddress": "user1234@gmail.com"
+    }
+  },
+  "DELETE": {
+    "statusCode": 200,
+    "messageFromServer": "User by username: username123 was successfully removed."
+  }
+}
