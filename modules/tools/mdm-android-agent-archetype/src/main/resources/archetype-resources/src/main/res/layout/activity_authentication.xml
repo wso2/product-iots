@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="true">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+        <LinearLayout
+                android:id="@+id/errorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dip">
+
+            <EditText
+                    android:id="@+id/etDomain"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/txt_domain"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"/>
+
+            <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/txt_username"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"/>
+
+            <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/txt_password"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black">
+
+                <requestFocus/>
+            </EditText>
+
+            <RadioGroup
+                    android:id="@+id/radioGroupType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                <RadioButton
+                        android:id="@+id/radioBYOD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="true"
+                        android:text="@string/txt_byod"
+                        android:textColor="@android:color/black"/>
+
+                <RadioButton
+                        android:id="@+id/radioCOPE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:button="@drawable/custom_checkbox"
+                        android:text="@string/txt_cope"
+                        android:textColor="@android:color/black"/>
+            </RadioGroup>
+
+            <Button
+                    android:id="@+id/btnRegister"
+                    style="@style/ButtonText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_orange"
+                    android:text="@string/txt_register"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/footer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/repeat_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

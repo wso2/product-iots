@@ -36,9 +36,8 @@
         <module>tests-artifacts</module>
         <module>tests-common</module>
         <module>tests-integration</module>
-        <!--<module>tests-ui-integration</module>-->
+        <module>tests-ui-integration</module>
         <module>tests-platform</module>
-        <!--<module>tests-samples</module>-->
     </modules>
 
     <!--<build>-->

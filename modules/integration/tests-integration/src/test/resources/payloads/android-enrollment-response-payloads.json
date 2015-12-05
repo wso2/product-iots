@@ -1,0 +1,18 @@
+{
+  "POST": {
+    "responseCode": "Created",
+    "responseMessage": "Device enrollment succeeded."
+  },
+  "PUT": {
+    "responseCode": "Accepted",
+    "responseMessage": "Device enrollment has updated successfully"
+  },
+  "GET": {
+    "responseCode": "Accepted",
+    "responseMessage": "Device has already enrolled"
+  },
+  "DELETE": {
+    "responseCode": "Accepted",
+    "responseMessage": "Device has removed successfully"
+  }
+}

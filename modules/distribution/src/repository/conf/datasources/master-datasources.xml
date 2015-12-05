@@ -1,3 +1,21 @@
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
 <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
@@ -26,58 +44,6 @@
         </datasource>
 
         <datasource>
-            <name>WSO2_IDENTITY_DB</name>
-            <description>The datasource used for Identity configurations</description>
-            <jndiConfig>
-                <name>jdbc/WSO2IdentityDB</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:h2:repository/database/WSO2IDENTITY_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1</validationQuery>
-                    <validationInterval>30000</validationInterval>
-                </configuration>
-            </definition>
-        </datasource>
-
-        <datasource>
-            <name>SOCIAL_CACHE</name>
-            <description>The datasource used for storing the cached social objects.</description>
-            <jndiConfig>
-                <name>jdbc/test</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:h2:repository/database/WSO2SOCIAL_CACHE_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                </configuration>
-            </definition>
-        </datasource>
-
-        <datasource>
-            <name>SOCIAL_CASSANDRA_DB</name>
-            <description>The cassandra  datasource used for storing social activities</description>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:cassandra://localhost:9160/EVENT_KS</url>
-                    <username>admin@admin.com</username>
-                    <password>admin</password>
-                    <driverClassName>org.apache.cassandra.cql.jdbc.CassandraDriver</driverClassName>
-                </configuration>
-            </definition>
-        </datasource>
-
-        <datasource>
             <name>WSO2AM_DB</name>
             <description>The datasource used for API Manager database</description>
             <jndiConfig>
@@ -97,6 +63,77 @@
                 </configuration>
             </definition>
         </datasource>
+
+        <!--<datasource>-->
+        <!--<name>WSO2_IDENTITY_DB</name>-->
+        <!--<description>The datasource used for Identity configurations</description>-->
+        <!--<jndiConfig>-->
+        <!--<name>jdbc/WSO2IdentityDB</name>-->
+        <!--</jndiConfig>-->
+        <!--<definition type="RDBMS">-->
+        <!--<configuration>-->
+        <!--<url>jdbc:h2:repository/database/WSO2IDENTITY_DB;DB_CLOSE_ON_EXIT=FALSE</url>-->
+        <!--<username>wso2carbon</username>-->
+        <!--<password>wso2carbon</password>-->
+        <!--<driverClassName>org.h2.Driver</driverClassName>-->
+        <!--<maxActive>50</maxActive>-->
+        <!--<maxWait>60000</maxWait>-->
+        <!--<testOnBorrow>true</testOnBorrow>-->
+        <!--<validationQuery>SELECT 1</validationQuery>-->
+        <!--<validationInterval>30000</validationInterval>-->
+        <!--</configuration>-->
+        <!--</definition>-->
+        <!--</datasource>-->
+
+        <!--<datasource>-->
+        <!--<name>SOCIAL_CACHE</name>-->
+        <!--<description>The datasource used for storing the cached social objects.</description>-->
+        <!--<jndiConfig>-->
+        <!--<name>jdbc/test</name>-->
+        <!--</jndiConfig>-->
+        <!--<definition type="RDBMS">-->
+        <!--<configuration>-->
+        <!--<url>jdbc:h2:repository/database/WSO2SOCIAL_CACHE_DB;DB_CLOSE_ON_EXIT=FALSE</url>-->
+        <!--<username>wso2carbon</username>-->
+        <!--<password>wso2carbon</password>-->
+        <!--<driverClassName>org.h2.Driver</driverClassName>-->
+        <!--<maxActive>50</maxActive>-->
+        <!--<maxWait>60000</maxWait>-->
+        <!--</configuration>-->
+        <!--</definition>-->
+        <!--</datasource>-->
+
+        <!--<datasource>-->
+        <!--<name>SOCIAL_CASSANDRA_DB</name>-->
+        <!--<description>The cassandra  datasource used for storing social activities</description>-->
+        <!--<definition type="RDBMS">-->
+        <!--<configuration>-->
+        <!--<url>jdbc:cassandra://localhost:9160/EVENT_KS</url>-->
+        <!--<username>admin@admin.com</username>-->
+        <!--<password>admin</password>-->
+        <!--<driverClassName>org.apache.cassandra.cql.jdbc.CassandraDriver</driverClassName>-->
+        <!--</configuration>-->
+        <!--</definition>-->
+        <!--</datasource>-->
+
+
+        <!--<datasource>-->
+        <!--<name>JAGH2</name>-->
+        <!--<description>The datasource used for by the Jaggery Storage Manager</description>-->
+        <!--<jndiConfig>-->
+        <!--<name>jdbc/test</name>-->
+        <!--</jndiConfig>-->
+        <!--<definition type="RDBMS">-->
+        <!--<configuration>-->
+        <!--<url>jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>-->
+        <!--<username>sa</username>-->
+        <!--<password></password>-->
+        <!--<driverClassName>org.h2.Driver</driverClassName>-->
+        <!--<maxActive>50</maxActive>-->
+        <!--<maxWait>60000</maxWait>-->
+        <!--</configuration>-->
+        <!--</definition>-->
+        <!--</datasource>-->
 
         <datasource>
             <name>JAGH2</name>
@@ -120,24 +157,44 @@
         <datasource>
             <name>WSO2IOT_STATS_DB</name>
             <jndiConfig>
-            <name>jdbc/WSO2IOT_STATS_DB</name>
+                <name>jdbc/WSO2IOT_STATS_DB</name>
             </jndiConfig>
             <description>The datasource used for analyzer data</description>
             <definition type="RDBMS">
-            <configuration>
-                <url>jdbc:h2:$/repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url>
-                <!--url>jdbc:h2:${BAM_HOME}/repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url-->
-                <username>wso2carbon</username>
-                <password>wso2carbon</password>
-                <driverClassName>org.h2.Driver</driverClassName>
-                <maxActive>50</maxActive>
-                <maxWait>60000</maxWait>
-                <testOnBorrow>true</testOnBorrow>
-                <validationQuery>SELECT 1</validationQuery>
-                <validationInterval>30000</validationInterval>
-            </configuration>
+                <configuration>
+                    <url>jdbc:h2:$/repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url>
+                    <!--url>jdbc:h2:${BAM_HOME}/repository/database/IOT_STATS_DB;AUTO_SERVER=TRUE</url-->
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
             </definition>
         </datasource>
-
+        <datasource>
+            <name>VirtualFireAlarmDM_DB</name>
+            <description>The datasource used for the Virtual-Firealarm database</description>
+            <jndiConfig>
+                <name>jdbc/VirtualFireAlarmDM_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/VirtualFireAlarmDM_DB;DB_CLOSE_ON_EXIT=FALSE
+                    </url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
     </datasources>
 </datasources-configuration>

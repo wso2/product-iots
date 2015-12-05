@@ -1,0 +1,83 @@
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<s:Envelope
+        xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+        xmlns:a="http://www.w3.org/2005/08/addressing"
+        xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+        xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+        xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+        xmlns:ac="http://schemas.xmlsoap.org/ws/2006/12/authorization">
+    <s:Header>
+        <a:Action
+                s:mustUnderstand="1">
+            http://schemas.microsoft.com/windows/pki/2009/01/enrollment/RST/wstep
+        </a:Action>
+        <a:MessageID>
+            urn:uuid:0d5a1441-5891-453b-becf-a2e5f6ea3749
+        </a:MessageID>
+        <a:ReplyTo>
+            <a:Address>
+                http://www.w3.org/2005/08/addressing/anonymous
+            </a:Address>
+        </a:ReplyTo>
+        <a:To
+                s:mustUnderstand="1">
+            https://EnterpriseEnrollment.wso2.com/ENROLLMENTSERVER/DeviceEnrollmentWebservice.svc
+        </a:To>
+        <wsse:Security
+                s:mustUnderstand="1">
+            <wsse:BinarySecurityToken
+                    ValueType="http://schemas.microsoft.com/5.0.0.0/ConfigurationManager/Enrollment/DeviceEnrollmentUserToken"
+                    EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd#base64binary">
+                {BinarySecurityToken}
+            </wsse:BinarySecurityToken>
+        </wsse:Security>
+    </s:Header>
+    <s:Body>
+        <wst:RequestSecurityToken>
+            <wst:TokenType>
+                http://schemas.microsoft.com/5.0.0.0/ConfigurationManager/Enrollment/DeviceEnrollmentToken
+            </wst:TokenType>
+            <wst:RequestType>
+                http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue
+            </wst:RequestType>
+            <wsse:BinarySecurityToken
+                    ValueType="http://schemas.microsoft.com/windows/pki/2009/01/enrollment#PKCS10"
+                    EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd#base64binary">
+                [truncated]
+                MIICcTCCAV0CAQAwMDEuMCwGA1UEAxMlQjFDNDNDRDAtMTYyNC01RkJCLThFNTQtMzRDRjE3REZEM0ExADCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ1kKlZn4RIoFAWgkeK3ysI3GKWi2epQG6niWNxth4O/YQBLybPaF6TVJWp8U5FSeaN9+NoEi51hPa8vosKMYd94TEEeKykLb08Bpvj
+            </wsse:BinarySecurityToken>
+            <ac:AdditionalContext
+                    xmlns="http://schemas.xmlsoap.org/ws/2006/12/authorization">
+                <ac:ContextItem
+                        Name="DeviceType">
+                    <ac:Value>
+                        WindowsPhone
+                    </ac:Value>
+                </ac:ContextItem>
+                <ac:ContextItem
+                        Name="ApplicationVersion">
+                    <ac:Value>
+                        8.10.12397.895
+                    </ac:Value>
+                </ac:ContextItem>
+            </ac:AdditionalContext>
+        </wst:RequestSecurityToken>
+    </s:Body>
+</s:Envelope>
