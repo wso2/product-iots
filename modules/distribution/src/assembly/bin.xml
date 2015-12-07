@@ -388,6 +388,9 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps/
             </outputDirectory>
+            <excludes>
+                <exclude>appmoauth2.war</exclude>
+            </excludes>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
         </fileSet>
