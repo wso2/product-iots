@@ -474,9 +474,9 @@
                                     org.wso2.carbon.appmgt:org.wso2.carbon.appmgt.store.feature:${appmgt.feature.version}
                                 </featureArtifactDef>
 
-                                <featureArtifactDef>
-                                    org.wso2.carbon.store:org.wso2.carbon.social.feature:${carbon.store.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.store:org.wso2.carbon.social.feature:${carbon.store.version}-->
+                                <!--</featureArtifactDef>-->
 
 
                                 <featureArtifactDef>
@@ -1261,10 +1261,10 @@
 
                                 <!-- End of app management features-->
 
-                                <feature>
-                                    <id>org.wso2.carbon.social.feature.group</id>
-                                    <version>${carbon.store.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.social.feature.group</id>-->
+                                    <!--<version>${carbon.store.version}</version>-->
+                                <!--</feature>-->
                                 <!-- Cipher tool feature -->
 
                                 <feature>
