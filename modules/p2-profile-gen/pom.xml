@@ -144,9 +144,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.common.api.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.common.api.feature:${carbon.device.mgt.version}-->
+                                <!--</featureArtifactDef>-->
                                 <!-- End of Device Management Features -->
 
                                 <!-- Mobile Device Management Features -->
@@ -485,6 +485,7 @@
                                 <!-- End of app manager feature-->
 
                                 <!-- Cipher tools feature -->
+
                                 <featureArtifactDef>
                                     org.wso2.ciphertool:org.wso2.ciphertool.feature:${cipher.tool.version}
                                 </featureArtifactDef>
@@ -832,9 +833,7 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>
-                                        org.wso2.carbon.dynamic.client.registration.server.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.dynamic.client.registration.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -842,21 +841,19 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.devicemgt.ui.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.common.api.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.version}</version>-->
+                                <!--</feature>-->
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.common.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.server.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.device.mgt.analytics.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
@@ -866,9 +863,7 @@
                                     <version>${carbon.mobile.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>
-                                        org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
                                     <version>${carbon.mobile.device.mgt.version}</version>
                                 </feature>
 
@@ -1262,14 +1257,15 @@
                                     <id>org.wso2.carbon.appmgt.store.feature.group</id>
                                     <version>${appmgt..feature.version}</version>
                                 </feature>
+
                                 <!-- End of app management features-->
 
                                 <feature>
                                     <id>org.wso2.carbon.social.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
-
                                 <!-- Cipher tool feature -->
+
                                 <feature>
                                     <id>org.wso2.ciphertool.feature.group</id>
                                     <version>${cipher.tool.version}</version>
