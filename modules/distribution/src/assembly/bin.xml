@@ -388,6 +388,9 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps/
             </outputDirectory>
+            <excludes>
+                <exclude>appmoauth2.war</exclude>
+            </excludes>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
         </fileSet>
@@ -1024,9 +1027,7 @@
 
         <!-- ************* Data bridge related files ********** -->
         <file>
-            <!--<source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>-->
-            <!--STORE-1101-->
-            <source>src/repository/conf/data-bridge/data-bridge-config.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
