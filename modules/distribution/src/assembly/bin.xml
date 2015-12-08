@@ -90,6 +90,8 @@
                 <exclude>**/plugins/org.wso2.carbon.endpoint.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.inbound.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.rest.api.ui*</exclude>
+                <!--TODO: Remove exclude for asm-all jar after fixing java stack issue-->
+                <exclude>**/asm-all_4.1.0.wso2v1.jar</exclude>
             </excludes>
         </fileSet>
 
