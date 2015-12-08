@@ -283,6 +283,17 @@
             </includes>
         </fileSet>
 
+        <!-- Copying Social plugin related dbscripts -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
         <!--Copying modules-->
         <fileSet>
             <directory>
