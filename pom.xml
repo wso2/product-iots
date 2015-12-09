@@ -1062,8 +1062,8 @@
         <!-- Carbon Mediation -->
         <carbon.mediation.version>4.4.11</carbon.mediation.version>
 
-        <!-- Carbon Analytics Common -->
-        <carbon.analytics.common.version>5.0.5</carbon.analytics.common.version>
+        <!-- Carbon Analytics Common (DAS) -->
+        <carbon.analytics.common.version>5.0.6</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1079,7 +1079,6 @@
 
         <!--DAS-->
         <carbon.analytics.version>1.0.4</carbon.analytics.version>
-        <carbon.analytics.common.version>5.0.6</carbon.analytics.common.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>1.0.0</shindig.version>
         <carbon.event-processing.version>2.0.9</carbon.event-processing.version>

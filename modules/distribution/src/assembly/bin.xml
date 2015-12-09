@@ -90,6 +90,8 @@
                 <exclude>**/plugins/org.wso2.carbon.endpoint.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.inbound.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.rest.api.ui*</exclude>
+                <!--TODO: Remove exclude for asm-all jar after fixing java stack issue-->
+                <exclude>**/asm-all_4.1.0.wso2v1.jar</exclude>
             </excludes>
         </fileSet>
 
@@ -278,6 +280,17 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/apimgt</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
+        <!-- Copying Social plugin related dbscripts -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
@@ -1027,9 +1040,7 @@
 
         <!-- ************* Data bridge related files ********** -->
         <file>
-            <!--<source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>-->
-            <!--STORE-1101-->
-            <source>src/repository/conf/data-bridge/data-bridge-config.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
