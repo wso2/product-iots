@@ -277,7 +277,7 @@
         <!-- Copying API management related dbscripts -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt
+                src/repository/resources/dbscripts/apimgt
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/apimgt</outputDirectory>
             <includes>
@@ -462,6 +462,7 @@
                 <include>**/saml1-assertion-config</include>
                 <include>**/msg-mgt.properties</include>
                 <include>**/entitlement.properties</include>
+                <include>**/EndpointConfig.properties</include>
             </includes>
         </fileSet>
         <fileSet>
