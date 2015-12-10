@@ -9,6 +9,7 @@
     <property name="Light_dir" value="Light"/>
     <property name="Battery_dir" value="Battery"/>
     <property name="Magnetic_dir" value="Magnetic"/>
+    <property name="Accelerometer_dir" value="Accelerometer"/>
     <target name="clean">
         <delete dir="${target-dir}"/>
     </target>
@@ -29,8 +30,8 @@
         <zip destfile="${target-dir}/${Magnetic_dir}.car">
             <zipfileset dir="${Magnetic_dir}"/>
         </zip>
+        <zip destfile="${target-dir}/${Accelerometer_dir}.car">
+            <zipfileset dir="${Accelerometer_dir}"/>
+        </zip>
     </target>
-
-
-
 </project>
