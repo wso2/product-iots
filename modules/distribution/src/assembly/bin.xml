@@ -1174,14 +1174,14 @@
             <fileMode>644</fileMode>
         </file>
 
-        <file>
-            <source>
-                src/repository/patches/oltu-1.0.0.wso2v2.jar
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/components/patches/patch1000
-            </outputDirectory>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--src/repository/patches/oltu-1.0.0.wso2v2.jar-->
+            <!--</source>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/components/patches/patch1000-->
+            <!--</outputDirectory>-->
+        <!--</file>-->
 
     </files>
 </assembly>
