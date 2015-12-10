@@ -365,16 +365,6 @@
                 <include>dynamic-client-web.war</include>
             </includes>
         </fileSet>
-        <!--copy jaxrs web app for OAuth feature-->
-
-
-        <!-- Copying mdm app extensions -->
-        <fileSet>
-            <directory>../apps/jaggery/mdm/src/mdm/</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/mdm
-            </outputDirectory>
-        </fileSet>
 
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
@@ -384,6 +374,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
+            <excludes>
+                <exclude>jaggery.conf</exclude>
+            </excludes>
         </fileSet>
 
         <fileSet>
