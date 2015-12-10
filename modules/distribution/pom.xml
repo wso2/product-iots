@@ -316,7 +316,7 @@
                                     <classpath refid="maven.runtime.classpath"/>
 
                                     <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql"/>
+                                            file="${basedir}/src/repository/resources/dbscripts/apimgt/h2.sql"/>
                                 </sql>
                                 <echo message="##################### END ####################"/>
                             </tasks>
