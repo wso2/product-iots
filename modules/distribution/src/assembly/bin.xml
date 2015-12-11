@@ -240,6 +240,16 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/devicemgt
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources
+            </outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>src/repository/resources</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
             <includes>
