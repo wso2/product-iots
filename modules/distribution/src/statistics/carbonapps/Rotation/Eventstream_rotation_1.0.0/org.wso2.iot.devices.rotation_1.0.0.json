@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.rotation",
+  "version": "1.0.0",
+  "nickName": "Rotation Data",
+  "description": "Rotation data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},     
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},  
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "rotation","type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		

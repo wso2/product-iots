@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.gyroscope",
+  "version": "1.0.0",
+  "nickName": "Gyroscope Data",
+  "description": "Gyroscope data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},     
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},  
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "gyroscope","type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		
