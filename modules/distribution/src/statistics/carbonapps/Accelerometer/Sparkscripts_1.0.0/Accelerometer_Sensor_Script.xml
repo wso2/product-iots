@@ -7,7 +7,7 @@ CREATE TEMPORARY TABLE DeviceAccelerometerData USING CarbonAnalytics OPTIONS(tab
 CREATE TEMPORARY TABLE DeviceAccelerometerSummaryData USING CarbonAnalytics OPTIONS (tableName "DEVICE_ACCELEROMETER_SUMMARY", schema "accelerometer FLOAT, deviceType STRING -i, deviceId STRING -i, owner STRING -i, time LONG -i",primaryKeys "deviceType, deviceId, owner, time");
 
                            
-insert overwrite table DeviceAccelerometerSummaryData select accelerometer, meta_deviceType as deviceType, meta_deviceId as deviceId, meta_owner as owner, cast(meta_time/1000 as BIGINT)as time from DeviceAccelerometerData group by battery, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
+insert overwrite table DeviceAccelerometerSummaryData select accelerometer, meta_deviceType as deviceType, meta_deviceId as deviceId, meta_owner as owner, cast(meta_time/1000 as BIGINT)as time from DeviceAccelerometerData group by accelerometer, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
 </Script>
     <CronExpression>0 * * * * ?</CronExpression>
 </Analytics>
