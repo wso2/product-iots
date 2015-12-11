@@ -35,10 +35,6 @@
 	<name>WSO2 IoT Server - Distribution</name>
 	<description>WSO2 IoT Server Distribution</description>
 
-	<modules>
-        <module>src/statistics/carbonapps</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>com.h2database.wso2</groupId>

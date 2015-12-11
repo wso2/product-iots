@@ -342,7 +342,7 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>src/statistics/carbonapps/target</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
             </outputDirectory>
         </fileSet>
