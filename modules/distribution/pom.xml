@@ -260,7 +260,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <!-- Creating Virtual Firealarm Plugin Management schema -->
+                        <!-- Creating Android Sense Plugin Management schema -->
                         <id>create-android-sense-plugin-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
