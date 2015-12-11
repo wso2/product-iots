@@ -10,6 +10,11 @@
     <property name="Battery_dir" value="Battery"/>
     <property name="Magnetic_dir" value="Magnetic"/>
     <property name="Accelerometer_dir" value="Accelerometer"/>
+    <property name="Gravity_dir" value="Gravity"/>
+    <property name="Gyroscope_dir" value="Gyroscope"/>
+    <property name="Proximity_dir" value="Proximity"/>
+    <property name="Pressure_dir" value="Pressure"/>
+    <property name="Rotation_dir" value="Rotation"/>
     <target name="clean">
         <delete dir="${target-dir}"/>
     </target>
