@@ -34,7 +34,7 @@
 			<Type>LONG</Type>
 		</ColumnDefinition>
 		<ColumnDefinition>
-			<Name>battery</Name>
+			<Name>accelerometer</Name>
 			<EnableIndexing>false</EnableIndexing>
 			<IsPrimaryKey>false</IsPrimaryKey>
 			<EnableScoreParam>false</EnableScoreParam>

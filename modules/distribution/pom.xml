@@ -285,7 +285,7 @@
                                     <classpath refid="maven.runtime.classpath"/>
 
                                     <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/android_sense/h2.sql"/>
+                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/androidsense/h2.sql"/>
                                 </sql>
                                 <echo message="##################### END ####################"/>
                             </tasks>
