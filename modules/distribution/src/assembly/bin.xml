@@ -240,6 +240,16 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/devicemgt
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources
+            </outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>src/repository/resources</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
             <includes>
@@ -332,6 +342,11 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>src/statistics/carbonapps/target</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources
             </directory>
@@ -365,16 +380,6 @@
                 <include>dynamic-client-web.war</include>
             </includes>
         </fileSet>
-        <!--copy jaxrs web app for OAuth feature-->
-
-
-        <!-- Copying mdm app extensions -->
-        <fileSet>
-            <directory>../apps/jaggery/mdm/src/mdm/</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/mdm
-            </outputDirectory>
-        </fileSet>
 
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
@@ -384,6 +389,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
+            <excludes>
+                <exclude>jaggery.conf</exclude>
+            </excludes>
         </fileSet>
 
         <fileSet>
@@ -507,6 +515,19 @@
                 <!--<include>**/hbase-analytics-config.xml</include>-->
                 <include>**/analytics-data-config.xml</include>
                 <include>**/analytics-eventsink-config.xml</include>
+            </includes>
+        </fileSet>
+
+        <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/portal
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal
+            </outputDirectory>
+            <includes>
+                <include>**/*</include>
             </includes>
         </fileSet>
     </fileSets>
@@ -897,7 +918,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml
+            <source>src/repository/conf/carbon.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -1181,14 +1202,14 @@
             <fileMode>644</fileMode>
         </file>
 
-        <file>
-            <source>
-                src/repository/patches/oltu-1.0.0.wso2v2.jar
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/components/patches/patch1000
-            </outputDirectory>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--src/repository/patches/oltu-1.0.0.wso2v2.jar-->
+            <!--</source>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/components/patches/patch1000-->
+            <!--</outputDirectory>-->
+        <!--</file>-->
 
     </files>
 </assembly>

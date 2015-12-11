@@ -1080,6 +1080,7 @@
         <!--DAS-->
         <carbon.analytics.version>1.0.4</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
+        <carbon.dashboard.version>1.0.9</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
         <carbon.event-processing.version>2.0.9</carbon.event-processing.version>
         <carbon.data.version>4.3.2</carbon.data.version>

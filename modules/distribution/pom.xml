@@ -259,9 +259,8 @@
                             </tasks>
                         </configuration>
                     </execution>
-
                     <execution>
-                        <!-- Creating Android Sense Plugin Management schema -->
+                        <!-- Creating Virtual Firealarm Plugin Management schema -->
                         <id>create-android-sense-plugin-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
@@ -285,13 +284,12 @@
                                     <classpath refid="maven.runtime.classpath"/>
 
                                     <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/androidsense/h2.sql"/>
+                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/android_sense/h2.sql"/>
                                 </sql>
                                 <echo message="##################### END ####################"/>
                             </tasks>
                         </configuration>
                     </execution>
-
                     <!--<execution>-->
                     <!--&lt;!&ndash; Creating IDP Management schema &ndash;&gt;-->
                     <!--<id>create-idp-mgt-schema</id>-->
