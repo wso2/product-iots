@@ -33,5 +33,20 @@
         <zip destfile="${target-dir}/${Accelerometer_dir}.car">
             <zipfileset dir="${Accelerometer_dir}"/>
         </zip>
+        <zip destfile="${target-dir}/${Gravity_dir}.car">
+            <zipfileset dir="${Gravity_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Gyroscope_dir}.car">
+            <zipfileset dir="${Gyroscope_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Pressure_dir}.car">
+            <zipfileset dir="${Pressure_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Rotation_dir}.car">
+            <zipfileset dir="${Rotation_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Proximity_dir}.car">
+            <zipfileset dir="${Proximity_dir}"/>
+        </zip>
     </target>
 </project>
