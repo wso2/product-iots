@@ -416,7 +416,7 @@
             <fileMode>644</fileMode>
         </fileSet>
 
-        <!-- Copying API Manager Publisher and Store Jaggery apps -->
+        <!-- Copying APP Manager Publisher and Store Jaggery apps -->
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/publisher/
@@ -445,6 +445,37 @@
                 <exclude>styles-layout.css</exclude>
             </excludes>
         </fileSet>
+
+        <!-- Copying API Manager Publisher and Store Jaggery apps -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-publisher/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-publisher
+            </outputDirectory>
+            <excludes>
+                <exclude>publisherLogo/**</exclude>
+                <exclude>publisherTheme/**</exclude>
+                <exclude>publisherSite/**</exclude>
+                <exclude>footer/**</exclude>
+                <exclude>localstyles.css</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store
+            </outputDirectory>
+            <excludes>
+                <exclude>storeLogo/**</exclude>
+                <exclude>storeSite/**</exclude>
+                <exclude>base-page/**</exclude>
+                <exclude>login/**</exclude>
+                <exclude>styles-layout.css</exclude>
+            </excludes>
+        </fileSet>
+
 
         <!-- Copying synapse-config directory -->
         <fileSet>
