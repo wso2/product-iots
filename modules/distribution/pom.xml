@@ -554,6 +554,40 @@
                             </replacements>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>replace-for-api-publisher</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-publisher/site/conf/site.json</file>
+                            <replacements>
+                                <replacement>
+                                    <token>(/publisher)</token>
+                                    <value>/api-publisher</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>replace-for-api-store</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json</file>
+                            <replacements>
+                                <replacement>
+                                    <token>(/store)</token>
+                                    <value>/api-store</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
             <!--   <plugin>
