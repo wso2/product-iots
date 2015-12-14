@@ -401,9 +401,6 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
-            <excludes>
-                <exclude>jaggery.conf</exclude>
-            </excludes>
         </fileSet>
 
         <fileSet>
