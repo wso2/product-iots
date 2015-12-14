@@ -67,9 +67,7 @@
         <!--
             Server URL of the Authentication service
         -->
-        <ServerURL>
-            https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/
-        </ServerURL>
+        <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
         <!--
             Admin username for the Authentication manager.
         -->
