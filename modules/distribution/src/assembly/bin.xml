@@ -331,6 +331,15 @@
             </includes>
         </fileSet>
 
+        <!-- Copying the "api-store" app specific jaggery modules -->
+        <fileSet>
+            <directory>src/repository/modules/apimstore</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/apimstore</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
         <!-- Copying Device Management related dbscripts -->
         <fileSet>
             <directory>
@@ -391,6 +400,7 @@
             </outputDirectory>
             <excludes>
                 <exclude>jaggery.conf</exclude>
+                <exclude>app/conf/app-conf.json</exclude>
             </excludes>
         </fileSet>
 
@@ -402,10 +412,10 @@
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
             <excludes>
-                <exclude>jaggery.conf</exclude>
+                <exclude>app/conf/app-conf.json</exclude>
             </excludes>
         </fileSet>
-
+        
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt/
@@ -485,6 +495,8 @@
                 <exclude>base-page/**</exclude>
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
+                <exclude>modules/manager/manager.jag</exclude>
+                <exclude>jagg/jagg.jag</exclude>
             </excludes>
         </fileSet>
 
@@ -595,6 +607,20 @@
     </dependencySets>
 
     <files>
+        <!-- Copying the "api-store" app specific files that uses the edited "apimstore" jaggery module -->
+        <file>
+            <source>src/repository/jaggeryapps/api-store/jagg.jag</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/jagg
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/jaggeryapps/api-store/manager.jag</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/modules/manager
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war

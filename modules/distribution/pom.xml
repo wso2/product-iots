@@ -298,7 +298,6 @@
                         </goals>
                         <configuration>
                             <tasks>
-
                                 <echo message="########### Create Digital Display plugin Management H2 Schema ###########"/>
 
                                 <property name="db.dir"
