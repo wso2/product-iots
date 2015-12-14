@@ -331,6 +331,15 @@
             </includes>
         </fileSet>
 
+        <!-- Copying the "api-store" app specific jaggery modules -->
+        <fileSet>
+            <directory>src/repository/modules/apimstore</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/apimstore</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
         <!-- Copying Device Management related dbscripts -->
         <fileSet>
             <directory>
@@ -596,6 +605,20 @@
     </dependencySets>
 
     <files>
+        <!-- Copying the "api-store" app specific files that uses the edited "apimstore" jaggery module -->
+        <file>
+            <source>src/repository/jaggeryapps/api-store/jagg.jag</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/jagg
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/jaggeryapps/api-store/manager.jag</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/modules/manager
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war
