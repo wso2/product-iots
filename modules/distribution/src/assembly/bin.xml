@@ -495,6 +495,8 @@
                 <exclude>base-page/**</exclude>
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
+                <exclude>modules/manager/manager.jag</exclude>
+                <exclude>jagg/jagg.jag</exclude>
             </excludes>
         </fileSet>
 
