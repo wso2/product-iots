@@ -447,6 +447,7 @@
                                 <!--<unzip src="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" dest="${jardir}/shindig-common-${shindig.version}">
                                     <patternset>
                                         <exclude name="**/shindig.properties" />
+d                                        <exclude name="**/shindig.properties" />
                                     </patternset>
                                 </unzip>
                                 <copy file="src/repository/conf/shindig.properties" todir="${jardir}/shindig-common-${shindig.version}" />
