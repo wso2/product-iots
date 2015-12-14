@@ -35,10 +35,6 @@
 	<name>WSO2 IoT Server - Distribution</name>
 	<description>WSO2 IoT Server Distribution</description>
 
-	<modules>
-        <module>src/statistics/carbonapps</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>com.h2database.wso2</groupId>
@@ -259,17 +255,52 @@
                             </tasks>
                         </configuration>
                     </execution>
-
                     <execution>
-                        <!-- Creating Digital Display Plugin Management schema -->
-                        <id>create-digitaldisplay-plugin-mgt-schema</id>
+                        <!-- Creating Android Sense Plugin Management schema -->
+                        <id>create-android-sense-plugin-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <tasks>
+
+                                <echo message="########### Create Android Sense plugin Management H2 Schema ###########"/>
+
+                                <property name="db.dir"
+                                          value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
+                                <property name="userid" value="wso2carbon"/>
+                                <property name="password" value="wso2carbon"/>
+                                <property name="dbURL"
+                                          value="jdbc:h2:file:${basedir}/${db.dir}/AndroidSenseDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
+                                     password="${password}"
+                                     autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath"/>
+                                    <classpath refid="maven.compile.classpath"/>
+                                    <classpath refid="maven.runtime.classpath"/>
+
+                                    <fileset
+                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/android_sense/h2.sql"/>
+                                </sql>
+                                <echo message="##################### END ####################"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating Digital Display Plugin Management schema -->
+                        <id>create-digital-display-plugin-mgt-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+
                                 <echo message="########### Create Digital Display plugin Management H2 Schema ###########"/>
+
                                 <property name="db.dir"
                                           value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
                                 <property name="userid" value="wso2carbon"/>
@@ -349,7 +380,7 @@
                                     <classpath refid="maven.runtime.classpath"/>
 
                                     <fileset
-                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql"/>
+                                            file="${basedir}/src/repository/resources/dbscripts/apimgt/h2.sql"/>
                                 </sql>
                                 <echo message="##################### END ####################"/>
                             </tasks>
@@ -560,6 +591,40 @@
                             </replacements>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>replace-for-api-publisher</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-publisher/site/conf/site.json</file>
+                            <replacements>
+                                <replacement>
+                                    <token>(/publisher)</token>
+                                    <value>/api-publisher</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>replace-for-api-store</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json</file>
+                            <replacements>
+                                <replacement>
+                                    <token>(/store)</token>
+                                    <value>/api-store</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
             <!--   <plugin>

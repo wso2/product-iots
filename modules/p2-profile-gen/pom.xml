@@ -172,6 +172,9 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.mobile.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.mobile.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.digitaldisplay.feature:${carbon.mobile.device.mgt.version}
                                 </featureArtifactDef>
                                 <!-- IoT Device Management Features -->
@@ -770,7 +773,12 @@
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <!--End of DAS Feature-->
-
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboard.version}
+                                </feaureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -875,6 +883,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
+                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
                                     <version>${carbon.mobile.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1622,6 +1634,14 @@
                                     <version>${carbon.event-processing.version}</version>
                                 </feature>
                                 <!--END - Tools-->
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
