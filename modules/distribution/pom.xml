@@ -264,7 +264,9 @@
                         </goals>
                         <configuration>
                             <tasks>
+
                                 <echo message="########### Create Android Sense plugin Management H2 Schema ###########"/>
+
                                 <property name="db.dir"
                                           value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
                                 <property name="userid" value="wso2carbon"/>
@@ -286,8 +288,9 @@
                             </tasks>
                         </configuration>
                     </execution>
+
                     <execution>
-                        <!-- Creating Android Sense Plugin Management schema -->
+                        <!-- Creating Digital Display Plugin Management schema -->
                         <id>create-digital-display-plugin-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
@@ -296,6 +299,7 @@
                         <configuration>
                             <tasks>
                                 <echo message="########### Create Digital Display plugin Management H2 Schema ###########"/>
+
                                 <property name="db.dir"
                                           value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
                                 <property name="userid" value="wso2carbon"/>
@@ -317,6 +321,7 @@
                             </tasks>
                         </configuration>
                     </execution>
+
                     <!--<execution>-->
                     <!--&lt;!&ndash; Creating IDP Management schema &ndash;&gt;-->
                     <!--<id>create-idp-mgt-schema</id>-->
@@ -441,6 +446,7 @@
                                 <!--<unzip src="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" dest="${jardir}/shindig-common-${shindig.version}">
                                     <patternset>
                                         <exclude name="**/shindig.properties" />
+d                                        <exclude name="**/shindig.properties" />
                                     </patternset>
                                 </unzip>
                                 <copy file="src/repository/conf/shindig.properties" todir="${jardir}/shindig-common-${shindig.version}" />
