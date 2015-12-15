@@ -1310,8 +1310,8 @@
         </repository>
         <repository>
             <id>wso2-staging</id>
-            <name>WSO2 Staging Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonappmgt-133/</url>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonapimgt-174/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
