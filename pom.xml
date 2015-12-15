@@ -1057,7 +1057,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>4.3.0</carbon.api.mgt.version>
+        <carbon.api.mgt.version>4.3.1</carbon.api.mgt.version>
 
         <!-- Carbon Mediation -->
         <carbon.mediation.version>4.4.11</carbon.mediation.version>
