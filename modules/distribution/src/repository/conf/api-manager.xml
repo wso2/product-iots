@@ -149,9 +149,7 @@
                 <!--
 							Server URL of the API gateway.
 					-->
-                <ServerURL>
-                    https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/
-                </ServerURL>
+                <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
                 <!--
 							Admin username for the API gateway.
 					-->
@@ -281,9 +279,7 @@
         <!--
             Server URL of the API key manager
         -->
-        <ServerURL>
-            https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/
-        </ServerURL>
+        <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
 
         <!--
             Admin username for API key manager.
