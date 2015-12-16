@@ -337,7 +337,7 @@
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
-                                          value="jdbc:h2:file:${basedir}/${db.dir}/DroneAnalyzerServiceDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+                                          value="jdbc:h2:file:${basedir}/${db.dir}/DroneAnalyzerDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
 
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
                                      password="${password}"
