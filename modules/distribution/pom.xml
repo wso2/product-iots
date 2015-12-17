@@ -354,6 +354,70 @@
                         </configuration>
                     </execution>
 
+                    <execution>
+                        <!-- Creating Arduino Plugin Management schema -->
+                        <id>create-arduino-plugin-mgt-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create Arduino plugin Management H2 Schema ###########"/>
+                                <property name="db.dir"
+                                          value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
+                                <property name="userid" value="wso2carbon"/>
+                                <property name="password" value="wso2carbon"/>
+                                <property name="dbURL"
+                                          value="jdbc:h2:file:${basedir}/${db.dir}/ArduinoDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
+                                     password="${password}"
+                                     autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath"/>
+                                    <classpath refid="maven.compile.classpath"/>
+                                    <classpath refid="maven.runtime.classpath"/>
+
+                                    <fileset
+                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/arduino/h2.sql"/>
+                                </sql>
+                                <echo message="##################### END ####################"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating RaspberryPi Plugin Management schema -->
+                        <id>create-raspberrypi-plugin-mgt-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create RaspberryPi plugin Management H2 Schema ###########"/>
+                                <property name="db.dir"
+                                          value="target/wso2carbon-core-${carbon.kernel.version}/repository/database"/>
+                                <property name="userid" value="wso2carbon"/>
+                                <property name="password" value="wso2carbon"/>
+                                <property name="dbURL"
+                                          value="jdbc:h2:file:${basedir}/${db.dir}/RaspberryPiDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
+                                     password="${password}"
+                                     autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath"/>
+                                    <classpath refid="maven.compile.classpath"/>
+                                    <classpath refid="maven.runtime.classpath"/>
+
+                                    <fileset
+                                            file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/raspberrypi/h2.sql"/>
+                                </sql>
+                                <echo message="##################### END ####################"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+
                     <!--<execution>-->
                     <!--&lt;!&ndash; Creating IDP Management schema &ndash;&gt;-->
                     <!--<id>create-idp-mgt-schema</id>-->
