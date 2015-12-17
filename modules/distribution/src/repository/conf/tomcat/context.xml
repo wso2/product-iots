@@ -47,6 +47,9 @@
      -->
     <Listener className="org.wso2.carbon.apimgt.webapp.publisher.lifecycle.listener.APIPublisherLifecycleListener"/>
 
+    <!-- Listener responsible for reading device features -->
+    <Listener className="org.wso2.carbon.apimgt.webapp.publisher.lifecycle.listener.FeatureManagementLifecycleListener"/>
+
     <!-- WebAppDeploymentLifecycleListener listens to webapp deployment events and adds the custom permissions defined in webapps'
         META-INF/permissions.xml to the permissions/admin section of registry. Given below is a sample of permissions.xml file.
 
