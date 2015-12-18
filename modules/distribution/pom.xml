@@ -562,12 +562,35 @@ d                                        <exclude name="**/shindig.properties" /
 							</tasks>
 						</configuration>
 					</execution>
+
 					<execution>
 						<id>copy_modules_apps</id>
 						<phase>package</phase>
 						<configuration>
 							<tasks>
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps"/>
+
+								<!--Make samples directory for distribution-->
+								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples"/>
+
+								<!--Copy samples to distribution-->
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/samples"
+									  overwrite="true">
+									<fileset dir="../samples">
+										<exclude name="**/*.iml"/>
+										<exclude name="**/.DS_Store"/>
+										<exclude name="**/target/"/>
+									</fileset>
+								</copy>
+
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/"
+									  overwrite="true">
+									<fileset dir="../samples/installer/">
+										<exclude name="**/*.iml"/>
+										<exclude name="**/.DS_Store"/>
+										<exclude name="**/target/"/>
+									</fileset>
+								</copy>
 
 								<!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/modules" overwrite="true">
 									<fileset dir="src/repository/modules"></fileset>
