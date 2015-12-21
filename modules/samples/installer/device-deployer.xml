@@ -55,7 +55,7 @@
 
 							<featureArtifacts>
 								<featureArtifactDef>
-									{FEATURE_ARTIFACT_DEF}.feature:{FEATURE_VERSION}
+									{FEATURE_GROUP_ID}:{FEATURE_ARTIFACT_DEF}:{FEATURE_VERSION}
 								</featureArtifactDef>
 							</featureArtifacts>
 						</configuration>
@@ -84,7 +84,7 @@
 							<deleteOldProfileFiles>true</deleteOldProfileFiles>
 							<features>
 								<feature>
-									<id>{FEATURE_ARTIFACT_DEF}.feature.group</id>
+									<id>{FEATURE_ARTIFACT_DEF}.group</id>
 									<version>{FEATURE_VERSION}</version>
 								</feature>
 							</features>
