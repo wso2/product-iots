@@ -613,7 +613,7 @@
 
         <file>
             <source>src/repository/bin/wso2server.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin/wso2server.sh</outputDirectory>
             <fileMode>755</fileMode>
         </file>
 
