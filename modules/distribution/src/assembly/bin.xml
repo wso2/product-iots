@@ -111,6 +111,9 @@
             <includes>
                 <include>**/*.sh</include>
             </includes>
+            <excludes>
+                <exclude>bin/wso2server.sh</exclude>
+            </excludes>
             <fileMode>755</fileMode>
         </fileSet>
 
@@ -607,6 +610,13 @@
     </dependencySets>
 
     <files>
+
+        <file>
+            <source>src/repository/bin/wso2server.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin/wso2server.sh</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <!-- Copying the "api-store" app specific files that uses the edited "apimstore" jaggery module -->
         <file>
             <source>src/repository/jaggeryapps/api-store/jagg.jag</source>
