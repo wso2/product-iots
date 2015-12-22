@@ -352,6 +352,10 @@
 		org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->
         <EncryptPersistedTokens>false</EncryptPersistedTokens>
 
+        <ScopeWhitelist>
+            <Scope>device_scope</Scope>
+        </ScopeWhitelist>
+
     </APIKeyValidator>
 
     <!--
