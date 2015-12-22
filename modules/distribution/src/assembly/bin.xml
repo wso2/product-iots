@@ -503,6 +503,14 @@
             </excludes>
         </fileSet>
 
+        <!--============ Added with API Features ===============-->
+        <fileSet>
+            <directory>src/api-resources/customsequences</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/customsequences</outputDirectory>
+            <includes>
+                <include>**/**.xml</include>
+            </includes>
+        </fileSet>
 
         <!-- Copying synapse-config directory -->
         <fileSet>
