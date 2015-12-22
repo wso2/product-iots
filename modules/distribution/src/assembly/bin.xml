@@ -576,6 +576,54 @@
             </includes>
         </fileSet>
 
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/metrics/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/metrics</outputDirectory>
+            <includes>
+                <include>**/*.sql</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/mb-store
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/mb-store</outputDirectory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
+        <!-- messaging related configs -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
+            </outputDirectory>
+            <includes>
+                <include>**/broker.xml</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
+        <!--QPID related configurations-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/advanced</outputDirectory>
+            <includes>
+                <include>**/qpid-config.xml</include>
+                <include>**/qpid-virtualhosts.xml</include>
+                <include>**/qpid-jmxremote.access</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
         <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
         <fileSet>
             <directory>
@@ -770,9 +818,7 @@
 
         <!-- Copying event-broker.xml -->
         <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
-            </source>
+            <source>src/repository/conf/event-broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -883,6 +929,30 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--Metrics-->
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>false</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>false</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/metrics-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2METRICS_DB.h2.db</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
 
