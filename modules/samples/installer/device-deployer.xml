@@ -17,123 +17,125 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>org.wso2.iot</groupId>
-		<artifactId>wso2iot-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>org.wso2.iot</groupId>
+        <artifactId>wso2iot-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.wso2.iot.devicetypes</groupId>
-	<artifactId>devicetype-feature-installation</artifactId>
-	<version>1.0.0</version>
-	<packaging>pom</packaging>
-	<name>Creating custom distribution</name>
-	<url>http://wso2.org</url>
-	<build>
-		<plugins>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wso2.iot.devicetypes</groupId>
+    <artifactId>devicetype-feature-installation</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Creating custom distribution</name>
+    <url>http://wso2.org</url>
+    <build>
+        <plugins>
 
-			<plugin>
-				<groupId>org.wso2.maven</groupId>
-				<artifactId>carbon-p2-plugin</artifactId>
-				<version>1.5.3</version>
+            <plugin>
+                <groupId>org.wso2.maven</groupId>
+                <artifactId>carbon-p2-plugin</artifactId>
+                <version>1.5.3</version>
 
-				<executions>
-					<execution>
-						<id>2-p2-repo-generation</id>
-						<phase>package</phase>
-						<goals>
-							<goal>p2-repo-gen</goal>
-						</goals>
-						<configuration>
-							<metadataRepository>file:${basedir}/samples/p2-repo</metadataRepository>
-							<artifactRepository>file:${basedir}/samples/p2-repo</artifactRepository>
-							<publishArtifacts>true</publishArtifacts>
-							<publishArtifactRepository>true</publishArtifactRepository>
+                <executions>
+                    <execution>
+                        <id>2-p2-repo-generation</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-repo-gen</goal>
+                        </goals>
+                        <configuration>
+                            <metadataRepository>file:${basedir}/samples/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/samples/p2-repo</artifactRepository>
+                            <publishArtifacts>true</publishArtifacts>
+                            <publishArtifactRepository>true</publishArtifactRepository>
 
-							<featureArtifacts>
-								<featureArtifactDef>
-									{FEATURE_GROUP_ID}:{FEATURE_ARTIFACT_DEF}:{FEATURE_VERSION}
-								</featureArtifactDef>
-							</featureArtifacts>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+                            <featureArtifacts>
+                                <featureArtifactDef>
+                                    <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  -->
+                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:1.9.2-SNAPSHOT
+                                </featureArtifactDef>
+                            </featureArtifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
 
-			<plugin>
-				<groupId>org.wso2.maven</groupId>
-				<artifactId>carbon-p2-plugin</artifactId>
-				<version>1.5.3</version>
-				<executions>
-					<execution>
-						<id>feature-install</id>
-						<phase>package</phase>
-						<goals>
-							<goal>p2-profile-gen</goal>
-						</goals>
-						<configuration>
-							<profile>default</profile>
-							<metadataRepository>file:${basedir}/samples/p2-repo</metadataRepository>
-							<artifactRepository>file:${basedir}/samples/p2-repo</artifactRepository>
-							<destination>repository/components</destination>
-							<deleteOldProfileFiles>true</deleteOldProfileFiles>
-							<features>
-								<feature>
-									<id>{FEATURE_ARTIFACT_DEF}.group</id>
-									<version>{FEATURE_VERSION}</version>
-								</feature>
-							</features>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<replace token="false" value="true" dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
-									<include name="**/bundles.info"/>
-								</replace>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-	<repositories>
-		<repository>
-			<id>wso2-nexus</id>
-			<name>WSO2 internal Repository</name>
-			<url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>wso2-maven2-repository</id>
-			<url>http://dist.wso2.org/maven2</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>wso2-maven2-snapshot-repository</id>
-			<url>http://dist.wso2.org/snapshots/maven2</url>
-		</pluginRepository>
-	</pluginRepositories>
+            <plugin>
+                <groupId>org.wso2.maven</groupId>
+                <artifactId>carbon-p2-plugin</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>default</profile>
+                            <metadataRepository>file:${basedir}/samples/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/samples/p2-repo</artifactRepository>
+                            <destination>repository/components</destination>
+                            <deleteOldProfileFiles>true</deleteOldProfileFiles>
+                            <features>
+                                <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  -->
+                                <feature>
+                                    <id>org.coffeeking.connectedcup.feature.group</id>
+                                    <version>1.9.2-SNAPSHOT</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <replace token="false" value="true" dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>wso2-maven2-repository</id>
+            <url>http://dist.wso2.org/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>wso2-maven2-snapshot-repository</id>
+            <url>http://dist.wso2.org/snapshots/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
