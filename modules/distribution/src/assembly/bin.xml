@@ -1005,25 +1005,6 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!-- Copying H2 database related files corresponding to default Device management repository schema -->
-        <file>
-            <source>
-                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2DM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2DM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-
-        <!-- Copying H2 database related files corresponding to default Device management repository schema -->
-        <file>
-            <source>
-                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2DM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2DM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
 
         <!-- Copying ANDROID SENSE H2 database -->
         <file>
