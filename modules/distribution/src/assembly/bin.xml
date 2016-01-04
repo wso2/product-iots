@@ -596,6 +596,22 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
+
+
+        <!-- Copying temporary patches from DAS that fixes JIRA DAS-339 and a Concurrent DB Access Issue -->
+                        <!-- Can be safely removed upon a DAS release with these fixes -->
+        <fileSet>
+            <directory>
+                src/repository/patches
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/components/patches
+            </outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
     </fileSets>
 
 
@@ -1070,25 +1086,26 @@
             <fileMode>644</fileMode>
         </file>
 
-        <!--&lt;!&ndash; Copying MOBILE-ANDROID H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileAndroid_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>WSO2MobileAndroid_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
 
-        <!--&lt;!&ndash; Copying MOBILE-WINDOWS H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>WSO2MobileAndroid_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+        <!-- Copying MOBILE-ANDROID H2 database -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileAndroid_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>WSO2MobileAndroid_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- Copying MOBILE-WINDOWS H2 database -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>WSO2MobileWindows_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
 
         <file>
             <source>src/repository/conf/carbon.xml
