@@ -620,18 +620,18 @@
                                 </featureArtifactDef>
 
                                 <!-- Carbon Deployment Features -->
-                                <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
+                                <!--+++++++++++++++++++++++++++++++++++++++++++++-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.deployment:org.wso2.carbon.module.mgt.server.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
                                 <!--<featureArtifactDef>-->
                                 <!--org.wso2.carbon.deployment:org.wso2.carbon.webapp.mgt.server.feature:${carbon.deployment.version}-->
                                 <!--</featureArtifactDef>-->
-                                <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
+                                <!--+++++++++++++++++++++++++++++++++++++++++++++-->
                                 <!-- End of Carbon Deployment Features -->
 
                                 <!-- Registry Features -->
-                                <!--+++++++++++++++++++++++++++++++++++++++++++++++-->
+                                <!--+++++++++++++++++++++++++++++++++++++++++++++-->
 
                                 <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
@@ -787,6 +787,20 @@
                                 </feaureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
+
+				<!-- MB Features -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.messaging:org.wso2.carbon.andes.feature:${carbon.messaging.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.mb:org.wso2.mb.styles.feature:${product.mb.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.mb:org.wso2.stratos.mb.dashboard.ui.feature:${product.mb.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -1662,6 +1676,22 @@
                                 <feature>
                                     <id>org.wso2.carbon.dashboards.portal.feature.group</id>
                                     <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.messaging.andes.feature.group</id>
+                                    <version>${carbon.messaging.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.mb.styles.feature.group</id>
+                                    <version>${product.mb.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.stratos.mb.dashboard.ui.feature.group</id>
+                                    <version>${product.mb.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.metrics.feature.group</id>
+                                    <version>${carbon.metrics.version}</version>
                                 </feature>
                             </features>
                         </configuration>

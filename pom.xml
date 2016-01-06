@@ -1121,6 +1121,11 @@
         <project.scm.id>github-scm</project.scm.id>
 
         <uuf.version>1.0.0-SNAPSHOT</uuf.version>
+
+        <!-- MB Features -->
+        <carbon.messaging.version>3.0.1</carbon.messaging.version>
+        <product.mb.version>3.0.0</product.mb.version>
+        <carbon.metrics.version>1.1.1</carbon.metrics.version>
     </properties>
 
     <scm>
