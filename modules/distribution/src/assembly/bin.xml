@@ -113,6 +113,7 @@
             </includes>
             <excludes>
                 <exclude>bin/wso2server.sh</exclude>
+                <exclude>bin/wso2server.bat</exclude>
             </excludes>
             <fileMode>755</fileMode>
         </fileSet>
@@ -647,6 +648,11 @@
 
         <file>
             <source>src/repository/bin/wso2server.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/bin/wso2server.bat</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
