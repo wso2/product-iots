@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EventStoreConfiguration>
+    <Source>
+        <StreamId>org.wso2.iot.devices.coffeelevel:1.0.0</StreamId>
+    </Source>
+    <RecordStoreName>EVENT_STORE</RecordStoreName>
+    <TableSchema>
+		<ColumnDefinition>
+			<Name>meta_owner</Name>
+			<EnableIndexing>true</EnableIndexing>
+			<IsPrimaryKey>true</IsPrimaryKey>
+			<EnableScoreParam>false</EnableScoreParam>
+			<Type>STRING</Type>
+		</ColumnDefinition>
+		<ColumnDefinition>
+			<Name>meta_deviceType</Name>
+			<EnableIndexing>true</EnableIndexing>
+			<IsPrimaryKey>true</IsPrimaryKey>
+			<EnableScoreParam>false</EnableScoreParam>
+			<Type>STRING</Type>
+		</ColumnDefinition>
+		<ColumnDefinition>
+			<Name>meta_deviceId</Name>
+			<EnableIndexing>true</EnableIndexing>
+			<IsPrimaryKey>true</IsPrimaryKey>
+			<EnableScoreParam>false</EnableScoreParam>
+			<Type>STRING</Type>
+		</ColumnDefinition>
+		<ColumnDefinition>
+			<Name>meta_time</Name>
+			<EnableIndexing>true</EnableIndexing>
+			<IsPrimaryKey>true</IsPrimaryKey>
+			<EnableScoreParam>false</EnableScoreParam>
+			<Type>LONG</Type>
+		</ColumnDefinition>
+		<ColumnDefinition>
+			<Name>coffeelevel</Name>
+			<EnableIndexing>false</EnableIndexing>
+			<IsPrimaryKey>false</IsPrimaryKey>
+			<EnableScoreParam>false</EnableScoreParam>
+			<Type>FLOAT</Type>
+		</ColumnDefinition>
+    </TableSchema>
+</EventStoreConfiguration>
