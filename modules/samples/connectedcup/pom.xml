@@ -20,6 +20,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <parent>
+        <groupId>org.wso2</groupId>
+        <artifactId>wso2</artifactId>
+        <version>1</version>
+    </parent>
+
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
@@ -29,6 +35,11 @@
     	<name>WSO2 IoTS(Device Types) - Connected Cup</name>
     	<description>WSO2 IoTS(Device Types) - Connected Cup</description>
 	<url>http://wso2.org</url>
+
+    <modules>
+        <module>component</module>
+        <module>feature</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -251,10 +262,5 @@
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
 	</properties>
-
-	<modules>
-		<module>component</module>
-        	<module>feature</module>
-	</modules>
 
 </project>
