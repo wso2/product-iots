@@ -31,7 +31,3 @@ target
 *.iml
 .idea
 .DS_Store
-
-# Ignore .car and Database files
-*.car
-*.h2.db

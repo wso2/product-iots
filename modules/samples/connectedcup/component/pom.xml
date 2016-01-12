@@ -38,8 +38,7 @@
 
 	<modules>
 		<module>plugin</module>
-		<module>controller</module>
-		<module>manager</module>
+		<module>service</module>
 		<module>agent</module>
 	</modules>
 
@@ -65,24 +64,6 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <dependency>
-                <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-                <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-                <version>1.9.2-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.carbon.devicemgt</groupId>
-                <artifactId>org.wso2.carbon.apimgt.webapp.publisher</artifactId>
-                <version>${carbon.device.mgt.version}</version>
-                <scope>system</scope>
-                <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.webapp.publisher_0.9.2.SNAPSHOT.jar
-                </systemPath>
-            </dependency>
-
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
