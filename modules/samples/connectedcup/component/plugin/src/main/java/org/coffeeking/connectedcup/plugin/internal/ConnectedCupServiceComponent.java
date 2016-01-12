@@ -20,12 +20,13 @@ package org.coffeeking.connectedcup.plugin.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coffeeking.connectedcup.plugin.impl.ConnectedCupManagerService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 import org.wso2.carbon.device.mgt.iot.service.DeviceTypeService;
-import org.coffeeking.connectedcup.plugin.impl.ConnectedCupManagerService;
+
 /**
  * @scr.component name="org.coffeeking.connectedcup.plugin.internal
  * .ConnectedCupServiceComponent"
