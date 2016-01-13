@@ -25,18 +25,11 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-import org.wso2.carbon.device.mgt.iot.service.DeviceTypeService;
 
 /**
  * @scr.component name="org.coffeeking.connectedcup.plugin.internal
  * .ConnectedCupServiceComponent"
  * immediate="true"
- * @scr.reference name="org.wso2.carbon.device.mgt.iot.service.DeviceTypeServiceImpl"
- * interface="org.wso2.carbon.device.mgt.iot.service.DeviceTypeService"
- * cardinality="1..1"
- * policy="dynamic"
- * bind="setDeviceTypeService"
- * unbind="unsetDeviceTypeService"
  */
 
 public class ConnectedCupServiceComponent {
@@ -76,16 +69,5 @@ public class ConnectedCupServiceComponent {
         } catch (Throwable e) {
             log.error("Error occurred while de-activating Connected Cup Service Component", e);
         }
-    }
-
-    protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
-        /* This is to avoid this component getting initialized before the
-		common registered */
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service set to mobile service component");
-        }
-    }
-
-    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService) {
     }
 }
