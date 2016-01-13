@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Analytics>
-    <Name>IoTServer_Sensor_Script</Name>
+    <Name>Temperature_Sensor_Script</Name>
     <Script>
         CREATE TEMPORARY TABLE DeviceTemperatureData USING CarbonAnalytics OPTIONS(tableName "ORG_WSO2_IOT_DEVICES_TEMPERATURE");
 

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <artifact name="Eventreceiver_coffeelevel" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
-    <file>Eventreceiver_coffeelevel.xml</file>
+    <file>EventReceiver_coffeelevel.xml</file>
 </artifact>
