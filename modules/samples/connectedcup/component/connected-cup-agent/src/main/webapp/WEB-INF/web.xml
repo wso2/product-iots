@@ -1,0 +1,27 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>ConnectedCup-Webapp</display-name>
+
+    <servlet>
+        <servlet-name>PushTemperature</servlet-name>
+        <servlet-class>org.coffeeking.agent.datasense.PushTemperature</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PushTemperature</servlet-name>
+        <url-pattern>/push_temperature</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PushLevel</servlet-name>
+        <servlet-class>org.coffeeking.agent.datasense.PushLevel</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PushLevel</servlet-name>
+        <url-pattern>/push_level</url-pattern>
+    </servlet-mapping>
+
+</web-app>
