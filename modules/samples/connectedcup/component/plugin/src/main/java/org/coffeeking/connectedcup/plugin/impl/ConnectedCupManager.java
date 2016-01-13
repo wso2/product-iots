@@ -21,6 +21,7 @@ package org.coffeeking.connectedcup.plugin.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coffeeking.connectedcup.plugin.exception.ConnectedCupDeviceMgtPluginException;
 import org.coffeeking.connectedcup.plugin.impl.dao.ConnectedCupDAO;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
@@ -31,12 +32,6 @@ import org.wso2.carbon.device.mgt.common.FeatureManager;
 import org.wso2.carbon.device.mgt.common.configuration.mgt.TenantConfiguration;
 import org.wso2.carbon.device.mgt.common.license.mgt.License;
 import org.wso2.carbon.device.mgt.common.license.mgt.LicenseManagementException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactory;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dto.IotDevice;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.util.IotDeviceManagementUtil;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +42,7 @@ public class ConnectedCupManager implements DeviceManager {
 
     private static final Log log = LogFactory.getLog(ConnectedCupManager.class);
 
-    private static final IotDeviceManagementDAOFactory iotDeviceManagementDAOFactory = new ConnectedCupDAO();
+    private static final ConnectedCupDAO connectedCupDAO = new ConnectedCupDAO();
 
     @Override
     public FeatureManager getFeatureManager() {
@@ -70,19 +65,17 @@ public class ConnectedCupManager implements DeviceManager {
     @Override
     public boolean enrollDevice(Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
                 log.debug("Enrolling a new Connected Cup device : " + device.getDeviceIdentifier());
             }
             ConnectedCupDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().addIotDevice(
-                    iotDevice);
+            status = connectedCupDAO.getConnectedCupDeviceDAO().addDevice(device);
             ConnectedCupDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             try {
                 ConnectedCupDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+            } catch (ConnectedCupDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device enrol transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -96,19 +89,17 @@ public class ConnectedCupManager implements DeviceManager {
     @Override
     public boolean modifyEnrollment(Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
                 log.debug("Modifying the Connected Cup device enrollment data");
             }
             ConnectedCupDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
+            status = connectedCupDAO.getConnectedCupDeviceDAO().updateDevice(device);
             ConnectedCupDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             try {
                 ConnectedCupDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+            } catch (ConnectedCupDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -128,13 +119,12 @@ public class ConnectedCupManager implements DeviceManager {
                 log.debug("Dis-enrolling Connected Cup device : " + deviceId);
             }
             ConnectedCupDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .deleteIotDevice(deviceId.getId());
+            status = connectedCupDAO.getConnectedCupDeviceDAO().deleteDevice(deviceId.getId());
             ConnectedCupDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             try {
                 ConnectedCupDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+            } catch (ConnectedCupDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device dis enrol transaction :" + deviceId.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -152,13 +142,11 @@ public class ConnectedCupManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Checking the enrollment of Connected Cup device : " + deviceId.getId());
             }
-            IotDevice iotDevice =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getIotDevice(
-                            deviceId.getId());
+            Device iotDevice = connectedCupDAO.getConnectedCupDeviceDAO().getDevice(deviceId.getId());
             if (iotDevice != null) {
                 isEnrolled = true;
             }
-        } catch (IotDeviceManagementDAOException e) {
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             String msg = "Error while checking the enrollment status of Connected Cup device : " +
                          deviceId.getId();
             log.error(msg, e);
@@ -184,10 +172,9 @@ public class ConnectedCupManager implements DeviceManager {
         try {if (log.isDebugEnabled()) {
                 log.debug("Getting the details of Connected Cup device : " + deviceId.getId());
             }
-            IotDevice iotDevice = iotDeviceManagementDAOFactory.getIotDeviceDAO().
-                    getIotDevice(deviceId.getId());
-            device = IotDeviceManagementUtil.convertToDevice(iotDevice);
-        } catch (IotDeviceManagementDAOException e) {
+            device = connectedCupDAO.getConnectedCupDeviceDAO().getDevice(deviceId.getId());
+
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             String msg = "Error while fetching the Connected Cup device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
@@ -229,20 +216,18 @@ public class ConnectedCupManager implements DeviceManager {
     @Override
     public boolean updateDeviceInfo(DeviceIdentifier deviceIdentifier, Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
                 log.debug(
                         "updating the details of Connected Cup device : " + deviceIdentifier);
             }
             ConnectedCupDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
+            status = connectedCupDAO.getConnectedCupDeviceDAO().updateDevice(device);
             ConnectedCupDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             try {
                 ConnectedCupDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+            } catch (ConnectedCupDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -261,15 +246,8 @@ public class ConnectedCupManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Fetching the details of all Connected Cup devices");
             }
-            List<IotDevice> iotDevices =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getAllIotDevices();
-            if (iotDevices != null) {
-                devices = new ArrayList<Device>();
-                for (IotDevice iotDevice : iotDevices) {
-                    devices.add(IotDeviceManagementUtil.convertToDevice(iotDevice));
-                }
-            }
-        } catch (IotDeviceManagementDAOException e) {
+            devices = connectedCupDAO.getConnectedCupDeviceDAO().getAllDevices();
+        } catch (ConnectedCupDeviceMgtPluginException e) {
             String msg = "Error while fetching all Connected Cup devices.";
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);

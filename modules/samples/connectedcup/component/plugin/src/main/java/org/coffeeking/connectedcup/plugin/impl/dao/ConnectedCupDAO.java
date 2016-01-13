@@ -21,102 +21,112 @@ package org.coffeeking.connectedcup.plugin.impl.dao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
+import org.coffeeking.connectedcup.plugin.exception.ConnectedCupDeviceMgtPluginException;
 import org.coffeeking.connectedcup.plugin.impl.dao.impl.ConnectedCupDAOImpl;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactory;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactoryInterface;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ConnectedCupDAO extends IotDeviceManagementDAOFactory
-        implements IotDeviceManagementDAOFactoryInterface {
+public class ConnectedCupDAO {
 
-    private static final Log log = LogFactory.getLog(ConnectedCupDAO.class);
-    static DataSource dataSource;
-    private static ThreadLocal<Connection> currentConnection = new ThreadLocal<Connection>();
+	private static final Log log = LogFactory.getLog(ConnectedCupDAO.class);
+	static DataSource dataSource;
+	private static ThreadLocal<Connection> currentConnection = new ThreadLocal<Connection>();
 
-    public ConnectedCupDAO() {
-        initFireAlarmDAO();
-    }
+	public ConnectedCupDAO() {
+		initConnectedCupDAO();
+	}
 
-    public static void initFireAlarmDAO() {
-        dataSource = getDataSourceMap().get(ConnectedCupConstants.DEVICE_TYPE);
-    }
+	public static void initConnectedCupDAO() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup(ConnectedCupConstants.DATA_SOURCE_NAME);
+		} catch (NamingException e) {
+			log.error("Error while looking up the data source: " +
+							  ConnectedCupConstants.DATA_SOURCE_NAME);
+		}
 
-    @Override public IotDeviceDAO getIotDeviceDAO() {
-        return new ConnectedCupDAOImpl();
-    }
+	}
 
-    public static void beginTransaction() throws IotDeviceManagementDAOException {
-        try {
-            Connection conn = dataSource.getConnection();
-            conn.setAutoCommit(false);
-            currentConnection.set(conn);
-        } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while retrieving datasource connection", e);
-        }
-    }
 
-    public static Connection getConnection() throws IotDeviceManagementDAOException {
-        if (currentConnection.get() == null) {
-            try {
-                currentConnection.set(dataSource.getConnection());
-            } catch (SQLException e) {
-                throw new IotDeviceManagementDAOException("Error occurred while retrieving data source connection", e);
-            }
-        }
-        return currentConnection.get();
-    }
+	public ConnectedCupDAOImpl getConnectedCupDeviceDAO() {
+		return new ConnectedCupDAOImpl();
+	}
 
-    public static void commitTransaction() throws IotDeviceManagementDAOException {
-        try {
-            Connection conn = currentConnection.get();
-            if (conn != null) {
-                conn.commit();
-            } else {
-                if (log.isDebugEnabled()) {
-                    log.debug("Datasource connection associated with the current thread is null, hence commit "
-                            + "has not been attempted");
-                }
-            }
-        } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while committing the transaction", e);
-        } finally {
-            closeConnection();
-        }
-    }
+	public static void beginTransaction() throws ConnectedCupDeviceMgtPluginException {
+		try {
+			Connection conn = dataSource.getConnection();
+			conn.setAutoCommit(false);
+			currentConnection.set(conn);
+		} catch (SQLException e) {
+			throw new ConnectedCupDeviceMgtPluginException(
+					"Error occurred while retrieving datasource connection", e);
+		}
+	}
 
-    public static void closeConnection() throws IotDeviceManagementDAOException {
+	public static Connection getConnection() throws ConnectedCupDeviceMgtPluginException {
+		if (currentConnection.get() == null) {
+			try {
+				currentConnection.set(dataSource.getConnection());
+			} catch (SQLException e) {
+				throw new ConnectedCupDeviceMgtPluginException(
+						"Error occurred while retrieving data source connection", e);
+			}
+		}
+		return currentConnection.get();
+	}
 
-        Connection con = currentConnection.get();
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                log.error("Error occurred while close the connection");
-            }
-        }
-        currentConnection.remove();
-    }
+	public static void commitTransaction() throws ConnectedCupDeviceMgtPluginException {
+		try {
+			Connection conn = currentConnection.get();
+			if (conn != null) {
+				conn.commit();
+			} else {
+				if (log.isDebugEnabled()) {
+					log.debug("Datasource connection associated with the current thread is null, " +
+									"hence commit has not been attempted");
+				}
+			}
+		} catch (SQLException e) {
+			throw new ConnectedCupDeviceMgtPluginException(
+					"Error occurred while committing the transaction", e);
+		} finally {
+			closeConnection();
+		}
+	}
 
-    public static void rollbackTransaction() throws IotDeviceManagementDAOException {
-        try {
-            Connection conn = currentConnection.get();
-            if (conn != null) {
-                conn.rollback();
-            } else {
-                if (log.isDebugEnabled()) {
-                    log.debug("Datasource connection associated with the current thread is null, hence rollback "
-                            + "has not been attempted");
-                }
-            }
-        } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while rollback the transaction", e);
-        } finally {
-            closeConnection();
-        }
-    }
+	public static void closeConnection() throws ConnectedCupDeviceMgtPluginException {
+
+		Connection con = currentConnection.get();
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				log.error("Error occurred while close the connection");
+			}
+		}
+		currentConnection.remove();
+	}
+
+	public static void rollbackTransaction() throws ConnectedCupDeviceMgtPluginException {
+		try {
+			Connection conn = currentConnection.get();
+			if (conn != null) {
+				conn.rollback();
+			} else {
+				if (log.isDebugEnabled()) {
+					log.debug(
+							"Datasource connection associated with the current thread is null, " +
+                                    "hence rollback has not been attempted");
+				}
+			}
+		} catch (SQLException e) {
+			throw new ConnectedCupDeviceMgtPluginException("Error occurred while rollback the transaction", e);
+		} finally {
+			closeConnection();
+		}
+	}
 }

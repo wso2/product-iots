@@ -18,6 +18,7 @@
 
 package org.coffeeking.connectedcup.plugin.impl;
 
+import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
@@ -34,8 +35,7 @@ public class ConnectedCupManagerService implements DeviceManagementService{
 
 	@Override
 	public String getType() {
-		return "connectedcup";
-        //TODO: Constant
+		return ConnectedCupConstants.DEVICE_TYPE;
 	}
 
 
