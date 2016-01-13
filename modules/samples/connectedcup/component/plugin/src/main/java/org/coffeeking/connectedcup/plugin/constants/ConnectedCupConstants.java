@@ -18,5 +18,6 @@ public class ConnectedCupConstants {
 
     public static final String SENSOR_TEMPERATURE = "temperature";
     public static final String SENSOR_LEVEL = "level";
+    public static final String DATA_SOURCE_NAME = "jdbc/ConnectedCupDM_DB";
 
 }

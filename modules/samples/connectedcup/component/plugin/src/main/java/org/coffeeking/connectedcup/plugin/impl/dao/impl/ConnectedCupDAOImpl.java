@@ -21,222 +21,223 @@ package org.coffeeking.connectedcup.plugin.impl.dao.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
+import org.coffeeking.connectedcup.plugin.exception.ConnectedCupDeviceMgtPluginException;
 import org.coffeeking.connectedcup.plugin.impl.dao.ConnectedCupDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.util.IotDeviceManagementDAOUtil;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dto.IotDevice;
-
+import org.coffeeking.connectedcup.plugin.impl.dao.util.ConnectedCupUtils;
+import org.wso2.carbon.device.mgt.common.Device;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Implements IotDeviceDAO for virtual firealarm Devices.
+ *  Device Dao for connected cup Devices.
  */
-public class ConnectedCupDAOImpl implements IotDeviceDAO {
-	
+public class ConnectedCupDAOImpl {
 
-	    private static final Log log = LogFactory.getLog(ConnectedCupDAOImpl.class);
 
-	    @Override
-	    public IotDevice getIotDevice(String iotDeviceId)
-			    throws IotDeviceManagementDAOException {
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        IotDevice iotDevice = null;
-	        ResultSet resultSet = null;
-	        try {
-	            conn = ConnectedCupDAO.getConnection();
-	            String selectDBQuery =
-						"SELECT CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, ACCESS_TOKEN, REFRESH_TOKEN" +
-						" FROM CONNECTED_CUP_DEVICE WHERE CONNECTED_CUP_DEVICE_ID = ?";
-	            stmt = conn.prepareStatement(selectDBQuery);
-	            stmt.setString(1, iotDeviceId);
-	            resultSet = stmt.executeQuery();
+	private static final Log log = LogFactory.getLog(ConnectedCupDAOImpl.class);
 
-	            if (resultSet.next()) {
-					iotDevice = new IotDevice();
-					iotDevice.setIotDeviceName(resultSet.getString(
-							ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_NAME));
-					Map<String, String> propertyMap = new HashMap<String, String>();
-					propertyMap.put(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, resultSet.getString("ACCESS_TOKEN"));
-					propertyMap.put(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN, resultSet.getString("REFRESH_TOKEN"));
-					iotDevice.setDeviceProperties(propertyMap);
+	public Device getDevice(String deviceId) throws ConnectedCupDeviceMgtPluginException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		Device connectedCupDevice = null;
+		ResultSet resultSet = null;
+		try {
+			conn = ConnectedCupDAO.getConnection();
+			String selectDBQuery =
+					"SELECT CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, ACCESS_TOKEN, REFRESH_TOKEN" +
+							" FROM CONNECTED_CUP_DEVICE WHERE CONNECTED_CUP_DEVICE_ID = ?";
+			stmt = conn.prepareStatement(selectDBQuery);
+			stmt.setString(1, deviceId);
+			resultSet = stmt.executeQuery();
 
-					if (log.isDebugEnabled()) {
-						log.debug("Connected Cup service " + iotDeviceId + " data has been fetched from " +
-						          "Connected Cup database.");
-					}
+			if (resultSet.next()) {
+				connectedCupDevice = new Device();
+				connectedCupDevice.setName(resultSet.getString(
+						ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_NAME));
+				List<Device.Property> propertyList = new ArrayList<Device.Property>();
+				propertyList.add(ConnectedCupUtils.getProperty(
+						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN,
+						resultSet.getString("ACCESS_TOKEN")));
+				propertyList.add(ConnectedCupUtils.getProperty(
+						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN,
+						resultSet.getString("REFRESH_TOKEN")));
+				connectedCupDevice.setProperties(propertyList);
+
+				if (log.isDebugEnabled()) {
+					log.debug("Connected Cup service " + deviceId + " data has been fetched from" +
+									  "Connected Cup database.");
 				}
-	        } catch (SQLException e) {
-	            String msg = "Error occurred while fetching Connected Cup device : '" + iotDeviceId + "'";
-	            log.error(msg, e);
-	            throw new IotDeviceManagementDAOException(msg, e);
-	        } finally {
-	            IotDeviceManagementDAOUtil.cleanupResources(stmt, resultSet);
-	            ConnectedCupDAO.closeConnection();
-	        }
+			}
+		} catch (SQLException e) {
+			String msg = "Error occurred while fetching Connected Cup device : '" + deviceId + "'";
+			log.error(msg, e);
+			throw new ConnectedCupDeviceMgtPluginException(msg, e);
+		} finally {
+			ConnectedCupUtils.cleanupResources(stmt, resultSet);
+			ConnectedCupDAO.closeConnection();
+		}
+		return connectedCupDevice;
+	}
 
-	        return iotDevice;
-	    }
 
-	    @Override
-	    public boolean addIotDevice(IotDevice iotDevice)
-			    throws IotDeviceManagementDAOException {
-	        boolean status = false;
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        try {
-	            conn = ConnectedCupDAO.getConnection();
-		        String createDBQuery =
-				        "INSERT INTO CONNECTED_CUP_DEVICE(CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, ACCESS_TOKEN, REFRESH_TOKEN) VALUES (?, ?, ?, ?)";
+	public boolean addDevice(Device connectedCupDevice) throws ConnectedCupDeviceMgtPluginException {
+		boolean status = false;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = ConnectedCupDAO.getConnection();
+			String createDBQuery =
+					"INSERT INTO CONNECTED_CUP_DEVICE(CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, " +
+							"ACCESS_TOKEN, REFRESH_TOKEN) VALUES (?, ?, ?, ?)";
 
-		        stmt = conn.prepareStatement(createDBQuery);
-		        stmt.setString(1, iotDevice.getIotDeviceId());
-		        stmt.setString(2, iotDevice.getIotDeviceName());
-		        stmt.setString(3, iotDevice.getDeviceProperties().get(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN));
-		        stmt.setString(4, iotDevice.getDeviceProperties().get(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN));
-			
-				
-				int rows = stmt.executeUpdate();
-				if (rows > 0) {
-					status = true;
-					if (log.isDebugEnabled()) {
-						log.debug("Connected Cup device " + iotDevice.getIotDeviceId() + " data has been" +
-						          " added to the Connected Cup database.");
-					}
+			stmt = conn.prepareStatement(createDBQuery);
+			stmt.setString(1, connectedCupDevice.getDeviceIdentifier());
+			stmt.setString(2, connectedCupDevice.getName());
+			stmt.setString(3, ConnectedCupUtils.getDeviceProperty(
+					connectedCupDevice.getProperties(),
+					ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN));
+			stmt.setString(4, ConnectedCupUtils.getDeviceProperty(
+					connectedCupDevice.getProperties(),
+					ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN));
+
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+				status = true;
+				if (log.isDebugEnabled()) {
+					log.debug("Connected Cup device " + connectedCupDevice.getDeviceIdentifier() +
+									  " data has been added to the Connected Cup database.");
 				}
-	        } catch (SQLException e) {
-	            String msg = "Error occurred while adding the Connected Cup device '" +
-	                         iotDevice.getIotDeviceId() + "' to the Connected Cup db.";
-	            log.error(msg, e);
-	            throw new IotDeviceManagementDAOException(msg, e);
-	        } finally {
-	            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
-	        }
-	        return status;
-	    }
+			}
+		} catch (SQLException e) {
+			String msg = "Error occurred while adding the Connected Cup device '" +
+					connectedCupDevice.getDeviceIdentifier() + "' to the Connected Cup db.";
+			log.error(msg, e);
+			throw new ConnectedCupDeviceMgtPluginException(msg, e);
+		} finally {
+			ConnectedCupUtils.cleanupResources(stmt, null);
+		}
+		return status;
+	}
 
-	    @Override
-	    public boolean updateIotDevice(IotDevice iotDevice)
-			    throws IotDeviceManagementDAOException {
-	        boolean status = false;
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        try {
-	            conn = ConnectedCupDAO.getConnection();
-	            String updateDBQuery =
-						"UPDATE CONNECTED_CUP_DEVICE SET  DEVICE_NAME = ?, ACCESS_TOKEN=?, REFRESH_TOKEN=? WHERE CONNECTED_CUP_DEVICE_ID = ?";
+	public boolean updateDevice(Device connectedCupDevice) throws ConnectedCupDeviceMgtPluginException {
+		boolean status = false;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = ConnectedCupDAO.getConnection();
+			String updateDBQuery =
+					"UPDATE CONNECTED_CUP_DEVICE SET  DEVICE_NAME = ?, ACCESS_TOKEN=?, " +
+							"REFRESH_TOKEN=? WHERE CONNECTED_CUP_DEVICE_ID = ?";
 
-				stmt = conn.prepareStatement(updateDBQuery);
+			stmt = conn.prepareStatement(updateDBQuery);
 
-				if (iotDevice.getDeviceProperties() == null) {
-					iotDevice.setDeviceProperties(new HashMap<String, String>());
+			if (connectedCupDevice.getProperties() == null) {
+				connectedCupDevice.setProperties(new ArrayList<Device.Property>());
+			}
+			stmt.setString(1, connectedCupDevice.getName());
+			stmt.setString(2, ConnectedCupUtils.getDeviceProperty(
+					connectedCupDevice.getProperties(),
+					ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN));
+			stmt.setString(3, ConnectedCupUtils.getDeviceProperty(
+					connectedCupDevice.getProperties(),
+					ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN));
+			stmt.setString(4, connectedCupDevice.getDeviceIdentifier());
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+				status = true;
+				if (log.isDebugEnabled()) {
+					log.debug("Connected Cup device " + connectedCupDevice.getDeviceIdentifier() +
+									  " data has been modified.");
 				}
-				stmt.setString(1, iotDevice.getIotDeviceName());
-				stmt.setString(2, iotDevice.getDeviceProperties().get(
-						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN));
-				stmt.setString(3, iotDevice.getDeviceProperties().get(
-						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN));
-				stmt.setString(4, iotDevice.getIotDeviceId());
-				int rows = stmt.executeUpdate();
-				if (rows > 0) {
-					status = true;
-					if (log.isDebugEnabled()) {
-						log.debug("Connected Cup device " + iotDevice.getIotDeviceId() + " data has been" +
-						          " modified.");
-					}
+			}
+		} catch (SQLException e) {
+			String msg = "Error occurred while modifying the Connected Cup device '" +
+					connectedCupDevice.getDeviceIdentifier() + "' data.";
+			log.error(msg, e);
+			throw new ConnectedCupDeviceMgtPluginException(msg, e);
+		} finally {
+			ConnectedCupUtils.cleanupResources(stmt, null);
+		}
+		return status;
+	}
+
+	public boolean deleteDevice(String deviceId) throws ConnectedCupDeviceMgtPluginException {
+		boolean status = false;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = ConnectedCupDAO.getConnection();
+			String deleteDBQuery =
+					"DELETE FROM CONNECTED_CUP_DEVICE WHERE CONNECTED_CUP_DEVICE_ID = ?";
+			stmt = conn.prepareStatement(deleteDBQuery);
+			stmt.setString(1, deviceId);
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+				status = true;
+				if (log.isDebugEnabled()) {
+					log.debug("Connected Cup device " + deviceId + " data has deleted" +
+									  " from the Connected Cup database.");
 				}
-	        } catch (SQLException e) {
-	            String msg = "Error occurred while modifying the Connected Cup device '" +
-	                         iotDevice.getIotDeviceId() + "' data.";
-	            log.error(msg, e);
-	            throw new IotDeviceManagementDAOException(msg, e);
-	        } finally {
-	            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
-	        }
-	        return status;
-	    }
+			}
+		} catch (SQLException e) {
+			String msg = "Error occurred while deleting Connected Cup device " + deviceId;
+			log.error(msg, e);
+			throw new ConnectedCupDeviceMgtPluginException(msg, e);
+		} finally {
+			ConnectedCupUtils.cleanupResources(stmt, null);
+		}
+		return status;
+	}
 
-	    @Override
-	    public boolean deleteIotDevice(String iotDeviceId)
-			    throws IotDeviceManagementDAOException {
-	        boolean status = false;
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        try {
-	            conn = ConnectedCupDAO.getConnection();
-	            String deleteDBQuery =
-						"DELETE FROM CONNECTED_CUP_DEVICE WHERE CONNECTED_CUP_DEVICE_ID = ?";
-				stmt = conn.prepareStatement(deleteDBQuery);
-				stmt.setString(1, iotDeviceId);
-				int rows = stmt.executeUpdate();
-				if (rows > 0) {
-					status = true;
-					if (log.isDebugEnabled()) {
-						log.debug("Connected Cup device " + iotDeviceId + " data has deleted" +
-						          " from the Connected Cup database.");
-					}
-				}
-	        } catch (SQLException e) {
-	            String msg = "Error occurred while deleting Connected Cup device " + iotDeviceId;
-	            log.error(msg, e);
-	            throw new IotDeviceManagementDAOException(msg, e);
-	        } finally {
-	            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
-	        }
-	        return status;
-	    }
+	public List<Device> getAllDevices() throws ConnectedCupDeviceMgtPluginException {
 
-	    @Override
-	    public List<IotDevice> getAllIotDevices()
-			    throws IotDeviceManagementDAOException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		Device connectedCupDevice;
+		List<Device> iotDevices = new ArrayList<>();
 
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        ResultSet resultSet = null;
-	        IotDevice iotDevice;
-	        List<IotDevice> iotDevices = new ArrayList<>();
+		try {
+			conn = ConnectedCupDAO.getConnection();
+			String selectDBQuery =
+					"SELECT CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, ACCESS_TOKEN, REFRESH_TOKEN" +
+							"FROM CONNECTED_CUP_DEVICE";
+			stmt = conn.prepareStatement(selectDBQuery);
+			resultSet = stmt.executeQuery();
+			while (resultSet.next()) {
+				connectedCupDevice = new Device();
+				connectedCupDevice.setDeviceIdentifier(resultSet.getString(
+						ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_ID));
+				connectedCupDevice.setName(resultSet.getString(
+						ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_NAME));
 
-	        try {
-	            conn = ConnectedCupDAO.getConnection();
-	            String selectDBQuery =
-						"SELECT CONNECTED_CUP_DEVICE_ID, DEVICE_NAME, ACCESS_TOKEN, REFRESH_TOKEN" +
-						"FROM CONNECTED_CUP_DEVICE";
-				stmt = conn.prepareStatement(selectDBQuery);
-				resultSet = stmt.executeQuery();
-				while (resultSet.next()) {
-					iotDevice = new IotDevice();
-					iotDevice.setIotDeviceId(resultSet.getString(ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_ID));
-					iotDevice.setIotDeviceName(resultSet.getString(ConnectedCupConstants.DEVICE_PLUGIN_DEVICE_NAME));
-
-					Map<String, String> propertyMap = new HashMap<>();
-					propertyMap.put(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN,
-									resultSet.getString("ACCESS_TOKEN"));
-					propertyMap.put(ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN,
-									resultSet.getString("REFRESH_TOKEN"));
-					iotDevice.setDeviceProperties(propertyMap);
-					iotDevices.add(iotDevice);
-				}
-	            if (log.isDebugEnabled()) {
-	                log.debug("All Connected Cup device details have fetched from Connected Cup database.");
-	            }
-	            return iotDevices;
-	        } catch (SQLException e) {
-	            String msg = "Error occurred while fetching all Connected Cup device data'";
-	            log.error(msg, e);
-	            throw new IotDeviceManagementDAOException(msg, e);
-	        } finally {
-	            IotDeviceManagementDAOUtil.cleanupResources(stmt, resultSet);
-	            ConnectedCupDAO.closeConnection();
-	        }
-	        
-	    }
+				List<Device.Property> propertyList = new ArrayList<Device.Property>();
+				propertyList.add(ConnectedCupUtils.getProperty(
+						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN,
+						resultSet.getString("ACCESS_TOKEN")));
+				propertyList.add(ConnectedCupUtils.getProperty(
+						ConnectedCupConstants.DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN,
+						resultSet.getString("REFRESH_TOKEN")));
+				connectedCupDevice.setProperties(propertyList);
+			}
+			if (log.isDebugEnabled()) {
+				log.debug("All Connected Cup device details have fetched from Connected Cup database" +
+								".");
+			}
+			return iotDevices;
+		} catch (SQLException e) {
+			String msg = "Error occurred while fetching all Connected Cup device data'";
+			log.error(msg, e);
+			throw new ConnectedCupDeviceMgtPluginException(msg, e);
+		} finally {
+			ConnectedCupUtils.cleanupResources(stmt, resultSet);
+			ConnectedCupDAO.closeConnection();
+		}
 
 	}
+
+}
