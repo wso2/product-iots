@@ -58,9 +58,6 @@ public class ConnectedCupControllerService {
     private static final String SUPER_TENANT = "carbon.super";
     private static ConnectedCupMQTTConnector connectedCupMQTTConnector;
 
-    @Context
-    HttpServletResponse response;
-
 
     public ConnectedCupMQTTConnector connectedCupMQTTConnector() {
         return ConnectedCupControllerService.connectedCupMQTTConnector;
@@ -81,8 +78,11 @@ public class ConnectedCupControllerService {
      * @param deviceId
      * @param owner
      */
-    @Path("controller/cup/coffeelevel")
+    @Path("controller/coffeelevel")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Feature(code = "coffeelevel", name="Coffeelevel", description = "read coffeelevel from this device", type =
+            "monitor")
     public SensorRecord readCoffeeLevel(@HeaderParam("owner") String owner,
                                         @HeaderParam("deviceId") String deviceId,
                                         @Context HttpServletResponse response) {
@@ -118,8 +118,11 @@ public class ConnectedCupControllerService {
 
 
 
-    @Path("controller/cup/temperature")
+    @Path("controller/temperature")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Feature(code = "temperature", name="Temperature", description = "read temperature from this device", type =
+            "monitor")
     public SensorRecord readTemperature(@HeaderParam("owner") String owner,
                                         @HeaderParam("deviceId") String deviceId,
                                         @Context HttpServletResponse response) {
@@ -156,9 +159,9 @@ public class ConnectedCupControllerService {
 
     @Path("controller/ordercoffee")
     @POST
-    public HttpServletResponse orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String
+    public void orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String
             deviceOwner, @Context HttpServletResponse response){
-        SensorRecord sensorRecord = null;
+
         DeviceValidator deviceValidator = new DeviceValidator();
         try {
             if (!deviceValidator.isExist(deviceOwner, SUPER_TENANT, new DeviceIdentifier(
@@ -175,6 +178,6 @@ public class ConnectedCupControllerService {
         if (log.isDebugEnabled()) {
             log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
         }
-        return response;
+//        return response;
     }
 }

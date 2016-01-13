@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.UUID;
 
 @API( name="connectedcup_mgt", version="1.0.0", context="/connectedcup_mgt")
-public class ConnectedCupManagerService {
+public class    ConnectedCupManagerService {
     private static Log log = LogFactory.getLog(ConnectedCupManagerService.class);
     private static final String SUPER_TENANT = "carbon.super";
 
@@ -69,175 +69,175 @@ public class ConnectedCupManagerService {
     public boolean register(@QueryParam("name") String name, @QueryParam("owner") String owner) {
 
 
-            DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
-            String deviceId = shortUUID();
+        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+        String deviceId = shortUUID();
 
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+        DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+        deviceIdentifier.setId(deviceId);
+        deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
 
-            try {
-                if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-                    response.setStatus(Response.Status.CONFLICT.getStatusCode());
-                    return false;
-                }
-
-                Device device = new Device();
-                device.setDeviceIdentifier(deviceId);
-                EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
-                enrolmentInfo.setDateOfEnrolment(new Date().getTime());
-                enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
-                enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
-                enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
-                device.setName(name);
-                device.setType(ConnectedCupConstants.DEVICE_TYPE);
-                enrolmentInfo.setOwner(owner);
-                device.setEnrolmentInfo(enrolmentInfo);
-
-                KeyGenerationUtil.createApplicationKeys(ConnectedCupConstants.DEVICE_TYPE);
-
-                TokenClient accessTokenClient = new TokenClient(ConnectedCupConstants.DEVICE_TYPE);
-                AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
-
-                //create token
-                String accessToken = accessTokenInfo.getAccess_token();
-                String refreshToken = accessTokenInfo.getRefresh_token();
-                List<Device.Property> properties = new ArrayList<>();
-
-                Device.Property accessTokenProperty = new Device.Property();
-                accessTokenProperty.setName("accessToken");
-                accessTokenProperty.setValue(accessToken);
-
-                Device.Property refreshTokenProperty = new Device.Property();
-                refreshTokenProperty.setName("refreshToken");
-                refreshTokenProperty.setValue(refreshToken);
-
-                properties.add(accessTokenProperty);
-                properties.add(refreshTokenProperty);
-                device.setProperties(properties);
-
-                boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
-                if (added) {
-                    response.setStatus(Response.Status.OK.getStatusCode());
-                } else {
-                    response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-                }
-
-                return added;
-            } catch (DeviceManagementException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        try {
+            if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+                response.setStatus(Response.Status.CONFLICT.getStatusCode());
                 return false;
-            } catch (AccessTokenException e) {
-                e.printStackTrace();
-            } finally {
-                deviceManagement.endTenantFlow();
-            }
-            return true;
-
-        }
-
-        @Path("/device/remove/{device_id}")
-        @DELETE
-        public void removeDevice(@PathParam("device_id") String deviceId,
-                                 @Context HttpServletResponse response) {
-
-            DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-
-            try {
-                boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
-                        deviceIdentifier);
-                if (removed) {
-                    response.setStatus(Response.Status.OK.getStatusCode());
-
-                } else {
-                    response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-
-                }
-            } catch (DeviceManagementException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            } finally {
-                deviceManagement.endTenantFlow();
             }
 
+            Device device = new Device();
+            device.setDeviceIdentifier(deviceId);
+            EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+            enrolmentInfo.setDateOfEnrolment(new Date().getTime());
+            enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
+            enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
+            device.setName(name);
+            device.setType(ConnectedCupConstants.DEVICE_TYPE);
+            enrolmentInfo.setOwner(owner);
+            device.setEnrolmentInfo(enrolmentInfo);
 
-        }
+            KeyGenerationUtil.createApplicationKeys(ConnectedCupConstants.DEVICE_TYPE);
 
-        @Path("/device/update/{device_id}")
-        @POST
-        public boolean updateDevice(@PathParam("device_id") String deviceId,
-                                    @QueryParam("name") String name,
-                                    @Context HttpServletResponse response) {
+            TokenClient accessTokenClient = new TokenClient(ConnectedCupConstants.DEVICE_TYPE);
+            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
 
-            DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+            //create token
+            String accessToken = accessTokenInfo.getAccess_token();
+            String refreshToken = accessTokenInfo.getRefresh_token();
+            List<Device.Property> properties = new ArrayList<>();
 
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+            Device.Property accessTokenProperty = new Device.Property();
+            accessTokenProperty.setName("accessToken");
+            accessTokenProperty.setValue(accessToken);
 
-            try {
-                Device device = deviceManagement.getDeviceManagementService().getDevice(
-                        deviceIdentifier);
-                device.setDeviceIdentifier(deviceId);
+            Device.Property refreshTokenProperty = new Device.Property();
+            refreshTokenProperty.setName("refreshToken");
+            refreshTokenProperty.setValue(refreshToken);
 
-                // device.setDeviceTypeId(deviceTypeId);
-                device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
+            properties.add(accessTokenProperty);
+            properties.add(refreshTokenProperty);
+            device.setProperties(properties);
 
-                device.setName(name);
-                device.setType(ConnectedCupConstants.DEVICE_TYPE);
-
-                boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
-                        device);
-
-
-                if (updated) {
-                    response.setStatus(Response.Status.OK.getStatusCode());
-
-                } else {
-                    response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-
-                }
-                return updated;
-            } catch (DeviceManagementException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                return false;
-            } finally {
-                deviceManagement.endTenantFlow();
+            boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
+            if (added) {
+                response.setStatus(Response.Status.OK.getStatusCode());
+            } else {
+                response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
             }
 
+            return added;
+        } catch (DeviceManagementException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            return false;
+        } catch (AccessTokenException e) {
+            e.printStackTrace();
+        } finally {
+            deviceManagement.endTenantFlow();
         }
+        return true;
 
-        @Path("/device/{device_id}")
-        @GET
-        @Consumes("application/json")
-        @Produces("application/json")
-        public Device getDevice(@PathParam("device_id") String deviceId) {
+    }
 
-            DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+    @Path("/device/remove/{device_id}")
+    @DELETE
+    public void removeDevice(@PathParam("device_id") String deviceId,
+                             @Context HttpServletResponse response) {
 
-            try {
-                Device device = deviceManagement.getDeviceManagementService().getDevice(
-                        deviceIdentifier);
+        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+        DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+        deviceIdentifier.setId(deviceId);
+        deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
 
-                return device;
-            } catch (DeviceManagementException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                return null;
-            } finally {
-                deviceManagement.endTenantFlow();
+        try {
+            boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
+                    deviceIdentifier);
+            if (removed) {
+                response.setStatus(Response.Status.OK.getStatusCode());
+
+            } else {
+                response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
             }
-
+        } catch (DeviceManagementException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        } finally {
+            deviceManagement.endTenantFlow();
         }
 
-        private static String shortUUID() {
-            UUID uuid = UUID.randomUUID();
-            long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
-            return Long.toString(l, Character.MAX_RADIX);
+
+    }
+
+    @Path("/device/update/{device_id}")
+    @POST
+    public boolean updateDevice(@PathParam("device_id") String deviceId,
+                                @QueryParam("name") String name,
+                                @Context HttpServletResponse response) {
+
+        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+
+        DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+        deviceIdentifier.setId(deviceId);
+        deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+
+        try {
+            Device device = deviceManagement.getDeviceManagementService().getDevice(
+                    deviceIdentifier);
+            device.setDeviceIdentifier(deviceId);
+
+            // device.setDeviceTypeId(deviceTypeId);
+            device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
+
+            device.setName(name);
+            device.setType(ConnectedCupConstants.DEVICE_TYPE);
+
+            boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
+                    device);
+
+
+            if (updated) {
+                response.setStatus(Response.Status.OK.getStatusCode());
+
+            } else {
+                response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
+            }
+            return updated;
+        } catch (DeviceManagementException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            return false;
+        } finally {
+            deviceManagement.endTenantFlow();
         }
+
+    }
+
+    @Path("/device/{device_id}")
+    @GET
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Device getDevice(@PathParam("device_id") String deviceId) {
+
+        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+        DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+        deviceIdentifier.setId(deviceId);
+        deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+
+        try {
+            Device device = deviceManagement.getDeviceManagementService().getDevice(
+                    deviceIdentifier);
+
+            return device;
+        } catch (DeviceManagementException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            return null;
+        } finally {
+            deviceManagement.endTenantFlow();
+        }
+
+    }
+
+    private static String shortUUID() {
+        UUID uuid = UUID.randomUUID();
+        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
+        return Long.toString(l, Character.MAX_RADIX);
+    }
 
 }

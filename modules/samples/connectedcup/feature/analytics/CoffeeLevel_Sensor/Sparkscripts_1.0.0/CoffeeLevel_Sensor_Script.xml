@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Analytics>
-    <Name>IoTServer_Sensor_Script</Name>
+    <Name>CoffeeLevel_Sensor_Script</Name>
     <Script>
         CREATE TEMPORARY TABLE DeviceCoffeeLevelData USING CarbonAnalytics OPTIONS(tableName
         "ORG_WSO2_IOT_DEVICES_COFFEELEVEL");
 
         CREATE TEMPORARY TABLE DeviceCoffeeLevelSummaryData USING CarbonAnalytics OPTIONS (tableName
-        "DEVICE_COFFEE_LEVEL_SUMMARY", schema "coffeelevel FLOAT, deviceType STRING -i, deviceId STRING -i, owner
+        "DEVICE_COFFEELEVEL_SUMMARY", schema "coffeelevel FLOAT, deviceType STRING -i, deviceId STRING -i, owner
         STRING -i,
         time LONG -i",primaryKeys "deviceType, deviceId, owner, time");
 
