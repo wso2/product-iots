@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>device-mgt-iot-connectedcup</artifactId>
+    <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+    <version>1.9.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>org.coffeking.agent</artifactId>
+  <packaging>war</packaging>
+  <version>1.9.2-SNAPSHOT</version>
+  <name>connected-cup-agent Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20151123</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.paho</groupId>
+      <artifactId>mqtt-client</artifactId>
+      <version>0.4.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>connected-cup-agent</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>wso2.releases</id>
+      <name>WSO2 internal Repository</name>
+      <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>wso2.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>wso2-nexus</id>
+      <name>WSO2 internal Repository</name>
+      <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+
+  <repositories>
+    <!-- Before adding ANYTHING in here, please start a discussion on the dev list.
+         Ideally the Axis2 build should only use Maven central (which is available
+         by default) and nothing else. We had troubles with other repositories in
+         the past. Therefore configuring additional repositories here should be
+         considered very carefully. -->
+    <repository>
+      <id>wso2-nexus</id>
+      <name>WSO2 internal Repository</name>
+      <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+    </repository>
+    <repository>
+      <id>wso2.releases</id>
+      <name>WSO2 internal Repository</name>
+      <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+    </repository>
+    <repository>
+      <id>wso2.snapshots</id>
+      <name>WSO2 Snapshot Repository</name>
+      <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>gcm-server-repository</id>
+      <name>GCM Server repository - GitHub</name>
+      <url>https://github.com/slorber/gcm-server-repository/raw/master/releases/</url>
+    </repository>
+    <repository>
+      <id>wso2-staging</id>
+      <name>WSO2 internal Repository</name>
+      <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonapimgt-174/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </releases>
+    </repository>
+  </repositories>
+
+</project>
