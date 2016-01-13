@@ -47,6 +47,7 @@ public class ConnectedCupServiceUtils {
     //TODO; replace this tenant domain
     private static final String SUPER_TENANT = "carbon.super";
     private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
+    private static final String COFFEE_LEVEL_STREAM_DEFINITION = "org.wso2.iot.devices.coffeelevel";
 
     public static String sendCommandViaHTTP(final String deviceHTTPEndpoint, String urlContext,
                                             boolean fireAndForgot) throws DeviceManagementException {
@@ -66,7 +67,7 @@ public class ConnectedCupServiceUtils {
             } catch (ProtocolException e) {
                 String errorMsg =
                         "Protocol specific error occurred when trying to set method to GET" +
-                                " for:" + urlString;
+                        " for:" + urlString;
                 log.error(errorMsg);
                 throw new DeviceManagementException(errorMsg, e);
             }
@@ -144,7 +145,7 @@ public class ConnectedCupServiceUtils {
             throw new DeviceManagementException(errorMsg, e);
         } catch (IOException e) {
             String errorMsg = "Error occured whilst trying to open a connection to: " +
-                    connectionUrl.toString();
+                              connectionUrl.toString();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
@@ -163,7 +164,7 @@ public class ConnectedCupServiceUtils {
         } catch (IOException e) {
             String errorMsg =
                     "There is an issue with connecting the reader to the input stream at: " +
-                            httpConnection.getURL();
+                    httpConnection.getURL();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
@@ -178,7 +179,7 @@ public class ConnectedCupServiceUtils {
         } catch (IOException e) {
             String errorMsg =
                     "Error occured whilst trying read from the connection stream at: " +
-                            httpConnection.getURL();
+                    httpConnection.getURL();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
@@ -187,25 +188,33 @@ public class ConnectedCupServiceUtils {
         } catch (IOException e) {
             log.error(
                     "Could not succesfully close the bufferedReader to the connection at: " +
-                            httpConnection.getURL());
+                    httpConnection.getURL());
         }
 
         return completeResponse.toString();
     }
 
-    public static boolean publishToDAS(String owner, String deviceId, float temperature) {
+    public static boolean publishToDAS(String owner, String deviceId, String sensor, float values) {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
         ctx.setTenantDomain(SUPER_TENANT, true);
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
         Object metdaData[] = {owner, ConnectedCupConstants.DEVICE_TYPE, deviceId,
-                System.currentTimeMillis()};
-        Object payloadData[] = {temperature};
+                              System.currentTimeMillis()};
+        Object payloadData[] = {values};
 
         try {
-            deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0", metdaData,
-                                                new Object[0], payloadData);
+            switch (sensor){
+                case "temperature":
+                    deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0", metdaData,
+                                                        new Object[0], payloadData);
+                    break;
+                case "coffeelevel":
+                    deviceAnalyticsService.publishEvent(COFFEE_LEVEL_STREAM_DEFINITION, "1.0.0", metdaData,
+                                                        new Object[0], payloadData);
+            }
+
         } catch (DataPublisherConfigurationException e) {
             return false;
         } finally {
