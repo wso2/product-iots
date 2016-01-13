@@ -146,7 +146,7 @@ function downloadAgent() {
     payload.owner = $inputs[1].value;
 
     var connectedCupRegisterURL = "/connectedcup_mgt/connectedcup/cup/register?" +
-                                                        "name=" + payload.name + "&owner=" + payload.owner;
+                                                        "name=" + encodeURI(payload.name) + "&owner=" + payload.owner;
 
     invokerUtil.post(
         connectedCupRegisterURL,
