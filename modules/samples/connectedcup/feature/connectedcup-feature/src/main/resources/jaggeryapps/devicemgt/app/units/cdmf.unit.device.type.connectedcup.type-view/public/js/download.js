@@ -136,22 +136,20 @@ function downloadAgent() {
 
     var $inputs = $('#downloadForm :input');
 
-    // not sure if you wanted this, but I thought I'd add it.
-    // get an associative array of just the values.
     var values = {};
     $inputs.each(function() {
         values[this.name] = $(this).val();
     });
 
-    console.log($inputs);
-    console.log($inputs[0].value);
-    console.log($inputs[1].value);
+    var connectedCupRegisterURL = "/connectedcup_mgt/connectedcup/cup/register?" +
+                                                        "name=" + payload.name + "&owner=" + payload.owner;
 
-    var payload = {}
+    var payload = {};
     payload.name = $inputs[0].value;
     payload.owner = $inputs[1].value;
+
     invokerUtil.post(
-        "/connectedcup_mgt/connectedcup/cup/register?name=" + payload.name + "&owner=" + payload.owner,
+        connectedCupRegisterURL,
         payload,
         function (data, textStatus, jqxhr) {
             hidePopup();
