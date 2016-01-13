@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
@@ -81,8 +81,8 @@ public class ConnectedCupControllerService {
     @Path("controller/coffeelevel")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "coffeelevel", name="Coffeelevel", description = "read coffeelevel from this device", type =
-            "monitor")
+    @Feature( code="coffeelevel", name="Coffee Level", type="monitor",
+            description="Request Coffee Level from Connected cup")
     public SensorRecord readCoffeeLevel(@HeaderParam("owner") String owner,
                                         @HeaderParam("deviceId") String deviceId,
                                         @Context HttpServletResponse response) {
@@ -121,8 +121,8 @@ public class ConnectedCupControllerService {
     @Path("controller/temperature")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "temperature", name="Temperature", description = "read temperature from this device", type =
-            "monitor")
+    @Feature( code="temperature", name="Temperature", type="monitor",
+            description="Request Temperature reading from Connected cup")
     public SensorRecord readTemperature(@HeaderParam("owner") String owner,
                                         @HeaderParam("deviceId") String deviceId,
                                         @Context HttpServletResponse response) {
