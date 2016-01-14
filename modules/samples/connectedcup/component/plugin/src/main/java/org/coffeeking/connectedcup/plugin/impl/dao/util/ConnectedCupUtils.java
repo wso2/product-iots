@@ -20,7 +20,13 @@ package org.coffeeking.connectedcup.plugin.impl.dao.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.device.mgt.common.Device;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,15 +36,52 @@ public class ConnectedCupUtils {
 
     private static Log log = LogFactory.getLog(ConnectedCupUtils.class);
 
-    public static String getDeviceProperty(Map<String, String> deviceProperties, String property) {
-
-        String deviceProperty = deviceProperties.get(property);
-
-        if (deviceProperty == null) {
-            return "";
+    public static String getDeviceProperty(List<Device.Property> deviceProperties, String propertyKey) {
+        String deviceProperty = "";
+        for(Device.Property property :deviceProperties){
+            if(propertyKey.equals(property.getName())){
+                deviceProperty = property.getValue();
+            }
         }
-
         return deviceProperty;
+    }
+
+    public static Device.Property getProperty(String property, String value) {
+        if (property != null) {
+            Device.Property prop = new Device.Property();
+            prop.setName(property);
+            prop.setValue(value);
+            return prop;
+        }
+        return null;
+    }
+
+    public static void cleanupResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                log.warn("Error occurred while closing result set", e);
+            }
+        }
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                log.warn("Error occurred while closing prepared statement", e);
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                log.warn("Error occurred while closing database connection", e);
+            }
+        }
+    }
+
+    public static void cleanupResources(PreparedStatement stmt, ResultSet rs) {
+        cleanupResources(null, stmt, rs);
     }
 
 
