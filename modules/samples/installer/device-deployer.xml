@@ -30,9 +30,14 @@
     <packaging>pom</packaging>
     <name>Creating custom distribution</name>
     <url>http://wso2.org</url>
+
+    <modules>
+        <!-- maven module of your device-type -->
+        <module>samples/connectedcup</module>
+    </modules>
+
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
@@ -53,7 +58,7 @@
 
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  -->
+                                    <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
                                     org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:1.9.2-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
@@ -61,8 +66,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
 
             <plugin>
                 <groupId>org.wso2.maven</groupId>
@@ -82,7 +85,7 @@
                             <destination>repository/components</destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
-                                <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  -->
+                                <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
                                     <version>1.9.2-SNAPSHOT</version>
@@ -114,6 +117,7 @@
             </plugin>
         </plugins>
     </build>
+
     <repositories>
         <repository>
             <id>wso2-nexus</id>
