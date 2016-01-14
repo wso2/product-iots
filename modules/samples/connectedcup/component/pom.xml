@@ -40,6 +40,7 @@
 		<module>plugin</module>
 		<module>controller</module>
 		<module>manager</module>
+        <module>agent</module>
 
 	</modules>
 
