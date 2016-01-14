@@ -22,6 +22,9 @@ function onRequest(context) {
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("id");
 
+    var property = require("process").getProperty;
+    var serverIp = property("carbon.local.ip");
+
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
         var deviceModule = require("/app/modules/device.js").deviceModule;
         var device = deviceModule.viewDevice(deviceType, deviceId);
@@ -29,7 +32,8 @@ function onRequest(context) {
         if (device && device.status != "error") {
             log.info(device);
             var deviceProperties = device.properties;
-            device.accessToken = deviceProperties.accessToken
+            device.accessToken = deviceProperties.accessToken;
+            device.ip = serverIp;
             return {"device": device};
         }
     }
