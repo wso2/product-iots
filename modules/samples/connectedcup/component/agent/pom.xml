@@ -7,7 +7,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>org.coffeking.agent</artifactId>
+  <artifactId>org.coffeeking.agent</artifactId>
   <packaging>war</packaging>
   <version>1.9.2-SNAPSHOT</version>
   <name>connected-cup-agent Maven Webapp</name>

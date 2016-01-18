@@ -40,7 +40,8 @@
 		<module>plugin</module>
 		<module>controller</module>
 		<module>manager</module>
-        <module>connected-cup-agent</module>
+        <module>agent</module>
+
 	</modules>
 
 	<build>
