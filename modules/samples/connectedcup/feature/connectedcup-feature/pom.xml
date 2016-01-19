@@ -58,7 +58,7 @@
 
 		<dependency>
 			<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-			<artifactId>org.coffeking.agent</artifactId>
+			<artifactId>org.coffeeking.agent</artifactId>
 			<version>1.9.2-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
