@@ -7,8 +7,8 @@ org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../depl
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/carbonapps/,target:${installFolder}/../../deployment/server/carbonapps/,overwrite:true);\
 org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../resources/sketches/);\
 org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../resources/sketches/${rootArtifactId}/);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/agent/,target:${installFolder}/../../resources/sketches/${rootArtifactId}/,overwrite:true);\
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/dbscripts/,target:${installFolder}/../../../dbscripts/cdm/plugins/${rootArtifactId},overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/agent/,target:${installFolder}/../../resources/sketches/${deviceType}/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/dbscripts/,target:${installFolder}/../../../dbscripts/cdm/plugins/${deviceType},overwrite:true);\
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/datasources/,target:${installFolder}/../../conf/datasources/,overwrite:true);\
 org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../deployment/server/jaggeryapps/);\
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/${package}.${rootArtifactId}_${feature.version}/jaggeryapps/,target:${installFolder}/../../deployment/server/jaggeryapps/,overwrite:true);\

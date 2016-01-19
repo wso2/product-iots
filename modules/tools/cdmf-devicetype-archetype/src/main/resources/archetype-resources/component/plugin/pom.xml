@@ -51,7 +51,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${artifactId}</Bundle-Name>
-                        <Bundle-Version>${carbon.iot.device.mgt.version}</Bundle-Version>
+                        <Bundle-Version>${version}</Bundle-Version>
                         <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
                         <Private-Package>${package}.${rootArtifactId}.plugin.internal</Private-Package>
                         <Import-Package>

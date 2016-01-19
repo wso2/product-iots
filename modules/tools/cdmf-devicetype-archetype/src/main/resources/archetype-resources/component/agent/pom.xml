@@ -27,6 +27,7 @@
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
     <name>${artifactId}</name>
+    <packaging>war</packaging>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -50,7 +51,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${maven-war-plugin.version}</version>
                 <configuration>
-                    <warName>${artifactId}</warName>
+                    <warName>${artifactId}_agent</warName>
                 </configuration>
             </plugin>
         </plugins>

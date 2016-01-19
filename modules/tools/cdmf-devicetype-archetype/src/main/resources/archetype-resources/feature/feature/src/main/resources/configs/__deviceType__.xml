@@ -18,8 +18,7 @@
   -->
 
 <DeviceTypeConfigurations>
-  <DeviceTypeConfig type="device_type">
-    <DatasourceName>jdbc/device_typeDM_DB</DatasourceName>
-    <!--ApiApplicationName>firealarm</ApiApplicationName-->
+  <DeviceTypeConfig type="${deviceType}">
+    <DatasourceName>jdbc/${deviceType}DM_DB</DatasourceName>
   </DeviceTypeConfig>
 </DeviceTypeConfigurations>

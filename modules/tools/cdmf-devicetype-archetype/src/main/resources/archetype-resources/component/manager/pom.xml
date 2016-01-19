@@ -46,7 +46,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${maven-war-plugin.version}</version>
                 <configuration>
-                    <warName>${artifactId}</warName>
+                    <warName>${artifactId}_mgt</warName>
                 </configuration>
             </plugin>
         </plugins>
