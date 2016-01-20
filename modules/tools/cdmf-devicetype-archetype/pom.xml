@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -16,24 +16,21 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <groupId>org.wso2.iot</groupId>
-        <artifactId>wso2cdm-tools</artifactId>
+        <artifactId>wso2cdmf-tools</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mdm-android-agent-archetype</artifactId>
+    <groupId>cdmf.devicetype</groupId>
+    <artifactId>cdmf-devicetype-archetype</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>WSO2 MDM Agent Android Archetype</name>
-    <description>Creates a MDM-Android agent project</description>
+    <name>Archetype of WSO2 CDMF Device Type</name>
+    <description>Archetype of WSO2 CDMF Device Type</description>
     <packaging>maven-archetype</packaging>
-
     <organization>
         <name>WSO2 Inc.</name>
         <url>http://www.wso2.com</url>
@@ -62,9 +59,8 @@
             </plugins>
         </pluginManagement>
     </build>
-
     <properties>
-        <archetype.packaging.version>2.2</archetype.packaging.version>
-        <archetype.plugin.version>2.2</archetype.plugin.version>
+        <archetype.packaging.version>2.4</archetype.packaging.version>
+        <archetype.plugin.version>2.4</archetype.plugin.version>
     </properties>
 </project>
