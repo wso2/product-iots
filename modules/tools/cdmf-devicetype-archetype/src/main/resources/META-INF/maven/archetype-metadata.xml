@@ -19,6 +19,14 @@
     <requiredProperties>
         <requiredProperty key="deviceType"></requiredProperty>
     </requiredProperties>
+    <fileSets>
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory>installer</directory>
+            <includes>
+                <include>**/*.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
     <modules>
         <module id="component" dir="component" name="component">
             <modules>
