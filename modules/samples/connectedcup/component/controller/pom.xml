@@ -88,7 +88,7 @@
         <!--MQTT -->
         <dependency>
             <groupId>org.eclipse.paho</groupId>
-            <artifactId>mqtt-client</artifactId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
         </dependency>
 
         <!--IOT -->
