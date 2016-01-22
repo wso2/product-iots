@@ -122,7 +122,7 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
-                <artifactId>mqtt-client</artifactId>
+				<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${paho.mqtt.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -225,7 +225,7 @@
     <properties>
 		<carbon.kernel.version>4.4.2</carbon.kernel.version>
 		<carbon.device.mgt.version>0.9.2-SNAPSHOT</carbon.device.mgt.version>
-		<paho.mqtt.version>0.4.0</paho.mqtt.version>
+		<paho.mqtt.version>1.0.2</paho.mqtt.version>
 		<commons-json.version>3.0.0.wso2v1</commons-json.version>
 		<eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
 		<carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
