@@ -659,7 +659,7 @@
 
         <!-- Copying temporary patches from DAS that fixes JIRA DAS-339 and a Concurrent DB Access Issue -->
                         <!-- Can be safely removed upon a DAS release with these fixes -->
-        <fileSet>
+        <!--fileSet>
             <directory>
                 src/repository/patches
             </directory>
@@ -669,7 +669,7 @@
             <includes>
                 <include>**/*</include>
             </includes>
-        </fileSet>
+        </fileSet-->
 
     </fileSets>
 
@@ -801,14 +801,13 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--        <file>
-                    <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
-                    </source>
-                    <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
-                    <filtered>true</filtered>
-                    <fileMode>644</fileMode>
-                </file>-->
-
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <file>
             <source>INSTALL.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
@@ -863,9 +862,8 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon-event-broker.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/messaging-event-broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
