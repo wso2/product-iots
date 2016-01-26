@@ -90,7 +90,7 @@
                 <version>${carbon.kernel.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.ndatasource.core_4.4.2.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.ndatasource.core_${carbon.kernel.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -220,7 +220,7 @@
                 </exclusions>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_4.4.2.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_${carbon.kernel.version}.jar
                 </systemPath>
             </dependency>
             <dependency>

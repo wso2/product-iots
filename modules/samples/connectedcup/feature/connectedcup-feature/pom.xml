@@ -152,7 +152,7 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-									<artifactId>org.coffeking.agent</artifactId>
+									<artifactId>org.coffeeking.agent</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
