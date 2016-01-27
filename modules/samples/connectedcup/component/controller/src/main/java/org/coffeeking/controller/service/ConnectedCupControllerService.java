@@ -36,6 +36,7 @@ import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
 import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
+import org.wso2.carbon.device.mgt.iot.DeviceManagement;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -64,14 +65,37 @@ public class ConnectedCupControllerService {
     }
 
     public void setconnectedCupMQTTConnector(
-            ConnectedCupMQTTConnector connectedCupMQTTConnector) {
-        ConnectedCupControllerService.connectedCupMQTTConnector = connectedCupMQTTConnector;
-        if (MqttConfig.getInstance().isEnabled()) {
-            connectedCupMQTTConnector.connect();
-        } else {
-            log.warn("MQTT disabled in 'devicemgt-config.xml'. " +
-                     "Hence, DigitalDisplayMqttCommunicationHandler not started.");
+            final ConnectedCupMQTTConnector connectedCupMQTTConnector) {
+
+        Runnable connector = new Runnable() {
+            public void run() {
+                if (waitForServerStartup()) {
+                    return;
+                }
+                ConnectedCupControllerService.connectedCupMQTTConnector = connectedCupMQTTConnector;
+                if (MqttConfig.getInstance().isEnabled()) {
+                    connectedCupMQTTConnector.connect();
+                } else {
+                    log.warn("MQTT disabled in 'devicemgt-config.xml'. " +
+                            "Hence, ConnectedCupMQTTConnector not started.");
+                }
+            }
+        };
+
+        Thread connectorThread = new Thread(connector);
+        connectorThread.setDaemon(true);
+        connectorThread.start();
+    }
+
+    private boolean waitForServerStartup() {
+        while (!DeviceManagement.isServerReady()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                return true;
+            }
         }
+        return false;
     }
 
     /**
