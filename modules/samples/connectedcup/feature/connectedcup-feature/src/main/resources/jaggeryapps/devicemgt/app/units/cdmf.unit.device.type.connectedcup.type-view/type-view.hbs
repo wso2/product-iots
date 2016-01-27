@@ -1,54 +1,46 @@
 <div class="col-lg-12  margin-top-double" xmlns="http://www.w3.org/1999/html">
     <h1 class="grey ">Connected Cup</h1>
     <hr>
-    <p class="margin-bottom-double light-grey ">Connected Coffee Cups from CoffeeKing</p>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 padding-top">
     <img src="{{@unit.publicUri}}/images/coffeecup.png" class="img-responsive">
 </div>
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 padding-top">
+    <h4 class="doc-link">Click
+        <a href="https://docs.wso2.com/display/IoTS100/Sample+-+Getting+the+Connected+Cup+into+the+WSO2+IoT+Server"
+                                  target="_blank">[ here ]</a> for latest instructions and troubleshooting.</h4>
+</div>
 <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 padding-top">
-    <h3 class="uppercase">Ingredients</h3>
+    <h3 class="uppercase">What it Does</h3>
     <hr>
-    <p class="grey margin-top">Hardware Requirements </p>
+    <p class="grey margin-top">Connected cup is a virtual simulation of a smart coffee cup from the IOT Hardware
+                               manufacturer "Coffee King". Once an instance of the virtual Connected-Cup, Users can play
+                               around with the temperature and Coffee level. And the information will be relayed back to
+                               the IoTServer and summarized.
+    </p>
+
+    <p>The device supports communication via HTTPS only.</p>
     <br>
-    <ul>
-            <span class="fw-stack fw-lg margin-right">
-                    <i class="fw fw-ring fw-stack-2x"> </i>
-                    <i class="fw fw-right-arrow fw-stack-1x"></i>
-                </span> Coffee Cup <br/>
+
+    <h3 class="uppercase">What You Need</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double"><span class="circle">STEP 01</span>&nbsp;&nbsp;&nbsp;Go ahead and
+            [Crete an Instance] of the Device.
+        </li>
+        <li class="padding-top-double"><span class="circle">STEP 02</span>&nbsp;&nbsp;&nbsp;Give a name to your
+            Connected Cup instance.
+        </li>
+        <li class="padding-top-double"><span class="circle">STEP 03</span>&nbsp;&nbsp;&nbsp;Read
+                                                                          [Try Out] section
+                                                                          to further experiment with the device.
+        </li>
     </ul>
     <br>
 
     <a href="/api-store/apis/info?name={{@uriParams.deviceType}}&version=1.0.0&provider=admin"
        class="btn-operations" target="_blank"><i class="fw fw-api"></i> View API</i> &nbsp;</a>
     <a href="#" class="download-link btn-operations"><i class="fw fw-download"></i>Create an Instance</a>
-
-    <div id="download-device-modal-content" class="hide">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col-md-7 col-centered">
-                    <h3>Name your device and download the agent from following link.</h3>
-                    <br/>
-                    <form id="downloadForm">
-                        <div class="control-group">
-                            <div class="controls">
-                                <input class="connectedCupName" style="color:#3f3f3f;padding:5px"
-                                       type="text"
-                                       placeholder="Ex. Office_CoffeeCup"
-                                       name="name" size="60" required>
-                                <br/>
-                                <input type="hidden" class="owner" name="owner" value={{@user.username}} />
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="buttons">
-                            <a class="btn-operations" onclick="downloadAgent()">Create an Instance</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="download-device-modal-content-links" class="hide">
         <div class="modal-content">
@@ -153,38 +145,25 @@
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-12 padding-double grey-bg ">
-    <h3 class="uppercase">Prepare</h3><hr>
-    <p class="grey margin-top">Get your device ready</p>
+    <h3 class="uppercase">Try Out</h3><hr>
+    <p class="grey margin-top">Access your Device</p>
     <br/>
     <ul>
-        <p class="padding-top-double"><span class="circle">01</span> Set up your RaspberryPi device as shown in the schematic below and get the Digital Display setup.</p>
-        <p class="padding-top-double"><span class="circle">02</span> Connect a monitor to your RaspberryPi via the HDMI cable to get a UI view of the device.</p>
-        <p class="padding-top-double"><span class="circle">03</span> Get the RaspberryPi to connect to the internet (via Ethernet or Wifi) and note its IP_ADDRESS</p>
+        <p class="padding-top-double"><span class="circle">01</span> Select instance of the Connected Cup you created from the "Devices" section and click "View".</p>
+        <p class="padding-top-double"><span class="circle">02</span> Click the [Go to Device] button from the "Operations" section and you will be able to view and experiment with the device.</p>
     </ul>
     <br>
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-12 padding-double">
-    <h3 class="uppercase">Schematic Diagram</h3><hr>
+    <h3 class="uppercase">Connected Cup Agent</h3><hr>
     <p class="grey margin-top">Click on the image to zoom</p>
     <center>
-        <a href="{{@unit.publicUri}}/images/schematicsGuide.png" target="_blank">
-            <img src="{{@unit.publicUri}}/images/schematicsGuide.png" class="img-responsive" style="max-width: 500px; max-height: 500px">
+        <a href="{{@unit.publicUri}}/images/coffee_stats.png" target="_blank">
+            <img src="{{@unit.publicUri}}/images/coffee_stats.png" class="img-responsive" style="max-width: 500px; max-height: 500px">
         </a>
     </center>
     <br/>
-</div>
-
-<div class="col-xs-12 col-sm-6 col-md-3 col-lg-12 padding-double">
-    <h3 class="uppercase">Connect (Quick Start)</h3><hr>
-    <p class="grey margin-top">Internet of Things Foundation Quickstart connection</p>
-    <br/>
-    <ul>
-        <p class="padding-top-double"><span class="circle">01</span> <b>Click on the <i>'Create DEB'</i> button above to get the download link for the Digital Display setup files</b></p>
-        <p class="padding-top-double"><span class="circle">02</span> <i>(The following commands can be issued by directly typing into the terminal of the device or by an <b>'ssh'</b> login from a remote PC)</i></p>
-        <p class="padding-top-double"><span class="circle">03</span> <b>Download the Digital Display setup files using the following command: 'curl -k < url_link_received_from_the_above_step >> Agent.zip'</b><br/><i>This will download a zip file named 'Agent.zip'</i></p>
-    </ul>
-    <br>
 </div>
 
 </div>
@@ -246,6 +225,16 @@
     }
     .grey-bg {
         background-color: #f6f4f4;
+    }
+    .doc-link {
+        background: #11375B;
+        padding: 20px;
+        color: white;
+        margin-top: 0;
+    }
+
+    .doc-link a {
+        color: white;
     }
 </style>
 
