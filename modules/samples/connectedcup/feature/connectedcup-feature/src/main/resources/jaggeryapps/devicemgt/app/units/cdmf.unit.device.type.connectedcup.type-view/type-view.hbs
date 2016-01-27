@@ -42,6 +42,33 @@
        class="btn-operations" target="_blank"><i class="fw fw-api"></i> View API</i> &nbsp;</a>
     <a href="#" class="download-link btn-operations"><i class="fw fw-download"></i>Create an Instance</a>
 
+    <div id="download-device-modal-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered">
+                    <h3>Name your device and download the agent from following link.</h3>
+                    <br/>
+                    <form id="downloadForm">
+                        <div class="control-group">
+                            <div class="controls">
+                                <input class="connectedCupName" style="color:#3f3f3f;padding:5px"
+                                       type="text"
+                                       placeholder="Ex. Office_CoffeeCup"
+                                       name="name" size="60" required>
+                                <br/>
+                                <input type="hidden" class="owner" name="owner" value={{@user.username}} />
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="buttons">
+                            <a class="btn-operations" onclick="downloadAgent()">Create an Instance</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="download-device-modal-content-links" class="hide">
         <div class="modal-content">
             <div class="row">
