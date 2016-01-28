@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -82,9 +82,7 @@
         <SessionTimeout>36000</SessionTimeout>
         <!-- skips authentication if valid SAML2 Web SSO browser session available -->
         <AcceptSAMLSSOLogin>false</AcceptSAMLSSOLogin>
-        <ClaimsRetrieverImplClass>
-            org.wso2.carbon.identity.provider.openid.claims.DefaultClaimsRetriever
-        </ClaimsRetrieverImplClass>
+        <ClaimsRetrieverImplClass>org.wso2.carbon.identity.provider.openid.claims.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
     </OpenID>
 
     <OAuth>
@@ -109,8 +107,7 @@
         <TokenPersistenceProcessor>org.wso2.carbon.identity.oauth.tokenprocessor.PlainTextPersistenceProcessor</TokenPersistenceProcessor>
         <!-- Supported Client Autnetication Methods -->
         <ClientAuthHandlers>
-            <ClientAuthHandler
-                    Class="org.wso2.carbon.identity.oauth2.token.handlers.clientauth.BasicAuthClientAuthHandler">
+            <ClientAuthHandler Class="org.wso2.carbon.identity.oauth2.token.handlers.clientauth.BasicAuthClientAuthHandler">
                 <Property Name="StrictClientCredentialValidation">false</Property>
             </ClientAuthHandler>
         </ClientAuthHandlers>
@@ -151,21 +148,18 @@
                 <GrantTypeName>iwa:ntlm</GrantTypeName>
                 <GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.token.handlers.grant.iwa.ntlm.NTLMAuthenticationGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
-	    <SupportedGrantType>
+            <SupportedGrantType>
                 <GrantTypeName>devicecloud</GrantTypeName>
                 <GrantTypeHandlerImplClass>org.wso2.carbon.devicemgt.grant.DeviceGrant</GrantTypeHandlerImplClass>
                 <GrantTypeValidatorImplClass>org.wso2.carbon.devicemgt.grant.DeviceGrantValidator</GrantTypeValidatorImplClass>
             </SupportedGrantType>
         </SupportedGrantTypes>
         <OAuthCallbackHandlers>
-            <OAuthCallbackHandler
-                    Class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.DeviceMgtOAuthCallbackHandler"/>
+            <OAuthCallbackHandler Class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.DeviceMgtOAuthCallbackHandler"/>
         </OAuthCallbackHandlers>
-        <OAuthScopeValidator
-                class="org.wso2.carbon.device.mgt.oauth.extensions.validators.PermissionBasedScopeValidator"/>
+        <OAuthScopeValidator class="org.wso2.carbon.device.mgt.oauth.extensions.validators.PermissionBasedScopeValidator"/>
         <TokenValidators>
-            <TokenValidator type="bearer"
-                            class="org.wso2.carbon.identity.oauth2.validators.DefaultOAuth2TokenValidator"/>
+            <TokenValidator type="bearer" class="org.wso2.carbon.identity.oauth2.validators.DefaultOAuth2TokenValidator"/>
         </TokenValidators>
         <!-- Assertions can be used to embedd parameters into access token. -->
         <EnableAssertions>
@@ -185,11 +179,8 @@
         </AccessTokenPartitioningDomains>
         <AuthorizationContextTokenGeneration>
             <Enabled>false</Enabled>
-            <TokenGeneratorImplClass>org.wso2.carbon.identity.oauth2.authcontext.JWTTokenGenerator
-            </TokenGeneratorImplClass>
-            <ClaimsRetrieverImplClass>
-                org.wso2.carbon.identity.oauth2.authcontext.DefaultClaimsRetriever
-            </ClaimsRetrieverImplClass>
+            <TokenGeneratorImplClass>org.wso2.carbon.identity.oauth2.authcontext.JWTTokenGenerator</TokenGeneratorImplClass>
+            <ClaimsRetrieverImplClass>org.wso2.carbon.identity.oauth2.authcontext.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
             <ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI>
             <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
             <AuthorizationContextTTL>15</AuthorizationContextTTL>
@@ -198,27 +189,16 @@
             <!--SAML2TokenHandler></SAML2TokenHandler-->
         </SAML2Grant>
         <OpenIDConnect>
-            <IDTokenBuilder>org.wso2.carbon.identity.openidconnect.DefaultIDTokenBuilder
-            </IDTokenBuilder>
+            <IDTokenBuilder>org.wso2.carbon.identity.openidconnect.DefaultIDTokenBuilder</IDTokenBuilder>
             <IDTokenIssuerID>https://localhost:9443/oauth2endpoints/token</IDTokenIssuerID>
             <IDTokenSubjectClaim>http://wso2.org/claims/givenname</IDTokenSubjectClaim>
-            <IDTokenCustomClaimsCallBackHandler>
-                org.wso2.carbon.identity.openidconnect.SAMLAssertionClaimsCallback
-            </IDTokenCustomClaimsCallBackHandler>
+            <IDTokenCustomClaimsCallBackHandler>org.wso2.carbon.identity.openidconnect.SAMLAssertionClaimsCallback</IDTokenCustomClaimsCallBackHandler>
             <IDTokenExpiration>3600</IDTokenExpiration>
             <UserInfoEndpointClaimDialect>http://wso2.org/claims</UserInfoEndpointClaimDialect>
-            <UserInfoEndpointClaimRetriever>
-                org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoUserStoreClaimRetriever
-            </UserInfoEndpointClaimRetriever>
-            <UserInfoEndpointRequestValidator>
-                org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInforRequestDefaultValidator
-            </UserInfoEndpointRequestValidator>
-            <UserInfoEndpointAccessTokenValidator>
-                org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoISAccessTokenValidator
-            </UserInfoEndpointAccessTokenValidator>
-            <UserInfoEndpointResponseBuilder>
-                org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoJSONResponseBuilder
-            </UserInfoEndpointResponseBuilder>
+            <UserInfoEndpointClaimRetriever>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoUserStoreClaimRetriever</UserInfoEndpointClaimRetriever>
+            <UserInfoEndpointRequestValidator>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInforRequestDefaultValidator</UserInfoEndpointRequestValidator>
+            <UserInfoEndpointAccessTokenValidator>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoISAccessTokenValidator</UserInfoEndpointAccessTokenValidator>
+            <UserInfoEndpointResponseBuilder>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoJSONResponseBuilder</UserInfoEndpointResponseBuilder>
             <SkipUserConsent>false</SkipUserConsent>
         </OpenIDConnect>
     </OAuth>
@@ -240,38 +220,25 @@
         <EntityId>localhost</EntityId>
         <IdentityProviderURL>https://localhost:9443/samlsso</IdentityProviderURL>
         <SingleLogoutRetryCount>5</SingleLogoutRetryCount>
-        <SingleLogoutRetryInterval>60000</SingleLogoutRetryInterval>
-        <!-- in milli seconds -->
+        <SingleLogoutRetryInterval>60000</SingleLogoutRetryInterval> <!-- in milli seconds -->
         <TenantPartitioningEnabled>false</TenantPartitioningEnabled>
         <PersistanceCacheTimeout>157680000</PersistanceCacheTimeout>
         <SessionIndexCacheTimeout>157680000</SessionIndexCacheTimeout>
-        <SessionTimeout>36000</SessionTimeout>
-        <!-- remember me session timeout in seconds -->
+        <SessionTimeout>36000</SessionTimeout> <!-- remember me session timeout in seconds -->
         <!-- skips authentication if valid SAML2 Web SSO browser session available -->
-        <AttributeStatementBuilder>
-            org.wso2.carbon.identity.sso.saml.attributes.UserAttributeStatementBuilder
-        </AttributeStatementBuilder>
+        <AttributeStatementBuilder>org.wso2.carbon.identity.sso.saml.attributes.UserAttributeStatementBuilder</AttributeStatementBuilder>
         <AttributesClaimDialect>http://wso2.org/claims</AttributesClaimDialect>
         <AcceptOpenIDLogin>false</AcceptOpenIDLogin>
-        <ClaimsRetrieverImplClass>
-            org.wso2.carbon.identity.sso.saml.builders.claims.DefaultClaimsRetriever
-        </ClaimsRetrieverImplClass>
-        <SAMLSSOAssertionBuilder>
-            org.wso2.carbon.identity.sso.saml.builders.assertion.DefaultSAMLAssertionBuilder
-        </SAMLSSOAssertionBuilder>
-        <SAMLSSOEncrypter>
-            org.wso2.carbon.identity.sso.saml.builders.encryption.DefaultSSOEncrypter
-        </SAMLSSOEncrypter>
-        <SAMLSSOSigner>org.wso2.carbon.identity.sso.saml.builders.signature.DefaultSSOSigner
-        </SAMLSSOSigner>
-        <SAML2HTTPRedirectSignatureValidator>
-            org.wso2.carbon.identity.sso.saml.validators.SAML2HTTPRedirectDeflateSignatureValidator
-        </SAML2HTTPRedirectSignatureValidator>
+        <ClaimsRetrieverImplClass>org.wso2.carbon.identity.sso.saml.builders.claims.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
+        <SAMLSSOAssertionBuilder>org.wso2.carbon.identity.sso.saml.builders.assertion.DefaultSAMLAssertionBuilder</SAMLSSOAssertionBuilder>
+        <SAMLSSOEncrypter>org.wso2.carbon.identity.sso.saml.builders.encryption.DefaultSSOEncrypter</SAMLSSOEncrypter>
+        <SAMLSSOSigner>org.wso2.carbon.identity.sso.saml.builders.signature.DefaultSSOSigner</SAMLSSOSigner>
+        <SAML2HTTPRedirectSignatureValidator>org.wso2.carbon.identity.sso.saml.validators.SAML2HTTPRedirectDeflateSignatureValidator</SAML2HTTPRedirectSignatureValidator>
         <!--SAMLSSOResponseBuilder>org.wso2.carbon.identity.sso.saml.builders.DefaultResponseBuilder</SAMLSSOResponseBuilder-->
 
         <!-- SAML Token validity period in minutes -->
         <SAMLResponseValidityPeriod>5</SAMLResponseValidityPeriod>
-        <UseAuthenticatedUserDomainCrypto>false</UseAuthenticatedUserDomainCrypto>
+        <UseAuthenticatedUserDomainCrypto>true</UseAuthenticatedUserDomainCrypto>
     </SSOService>
 
     <EntitlementSettings>
