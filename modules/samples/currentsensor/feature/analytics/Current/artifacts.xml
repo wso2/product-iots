@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artifacts>
+    <artifact name="Current_CAPP" version="1.0.0" type="carbon/application">
+
+		<dependency artifact="Eventstream_current" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="Eventstore_current" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="Eventreceiver_current" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+
+		<dependency artifact="Sparkscripts" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+    </artifact>
+</artifacts>

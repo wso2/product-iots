@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="create-sample-sensor-capps" default="zip" basedir=".">
+
+    <property name="project-name" value="${ant.project.name}"/>
+    <property name="target-dir" value="../org.wso2.carbon.device.mgt.iot.currentsensor.feature/src/main/resources/carbonapps"/>
+
+    <property name="Current_dir" value="Current"/>
+
+    <target name="clean">
+        <delete dir="${target-dir}" />
+    </target>
+
+    <target name="zip" depends="clean">
+        <mkdir dir="${target-dir}"/>
+        <zip destfile="${target-dir}/${Current_dir}.car">
+            <zipfileset dir="${Current_dir}"/>
+        </zip>
+    </target>
+</project>

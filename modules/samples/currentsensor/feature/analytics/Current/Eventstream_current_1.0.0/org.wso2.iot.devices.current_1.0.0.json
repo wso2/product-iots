@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.current",
+  "version": "1.0.0",
+  "nickName": "AC Current Data",
+  "description": "AC Current data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+      {
+        "name": "current","type": "FLOAT"
+      }
+  ]
+}
+	
+
+				                                    		
