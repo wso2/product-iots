@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
@@ -9,7 +27,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>1.9.2-SNAPSHOT</version>
-    <artifactId>component</artifactId>
+    <artifactId>${project-base-package}-component</artifactId>
+    <name>WSO2 IoTS(Device Types) - Current Sensor Component</name>
     <packaging>pom</packaging>
     <build>
         <pluginManagement>
@@ -32,10 +51,12 @@
     </build>
 
     <modules>
+        <module>analytics</module>
         <module>plugin</module>
         <module>controller</module>
         <module>manager</module>
         <module>agent</module>
+        <module>ui</module>
     </modules>
 
     <dependencyManagement>
@@ -46,12 +67,6 @@
                 <version>1.9.2-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-                <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-                <version>1.9.2-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
 
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
@@ -59,7 +74,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.webapp.publisher_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.webapp.publisher_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
 
@@ -78,7 +93,7 @@
                 <version>${carbon.iot.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot_1.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot_${carbon.iot.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -87,7 +102,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -96,7 +111,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.common_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.common_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -105,7 +120,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.certificate.mgt.core_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.certificate.mgt.core_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -114,7 +129,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.annotations_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.annotations_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -123,7 +138,7 @@
                 <version>${carbon.device.mgt.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.analytics_0.9.2.SNAPSHOT.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.analytics_${carbon.device.mgt.jar.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -237,6 +252,11 @@
                 <systemPath>
                     ${basedir}/../../../../repository/components/plugins/commons-codec_1.4.0.wso2v1.jar
                 </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

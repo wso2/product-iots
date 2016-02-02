@@ -1,11 +1,9 @@
 
 -- -----------------------------------------------------
---  Agent Database
+-- Table `CURRENT_SENSOR_DEVICE`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `currentsensor_DEVICE` (
-  `currentsensor_DEVICE_ID` VARCHAR(45) NOT NULL ,
+CREATE TABLE IF NOT EXISTS `CURRENT_SENSOR_DEVICE` (
+  `CURRENT_SENSOR_DEVICE_ID` VARCHAR(45) NOT NULL ,
   `DEVICE_NAME` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`currentsensor_DEVICE_ID`) );
-
-
+  PRIMARY KEY (`CURRENT_SENSOR_DEVICE_ID`) );
 

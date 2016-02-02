@@ -17,8 +17,9 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -26,81 +27,81 @@
         <version>1</version>
     </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-        <artifactId>device.mgt.iot.connectedcup-parent</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
-	<packaging>pom</packaging>
-    	<name>WSO2 IoTS(Device Types) - Connected Cup</name>
-    	<description>WSO2 IoTS(Device Types) - Connected Cup</description>
-	<url>http://wso2.org</url>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+    <artifactId>device.mgt.iot.connectedcup-parent</artifactId>
+    <version>1.9.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>WSO2 IoTS(Device Types) - Connected Cup Component</name>
+    <description>WSO2 IoTS(Device Types) - Connected Cup Component</description>
+    <url>http://wso2.org</url>
 
     <modules>
         <module>component</module>
         <module>feature</module>
     </modules>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.eclipse.osgi</groupId>
-				<artifactId>org.eclipse.osgi</artifactId>
-				<version>${eclipse.osgi.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.equinox</groupId>
-				<artifactId>org.eclipse.equinox.common</artifactId>
-				<version>${eclipse.equinox.common.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${testng.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>junit</groupId>
-						<artifactId>junit</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.beanshell</groupId>
-						<artifactId>bsh</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.yaml</groupId>
-						<artifactId>snakeyaml</artifactId>
-					</exclusion>
-				</exclusions>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.osgi</groupId>
-				<artifactId>org.eclipse.osgi.services</artifactId>
-				<version>3.3.100.v20120522-1822</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.wso2.carbon</groupId>
-				<artifactId>org.wso2.carbon.logging</artifactId>
-				<version>${carbon.kernel.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.log4j.wso2</groupId>
-						<artifactId>log4j</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.wso2.carbon</groupId>
-						<artifactId>org.wso2.carbon.bootstrap</artifactId>
-					</exclusion>
-				</exclusions>
-				<scope>provided</scope>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.eclipse.osgi</groupId>
+                <artifactId>org.eclipse.osgi</artifactId>
+                <version>${eclipse.osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.equinox</groupId>
+                <artifactId>org.eclipse.equinox.common</artifactId>
+                <version>${eclipse.equinox.common.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.beanshell</groupId>
+                        <artifactId>bsh</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.yaml</groupId>
+                        <artifactId>snakeyaml</artifactId>
+                    </exclusion>
+                </exclusions>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.osgi</groupId>
+                <artifactId>org.eclipse.osgi.services</artifactId>
+                <version>3.3.100.v20120522-1822</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.logging</artifactId>
+                <version>${carbon.kernel.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.log4j.wso2</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.wso2.carbon</groupId>
+                        <artifactId>org.wso2.carbon.bootstrap</artifactId>
+                    </exclusion>
+                </exclusions>
+                <scope>provided</scope>
+            </dependency>
             <!-- CXF dependencies -->
             <dependency>
                 <groupId>org.apache.cxf</groupId>
@@ -122,7 +123,7 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
-				<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${paho.mqtt.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -154,44 +155,44 @@
                 <version>4.1</version>
                 <scope>provided</scope>
             </dependency>
-		</dependencies>
-	</dependencyManagement>
+        </dependencies>
+    </dependencyManagement>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>wso2.releases</id>
-			<name>WSO2 internal Repository</name>
-			<url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-		</pluginRepository>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>wso2.releases</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </pluginRepository>
 
-		<pluginRepository>
-			<id>wso2.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
-			<id>wso2-nexus</id>
-			<name>WSO2 internal Repository</name>
-			<url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
+        <pluginRepository>
+            <id>wso2.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 
     <repositories>
         <!-- Before adding ANYTHING in here, please start a discussion on the dev list.
@@ -223,17 +224,17 @@
 
 
     <properties>
-	<carbon.kernel.version>4.4.3</carbon.kernel.version>
-	<carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.kernel.version>4.4.3</carbon.kernel.version>
+        <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.jar.version>1.1.0.SNAPSHOT</carbon.device.mgt.jar.version>
-	<paho.mqtt.version>1.0.2</paho.mqtt.version>
-	<commons-json.version>3.0.0.wso2v1</commons-json.version>
-	<eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
-	<carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
+        <paho.mqtt.version>1.0.2</paho.mqtt.version>
+        <commons-json.version>3.0.0.wso2v1</commons-json.version>
+        <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
+        <carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
         <carbon.iot.device.mgt.jar.version>1.9.2.SNAPSHOT</carbon.iot.device.mgt.jar.version>
-	<javax.ws.rs.version>1.1.1</javax.ws.rs.version>
+        <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
-	<!--XMPP/MQTT Version-->
+        <!--XMPP/MQTT Version-->
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
         <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
         <cxf.version>2.6.1</cxf.version>
@@ -241,6 +242,6 @@
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
-	</properties>
+    </properties>
 
 </project>

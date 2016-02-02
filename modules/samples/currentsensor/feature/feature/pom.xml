@@ -15,20 +15,25 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <groupId>org.homeautomation</groupId>
         <artifactId>feature</artifactId>
         <version>1.9.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <version>1.9.2-SNAPSHOT</version>
     <artifactId>${groupId}.currentsensor.feature</artifactId>
     <packaging>pom</packaging>
-    <name> ${project.artifactId} </name>
-	<url>http://wso2.org</url>
+    <name>${project.artifactId}</name>
+    <url>http://wso2.org</url>
+
     <dependencies>
         <dependency>
             <groupId>org.homeautomation</groupId>
@@ -59,6 +64,7 @@
             <version>1.2.140.wso2v3</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -90,7 +96,40 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-jaxrs-manager-war</id>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.homeautomation</groupId>
+                                    <artifactId>${project-base-package}.analytics</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.homeautomation</groupId>
+                                    <artifactId>${project-base-package}.ui</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps/devicemgt
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-jaxrs-war</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy</goal>
@@ -102,45 +141,29 @@
                                     <artifactId>${project-base-package}.manager</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
                                     <destFileName>currentsensor_mgt.war</destFileName>
                                 </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-controller-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
                                 <artifactItem>
                                     <groupId>org.homeautomation</groupId>
                                     <artifactId>${project-base-package}.controller</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
                                     <destFileName>currentsensor.war</destFileName>
                                 </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-agent-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
                                 <artifactItem>
                                     <groupId>org.homeautomation</groupId>
                                     <artifactId>${project-base-package}.agent</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
                                     <destFileName>currentsensor_agent.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -162,7 +185,7 @@
                         <configuration>
                             <tasks>
                                 <property name="db.dir"
-                                          value="src/main/resources/database"/>
+                                          value="target/maven-shared-archive-resources/database"/>
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
