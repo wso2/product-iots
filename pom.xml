@@ -1013,7 +1013,7 @@
 
         <!--Eclipse Osgi-->
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
-        <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
+        <eclipse.osgi.version>3.9.1.v20130814-1242</eclipse.osgi.version>
 
         <!--Orbit versions-->
 
@@ -1034,7 +1034,7 @@
         <carbon.deployment.version>4.6.0</carbon.deployment.version>
 
         <!-- Carbon Identity -->
-        <carbon.identity.version>5.0.3</carbon.identity.version>
+        <carbon.identity.version>5.0.7</carbon.identity.version>
 
         <!-- Carbon Multi-tenancy -->
         <carbon.multitenancy.version>4.5.0</carbon.multitenancy.version>
@@ -1046,7 +1046,7 @@
         <carbon.governance.version>4.5.8</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>0.9.2-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
 
         <!-- Carbon Mobile Device Management -->
@@ -1063,7 +1063,7 @@
         <carbon.mediation.version>4.4.11</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.0.9-SNAPSHOT</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.10-SNAPSHOT</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1082,7 +1082,7 @@
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <carbon.dashboard.version>1.0.9</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.11-SNAPSHOT</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.11</carbon.event-processing.version>
         <carbon.data.version>4.3.5-SNAPSHOT</carbon.data.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
@@ -1123,7 +1123,7 @@
         <uuf.version>1.0.0-SNAPSHOT</uuf.version>
 
         <!-- MB Features -->
-        <carbon.messaging.version>3.1.0-SNAPSHOT</carbon.messaging.version>
+        <carbon.messaging.version>3.1.0</carbon.messaging.version>
         <product.mb.version>3.1.0-SNAPSHOT</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
     </properties>

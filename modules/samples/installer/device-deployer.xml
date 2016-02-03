@@ -34,6 +34,7 @@
     <modules>
         <!-- maven module of your device-type -->
         <module>samples/connectedcup</module>
+        <module>samples/currentsensor</module>
     </modules>
 
     <build>
@@ -60,6 +61,9 @@
                                 <featureArtifactDef>
                                     <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
                                     org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:1.9.2-SNAPSHOT
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.homeautomation:org.homeautomation.currentsensor.feature:1.9.2-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -88,6 +92,10 @@
                                 <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
+                                    <version>1.9.2-SNAPSHOT</version>
+                                </feature>
+                                <feature>
+                                    <id>org.homeautomation.currentsensor.feature.group</id>
                                     <version>1.9.2-SNAPSHOT</version>
                                 </feature>
                             </features>
