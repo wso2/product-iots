@@ -1,6 +1,6 @@
 {
   "deviceType": {
-    "label": "Current Sensor",
+    "label": "Water Dispensor",
     "category": "virtual"
   },
   "analyticStreams": [
