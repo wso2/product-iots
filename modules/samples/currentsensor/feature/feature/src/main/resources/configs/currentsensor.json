@@ -25,6 +25,17 @@
           {"column": {"name":"POWER", "label":"power", "ui-mapping":"y-axis"}}
         ]
       }
+    },
+    {
+      "name": "Flow Rate x100",
+      "table": "DEVICE_FLOWRATE_SUMMARY",
+      "ui_unit": {
+        "name": "cdmf.unit.analytics.line-chart",
+        "data":[
+          {"column": {"name":"TIME", "label":"time", "ui-mapping":"x-axis"}},
+          {"column": {"name":"FlowRate", "label":"flowrate", "ui-mapping":"y-axis"}}
+        ]
+      }
     }
   ]
 }
