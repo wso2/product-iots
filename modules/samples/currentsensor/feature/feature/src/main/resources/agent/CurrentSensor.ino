@@ -51,8 +51,8 @@ void loop()
     }
 
     if(millis() - pushTimestamp > PUSH_INTERVAL){
-        while (!client.connected()) {
-            setupClient();
+        if (!client.connected()) {
+            wdt_reset();
         }
         pushData();
         

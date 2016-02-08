@@ -25,6 +25,7 @@
 
     <property name="Current_dir" value="Current"/>
     <property name="Power_Sensor_dir" value="Power_Sensor"/>
+    <property name="Flow_Sensor_dir" value="Flow_Sensor"/>
 
     <target name="clean">
         <delete dir="${target-dir}" />
@@ -37,6 +38,9 @@
         </zip>
         <zip destfile="${target-dir}/${Power_Sensor_dir}.car">
             <zipfileset dir="${src-dir}/${Power_Sensor_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Flow_Sensor_dir}.car">
+            <zipfileset dir="${src-dir}/${Flow_Sensor_dir}"/>
         </zip>
     </target>
 

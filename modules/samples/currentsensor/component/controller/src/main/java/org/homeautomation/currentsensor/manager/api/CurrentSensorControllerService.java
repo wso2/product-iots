@@ -117,6 +117,36 @@ public class CurrentSensorControllerService {
     }
 
     /**
+     * @param owner
+     * @param deviceId
+     * @param protocol
+     * @param response
+     * @return
+     */
+    @Path("controller/read-flowrate")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Feature( code="read-flowrate", name="Flow Rate x100", type="monitor",
+            description="Request flow rate reading from Arduino agent")
+    public SensorRecord requestFlowRate(@HeaderParam("owner") String owner,
+                                     @HeaderParam("deviceId") String deviceId,
+                                     @HeaderParam("protocol") String protocol,
+                                     @Context HttpServletResponse response) {
+        SensorRecord sensorRecord = null;
+
+        try {
+            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
+                    CurrentSensorConstants.SENSOR_FLOWRATE);
+        } catch ( DeviceControllerException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        }
+
+        response.setStatus(Response.Status.OK.getStatusCode());
+        return sensorRecord;
+    }
+
+    /**
      * @param dataMsg
      * @param response
      */
@@ -148,6 +178,31 @@ public class CurrentSensorControllerService {
             log.warn("An error occured whilst trying to publish pin data of Power Sensor Data with ID [" + deviceId +
                      "] of owner [" + owner + "]");
         }
+    }
+
+    /**
+     * @param dataMsg
+     * @param response
+     */
+    @Path("controller/pushflowrate")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void pushFlowRate(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
+
+        String owner = dataMsg.owner;
+        String deviceId = dataMsg.deviceId;
+        float pinData = dataMsg.value / 100;
+
+        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_FLOWRATE,
+                String.valueOf(pinData),
+                Calendar.getInstance().getTimeInMillis());
+
+        if (!CurrentSensorServiceUtils.publishToDASFlowRate(dataMsg.owner, dataMsg.deviceId, pinData)) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
+                    "] of owner [" + owner + "]");
+        }
+
     }
 
 }
