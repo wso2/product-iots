@@ -42,7 +42,7 @@
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
-        <!--<module>modules/integration</module>-->
+        <module>modules/integration</module>
     </modules>
 
     <dependencyManagement>
