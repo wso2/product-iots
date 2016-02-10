@@ -1124,7 +1124,7 @@
 
         <!-- MB Features -->
         <carbon.messaging.version>3.1.0</carbon.messaging.version>
-        <product.mb.version>3.1.0-SNAPSHOT</product.mb.version>
+        <product.mb.version>3.1.0</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
     </properties>
 
