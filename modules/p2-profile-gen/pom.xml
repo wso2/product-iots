@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -151,40 +151,40 @@
 
                                 <!-- Mobile Device Management Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.mdm.mdmmgt.server.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.mdm.mdmmgt.server.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <!-- Mobile Device Management Features -->
 
                                 <!-- IoT Device Management Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.digitaldisplay.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.digitaldisplay.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.droneanalyzer.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.droneanalyzer.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.mobile.device.mgt.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <!-- IoT Device Management Features -->
 
@@ -421,7 +421,7 @@
 
                                 <!--- MDM Features -->
                                 <featureArtifactDef>
-                                    org.wso2.iot:org.wso2.iot.styles.feature:${carbon.iot.device.mgt.version}
+                                    org.wso2.iot:org.wso2.iot.styles.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
 
                                 <!-- Mediation Features -->
@@ -831,7 +831,7 @@
                                 <!-- IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.iot.styles.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of IoTServer Features -->
 
@@ -888,48 +888,48 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.mdm.mdmmgt.server.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.digitaldisplay.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                  <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.droneanalyzer.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.mobile.device.mgt.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 
                                 <!-- Carbon Deployment Features -->
