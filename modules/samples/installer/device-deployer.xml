@@ -60,10 +60,10 @@
                             <featureArtifacts>
                                 <featureArtifactDef>
                                     <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
-                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:1.9.2-SNAPSHOT
+                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:2.0.4-SNAPSHOT
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.homeautomation:org.homeautomation.currentsensor.feature:1.9.2-SNAPSHOT
+                                    org.homeautomation:org.homeautomation.currentsensor.feature:2.0.4-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -92,11 +92,11 @@
                                 <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
-                                    <version>1.9.2-SNAPSHOT</version>
+                                    <version>2.0.4-SNAPSHOT</version>
                                 </feature>
                                 <feature>
                                     <id>org.homeautomation.currentsensor.feature.group</id>
-                                    <version>1.9.2-SNAPSHOT</version>
+                                    <version>2.0.4-SNAPSHOT</version>
                                 </feature>
                             </features>
                         </configuration>
