@@ -23,11 +23,20 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
 
 /**
- * Login as registered user
+ * This class is used to login to the system as the Admin.
  */
 public class LoginUtils {
     private static UIElementMapper uiElementMapper;
 
+    /**
+     *
+     * This method is used to login as admin.
+     *
+     * @param driver The selenium web driver
+     * @param automationContext Test Automation context
+     * @param webAppURL The server url
+     * @throws Exception
+     */
     public static void login(WebDriver driver, AutomationContext automationContext,
                              String webAppURL) throws Exception {
         uiElementMapper = UIElementMapper.getInstance();

@@ -9,6 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
+
+/**
+ * This class represents the add user page of the IOT server.
+ */
 public class AddUserPage {
     private static final Log log = LogFactory.getLog(AddUserPage.class);
     private WebDriver driver;
@@ -24,7 +28,16 @@ public class AddUserPage {
         }
     }
 
-    public UserAddedPage createNewUser(String userName, String firstName, String lastName, String email) throws Exception {
+    /**
+     * Method to create a new user.
+     * @param userName The username for the user.
+     * @param firstName The user's first name.
+     * @param lastName  The user's last name.
+     * @param email Email address of the user.
+     * @return The user added confirmation page.
+     * @throws Exception
+     */
+    public UserAddedConfirmationPage createNewUser(String userName, String firstName, String lastName, String email) throws Exception {
 
         WebElement userNameField = driver.findElement(By.id(
                 uiElementMapper.getElement("iot.admin.addUser.username.id")));
@@ -44,9 +57,9 @@ public class AddUserPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.add.btn.xpath"))));
 
-        driver.findElement(By.xpath("//button[@id='add-user-btn']")).click();
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.addUser.add.btn.xpath"))).click();
 
-        return new UserAddedPage(driver);
+        return new UserAddedConfirmationPage(driver);
     }
 
 

@@ -13,7 +13,7 @@ import org.wso2.iot.integration.ui.pages.login.LoginPage;
 import java.io.IOException;
 
 /**
- * Created by menaka on 1/19/16.
+ * This class represents the new user registration page.
  */
 public class NewUserRegisterPage {
     private static final Log log = LogFactory.getLog(NewUserRegisterPage.class);
@@ -30,8 +30,19 @@ public class NewUserRegisterPage {
         }
     }
 
-    public LoginPage addUser(String firstName, String lastName, String email, String userName, String password,
-                             String
+    /**
+     * The method to register a new user.
+     * @param firstName First name of the user.
+     * @param lastName Last name of the user.
+     * @param email Email address of the user.
+     * @param userName User name for the user. This will be used to login to the server.
+     * @param password The password for the user.
+     * @param confirmPassword Password confirmation.
+     * @return After the user is created it navigates back to the login page.
+     * @throws IOException
+     */
+    public LoginPage registerUser(String firstName, String lastName, String email, String userName, String password,
+                                  String
             confirmPassword) throws IOException {
         WebElement firstNameField = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.user.add.input.firstname.xpath")));

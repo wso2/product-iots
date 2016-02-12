@@ -30,10 +30,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-/**
- * Created by menaka on 1/19/16.
- *
- */
+
 public class IOTIntegrationUIBaseTestCase {
 
     private static final Log log = LogFactory.getLog(IOTIntegrationUIBaseTestCase.class);

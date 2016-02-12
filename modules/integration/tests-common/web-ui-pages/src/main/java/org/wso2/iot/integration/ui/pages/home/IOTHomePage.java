@@ -72,7 +72,6 @@ public class IOTHomePage {
     }
 
     //To add new Device groups as user
-
     public void goToGroupMgt() throws Exception {
         driver.findElement(By.xpath("iot.home.page.uuf-menu.xpath")).click();
         driver.findElement(By.xpath("iot.home.page.uuf-menu.groupmgt.xpath")).click();

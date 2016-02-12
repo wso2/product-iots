@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 /**
- * Created by menaka on 2/8/16.
+ * Class to represent the user view.
  */
 public class ViewUserPage {
     private static final Log log = LogFactory.getLog(ViewUserPage.class);

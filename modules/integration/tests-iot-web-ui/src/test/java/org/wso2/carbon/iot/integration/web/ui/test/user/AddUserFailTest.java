@@ -40,7 +40,7 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
  *      5. Empty email
  *      6. Incorrect email
  */
-public class AddUserFormTest extends IOTIntegrationUIBaseTestCase {
+public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
     UIElementMapper uiElementMapper;

@@ -125,7 +125,7 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
                 uiElementMapper.getElement("iot.user.register.confirmPassword.error"))).getText(),
                             "Please enter the same password as above");
     }
-//
+
     @Test (description = "Test for email")
     public void incorrectEmail() throws Exception {
         clearForm();
@@ -140,7 +140,7 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
                             "Email is not valid. Please enter a correct email address.");
 
     }
-//
+
     @Test (description = "Test for password length")
     public void passwordLengthTest() throws Exception {
         clearForm();

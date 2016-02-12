@@ -28,7 +28,9 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import java.io.IOException;
 
 /**
- * Add group page of iot server
+ * Add group page of iot server. This class contains methods to,
+ * 1. Create a new group
+ * 2. Submit an empty form
  */
 public class DeviceAddGroupPage {
 
@@ -48,6 +50,12 @@ public class DeviceAddGroupPage {
     }
 
 
+    /**
+     * @param name The group name that is need to be created.
+     * @param description the description for the group
+     * @return The resultant page.
+     * @throws Exception
+     */
     public DeviceGroupsPage addNewGroup (String name, String description) throws Exception{
 
         WebElement nameField = driver.findElement(By.id(
@@ -66,6 +74,9 @@ public class DeviceAddGroupPage {
 
     }
 
+    /**
+     * @return The error string when trying to submit an empty form.
+     */
     public String submitEmptyForm() {
         WebElement nameField = driver.findElement(By.id(
                 uiElementMapper.getElement("iot.device.group.addGroupForm.name.id")));

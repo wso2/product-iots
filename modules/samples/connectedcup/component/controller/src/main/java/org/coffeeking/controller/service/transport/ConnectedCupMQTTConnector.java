@@ -122,6 +122,7 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
     public void processIncomingMessage(MqttMessage mqttMessage, String... strings) throws TransportHandlerException {
         String topic = strings[0];
 
+
         String ownerAndId = topic.replace("wso2" + File.separator, "");
         ownerAndId = ownerAndId.replace(File.separator + ConnectedCupConstants.DEVICE_TYPE + File.separator, ":");
         ownerAndId = ownerAndId.replace(File.separator + "connected_publisher", "");
@@ -154,11 +155,13 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
 //
 
         switch(messageData[0]) {
-            case "temperature": SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
+            case "temperature":
+                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
                                                                                 String.valueOf(messageData[1]),
                                                                                 Calendar.getInstance().getTimeInMillis());
                 break;
-            case "coffeelevel": SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_LEVEL,
+            case "coffeelevel":
+                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_LEVEL,
                                                                                 String.valueOf(messageData[1]),
                                                                                 Calendar.getInstance().getTimeInMillis());
                 break;

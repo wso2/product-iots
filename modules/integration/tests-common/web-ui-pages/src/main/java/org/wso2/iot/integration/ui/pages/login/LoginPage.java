@@ -32,7 +32,7 @@ import org.wso2.iot.integration.ui.pages.uesr.NewUserRegisterPage;
 import java.io.IOException;
 
 /**
- * Login page of the iot server
+ * Represents the Login page of the iot server.
  *
  */
 public class LoginPage {
@@ -50,6 +50,13 @@ public class LoginPage {
         }
     }
 
+    /**
+     * Method to login as a registered user.
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @return After a user is logged in, it will redirect to the IOT Server Home page.
+     * @throws IOException
+     */
     public IOTHomePage loginAsUser(String username, String password) throws IOException {
         log.info("Login as " + username);
         WebElement userNameField = driver.findElement(By.xpath(
@@ -62,6 +69,13 @@ public class LoginPage {
         return new IOTHomePage(driver);
     }
 
+    /**
+     * Method to login as the server admin.
+     * @param username The admin user name (admin).
+     * @param password The admin password (admin).
+     * @return After admin logged in, it will redirect to the IOT Server dashboard.
+     * @throws IOException
+     */
     public IOTAdminDashboard loginAsAdmin(String username, String password) throws IOException {
         log.info("Login as " + username);
         WebElement userNameField = driver.findElement(By.xpath(
@@ -74,6 +88,11 @@ public class LoginPage {
         return new IOTAdminDashboard(driver);
     }
 
+    /**
+     * Method for new user registration.
+     * @return After clicking the Register link, it will navigate to the User Registration page.
+     * @throws IOException
+     */
     public NewUserRegisterPage registerNewUser() throws IOException {
         WebElement registerLink = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.user.register.link.xpath")));

@@ -49,7 +49,7 @@ public class RegisterTest extends IOTIntegrationUIBaseTestCase {
         LoginPage test = new LoginPage(driver);
         uiElementMapper = UIElementMapper.getInstance();
         NewUserRegisterPage registerTest = test.registerNewUser();
-        LoginPage loginPage = registerTest.addUser(
+        LoginPage loginPage = registerTest.registerUser(
                 uiElementMapper.getElement("iot.user.add.firstname"),
                 uiElementMapper.getElement("iot.user.add.lastname"),
                 uiElementMapper.getElement("iot.user.add.email"),

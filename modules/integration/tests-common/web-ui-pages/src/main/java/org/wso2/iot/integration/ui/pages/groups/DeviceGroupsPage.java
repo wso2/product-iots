@@ -30,10 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by menaka on 1/24/16.
- *
- */
 public class DeviceGroupsPage {
     private static final Log log = LogFactory.getLog(DeviceGroupsPage.class);
     private WebDriver driver;

@@ -31,6 +31,23 @@ import org.wso2.iot.integration.ui.pages.uesr.UserListingPage;
 
 import java.io.IOException;
 
+
+/**
+ * This class represents the Admin Dashboard of the IOT server.
+ * Server dashboard has following sections and functions.
+ * 1. User Management
+ *      - View users.
+ *      - Add a new user
+ * 2. Group Management.
+ *      - View Groups.
+ *      - Add a new group.
+ * 3. Device Management.
+ *      - View enrolled devices.
+ *      - Enroll a device.
+ * 3. Policy Management.
+ *      - View Policies.
+ *      - Create a policy.
+ */
 public class IOTAdminDashboard {
 
     private static final Log log = LogFactory.getLog(IOTHomePage.class);

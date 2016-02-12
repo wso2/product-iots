@@ -30,8 +30,9 @@ import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
 
 /**
- * Created by menaka on 1/25/16.
- *
+ * This class contains methods to test the failing scenarios of Group creation.
+ * There can be groups with same name.
+ * So the failing scenario is sending the form with empty group name.
  */
 public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
@@ -43,7 +44,7 @@ public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
         LoginUtils.login(driver, automationContext, getWebAppURL());
     }
 
-    @Test(description = "Test for submitting an empty form.")
+    @Test(description = "Test for empty group name.")
     public void addNewGroupFailTest () throws Exception {
         driver.get(getWebAppURL() + Constants.IOT_GROUP_ADD_URL);
         DeviceAddGroupPage addGroupPage = new DeviceAddGroupPage(driver);

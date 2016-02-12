@@ -34,7 +34,7 @@
             <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupFailTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.user.TestAdminFunctions"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFormTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFailTest"/>
         </classes>
 
     </test>

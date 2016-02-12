@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 /**
- * Created by menaka on 2/8/16.
- *
+ * This class represents the Edit user page of the IOT server
  */
 public class EditUserPage {
     private static final Log log = LogFactory.getLog(EditUserPage.class);
