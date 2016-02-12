@@ -30,10 +30,9 @@ import org.wso2.iot.integration.ui.pages.uesr.AddUserPage;
 import org.wso2.iot.integration.ui.pages.uesr.UserListingPage;
 
 /**
- * Test for checking admin capabilities.
+ * Test for check following admin capabilities.
  *    - Create a new User
  *    - Delete a user
- *    -- and more
  */
 public class TestAdminFunctions extends IOTIntegrationUIBaseTestCase {
 
