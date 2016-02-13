@@ -381,7 +381,7 @@
         <!-- Copying Mobile plugin management related dbscripts -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.mobile.device.mgt.version}/dbscripts/cdm/plugins
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.device.mgt.plugin.version}/dbscripts/cdm/plugins
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm/plugins
             </outputDirectory>

@@ -15,18 +15,19 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.homeautomation</groupId>
         <artifactId>${project-base-package}-component</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
+        <version>2.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>1.9.2-SNAPSHOT</version>
+    <version>2.0.4-SNAPSHOT</version>
     <artifactId>${groupId}.currentsensor.plugin</artifactId>
     <packaging>bundle</packaging>
     <name>${groupId}.currentsensor.plugin for CDMF </name>
@@ -57,7 +58,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${groupId}.currentsensor.plugin</Bundle-SymbolicName>
                         <Bundle-Name>${groupId}.currentsensor.plugin</Bundle-Name>
-                        <Bundle-Version>1.9.2-SNAPSHOT</Bundle-Version>
+                        <Bundle-Version>2.0.4-SNAPSHOT</Bundle-Version>
                         <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
                         <Private-Package>org.homeautomation.currentsensor.plugin.internal</Private-Package>
                         <Import-Package>
