@@ -33,11 +33,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>tests-artifacts</module>
+        <!--<module>tests-artifacts</module>-->
         <module>tests-common</module>
-        <module>tests-integration</module>
-        <module>tests-ui-integration</module>
-        <module>tests-platform</module>
+        <!--<module>tests-integration</module>-->
+        <!--<module>tests-ui-integration</module>-->
+        <module>tests-iot-web-ui</module>
     </modules>
 
     <!--<build>-->
