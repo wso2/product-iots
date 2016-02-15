@@ -30,20 +30,26 @@ import org.wso2.carbon.device.mgt.iot.DeviceManagement;
 import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
 import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
+import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
+import org.wso2.carbon.device.mgt.common.DeviceManagementException;
+import org.wso2.carbon.device.mgt.iot.DeviceValidator;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
+import java.util.concurrent.ConcurrentHashMap;
 
 @API(name = "currentsensor", version = "1.0.0", context = "/currentsensor")
 @DeviceType(value = "currentsensor")
 public class CurrentSensorControllerService {
 
-
     private static Log log = LogFactory.getLog(CurrentSensorControllerService.class);
+    private ConcurrentHashMap<String, String> deviceToIpMap = new ConcurrentHashMap<>();
+    private static final String SUPER_TENANT = "carbon.super";
 
     private boolean waitForServerStartup() {
         while (!DeviceManagement.isServerReady()) {
@@ -56,6 +62,37 @@ public class CurrentSensorControllerService {
         return false;
     }
 
+
+    @Path("controller/register/{owner}/{deviceId}/{ip}/{port}")
+    @POST
+    public String registerDeviceIP(@PathParam("owner") String owner,
+                                   @PathParam("deviceId") String deviceId,
+                                   @PathParam("ip") String deviceIP,
+                                   @PathParam("port") String devicePort,
+                                   @Context HttpServletResponse response,
+                                   @Context HttpServletRequest request) {
+        System.out.println("Register Call..");
+        //TODO:: Need to get IP from the request itself
+        String result;
+
+        if (log.isDebugEnabled()) {
+            log.debug("Got register call from IP: " + deviceIP + " for Device ID: " + deviceId + " of owner: " + owner);
+        }
+
+        String deviceHttpEndpoint = deviceIP + ":" + devicePort;
+        deviceToIpMap.put(deviceId, deviceHttpEndpoint);
+
+        result = "Device-IP Registered";
+        response.setStatus(Response.Status.OK.getStatusCode());
+
+        if (log.isDebugEnabled()) {
+            log.debug(result);
+        }
+
+        return result;
+    }
+
+
     /**
      * @param owner
      * @param deviceId
@@ -67,18 +104,18 @@ public class CurrentSensorControllerService {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature( code="read-current", name="Current", type="monitor",
-            description="Request current reading from Arduino agent")
+    @Feature(code = "read-current", name = "Current", type = "monitor",
+            description = "Request current reading from Arduino agent")
     public SensorRecord requestCurrent(@HeaderParam("owner") String owner,
-                                           @HeaderParam("deviceId") String deviceId,
-                                           @HeaderParam("protocol") String protocol,
-                                           @Context HttpServletResponse response) {
+                                       @HeaderParam("deviceId") String deviceId,
+                                       @HeaderParam("protocol") String protocol,
+                                       @Context HttpServletResponse response) {
         SensorRecord sensorRecord = null;
 
         try {
             sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           CurrentSensorConstants.SENSOR_CURRENT);
-        } catch ( DeviceControllerException e) {
+                    CurrentSensorConstants.SENSOR_CURRENT);
+        } catch (DeviceControllerException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
 
@@ -97,18 +134,18 @@ public class CurrentSensorControllerService {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature( code="read-power", name="Power x100", type="monitor",
-            description="Request power reading from Arduino agent")
+    @Feature(code = "read-power", name = "Power x100", type = "monitor",
+            description = "Request power reading from Arduino agent")
     public SensorRecord requestPower(@HeaderParam("owner") String owner,
-                                       @HeaderParam("deviceId") String deviceId,
-                                       @HeaderParam("protocol") String protocol,
-                                       @Context HttpServletResponse response) {
+                                     @HeaderParam("deviceId") String deviceId,
+                                     @HeaderParam("protocol") String protocol,
+                                     @Context HttpServletResponse response) {
         SensorRecord sensorRecord = null;
 
         try {
             sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           CurrentSensorConstants.SENSOR_POWER);
-        } catch ( DeviceControllerException e) {
+                    CurrentSensorConstants.SENSOR_POWER);
+        } catch (DeviceControllerException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
 
@@ -127,18 +164,18 @@ public class CurrentSensorControllerService {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature( code="read-flowrate", name="Flow Rate x100", type="monitor",
-            description="Request flow rate reading from Arduino agent")
+    @Feature(code = "read-flowrate", name = "Flow Rate x100", type = "monitor",
+            description = "Request flow rate reading from Arduino agent")
     public SensorRecord requestFlowRate(@HeaderParam("owner") String owner,
-                                     @HeaderParam("deviceId") String deviceId,
-                                     @HeaderParam("protocol") String protocol,
-                                     @Context HttpServletResponse response) {
+                                        @HeaderParam("deviceId") String deviceId,
+                                        @HeaderParam("protocol") String protocol,
+                                        @Context HttpServletResponse response) {
         SensorRecord sensorRecord = null;
 
         try {
             sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
                     CurrentSensorConstants.SENSOR_FLOWRATE);
-        } catch ( DeviceControllerException e) {
+        } catch (DeviceControllerException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
 
@@ -150,59 +187,74 @@ public class CurrentSensorControllerService {
      * @param dataMsg
      * @param response
      */
-    @Path("controller/pushcurrent")
+    @Path("controller/push-data")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void pushCurrent(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
+    public void pushData(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
 
         String owner = dataMsg.owner;
         String deviceId = dataMsg.deviceId;
-        float pinData = dataMsg.value;
+        String deviceIp = dataMsg.reply;
+        float current = dataMsg.current;
+        float flow_rate = dataMsg.flow_rate;
 
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_CURRENT,
-                String.valueOf(pinData),
-                Calendar.getInstance().getTimeInMillis());
+        try {
+            DeviceValidator deviceValidator = new DeviceValidator();
+            if (!deviceValidator.isExist(owner, SUPER_TENANT, new DeviceIdentifier(deviceId,
+                    CurrentSensorConstants.DEVICE_TYPE))) {
+                response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+                log.warn("Temperature data Received from unregistered raspberrypi device [" + deviceId +
+                        "] for owner [" + owner + "]");
+                return;
+            }
 
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_POWER,
-                String.valueOf(pinData * 230 / 100),
-                Calendar.getInstance().getTimeInMillis());
+            String registeredIp = deviceToIpMap.get(deviceId);
 
-        if (!CurrentSensorServiceUtils.publishToDASCurrent(dataMsg.owner, dataMsg.deviceId, pinData)) {
-            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
-                    "] of owner [" + owner + "]");
+            if (registeredIp == null) {
+                log.warn("Unregistered IP: Temperature Data Received from an un-registered IP " + deviceIp +
+                        " for device ID - " + deviceId);
+                response.setStatus(Response.Status.PRECONDITION_FAILED.getStatusCode());
+                return;
+            } else if (!registeredIp.equals(deviceIp)) {
+                log.warn("Conflicting IP: Received IP is " + deviceIp + ". Device with ID " + deviceId +
+                        " is already registered under some other IP. Re-registration required");
+                response.setStatus(Response.Status.CONFLICT.getStatusCode());
+                return;
+            }
+
+            SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_CURRENT,
+                    String.valueOf(current),
+                    Calendar.getInstance().getTimeInMillis());
+
+            SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_POWER,
+                    String.valueOf(current * 230 / 100),
+                    Calendar.getInstance().getTimeInMillis());
+
+            SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_FLOWRATE,
+                    String.valueOf(flow_rate/100),
+                    Calendar.getInstance().getTimeInMillis());
+
+            if (!CurrentSensorServiceUtils.publishToDASCurrent(dataMsg.owner, dataMsg.deviceId, current)) {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
+                        "] of owner [" + owner + "]");
+            }
+
+            if (!CurrentSensorServiceUtils.publishToDASPower(dataMsg.owner, dataMsg.deviceId, current * 230 / 100)) {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                log.warn("An error occured whilst trying to publish pin data of Power Sensor Data with ID [" + deviceId +
+                        "] of owner [" + owner + "]");
+            }
+
+            if (!CurrentSensorServiceUtils.publishToDASFlowRate(dataMsg.owner, dataMsg.deviceId, flow_rate/100)) {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
+                        "] of owner [" + owner + "]");
+            }
+        } catch (DeviceManagementException e) {
+            String errorMsg = "Validation attempt for deviceId [" + deviceId + "] of owner [" + owner + "] failed.\n";
+            log.error(errorMsg + Response.Status.INTERNAL_SERVER_ERROR.getReasonPhrase() + "\n" + e.getErrorMessage());
         }
-
-        if (!CurrentSensorServiceUtils.publishToDASPower(dataMsg.owner, dataMsg.deviceId, pinData * 230 / 100)) {
-            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            log.warn("An error occured whilst trying to publish pin data of Power Sensor Data with ID [" + deviceId +
-                     "] of owner [" + owner + "]");
-        }
-    }
-
-    /**
-     * @param dataMsg
-     * @param response
-     */
-    @Path("controller/pushflowrate")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void pushFlowRate(final DeviceJSON dataMsg, @Context HttpServletResponse response) {
-
-        String owner = dataMsg.owner;
-        String deviceId = dataMsg.deviceId;
-        float pinData = dataMsg.value / 100;
-
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_FLOWRATE,
-                String.valueOf(pinData),
-                Calendar.getInstance().getTimeInMillis());
-
-        if (!CurrentSensorServiceUtils.publishToDASFlowRate(dataMsg.owner, dataMsg.deviceId, pinData)) {
-            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
-                    "] of owner [" + owner + "]");
-        }
-
     }
 
 }

@@ -1,7 +1,8 @@
 {
   "deviceType": {
-    "label": "Water Dispensor",
+    "label": "Water Dispenser",
     "category": "virtual"
+
   },
   "analyticStreams": [
     {
