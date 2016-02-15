@@ -307,7 +307,7 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.carbon.iot.integration.ui.pages</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
+                <version>${carbon.device.mgt.plugin.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -512,7 +512,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
                 <artifactId>org.wso2.carbon.device.mgt.mobile</artifactId>
-                <version>${carbon.mobile.device.mgt.version}</version>
+                <version>${carbon.device.mgt.plugin.version}</version>
             </dependency>
 
             <!--Osgi dependencies-->
@@ -1049,12 +1049,9 @@
         <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
 
-        <!-- Carbon Mobile Device Management -->
-        <carbon.mobile.device.mgt.version>1.9.2-SNAPSHOT</carbon.mobile.device.mgt.version>
+        <!-- Carbon Device Management Plugins-->
+        <carbon.device.mgt.plugin.version>2.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>
         <mdm.version>2.0.0-SNAPSHOT</mdm.version>
-
-        <!-- IOT Device Management -->
-        <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>4.3.2-SNAPSHOT</carbon.api.mgt.version>
@@ -1124,7 +1121,7 @@
 
         <!-- MB Features -->
         <carbon.messaging.version>3.1.0</carbon.messaging.version>
-        <product.mb.version>3.1.0-SNAPSHOT</product.mb.version>
+        <product.mb.version>3.1.0</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
     </properties>
 

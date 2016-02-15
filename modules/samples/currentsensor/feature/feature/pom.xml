@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.homeautomation</groupId>
         <artifactId>feature</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
+        <version>2.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>1.9.2-SNAPSHOT</version>
+    <version>2.0.4-SNAPSHOT</version>
     <artifactId>${groupId}.currentsensor.feature</artifactId>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
@@ -38,24 +38,24 @@
         <dependency>
             <groupId>org.homeautomation</groupId>
             <artifactId>${project-base-package}.plugin</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>${carbon.device.mgt.plugin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.homeautomation</groupId>
             <artifactId>${project-base-package}.manager</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>${carbon.device.mgt.plugin.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>org.homeautomation</groupId>
             <artifactId>${project-base-package}.controller</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>${carbon.device.mgt.plugin.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>org.homeautomation</groupId>
             <artifactId>${project-base-package}.agent</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>${carbon.device.mgt.plugin.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
@@ -225,7 +225,7 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>
-                                    org.homeautomation:${project-base-package}.plugin:1.9.2-SNAPSHOT
+                                    org.homeautomation:${project-base-package}.plugin:${carbon.device.mgt.plugin.version}
                                 </bundleDef>
                             </bundles>
                             <importFeatures>
