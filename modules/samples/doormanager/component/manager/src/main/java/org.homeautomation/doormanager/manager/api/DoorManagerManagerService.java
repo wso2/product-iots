@@ -274,9 +274,11 @@ public class DoorManagerManagerService {
                         String accessToken = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/accesstoken", null);
                         String cardNumber = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/cardnumber", null);
                         if(cardNumber.equals(userInfo.cardNumber)){
-                            if(accessToken != null){
+                            if(accessToken != null && doorManagerDAO.getAutomaticDoorLockerDeviceDAO().
+									checkCardDoorAssociation(cardNumber, userInfo.deviceId)){
                                 JSONObject credentials = new JSONObject();
                                 credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
+								credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
                                 return Response.ok(credentials, MediaType.APPLICATION_JSON_TYPE).build();
                             }
                         }

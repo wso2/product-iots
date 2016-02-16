@@ -261,6 +261,34 @@ public class DoorManagerDAOImpl {
 		return status;
 	}
 
+	public boolean checkCardDoorAssociation(String cardNum, String deviceID) throws DoorManagerDeviceMgtPluginException {
+		boolean status = false;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DoorManagerDAO.getConnection();
+			String createDBQuery = "SELECT * FROM SHARED_DOORLOCK_SAFE WHERE" +
+					" DOORMANAGER_DEVICE_ID = ? AND SERIAL_NUMBER = ?";
+			stmt = conn.prepareStatement(createDBQuery);
+			stmt.setString(1, cardNum);
+			stmt.setString(2, deviceID);
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+				status = true;
+				if (log.isDebugEnabled()) {
+					log.debug("Lock : "+ deviceID + " is associated with card no : "+cardNum);
+				}
+			}
+		} catch (SQLException e) {
+			String msg = "No associations were found between lock : "+ deviceID +" and card : "+ cardNum;
+			log.error(msg, e);
+			throw new DoorManagerDeviceMgtPluginException(msg, e);
+		} finally {
+			DoorManagerUtils.cleanupResources(stmt, null);
+		}
+		return status;
+	}
+
 	public List<String> getUserCredentials(String deviceId, String UIDofUser) throws DoorManagerDeviceMgtPluginException {
 
 		Connection conn = null;
