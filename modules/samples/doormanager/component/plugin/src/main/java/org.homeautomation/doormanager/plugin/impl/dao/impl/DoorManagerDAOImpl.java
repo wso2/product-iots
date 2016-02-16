@@ -57,7 +57,6 @@ public class DoorManagerDAOImpl {
 			stmt = conn.prepareStatement(selectDBQuery);
 			stmt.setString(1, deviceId);
 			resultSet = stmt.executeQuery();
-
 			if (resultSet.next()) {
 				automaticDoorLockerDevice = new Device();
 				automaticDoorLockerDevice.setName(resultSet.getString(

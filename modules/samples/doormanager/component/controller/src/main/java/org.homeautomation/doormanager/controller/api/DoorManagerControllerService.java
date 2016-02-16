@@ -58,16 +58,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 
 @API(name = "doormanager", version = "1.0.0", context = "/doormanager")
 @DeviceType(value = "doormanager")
 public class DoorManagerControllerService {
 
     private static final DoorManagerDAO DOOR_MANAGER_DAO = new DoorManagerDAO();
-    @Context  //injected response proxy supporting multiple thread
 
     private static Log log = LogFactory.getLog(DoorManagerControllerService.class);
     private HttpServletResponse response;
@@ -75,6 +76,8 @@ public class DoorManagerControllerService {
     private ConcurrentHashMap<String, DeviceJSON> deviceToIpMap = new ConcurrentHashMap<>();
 
     private PrivilegedCarbonContext ctx;
+
+    @Context  //injected response proxy supporting multiple thread
 
     private UserStoreManager getUserStoreManager() throws UserStoreException {
         String tenantDomain = CarbonContext.getThreadLocalCarbonContext().getTenantDomain();
@@ -144,36 +147,36 @@ public class DoorManagerControllerService {
                                 @FormParam("policy") String policy,
                                 @FormParam("cardNumber") String cardNumber,
                                 @FormParam("userName") String userName,
-                                @Context HttpServletResponse response){
+                                @Context HttpServletResponse response) {
         try {
-                if (userName != null && cardNumber != null && deviceId != null) {
-                    try {
-                        UserStoreManager userStoreManager = this.getUserStoreManager();
-                        if (userStoreManager.isExistingUser(userName)) {
-                            TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
-                            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
-                            String accessToken = accessTokenInfo.getAccess_token();
-                            if (accessToken == null) {
-                                response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-                                return;
-                            }
-                            Map<String, String> claims = new HashMap<>();
-                            claims.put("http://wso2.org/claims/lock/accesstoken", accessToken);
-                            claims.put("http://wso2.org/claims/lock/refreshtoken", accessTokenInfo.getRefresh_token());
-                            claims.put("http://wso2.org/claims/lock/cardnumber", cardNumber);
-                            userStoreManager.setUserClaimValues(userName, claims, null);
-                            //TODO: Add content to dto
-                        } else {
-                            response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
+            if (userName != null && cardNumber != null && deviceId != null) {
+                try {
+                    UserStoreManager userStoreManager = this.getUserStoreManager();
+                    if (userStoreManager.isExistingUser(userName)) {
+                        TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
+                        AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
+                        String accessToken = accessTokenInfo.getAccess_token();
+                        if (accessToken == null) {
+                            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
+                            return;
                         }
-                    } catch (UserStoreException e) {
-                        response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                        log.error(e);
+                        Map<String, String> claims = new HashMap<>();
+                        claims.put("http://wso2.org/claims/lock/accesstoken", accessToken);
+                        claims.put("http://wso2.org/claims/lock/refreshtoken", accessTokenInfo.getRefresh_token());
+                        claims.put("http://wso2.org/claims/lock/cardnumber", cardNumber);
+                        userStoreManager.setUserClaimValues(userName, claims, null);
+                        //TODO: Add content to dto
+                        response.setStatus(Response.Status.OK.getStatusCode());
+                    } else {
+                        response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
                     }
+                } catch (UserStoreException e) {
+                    response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                    log.error(e);
                 }
-                else {
-                    response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-                }
+            } else {
+                response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
+            }
 
         } catch (AccessTokenException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -326,14 +329,14 @@ public class DoorManagerControllerService {
                                            @Context HttpServletResponse response) {
         try {
             int lockerCurrentState;
-            if(state.toUpperCase().equals("LOCK")){
+            if (state.toUpperCase().equals("LOCK")) {
                 lockerCurrentState = 0;
-            }else{
+            } else {
                 lockerCurrentState = 1;
             }
             SensorDataManager.getInstance().setSensorRecord(deviceId, "door_locker_state",
-                        String.valueOf(lockerCurrentState), Calendar.getInstance().getTimeInMillis());
-            doorManagerMQTTConnector.sendCommandViaMQTT(owner, deviceId,"DoorManager:", state.toUpperCase());
+                                                            String.valueOf(lockerCurrentState), Calendar.getInstance().getTimeInMillis());
+            doorManagerMQTTConnector.sendCommandViaMQTT(owner, deviceId, "DoorManager:", state.toUpperCase());
             response.setStatus(Response.Status.OK.getStatusCode());
         } catch (DeviceManagementException e) {
             log.error(e);
