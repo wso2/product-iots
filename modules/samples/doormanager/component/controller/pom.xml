@@ -224,10 +224,5 @@
             <artifactId>org.wso2.carbon.user.core</artifactId>
             <version>4.4.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.user.core</artifactId>
-            <version>4.4.3</version>
-        </dependency>
     </dependencies>
 </project>

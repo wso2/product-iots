@@ -1,8 +1,7 @@
 {
   "deviceType": {
     "label": "Smart Meeter",
-    "category": "virtual"
-
+    "category": "iot"
   },
   "analyticStreams": [
     {
