@@ -18,9 +18,16 @@
 
 package org.homeautomation.doormanager.manager.api;
 
+import com.google.gson.JsonObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.geronimo.mail.util.Base64;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.SystemDefaultHttpClient;
 import org.homeautomation.doormanager.manager.api.dto.UserInfo;
 import org.homeautomation.doormanager.plugin.constants.DoorManagerConstants;
 import org.homeautomation.doormanager.plugin.exception.DoorManagerDeviceMgtPluginException;
@@ -46,6 +53,7 @@ import org.wso2.carbon.device.mgt.iot.util.ZipUtil;
 import org.wso2.carbon.user.api.UserStoreException;
 import org.wso2.carbon.user.api.UserStoreManager;
 import org.wso2.carbon.user.core.service.RealmService;
+import com.google.code.gson.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,6 +62,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -279,6 +288,7 @@ public class DoorManagerManagerService {
                                 JSONObject credentials = new JSONObject();
                                 credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
 								credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
+								sendCEPEvent(userInfo.deviceId, cardNumber, true);
                                 return Response.ok(credentials, MediaType.APPLICATION_JSON_TYPE).build();
                             }
                         }
@@ -299,6 +309,44 @@ public class DoorManagerManagerService {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	}
+
+	private void sendCEPEvent(String deviceId, String cardId, boolean accessStatus){
+		String cepEventReciever = " http://localhost:9763/endpoints/lockAuthorizedEvent";
+
+		HttpClient httpClient = new SystemDefaultHttpClient();
+		HttpPost method = new HttpPost(cepEventReciever);
+		JsonObject event = new JsonObject();
+		JsonObject metaData = new JsonObject();
+		JsonObject payLoadData = new JsonObject();
+
+		metaData.addProperty("timestamp", System.currentTimeMillis());
+		metaData.addProperty("sensorName", "deviceLock");
+
+		payLoadData.addProperty("deviceID", deviceId);
+		payLoadData.addProperty("cardID", cardId);
+
+		event.add("metaData", metaData);
+		event.add("payloadData", payLoadData);
+
+		String eventString = "{\"event\": " + event + "}";
+
+		try {
+			StringEntity entity = new StringEntity(eventString);
+			method.setEntity(entity);
+			if (cepEventReciever.startsWith("https")) {
+				method.setHeader("Authorization", "Basic " + Base64.encode(("admin" + ":" + "admin").getBytes()));
+			}
+			httpClient.execute(method).getEntity().getContent().close();
+		} catch (UnsupportedEncodingException e) {
+			log.error("Error while constituting CEP event"+ e.getMessage());
+		} catch (ClientProtocolException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		} catch (IOException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		}
+
+
 	}
 
 	@POST
