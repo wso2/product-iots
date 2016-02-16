@@ -1,0 +1,282 @@
+<div class="col-lg-12  margin-top-double">
+    <h1 class="grey ">Door Manager</h1>
+    <hr>
+</div>
+
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 padding-top">
+    <img src="{{@unit.publicUri}}/images/doorManager-icon.png" class="img-responsive">
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 padding-top">
+    <!--todo need to change this url-->
+    <h4 class="doc-link">Click <a href="https://docs.wso2.com/pages/viewpage.action?pageId=48289181"
+                                  target="_blank">[ here ]</a> for latest instructions and troubleshooting.</h4>
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 padding-top">
+
+    <h3 class="uppercase">What it Does</h3>
+    <hr>
+    <p class="grey margin-top">Connect an Automatic Door Locker to WSO2 IoT Server and control and view current state
+        of door locker.</p>
+    <br>
+    <h3 class="uppercase">What You Need</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double"><span class="circle">ITEM 01</span>&nbsp;&nbsp;&nbsp;Electronic solenoid door
+            lock - 2
+        </li>
+        <li class="padding-top-double"><span class="circle">ITEM 02</span>&nbsp;&nbsp;&nbsp;MFRC522 RFID Reader/Writer
+        </li>
+        <li class="padding-top-double"><span class="circle">ITEM 03</span>&nbsp;&nbsp;&nbsp;2 Channel 5V Relay Module
+        </li>
+        <li class="padding-top-double"><span class="circle">ITEM 04</span>&nbsp;&nbsp;&nbsp;12 Volt DC - 1 Amp (12V, 1A)
+            Power Supply
+        </li>
+        <li class="padding-top-double"><span class="circle">ITEM 05</span>&nbsp;&nbsp;&nbsp;LED Bulbs (Red and Green)
+        </li>
+        <li class="padding-top-double"><span class="circle">ITEM 06</span>&nbsp;&nbsp;&nbsp;Resistors (333ohms) -2
+        </li>
+        <li class="padding-top-double">&nbsp;&nbsp;&nbsp;Proceed to [Prepare] section.
+    </ul>
+    <br>
+
+    <a href="/api-store/apis/info?name={{@uriParams.deviceType}}&version=1.0.0&provider=admin" class="btn-operations"
+       target="_blank"><i class="fw fw-api"></i> View API</i> &nbsp;</a>
+    <a href="#" class="download-link btn-operations"><i class="fw fw-download"></i>Register New Lock Safe</a>
+
+    <div id="download-device-modal-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7  center-container">
+                    <h3>Enter your device name serial number and then  register {{@uriParams.deviceType}} the agent from following link.</h3>
+                    <br/>
+                    <form id="downloadForm">
+                        <div class="control-group">
+                            <div class="controls">
+                                Device Name: <input class="new-device-name" style="color:#3f3f3f;padding:5px"
+                                       type="text"
+                                       placeholder="Ex. drone"
+                                       name="deviceName" size="60" required></br>
+                                Serial Number: <input  style="color:#3f3f3f;padding:5px"
+                                       type="text"
+                                       placeholder="Ex. serial number"
+                                       name="serialNumber" size="60" required>
+                                <br/>
+                                <input type="hidden" class="deviceType" name="deviceType"
+                                       value="doormanager"/>
+                                <input type="hidden" class="owner" name="owner" value={{@user.username}} />
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="buttons">
+                            <a class="btn-operations" onclick="downloadAgent()">Register Now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-400-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Exception at backend. Try Later.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="device-400-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-401-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>You have to log in first.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-401-link" class="blue-button">
+                            Goto Login Page
+                        </a>&nbsp;&nbsp;
+                        <a href="#" onclick="hidePopup();" class="btn-operations">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-403-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Action not permitted.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-403-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-409-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Device Sketch does not exist.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-409-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-unexpected-error-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Unexpected error.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-unexpected-error-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+</div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-double grey-bg">
+    <h3 class="uppercase">Prepare</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;Get the basic setup done
+            according to schematic below
+        </li>
+        <li class="padding-top-double"><span class="circle">02</span>&nbsp;&nbsp;&nbsp;Ensure your RaspberryPi Board
+            can connect to Internet.
+        </li>
+        <li class="padding-top-double"><span class="circle">03</span>&nbsp;&nbsp;&nbsp;Click on
+            [Download Agent] button above to get Automatic Door Locker agent.
+        </li>
+        <li class="padding-top-double"><span class="circle">04</span>&nbsp;&nbsp;&nbsp;Copy downloaded Agent into your
+            RaspberryPi.
+        </li>
+        <li class="padding-top-double"><span class="circle">05</span>&nbsp;&nbsp;&nbsp; Run "Agent.sh" script with root privileges.
+        </li>
+    </ul>
+    <br>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
+    <h3 class="uppercase">SCHEMATIC DIAGRAM</h3>
+    <hr>
+    <p class="grey margin-top">Click on the image to zoom</p>
+    <center>
+        <a href="{{@unit.publicUri}}/images/schematicsGuide.png" target="_blank">
+            <img src="{{@unit.publicUri}}/images/schematicsGuide.png" class="img-responsive">
+        </a>
+    </center>
+    <br/>
+</div>
+
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
+    <h3 class="uppercase">Try Out</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;You can view
+            all your connected
+            devices at <a
+                    href="{{@app.context}}/devices">[Device
+                Management]</a>
+            page.
+        </li>
+        <li class="padding-top-double"><span class="circle">02</span>&nbsp;&nbsp;&nbsp;Select one of
+            connected devices and check for available control operations as well as current state of door locker
+        </li>
+    </ul>
+    <br/>
+
+    <p class="grey margin-top">Click on the image to zoom</p>
+    <center>
+        <a href="{{@unit.publicUri}}/images/myDevices_analytics.png" target="_blank">
+            <img src="{{@unit.publicUri}}/images/myDevices_analytics.png" class="img-responsive">
+        </a>
+    </center>
+
+</div>
+
+{{#zone "topCss"}}
+    <style type="text/css">
+        .circle {
+            background: none repeat scroll 0 0 #191919;
+            border-radius: 50px;
+            height: 50px;
+            padding: 10px;
+            width: 50px;
+            color: #fff;
+        }
+        .padding-top-double {
+            padding-top: 20px;
+        }
+        .padding-double {
+            padding: 20px;
+        }
+        .grey {
+            color: #333;
+        }
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #7f7f7f;
+            margin: 1em 0;
+            padding: 0;
+            opacity: 0.2;
+        }
+        .light-grey {
+            color: #7c7c7c;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .grey-bg {
+            background-color: #f6f4f4;
+        }
+        .doc-link {
+            background: #11375B;
+            padding: 20px;
+            color: white;
+            margin-top: 0;
+        }
+        .doc-link a {
+            color: white;
+        }
+    </style>
+{{/zone}}
+
+{{#zone "bottomJs"}}
+    {{js "/js/download.js"}}
+    {{js "/js/jquery.validate.js"}}
+{{/zone}}
