@@ -1,0 +1,17 @@
+{
+  "name": "org.wso2.iot.devices.sensor",
+  "version": "1.0.0",
+  "nickName": "Flow Rate Data",
+  "description": "Sensor data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "sensorValue","type": "FLOAT"
+    }
+  ]
+}
