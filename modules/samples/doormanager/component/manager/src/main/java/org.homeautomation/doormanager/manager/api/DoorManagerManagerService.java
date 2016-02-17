@@ -273,14 +273,14 @@ public class DoorManagerManagerService {
             log.warn(userInfo.userName);
             log.warn(userInfo.cardNumber);
             log.warn(userInfo.deviceId);
-            response.addHeader("REMOTE_USER", "ppppppppppppppppppppp");
-            //response.addDateHeader("Authentication","55555555555555555555");
             if (userInfo.userName != null && userInfo.cardNumber != null && userInfo.deviceId != null) {
                 try {
                     UserStoreManager userStoreManager = this.getUserStoreManager();
                     if (userStoreManager.isExistingUser(userInfo.userName)) {
                         String accessToken = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/accesstoken", null);
                         String cardNumber = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/cardnumber", null);
+						log.warn(accessToken);
+						log.warn(cardNumber);
                         if(cardNumber.equals(userInfo.cardNumber)){
                             if(accessToken != null && doorManagerDAO.getAutomaticDoorLockerDeviceDAO().
 									checkCardDoorAssociation(cardNumber, userInfo.deviceId)){
@@ -288,6 +288,7 @@ public class DoorManagerManagerService {
                                 credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
 								credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
 								sendCEPEvent(userInfo.deviceId, cardNumber, true);
+								log.warn(doorManagerDAO.getAutomaticDoorLockerDeviceDAO().getUserEmailAddress(cardNumber));
                                 return Response.ok(credentials, MediaType.APPLICATION_JSON_TYPE).build();
                             }
                         }
@@ -311,22 +312,17 @@ public class DoorManagerManagerService {
 	}
 
 	private void sendCEPEvent(String deviceId, String cardId, boolean accessStatus){
-		String cepEventReciever = " http://localhost:9763/endpoints/lockAuthorizedEvent";
+		String cepEventReciever = "http://localhost:9768/endpoints/LockEventReciever";
 
 		HttpClient httpClient = new SystemDefaultHttpClient();
 		HttpPost method = new HttpPost(cepEventReciever);
 		JsonObject event = new JsonObject();
 		JsonObject metaData = new JsonObject();
-		JsonObject payLoadData = new JsonObject();
 
-		metaData.addProperty("timestamp", System.currentTimeMillis());
-		metaData.addProperty("sensorName", "deviceLock");
-
-		payLoadData.addProperty("deviceID", deviceId);
-		payLoadData.addProperty("cardID", cardId);
+		metaData.addProperty("deviceID", deviceId);
+		metaData.addProperty("cardID", cardId);
 
 		event.add("metaData", metaData);
-		event.add("payloadData", payLoadData);
 
 		String eventString = "{\"event\": " + event + "}";
 
