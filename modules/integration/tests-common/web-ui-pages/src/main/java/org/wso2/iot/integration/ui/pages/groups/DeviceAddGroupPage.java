@@ -17,12 +17,9 @@
  */
 package org.wso2.iot.integration.ui.pages.groups;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -34,29 +31,26 @@ import java.io.IOException;
  */
 public class DeviceAddGroupPage {
 
-    private static final Log log = LogFactory.getLog(DeviceAddGroupPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
     public DeviceAddGroupPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
 
         if (!driver.findElement(By.xpath
-                    (uiElementMapper.getElement("iot.device.group.addNewGroup.xpath"))).getText().contains("ADD NEW GROUP")){
+                (uiElementMapper.getElement("iot.device.group.addNewGroup.xpath"))).getText().contains("ADD NEW GROUP")) {
             throw new IllegalStateException("This is not the Add Group page");
         }
     }
 
 
     /**
-     * @param name The group name that is need to be created.
+     * @param name        The group name that is need to be created.
      * @param description the description for the group
      * @return The resultant page.
-     * @throws Exception
      */
-    public DeviceGroupsPage addNewGroup (String name, String description) throws Exception{
+    public DeviceGroupsPage addNewGroup(String name, String description) throws IOException {
 
         WebElement nameField = driver.findElement(By.id(
                 uiElementMapper.getElement("iot.device.group.addGroupForm.name.id")));

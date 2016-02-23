@@ -17,9 +17,6 @@
  */
 package org.wso2.iot.integration.ui.pages;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -29,8 +26,7 @@ import java.util.Properties;
  */
 public class UIElementMapper {
 
-    public static final Properties uiPropertiies = new Properties();
-    private static final Log log = LogFactory.getLog(UIElementMapper.class);
+    public static final Properties uiProperties = new Properties();
     private static UIElementMapper instance;
 
     private UIElementMapper(){
@@ -50,16 +46,16 @@ public class UIElementMapper {
         InputStream inputStream = UIElementMapper.class.getResourceAsStream("/mapper.properties");
 
         if (inputStream.available() > 0) {
-            uiPropertiies.load(inputStream);
+            uiProperties.load(inputStream);
             inputStream.close();
-            return uiPropertiies;
+            return uiProperties;
         }
         return null;
     }
 
     public String getElement (String key) {
-        if (uiPropertiies != null) {
-            return uiPropertiies.getProperty(key);
+        if (!uiProperties.isEmpty()) {
+            return uiProperties.getProperty(key);
         }
         return null;
     }

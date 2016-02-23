@@ -45,7 +45,7 @@ public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty group name.")
-    public void addNewGroupFailTest () throws Exception {
+    public void addNewGroupFailTest() throws Exception {
         driver.get(getWebAppURL() + Constants.IOT_GROUP_ADD_URL);
         DeviceAddGroupPage addGroupPage = new DeviceAddGroupPage(driver);
 

@@ -29,30 +29,29 @@ import org.wso2.iot.integration.ui.pages.login.LoginPage;
 
 /**
  * Test Login as Admin
- *
  */
 public class LoginTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
 
-    @BeforeClass (alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setup() throws Exception {
         super.init();
         driver = BrowserManager.getWebDriver();
         driver.get(getWebAppURL() + Constants.IOT_LOGIN_PATH);
     }
 
-    @Test (description = "Verify login to IOT server dashboard")
+    @Test(description = "Verify login to IOT server dashboard")
     public void testAdminLogin() throws Exception {
         LoginPage test = new LoginPage(driver);
         IOTAdminDashboard dashboard = test.loginAsAdmin(
-                                              automationContext.getSuperTenant().getTenantAdmin().getUserName(),
-                                              automationContext.getSuperTenant().getTenantAdmin().getPassword());
+                automationContext.getSuperTenant().getTenantAdmin().getUserName(),
+                automationContext.getSuperTenant().getTenantAdmin().getPassword());
         dashboard.logout();
-        driver.close();
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
+        driver.close();
         driver.quit();
     }
 }

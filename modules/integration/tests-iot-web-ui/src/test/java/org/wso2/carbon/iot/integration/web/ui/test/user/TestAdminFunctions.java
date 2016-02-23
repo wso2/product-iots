@@ -29,37 +29,40 @@ import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
 import org.wso2.iot.integration.ui.pages.uesr.AddUserPage;
 import org.wso2.iot.integration.ui.pages.uesr.UserListingPage;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * Test for check following admin capabilities.
- *    - Create a new User
- *    - Delete a user
+ * - Create a new User
+ * - Delete a user
  */
 public class TestAdminFunctions extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws Exception {
+    public void setup() throws IOException, XPathExpressionException, XMLStreamException {
         super.init();
         driver = BrowserManager.getWebDriver();
         LoginUtils.login(driver, automationContext, getWebAppURL());
     }
 
     @Test(description = "Test for creating a new user")
-    public void createUserTest() throws Exception {
+    public void createUserTest() throws IOException {
         IOTAdminDashboard adminDashboard = new IOTAdminDashboard(driver);
         AddUserPage addUserPage = adminDashboard.addUser();
         addUserPage.createNewUser("user1", "User", "User", "user@wso2.com");
     }
 
     @Test(description = "Test for deleting a created user", dependsOnMethods = {"createUserTest"})
-    public void deleteUserTest() throws Exception {
+    public void deleteUserTest() throws XPathExpressionException, IOException, InterruptedException {
         driver.get(getWebAppURL() + Constants.IOT_HOME_URL);
         IOTAdminDashboard adminDashboard = new IOTAdminDashboard(driver);
         UserListingPage userListingPage = adminDashboard.viewUser();
         userListingPage.deleteUser();
     }
-
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {

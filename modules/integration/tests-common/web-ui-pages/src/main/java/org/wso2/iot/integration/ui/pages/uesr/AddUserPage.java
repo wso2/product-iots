@@ -1,43 +1,44 @@
 package org.wso2.iot.integration.ui.pages.uesr;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+
+import java.io.IOException;
 
 
 /**
  * This class represents the add user page of the IOT server.
  */
 public class AddUserPage {
-    private static final Log log = LogFactory.getLog(AddUserPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
-    public AddUserPage(WebDriver driver) throws Exception {
+    public AddUserPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        if (!webDriverWait.until(ExpectedConditions.titleContains("User Management | IoT Server"))){
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        if (!webDriverWait.until(ExpectedConditions.titleContains("User Management | IoT Server"))) {
             throw new IllegalStateException("This is not the Add User page");
         }
     }
 
     /**
      * Method to create a new user.
-     * @param userName The username for the user.
+     *
+     * @param userName  The username for the user.
      * @param firstName The user's first name.
      * @param lastName  The user's last name.
-     * @param email Email address of the user.
+     * @param email     Email address of the user.
      * @return The user added confirmation page.
-     * @throws Exception
      */
-    public UserAddedConfirmationPage createNewUser(String userName, String firstName, String lastName, String email) throws Exception {
+    public UserAddedConfirmationPage createNewUser(String userName, String firstName, String lastName, String email)
+            throws IOException {
 
         WebElement userNameField = driver.findElement(By.id(
                 uiElementMapper.getElement("iot.admin.addUser.username.id")));
@@ -53,7 +54,7 @@ public class AddUserPage {
         lastNameField.sendKeys(lastName);
         emailField.sendKeys(email);
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.add.btn.xpath"))));
 

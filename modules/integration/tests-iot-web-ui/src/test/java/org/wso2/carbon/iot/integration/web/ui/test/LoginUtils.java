@@ -19,32 +19,30 @@ package org.wso2.carbon.iot.integration.web.ui.test;
 
 import org.openqa.selenium.WebDriver;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
+
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 
 /**
  * This class is used to login to the system as the Admin.
  */
 public class LoginUtils {
-    private static UIElementMapper uiElementMapper;
 
     /**
-     *
      * This method is used to login as admin.
      *
-     * @param driver The selenium web driver
+     * @param driver            The selenium web driver
      * @param automationContext Test Automation context
-     * @param webAppURL The server url
-     * @throws Exception
+     * @param webAppURL         The server url
      */
     public static void login(WebDriver driver, AutomationContext automationContext,
-                             String webAppURL) throws Exception {
-        uiElementMapper = UIElementMapper.getInstance();
+                             String webAppURL) throws IOException, XPathExpressionException {
         driver.get(webAppURL + Constants.IOT_LOGIN_PATH);
         LoginPage test = new LoginPage(driver);
         test.loginAsAdmin(automationContext.getSuperTenant().getTenantAdmin().getUserName(),
                           automationContext.getSuperTenant().getTenantAdmin().getPassword());
-        }
+    }
 
 
 }

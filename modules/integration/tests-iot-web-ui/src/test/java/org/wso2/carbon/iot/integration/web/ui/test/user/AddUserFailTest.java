@@ -24,21 +24,24 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
 import org.wso2.carbon.iot.integration.web.ui.test.Constants;
 import org.wso2.carbon.iot.integration.web.ui.test.LoginUtils;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * Test cases for
- *      1. Empty  form submission
- *      2. Short user name
- *      3. Empty First Name
- *      4. Empty Last Name
- *      5. Empty email
- *      6. Incorrect email
+ * 1. Empty  form submission
+ * 2. Short user name
+ * 3. Empty First Name
+ * 4. Empty Last Name
+ * 5. Empty email
+ * 6. Incorrect email
  */
 public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
 
@@ -52,7 +55,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     WebElement addUserButton;
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws Exception {
+    public void setup() throws XPathExpressionException, XMLStreamException, IOException {
         super.init();
         driver = BrowserManager.getWebDriver();
         LoginUtils.login(driver, automationContext, getWebAppURL());
@@ -82,7 +85,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Username is a required field. It cannot be empty.");
-
     }
 
     @Test(description = "Test for short user name")
@@ -99,7 +101,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Username must be between 3 and 30 characters long.");
-
     }
 
     @Test(description = "Test for empty first name")
@@ -116,7 +117,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Firstname is a required field. It cannot be empty.");
-
     }
 
     @Test(description = "Test for empty last name")
@@ -132,7 +132,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Lastname is a required field. It cannot be empty.");
-
     }
 
     @Test(description = "Test for empty email name")
@@ -149,7 +148,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Email is a required field. It cannot be empty.");
-
     }
 
     @Test(description = "Test for incorrect email")
@@ -168,7 +166,8 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
                             "Provided email is invalid. Please check.");
 
     }
-    public void clearForm() {
+
+    private void clearForm() {
         firstNameField.clear();
         lastNameField.clear();
         emailField.clear();

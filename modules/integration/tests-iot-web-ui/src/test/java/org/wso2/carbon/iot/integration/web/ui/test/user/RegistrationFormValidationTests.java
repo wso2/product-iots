@@ -31,14 +31,18 @@ import org.wso2.carbon.iot.integration.web.ui.test.Constants;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * These test cases check for following:
- *   - Submitting an empty form
- *   - Existing username
- *   - Non matching passwords
- *   - Password, username length
+ * - Submitting an empty form
+ * - Existing username
+ * - Non matching passwords
+ * - Password, username length
  */
-public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
+public class RegistrationFormValidationTests extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
     UIElementMapper uiElementMapper;
 
@@ -51,7 +55,7 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
     WebElement registerButton;
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws Exception {
+    public void setup() throws XPathExpressionException, XMLStreamException, IOException {
         super.init();
         driver = BrowserManager.getWebDriver();
         driver.get(getWebAppURL() + Constants.IOT_USER_REGISTER_URL);
@@ -78,7 +82,7 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
     }
 
     @Test(description = "Test for submitting an empty registration form")
-    public void emptyFormTest() throws Exception {
+    public void emptyFormTest() {
         clearForm();
         firstNameField.sendKeys("");
         lastNameField.sendKeys("");
@@ -109,8 +113,8 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
                             "Please enter a user login password");
     }
 
-    @Test (description = "Test for non matching passwords")
-    public void nonMatchingPasswordTest() throws Exception {
+    @Test(description = "Test for non matching passwords")
+    public void nonMatchingPasswordTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -126,8 +130,8 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
                             "Please enter the same password as above");
     }
 
-    @Test (description = "Test for email")
-    public void incorrectEmail() throws Exception {
+    @Test(description = "Test for email")
+    public void incorrectEmailTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -138,11 +142,10 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
         Assert.assertEquals(driver.findElement(By.id(
                 uiElementMapper.getElement("iot.user.register.email.error"))).getText(),
                             "Email is not valid. Please enter a correct email address.");
-
     }
 
-    @Test (description = "Test for password length")
-    public void passwordLengthTest() throws Exception {
+    @Test(description = "Test for password length")
+    public void passwordLengthTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -156,11 +159,10 @@ public class RegistrationFormTests extends IOTIntegrationUIBaseTestCase{
         Assert.assertEquals(driver.findElement(By.id(
                 uiElementMapper.getElement("iot.user.register.password.error"))).getText(),
                             "Password should be between 5 and 30 characters.");
-
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception {
+    public void tearDown() {
         driver.quit();
     }
 

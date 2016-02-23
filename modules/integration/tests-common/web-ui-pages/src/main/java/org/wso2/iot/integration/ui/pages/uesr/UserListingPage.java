@@ -17,39 +17,33 @@
  */
 package org.wso2.iot.integration.ui.pages.uesr;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
+import java.io.IOException;
+
 /**
  * Class to represent the user listing page.
  */
 public class UserListingPage {
-    private static final Log log = LogFactory.getLog(UserListingPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
-    public UserListingPage(WebDriver driver) throws Exception {
+    public UserListingPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-
-        if (!driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.listing.page.subtitle.xpath")))
-                .getText().contains("USERS")){
-            throw new IllegalStateException("This is not the User Listing page");
-        }
     }
 
     /**
      * @return After deleting a user, returns back to the user listing page.
-     * @throws Exception
      */
-    public UserListingPage deleteUser() throws Exception {
+    //Don't use generic exceptions.
+    public UserListingPage deleteUser() throws IOException, InterruptedException {
         WebElement deleteBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.deleteUser.btn.xpath")));
-        if (deleteBtn!=null){
+        if (deleteBtn != null) {
             deleteBtn.click();
         } else {
             return new UserListingPage(driver);
@@ -60,6 +54,4 @@ public class UserListingPage {
 
         return new UserListingPage(driver);
     }
-
-
 }

@@ -33,9 +33,9 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 /**
  * Test cases to test the incorrect login from submissions.
  * Ex:
- *  1. Empty form
- *  2. Incorrect username or password
- *  3. short password
+ * 1. Empty form
+ * 2. Incorrect username or password
+ * 3. short password
  */
 public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
 
@@ -46,7 +46,7 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
     WebElement passwordField;
     WebElement loginButton;
 
-    @BeforeClass (alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setup() throws Exception {
         super.init();
         driver = BrowserManager.getWebDriver();
@@ -60,16 +60,14 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
 
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.username.error")))
-                                    .getText(), "Please enter a username");
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error")))
-                                    .getText(), "Please provide a password");
-
+        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.username.error"))).
+                getText(), "Please enter a username");
+        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error"))).
+                getText(), "Please provide a password");
     }
 
-    @Test (description = "Test for incorrect username")
+    @Test(description = "Test for incorrect username")
     public void incorrectUserNameTest() throws Exception {
-
         clearForm();
 
         userNameField.sendKeys("admin1");
@@ -77,12 +75,11 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
 
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")))
-                                    .getText(), "Incorrect username or password.!");
-
+        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath"))).
+                getText(), "Incorrect username or password.!");
     }
 
-    @Test (description = "Test for incorrect password")
+    @Test(description = "Test for incorrect password")
     public void incorrectPasswordTest() throws Exception {
         clearForm();
 
@@ -91,15 +88,13 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
 
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")))
-                                    .getText(), "Incorrect username or password.!");
-
+        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath"))).
+                getText(), "Incorrect username or password.!");
     }
 
 
-    @Test (description = "Test for short password")
+    @Test(description = "Test for short password")
     public void shortPasswordTest() throws Exception {
-
         clearForm();
 
         userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getUserName());
@@ -107,12 +102,11 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
 
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error")))
-                                    .getText(), "Your password must be at least 3 characters long");
-
+        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error"))).
+                getText(), "Your password must be at least 3 characters long");
     }
 
-    public void clearForm() throws Exception{
+    public void clearForm() throws Exception {
         driver.get(getWebAppURL() + Constants.IOT_LOGIN_PATH);
         uiElementMapper = UIElementMapper.getInstance();
 

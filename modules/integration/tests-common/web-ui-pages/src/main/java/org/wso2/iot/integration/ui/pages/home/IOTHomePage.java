@@ -17,13 +17,12 @@
  */
 package org.wso2.iot.integration.ui.pages.home;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.enroll.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
@@ -36,7 +35,6 @@ import java.io.IOException;
  * For admin this is the dashboard.
  */
 public class IOTHomePage {
-    private static final Log log = LogFactory.getLog(IOTHomePage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -44,19 +42,19 @@ public class IOTHomePage {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
         // Check that we're on the right page.
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
         if (!wait.until(ExpectedConditions.titleIs("Device Management | IoT Server"))) {
             throw new IllegalStateException("This is not the home page");
         }
     }
 
-    public boolean checkUserName() throws Exception{
+    public boolean checkUserName() {
         String name = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).getText();
         return name.contains(uiElementMapper.getElement("iot.user.login.username"));
     }
 
     //To logout
-    public LoginPage logout() throws Exception {
+    public LoginPage logout() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).click();
         WebElement logout = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.logout.link.xpath")));
         logout.click();
@@ -64,7 +62,7 @@ public class IOTHomePage {
     }
 
     //To enroll devices as user
-    public EnrollDevicePage enrollNewDevice() throws Exception{
+    public EnrollDevicePage enrollNewDevice() throws IOException {
         driver.findElement(By.xpath("iot.home.page.uuf-menu.xpath")).click();
         driver.findElement(By.xpath("iot.home.page.uuf-menu.devicemgt.xpath")).click();
         driver.findElement(By.xpath("iot.home.enrollDevice.xpath")).click();
@@ -72,12 +70,12 @@ public class IOTHomePage {
     }
 
     //To add new Device groups as user
-    public void goToGroupMgt() throws Exception {
+    public void goToGroupMgt() {
         driver.findElement(By.xpath("iot.home.page.uuf-menu.xpath")).click();
         driver.findElement(By.xpath("iot.home.page.uuf-menu.groupmgt.xpath")).click();
     }
 
-    public DeviceAddGroupPage addNewGroup() throws Exception {
+    public DeviceAddGroupPage addNewGroup() throws IOException {
         driver.findElement(By.xpath("iot.device.viewGroup.empty.addGroup.xpath")).click();
         return new DeviceAddGroupPage(driver);
     }

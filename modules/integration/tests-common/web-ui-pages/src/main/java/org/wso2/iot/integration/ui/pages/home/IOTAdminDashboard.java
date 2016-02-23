@@ -36,17 +36,17 @@ import java.io.IOException;
  * This class represents the Admin Dashboard of the IOT server.
  * Server dashboard has following sections and functions.
  * 1. User Management
- *      - View users.
- *      - Add a new user
+ * - View users.
+ * - Add a new user
  * 2. Group Management.
- *      - View Groups.
- *      - Add a new group.
+ * - View Groups.
+ * - Add a new group.
  * 3. Device Management.
- *      - View enrolled devices.
- *      - Enroll a device.
+ * - View enrolled devices.
+ * - Enroll a device.
  * 3. Policy Management.
- *      - View Policies.
- *      - Create a policy.
+ * - View Policies.
+ * - Create a policy.
  */
 public class IOTAdminDashboard {
 
@@ -73,22 +73,22 @@ public class IOTAdminDashboard {
         return new LoginPage(driver);
     }
 
-    public DeviceAddGroupPage addGroup() throws Exception {
+    public DeviceAddGroupPage addGroup() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.group.addButton.xpath"))).click();
         return new DeviceAddGroupPage(driver);
     }
 
-    public DeviceGroupsPage viewGroups() throws Exception {
+    public DeviceGroupsPage viewGroups() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.group.viewButton.xpath"))).click();
         return new DeviceGroupsPage(driver);
     }
 
-    public AddUserPage addUser() throws Exception {
+    public AddUserPage addUser() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.addButton.xpath"))).click();
         return new AddUserPage(driver);
     }
 
-    public UserListingPage viewUser() throws Exception {
+    public UserListingPage viewUser() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.viewButton.xpath"))).click();
         return new UserListingPage(driver);
     }

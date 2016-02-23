@@ -32,7 +32,7 @@ public class EnrollDevicePage {
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
-    public EnrollDevicePage(WebDriver driver) throws IOException{
+    public EnrollDevicePage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
     }

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 /**
@@ -20,7 +21,7 @@ public class EditUserPage {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
         if (!webDriverWait.until(ExpectedConditions.titleContains("User Management | IoT Server"))){
             throw new IllegalStateException("This is not the Edit User page");
         }

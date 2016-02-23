@@ -307,7 +307,7 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.carbon.iot.integration.ui.pages</artifactId>
-                <version>${carbon.device.mgt.plugin.version}</version>
+                <version>${carbon.iot.device.mgt.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -1048,6 +1048,9 @@
         <!-- Carbon Device Management -->
         <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
+
+        <!-- IOT Device Management -->
+        <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
         <carbon.device.mgt.plugin.version>2.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>

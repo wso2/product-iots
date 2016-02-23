@@ -47,13 +47,13 @@ public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for adding a new device group.")
-    public void addNewGroupTest () throws Exception {
+    public void addNewGroupTest() throws Exception {
         DeviceAddGroupPage addGroupPage = adminDashboard.addGroup();
         addGroupPage.addNewGroup("group1", "This is test group");
     }
 
-    @Test (description = "Check whether the created group exists", dependsOnMethods = {"addNewGroupTest"})
-    public void isGroupCreatedTest () throws Exception {
+    @Test(description = "Check whether the created group exists", dependsOnMethods = {"addNewGroupTest"})
+    public void isGroupCreatedTest() throws Exception {
         driver.get(getWebAppURL() + Constants.IOT_HOME_URL);
         DeviceGroupsPage groupsPage = adminDashboard.viewGroups();
         Assert.assertTrue(groupsPage.isGroupCreated("group1"));
