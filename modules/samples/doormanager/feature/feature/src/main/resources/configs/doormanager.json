@@ -1,0 +1,19 @@
+{
+  "deviceType": {
+    "label": "Door Manager",
+    "category": "iot"
+  },
+  "analyticStreams": [
+    {
+      "name": "sensorValue",
+      "table": "DEVICE_SENSOR_DATA_SUMMARY",
+      "ui_unit": {
+        "name": "cdmf.unit.analytics.line-chart",
+        "data":[
+          {"column": {"name":"TIME", "label":"time", "ui-mapping":"x-axis"}},
+          {"column": {"name":"sensorValue", "label":"sensorValue", "ui-mapping":"y-axis"}}
+        ]
+      }
+    }
+  ]
+}

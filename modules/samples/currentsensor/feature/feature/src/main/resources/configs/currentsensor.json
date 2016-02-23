@@ -1,7 +1,7 @@
 {
   "deviceType": {
-    "label": "Water Dispensor",
-    "category": "virtual"
+    "label": "Smart Meeter",
+    "category": "iot"
   },
   "analyticStreams": [
     {
