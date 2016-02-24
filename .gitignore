@@ -31,3 +31,5 @@ target
 *.iml
 .idea
 .DS_Store
+*.pyc
+.sonar
