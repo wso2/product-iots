@@ -1028,7 +1028,7 @@
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
         <!-- Carbon Commons -->
-        <carbon.commons.version>4.4.8</carbon.commons.version>
+        <carbon.commons.version>4.4.9-SNAPSHOT</carbon.commons.version>
 
         <!-- Carbon Deployment -->
         <carbon.deployment.version>4.6.0</carbon.deployment.version>
@@ -1060,7 +1060,7 @@
         <carbon.mediation.version>4.4.11</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.0.10-SNAPSHOT</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.11-SNAPSHOT</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
