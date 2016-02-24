@@ -1,5 +1,4 @@
-# multi-module-maven-archetype example
-
+# cdmf-devicetype-archetype
 
 To create new project
 
@@ -20,7 +19,7 @@ version, packaging and name of your device type as shown bellow.
        version: 1.0.0-SNAPSHOT
        package: org.coffeeking
        deviceType: connectedCup
-        Y: : 
+        Y: : Y
 
        
 
