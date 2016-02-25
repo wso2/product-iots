@@ -142,15 +142,10 @@ public class ControllerService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void pushData(final DeviceJSON agentInfo, @Context HttpServletResponse response) {
-        String owner = agentInfo.owner;
-        String deviceId = agentInfo.deviceId;
-        float pinData = agentInfo.sensorValue;
-        log.warn(pinData);
-        log.warn(String.valueOf(pinData));
-        if (!ServiceUtils.publishToDASSensorValue(agentInfo.owner, agentInfo.deviceId, pinData)) {
+        if (!ServiceUtils.publishToDASSensorValue(agentInfo.owner, agentInfo.deviceId, agentInfo.sensorValue)) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            log.warn("An error occurred whilst trying to publish pin data of go Data with ID [" + deviceId +
-                    "] of owner [" + owner + "]");
+            log.warn("An error occurred whilst trying to publish pin data of go Data with ID [" + agentInfo.deviceId +
+                    "] of owner [" + agentInfo.owner + "]");
         }
     }
 
@@ -170,7 +165,6 @@ public class ControllerService {
                                   @Context HttpServletResponse response) {
         try {
             mqttConnector.sendCommandViaMQTT(owner, deviceId, "Sensor:", state.toUpperCase());
-
             response.setStatus(Response.Status.OK.getStatusCode());
         } catch (DeviceManagementException e) {
             log.error(e);

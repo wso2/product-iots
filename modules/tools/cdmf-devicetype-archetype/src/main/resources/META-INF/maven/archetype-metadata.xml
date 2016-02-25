@@ -21,7 +21,7 @@
         <requiredProperty key="nameOfTheSensor"></requiredProperty>
     </requiredProperties>
     <modules>
-        <module id="component" dir="component" name="component">
+        <module id="${rootArtifactId}-component" dir="component" name="${rootArtifactId}-component">
             <modules>
                 <module id="${groupId}.${rootArtifactId}.plugin" dir="plugin"
                         name="${groupId}.${rootArtifactId}.plugin">
@@ -149,7 +149,7 @@
                 </module>
             </modules>
         </module>
-        <module id="feature" dir="feature" name="feature">
+        <module id="${rootArtifactId}-feature" dir="feature" name="${rootArtifactId}-feature">
             <modules>
                 <module id="${groupId}.${rootArtifactId}.feature" dir="feature"
                         name="${groupId}.${rootArtifactId}.feature">

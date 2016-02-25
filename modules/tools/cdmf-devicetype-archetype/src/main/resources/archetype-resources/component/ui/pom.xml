@@ -21,7 +21,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>${groupId}</groupId>
-        <artifactId>component</artifactId>
+        <artifactId>${rootArtifactId}-component</artifactId>
         <version>${version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
