@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>${groupId}</groupId>
-        <artifactId>component</artifactId>
+        <artifactId>${rootArtifactId}-component</artifactId>
         <version>${version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -56,7 +56,7 @@
                         <Bundle-Name>${artifactId}</Bundle-Name>
                         <Bundle-Version>${version}</Bundle-Version>
                         <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
-                        <Private-Package>${groupId}.${rootArtifactId}.plugin.internal</Private-Package>
+                        <Private-Package>${project-base-package}.plugin.internal</Private-Package>
                         <Import-Package>
                             org.osgi.framework,
                             org.osgi.service.component,
@@ -73,8 +73,8 @@
                             org.wso2.carbon.device.mgt.iot.*,
                         </Import-Package>
                         <Export-Package>
-                            !${groupId}.${rootArtifactId}.plugin.internal,
-                            ${groupId}.${rootArtifactId}.plugin.*
+                            !${project-base-package}.plugin.internal,
+                            ${project-base-package}.plugin.*
                         </Export-Package>
                     </instructions>
                 </configuration>
