@@ -1,12 +1,14 @@
 # cdmf-devicetype-archetype
 
 To install this maven archetype 
-     go to this folder `cdmf-devicetype-archetype` 
+     
+go to this folder `cdmf-devicetype-archetype` 
        
      mvn clean install
 
 To create new project
-     go to this folder `/wso2iots-1.0.0-SNAPSHOT/samples`
+
+go to this folder `/wso2iots-1.0.0-SNAPSHOT/samples`
      
      mvn archetype:generate -DarchetypeCatalog=local
      
@@ -32,7 +34,7 @@ version, packaging, name of your device type and name for sensor as shown bellow
 To install sample app into IOTS
    open `device-deployer.xml` which is located in wso2iots-1.0.0-SNAPSHOT directory
 
-Under modules tag add name of sample which you created as module as below
+Under modules tag add name of sample which you created as module
            
            <module>samples/safeLocker</module>
 
