@@ -48,12 +48,6 @@
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${project-base-package}.agent</artifactId>
-            <version>${version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
             <groupId>com.h2database.wso2</groupId>
             <artifactId>h2-database-engine</artifactId>
             <version>1.2.140.wso2v3</version>
@@ -90,6 +84,40 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${groupId}</groupId>
+                                    <artifactId>${project-base-package}.analytics</artifactId>
+                                    <version>${version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${groupId}</groupId>
+                                    <artifactId>${project-base-package}.ui
+                                    </artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>copy-jaxrs-manager-war</id>
                         <phase>package</phase>
                         <goals>
@@ -102,8 +130,11 @@
                                     <artifactId>${project-base-package}.manager</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
-                                    <destFileName>${rootArtifactId}_mgt.war</destFileName>
+                                    <outputDirectory>
+                                        <!--${basedir}/src/main/resources/webapps/-->
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
+                                    <destFileName>${deviceType}_mgt.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -121,27 +152,11 @@
                                     <artifactId>${project-base-package}.controller</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
-                                    <destFileName>${rootArtifactId}.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-agent-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${groupId}</groupId>
-                                    <artifactId>${project-base-package}.agent</artifactId>
-                                    <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
-                                    <destFileName>${rootArtifactId}_agent.war</destFileName>
+                                    <outputDirectory>
+                                        <!--${basedir}/src/main/resources/webapps/-->
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
+                                    <destFileName>${deviceType}.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -166,7 +181,7 @@
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
-                                          value="jdbc:h2:file:${basedir}/${db.dir}/${deviceType}DM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+                                  value="jdbc:h2:file:${basedir}/${db.dir}/${deviceType}DM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
                                 <mkdir dir="${basedir}/${db.dir}"/>
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
                                      password="${password}"

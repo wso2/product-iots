@@ -34,7 +34,6 @@
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-
     <context-param>
         <param-name>isAdminService</param-name>
         <param-value>false</param-value>
@@ -43,7 +42,6 @@
         <param-name>doAuthentication</param-name>
         <param-value>false</param-value>
     </context-param>
-
     <!--publish to apim-->
     <context-param>
         <param-name>managed-api-enabled</param-name>
@@ -53,18 +51,16 @@
         <param-name>managed-api-owner</param-name>
         <param-value>admin</param-value>
     </context-param>
-    <!--please change sampleapp with your application name -->
     <context-param>
         <param-name>managed-api-context-template</param-name>
-        <param-value>/sampleapp/{version}</param-value>
+        <param-value>/${deviceType}/{version}</param-value>
     </context-param>
     <context-param>
         <param-name>managed-api-application</param-name>
-        <param-value>sampleapp</param-value>
+        <param-value>${deviceType}</param-value>
     </context-param>
     <context-param>
         <param-name>managed-api-isSecured</param-name>
         <param-value>true</param-value>
     </context-param>
-
 </web-app>
