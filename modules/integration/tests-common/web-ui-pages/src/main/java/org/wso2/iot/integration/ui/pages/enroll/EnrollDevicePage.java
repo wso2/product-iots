@@ -36,5 +36,4 @@ public class EnrollDevicePage {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
     }
-
 }

@@ -30,7 +30,6 @@ public class UIElementMapper {
     private static UIElementMapper instance;
 
     private UIElementMapper(){
-
     }
 
     public static synchronized UIElementMapper getInstance() throws IOException {
@@ -59,6 +58,4 @@ public class UIElementMapper {
         }
         return null;
     }
-
-
 }

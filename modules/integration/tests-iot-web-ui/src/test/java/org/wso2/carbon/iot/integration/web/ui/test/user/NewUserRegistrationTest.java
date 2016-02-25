@@ -37,9 +37,9 @@ import java.io.IOException;
 /**
  * Test for registering a new user and login
  */
-public class RegisterTest extends IOTIntegrationUIBaseTestCase {
+public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
-    UIElementMapper uiElementMapper;
+    private UIElementMapper uiElementMapper;
 
     @BeforeClass(alwaysRun = true)
     public void setup() throws XPathExpressionException, XMLStreamException, IOException {
@@ -50,10 +50,10 @@ public class RegisterTest extends IOTIntegrationUIBaseTestCase {
 
     @Test(description = "Verify new User registration")
     public void userRegisterTest() throws IOException {
-        LoginPage test = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         uiElementMapper = UIElementMapper.getInstance();
-        NewUserRegisterPage registerTest = test.registerNewUser();
-        LoginPage loginPage = registerTest.registerUser(
+        NewUserRegisterPage registerTest = loginPage.registerNewUser();
+        loginPage = registerTest.registerUser(
                 uiElementMapper.getElement("iot.user.add.firstname"),
                 uiElementMapper.getElement("iot.user.add.lastname"),
                 uiElementMapper.getElement("iot.user.add.email"),
@@ -65,10 +65,13 @@ public class RegisterTest extends IOTIntegrationUIBaseTestCase {
                                                      uiElementMapper.getElement("iot.user.add.password"));
 
         Assert.assertTrue(homePage.checkUserName());
+    }
 
+    @Test(description = "Test user logout function", dependsOnMethods = {"userRegisterTest"})
+    public void logoutTest() throws IOException {
+        IOTHomePage homePage = new IOTHomePage(driver);
         homePage.logout();
-
-        driver.close();
+        Assert.assertEquals(driver.getTitle(), "Login | IoT Server");
     }
 
     @AfterClass(alwaysRun = true)

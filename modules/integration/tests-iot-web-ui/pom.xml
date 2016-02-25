@@ -48,9 +48,9 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
-                    <!--<skipTests>${skipUiTests}</skipTests>-->
 
                     <systemProperties>
+                        <skipTests>true</skipTests>
                         <property>
                             <name>maven.test.haltafterfailure</name>
                             <value>false</value>
@@ -245,30 +245,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-antrun-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>Test.Connected.Cup</id>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<echo message="********************** installing ************************"/>-->
-                                <!--&lt;!&ndash;<property name="tempDir" refid="**/wso2iots-1.0.0-SNAPSHOT"/>&ndash;&gt;-->
-                                <!--<ant antfile="${basedir}/src/test/resources/build.xml">-->
-                                <!--<target name="mvn clean"/>-->
-                                <!--<target name="mvn clean package"/>-->
-                                <!--</ant>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<version>1.8</version>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 
@@ -291,8 +267,5 @@
         </dependency>
     </dependencies>
 
-    <properties>
-        <skipUiTests>true</skipUiTests>
-    </properties>
 
 </project>

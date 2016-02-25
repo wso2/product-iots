@@ -20,6 +20,9 @@ package org.wso2.iot.integration.ui.pages.uesr;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -39,18 +42,23 @@ public class UserListingPage {
     /**
      * @return After deleting a user, returns back to the user listing page.
      */
-    //Don't use generic exceptions.
-    public UserListingPage deleteUser() throws IOException, InterruptedException {
+    public UserListingPage deleteUser() throws IOException {
         WebElement deleteBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.deleteUser.btn.xpath")));
-        if (deleteBtn != null) {
-            deleteBtn.click();
-        } else {
-            return new UserListingPage(driver);
-        }
-        driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.yes.link.xpath"))).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.success.link.xpath"))).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        wait.until(ExpectedConditions.visibilityOf(deleteBtn));
+        deleteBtn.click();
+
+        WebElement deleteConfirmationBtn = driver.findElement(
+                By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.yes.link.xpath")));
+        wait.until(ExpectedConditions.visibilityOf(deleteConfirmationBtn));
+        deleteConfirmationBtn.click();
+
+        WebElement deleteSuccessBtn = driver.findElement(
+                By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.success.link.xpath")));
+        wait.until(ExpectedConditions.visibilityOf(deleteSuccessBtn));
+        deleteSuccessBtn.click();
 
         return new UserListingPage(driver);
     }

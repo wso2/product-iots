@@ -27,6 +27,10 @@ import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * Test Login as Admin
  */
@@ -34,14 +38,14 @@ public class LoginTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws Exception {
+    public void setup() throws XPathExpressionException, XMLStreamException, IOException {
         super.init();
         driver = BrowserManager.getWebDriver();
         driver.get(getWebAppURL() + Constants.IOT_LOGIN_PATH);
     }
 
     @Test(description = "Verify login to IOT server dashboard")
-    public void testAdminLogin() throws Exception {
+    public void testAdminLogin() throws IOException, XPathExpressionException {
         LoginPage test = new LoginPage(driver);
         IOTAdminDashboard dashboard = test.loginAsAdmin(
                 automationContext.getSuperTenant().getTenantAdmin().getUserName(),
@@ -50,8 +54,7 @@ public class LoginTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception {
-        driver.close();
+    public void tearDown(){
         driver.quit();
     }
 }

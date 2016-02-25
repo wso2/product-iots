@@ -63,6 +63,4 @@ public class DeviceGroupsPage {
 
         return groupsList.contains(groupName);
     }
-
-
 }

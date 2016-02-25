@@ -31,6 +31,9 @@ import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceGroupsPage;
 import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
 
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * Test cases for grouping feature of IOT server.
  */
@@ -47,13 +50,13 @@ public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for adding a new device group.")
-    public void addNewGroupTest() throws Exception {
+    public void addNewGroupTest() throws IOException {
         DeviceAddGroupPage addGroupPage = adminDashboard.addGroup();
         addGroupPage.addNewGroup("group1", "This is test group");
     }
 
     @Test(description = "Check whether the created group exists", dependsOnMethods = {"addNewGroupTest"})
-    public void isGroupCreatedTest() throws Exception {
+    public void isGroupCreatedTest() throws IOException, XPathExpressionException {
         driver.get(getWebAppURL() + Constants.IOT_HOME_URL);
         DeviceGroupsPage groupsPage = adminDashboard.viewGroups();
         Assert.assertTrue(groupsPage.isGroupCreated("group1"));
@@ -63,5 +66,4 @@ public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
     public void tearDown() throws Exception {
         driver.quit();
     }
-
 }

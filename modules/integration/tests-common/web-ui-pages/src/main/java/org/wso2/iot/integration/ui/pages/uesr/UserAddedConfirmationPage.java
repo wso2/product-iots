@@ -21,8 +21,5 @@ public class UserAddedConfirmationPage {
         this.uiElementMapper = UIElementMapper.getInstance();
 
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.addUser.view.btn.xpath"))).click();
-
     }
-
-
 }

@@ -62,6 +62,4 @@ public class AddUserPage {
 
         return new UserAddedConfirmationPage(driver);
     }
-
-
 }

@@ -134,26 +134,6 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
         String[] messageData = mqttMessage.toString().split(":");
         Float value = Float.valueOf(messageData[1]);
 
-//        if (actualMessage.contains("PUBLISHER")) {
-//            float temperature = Float.parseFloat(actualMessage.split(":")[2]);
-//
-//            if (!ConnectedCupServiceUtils.publishToDAS(owner, deviceId, messageData[0], value)) {
-//                log.error("MQTT Subscriber: Publishing data to DAS failed.");
-//            }
-//
-//            if (log.isDebugEnabled()) {
-//                log.debug("MQTT Subscriber: Published data to DAS successfully.");
-//            }
-//
-//        } else if (actualMessage.contains("TEMPERATURE")) {
-//            String temperatureValue = actualMessage.split(":")[1];
-//            SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
-//                                                            temperatureValue,
-//                                                            Calendar.getInstance().getTimeInMillis());
-//        }
-//
-//
-
         switch(messageData[0]) {
             case "temperature":
                 SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,

@@ -65,7 +65,6 @@ public class DeviceAddGroupPage {
         addGroupButton.click();
 
         return new DeviceGroupsPage(driver);
-
     }
 
     /**
@@ -87,5 +86,4 @@ public class DeviceAddGroupPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.device.groups.add.emptyfrom.error"))).getText();
     }
-
 }

@@ -49,14 +49,12 @@ public class IOTIntegrationUIBaseTestCase {
     }
 
     protected String getSessionCookie(AutomationContext context)
-            throws RemoteException, XPathExpressionException,
-                   LoginAuthenticationExceptionException {
+            throws RemoteException, XPathExpressionException, LoginAuthenticationExceptionException {
         AuthenticatorClient authenticationAdminClient = new AuthenticatorClient(context.getContextUrls().getBackEndUrl());
         return authenticationAdminClient.login(automationContext.getSuperTenant().
-                                                                       getTenantAdmin().getUserName(), automationContext.getSuperTenant().
-                                                                       getTenantAdmin().getPassword(),
-                                                               automationContext.getDefaultInstance().getHosts().get("default"));
-
+                                                       getTenantAdmin().getUserName(), automationContext.getSuperTenant().
+                                                       getTenantAdmin().getPassword(),
+                                               automationContext.getDefaultInstance().getHosts().get("default"));
     }
 
     protected String getServiceURL() throws XPathExpressionException {

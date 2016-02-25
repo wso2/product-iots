@@ -25,7 +25,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
 /**
- * This class is used to login to the system as the Admin.
+ * This class is used to login to the server as the Admin.
  */
 public class LoginUtils {
 
@@ -43,6 +43,4 @@ public class LoginUtils {
         test.loginAsAdmin(automationContext.getSuperTenant().getTenantAdmin().getUserName(),
                           automationContext.getSuperTenant().getTenantAdmin().getPassword());
     }
-
-
 }

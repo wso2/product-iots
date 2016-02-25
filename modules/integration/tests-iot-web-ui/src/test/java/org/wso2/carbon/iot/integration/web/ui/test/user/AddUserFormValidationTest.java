@@ -43,16 +43,16 @@ import java.io.IOException;
  * 5. Empty email
  * 6. Incorrect email
  */
-public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
+public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
-    UIElementMapper uiElementMapper;
+    private UIElementMapper uiElementMapper;
 
-    WebElement firstNameField;
-    WebElement lastNameField;
-    WebElement emailField;
-    WebElement userNameField;
-    WebElement addUserButton;
+    private WebElement firstNameField;
+    private WebElement lastNameField;
+    private WebElement emailField;
+    private WebElement userNameField;
+    private WebElement addUserButton;
 
     @BeforeClass(alwaysRun = true)
     public void setup() throws XPathExpressionException, XMLStreamException, IOException {
@@ -60,7 +60,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         driver = BrowserManager.getWebDriver();
         LoginUtils.login(driver, automationContext, getWebAppURL());
         driver.get(getWebAppURL() + Constants.IOT_USER_ADD_URL);
-
         uiElementMapper = UIElementMapper.getInstance();
 
         userNameField = driver.findElement(By.id(uiElementMapper.getElement("iot.admin.addUser.username.id")));
@@ -72,7 +71,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty form submission")
-    public void emptyFormTest() throws Exception {
+    public void emptyFormTest(){
         clearForm();
 
         firstNameField.sendKeys("");
@@ -88,7 +87,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for short user name")
-    public void shortUserNameTest() throws Exception {
+    public void shortUserNameTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -104,7 +103,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty first name")
-    public void emptyFirstNameTest() throws Exception {
+    public void emptyFirstNameTest() {
         clearForm();
 
         firstNameField.sendKeys("");
@@ -120,7 +119,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty last name")
-    public void emptyLastNameTest() throws Exception {
+    public void emptyLastNameTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -135,7 +134,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty email name")
-    public void emptyEmailTest() throws Exception {
+    public void emptyEmailTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -151,7 +150,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for incorrect email")
-    public void incorrectEmailTest() throws Exception {
+    public void incorrectEmailTest() {
         clearForm();
 
         firstNameField.sendKeys("User");
@@ -164,7 +163,6 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
         Assert.assertEquals(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
                             "Provided email is invalid. Please check.");
-
     }
 
     private void clearForm() {
@@ -175,8 +173,7 @@ public class AddUserFailTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception {
+    public void tearDown() {
         driver.quit();
     }
-
 }
