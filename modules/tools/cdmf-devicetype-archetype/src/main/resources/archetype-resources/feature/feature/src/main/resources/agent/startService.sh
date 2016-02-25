@@ -43,6 +43,11 @@ for f in ./deviceConfig.properties; do
     break
 done
 
+#install mqtt dependency
+git clone git://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.python.git
+cd org.eclipse.paho.mqtt.python
+sudo python setup.py install
+
 cd $currentDir
 
 #while true; do
@@ -63,7 +68,6 @@ if [ $? -ne 0 ]; then
 	echo "Could not start the service..."
 	exit;
 fi
-
 
 echo "--------------------------------------------------------------------------"
 echo "|			Successfully Started		"
