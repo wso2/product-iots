@@ -28,13 +28,14 @@
 
         <classes>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.RegisterTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.RegistrationFormTests"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.NewUserRegistrationTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.RegistrationFormValidationTests"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginFailTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupFailTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.user.TestAdminFunctions"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFailTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFormValidationTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleInstallationTest"/>
         </classes>
 
     </test>
