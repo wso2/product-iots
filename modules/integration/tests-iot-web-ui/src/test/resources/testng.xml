@@ -27,15 +27,16 @@
         </packages>
 
         <classes>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.NewUserRegistrationTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.RegistrationFormValidationTests"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginFailTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupFailTest"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.TestAdminFunctions"/>
-            <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFormValidationTest"/>
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.user.NewUserRegistrationTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.user.RegistrationFormValidationTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.login.LoginFailTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupFailTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.user.AdminFunctionsTest"/>-->
+            <!--<class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFormValidationTest"/>-->
             <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleInstallationTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleInstallationVerification"/>
         </classes>
 
     </test>

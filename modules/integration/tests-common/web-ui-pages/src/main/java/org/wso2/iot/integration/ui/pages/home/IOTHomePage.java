@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
-import org.wso2.iot.integration.ui.pages.enroll.EnrollDevicePage;
+import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
 

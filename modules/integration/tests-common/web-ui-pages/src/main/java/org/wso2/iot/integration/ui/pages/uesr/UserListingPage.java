@@ -42,7 +42,7 @@ public class UserListingPage {
     /**
      * @return After deleting a user, returns back to the user listing page.
      */
-    public UserListingPage deleteUser() throws IOException {
+    public UserListingPage deleteUser() throws IOException, InterruptedException {
         WebElement deleteBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.deleteUser.btn.xpath")));
 
@@ -55,9 +55,9 @@ public class UserListingPage {
         wait.until(ExpectedConditions.visibilityOf(deleteConfirmationBtn));
         deleteConfirmationBtn.click();
 
+        Thread.sleep(UIConstants.threadTimeout);
         WebElement deleteSuccessBtn = driver.findElement(
                 By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.success.link.xpath")));
-        wait.until(ExpectedConditions.visibilityOf(deleteSuccessBtn));
         deleteSuccessBtn.click();
 
         return new UserListingPage(driver);

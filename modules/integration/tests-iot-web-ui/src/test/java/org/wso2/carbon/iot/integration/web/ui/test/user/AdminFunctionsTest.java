@@ -38,7 +38,7 @@ import java.io.IOException;
  * - Create a new User
  * - Delete a user
  */
-public class TestAdminFunctions extends IOTIntegrationUIBaseTestCase {
+public class AdminFunctionsTest extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
 

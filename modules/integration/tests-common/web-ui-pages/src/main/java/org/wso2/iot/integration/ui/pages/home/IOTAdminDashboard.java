@@ -23,6 +23,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.iot.integration.ui.pages.devices.DevicesPage;
+import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceGroupsPage;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
@@ -91,6 +93,16 @@ public class IOTAdminDashboard {
     public UserListingPage viewUser() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.viewButton.xpath"))).click();
         return new UserListingPage(driver);
+    }
+
+    public EnrollDevicePage enrollNewDevice() throws IOException {
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.device.addBtn.xpath"))).click();
+        return new EnrollDevicePage(driver);
+    }
+
+    public DevicesPage viewDevices() throws IOException {
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.device.viewBtn.xpath"))).click();
+        return new DevicesPage(driver);
     }
 
     //ToDo : Need to add device and policy methods

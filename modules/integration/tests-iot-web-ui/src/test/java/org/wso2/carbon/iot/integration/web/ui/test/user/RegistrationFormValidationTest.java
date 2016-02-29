@@ -40,7 +40,7 @@ import java.io.IOException;
  * - Non matching passwords
  * - Password, username length
  */
-public class RegistrationFormValidationTests extends IOTIntegrationUIBaseTestCase {
+public class RegistrationFormValidationTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
     private NewUserRegisterPage registerPage;
@@ -99,7 +99,7 @@ public class RegistrationFormValidationTests extends IOTIntegrationUIBaseTestCas
 
     @Test(description = "Test for password length")
     public void passwordLengthTest() {
-        registerPage.validateForm("user", "user", "user@wso2.com", "user1", "passw", "passw");
+        registerPage.validateForm("user", "user", "user@wso2.com", "user1", "pass", "pass");
         Assert.assertEquals(driver.findElement(By.id(
                 uiElementMapper.getElement("iot.user.register.password.error"))).getText(),
                             "Password should be between 5 and 30 characters.");
@@ -109,6 +109,4 @@ public class RegistrationFormValidationTests extends IOTIntegrationUIBaseTestCas
     public void tearDown() {
         driver.quit();
     }
-
-
 }

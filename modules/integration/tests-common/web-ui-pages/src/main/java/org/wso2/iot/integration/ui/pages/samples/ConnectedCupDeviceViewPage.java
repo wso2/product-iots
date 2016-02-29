@@ -15,25 +15,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.iot.integration.ui.pages.enroll;
+package org.wso2.iot.integration.ui.pages.samples;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
-import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
-import java.io.IOException;
+public class ConnectedCupDeviceViewPage {
 
-/**
- * Device Enrollment page for new user
- */
-public class EnrollDevicePage {
-    private static final Log log = LogFactory.getLog(EnrollDevicePage.class);
-    private WebDriver driver;
-    private UIElementMapper uiElementMapper;
-
-    public EnrollDevicePage(WebDriver driver) throws IOException {
-        this.driver = driver;
-        this.uiElementMapper = UIElementMapper.getInstance();
-    }
 }

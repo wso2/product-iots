@@ -20,11 +20,16 @@ package org.wso2.carbon.iot.integration.web.ui.test.samples;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
+import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
 import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
-import org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerManager;
+import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
+import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 
 import javax.xml.stream.XMLStreamException;
@@ -34,6 +39,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.Properties;
 
 
@@ -53,15 +60,18 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     private Properties properties = System.getProperties();
     private String carbonHome = properties.getProperty("carbon.home");
     private String[] cmdArray;
+    private LogViewerClient logViewerClient;
 
     @BeforeClass(alwaysRun = true)
-    public void setup() throws XPathExpressionException, XMLStreamException, IOException, AutomationFrameworkException {
+    public void setup() throws XPathExpressionException, XMLStreamException, IOException, AutomationFrameworkException,
+                               LoginAuthenticationExceptionException {
         super.init();
+        logViewerClient = new LogViewerClient(getBackendURL(), getSessionCookie(automationContext));
     }
 
-    @Test(description = "Verify the sample build process")
+    @Test(groups = {"iot.sample"}, description = "Verify the sample build process")
     public void sampleBuildTest() throws IOException {
-        String connectedCupDir = carbonHome + File.pathSeparator + "samples" + File.pathSeparator + "connectedcup";
+        String connectedCupDir = carbonHome + File.separator + "samples" + File.separator + "connectedcup";
         log.info("Connected cup Sample: " + connectedCupDir);
         File dir = new File(connectedCupDir);
         try {
@@ -69,7 +79,6 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
                 log.info("Executing maven clean install --------------------------------");
                 cmdArray = new String[]{"cmd.exe", "/c", "mvn clean install"};
                 tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
-
             } else {
                 log.info("Executing maven clean install --------------------------------");
                 cmdArray = new String[]{"mvn", "clean", "install"};
@@ -85,7 +94,8 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(description = "Verify the sample installation process", dependsOnMethods = {"sampleBuildTest"})
+    @Test(groups = {"iot.sample"}, description = "Verify the sample installation process", dependsOnMethods =
+            {"sampleBuildTest"})
     public void sampleInstallationTest() throws IOException {
 
         log.info("CARBON_HOME: " + System.getProperty("carbon.home"));
@@ -108,21 +118,33 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(description = "Test restarting the server", dependsOnMethods = {"sampleInstallationTest"})
+    @Test(groups = {"iot.sample"}, description = "Test restarting the server", dependsOnMethods =
+            {"sampleInstallationTest"})
     public void serverRestartTest() {
-        CarbonServerManager serverManager = new CarbonServerManager(automationContext);
+        ServerConfigurationManager serverManager;
+        LogEvent[] events;
+        String msg = "Mgt Console URL  : https://10.100.4.7:9443/carbon/";
         try {
+            serverManager = new ServerConfigurationManager(automationContext);
             serverManager.restartGracefully();
-        } catch (AutomationFrameworkException e) {
-            log.error("Restart failed....");
+
+            events = logViewerClient.getAllRemoteSystemLogs();
+            Assert.assertTrue(waitForRestart(events, msg));
+        } catch (AutomationUtilException | XPathExpressionException | MalformedURLException e) {
+            log.error("Restart failed due to : " + e.getLocalizedMessage());
+        } catch (RemoteException | LogViewerLogViewerException e) {
+            log.error("Cannot get server log due to : " + e.getLocalizedMessage());
         }
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
+        if (tempProcess != null) {
+            tempProcess.destroy();
+        }
     }
 
-    public boolean waitForMessage(InputStream inputStream, String message) throws IOException {
+    private boolean waitForMessage(InputStream inputStream, String message) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         boolean status = false;
@@ -133,5 +155,13 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
             }
         }
         return status;
+    }
+
+    private boolean waitForRestart(LogEvent[] events, String msg) {
+        for (LogEvent event : events) {
+            if (event.getMessage().contains(msg))
+                return true;
+        }
+        return false;
     }
 }
