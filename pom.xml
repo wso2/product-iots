@@ -1079,7 +1079,7 @@
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <carbon.dashboard.version>1.0.9</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.11</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.12</carbon.event-processing.version>
         <carbon.data.version>4.3.5-SNAPSHOT</carbon.data.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
