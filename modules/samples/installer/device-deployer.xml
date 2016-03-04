@@ -35,6 +35,7 @@
         <!-- STEP#1 ADD THE LOCATION OF YOUR DEVICE-TYPE -->
         <module>samples/connectedcup</module>
         <module>samples/currentsensor</module>
+        <module>samples/firealarm</module>
     </modules>
 
     <build>
@@ -63,6 +64,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.homeautomation:org.homeautomation.currentsensor.feature:2.0.4-SNAPSHOT
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.homeautomation:org.homeautomation.firealarm.feature:1.0.0-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -96,6 +100,10 @@
                                 <feature>
                                     <id>org.homeautomation.currentsensor.feature.group</id>
                                     <version>2.0.4-SNAPSHOT</version>
+                                </feature>
+                                <feature>
+                                    <id>org.homeautomation.firealarm.feature.group</id>
+                                    <version>1.0.0-SNAPSHOT</version>
                                 </feature>
                             </features>
                         </configuration>

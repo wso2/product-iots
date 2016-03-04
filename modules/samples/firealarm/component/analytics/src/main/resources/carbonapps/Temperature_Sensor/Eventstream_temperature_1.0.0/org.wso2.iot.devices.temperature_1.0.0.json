@@ -1,0 +1,33 @@
+{
+  "name": "org.wso2.iot.devices.temperature",
+  "version": "1.0.0",
+  "nickName": "Temperature Data",
+  "description": "Temperature data received from the Device",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "temperature",
+      "type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		
