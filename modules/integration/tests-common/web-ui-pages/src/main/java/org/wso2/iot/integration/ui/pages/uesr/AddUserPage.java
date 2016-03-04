@@ -71,10 +71,6 @@ public class AddUserPage {
         lastNameField.sendKeys(lastName);
         emailField.sendKeys(email);
 
-        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-//                uiElementMapper.getElement("iot.admin.addUser.add.btn.xpath"))));
-
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.addUser.add.btn.xpath"))).click();
 
         return new UserAddedConfirmationPage(driver);

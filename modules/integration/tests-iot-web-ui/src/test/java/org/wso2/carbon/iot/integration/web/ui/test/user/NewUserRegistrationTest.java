@@ -39,7 +39,6 @@ import java.io.IOException;
  */
 public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
-    private UIElementMapper uiElementMapper;
 
     @BeforeClass(alwaysRun = true)
     public void setup() throws XPathExpressionException, XMLStreamException, IOException {
@@ -51,7 +50,7 @@ public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     @Test(description = "Verify new User registration")
     public void userRegisterTest() throws IOException {
         LoginPage login = new LoginPage(driver);
-        uiElementMapper = UIElementMapper.getInstance();
+        UIElementMapper uiElementMapper = UIElementMapper.getInstance();
         NewUserRegisterPage registerTest = login.registerNewUser();
         LoginPage loginPage = registerTest.registerUser(
                 uiElementMapper.getElement("iot.user.add.firstname"),

@@ -54,13 +54,13 @@ public class DeviceGroupsPage {
     public boolean isGroupCreated(String groupName) {
         WebElement table = driver.findElement(By.id(uiElementMapper.getElement("iot.device.table.id")));
         List<WebElement> allGroupNames = table.findElements(By.tagName("h4"));
-        List<String> groupsList = new ArrayList<>();
 
         for (WebElement name : allGroupNames) {
-            groupsList.add(name.getText());
-
+            if (name.getText().contains(groupName)){
+                return true;
+            }
         }
 
-        return groupsList.contains(groupName);
+        return false;
     }
 }

@@ -32,8 +32,6 @@ import java.rmi.RemoteException;
 
 
 public class IOTIntegrationUIBaseTestCase {
-
-    private static final Log log = LogFactory.getLog(IOTIntegrationUIBaseTestCase.class);
     protected AutomationContext automationContext;
 
     protected void init() throws IOException, XMLStreamException, XPathExpressionException {

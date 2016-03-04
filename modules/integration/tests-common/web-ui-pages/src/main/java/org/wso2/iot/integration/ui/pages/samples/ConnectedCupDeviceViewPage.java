@@ -18,6 +18,36 @@
 package org.wso2.iot.integration.ui.pages.samples;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIElementMapper;
+
+import java.io.IOException;
+
 public class ConnectedCupDeviceViewPage {
+    private WebDriver driver;
+    private UIElementMapper uiElementMapper;
+
+    public ConnectedCupDeviceViewPage(WebDriver driver, String name) throws IOException {
+        this.driver = driver;
+        this.uiElementMapper = UIElementMapper.getInstance();
+
+        if (!driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.sample.connectedcup.view.page.title"))).getText().
+                contains(name)) {
+            throw new IllegalStateException("This is not the Connected cup device type view page");
+        }
+    }
+
+    public VirtualSampleViewPage gotoDevice() throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTime);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                uiElementMapper.getElement("iot.sample.connectedcup.gotodevice.xpath"))));
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.connectedcup.gotodevice.xpath"))).click();
+        return new VirtualSampleViewPage(driver);
+    }
 
 }

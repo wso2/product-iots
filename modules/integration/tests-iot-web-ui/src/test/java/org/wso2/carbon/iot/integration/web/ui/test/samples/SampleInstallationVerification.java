@@ -27,7 +27,6 @@ import org.wso2.carbon.iot.integration.web.ui.test.LoginUtils;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
-import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceTypeViewPage;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
@@ -36,7 +35,6 @@ import java.io.IOException;
 public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
-    private EnrollDevicePage enrollDevicePage;
     private IOTAdminDashboard adminDashboard;
 
     @BeforeClass(alwaysRun = true)
@@ -47,17 +45,11 @@ public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase
         adminDashboard = new IOTAdminDashboard(driver);
     }
 
-    @Test(description = "Verify the sample is available in Virtual devices section.")
+    @Test(description = "Verify the sample is available in Virtual devices section.", groups = {"iot.install"},
+            dependsOnGroups = {"iot.sample"})
     public void installationVerificationTest() throws IOException {
-        enrollDevicePage = adminDashboard.enrollNewDevice();
-        Assert.assertTrue(enrollDevicePage.isInstalled("ConnectedCup"));
-//        Assert.assertTrue(enrollDevicePage.isInstalled("Virtual Fire Alarm"));
-    }
-
-    @Test(description = "Verify the installation of UI components.", dependsOnMethods =
-            {"installationVerificationTest"})
-    public void verifyNavigationToDeviceTypeView() throws IOException {
-        ConnectedCupDeviceTypeViewPage connectedCupDeviceTypeViewPage = enrollDevicePage.gotoConnectedCupDeviceTypeViewPage();
+        EnrollDevicePage enrollDevicePage = adminDashboard.enrollNewDevice();
+        Assert.assertTrue(enrollDevicePage.isInstalled());
     }
 
     @AfterClass(alwaysRun = true)

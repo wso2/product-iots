@@ -20,6 +20,7 @@ package org.wso2.iot.integration.ui.pages.devices;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,9 +35,9 @@ import java.io.IOException;
  * Device Enrollment page for new user
  */
 public class EnrollDevicePage {
-    private static final Log log = LogFactory.getLog(EnrollDevicePage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
+    private Log log = LogFactory.getLog(EnrollDevicePage.class);
 
     public EnrollDevicePage(WebDriver driver) throws IOException {
         this.driver = driver;
@@ -48,22 +49,31 @@ public class EnrollDevicePage {
         }
     }
 
-    public boolean isInstalled(String name) {
-
-        return driver.findElement(By.id("#" + name.toLowerCase())) != null;
-
-//        WebElement sample = null;
-//        try {
-//            sample = driver.findElement(By.id("#"+name.toLowerCase()));
-//        } catch (NoSuchElementException e){
-//            log.error("No element found for id: " + name);
-//        }
-//        return sample != null;
+    public boolean isInstalled() {
+        boolean check = UIConstants.isElementPresent(log, driver, By.xpath(
+                uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
+        if (check) {
+            WebElement deviceDiv = driver.findElement(By.xpath(
+                    uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
+            WebElement tryBtn = deviceDiv.findElement(By.tagName("button"));
+            return tryBtn.isDisplayed();
+        }
+        return false;
     }
 
     public ConnectedCupDeviceTypeViewPage gotoConnectedCupDeviceTypeViewPage() throws IOException {
-        WebElement tryBtn = driver.findElement(By.id(uiElementMapper.getElement("iot.sample.connectedcup.try.btn.id")));
-        tryBtn.click();
-        return new ConnectedCupDeviceTypeViewPage(driver);
+        boolean check = UIConstants.isElementPresent(log, driver,By.xpath(
+                uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
+        if (check){
+            WebElement deviceDiv = driver.findElement(By.xpath(
+                    uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
+            WebElement tryBtn = deviceDiv.findElement(By.tagName("button"));
+            tryBtn.click();
+            return new ConnectedCupDeviceTypeViewPage(driver);
+        } else {
+            log.error("Element not found...........................");
+            return null;
+        }
     }
+
 }

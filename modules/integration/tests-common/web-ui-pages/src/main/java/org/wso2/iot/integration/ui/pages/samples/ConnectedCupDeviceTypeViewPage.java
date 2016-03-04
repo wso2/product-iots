@@ -21,6 +21,7 @@ package org.wso2.iot.integration.ui.pages.samples;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -32,24 +33,34 @@ public class ConnectedCupDeviceTypeViewPage {
     public ConnectedCupDeviceTypeViewPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-
-//        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
-        if (driver.findElement(By.xpath(
+        if (!driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.page.title"))).getText().
                 contains("Connected Cup")) {
             throw new IllegalStateException("This is not the Connected cup device type view page");
         }
     }
 
-    public void enrollDevice(String name) {
+    public boolean isPopUpPresent() throws InterruptedException {
         WebElement createInstanceBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstanceBtn.xpath")));
         createInstanceBtn.click();
+
+        Thread.sleep(UIConstants.threadTimeout);
+
+        return driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.modal.popup.xpath"))).isDisplayed();
+
+    }
+
+    public boolean enrollDevice(String name) throws InterruptedException {
+
         WebElement nameField = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstance.nameField.xpath")));
         WebElement createButton = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstance.downloadBtn.xpath")));
         nameField.sendKeys(name);
         createButton.click();
+        return driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.sample.connectedcup.page.title"))).getText().contains("Connected Cup");
     }
+
 }

@@ -23,4 +23,10 @@ public class Constants {
     public static final String IOT_USER_ADD_URL = "/devicemgt/user/add";
     public static final String IOT_GROUP_ADD_URL = "/devicemgt/group/add";
     public static final String IOT_HOME_URL = "/devicemgt/";
+    public static final String IOT_ENROLL_CONNECTED_CUP = "/device/connectedcup/enroll";
+    public static final String IOT_DEVICES_URL = "/devicemgt/devices";
+    public static final String IOT_CONNECTED_CUP_NAME = "testDevice";
+
+
+
 }

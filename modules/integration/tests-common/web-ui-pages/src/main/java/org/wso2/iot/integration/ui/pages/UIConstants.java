@@ -17,7 +17,29 @@
  */
 package org.wso2.iot.integration.ui.pages;
 
+import org.apache.commons.logging.Log;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 public class UIConstants {
     public static long webDriverTimeOut = 10;
+    public static long webDriverTime = 60;
     public static int threadTimeout = 1000;
+
+    public static boolean isElementPresent(Log log, WebDriver driver, By by) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, webDriverTime);
+            wait.until(ExpectedConditions.presenceOfElementLocated(by));
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            log.error(by.toString() + " is not present");
+            return false;
+        }
+
+    }
+
 }
