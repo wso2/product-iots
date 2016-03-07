@@ -1,0 +1,80 @@
+#rect {
+    fill: none;
+    stroke: rgb(0, 0, 0);
+    stroke-width: 2;
+}
+
+#rectCurve {
+    fill: none;
+    stroke: rgb(0, 0, 0);
+    stroke-width: 0.5;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: grey;
+    stroke-width: 2;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+
+.label{
+    font-size: 16.844px !important;
+}
+
+/* arc tween shit*/
+.background {
+    fill: #FFFFFF;
+    fill-opacity: 0.01;
+}
+
+.component {
+    fill: #e1e1e1;
+}
+
+.component .label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #0000FF;
+}
+
+.arc {
+    stroke-weight:0.1;
+    fill: #4e8fff;
+}
+
+
+.arc2 {
+    stroke-weight:0.1;
+    fill: #3660b0;
+}
+
+
+.label {
+    font-family:  Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+}
+
+.labelArc {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #0000FF;
+}
+
+.tooltipClass {
+    background-color: #e5f2ff;
+    padding: 4px 8px;
+
+}
+.tooltipClass p{
+    margin: 0;
+    padding: 0;
+
+}
