@@ -1,0 +1,380 @@
+<%
+(function () {
+    var TYPE = "type";
+    var TABLE_NAME = "tableName";
+    var TIME_FROM = "timeFrom";
+    var TIME_TO = "timeTo";
+    var START = "start";
+    var COUNT = "count";
+    var FILTER = "filter";
+    var QUERY = "query";
+    var SORT_SCORE_VALUE = "scoreFunc";
+    var RECORDSTORE_NAME = "recordStore";
+    var HTTPS_TRANSPORT = "https";
+    var CONTENT_TYPE_JSON = "application/json";
+    var AUTHORIZATION_HEADER = "Authorization";
+    var USER_TOKEN = "user";
+    var USERNAME = "username";
+    var WAIT_TIME = "waitTime";
+    var LOCALHOST = "localhost";
+    var HTTP_USER_NOT_AUTHENTICATED = 403;
+    var HTTP_INTERNAL_ERROR = 500;
+    var MILLISECONDS_PER_SECOND = 1000;
+    var JS_MAX_VALUE = "9007199254740992";
+    var JS_MIN_VALUE = "-9007199254740992";
+    var ZERO_INDEX = "0";
+    var LAST_INDEX = "5000";    //Set the max value to 5000. This is to prevent accidental loading of millions of records.
+    var DEFAULT_COUNT = 20;
+
+    var TYPE_CLEAR_INDEX_DATA = 1;
+//    var TYPE_CREATE_TABLE = 2;
+//    var TYPE_DELETE_BY_ID = 3;
+//    var TYPE_DELETE_BY_RANGE = 4;
+//    var TYPE_DELETE_TABLE = 5;
+    var TYPE_GET_RECORD_COUNT = 6;
+    var TYPE_GET_BY_ID = 7;
+    var TYPE_GET_BY_RANGE = 8;
+    var TYPE_LIST_TABLES = 9;
+    var TYPE_GET_SCHEMA = 10;
+//    var TYPE_PUT_RECORDS = 11;
+//    var TYPE_PUT_RECORDS_TO_TABLE = 12;
+    var TYPE_SEARCH = 13;
+    var TYPE_SEARCH_COUNT = 14;
+    var TYPE_SET_SCHEMA = 15;
+    var TYPE_TABLE_EXISTS = 16;
+    var TYPE_WAIT_FOR_INDEXING = 17;
+    var TYPE_PAGINATION_SUPPORTED = 18;
+    var TYPE_DRILLDOWN_CATEGORIES = 19;
+    var TYPE_DRILLDOWN_SEARCH = 20;
+    var TYPE_DRILLDOWN_SEARCH_COUNT = 21;
+    var TYPE_ADD_STREAM_DEFINITION = 22;
+    var TYPE_GET_STREAM_DEFINITION = 23;
+    var TYPE_PUBLISH_EVENTS = 24;
+    var TYPE_GET_WITH_KEY_VALUES = 25;
+    var TYPE_GET_RECORDSTORES = 26;
+    var TYPE_GET_RECORDSTORE_BY_TABLE = 27;
+    var TYPE_WAIT_FOR_INDEXING_FOR_TABLE = 28;
+    var TYPE_SEARCH_WITH_AGGREGATES = 29;
+    var TYPE_REINDEX = 30;
+    var log = new Log();
+    var carbon = require('carbon');
+    var configs = require('/configs/designer.json');
+    var utils = require('/modules/utils.js');
+    var JSUtils = Packages.org.wso2.carbon.analytics.jsservice.Utils;
+    var AnalyticsCachedJSServiceConnector = Packages.org.wso2.carbon.analytics.jsservice.AnalyticsCachedJSServiceConnector;
+    var AnalyticsCache = Packages.org.wso2.carbon.analytics.jsservice.AnalyticsCachedJSServiceConnector.AnalyticsCache;
+    var cacheTimeoutSeconds = 5;
+    var loggedInUser = null;
+
+    if(configs.cacheTimeoutSeconds) {
+        cacheTimeoutSeconds = parseInt(configs.cacheTimeoutSeconds);
+    }
+    var cacheSizeBytes = 1024 * 1024 * 1024; // 1GB
+    if(configs.cacheSizeBytes) {
+        cacheSizeBytes = parseInt(configs.cacheSizeBytes);
+    }
+    response.contentType = CONTENT_TYPE_JSON;
+
+    var authParam = request.getHeader(AUTHORIZATION_HEADER);
+    if (authParam != null) {
+        credentials = JSUtils.authenticate(authParam);
+        loggedInUser = credentials[0];
+    } else {
+        var token = session.get(USER_TOKEN);
+        if (token != null) {
+            loggedInUser = token[USERNAME];
+        } else {
+            log.error("user is not authenticated!");
+            response.status = HTTP_USER_NOT_AUTHENTICATED;
+            print('{ "status": "Failed", "message": "User is not authenticated." }');
+            return;
+        }
+    }
+
+    var cache = application.get("AnalyticsWebServiceCache");
+    if (cache == null) {
+        cache = new AnalyticsCache(cacheTimeoutSeconds, cacheSizeBytes);
+        application.put("AnalyticsWebServiceCache", cache);
+    }
+
+    var connector = new AnalyticsCachedJSServiceConnector(cache);
+
+    var type = 0;
+    var typeParam = request.getParameter(TYPE);
+    if (typeParam != null) {
+        type = parseInt(typeParam);
+    }
+
+    if (type == 0) {
+        log.error("operation type is not specified!");
+        response.status = HTTP_INTERNAL_ERROR;
+        print('{ "status": "Failed", "message": "Operation type is not specified" }');
+        return;
+    }
+
+    var tableName = request.getParameter(TABLE_NAME);
+    if (type != TYPE_LIST_TABLES &&
+        //        type != TYPE_PUT_RECORDS &&
+        type != TYPE_PAGINATION_SUPPORTED &&
+        type != TYPE_ADD_STREAM_DEFINITION &&
+        type != TYPE_GET_STREAM_DEFINITION &&
+        type != TYPE_PUBLISH_EVENTS &&
+        type != TYPE_WAIT_FOR_INDEXING &&
+        type != TYPE_GET_RECORDSTORES) {
+        if (tableName == null) {
+            log.error("tableName is not provided!");
+            response.status = HTTP_INTERNAL_ERROR;
+            print('{ "status": "Failed", "message": "Table name param is empty" }');
+            return;
+        }
+    }
+
+    var content = request.getContent();
+    var contentAsString = null;
+    if (content != '' && content != null) {
+        contentAsString = stringify(content);
+        if (log.isDebugEnabled()) {
+            log.debug("value of content: " + contentAsString);
+        }
+    }
+    if (connector != null && loggedInUser != null) {
+        var result = null;
+        switch (type) {
+            case TYPE_LIST_TABLES:
+            {
+                result = connector.getTableList(loggedInUser);
+                break;
+            }
+            /*case TYPE_CREATE_TABLE:
+             {
+             print(connector.createTable(tableName));
+             break;
+             }
+             case TYPE_DELETE_TABLE:
+             {
+             print(connector.deleteTable(tableName));
+             break;
+             } */
+            case TYPE_TABLE_EXISTS:
+            {
+                result = connector.tableExists(loggedInUser, tableName);
+                break;
+            }
+            case TYPE_GET_BY_RANGE:
+            {
+                var from = request.getParameter(TIME_FROM);
+                if (from == 'undefined') from = JS_MIN_VALUE;
+                var to = request.getParameter(TIME_TO);
+                if (to == 'undefined') to = JS_MAX_VALUE;
+                var start = request.getParameter(START);
+                var intStart = ZERO_INDEX;
+                if (start != 'undefined' && start != null) {
+                    intStart = parseInt(start, 10);
+                }
+                var count = request.getParameter(COUNT);
+                var intCount = LAST_INDEX;
+                if (count != 'undefined' && count != null) {
+                    intCount = parseInt(count, 10);
+                }
+                result = connector.getRecordsByRange(loggedInUser, tableName, from, to, intStart, intCount, contentAsString);
+                break;
+            }
+            case TYPE_GET_WITH_KEY_VALUES:
+            {
+                result = connector.getWithKeyValues(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_GET_BY_ID:
+            {
+                result = connector.getRecordsByIds(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_GET_RECORD_COUNT:
+            {
+                result = connector.getRecordCount(loggedInUser, tableName);
+                break;
+            }
+            /*case TYPE_DELETE_BY_RANGE:
+             {
+             var timeFrom = Long.parseLong(request.getParameter(TIME_FROM));
+             var timeTo = Long.parseLong(request.getParameter(TIME_TO));
+             print(connector.deleteRecordsByRange(tableName, timeFrom, timeTo));
+             break;
+             }
+             case TYPE_DELETE_BY_ID:
+             {
+             print(connector.deleteRecordsByIds(tableName, contentAsString));
+             break;
+             }*/
+            case TYPE_CLEAR_INDEX_DATA:
+            {
+                result = connector.clearIndexData(loggedInUser, tableName);
+                break;
+            }
+            /*case TYPE_PUT_RECORDS:
+             {
+             print(connector.insertRecords(contentAsString));
+             break;
+             }*/
+            case TYPE_SEARCH_COUNT:
+            {
+                var queryString = request.getParameter(QUERY);
+                if (queryString == 'undefined' || queryString == null || queryString == '') {
+                     result = '{ "status": "Failed", "statusCode": "400", "message": "Invalid Request" }';
+                     break;
+                };
+
+                contentAsString = "{query: " + queryString + "}";
+                result = connector.searchCount(loggedInUser, tableName, contentAsString);
+                                break;
+            }
+            case TYPE_SEARCH:
+            {
+                var queryString = request.getParameter(QUERY);
+                if (queryString == 'undefined' || queryString == null || queryString == '') {
+                     result = '{ "status": "Failed", "statusCode": "400", "message": "Invalid Request" }';
+                     break;
+                };
+
+                var count = request.getParameter(COUNT);
+                if (count == 'undefined' || count == null || count == '') {
+                    count = DEFAULT_COUNT;
+                }
+
+                contentAsString = "{query: " + queryString + ", count:" + count + "}";
+                result = connector.search(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_SET_SCHEMA:
+            {
+                print(connector.setTableSchema(loggedInUser, tableName, contentAsString));
+                break;
+            }
+            case TYPE_GET_SCHEMA:
+            {
+                result = connector.getTableSchema(loggedInUser, tableName);
+                break;
+            }
+            case TYPE_PAGINATION_SUPPORTED:
+            {
+                var recordStore = request.getParameter(RECORDSTORE_NAME)
+                result = connector.isPaginationSupported(recordStore);
+                break;
+            }
+            case TYPE_WAIT_FOR_INDEXING:
+            {
+                var waitTimeAsString = request.getParameter(WAIT_TIME);
+                var waitTime = -1;
+                if (waitTimeAsString != null) {
+                    waitTime = parseInt(waitTimeAsString);
+                }
+                result = connector.waitForIndexing(waitTime * MILLISECONDS_PER_SECOND);
+                break;
+            }
+            case TYPE_WAIT_FOR_INDEXING_FOR_TABLE:
+            {
+                var waitTimeAsString = request.getParameter(WAIT_TIME);
+                var waitTime = -1;
+                if (waitTimeAsString != null) {
+                    waitTime = parseInt(waitTimeAsString);
+                }
+                result = connector.waitForIndexing(tableName, waitTime * MILLISECONDS_PER_SECOND);
+                break;
+            }
+            case TYPE_DRILLDOWN_CATEGORIES:
+            {
+                result = connector.drillDownCategories(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_DRILLDOWN_SEARCH:
+            {
+                var queryString = request.getParameter(QUERY);
+                if (queryString == 'undefined' || queryString == null || queryString == '') {
+                     result = '{ "status": "Failed", "statusCode": "400", "message": "Invalid Request. Query string not found." }';
+                     break;
+                };
+
+                var scoreFunction = request.getParameter(SORT_SCORE_VALUE);
+                if (scoreFunction == 'undefined' || scoreFunction == null || scoreFunction == '') {
+                     result = '{ "status": "Failed", "statusCode": "400", "message": "Invalid Request. Score function not found." }';
+                     break;
+                };
+
+                var count = request.getParameter(COUNT);
+                if (count == 'undefined' || count == null || count == '') {
+                    count = DEFAULT_COUNT;
+                }
+
+                contentAsString = "{query: " + queryString + ", recordCount:"+ count +", scoreFunction:'"+ scoreFunction +"', categories: []}";
+                result = connector.drillDownSearch(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_DRILLDOWN_SEARCH_COUNT:
+            {
+                result = connector.drillDownSearchCount(loggedInUser, tableName, contentAsString);
+                break;
+            }
+            case TYPE_ADD_STREAM_DEFINITION:
+            {
+                result = connector.addStreamDefinition(contentAsString);
+                break;
+            }
+            case TYPE_GET_STREAM_DEFINITION:
+            {
+                result = connector.getStreamDefinition(contentAsString);
+                break;
+            }
+            case TYPE_PUBLISH_EVENTS:
+            {
+                result = connector.publishEvent(contentAsString);
+                break;
+            }
+            case TYPE_GET_RECORDSTORES:
+            {
+                result = connector.getRecordStoreList();
+                break;
+            }
+            case TYPE_GET_RECORDSTORE_BY_TABLE:
+            {
+                result = connector.getRecordStoreByTable(loggedInUser, tableName);
+                break;
+            }
+            case TYPE_SEARCH_WITH_AGGREGATES:
+            {
+                result = connector.searchWithAggregates(loggedInUser, contentAsString);
+                break;
+            }
+            case TYPE_REINDEX:
+            {
+                var from = request.getParameter(TIME_FROM);
+                if (from == 'undefined') from = JS_MIN_VALUE;
+                var to = request.getParameter(TIME_TO);
+                if (to == 'undefined') to = JS_MAX_VALUE;
+                result = connector.reIndex(loggedInUser, tableName, from, to);
+                break;
+            }
+            default:
+                result = '{ "status": "Failed", "statusCode": "500", "message": "Unidentified operation" }';
+        }
+        if (result != null) {
+            if (log.isDebugEnabled()) {
+                log.debug("value of result: " + result);
+                log.debug("status code: " + result.getstatusCode())
+            }
+
+            var statusCode = result.getStatusCode();
+            var status = result.getStatus();
+            var message = result.getMessage();
+            response.status = statusCode;
+            var finalResult = {
+                status: status,
+                message: message
+            };
+            print(finalResult);
+        }
+    } else {
+        print('{ "status": "Failed", "statusCode": "500", "message": "AnalyticsCachedWebServiceConnector is unavailable" }');
+    }
+
+}());
+%>

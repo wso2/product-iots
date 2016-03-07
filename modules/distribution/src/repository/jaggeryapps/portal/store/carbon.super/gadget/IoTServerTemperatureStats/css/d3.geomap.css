@@ -1,0 +1,29 @@
+/*!
+ * d3.geomap
+ * https://github.com/yaph/d3-geomap/blob/master/LICENSE
+ * MIT licensed
+ * Copyright (C) 2015 by Ramiro Gómez (http://ramiro.org/)
+ */
+text {
+  fill: #333;
+  font-size: 12px; }
+
+.background {
+  fill: none;
+  pointer-events: all; }
+
+.unit {
+  cursor: pointer;
+  fill: #ccc;
+  stroke: #000;
+  stroke-width: 0.4px; }
+
+.legend-bg {
+  fill: #fff;
+  fill-opacity: 0.8; }
+
+.legend-bar {
+  stroke: #333;
+  stroke-width: 1px; }
+
+/*# sourceMappingURL=geomap.css.map */

@@ -656,6 +656,20 @@
             </includes>
         </fileSet>
 
+        <!-- Copying the "portal" app specific modifications to the distribution pack-->
+        <fileSet>
+            <directory>
+                src/repository/jaggeryapps/portal/store/carbon.super/gadget
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget
+            </outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <!-- End of "portal" app specific modifications -->
 
         <!-- Copying temporary patches from DAS that fixes JIRA DAS-339 and a Concurrent DB Access Issue -->
                         <!-- Can be safely removed upon a DAS release with these fixes -->
@@ -718,6 +732,29 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+
+        <!-- Copying the "portal" app specific modifications to the distribution pack-->
+        <file>
+            <source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/controllers/apis
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
+            <source>src/repository/jaggeryapps/portal/js/outputAdapterUiLibrary.js</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
+            <source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <!-- End of "portal" app specific modifications -->
 
         <file>
             <source>
