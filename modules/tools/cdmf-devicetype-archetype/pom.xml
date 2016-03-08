@@ -28,8 +28,8 @@
     <groupId>cdmf.devicetype</groupId>
     <artifactId>cdmf-devicetype-archetype</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Archetype of WSO2 CDMF Device Type</name>
-    <description>Archetype of WSO2 CDMF Device Type</description>
+    <name>WSO2 CDMF Device Type Archetype</name>
+    <description>WSO2 CDMF Device Type Archetype</description>
     <packaging>maven-archetype</packaging>
     <organization>
         <name>WSO2 Inc.</name>

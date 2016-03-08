@@ -32,9 +32,10 @@
     <url>http://wso2.org</url>
 
     <modules>
-        <!-- maven module of your device-type -->
+        <!-- STEP#1 ADD THE LOCATION OF YOUR DEVICE-TYPE -->
         <module>samples/connectedcup</module>
         <module>samples/currentsensor</module>
+        <module>samples/firealarm</module>
     </modules>
 
     <build>
@@ -43,7 +44,6 @@
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
                 <version>1.5.3</version>
-
                 <executions>
                     <execution>
                         <id>2-p2-repo-generation</id>
@@ -59,11 +59,14 @@
 
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    <!-- STEP#1. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
+                                    <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
                                     org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:2.0.4-SNAPSHOT
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.homeautomation:org.homeautomation.currentsensor.feature:2.0.4-SNAPSHOT
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.homeautomation:org.homeautomation.firealarm.feature:1.0.0-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -89,7 +92,7 @@
                             <destination>repository/components</destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
-                                <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
+                                <!-- STEP#3. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
                                     <version>2.0.4-SNAPSHOT</version>
@@ -97,6 +100,10 @@
                                 <feature>
                                     <id>org.homeautomation.currentsensor.feature.group</id>
                                     <version>2.0.4-SNAPSHOT</version>
+                                </feature>
+                                <feature>
+                                    <id>org.homeautomation.firealarm.feature.group</id>
+                                    <version>1.0.0-SNAPSHOT</version>
                                 </feature>
                             </features>
                         </configuration>

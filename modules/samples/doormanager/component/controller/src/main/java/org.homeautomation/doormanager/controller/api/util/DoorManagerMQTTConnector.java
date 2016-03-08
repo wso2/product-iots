@@ -12,6 +12,7 @@ import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
 import org.wso2.carbon.device.mgt.iot.transport.mqtt.MQTTTransportHandler;
 
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.Calendar;
 import java.util.UUID;
@@ -80,12 +81,16 @@ public class DoorManagerMQTTConnector extends MQTTTransportHandler {
         }
         if (messageData.length == 2) {
             log.warn("-------------------------------------------");
-            log.warn(messageData[2]);
+            log.warn(messageData[0]);
             log.warn(messageData[1]);
             String lockerCurrentState = messageData[1];
             try {
                 SensorDataManager.getInstance().setSensorRecord(deviceId, "door_locker_state",
                         String.valueOf(1), Calendar.getInstance().getTimeInMillis());
+                if (!DoorManagerServiceUtils.publishToDASCurrent(owner, deviceId, 1)) {
+                    log.warn("An error occured whilst trying to publish  with ID [" + deviceId +
+                            "] of owner [" + owner + "]");
+                }
             } catch(Exception e){
                log.error(e);
             }
@@ -110,6 +115,21 @@ public class DoorManagerMQTTConnector extends MQTTTransportHandler {
         String payload = operation + param;
         try {
             publishToAutomaticDoorLocker(topic, payload, 2, false);
+            if(param.equals("LOCK")){
+                if (!DoorManagerServiceUtils.publishToDASCurrent(deviceOwner, deviceId, 0)) {
+                    log.warn("An error occured whilst trying to publish  with ID [" + deviceId +
+                            "] of owner [" + deviceOwner + "]");
+                }
+            }else{
+                if (!DoorManagerServiceUtils.publishToDASCurrent(deviceOwner, deviceId, 1)) {
+                    log.warn("An error occured whilst trying to publish  with ID [" + deviceId +
+                            "] of owner [" + deviceOwner + "]");
+                }
+            }
+            if (!DoorManagerServiceUtils.publishToDASCurrent(deviceOwner, deviceId, 1)) {
+                log.warn("An error occured whilst trying to publish  with ID [" + deviceId +
+                        "] of owner [" + deviceOwner + "]");
+            }
         } catch (TransportHandlerException e) {
             String errorMessage = "Error publishing data to device with ID " + deviceId;
             throw new DoorManagerException(errorMessage, e);

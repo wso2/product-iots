@@ -261,6 +261,56 @@ public class DoorManagerDAOImpl {
 		return status;
 	}
 
+	public boolean checkCardDoorAssociation(String cardNum, String deviceID) throws DoorManagerDeviceMgtPluginException {
+		Connection conn;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		try {
+			conn = DoorManagerDAO.getConnection();
+			String selectDBQuery = "SELECT * FROM REGISTERED_DOORLOCK_SAFE WHERE UID_of_USER = ? AND doormanager_DEVICE_ID = ?";
+			stmt = conn.prepareStatement(selectDBQuery);
+			stmt.setString(1, cardNum);
+			stmt.setString(2, deviceID);
+			resultSet = stmt.executeQuery();
+			String result;
+			if(resultSet.next()){
+				return true;
+			}else{
+				return false;
+			}
+		} catch (SQLException e) {
+			String msg = "No associations were found between lock : "+ deviceID +" and card : "+ cardNum;
+			throw new DoorManagerDeviceMgtPluginException(msg, e);
+		} finally {
+			DoorManagerUtils.cleanupResources(stmt, null);
+		}
+	}
+
+
+	public String getUserEmailAddress(String cardNum) throws DoorManagerDeviceMgtPluginException {
+		Connection conn;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String email;
+		try {
+			conn = DoorManagerDAO.getConnection();
+			String selectDBQuery = "SELECT EMAIL_ADDRESS FROM REGISTERED_DOORLOCK_SAFE WHERE UID_of_USER = ?";
+			stmt = conn.prepareStatement(selectDBQuery);
+			stmt.setString(1, cardNum);
+			resultSet = stmt.executeQuery();
+			if(resultSet.next()){
+				email = resultSet.getString("EMAIL_ADDRESS");
+				log.warn(email);
+				return email;
+			}
+			return null;
+		} catch (SQLException e) {
+			String msg = "No email found for the and card : "+ cardNum;
+			throw new DoorManagerDeviceMgtPluginException(msg, e);
+		} finally {
+			DoorManagerUtils.cleanupResources(stmt, null);
+		}
+	}
 	public List<String> getUserCredentials(String deviceId, String UIDofUser) throws DoorManagerDeviceMgtPluginException {
 
 		Connection conn = null;

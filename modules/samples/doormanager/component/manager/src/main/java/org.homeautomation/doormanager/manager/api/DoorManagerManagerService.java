@@ -18,9 +18,16 @@
 
 package org.homeautomation.doormanager.manager.api;
 
+import com.google.gson.JsonObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.geronimo.mail.util.Base64;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.SystemDefaultHttpClient;
 import org.homeautomation.doormanager.manager.api.dto.UserInfo;
 import org.homeautomation.doormanager.plugin.constants.DoorManagerConstants;
 import org.homeautomation.doormanager.plugin.exception.DoorManagerDeviceMgtPluginException;
@@ -54,6 +61,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -265,18 +273,22 @@ public class DoorManagerManagerService {
             log.warn(userInfo.userName);
             log.warn(userInfo.cardNumber);
             log.warn(userInfo.deviceId);
-            response.addHeader("REMOTE_USER", "ppppppppppppppppppppp");
-            //response.addDateHeader("Authentication","55555555555555555555");
             if (userInfo.userName != null && userInfo.cardNumber != null && userInfo.deviceId != null) {
                 try {
                     UserStoreManager userStoreManager = this.getUserStoreManager();
                     if (userStoreManager.isExistingUser(userInfo.userName)) {
                         String accessToken = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/accesstoken", null);
                         String cardNumber = userStoreManager.getUserClaimValue(userInfo.userName, "http://wso2.org/claims/lock/cardnumber", null);
+						log.warn(accessToken);
+						log.warn(cardNumber);
                         if(cardNumber.equals(userInfo.cardNumber)){
-                            if(accessToken != null){
+                            if(accessToken != null && doorManagerDAO.getAutomaticDoorLockerDeviceDAO().
+									checkCardDoorAssociation(cardNumber, userInfo.deviceId)){
                                 JSONObject credentials = new JSONObject();
                                 credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
+								credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
+								sendCEPEvent(userInfo.deviceId, cardNumber, true);
+								log.warn(doorManagerDAO.getAutomaticDoorLockerDeviceDAO().getUserEmailAddress(cardNumber));
                                 return Response.ok(credentials, MediaType.APPLICATION_JSON_TYPE).build();
                             }
                         }
@@ -297,6 +309,39 @@ public class DoorManagerManagerService {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	}
+
+	private void sendCEPEvent(String deviceId, String cardId, boolean accessStatus){
+		String cepEventReciever = "http://localhost:9768/endpoints/LockEventReciever";
+
+		HttpClient httpClient = new SystemDefaultHttpClient();
+		HttpPost method = new HttpPost(cepEventReciever);
+		JsonObject event = new JsonObject();
+		JsonObject metaData = new JsonObject();
+
+		metaData.addProperty("deviceID", deviceId);
+		metaData.addProperty("cardID", cardId);
+
+		event.add("metaData", metaData);
+
+		String eventString = "{\"event\": " + event + "}";
+
+		try {
+			StringEntity entity = new StringEntity(eventString);
+			method.setEntity(entity);
+			if (cepEventReciever.startsWith("https")) {
+				method.setHeader("Authorization", "Basic " + Base64.encode(("admin" + ":" + "admin").getBytes()));
+			}
+			httpClient.execute(method).getEntity().getContent().close();
+		} catch (UnsupportedEncodingException e) {
+			log.error("Error while constituting CEP event"+ e.getMessage());
+		} catch (ClientProtocolException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		} catch (IOException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		}
+
+
 	}
 
 	@POST
