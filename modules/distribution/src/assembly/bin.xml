@@ -59,7 +59,6 @@
                 <exclude>**/axis2services/sample01.aar</exclude>
                 <exclude>**/axis2services/echo/**</exclude>
                 <exclude>**/axis2services/version/**</exclude>
-                <!--exclude>**/pom.xml</exclude-->
                 <exclude>**/version.txt</exclude>
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/carbon.xml</exclude>
@@ -167,13 +166,6 @@
             <fileMode>755</fileMode>
         </fileSet>
 
-        <!-- Copy the landing page webapp -->
-        <!-- <fileSet>
-             <directory>src/repository/resources/stratos_root</directory>
-             <outputDirectory>wso2cdm-${pom.version}/repository/deployment/server/webapps/STRATOS_ROOT</outputDirectory>
-             <fileMode>755</fileMode>
-         </fileSet>-->
-        <!--Removed -->
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/modules
             </directory>
@@ -224,16 +216,6 @@
                 <exclude>authenticators.xml</exclude>
             </excludes>
         </fileSet>
-
-        <!-- <fileSet>
-             <directory>
-                 src/repository/conf/identity/
-             </directory>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
-             <includes>
-                 <include>**/**</include>
-             </includes>
-         </fileSet>-->
         <fileSet>
             <directory>src/repository/conf/datasources</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources
@@ -589,7 +571,6 @@
             <includes>
                 <include>**/analytics-config.xml</include>
                 <include>**/rdbms-config.xml</include>
-                <!--<include>**/hbase-analytics-config.xml</include>-->
                 <include>**/analytics-data-config.xml</include>
                 <include>**/analytics-eventsink-config.xml</include>
             </includes>
@@ -668,26 +649,8 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
-
         <!-- End of "portal" app specific modifications -->
-
-        <!-- Copying temporary patches from DAS that fixes JIRA DAS-339 and a Concurrent DB Access Issue -->
-                        <!-- Can be safely removed upon a DAS release with these fixes -->
-        <!--fileSet>
-            <directory>
-                src/repository/patches
-            </directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/components/patches
-            </outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet-->
-
     </fileSets>
-
-
 
     <dependencySets>
         <dependencySet>
@@ -707,7 +670,6 @@
     </dependencySets>
 
     <files>
-
         <file>
             <source>src/repository/bin/wso2server.sh</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
@@ -718,7 +680,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!-- Copying the "api-store" app specific files that uses the edited "apimstore" jaggery module -->
         <file>
             <source>src/repository/jaggeryapps/api-store/jagg.jag</source>
@@ -732,7 +693,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!-- Copying the "portal" app specific modifications to the distribution pack-->
         <file>
             <source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>
@@ -740,14 +700,12 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <file>
             <source>src/repository/jaggeryapps/portal/js/outputAdapterUiLibrary.js</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <file>
             <source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js
@@ -755,7 +713,6 @@
             <fileMode>755</fileMode>
         </file>
         <!-- End of "portal" app specific modifications -->
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war
@@ -816,22 +773,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- <file>
-             <source>
-                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading.xml
-             </source>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
-             <filtered>true</filtered>
-             <fileMode>644</fileMode>
-         </file>
-         <file>
-             <source>
-                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml
-             </source>
-             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
-             <filtered>true</filtered>
-             <fileMode>644</fileMode>
-         </file>-->
         <file>
             <source>src/repository/conf/tomcat/context.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
@@ -881,7 +822,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying logging-config.xml -->
         <file>
             <source>
@@ -891,7 +831,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying event-broker.xml -->
         <file>
             <source>src/repository/conf/event-broker.xml</source>
@@ -905,7 +844,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying application-authentication.xml -->
         <file>
             <source>
@@ -925,8 +863,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying thrift-authentication.xml -->
         <file>
             <source>
@@ -956,7 +892,6 @@
             </outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying governance.xml -->
         <file>
             <source>
@@ -965,7 +900,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying api-manager.xml -->
         <file>
             <source>src/repository/conf/api-manager.xml</source>
@@ -981,7 +915,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--cdm config file-->
         <file>
             <source>
@@ -991,8 +924,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying remote-appmanager-config.xml -->
         <file>
             <source>
@@ -1002,8 +933,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-
         <!--certificate config file-->
         <file>
             <source>
@@ -1013,7 +942,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--Metrics-->
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties</source>
@@ -1050,7 +978,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <!--app management config file-->
         <file>
             <source>
@@ -1060,7 +987,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--License Config file-->
         <file>
             <source>
@@ -1070,7 +996,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--Webapp Authenticator Config file-->
         <file>
             <source>
@@ -1080,7 +1005,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--Notification Config File-->
         <file>
             <source>
@@ -1090,7 +1014,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying the modified registry.xml file-->
         <file>
             <source>
@@ -1100,7 +1023,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!--cdm plugin config file-->
         <file>
             <source>
@@ -1121,7 +1043,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/claim-config.xml
@@ -1131,8 +1052,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying H2 database related files corresponding to default API management repository schema -->
         <file>
             <source>
@@ -1142,7 +1061,6 @@
             <destName>WSO2AM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying H2 database related files corresponding to default Device management repository schema -->
         <file>
             <source>
@@ -1152,8 +1070,6 @@
             <destName>WSO2DM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying ANDROID SENSE H2 database -->
         <file>
             <source>
@@ -1163,8 +1079,6 @@
             <destName>AndroidSenseDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying ARDUINO H2 database -->
         <file>
             <source>
@@ -1174,8 +1088,6 @@
             <destName>ArduinoDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying DIGITAL DISPLAY H2 database -->
         <file>
             <source>
@@ -1185,8 +1097,6 @@
             <destName>DigitalDisplayDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying DRONE ANALYZER H2 database -->
         <file>
             <source>
@@ -1196,8 +1106,6 @@
             <destName>DroneAnalyzerDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying RASPBERRY-PI H2 database -->
         <file>
             <source>
@@ -1207,7 +1115,6 @@
             <destName>RaspberryPiDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying VIRTUAL-FIREALARM H2 database -->
         <file>
             <source>
@@ -1217,8 +1124,6 @@
             <destName>VirtualFireAlarmDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
-
         <!-- Copying MOBILE-ANDROID H2 database -->
         <file>
             <source>
@@ -1228,7 +1133,6 @@
             <destName>WSO2MobileAndroid_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying MOBILE-WINDOWS H2 database -->
         <file>
             <source>
@@ -1238,28 +1142,12 @@
             <destName>WSO2MobileWindows_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>src/repository/conf/carbon.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
         </file>
-
-        <!-- Copying identity-mgt.properties -->
-        <!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-mgt.properties</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
-            <filtered>true</filtered>
-        </file-->
-
-        <!-- Copying email-admin-config.xml -->
-        <!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/email/email-admin-config.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/email</outputDirectory>
-            <filtered>true</filtered>
-        </file-->
-
         <!-- Copying axis2-client.xml -->
         <file>
             <source>
@@ -1270,7 +1158,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Copying axis2.xml -->
         <file>
             <source>src/repository/conf/axis2/axis2.xml</source>
@@ -1279,8 +1166,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-
         <file>
             <source>src/repository/conf/etc/launch.ini</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/
@@ -1288,16 +1173,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-        <!-- Copying MDM jaggery app -->
-        <!--<file>-->
-        <!--<source>../apps/jaggery/mdm/target/mdm.zip</source>-->
-        <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/-->
-        <!--</outputDirectory>-->
-        <!--<filtered>false</filtered>-->
-        <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
         <!-- Copying authenticators.xml -->
         <file>
             <source>
@@ -1308,7 +1183,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Cipher Tool Files -->
         <file>
             <source>
@@ -1331,7 +1205,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <!-- Analytics datasources -->
         <file>
             <source>
@@ -1341,7 +1214,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cep/storm/storm.yaml
@@ -1350,8 +1222,6 @@
             </outputDirectory>
             <filtered>true</filtered>
         </file>
-
-
         <!--DAS Files-->
         <file>
             <source>
@@ -1361,7 +1231,6 @@
             </outputDirectory>
             <filtered>true</filtered>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml
@@ -1371,7 +1240,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml
@@ -1381,7 +1249,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <!-- ************* Data bridge related files ********** -->
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
@@ -1412,7 +1279,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!--spark classpath config file-->
         <file>
             <source>
@@ -1422,7 +1288,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!--spark fair scheduler xml file-->
         <file>
             <source>
@@ -1432,7 +1297,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!--spark udf conf file-->
         <file>
             <source>
@@ -1442,7 +1306,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
         <!--Analytics REST APIs WebApp -->
         <file>
             <source>
@@ -1451,43 +1314,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/devicemgt-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/devicemgt-config.xsd-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/devicetype-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/devicetype-config.xsd-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/devicemgt-config.xml
@@ -1496,7 +1322,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/devicemgt-config.xsd
@@ -1505,7 +1330,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/devicetype-config.xml
@@ -1514,7 +1338,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/devicetype-config.xsd
@@ -1523,15 +1346,5 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--src/repository/patches/oltu-1.0.0.wso2v2.jar-->
-            <!--</source>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/components/patches/patch1000-->
-            <!--</outputDirectory>-->
-        <!--</file>-->
-
     </files>
 </assembly>
