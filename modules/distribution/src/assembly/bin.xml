@@ -89,8 +89,25 @@
                 <exclude>**/plugins/org.wso2.carbon.endpoint.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.inbound.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.rest.api.ui*</exclude>
-                <!--TODO: Remove exclude for asm-all jar after fixing java stack issue-->
+                <!--excluding asm-all jar after fixing java stack issue-->
                 <exclude>**/asm-all_4.1.0.wso2v1.jar</exclude>
+                <exclude>**/java-property-utils_1.9.0.wso2v1.jar</exclude>
+                <exclude>**/axis2-transport-jms_1.1.0.wso2v13.jar</exclude>
+                <exclude>**/axis2-transport-mail_1.1.0.wso2v13.jar</exclude>
+                <exclude>**/commons-digester_1.8.1.wso2v1.jar</exclude>
+                <exclude>**/org.apache.commons.configuration_1.10.0.jar</exclude>
+                <exclude>**/apache-zookeeper_3.3.4.wso2v1.jar</exclude>
+                <exclude>**/commons-configuration_1.6.0.wso2v1.jar</exclude>
+                <exclude>**/net.minidev.json-smart_1.2.0.jar</exclude>
+                <exclude>**/libthrift_0.7.0.wso2v2.jar</exclude>
+                <exclude>**/com.google.gson_2.3.1.jar</exclude>
+                <exclude>**/com.google.gson_2.2.4.jar</exclude>
+                <exclude>**/com.google.gson_2.1.0.jar</exclude>
+                <exclude>**/com.jayway.jsonpath_0.8.1.wso2v1.jar</exclude>
+                <exclude>**/json_1.0.0.wso2v1.jar</exclude>
+                <exclude>**/json_2.0.0.wso2v1.jar</exclude>
+                <exclude>**/bcprov-jdk15on_1.49.0.wso2v1.jar</exclude>
+                <exclude>**/xmlbeans_2.3.0.wso2v1.jar</exclude>
             </excludes>
         </fileSet>
 
