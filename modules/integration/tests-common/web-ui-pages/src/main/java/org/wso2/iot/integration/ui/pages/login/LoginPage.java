@@ -100,17 +100,4 @@ public class LoginPage {
         registerLink.click();
         return new NewUserRegisterPage(driver);
     }
-
-    public void validateForm(String username, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.username.xpath"))));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.password.xpath"))));
-        userNameField.clear();
-        passwordField.clear();
-        userNameField.sendKeys(username);
-        passwordField.sendKeys(password);
-        loginButton.click();
-    }
 }

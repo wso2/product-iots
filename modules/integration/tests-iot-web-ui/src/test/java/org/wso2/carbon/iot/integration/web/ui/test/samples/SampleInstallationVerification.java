@@ -32,6 +32,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
+/**
+ * Test cases to verify the sample installation is successful and device type is installed correctly.
+ */
 public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;

@@ -17,6 +17,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
+/**
+ * Test cases to verify the enrolment process.
+ */
 public class SampleEnrollmentTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driver;
     private ConnectedCupDeviceTypeViewPage connectedCupDeviceTypeViewPage;
@@ -31,13 +34,16 @@ public class SampleEnrollmentTest extends IOTIntegrationUIBaseTestCase {
         connectedCupDeviceTypeViewPage = enrollDevicePage.gotoConnectedCupDeviceTypeViewPage();
     }
 
-    @Test(description = "Verify the pop up modal is displayed.", groups = {"iot.enroll"}, dependsOnGroups = {"iot.install"})
+    @Test(description = "Verify the pop up modal is displayed.",
+          groups = {"iot.enroll"},
+          dependsOnGroups = {"iot.install"})
     public void enrollDevicePopUpModalTest() throws InterruptedException, IOException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.isPopUpPresent());
     }
 
-    @Test(description = "Test case for device enrolment", groups = {"iot.enroll"}, dependsOnMethods =
-            {"enrollDevicePopUpModalTest"})
+    @Test(description = "Test case for device enrolment",
+          groups = {"iot.enroll"},
+          dependsOnMethods = {"enrollDevicePopUpModalTest"})
     public void enrollDeviceTest() throws InterruptedException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.enrollDevice(Constants.IOT_CONNECTED_CUP_NAME));
     }

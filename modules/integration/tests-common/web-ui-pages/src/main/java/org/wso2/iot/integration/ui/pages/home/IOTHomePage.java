@@ -31,8 +31,7 @@ import org.wso2.iot.integration.ui.pages.login.LoginPage;
 import java.io.IOException;
 
 /**
- * In IOT server, this page is the Devices page for users.
- * For admin this is the dashboard.
+ * This class represents the IOT server home page.
  */
 public class IOTHomePage {
     private WebDriver driver;

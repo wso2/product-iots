@@ -28,12 +28,11 @@ import org.wso2.carbon.iot.integration.web.ui.test.LoginUtils;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.devices.DevicesPage;
 import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceViewPage;
-import org.wso2.iot.integration.ui.pages.samples.VirtualSampleViewPage;
+import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceInterface;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Test cases for test the functionality of the connected cup sample.
@@ -45,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver driverDevice;
     private WebDriver driverServer;
-    private VirtualSampleViewPage sampleViewPage;
+    private ConnectedCupDeviceInterface sampleViewPage;
     private ConnectedCupDeviceViewPage connectedCupDeviceViewPage;
 
     @BeforeClass(alwaysRun = true)
@@ -58,7 +57,7 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
         DevicesPage devicesPage = new DevicesPage(driverServer);
         connectedCupDeviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
         driverDevice.get(connectedCupDeviceViewPage.getDeviceLink());
-        sampleViewPage = new VirtualSampleViewPage(driverDevice);
+        sampleViewPage = new ConnectedCupDeviceInterface(driverDevice);
     }
 
     @Test(description = "Set the temperature level.",
@@ -113,7 +112,7 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
           groups = {"iot.sample.verify", "sample.temp"},
           dependsOnGroups = {"iot.enroll.verify"},
           dependsOnMethods = {"verifyGraphs"})
-    public void temperatureGraphLegendTest() throws IOException {
+    public void temperatureGraphLegendTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphLegendName(Constants.IOT_CONNECTED_CUP_TEMPERATURE_ID,
                                                                      Constants.IOT_CONNECTED_CUP_TEMPERATURE_LEGEND));
     }
@@ -138,7 +137,7 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     @Test(description = "Test the Y axis name of Coffee Level graph.",
           groups = {"iot.sample.coffee"},
           dependsOnGroups = {"sample.temp"})
-    public void coffeeLevelGraphYAxisNameTest() throws IOException {
+    public void coffeeLevelGraphYAxisNameTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_Y_AXIS));
@@ -147,7 +146,7 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     @Test(description = "Test the X axis name of Coffee Level graph.",
           groups = {"iot.sample.coffee"},
           dependsOnGroups = {"iot.enroll.verify", "sample.temp"})
-    public void coffeeLevelGraphXAxisNameTest() throws IOException {
+    public void coffeeLevelGraphXAxisNameTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_X_AXIS));

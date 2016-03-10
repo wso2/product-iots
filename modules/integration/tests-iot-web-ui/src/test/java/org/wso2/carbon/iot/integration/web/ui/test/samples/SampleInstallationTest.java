@@ -75,7 +75,8 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         logViewerClient = new LogViewerClient(getBackendURL(), getSessionCookie(automationContext));
     }
 
-    @Test(groups = {"iot.sample"}, description = "Verify the sample build process")
+    @Test(groups = {"iot.sample"},
+          description = "Verify the sample build process")
     public void sampleBuildTest() throws IOException {
         String connectedCupDir = carbonHome + File.separator + "samples" + File.separator + "connectedcup";
         log.info("Connected cup Sample: " + connectedCupDir);
@@ -100,8 +101,9 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(groups = {"iot.sample"}, description = "Verify the sample installation process", dependsOnMethods =
-            {"sampleBuildTest"})
+    @Test(groups = {"iot.sample"},
+          description = "Verify the sample installation process",
+          dependsOnMethods = {"sampleBuildTest"})
     public void sampleInstallationTest() throws IOException {
 
         log.info("CARBON_HOME: " + System.getProperty("carbon.home"));
@@ -124,8 +126,9 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(groups = {"iot.sample"}, description = "Test restarting the server", dependsOnMethods =
-            {"sampleInstallationTest"})
+    @Test(groups = {"iot.sample"},
+          description = "Test restarting the server",
+          dependsOnMethods = {"sampleInstallationTest"})
     public void serverRestartTest() {
         ServerConfigurationManager serverManager;
         try {
@@ -148,6 +151,11 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
+    /**
+     * Wait for a given message to be printed in terminal. Used for processes.
+     * @param inputStream : Input stream of the process
+     * @param message : The message which is to be look for
+     */
     private boolean waitForMessage(InputStream inputStream, String message) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
@@ -161,6 +169,11 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         return status;
     }
 
+    /**
+     * Wait until the server restarts.
+     * This method looks for "Mgt console URL:" to be appeared in the terminal.
+     * If it does not appear within the given timeout an Exception will be thrown.
+     */
     private void waitForRestart() {
         ExecutorService service = Executors.newSingleThreadExecutor();
         try {

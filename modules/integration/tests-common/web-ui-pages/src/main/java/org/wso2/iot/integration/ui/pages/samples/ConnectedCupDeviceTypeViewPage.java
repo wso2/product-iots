@@ -26,6 +26,10 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
 
+/**
+ * This class represents the Device Type View page of the Connected cup device, which has the functionality for
+ * download the device agent.
+ */
 public class ConnectedCupDeviceTypeViewPage {
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -40,6 +44,9 @@ public class ConnectedCupDeviceTypeViewPage {
         }
     }
 
+    /**
+     * This method verifies that the pop up modal for inserting a name for device is present.
+     */
     public boolean isPopUpPresent() throws InterruptedException {
         WebElement createInstanceBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstanceBtn.xpath")));
@@ -50,7 +57,13 @@ public class ConnectedCupDeviceTypeViewPage {
         return driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.modal.popup.xpath"))).isDisplayed();
     }
 
-    public boolean enrollDevice(String name) throws InterruptedException {
+    /**
+     * This method performs the enrolment process of the connected cup device. After clicking the Download button in
+     * the popup, user should be navigated to the device type view page again.
+     * This method checks the navigation and return true if navigation is correct.
+     * @param name : Name for the device.
+     */
+    public boolean enrollDevice(String name) {
 
         WebElement nameField = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstance.nameField.xpath")));

@@ -32,12 +32,16 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class VirtualSampleViewPage {
-    private Log log = LogFactory.getLog(VirtualSampleViewPage.class);
+/**
+ * Class to represent the Connected cup device interface.
+ * This device is a virtual device, which allows users to change Temperature and Level values and put an order.
+ */
+public class ConnectedCupDeviceInterface {
+    private Log log = LogFactory.getLog(ConnectedCupDeviceInterface.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
-    public VirtualSampleViewPage(WebDriver driver) throws IOException {
+    public ConnectedCupDeviceInterface(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
@@ -46,6 +50,9 @@ public class VirtualSampleViewPage {
         }
     }
 
+    /**
+     * Method to perform the order coffee functionality.
+     */
     public boolean orderCoffee() {
         if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.orderCoffee.xpath")))) {
@@ -57,6 +64,10 @@ public class VirtualSampleViewPage {
         return false;
     }
 
+    /**
+     * Method to change the temperature level.
+     * @param temp : The value to be set.
+     */
     public boolean changeTemperature(String temp) {
         if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.temperature.xpath")))) {
@@ -68,6 +79,10 @@ public class VirtualSampleViewPage {
         return false;
     }
 
+    /**
+     * Method to change the Coffee level.
+     * @param level : The value to be set.
+     */
     public boolean changeCoffeeLevel(String level) {
         if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.coffee.level.xpath")))) {
@@ -80,6 +95,11 @@ public class VirtualSampleViewPage {
         return false;
     }
 
+    /**
+     * This method performs the slider change action of the web interface.
+     * @param slider : The element of the slider to be changed.
+     * @param val : Value to be set.
+     */
     private void moveSlider(WebElement slider, int val) {
         Actions move = new Actions(driver);
         Action action = move.dragAndDropBy(slider, 0, val).build();

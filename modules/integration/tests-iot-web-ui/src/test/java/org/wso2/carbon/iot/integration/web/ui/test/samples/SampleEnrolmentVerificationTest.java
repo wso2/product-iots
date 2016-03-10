@@ -28,12 +28,15 @@ import org.wso2.carbon.iot.integration.web.ui.test.LoginUtils;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.devices.DevicesPage;
 import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceViewPage;
-import org.wso2.iot.integration.ui.pages.samples.VirtualSampleViewPage;
+import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceInterface;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
+/**
+ * Test cases to check whether the sample is enrolled correctly.
+ */
 public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCase {
     private WebDriver webDriver;
     private DevicesPage devicesPage;
@@ -66,7 +69,7 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     @Test(description = "Verify sample functions",
           dependsOnMethods = {"verifyNavigationTest"})
     public void sampleStartUpTest() throws IOException {
-        VirtualSampleViewPage sampleViewPage = connectedCupDeviceViewPage.gotoDevice();
+        ConnectedCupDeviceInterface sampleViewPage = connectedCupDeviceViewPage.gotoDevice();
         Assert.assertNotNull(sampleViewPage);
     }
 

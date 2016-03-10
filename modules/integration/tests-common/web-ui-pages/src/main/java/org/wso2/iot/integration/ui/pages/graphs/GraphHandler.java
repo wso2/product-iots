@@ -153,6 +153,12 @@ public class GraphHandler {
         return false;
     }
 
+    /**
+     * This method returns the WebElement for graph with the given class name.
+     * @param graph : Outer container of the graphs
+     * @param className : Class name of the graph needed.
+     * @return the WebElement which defined by the given class name. Null if no element is found.
+     */
     private WebElement getGraph(WebElement graph, String className) {
         List<WebElement> elements = graph.findElements(By.tagName("div"));
         for (WebElement e : elements) {
