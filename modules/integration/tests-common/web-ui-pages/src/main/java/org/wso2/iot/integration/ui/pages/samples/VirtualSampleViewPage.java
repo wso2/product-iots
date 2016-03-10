@@ -22,15 +22,18 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIConstants;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class VirtualSampleViewPage {
-    Log log = LogFactory.getLog(VirtualSampleViewPage.class);
+    private Log log = LogFactory.getLog(VirtualSampleViewPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -54,13 +57,12 @@ public class VirtualSampleViewPage {
         return false;
     }
 
-    public boolean changeTemperature(String val) {
+    public boolean changeTemperature(String temp) {
         if (UIConstants.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.temperature.xpath")))) {
             WebElement tempSlider = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.temperature.xpath")));
-            tempSlider.clear();
-            tempSlider.sendKeys(val);
+            moveSlider(tempSlider, Integer.parseInt(temp));
             return true;
         }
         return false;
@@ -69,12 +71,19 @@ public class VirtualSampleViewPage {
     public boolean changeCoffeeLevel(String level) {
         if (UIConstants.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.coffee.level.xpath")))) {
-            WebElement tempSlider = driver.findElement(By.xpath(
+            WebElement lvlSlider = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.coffee.level.xpath")));
-            tempSlider.clear();
-            tempSlider.sendKeys(level);
+            moveSlider(lvlSlider, Integer.parseInt(level));
+            driver.manage().timeouts().implicitlyWait(UIConstants.webDriverTime, TimeUnit.SECONDS);
             return true;
         }
         return false;
+    }
+
+    private void moveSlider(WebElement slider, int val) {
+        Actions move = new Actions(driver);
+        Action action = move.dragAndDropBy(slider, 0, val).build();
+        action.perform();
+
     }
 }

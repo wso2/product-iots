@@ -48,7 +48,6 @@ public class ConnectedCupDeviceTypeViewPage {
         Thread.sleep(UIConstants.threadTimeout);
 
         return driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.modal.popup.xpath"))).isDisplayed();
-
     }
 
     public boolean enrollDevice(String name) throws InterruptedException {
@@ -62,5 +61,4 @@ public class ConnectedCupDeviceTypeViewPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.page.title"))).getText().contains("Connected Cup");
     }
-
 }

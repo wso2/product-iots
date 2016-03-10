@@ -38,6 +38,7 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     private WebDriver webDriver;
     private DevicesPage devicesPage;
     private ConnectedCupDeviceViewPage connectedCupDeviceViewPage;
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws XPathExpressionException, XMLStreamException, IOException {
         super.init();
@@ -47,19 +48,23 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
         devicesPage = new DevicesPage(webDriver);
     }
 
-    @Test(description = "Verify enrolment of the sample device", groups = {"iot.enroll.verify"}, dependsOnGroups = "iot.enroll")
+    @Test(description = "Verify enrolment of the sample device",
+          groups = {"iot.enroll.verify"},
+          dependsOnGroups = "iot.enroll")
     public void verifyEnrollmentTest() {
         Assert.assertTrue(devicesPage.isDeviceEnrolled(Constants.IOT_CONNECTED_CUP_NAME));
     }
 
-    @Test(description = "Verify navigation to device view", dependsOnMethods = "verifyEnrollmentTest",
-            groups = {"iot.enroll.verify"})
+    @Test(description = "Verify navigation to device view",
+          dependsOnMethods = "verifyEnrollmentTest",
+          groups = {"iot.enroll.verify"})
     public void verifyNavigationTest() throws IOException {
         connectedCupDeviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
         Assert.assertNotNull(connectedCupDeviceViewPage);
     }
 
-    @Test(description = "Verify sample functions", dependsOnMethods = {"verifyNavigationTest"})
+    @Test(description = "Verify sample functions",
+          dependsOnMethods = {"verifyNavigationTest"})
     public void sampleStartUpTest() throws IOException {
         VirtualSampleViewPage sampleViewPage = connectedCupDeviceViewPage.gotoDevice();
         Assert.assertNotNull(sampleViewPage);
@@ -69,5 +74,4 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     public void tearDown() {
         webDriver.quit();
     }
-
 }

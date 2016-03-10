@@ -20,8 +20,6 @@ package org.wso2.carbon.iot.integration.web.ui.test.samples;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
-import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
-import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -30,6 +28,9 @@ import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
+import org.wso2.carbon.iot.integration.web.ui.test.Constants;
+import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
+import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 
 import javax.xml.stream.XMLStreamException;
@@ -42,7 +43,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Properties;
-
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Test cases for building and installation of sample device types.
@@ -55,7 +61,7 @@ import java.util.Properties;
  * In this test case, the build process of a new device type and installation to the server is tested.
  */
 public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
-    Log log = LogFactory.getLog(SampleInstallationTest.class);
+    private Log log = LogFactory.getLog(SampleInstallationTest.class);
     private Process tempProcess = null;
     private Properties properties = System.getProperties();
     private String carbonHome = properties.getProperty("carbon.home");
@@ -122,14 +128,12 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
             {"sampleInstallationTest"})
     public void serverRestartTest() {
         ServerConfigurationManager serverManager;
-        LogEvent[] events;
-        String msg = "Mgt Console URL  : https://10.100.4.7:9443/carbon/";
         try {
             serverManager = new ServerConfigurationManager(automationContext);
+            log.info("Restart Triggered -------------------------------------------------------------------");
             serverManager.restartGracefully();
-
-            events = logViewerClient.getAllRemoteSystemLogs();
-            Assert.assertTrue(waitForRestart(events, msg));
+            logViewerClient.getAllRemoteSystemLogs();
+            waitForRestart();
         } catch (AutomationUtilException | XPathExpressionException | MalformedURLException e) {
             log.error("Restart failed due to : " + e.getLocalizedMessage());
         } catch (RemoteException | LogViewerLogViewerException e) {
@@ -157,11 +161,45 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         return status;
     }
 
-    private boolean waitForRestart(LogEvent[] events, String msg) {
-        for (LogEvent event : events) {
-            if (event.getMessage().contains(msg))
-                return true;
+    private void waitForRestart() {
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        try {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        LogEvent[] logEvents = logViewerClient.getAllRemoteSystemLogs();
+                        for (LogEvent event : logEvents) {
+                            log.info(event.getMessage() + " @ " + event.getLogTime());
+                            if (event.getMessage().contains("Mgt Console URL  : " )){
+                                log.info("Server restarted successfully");
+                                Assert.assertTrue(true);
+                            }
+                        }
+                    } catch (RemoteException | LogViewerLogViewerException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            Future<?> f = service.submit(r);
+
+            f.get(Constants.IOT_RESTART_THREAD_TIMEOUT, TimeUnit.MINUTES);
+          }
+        catch (final InterruptedException e) {
+            log.error("Interrupted "+e.getMessage());
+            Assert.assertTrue(false);
         }
-        return false;
+        catch (final TimeoutException e) {
+            log.error("Timeout " + e.getMessage());
+            Assert.assertTrue(false);
+        }
+        catch (final ExecutionException e) {
+            log.error("Execution failed " + e.getMessage());
+            Assert.assertTrue(false);
+        }
+        finally {
+            service.shutdown();
+        }
     }
 }
