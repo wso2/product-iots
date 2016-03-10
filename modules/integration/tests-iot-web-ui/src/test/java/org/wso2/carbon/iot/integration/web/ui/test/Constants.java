@@ -27,6 +27,26 @@ public class Constants {
     public static final String IOT_DEVICES_URL = "/devicemgt/devices";
     public static final String IOT_CONNECTED_CUP_NAME = "testDevice";
 
+    public static final int IOT_RESTART_THREAD_TIMEOUT = 30;
+
+    public static final String IOT_CONNECTED_CUP_LEVEl = "34";
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE = "53";
+
+    public static final String IOT_GRAPH_X_AXIS = "x";
+    public static final String IOT_GRAPH_Y_AXIS = "y";
+
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE_ID = "Temperature";
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE_LEGEND = "Temperature";
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE_GRAPH_ID = "temperature";
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE_Y_AXIS = "Temperature";
+    public static final String IOT_CONNECTED_CUP_TEMPERATURE_X_AXIS = "time";
+
+    public static final String IOT_CONNECTED_CUP_COFFEE_LEVEL_ID = "Coffee Level";
+    public static final String IOT_CONNECTED_CUP_COFFEE_LEVEL_LEGEND = "Coffee Level";
+    public static final String IOT_CONNECTED_CUP_COFFEE_LEVEL_GRAPH_ID = "coffeelevel";
+    public static final String IOT_CONNECTED_CUP_COFFEE_LEVEL_Y_AXIS = "Coffeelevel";
+    public static final String IOT_CONNECTED_CUP_COFFEE_LEVEL_X_AXIS = "time";
+
 
 
 }

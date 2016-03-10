@@ -28,6 +28,11 @@ import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
 import org.wso2.carbon.iot.integration.web.ui.test.Constants;
 import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
+import org.wso2.iot.integration.ui.pages.login.LoginPage;
+
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 
 
 /**
@@ -37,7 +42,7 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
  * 2. Incorrect username or password
  * 3. short password
  */
-public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
+public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -57,53 +62,66 @@ public class LoginFailTest extends IOTIntegrationUIBaseTestCase {
     public void emptyLoginFormTest() throws Exception {
         userNameField.sendKeys("");
         passwordField.sendKeys("");
-
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.username.error"))).
-                getText(), "Please enter a username");
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error"))).
-                getText(), "Please provide a password");
+        WebElement alertUserName = driver.findElement(By.id(
+                uiElementMapper.getElement("iot.user.login.username.error")));
+        WebElement alertPassword = driver.findElement(By.id(
+                uiElementMapper.getElement("iot.user.login.password.error")));
+
+        if (!alertUserName.isDisplayed()) Assert.assertTrue(false, "Alert for user name is not present.");
+        if (!alertPassword.isDisplayed()) Assert.assertTrue(false, "Alert for password is not present.");
+
+            Assert.assertEquals(alertUserName.getText(), "Please enter a username");
+            Assert.assertEquals(alertPassword.getText(), "Please provide a password");
+
     }
 
     @Test(description = "Test for incorrect username")
     public void incorrectUserNameTest() throws Exception {
         clearForm();
-
         userNameField.sendKeys("admin1");
         passwordField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getPassword());
-
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath"))).
-                getText(), "Incorrect username or password.!");
+        WebElement alert = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")));
+        if (alert.isDisplayed()) {
+            Assert.assertEquals(alert.getText(), "Incorrect username or password.!");
+        } else {
+            Assert.assertTrue(false, "Alert is not present.");
+        }
+
     }
 
     @Test(description = "Test for incorrect password")
     public void incorrectPasswordTest() throws Exception {
         clearForm();
-
         userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getPassword());
         passwordField.sendKeys("admnn");
-
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath"))).
-                getText(), "Incorrect username or password.!");
+        WebElement alert = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")));
+        if (alert.isDisplayed()) {
+            Assert.assertEquals(alert.getText(), "Incorrect username or password.!");
+        } else {
+            Assert.assertTrue(false, "Alert is not present.");
+        }
     }
 
 
     @Test(description = "Test for short password")
     public void shortPasswordTest() throws Exception {
         clearForm();
-
         userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getUserName());
         passwordField.sendKeys("ad");
-
         loginButton.click();
 
-        Assert.assertEquals(driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error"))).
-                getText(), "Your password must be at least 3 characters long");
+        WebElement alert = driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error")));
+        if (alert.isDisplayed()) {
+            Assert.assertEquals(alert.getText(), "Your password must be at least 3 characters long");
+        } else {
+            Assert.assertTrue(false, "Alert is not present.");
+        }
     }
 
     public void clearForm() throws Exception {

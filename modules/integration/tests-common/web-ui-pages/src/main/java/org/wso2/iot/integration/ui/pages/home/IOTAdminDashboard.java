@@ -33,7 +33,6 @@ import org.wso2.iot.integration.ui.pages.uesr.UserListingPage;
 
 import java.io.IOException;
 
-
 /**
  * This class represents the Admin Dashboard of the IOT server.
  * Server dashboard has following sections and functions.
@@ -69,7 +68,7 @@ public class IOTAdminDashboard {
     }
 
     public LoginPage logout() throws IOException {
-        driver.findElement(By.xpath("/html/body/header/div/div[2]/a/span[1]")).click();
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).click();
         WebElement logout = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.logout.link.xpath")));
         logout.click();
         return new LoginPage(driver);

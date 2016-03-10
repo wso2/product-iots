@@ -53,7 +53,10 @@ public class IOTHomePage {
         return name.contains(uiElementMapper.getElement("iot.user.login.username"));
     }
 
-    //To logout
+
+    /**
+     * Perform the logout action.
+     * */
     public LoginPage logout() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).click();
         WebElement logout = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.logout.link.xpath")));

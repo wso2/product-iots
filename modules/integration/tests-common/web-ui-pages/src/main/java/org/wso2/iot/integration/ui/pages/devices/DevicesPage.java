@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class DevicesPage {
+    Log log = LogFactory.getLog(DevicesPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
-    Log log = LogFactory.getLog(DevicesPage.class);
 
     public DevicesPage(WebDriver driver) throws IOException {
 
@@ -60,24 +60,26 @@ public class DevicesPage {
 
     public ConnectedCupDeviceViewPage viewDevice(String deviceName) throws IOException {
         WebElement deviceTable = driver.findElement(By.xpath(uiElementMapper.getElement("iot.devices.table.xpath")));
-            List<WebElement> data = deviceTable.findElements(By.cssSelector("a"));
-            for (WebElement e : data) {
-                String s = getLink(e, "/device/connectedcup?id=");
-                if (s != null) {
-                    driver.get(s);
-                    return new ConnectedCupDeviceViewPage(driver, deviceName);
-                }
+        List<WebElement> data = deviceTable.findElements(By.cssSelector("a"));
+        for (WebElement e : data) {
+            String s = getLink(e, "/device/connectedcup?id=");
+            if (s != null) {
+                driver.get(s);
+                return new ConnectedCupDeviceViewPage(driver, deviceName);
             }
+        }
         return null;
     }
 
-    public String getLink(WebElement element, String lookupText) {
+    private String getLink(WebElement element, String... lookupText) {
         String link = element.getAttribute("href");
         log.info("Link -----------------------> " + link);
-        if (link.contains(lookupText)) {
-            log.info("returned ----------------->>>> " + link);
-            return link;
+        boolean check = true;
+        for (String s : lookupText) {
+            if (!link.contains(s)) {
+                check = false;
+            }
         }
-        return null;
+        return check ? link : null;
     }
 }

@@ -40,6 +40,9 @@ public class LoginPage {
     private static final Log log = LogFactory.getLog(LoginPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
+    private WebElement userNameField;
+    private WebElement passwordField;
+    private WebElement loginButton;
 
     public LoginPage(WebDriver driver) throws IOException {
         this.driver = driver;
@@ -49,6 +52,11 @@ public class LoginPage {
         if (!webDriverWait.until(ExpectedConditions.titleContains("Login | IoT Server"))) {
             throw new IllegalStateException("This is not the Login page");
         }
+        userNameField = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.user.login.input.username.xpath")));
+        passwordField = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.user.login.input.password.xpath")));
+        loginButton = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.button.xpath")));
     }
 
     /**
@@ -60,13 +68,9 @@ public class LoginPage {
      */
     public IOTHomePage loginAsUser(String username, String password) throws IOException {
         log.info("Login as " + username);
-        WebElement userNameField = driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.username.xpath")));
-        WebElement passwordField = driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.password.xpath")));
         userNameField.sendKeys(username);
         passwordField.sendKeys(password);
-        driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.button.xpath"))).click();
+        loginButton.click();
         return new IOTHomePage(driver);
     }
 
@@ -79,13 +83,9 @@ public class LoginPage {
      */
     public IOTAdminDashboard loginAsAdmin(String username, String password) throws IOException {
         log.info("Login as " + username);
-        WebElement userNameField = driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.username.xpath")));
-        WebElement passwordField = driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.user.login.input.password.xpath")));
         userNameField.sendKeys(username);
         passwordField.sendKeys(password);
-        driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.button.xpath"))).click();
+        loginButton.click();
         return new IOTAdminDashboard(driver);
     }
 
@@ -99,5 +99,18 @@ public class LoginPage {
                 uiElementMapper.getElement("iot.user.register.link.xpath")));
         registerLink.click();
         return new NewUserRegisterPage(driver);
+    }
+
+    public void validateForm(String username, String password) {
+        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                uiElementMapper.getElement("iot.user.login.input.username.xpath"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                uiElementMapper.getElement("iot.user.login.input.password.xpath"))));
+        userNameField.clear();
+        passwordField.clear();
+        userNameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
     }
 }

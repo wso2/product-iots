@@ -35,7 +35,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 
 /**
- * Test cases for
+ * Class contains test cases for Add user form validation.
  * 1. Empty  form submission
  * 2. Short user name
  * 3. Empty First Name
@@ -47,7 +47,6 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
-
     private WebElement firstNameField;
     private WebElement lastNameField;
     private WebElement emailField;
@@ -71,7 +70,7 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test for empty form submission")
-    public void emptyFormTest(){
+    public void emptyFormTest() {
         clearForm();
 
         firstNameField.sendKeys("");
@@ -81,9 +80,14 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
         addUserButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Username is a required field. It cannot be empty.");
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for empty form not is displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Username is a required field. It cannot be empty.");
     }
 
     @Test(description = "Test for short user name")
@@ -97,9 +101,14 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
         addUserButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Username must be between 3 and 30 characters long.");
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for short user name is not displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Username must be between 3 and 30 characters long.");
     }
 
     @Test(description = "Test for empty first name")
@@ -113,9 +122,14 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
         addUserButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Firstname is a required field. It cannot be empty.");
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for First name is not displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Firstname is a required field. It cannot be empty.");
     }
 
     @Test(description = "Test for empty last name")
@@ -128,9 +142,15 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
         userNameField.sendKeys("user1");
 
         addUserButton.click();
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Lastname is a required field. It cannot be empty.");
+
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for Last name is not displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Lastname is a required field. It cannot be empty.");
     }
 
     @Test(description = "Test for empty email name")
@@ -144,9 +164,14 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
         addUserButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Email is a required field. It cannot be empty.");
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for E-mail is not displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Email is a required field. It cannot be empty.");
     }
 
     @Test(description = "Test for incorrect email")
@@ -160,9 +185,14 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
 
         addUserButton.click();
 
-        Assert.assertEquals(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.admin.addUser.formError.xpath"))).getText(),
-                            "Provided email is invalid. Please check.");
+        WebElement alert = driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.admin.addUser.formError.xpath")));
+
+        if (!alert.isDisplayed()) {
+            Assert.assertTrue(false, "Alert for incorrect E-mail is not displayed.");
+        }
+
+        Assert.assertEquals(alert.getText(), "Provided email is invalid. Please check.");
     }
 
     private void clearForm() {
