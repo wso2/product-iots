@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceViewPage;
 
@@ -40,7 +40,7 @@ public class DevicesPage {
 
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         if (!webDriverWait.until(ExpectedConditions.titleContains("Device Management | IoT Server"))) {
             throw new IllegalStateException("This is not the Device Management page");
         }

@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.graphs.Graph;
 import org.wso2.iot.integration.ui.pages.graphs.GraphHandler;
@@ -56,7 +56,7 @@ public class ConnectedCupDeviceViewPage {
     }
 
     public VirtualSampleViewPage gotoDevice() throws IOException {
-        WebDriverWait wait = new WebDriverWait(driverServer, UIConstants.webDriverTime);
+        WebDriverWait wait = new WebDriverWait(driverServer, UIUtils.webDriverTime);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.gotodevice.xpath"))));
         String link = driverServer.findElement(By.xpath(
@@ -66,7 +66,7 @@ public class ConnectedCupDeviceViewPage {
     }
 
     public String getDeviceLink() {
-        WebDriverWait wait = new WebDriverWait(driverServer, UIConstants.webDriverTime);
+        WebDriverWait wait = new WebDriverWait(driverServer, UIUtils.webDriverTime);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.gotodevice.xpath"))));
         return driverServer.findElement(By.xpath(

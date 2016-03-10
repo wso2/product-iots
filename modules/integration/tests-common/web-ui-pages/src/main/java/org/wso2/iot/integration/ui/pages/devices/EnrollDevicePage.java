@@ -20,12 +20,11 @@ package org.wso2.iot.integration.ui.pages.devices;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceTypeViewPage;
 
@@ -43,14 +42,14 @@ public class EnrollDevicePage {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         if (!webDriverWait.until(ExpectedConditions.titleContains("Device Types | IoT Server"))) {
             throw new IllegalStateException("This is not the Device Enrollment page");
         }
     }
 
     public boolean isInstalled() {
-        boolean check = UIConstants.isElementPresent(log, driver, By.xpath(
+        boolean check = UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
         if (check) {
             WebElement deviceDiv = driver.findElement(By.xpath(
@@ -62,7 +61,7 @@ public class EnrollDevicePage {
     }
 
     public ConnectedCupDeviceTypeViewPage gotoConnectedCupDeviceTypeViewPage() throws IOException {
-        boolean check = UIConstants.isElementPresent(log, driver,By.xpath(
+        boolean check = UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
         if (check){
             WebElement deviceDiv = driver.findElement(By.xpath(

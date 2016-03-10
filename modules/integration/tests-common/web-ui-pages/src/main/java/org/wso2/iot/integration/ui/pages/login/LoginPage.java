@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.home.IOTAdminDashboard;
 import org.wso2.iot.integration.ui.pages.home.IOTHomePage;
@@ -47,7 +47,7 @@ public class LoginPage {
     public LoginPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
 
         if (!webDriverWait.until(ExpectedConditions.titleContains("Login | IoT Server"))) {
             throw new IllegalStateException("This is not the Login page");
@@ -102,7 +102,7 @@ public class LoginPage {
     }
 
     public void validateForm(String username, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                 uiElementMapper.getElement("iot.user.login.input.username.xpath"))));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(

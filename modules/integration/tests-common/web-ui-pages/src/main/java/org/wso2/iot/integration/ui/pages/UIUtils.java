@@ -15,31 +15,31 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.iot.integration.ui.pages.uesr;
+package org.wso2.iot.integration.ui.pages;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIUtils;
-import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
-/**
- * Class to represent the user view.
- */
-public class ViewUserPage {
-    private static final Log log = LogFactory.getLog(ViewUserPage.class);
-    private WebDriver driver;
-    private UIElementMapper uiElementMapper;
+public class UIUtils {
+    public static long webDriverTimeOut = 10;
+    public static long webDriverTime = 60;
+    public static int threadTimeout = 1000;
 
-    public ViewUserPage (WebDriver driver) throws Exception {
-        this.driver = driver;
-        this.uiElementMapper = UIElementMapper.getInstance();
-
-        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
-        if (!webDriverWait.until(ExpectedConditions.titleContains("User Management | IoT Server"))){
-            throw new IllegalStateException("This is not the User view page");
+    public static boolean isElementPresent(Log log, WebDriver driver, By by) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, webDriverTime);
+            wait.until(ExpectedConditions.presenceOfElementLocated(by));
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            log.error(by.toString() + " is not present");
+            return false;
         }
+
     }
+
 }

@@ -21,7 +21,7 @@ package org.wso2.iot.integration.ui.pages.samples;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class ConnectedCupDeviceTypeViewPage {
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstanceBtn.xpath")));
         createInstanceBtn.click();
 
-        Thread.sleep(UIConstants.threadTimeout);
+        Thread.sleep(UIUtils.threadTimeout);
 
         return driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.modal.popup.xpath"))).isDisplayed();
     }

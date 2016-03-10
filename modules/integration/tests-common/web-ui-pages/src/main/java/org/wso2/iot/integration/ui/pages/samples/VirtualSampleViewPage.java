@@ -26,7 +26,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -40,14 +40,14 @@ public class VirtualSampleViewPage {
     public VirtualSampleViewPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         if (!webDriverWait.until(ExpectedConditions.titleContains("Connected Coffee Cup"))) {
             throw new IllegalStateException("This is not the Connected cup device page");
         }
     }
 
     public boolean orderCoffee() {
-        if (UIConstants.isElementPresent(log, driver, By.xpath(
+        if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.orderCoffee.xpath")))) {
             WebElement orderBtn = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.orderCoffee.xpath")));
@@ -58,7 +58,7 @@ public class VirtualSampleViewPage {
     }
 
     public boolean changeTemperature(String temp) {
-        if (UIConstants.isElementPresent(log, driver, By.xpath(
+        if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.temperature.xpath")))) {
             WebElement tempSlider = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.temperature.xpath")));
@@ -69,12 +69,12 @@ public class VirtualSampleViewPage {
     }
 
     public boolean changeCoffeeLevel(String level) {
-        if (UIConstants.isElementPresent(log, driver, By.xpath(
+        if (UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.coffee.level.xpath")))) {
             WebElement lvlSlider = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.coffee.level.xpath")));
             moveSlider(lvlSlider, Integer.parseInt(level));
-            driver.manage().timeouts().implicitlyWait(UIConstants.webDriverTime, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(UIUtils.webDriverTime, TimeUnit.SECONDS);
             return true;
         }
         return false;

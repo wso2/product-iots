@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
@@ -42,7 +42,7 @@ public class IOTHomePage {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
         // Check that we're on the right page.
-        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         if (!wait.until(ExpectedConditions.titleIs("Device Management | IoT Server"))) {
             throw new IllegalStateException("This is not the home page");
         }

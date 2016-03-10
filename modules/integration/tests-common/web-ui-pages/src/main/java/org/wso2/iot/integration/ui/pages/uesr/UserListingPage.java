@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class UserListingPage {
         WebElement deleteBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.admin.deleteUser.btn.xpath")));
 
-        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         wait.until(ExpectedConditions.visibilityOf(deleteBtn));
         deleteBtn.click();
 
@@ -55,7 +55,7 @@ public class UserListingPage {
         wait.until(ExpectedConditions.visibilityOf(deleteConfirmationBtn));
         deleteConfirmationBtn.click();
 
-        Thread.sleep(UIConstants.threadTimeout);
+        Thread.sleep(UIUtils.threadTimeout);
         WebElement deleteSuccessBtn = driver.findElement(
                 By.xpath(uiElementMapper.getElement("iot.admin.deleteUser.success.link.xpath")));
         deleteSuccessBtn.click();

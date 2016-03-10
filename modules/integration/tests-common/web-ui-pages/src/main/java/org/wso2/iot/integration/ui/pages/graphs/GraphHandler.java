@@ -25,7 +25,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIConstants;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class GraphHandler {
      */
     public HashMap<String, Graph> getGraphMap() {
         HashMap<String, Graph> graphMap = new HashMap<>();
-        WebDriverWait wait = new WebDriverWait(driver, UIConstants.webDriverTimeOut);
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.stat.graph.wrapper.xpath")))));
         List<WebElement> graphs = driver.findElements(By.xpath(
@@ -139,7 +139,7 @@ public class GraphHandler {
      */
     public boolean isPathGetValues(WebElement graph, String val) {
         WebElement graphContainer = getGraph(graph, uiElementMapper.getElement("iot.stat.graph.class.name"));
-        driver.manage().timeouts().implicitlyWait(UIConstants.webDriverTimeOut, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(UIUtils.webDriverTimeOut, TimeUnit.SECONDS);
         String[] values;
         if (graphContainer != null) {
             values = graphContainer.findElement(By.tagName("path")).getAttribute("d").split(",");
