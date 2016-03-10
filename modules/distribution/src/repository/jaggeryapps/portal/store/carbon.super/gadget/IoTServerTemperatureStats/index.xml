@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Bar Chart"
+                 author="WSO2 Gadget Server"
+                 height="230"
+                 scrolling="true"
+                 tags="charts,bar,visualization,data"
+                 description="A generic Bar Chart gadget, that takes a json datasource as an input. It can be configured to fetch data in defined intervals. This gadget can be used to create dashboards with statistical data. This gadget can be reused as an iframe in any web page as it is self contained.">
+    </ModulePrefs>
+    <UserPref name="dataSource"
+              display_name="Data Source"
+              default_value="/portal/gadgets/bar-chart/datasource/dataFile4.jag">
+    </UserPref>
+    <!--UserPref name="options"
+              display_name="Chart Options"
+              default_value="/portal/gadgets/bar-chart/js/options-bar.js">
+    </UserPref-->
+    <UserPref name="updateGraph"
+              display_name="Update Interval (s)"
+              default_value="No">
+    </UserPref>
+    <Content type="html">
+        <![CDATA[
+             <html>
+             <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <title>Bar Chart</title>
+                <link href="css/flot-graph.css" rel="stylesheet" type="text/css">
+                <link href="css/igviz.css" rel="stylesheet" type="text/css">
+                <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+                <link href="css/d3.geomap.css" rel="stylesheet" type="text/css">
+                <script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script>
+                <script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+                <script language="javascript" type="text/javascript" src="js/topojson.js"></script>
+                <script language="javascript" type="text/javascript" src="js/d3.min.js"></script>
+                <script language="javascript" type="text/javascript" src="js/vega.js"></script>
+                <script language="javascript" type="text/javascript" src="js/VizGrammar.min.js"></script>
+                <script language="javascript" type="text/javascript" src="js/gadgetconf.js"></script>
+                <script language="javascript" type="text/javascript" src="js/outputAdapterUiLibrary.js"></script>
+                <script language="javascript" type="text/javascript" src="js/main.js"></script>
+
+            </head>
+
+            <body>
+                <div id="placeholder" class="demo-placeholder" style="height:90%"></div>
+                <script language="javascript" type="text/javascript">
+                  if(jQuery("#placeholder").html() == ""){
+                    jQuery("#placeholder").append('<div id="noChart"><table><tr><td style="padding:30px 20px 0px 20px"><img src="../../portal/images/noEvents.png" align="left" style="width:24;height:24"/></td><td><br/><b><p><br/> Data is not available for plotting</p></b></td></tr><tr><td></td><td><p>The chart will be loaded once the dashboard receives events</p><td/></tr></table></div>');
+                  }
+                </script>
+            </body>
+            </html>
+    ]]>
+    </Content>
+</Module>
+
+

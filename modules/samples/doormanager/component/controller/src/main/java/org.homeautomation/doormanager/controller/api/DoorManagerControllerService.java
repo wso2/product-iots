@@ -147,11 +147,13 @@ public class DoorManagerControllerService {
                                 @FormParam("policy") String policy,
                                 @FormParam("cardNumber") String cardNumber,
                                 @FormParam("userName") String userName,
+                                @FormParam("emailAddress") String emailAddress,
                                 @Context HttpServletResponse response) {
         try {
             if (userName != null && cardNumber != null && deviceId != null) {
                 try {
                     UserStoreManager userStoreManager = this.getUserStoreManager();
+                    DoorLockSafe doorLockSafe = new DoorLockSafe();
                     if (userStoreManager.isExistingUser(userName)) {
                         TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
                         AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
@@ -165,7 +167,35 @@ public class DoorManagerControllerService {
                         claims.put("http://wso2.org/claims/lock/refreshtoken", accessTokenInfo.getRefresh_token());
                         claims.put("http://wso2.org/claims/lock/cardnumber", cardNumber);
                         userStoreManager.setUserClaimValues(userName, claims, null);
-                        //TODO: Add content to dto
+                        doorLockSafe.setAccessToken(accessTokenInfo.getAccess_token());
+                        doorLockSafe.setRefreshToken(accessTokenInfo.getRefresh_token());
+                        doorLockSafe.setDeviceId(deviceId);
+                        doorLockSafe.setOwner(owner);
+                        doorLockSafe.setEmailAddress(emailAddress);
+                        doorLockSafe.setUIDofUser(cardNumber);
+                        doorLockSafe.setPolicy(policy);
+                        doorLockSafe.setSerialNumber(deviceId);
+                        boolean status;
+                        try {
+                            DoorManagerDAO.beginTransaction();
+                            status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
+                            DoorManagerDAO.commitTransaction();
+                            if (status) {
+                                response.setStatus(Response.Status.OK.getStatusCode());
+                            } else {
+                                response.setStatus(Response.Status.FORBIDDEN.getStatusCode());
+                            }
+                        } catch (DoorManagerDeviceMgtPluginException e) {
+                            try {
+                                DoorManagerDAO.rollbackTransaction();
+                            } catch (DoorManagerDeviceMgtPluginException e1) {
+                                String msg = "Error while updating the enrollment of the Door Manager Locker device : "
+                                        + doorLockSafe.getOwner();
+                                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                                log.error(msg, e);
+                            }
+                        }
+
                         response.setStatus(Response.Status.OK.getStatusCode());
                     } else {
                         response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
@@ -184,7 +214,7 @@ public class DoorManagerControllerService {
         }
     }
 
-    @Path("controller/registerNewUser")
+   /* @Path("controller/registerNewUser")
     @POST
     @Feature(code = "registerNewUser", name = "Assign to new user", type = "operation",
             description = "Assign to new user")
@@ -241,7 +271,7 @@ public class DoorManagerControllerService {
             response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
             log.error(e);
         }
-    }
+    }*/
 
     /*@Path("controller/registerNewUser")
     @POST
