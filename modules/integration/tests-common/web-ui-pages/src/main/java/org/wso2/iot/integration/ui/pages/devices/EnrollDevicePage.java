@@ -31,7 +31,8 @@ import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceTypeViewPage;
 import java.io.IOException;
 
 /**
- * Device Enrollment page for new user
+ * Device Enrollment page.
+ * This page lists the all device types which are currently installed in the IOT server.
  */
 public class EnrollDevicePage {
     private WebDriver driver;
@@ -48,6 +49,11 @@ public class EnrollDevicePage {
         }
     }
 
+    /**
+     * This method checks whether the Connected cup device is installed. If the device is installed correctly, it is
+     * displayed in this page.
+     * @return : True if the device is visible in the page. False otherwise.
+     */
     public boolean isInstalled() {
         boolean check = UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.xpath")));
@@ -60,6 +66,10 @@ public class EnrollDevicePage {
         return false;
     }
 
+    /**
+     * Method to perform the navigation to Device type view page of the Connected cup.
+     * @return : The corresponding Device type view page. Null, if the element is not visible.
+     */
     public ConnectedCupDeviceTypeViewPage gotoConnectedCupDeviceTypeViewPage() throws IOException {
         boolean check = UIUtils.isElementPresent(log, driver, By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.xpath")));

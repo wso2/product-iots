@@ -67,6 +67,10 @@ public class IOTAdminDashboard {
         }
     }
 
+    /**
+     * Performs the logout action.
+     * @return : The IOT login page
+     */
     public LoginPage logout() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).click();
         WebElement logout = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.logout.link.xpath")));
@@ -74,31 +78,55 @@ public class IOTAdminDashboard {
         return new LoginPage(driver);
     }
 
+    /**
+     * Performs the navigation to Add device group page.
+     * @return : Add Device Group page.
+     */
     public DeviceAddGroupPage addGroup() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.group.addButton.xpath"))).click();
         return new DeviceAddGroupPage(driver);
     }
 
+    /**
+     * Performs the navigation to Group listing page.
+     * @return : Groups page.
+     */
     public DeviceGroupsPage viewGroups() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.group.viewButton.xpath"))).click();
         return new DeviceGroupsPage(driver);
     }
 
+    /**
+     * Navigates to the Add User page.
+     * @return : Add user page.
+     */
     public AddUserPage addUser() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.addButton.xpath"))).click();
         return new AddUserPage(driver);
     }
 
+    /**
+     * Navigates to the User Listing page.
+     * @return : User Listing page.
+     */
     public UserListingPage viewUser() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.user.viewButton.xpath"))).click();
         return new UserListingPage(driver);
     }
 
+    /**
+     * Navigates to the New device enrollment page.
+     * @return : Enroll Device page.
+     */
     public EnrollDevicePage enrollNewDevice() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.device.addBtn.xpath"))).click();
         return new EnrollDevicePage(driver);
     }
 
+    /**
+     * Navigates to the Devices listing page.
+     * @return : devices listing page.
+     */
     public DevicesPage viewDevices() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.device.viewBtn.xpath"))).click();
         return new DevicesPage(driver);

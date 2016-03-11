@@ -66,6 +66,7 @@ public class ConnectedCupDeviceViewPage {
 
     /**
      * This method executes Connected cup sample web app.
+     * @return : The Connected cup web page.
      */
     public ConnectedCupDeviceInterface gotoDevice() throws IOException {
         WebDriverWait wait = new WebDriverWait(driverServer, UIUtils.webDriverTime);

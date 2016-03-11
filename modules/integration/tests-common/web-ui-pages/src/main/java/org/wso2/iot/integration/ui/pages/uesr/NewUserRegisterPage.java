@@ -94,7 +94,16 @@ public class NewUserRegisterPage {
         handleAction(firstName, lastName, email, userName, password, confirmPassword);
     }
 
-    public void handleAction(String firstName, String lastName, String email, String userName, String password,
+    /**
+     * Support method to populate the User registration form.
+     * @param firstName : First name of the user.
+     * @param lastName : Last name of the user.
+     * @param email : E mail of the user.
+     * @param userName : User name of the user.
+     * @param password : Password for the user.
+     * @param confirmPassword : Confirmation password.
+     */
+    private void handleAction(String firstName, String lastName, String email, String userName, String password,
                              String confirmPassword) {
         clearForm();
         firstNameField.sendKeys(firstName);
@@ -106,7 +115,10 @@ public class NewUserRegisterPage {
         registerButton.click();
     }
 
-    public void clearForm() {
+    /**
+     * Support method to clear the Registration form.
+     */
+    private void clearForm() {
         firstNameField.clear();
         lastNameField.clear();
         emailField.clear();

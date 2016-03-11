@@ -47,6 +47,10 @@ public class IOTHomePage {
         }
     }
 
+    /**
+     * Method to check the current User name
+     * @return : True if the user name matches the logged in user. False otherwise.
+     */
     public boolean checkUserName() {
         String name = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).getText();
         return name.contains(uiElementMapper.getElement("iot.user.login.username"));
@@ -54,8 +58,9 @@ public class IOTHomePage {
 
 
     /**
-     * Perform the logout action.
-     * */
+     * Performs the logout function.
+     * @return : IOT login page.
+     */
     public LoginPage logout() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.registered.name"))).click();
         WebElement logout = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.logout.link.xpath")));
@@ -63,7 +68,10 @@ public class IOTHomePage {
         return new LoginPage(driver);
     }
 
-    //To enroll devices as user
+    /**
+     * Navigates to the New device enrollment page.
+     * @return : Enroll Device page.
+     */
     public EnrollDevicePage enrollNewDevice() throws IOException {
         driver.findElement(By.xpath("iot.home.page.uuf-menu.xpath")).click();
         driver.findElement(By.xpath("iot.home.page.uuf-menu.devicemgt.xpath")).click();
@@ -71,13 +79,13 @@ public class IOTHomePage {
         return new EnrollDevicePage(driver);
     }
 
-    //To add new Device groups
-    public void goToGroupManagementPage() {
+    /**
+     * Performs the navigation to Add device group page.
+     * @return : Add Device Group page.
+     */
+    public DeviceAddGroupPage addNewGroup() throws IOException {
         driver.findElement(By.xpath("iot.home.page.uuf-menu.xpath")).click();
         driver.findElement(By.xpath("iot.home.page.uuf-menu.groupmgt.xpath")).click();
-    }
-
-    public DeviceAddGroupPage addNewGroup() throws IOException {
         driver.findElement(By.xpath("iot.device.viewGroup.empty.addGroup.xpath")).click();
         return new DeviceAddGroupPage(driver);
     }

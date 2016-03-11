@@ -31,6 +31,14 @@ import org.wso2.iot.integration.ui.pages.samples.ConnectedCupDeviceViewPage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class to represent the IOT devices page. In this page, all the enrolled devices are listed.
+ * User can perform following functions on the enrolled devices.
+ * 1. View the device.
+ * 2. View device analytics.
+ * 3. Edit the device.
+ * 4. Delete the device.
+ */
 public class DevicesPage {
     Log log = LogFactory.getLog(DevicesPage.class);
     private WebDriver driver;
@@ -46,6 +54,11 @@ public class DevicesPage {
         }
     }
 
+    /**
+     * This method checks whether the given device is enrolled and visible in the UI of the IOT server.
+     * @param name : The name of the device to be checked.
+     * @return : True if the device is enrolled and visible. False otherwise.
+     */
     public boolean isDeviceEnrolled(String name) {
         List<WebElement> deviceNames = driver.findElements(By.tagName("h4"));
         if (!deviceNames.isEmpty()) {
@@ -58,6 +71,12 @@ public class DevicesPage {
         return false;
     }
 
+    /**
+     * This method performs the navigation to the Device view of the given device.
+     * Here the navigation happens to the Connected cup device.
+     * @param deviceName : Name of the device.
+     * @return : The corresponding device view page. Null if not visible.
+     */
     public ConnectedCupDeviceViewPage viewDevice(String deviceName) throws IOException {
         WebElement deviceTable = driver.findElement(By.xpath(uiElementMapper.getElement("iot.devices.table.xpath")));
         List<WebElement> data = deviceTable.findElements(By.cssSelector("a"));
@@ -71,6 +90,12 @@ public class DevicesPage {
         return null;
     }
 
+    /**
+     * Method to extract the URL, which matches with the given parameters from an HTML element.
+     * @param element : WebElement, from which the URL should be extracted.
+     * @param lookupText : The parameters to be contained in the URL.
+     * @return : The URL String found. NULL if the URL is not found.
+     */
     private String getLink(WebElement element, String... lookupText) {
         String link = element.getAttribute("href");
         log.info("Link -----------------------> " + link);

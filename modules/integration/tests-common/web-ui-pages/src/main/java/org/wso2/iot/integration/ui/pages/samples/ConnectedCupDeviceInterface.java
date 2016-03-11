@@ -52,6 +52,7 @@ public class ConnectedCupDeviceInterface {
 
     /**
      * Method to perform the order coffee functionality.
+     * @return : True if the element is present and action is performed. False otherwise.
      */
     public boolean orderCoffee() {
         if (UIUtils.isElementPresent(log, driver, By.xpath(
@@ -67,6 +68,7 @@ public class ConnectedCupDeviceInterface {
     /**
      * Method to change the temperature level.
      * @param temp : The value to be set.
+     * @return : True if the element is present and value is set. False otherwise.
      */
     public boolean changeTemperature(String temp) {
         if (UIUtils.isElementPresent(log, driver, By.xpath(
@@ -82,6 +84,7 @@ public class ConnectedCupDeviceInterface {
     /**
      * Method to change the Coffee level.
      * @param level : The value to be set.
+     * @return : True if the element is present and value is set. False otherwise.
      */
     public boolean changeCoffeeLevel(String level) {
         if (UIUtils.isElementPresent(log, driver, By.xpath(

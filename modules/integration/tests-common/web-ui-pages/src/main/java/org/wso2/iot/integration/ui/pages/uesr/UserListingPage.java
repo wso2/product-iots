@@ -40,6 +40,7 @@ public class UserListingPage {
     }
 
     /**
+     * Performs the delete user action.
      * @return After deleting a user, returns back to the user listing page.
      */
     public UserListingPage deleteUser() throws IOException, InterruptedException {

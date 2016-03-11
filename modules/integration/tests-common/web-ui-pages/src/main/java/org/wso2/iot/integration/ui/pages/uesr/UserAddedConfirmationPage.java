@@ -27,10 +27,8 @@ import java.io.IOException;
  * This class represents the confirmation page for adding a new user.
  */
 public class UserAddedConfirmationPage {
-    private WebDriver driver;
 
     public UserAddedConfirmationPage(WebDriver driver) throws IOException {
-        this.driver = driver;
         UIElementMapper uiElementMapper = UIElementMapper.getInstance();
 
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.addUser.view.btn.xpath"))).click();

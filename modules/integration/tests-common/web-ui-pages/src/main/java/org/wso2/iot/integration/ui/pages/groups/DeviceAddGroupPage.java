@@ -46,8 +46,9 @@ public class DeviceAddGroupPage {
 
 
     /**
-     * @param name        The group name that is need to be created.
-     * @param description the description for the group
+     * This method performs creation of a new device group.
+     * @param name : The group name that is need to be created.
+     * @param description : the description for the group
      * @return The resultant page.
      */
     public DeviceGroupsPage addNewGroup(String name, String description) throws IOException {
@@ -68,6 +69,7 @@ public class DeviceAddGroupPage {
     }
 
     /**
+     * This method submits an empty form and returns the error message.
      * @return The error string when trying to submit an empty form.
      */
     public String submitEmptyForm() {

@@ -28,6 +28,9 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class represents the Groups page.
+ */
 public class DeviceGroupsPage {
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -43,6 +46,10 @@ public class DeviceGroupsPage {
         }
     }
 
+    /**
+     * Method to go to the Add device group page, by clicking the Add group button.
+     * @return : Add device groups page.
+     */
     public DeviceAddGroupPage addNewGroup() throws IOException {
         WebElement addNewGroupBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.device.viewGroup.empty.addGroup.xpath")));
@@ -50,6 +57,11 @@ public class DeviceGroupsPage {
         return new DeviceAddGroupPage(driver);
     }
 
+    /**
+     * This method checks whether the created group is visible in the UI.
+     * @param groupName : Name of the group created.
+     * @return : True if the group is visible. False otherwise.
+     */
     public boolean isGroupCreated(String groupName) {
         WebElement table = driver.findElement(By.id(uiElementMapper.getElement("iot.device.table.id")));
         List<WebElement> allGroupNames = table.findElements(By.tagName("h4"));
@@ -59,7 +71,6 @@ public class DeviceGroupsPage {
                 return true;
             }
         }
-
         return false;
     }
 }

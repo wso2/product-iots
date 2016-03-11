@@ -46,6 +46,7 @@ public class ConnectedCupDeviceTypeViewPage {
 
     /**
      * This method verifies that the pop up modal for inserting a name for device is present.
+     * @return : True if the Modal pop up is displayed. False otherwise.
      */
     public boolean isPopUpPresent() throws InterruptedException {
         WebElement createInstanceBtn = driver.findElement(By.xpath(
@@ -62,6 +63,7 @@ public class ConnectedCupDeviceTypeViewPage {
      * the popup, user should be navigated to the device type view page again.
      * This method checks the navigation and return true if navigation is correct.
      * @param name : Name for the device.
+     * @return : True if navigates to the Device type view page without errors. False otherwise.
      */
     public boolean enrollDevice(String name) {
 
