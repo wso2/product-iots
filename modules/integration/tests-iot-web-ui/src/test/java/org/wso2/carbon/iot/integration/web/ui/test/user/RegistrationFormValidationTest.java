@@ -57,7 +57,6 @@ public class RegistrationFormValidationTest extends IOTIntegrationUIBaseTestCase
 
     @Test(description = "Test for submitting an empty registration form")
     public void emptyFormTest() throws IOException {
-        registerPage.clearForm();
         registerPage.validateForm("", "", "", "", "", "");
 
         WebElement alertFirstName = driver.findElement(By.id(
