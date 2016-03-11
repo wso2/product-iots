@@ -21,9 +21,12 @@ package org.coffeeking.manager.service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
+import org.coffeeking.manager.service.util.APIUtil;
 import org.wso2.carbon.apimgt.annotations.api.API;
 import org.wso2.carbon.apimgt.annotations.device.DeviceType;
+import org.wso2.carbon.apimgt.webapp.publisher.APIPublisherUtil;
 import org.wso2.carbon.apimgt.webapp.publisher.KeyGenerationUtil;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
@@ -52,76 +55,62 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@API( name="connectedcup_mgt", version="1.0.0", context="/connectedcup_mgt")
-public class    ConnectedCupManagerService {
-    private static Log log = LogFactory.getLog(ConnectedCupManagerService.class);
-    private static final String SUPER_TENANT = "carbon.super";
+@API(name = "connectedcup_mgt", version = "1.0.0", context = "/connectedcup_mgt")
+public class ConnectedCupManagerService {
 
+    private static Log log = LogFactory.getLog(ConnectedCupManagerService.class);
     @Context
     private HttpServletResponse response;
+
     /**
      * @param name
-     * @param owner
      * @return
      */
-    @Path("cup/register")
+    @Path("manager/device")
     @POST
-    public boolean register(@QueryParam("name") String name, @QueryParam("owner") String owner) {
-
-
-        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
+    public boolean register(@QueryParam("name") String name) {
         String deviceId = shortUUID();
-
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-
         try {
-            if (deviceManagement.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+            if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
                 response.setStatus(Response.Status.CONFLICT.getStatusCode());
                 return false;
             }
-
             Device device = new Device();
             device.setDeviceIdentifier(deviceId);
             EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
             enrolmentInfo.setDateOfEnrolment(new Date().getTime());
             enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
             enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
             device.setName(name);
             device.setType(ConnectedCupConstants.DEVICE_TYPE);
-            enrolmentInfo.setOwner(owner);
+            enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
             device.setEnrolmentInfo(enrolmentInfo);
-
             KeyGenerationUtil.createApplicationKeys(ConnectedCupConstants.DEVICE_TYPE);
-
             TokenClient accessTokenClient = new TokenClient(ConnectedCupConstants.DEVICE_TYPE);
-            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(owner, deviceId);
-
-            //create token
+            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(APIUtil.getAuthenticatedUser(), deviceId);
             String accessToken = accessTokenInfo.getAccess_token();
             String refreshToken = accessTokenInfo.getRefresh_token();
             List<Device.Property> properties = new ArrayList<>();
-
             Device.Property accessTokenProperty = new Device.Property();
             accessTokenProperty.setName("accessToken");
             accessTokenProperty.setValue(accessToken);
-
             Device.Property refreshTokenProperty = new Device.Property();
             refreshTokenProperty.setName("refreshToken");
             refreshTokenProperty.setValue(refreshToken);
-
             properties.add(accessTokenProperty);
             properties.add(refreshTokenProperty);
             device.setProperties(properties);
 
-            boolean added = deviceManagement.getDeviceManagementService().enrollDevice(device);
+            boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
             if (added) {
                 response.setStatus(Response.Status.OK.getStatusCode());
             } else {
                 response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
             }
-
             return added;
         } catch (DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
@@ -129,108 +118,79 @@ public class    ConnectedCupManagerService {
         } catch (AccessTokenException e) {
             e.printStackTrace();
         } finally {
-            deviceManagement.endTenantFlow();
+            PrivilegedCarbonContext.endTenantFlow();
         }
         return true;
-
     }
 
-    @Path("/device/remove/{device_id}")
+    @Path("manager/device/{device_id}")
     @DELETE
     public void removeDevice(@PathParam("device_id") String deviceId,
                              @Context HttpServletResponse response) {
-
-        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-
         try {
-            boolean removed = deviceManagement.getDeviceManagementService().disenrollDevice(
-                    deviceIdentifier);
+            boolean removed = APIUtil.getDeviceManagementService().disenrollDevice(deviceIdentifier);
             if (removed) {
                 response.setStatus(Response.Status.OK.getStatusCode());
-
             } else {
                 response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-
             }
         } catch (DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         } finally {
-            deviceManagement.endTenantFlow();
+            PrivilegedCarbonContext.endTenantFlow();
         }
-
-
     }
 
-    @Path("/device/update/{device_id}")
+    @Path("manager/device/{device_id}")
     @POST
     public boolean updateDevice(@PathParam("device_id") String deviceId,
                                 @QueryParam("name") String name,
                                 @Context HttpServletResponse response) {
-
-        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
-
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-
         try {
-            Device device = deviceManagement.getDeviceManagementService().getDevice(
-                    deviceIdentifier);
+            Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             device.setDeviceIdentifier(deviceId);
-
             // device.setDeviceTypeId(deviceTypeId);
             device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
-
             device.setName(name);
             device.setType(ConnectedCupConstants.DEVICE_TYPE);
-
-            boolean updated = deviceManagement.getDeviceManagementService().modifyEnrollment(
-                    device);
-
-
+            boolean updated = APIUtil.getDeviceManagementService().modifyEnrollment(device);
             if (updated) {
                 response.setStatus(Response.Status.OK.getStatusCode());
-
             } else {
                 response.setStatus(Response.Status.NOT_ACCEPTABLE.getStatusCode());
-
             }
             return updated;
         } catch (DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
             return false;
         } finally {
-            deviceManagement.endTenantFlow();
+            PrivilegedCarbonContext.endTenantFlow();
         }
-
     }
 
-    @Path("/device/{device_id}")
+    @Path("manager/device/{device_id}")
     @GET
     @Consumes("application/json")
     @Produces("application/json")
     public Device getDevice(@PathParam("device_id") String deviceId) {
-
-        DeviceManagement deviceManagement = new DeviceManagement(SUPER_TENANT);
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-
         try {
-            Device device = deviceManagement.getDeviceManagementService().getDevice(
-                    deviceIdentifier);
-
+            Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             return device;
         } catch (DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
             return null;
         } finally {
-            deviceManagement.endTenantFlow();
+            PrivilegedCarbonContext.endTenantFlow();
         }
-
     }
 
     private static String shortUUID() {

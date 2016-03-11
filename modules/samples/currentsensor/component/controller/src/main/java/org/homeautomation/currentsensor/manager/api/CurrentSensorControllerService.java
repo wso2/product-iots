@@ -134,7 +134,7 @@ public class CurrentSensorControllerService {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-power", name = "Power x100", type = "monitor",
+    @Feature(code = "read-power", name = "Power", type = "monitor",
             description = "Request power reading from Arduino agent")
     public SensorRecord requestPower(@HeaderParam("owner") String owner,
                                      @HeaderParam("deviceId") String deviceId,
@@ -164,7 +164,7 @@ public class CurrentSensorControllerService {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-flowrate", name = "Flow Rate x100", type = "monitor",
+    @Feature(code = "read-flowrate", name = "Flow Rate", type = "monitor",
             description = "Request flow rate reading from Arduino agent")
     public SensorRecord requestFlowRate(@HeaderParam("owner") String owner,
                                         @HeaderParam("deviceId") String deviceId,
@@ -227,11 +227,11 @@ public class CurrentSensorControllerService {
                     Calendar.getInstance().getTimeInMillis());
 
             SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_POWER,
-                    String.valueOf(current * 230 / 100),
+                    String.valueOf(current * 230),
                     Calendar.getInstance().getTimeInMillis());
 
             SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_FLOWRATE,
-                    String.valueOf(flow_rate/100),
+                    String.valueOf(flow_rate),
                     Calendar.getInstance().getTimeInMillis());
 
             if (!CurrentSensorServiceUtils.publishToDASCurrent(dataMsg.owner, dataMsg.deviceId, current)) {
@@ -240,13 +240,13 @@ public class CurrentSensorControllerService {
                         "] of owner [" + owner + "]");
             }
 
-            if (!CurrentSensorServiceUtils.publishToDASPower(dataMsg.owner, dataMsg.deviceId, current * 230 / 100)) {
+            if (!CurrentSensorServiceUtils.publishToDASPower(dataMsg.owner, dataMsg.deviceId, current * 230)) {
                 response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
                 log.warn("An error occured whilst trying to publish pin data of Power Sensor Data with ID [" + deviceId +
                         "] of owner [" + owner + "]");
             }
 
-            if (!CurrentSensorServiceUtils.publishToDASFlowRate(dataMsg.owner, dataMsg.deviceId, flow_rate/100)) {
+            if (!CurrentSensorServiceUtils.publishToDASFlowRate(dataMsg.owner, dataMsg.deviceId, flow_rate)) {
                 response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
                 log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
                         "] of owner [" + owner + "]");

@@ -105,11 +105,15 @@ public class ControllerService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerDevice(final DeviceJSON agentInfo) {
-        if ((agentInfo.deviceId != null) && (agentInfo.owner != null)) {
-            return Response.status(Response.Status.OK).entity("Device has been registered successfully").build();
+        try {
+            if ((agentInfo.deviceId != null) && (agentInfo.owner != null)) {
+                return Response.status(Response.Status.OK).entity("Device has been registered successfully").build();
+            }
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Message body not " +
+                                                                          "well-formed and still invalid").build();
+        } finally {
+            PrivilegedCarbonContext.endTenantFlow();
         }
-        return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Message body not " +
-                                                                      "well-formed and still invalid").build();
     }
 
     /**
@@ -130,14 +134,17 @@ public class ControllerService {
                                         @HeaderParam("protocol") String protocol,
                                         @Context HttpServletResponse response) {
         SensorRecord sensorRecord = null;
-        if (isPermitted(owner, deviceId, response)) {
-            try {
+        try {
+            if (isPermitted(owner, deviceId, response)) {
+
                 sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
                                                                                DeviceTypeConstants.SENSOR_TEMPERATURE);
-            } catch (DeviceControllerException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                response.setStatus(Response.Status.OK.getStatusCode());
             }
-            response.setStatus(Response.Status.OK.getStatusCode());
+        } catch (DeviceControllerException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        } finally {
+            PrivilegedCarbonContext.endTenantFlow();
         }
         return sensorRecord;
     }
@@ -160,14 +167,16 @@ public class ControllerService {
                                      @HeaderParam("protocol") String protocol,
                                      @Context HttpServletResponse response) {
         SensorRecord sensorRecord = null;
-        if (isPermitted(owner, deviceId, response)) {
-            try {
+        try {
+            if (isPermitted(owner, deviceId, response)) {
                 sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
                                                                                DeviceTypeConstants.SENSOR_HUMIDITY);
-            } catch (DeviceControllerException e) {
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                response.setStatus(Response.Status.OK.getStatusCode());
             }
-            response.setStatus(Response.Status.OK.getStatusCode());
+        } catch (DeviceControllerException e) {
+            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        } finally {
+            PrivilegedCarbonContext.endTenantFlow();
         }
         return sensorRecord;
     }
@@ -198,6 +207,8 @@ public class ControllerService {
             } catch (DeviceTypeException e) {
                 log.error(e);
                 response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            } finally {
+                PrivilegedCarbonContext.endTenantFlow();
             }
         }
     }
@@ -214,6 +225,8 @@ public class ControllerService {
             }
         } catch (DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+        } finally {
+            PrivilegedCarbonContext.endTenantFlow();
         }
         return false;
     }

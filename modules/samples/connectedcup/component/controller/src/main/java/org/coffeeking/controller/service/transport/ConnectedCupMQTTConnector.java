@@ -37,20 +37,18 @@ import java.util.UUID;
 
 @SuppressWarnings("no JAX-WS annotation")
 public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
-    private static Log log = LogFactory.getLog(ConnectedCupMQTTConnector.class);
 
+    private static Log log = LogFactory.getLog(ConnectedCupMQTTConnector.class);
     private static String serverName = DeviceManagementConfigurationManager.getInstance().
             getDeviceManagementServerInfo().getName();
-
     private static String subscribeTopic = "wso2" + File.separator + "+" + File.separator +
                                            ConnectedCupConstants.DEVICE_TYPE + File.separator + "+" + File.separator
                                            + "connected_publisher";
-
     private static String iotServerSubscriber = UUID.randomUUID().toString().substring(0, 5);
 
     private ConnectedCupMQTTConnector() {
-        super(iotServerSubscriber, ConnectedCupConstants.DEVICE_TYPE,
-              MqttConfig.getInstance().getMqttQueueEndpoint(), subscribeTopic);
+        super(iotServerSubscriber, ConnectedCupConstants.DEVICE_TYPE, MqttConfig.getInstance().getMqttQueueEndpoint(),
+              subscribeTopic);
     }
 
     @Override
@@ -72,13 +70,10 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
                 }
             }
         };
-
         Thread connectorThread = new Thread(connector);
         connectorThread.setDaemon(true);
         connectorThread.start();
     }
-
-
 
     @Override
     public void publishDeviceData(String... publishData) throws TransportHandlerException {
@@ -88,91 +83,55 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
             log.error(errorMsg);
             throw new TransportHandlerException(errorMsg);
         }
-
         String deviceOwner = publishData[0];
         String deviceId = publishData[1];
         String resource = publishData[2];
         String state = publishData[3];
-
         MqttMessage pushMessage = new MqttMessage();
-        String publishTopic =
-                "wso2" + File.separator + deviceOwner + File.separator +
-                ConnectedCupConstants.DEVICE_TYPE + File.separator + deviceId;
+        String publishTopic = "wso2" + File.separator + deviceOwner + File.separator +
+                              ConnectedCupConstants.DEVICE_TYPE + File.separator + deviceId;
 
         try {
-
             String actualMessage = resource + ":" + state;
-
             pushMessage.setPayload(actualMessage.getBytes(StandardCharsets.UTF_8));
             pushMessage.setQos(DEFAULT_MQTT_QUALITY_OF_SERVICE);
             pushMessage.setRetained(false);
-
             publishToQueue(publishTopic, pushMessage);
-
         } catch (Exception e) {
-            String errorMsg = "Preparing payload failed for device - [" + deviceId + "] of owner - " +
-                              "[" + deviceOwner + "].";
+            String errorMsg = "Preparing payload failed for device - [" + deviceId + "] of owner-[" + deviceOwner + "].";
             log.error(errorMsg);
             throw new TransportHandlerException(errorMsg, e);
         }
     }
 
-
     @Override
     public void processIncomingMessage(MqttMessage mqttMessage, String... strings) throws TransportHandlerException {
         String topic = strings[0];
-
         String ownerAndId = topic.replace("wso2" + File.separator, "");
         ownerAndId = ownerAndId.replace(File.separator + ConnectedCupConstants.DEVICE_TYPE + File.separator, ":");
         ownerAndId = ownerAndId.replace(File.separator + "connected_publisher", "");
-
         String owner = ownerAndId.split(":")[0];
         String deviceId = ownerAndId.split(":")[1];
-
-//        String actualMessage = mqttMessage.toString();
         String[] messageData = mqttMessage.toString().split(":");
         Float value = Float.valueOf(messageData[1]);
-
-//        if (actualMessage.contains("PUBLISHER")) {
-//            float temperature = Float.parseFloat(actualMessage.split(":")[2]);
-//
-//            if (!ConnectedCupServiceUtils.publishToDAS(owner, deviceId, messageData[0], value)) {
-//                log.error("MQTT Subscriber: Publishing data to DAS failed.");
-//            }
-//
-//            if (log.isDebugEnabled()) {
-//                log.debug("MQTT Subscriber: Published data to DAS successfully.");
-//            }
-//
-//        } else if (actualMessage.contains("TEMPERATURE")) {
-//            String temperatureValue = actualMessage.split(":")[1];
-//            SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
-//                                                            temperatureValue,
-//                                                            Calendar.getInstance().getTimeInMillis());
-//        }
-//
-//
-
-        switch(messageData[0]) {
-            case "temperature": SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
-                                                                                String.valueOf(messageData[1]),
-                                                                                Calendar.getInstance().getTimeInMillis());
+        switch (messageData[0]) {
+            case "temperature":
+                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
+                                                                String.valueOf(messageData[1]),
+                                                                Calendar.getInstance().getTimeInMillis());
                 break;
-            case "coffeelevel": SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_LEVEL,
-                                                                                String.valueOf(messageData[1]),
-                                                                                Calendar.getInstance().getTimeInMillis());
+            case "coffeelevel":
+                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_LEVEL,
+                                                                String.valueOf(messageData[1]),
+                                                                Calendar.getInstance().getTimeInMillis());
                 break;
         }
-
-
         ConnectedCupServiceUtils.publishToDAS(owner, deviceId, messageData[0], value);
-
         if (log.isDebugEnabled()) {
             log.debug("Received MQTT message for OWNER: " + owner + " DEVICE.ID: " + deviceId + " | Command: " +
-                      messageData[0] +" " + messageData[1] );
+                      messageData[0] + " " + messageData[1]);
         }
     }
-
 
     @Override
     public void disconnect() {
@@ -186,7 +145,6 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
                             log.warn("Unable to 'STOP' MQTT connection at broker at: " + mqttBrokerEndPoint
                                      + " for device-type - " + ConnectedCupConstants.DEVICE_TYPE, e);
                         }
-
                         try {
                             Thread.sleep(timeoutInterval);
                         } catch (InterruptedException e1) {
@@ -197,17 +155,14 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
                 }
             }
         };
-
         Thread terminatorThread = new Thread(stopConnection);
         terminatorThread.setDaemon(true);
         terminatorThread.start();
     }
-
     @Override
     public void publishDeviceData() {
         // nothing to do
     }
-
 
     @Override
     public void publishDeviceData(MqttMessage publishData) throws TransportHandlerException {

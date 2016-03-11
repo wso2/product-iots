@@ -95,35 +95,33 @@
 <script src="js/libs/htmlpreview.min.js"></script>
 <script>HTMLPreview.replaceAssets();</script>
 <script>
-    $("#order-cup").click(function() {
+    $("#order-cup").click(function () {
 
         var deviceId = '<%=request.getSession().getAttribute("deviceId")%>';
         var deviceOwner = '<%=request.getSession().getAttribute("deviceOwner")%>';
         var token = '<%=request.getSession().getAttribute("token")%>';
-        var url = "/connectedcup/controller/ordercoffee?deviceId=" + deviceId +"&deviceOwner=" +
-                  deviceOwner;
+        var url = "/connectedcup/controller/ordercoffee?deviceId=" + deviceId + "&deviceOwner=" + deviceOwner;
 
         $.ajax({
                    type: 'POST',
                    url: url,
                    headers: {
-                       "Authorization" : "Bearer " + token
+                       "Authorization": "Bearer " + token
 
                    }
                });
 
     });
 
-    function sendData()
-    {
+    function sendData() {
         var deviceId = '<%=request.getSession().getAttribute("deviceId")%>';
         var deviceOwner = '<%=request.getSession().getAttribute("deviceOwner")%>';
         var tempPayload = "temperature:" + temperature;
         var levelPayload = "coffeelevel:" + coffee_amount;
-        $.post( "/connected-cup-agent/push_temperature?deviceId=" + deviceId +"&deviceOwner=" + deviceOwner +
-                "&payload=" + tempPayload);
-        $.post( "/connected-cup-agent/push_level?deviceId=" + deviceId +"&deviceOwner=" + deviceOwner +
-                "&payload=" + levelPayload);
+        $.post("/connected-cup-agent/push_temperature?deviceId=" + deviceId + "&deviceOwner=" + deviceOwner +
+               "&payload=" + tempPayload);
+        $.post("/connected-cup-agent/push_level?deviceId=" + deviceId + "&deviceOwner=" + deviceOwner +
+               "&payload=" + levelPayload);
         setTimeout(sendData, 5000);
     }
 
