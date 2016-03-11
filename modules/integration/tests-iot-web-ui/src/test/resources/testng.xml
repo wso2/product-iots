@@ -40,6 +40,5 @@
             <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleEnrolmentVerificationTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleFunctionalityTest"/>
         </classes>
-
     </test>
 </suite>
