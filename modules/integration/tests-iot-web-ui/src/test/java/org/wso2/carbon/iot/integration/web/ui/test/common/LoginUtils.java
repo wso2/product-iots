@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.carbon.iot.integration.web.ui.test;
+package org.wso2.carbon.iot.integration.web.ui.test.common;
 
 import org.openqa.selenium.WebDriver;
 import org.wso2.carbon.automation.engine.context.AutomationContext;

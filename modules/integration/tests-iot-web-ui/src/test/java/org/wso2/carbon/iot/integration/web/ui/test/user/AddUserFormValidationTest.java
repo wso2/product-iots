@@ -25,9 +25,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
-import org.wso2.carbon.iot.integration.web.ui.test.Constants;
-import org.wso2.carbon.iot.integration.web.ui.test.LoginUtils;
-import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
+import org.wso2.carbon.iot.integration.web.ui.test.common.Constants;
+import org.wso2.carbon.iot.integration.web.ui.test.common.LoginUtils;
+import org.wso2.carbon.iot.integration.web.ui.test.common.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import javax.xml.stream.XMLStreamException;

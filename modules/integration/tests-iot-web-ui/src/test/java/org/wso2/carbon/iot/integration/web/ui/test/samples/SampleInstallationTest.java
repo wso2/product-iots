@@ -28,10 +28,10 @@ import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException
 import org.wso2.carbon.integration.common.admin.client.LogViewerClient;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
-import org.wso2.carbon.iot.integration.web.ui.test.Constants;
+import org.wso2.carbon.iot.integration.web.ui.test.common.Constants;
 import org.wso2.carbon.logging.view.stub.LogViewerLogViewerException;
 import org.wso2.carbon.logging.view.stub.types.carbon.LogEvent;
-import org.wso2.iot.integration.ui.pages.IOTIntegrationUIBaseTestCase;
+import org.wso2.carbon.iot.integration.web.ui.test.common.IOTIntegrationUIBaseTestCase;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.xpath.XPathExpressionException;

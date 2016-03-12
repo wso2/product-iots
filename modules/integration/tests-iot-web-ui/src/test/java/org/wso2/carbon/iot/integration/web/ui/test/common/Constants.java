@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.carbon.iot.integration.web.ui.test;
+package org.wso2.carbon.iot.integration.web.ui.test.common;
 
 public class Constants {
     public static final String IOT_LOGIN_PATH = "/devicemgt/login";
