@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--/*
 * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -24,10 +25,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
+    <artifactId>${project-base-package}.analytics</artifactId>
     <version>${version}</version>
     <packaging>pom</packaging>
-    <name> ${artifactId} </name>
+    <name> ${project-base-package}.analytics</name>
     <url>http://wso2.org</url>
     <build>
         <plugins>

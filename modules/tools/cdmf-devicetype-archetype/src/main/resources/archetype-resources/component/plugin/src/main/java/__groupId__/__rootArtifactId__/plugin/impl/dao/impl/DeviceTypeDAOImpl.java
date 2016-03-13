@@ -21,11 +21,11 @@ package ${groupId}.${rootArtifactId}.plugin.impl.dao.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
+import ${groupId}.${rootArtifactId}.plugin.exception.DeviceTypePluginException;
 import ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.util.IotDeviceManagementDAOUtil;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dto.IotDevice;
+import ${groupId}.${rootArtifactId}.plugin.impl.dao.util.DeviceTypeUtils;
+import org.wso2.carbon.device.mgt.common.Device;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,175 +38,157 @@ import java.util.Map;
 /**
  * Implements IotDeviceDAO for ${deviceType} Devices.
  */
-public class DeviceTypeDAOImpl implements IotDeviceDAO {
+public class DeviceTypeDAOImpl {
 
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAOImpl.class);
 
-    @Override
-    public IotDevice getIotDevice(String iotDeviceId) throws IotDeviceManagementDAOException {
+    public Device getDevice(String deviceId) throws DeviceTypePluginException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        IotDevice iotDevice = null;
+        Device iotDevice = null;
         ResultSet resultSet = null;
         try {
-            conn = ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO.getConnection();
+            conn = DeviceTypeDAO.getConnection();
             String selectDBQuery =
                     "SELECT ${deviceType}_DEVICE_ID, DEVICE_NAME" +
                             " FROM ${deviceType}_DEVICE WHERE ${deviceType}_DEVICE_ID = ?";
             stmt = conn.prepareStatement(selectDBQuery);
-            stmt.setString(1, iotDeviceId);
+            stmt.setString(1, deviceId);
             resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
-                iotDevice = new IotDevice();
-                iotDevice.setIotDeviceName(resultSet.getString(
+                iotDevice = new Device();
+                iotDevice.setName(resultSet.getString(
                         DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_NAME));
-                Map<String, String> propertyMap = new HashMap<String, String>();
-
-
-                iotDevice.setDeviceProperties(propertyMap);
-
+                List<Device.Property> propertyList = new ArrayList<>();
+                iotDevice.setProperties(propertyList);
                 if (log.isDebugEnabled()) {
-                    log.debug("${deviceType} device " + iotDeviceId + " data has been fetched from " +
+                    log.debug("${deviceType} device " + deviceId + " data has been fetched from " +
                             "${deviceType} database.");
                 }
             }
         } catch (SQLException e) {
-            String msg = "Error occurred while fetching ${deviceType} device : '" + iotDeviceId + "'";
+            String msg = "Error occurred while fetching ${deviceType} device : '" + deviceId + "'";
             log.error(msg, e);
-            throw new IotDeviceManagementDAOException(msg, e);
+            throw new DeviceTypePluginException(msg, e);
         } finally {
-            IotDeviceManagementDAOUtil.cleanupResources(stmt, resultSet);
+            DeviceTypeUtils.cleanupResources(stmt, resultSet);
             DeviceTypeDAO.closeConnection();
         }
-
         return iotDevice;
     }
 
-    @Override
-    public boolean addIotDevice(IotDevice iotDevice) throws IotDeviceManagementDAOException {
+    public boolean addDevice(Device device) throws DeviceTypePluginException {
         boolean status = false;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         try {
-            conn = ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO.getConnection();
+            conn = DeviceTypeDAO.getConnection();
             String createDBQuery =
                     "INSERT INTO ${deviceType}_DEVICE(${deviceType}_DEVICE_ID, DEVICE_NAME) VALUES (?, ?)";
-
             stmt = conn.prepareStatement(createDBQuery);
-            stmt.setString(1, iotDevice.getIotDeviceId());
-            stmt.setString(2, iotDevice.getIotDeviceName());
-            if (iotDevice.getDeviceProperties() == null) {
-                iotDevice.setDeviceProperties(new HashMap<String, String>());
-            }
-
-
+            stmt.setString(1, device.getDeviceIdentifier());
+            stmt.setString(2, device.getName());
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 status = true;
                 if (log.isDebugEnabled()) {
-                    log.debug("${deviceType} device " + iotDevice.getIotDeviceId() + " data has been" +
+                    log.debug("${deviceType} device " + device.getDeviceIdentifier() + " data has been" +
                             " added to the ${deviceType} database.");
                 }
             }
         } catch (SQLException e) {
             String msg = "Error occurred while adding the ${deviceType} device '" +
-                    iotDevice.getIotDeviceId() + "' to the ${deviceType} db.";
+                    device.getDeviceIdentifier() + "' to the ${deviceType} db.";
             log.error(msg, e);
-            throw new IotDeviceManagementDAOException(msg, e);
+            throw new DeviceTypePluginException(msg, e);
         } finally {
-            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
+            DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    @Override
-    public boolean updateIotDevice(IotDevice iotDevice) throws IotDeviceManagementDAOException {
+    public boolean updateDevice(Device device) throws DeviceTypePluginException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO.getConnection();
+            conn = DeviceTypeDAO.getConnection();
             String updateDBQuery =
                     "UPDATE ${deviceType}_DEVICE SET  DEVICE_NAME = ? WHERE ${deviceType}_DEVICE_ID = ?";
             stmt = conn.prepareStatement(updateDBQuery);
-            if (iotDevice.getDeviceProperties() == null) {
-                iotDevice.setDeviceProperties(new HashMap<String, String>());
+            if (device.getProperties() == null) {
+                device.setProperties(new ArrayList<Device.Property>());
             }
-            stmt.setString(1, iotDevice.getIotDeviceName());
-            stmt.setString(2, iotDevice.getIotDeviceId());
+            stmt.setString(1, device.getName());
+            stmt.setString(2, device.getDeviceIdentifier());
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 status = true;
                 if (log.isDebugEnabled()) {
-                    log.debug("${deviceType} device " + iotDevice.getIotDeviceId() + " data has been" +
+                    log.debug("${deviceType} device " + device.getDeviceIdentifier() + " data has been" +
                             " modified.");
                 }
             }
         } catch (SQLException e) {
             String msg = "Error occurred while modifying the ${deviceType} device '" +
-                    iotDevice.getIotDeviceId() + "' data.";
+                    device.getDeviceIdentifier() + "' data.";
             log.error(msg, e);
-            throw new IotDeviceManagementDAOException(msg, e);
+            throw new DeviceTypePluginException(msg, e);
         } finally {
-            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
+            DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    @Override
-    public boolean deleteIotDevice(String iotDeviceId) throws IotDeviceManagementDAOException {
+    public boolean deleteDevice(String deviceId) throws DeviceTypePluginException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO.getConnection();
+            conn = DeviceTypeDAO.getConnection();
             String deleteDBQuery =
                     "DELETE FROM ${deviceType}_DEVICE WHERE ${deviceType}_DEVICE_ID = ?";
             stmt = conn.prepareStatement(deleteDBQuery);
-            stmt.setString(1, iotDeviceId);
+            stmt.setString(1, deviceId);
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 status = true;
                 if (log.isDebugEnabled()) {
-                    log.debug("${deviceType} device " + iotDeviceId + " data has deleted" +
+                    log.debug("${deviceType} device " + deviceId + " data has deleted" +
                             " from the ${deviceType} database.");
                 }
             }
         } catch (SQLException e) {
-            String msg = "Error occurred while deleting ${deviceType} device " + iotDeviceId;
+            String msg = "Error occurred while deleting ${deviceType} device " + deviceId;
             log.error(msg, e);
-            throw new IotDeviceManagementDAOException(msg, e);
+            throw new DeviceTypePluginException(msg, e);
         } finally {
-            IotDeviceManagementDAOUtil.cleanupResources(stmt, null);
+            DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    @Override
-    public List<IotDevice> getAllIotDevices() throws IotDeviceManagementDAOException {
+    public List<Device> getAllDevices() throws DeviceTypePluginException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
-        IotDevice iotDevice;
-        List<IotDevice> iotDevices = new ArrayList<IotDevice>();
+        Device device;
+        List<Device> iotDevices = new ArrayList<>();
         try {
-            conn = ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO.getConnection();
+            conn = DeviceTypeDAO.getConnection();
             String selectDBQuery =
                     "SELECT ${deviceType}_DEVICE_ID, DEVICE_NAME " +
                             "FROM ${deviceType}_DEVICE";
             stmt = conn.prepareStatement(selectDBQuery);
             resultSet = stmt.executeQuery();
             while (resultSet.next()) {
-                iotDevice = new IotDevice();
-                iotDevice.setIotDeviceId(resultSet.getString(DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_ID));
-                iotDevice.setIotDeviceName(resultSet.getString(DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_NAME));
-
-                Map<String, String> propertyMap = new HashMap<String, String>();
-
-                iotDevice.setDeviceProperties(propertyMap);
-                iotDevices.add(iotDevice);
+                device = new Device();
+                device.setDeviceIdentifier(resultSet.getString(DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_ID));
+                device.setName(resultSet.getString(DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_NAME));
+                List<Device.Property> propertyList = new ArrayList<>();
+                device.setProperties(propertyList);
             }
             if (log.isDebugEnabled()) {
                 log.debug("All ${deviceType} device details have fetched from ${deviceType} database.");
@@ -215,12 +197,10 @@ public class DeviceTypeDAOImpl implements IotDeviceDAO {
         } catch (SQLException e) {
             String msg = "Error occurred while fetching all ${deviceType} device data'";
             log.error(msg, e);
-            throw new IotDeviceManagementDAOException(msg, e);
+            throw new DeviceTypePluginException(msg, e);
         } finally {
-            IotDeviceManagementDAOUtil.cleanupResources(stmt, resultSet);
+            DeviceTypeUtils.cleanupResources(stmt, resultSet);
             DeviceTypeDAO.closeConnection();
         }
-
     }
-
 }

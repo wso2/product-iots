@@ -25,22 +25,13 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-import org.wso2.carbon.device.mgt.iot.service.DeviceTypeService;
 
 /**
  * @scr.component name="${groupId}.${rootArtifactId}.plugin.internal.ServiceComponent"
  * immediate="true"
- * @scr.reference name="org.wso2.carbon.device.mgt.iot.service.DeviceTypeService"
- * interface="org.wso2.carbon.device.mgt.iot.service.DeviceTypeService"
- * cardinality="1..1"
- * policy="dynamic"
- * bind="setDeviceTypeService"
- * unbind="unsetDeviceTypeService"
  */
 
 public class ServiceComponent {
-
-
     private ServiceRegistration serviceRegistration;
     private static final Log log = LogFactory.getLog(ServiceComponent.class);
 
@@ -75,15 +66,5 @@ public class ServiceComponent {
         } catch (Throwable e) {
             log.error("Error occurred while de-activating Iot Device Management bundle", e);
         }
-    }
-
-    protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service set to mobile service component");
-        }
-    }
-
-    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService)  {
-        //do nothing
     }
 }
