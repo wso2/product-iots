@@ -20,9 +20,9 @@
     <property name="project-name" value="${ant.project.name}"/>
     <property name="target-dir" value="target/carbonapps"/>
     <property name="src-dir" value="src/main/resources/carbonapps"/>
-    <property name="sensor_dir" value="Sensor"/>
+    <property name="sensor_dir" value="smartLock"/>
     <target name="clean">
-        <delete dir="${target-dir}" />
+        <delete dir="${target-dir}"/>
     </target>
     <target name="zip" depends="clean">
         <mkdir dir="${target-dir}"/>

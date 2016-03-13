@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.homeautomation.doormanager.manager.api.dto;
+package org.homeautomation.doormanager.controller.api.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -27,8 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfo {
-    @XmlElement(required = true) public String serialNumber;
-    @XmlElement(required = true) public String deviceId;
-    @XmlElement(required = true) public String cardNumber;
-    @XmlElement(required = true) public String userName;
+    @XmlElement(required = true)
+    public String deviceId;
+    @XmlElement(required = true)
+    public String cardNumber;
+    @XmlElement(required = true)
+    public String userName;
 }

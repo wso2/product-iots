@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -15,20 +16,20 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.homeautomation</groupId>
-        <artifactId>feature</artifactId>
+        <artifactId>doormanager-feature</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.0-SNAPSHOT</version>
-    <artifactId>${groupId}.doormanager.feature</artifactId>
+    <artifactId>org.homeautomation.doormanager.feature</artifactId>
     <packaging>pom</packaging>
-    <name> ${project.artifactId} </name>
-	<url>http://wso2.org</url>
+    <name>${project.artifactId}</name>
+    <url>http://wso2.org</url>
     <dependencies>
         <dependency>
             <groupId>org.homeautomation</groupId>
@@ -48,12 +49,6 @@
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>org.homeautomation</groupId>
-            <artifactId>${project-base-package}.agent</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
             <groupId>com.h2database.wso2</groupId>
             <artifactId>h2-database-engine</artifactId>
             <version>1.2.140.wso2v3</version>
@@ -63,6 +58,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -104,7 +100,7 @@
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
-                                        ${basedir}/src/main/resources/carbonapps
+                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
                                     </outputDirectory>
                                     <includes>**/*</includes>
                                 </artifactItem>
@@ -115,7 +111,9 @@
                                     <version>${project.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/jaggeryapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps
+                                    </outputDirectory>
                                     <includes>**/*</includes>
                                 </artifactItem>
                             </artifactItems>
@@ -134,7 +132,9 @@
                                     <artifactId>${project-base-package}.manager</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
                                     <destFileName>doormanager_mgt.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -153,27 +153,10 @@
                                     <artifactId>${project-base-package}.controller</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
+                                    </outputDirectory>
                                     <destFileName>doormanager.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-agent-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.homeautomation</groupId>
-                                    <artifactId>${project-base-package}.agent</artifactId>
-                                    <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${basedir}/src/main/resources/webapps/</outputDirectory>
-                                    <destFileName>doormanager_agent.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -198,7 +181,7 @@
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
-                                  value="jdbc:h2:file:${basedir}/${db.dir}/doormanagerDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
+                                          value="jdbc:h2:file:${basedir}/${db.dir}/doormanagerDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
                                 <mkdir dir="${basedir}/${db.dir}"/>
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
                                      password="${password}"
@@ -216,6 +199,7 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon-p2-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>

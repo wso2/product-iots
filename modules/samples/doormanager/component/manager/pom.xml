@@ -19,15 +19,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.homeautomation</groupId>
-        <artifactId>component</artifactId>
+        <artifactId>doormanager-component</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${groupId}.doormanager.manager</artifactId>
+    <artifactId>org.homeautomation.doormanager.manager</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>${groupId}.doormanager.manager </name>
+    <name>org.homeautomation.doormanager.manager </name>
     <url>http://wso2.org</url>
     <build>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -46,7 +46,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${maven-war-plugin.version}</version>
                 <configuration>
-                    <warName>${groupId}.doormanager.manager_mgt</warName>
+                    <warName>org.homeautomation.doormanager.manager_mgt</warName>
                 </configuration>
             </plugin>
         </plugins>
@@ -54,7 +54,7 @@
     <dependencies>
         <dependency>
             <groupId>org.homeautomation</groupId>
-            <artifactId>${project-base-package}.plugin</artifactId>
+            <artifactId>org.homeautomation.doormanager.plugin</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.devicemgt</groupId>
