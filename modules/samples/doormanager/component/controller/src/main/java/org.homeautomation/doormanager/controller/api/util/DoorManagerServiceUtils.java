@@ -27,28 +27,43 @@ import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 
 public class DoorManagerServiceUtils {
     private static final Log log = LogFactory.getLog(DoorManagerServiceUtils.class);
+    private static final String STREAM_DEFINITION = "org.wso2.iot.devices.smartLock";
+    private static final String STREAM_DEFINITION_VERSION = "1.0.0";
 
-    //TODO; replace this tenant domain
-    private static final String SUPER_TENANT = "carbon.super";
-    private static final String CURRENT_STREAM_DEFINITION = "org.wso2.iot.devices.sensor";
+    /**
+     * Publish door locker current status to DAS
+     *
+     * @param owner    owner of the device
+     * @param deviceId unique identifier of device
+     * @param status   current status of lock:- 1: open, 0: close
+     * @return status
+     */
+    public static boolean publishToDASLockerStatus(String owner, String deviceId, float status) throws
+            DataPublisherConfigurationException {
+        Object payloadCurrent[] = {status};
+        return publishToDAS(owner, deviceId, payloadCurrent, STREAM_DEFINITION);
+    }
 
-    public static boolean publishToDASCurrent(String owner, String deviceId, float current) {
+    private static boolean publishToDAS(String owner, String deviceId, Object[] payloadCurrent,
+                                        String definition) {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        ctx.setUsername(owner);
+        if (ctx.getTenantDomain(true) == null) {
+            ctx.setTenantDomain("carbon.super", true);
+        }
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
-        Object metdaData[] = {owner, DoorManagerConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
-        Object payloadCurrent[] = {current};
-
+        Object metaData[] = {owner, DoorManagerConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         try {
-            deviceAnalyticsService.publishEvent(CURRENT_STREAM_DEFINITION, "1.0.0", metdaData, new Object[0], payloadCurrent);
+            deviceAnalyticsService.publishEvent(definition, STREAM_DEFINITION_VERSION, metaData,
+                    new Object[0], payloadCurrent);
         } catch (DataPublisherConfigurationException e) {
+            log.error(e);
             return false;
         } finally {
             PrivilegedCarbonContext.endTenantFlow();
         }
         return true;
     }
-
 }

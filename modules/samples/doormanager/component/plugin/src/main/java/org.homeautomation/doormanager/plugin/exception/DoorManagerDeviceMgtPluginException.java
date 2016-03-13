@@ -18,17 +18,9 @@
 package org.homeautomation.doormanager.plugin.exception;
 
 
-public class DoorManagerDeviceMgtPluginException extends Exception{
+public class DoorManagerDeviceMgtPluginException extends Exception {
 
     private String errorMessage;
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
 
     public DoorManagerDeviceMgtPluginException(String msg, Exception nestedEx) {
         super(msg, nestedEx);
@@ -51,6 +43,14 @@ public class DoorManagerDeviceMgtPluginException extends Exception{
 
     public DoorManagerDeviceMgtPluginException(Throwable cause) {
         super(cause);
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
 }

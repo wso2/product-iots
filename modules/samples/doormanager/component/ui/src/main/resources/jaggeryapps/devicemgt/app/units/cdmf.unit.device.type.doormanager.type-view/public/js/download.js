@@ -86,8 +86,6 @@ function attachEvents() {
         var deviceType = $(this).data("devicetype");
         var downloadDeviceAPI = "/devicemgt/api/devices/sketch/generate_link";
         var payload = {"sketchType": sketchType, "deviceType": deviceType};
-
-        console.log("-------------------------->"+JSON.stringify(payload));
         $(modalPopupContent).html($('#download-device-modal-content').html());
         showPopup();
         var deviceName;
@@ -110,55 +108,105 @@ function attachEvents() {
                         doAction(data);
                     }
                 );
-            }else if(deviceName){
-                $('.controls').append('<label for="deviceName" generated="true" class="error" style="display: inline-block;">Please enter at least 4 characters.</label>');
+            } else if (deviceName) {
+                $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
+                    'style="display: inline-block;">Please enter at least 4 ' +
+                    'characters.</label>');
                 $('.control-group').removeClass('success').addClass('error');
             } else {
-                $('.controls').append('<label for="deviceName" generated="true" class="error" style="display: inline-block;">This field is required.</label>');
+                $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
+                    'style="display: inline-block;">This field is required.' +
+                    '</label>');
                 $('.control-group').removeClass('success').addClass('error');
             }
         });
+
         $("a#download-device-cancel-link").click(function () {
             hidePopup();
         });
+
     });
 }
 
 function downloadAgent() {
 
-    var $inputs = $('#downloadForm :input');
-    var values = {};
-    $inputs.each(function() {
-        values[this.name] = $(this).val();
-    });
-    var payload = {};
-    payload.name = $inputs[0].value;
-    payload.owner = $inputs[3].value;
-    payload.serialNumber = $inputs[1].value;
+    /*var $inputs = $('#downloadForm :input');
+     var values = {};
+     $inputs.each(function() {
+     values[this.name] = $(this).val();
+     });
+     var payload = {};
+     payload.name = $inputs[0].value;
+     //payload.owner = $inputs[3].value;
+     payload.serialNumber = $inputs[1].value;
 
-    var doorManagerRegisterURL = "/doormanager_mgt/manager/device/register?" +
-        "name=" + encodeURI(payload.name) + "&owner=" + payload.owner + "&serialNumber=" + payload.serialNumber;
+     var doorManagerRegisterURL = "/doormanager_mgt/manager/device/register?" +
+     "name=" + encodeURI(payload.name)  + "&deviceId=" + payload.serialNumber;
 
-    invokerUtil.post(
-        doorManagerRegisterURL,
-        payload,
-        function (data, textStatus, jqxhr) {
-            hidePopup();
-        },
-        function (data) {
-            hidePopup();
-        }
-    );
-    var deviceName;
+     invokerUtil.post(
+     doorManagerRegisterURL,
+     payload,
+     function (data, textStatus, jqxhr) {
+     hidePopup();
+     },
+     function (data) {
+     hidePopup();
+     }
+     );
+     var deviceName;
+     $('.new-device-name').each(function () {
+     if (this.value != "") {
+     deviceName = this.value;
+     }
+     });
+     if (deviceName && deviceName.length >= 4) {
+     setTimeout(function () {
+     hidePopup();
+     }, 1000);
+     }*/
+    var deviceName = "";
     $('.new-device-name').each(function () {
         if (this.value != "") {
             deviceName = this.value;
         }
     });
-    if (deviceName && deviceName.length >= 4) {
-        setTimeout(function () {
+    var deviceType = "";
+    $('.deviceType').each(function () {
+        if (this.value != "") {
+            deviceType = this.value;
+        }
+    });
+    var sketchType = "";
+    $('.sketchType').each(function () {
+        if (this.value != "") {
+            sketchType = this.value;
+        }
+    });
+    /*var serialNumber = "";
+     $('.device-serial-number').each(function () {
+     if (this.value != "") {
+     serialNumber = this.value;
+     }
+     });*/
+    var deviceNameFormat = /^[^~?!#$:;%^*`+={}\[\]\\()|<>,'"]{1,30}$/;
+    if (deviceName && deviceNameFormat.test(deviceName)) {
+        $(modalPopupContent).html($('#device-agent-downloading-content').html());
+        var successCallback = function (data) {
+            data = JSON.parse(data);
             hidePopup();
-        }, 1000);
+            window.location = "/devicemgt/api/devices/sketch/download/" + data.responseContent;
+        };
+        var generateLink = "/" + deviceType + "_mgt/manager/device/" + sketchType
+            + "/generate_link?deviceName=" + deviceName;
+        console.log("generated link"+ generateLink);
+        invokerUtil.get(generateLink, successCallback, function (message) {
+            console.log(message.content);
+            hidePopup();
+            doAction(data);
+        });
+    } else {
+        $("#invalid-username-error-msg span").text("Invalid device name");
+        $("#invalid-username-error-msg").removeClass("hidden");
     }
 }
 

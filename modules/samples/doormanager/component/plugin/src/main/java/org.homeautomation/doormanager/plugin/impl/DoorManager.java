@@ -22,19 +22,25 @@ package org.homeautomation.doormanager.plugin.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.homeautomation.doormanager.plugin.exception.DoorManagerDeviceMgtPluginException;
+import org.homeautomation.doormanager.plugin.impl.dao.DoorLockSafe;
 import org.homeautomation.doormanager.plugin.impl.dao.DoorManagerDAO;
+import org.wso2.carbon.context.CarbonContext;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.mgt.common.configuration.mgt.TenantConfiguration;
 import org.wso2.carbon.device.mgt.common.license.mgt.License;
 import org.wso2.carbon.device.mgt.common.license.mgt.LicenseManagementException;
+import org.wso2.carbon.user.api.UserStoreException;
+import org.wso2.carbon.user.api.UserStoreManager;
+import org.wso2.carbon.user.core.service.RealmService;
 
 import java.util.List;
 
-public class DoorManagerManager implements DeviceManager {
+public class DoorManager implements DeviceManager {
 
-    private static final Log log = LogFactory.getLog(DoorManagerManager.class);
-
+    private static final Log log = LogFactory.getLog(DoorManager.class);
     private static final DoorManagerDAO DOOR_MANAGER_DAO = new DoorManagerDAO();
+    private PrivilegedCarbonContext ctx;
 
     @Override
     public FeatureManager getFeatureManager() {
@@ -44,13 +50,11 @@ public class DoorManagerManager implements DeviceManager {
     @Override
     public boolean saveConfiguration(TenantConfiguration tenantConfiguration)
             throws DeviceManagementException {
-        //TODO implement this
         return false;
     }
 
     @Override
     public TenantConfiguration getConfiguration() throws DeviceManagementException {
-        //TODO implement this
         return null;
     }
 
@@ -94,7 +98,7 @@ public class DoorManagerManager implements DeviceManager {
                 e1.printStackTrace();
             }
             String msg = "Error while updating the enrollment of the Automatic Door Locker device : " +
-                         device.getDeviceIdentifier();
+                    device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -137,7 +141,7 @@ public class DoorManagerManager implements DeviceManager {
             }
         } catch (DoorManagerDeviceMgtPluginException e) {
             String msg = "Error while checking the enrollment status of Automatic Door Locker device : " +
-                         deviceId.getId();
+                    deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -158,7 +162,8 @@ public class DoorManagerManager implements DeviceManager {
     @Override
     public Device getDevice(DeviceIdentifier deviceId) throws DeviceManagementException {
         Device device;
-        try {if (log.isDebugEnabled()) {
+        try {
+            if (log.isDebugEnabled()) {
                 log.debug("Getting the details of Automatic Door Locker device : " + deviceId.getId());
             }
             device = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().getDevice(deviceId.getId());
@@ -230,7 +235,7 @@ public class DoorManagerManager implements DeviceManager {
 
     @Override
     public List<Device> getAllDevices() throws DeviceManagementException {
-        List<Device> devices = null;
+        List<Device> devices;
         try {
             if (log.isDebugEnabled()) {
                 log.debug("Fetching the details of all Automatic Door Locker devices");
@@ -242,6 +247,64 @@ public class DoorManagerManager implements DeviceManager {
             throw new DeviceManagementException(msg, e);
         }
         return devices;
+    }
+
+    /**
+     * Get userStore manager
+     *
+     * @return
+     * @throws UserStoreException
+     */
+    public UserStoreManager getUserStoreManager() throws UserStoreException {
+        String tenantDomain = CarbonContext.getThreadLocalCarbonContext().getTenantDomain();
+        PrivilegedCarbonContext.startTenantFlow();
+        ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+        ctx.setTenantDomain(tenantDomain, true);
+        if (log.isDebugEnabled()) {
+            log.debug("Getting thread local carbon context for tenant domain: " + tenantDomain);
+        }
+        RealmService realmService = (RealmService) ctx.getOSGiService(RealmService.class, null);
+        return realmService.getTenantUserRealm(ctx.getTenantId()).getUserStoreManager();
+    }
+
+    /**
+     * Ends tenant flow.
+     */
+    private void endTenantFlow() {
+        PrivilegedCarbonContext.endTenantFlow();
+        ctx = null;
+        if (log.isDebugEnabled()) {
+            log.debug("Tenant flow ended");
+        }
+    }
+
+    public boolean assignUserToLock(DoorLockSafe doorLockSafe) throws DoorManagerDeviceMgtPluginException {
+        boolean status;
+        try {
+            DoorManagerDAO.beginTransaction();
+            status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
+            DoorManagerDAO.commitTransaction();
+            return status;
+        } catch (DoorManagerDeviceMgtPluginException e) {
+            try {
+                DoorManagerDAO.rollbackTransaction();
+                throw new DoorManagerDeviceMgtPluginException(e);
+            } catch (DoorManagerDeviceMgtPluginException e1) {
+                String msg = "Error while adding new access card to user to control the lock "
+                        + doorLockSafe.getOwner();
+                log.error(msg, e);
+                throw new DoorManagerDeviceMgtPluginException(msg, e);
+            }
+        }
+    }
+
+    public boolean checkCardDoorAssociation(String cardNumber, String deviceId)
+            throws DoorManagerDeviceMgtPluginException {
+        boolean status;
+        DoorManagerDAO.beginTransaction();
+        status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().checkCardDoorAssociation(cardNumber, deviceId);
+        DoorManagerDAO.commitTransaction();
+        return status;
     }
 
 }
