@@ -17,6 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Eventstore_sensor" version="1.0.0" type="analytics/eventstore" serverRole="DataAnalyticsServer">
-    <file>org_wso2_iot_devices_sensor.xml</file>
+<artifact name="Eventstore_smartLock" version="1.0.0" type="analytics/eventstore" serverRole="DataAnalyticsServer">
+    <file>org_wso2_iot_devices_smartLock.xml</file>
 </artifact>

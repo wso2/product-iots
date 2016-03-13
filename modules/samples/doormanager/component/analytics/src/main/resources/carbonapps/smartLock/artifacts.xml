@@ -17,6 +17,11 @@
   ~ under the License.
   -->
 
-<artifact name="Sparkscripts" version="1.0.0" type="analytics/spark" serverRole="DataAnalyticsServer">
-    <file>Sensor_Script.xml</file>
-</artifact>
+<artifacts>
+    <artifact name="smartLock_CAPP" version="1.0.0" type="carbon/application">
+      <dependency artifact="Eventstream_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="Eventstore_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="Eventreceiver_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+      <dependency artifact="Sparkscripts" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+    </artifact>
+</artifacts>

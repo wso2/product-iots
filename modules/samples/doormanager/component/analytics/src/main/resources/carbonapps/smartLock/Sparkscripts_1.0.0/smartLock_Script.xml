@@ -18,13 +18,18 @@
   -->
 
 <Analytics>
-    <Name>Sensor_Script</Name>
+    <Name>IoTServer_smartLock_Script</Name>
     <Script>
-        CREATE TEMPORARY TABLE DeviceSensorData USING CarbonAnalytics OPTIONS(tableName "ORG_WSO2_IOT_DEVICES_SENSORDATA");
+        CREATE TEMPORARY TABLE DevicesmartLockData USING CarbonAnalytics OPTIONS(tableName
+        "ORG_WSO2_IOT_DEVICES_smartLock");
 
-        CREATE TEMPORARY TABLE DeviceSensorSummaryData USING CarbonAnalytics OPTIONS (tableName "DEVICE_SENSOR_DATA_SUMMARY", schema "sensorValue FLOAT, deviceType STRING -i, deviceId STRING -i, owner STRING -i, time LONG -i",primaryKeys "deviceType, deviceId, owner, time");
+        CREATE TEMPORARY TABLE DevicesmartLockSummaryData USING CarbonAnalytics OPTIONS (tableName
+        "DEVICE_smartLock_SUMMARY", schema "smartLock FLOAT, deviceType STRING -i, deviceId STRING -i, owner STRING -i,
+        time LONG -i",primaryKeys "deviceType, deviceId, owner, time");
 
-        insert overwrite table DeviceSensorSummaryData select sensorValue, meta_deviceType as deviceType, meta_deviceId as deviceId, meta_owner as owner, cast(meta_time/1000 as BIGINT)as time from DeviceSensorData group by sensorValue, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
+        insert overwrite table DevicesmartLockSummaryData select smartLock, meta_deviceType as deviceType, meta_deviceId
+        as deviceId, meta_owner as owner, cast(meta_time/1000 as BIGINT)as time from DevicesmartLockData group by
+        smartLock, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
     </Script>
     <CronExpression>0 * * * * ?</CronExpression>
 </Analytics>

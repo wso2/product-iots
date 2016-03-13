@@ -17,6 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Eventstream_sensor" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
-	<file>org.wso2.iot.devices.sensor_1.0.0.json</file>
+<artifact name="Eventreceiver_smartLock" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
+    <file>EventReceiver_smartLock.xml</file>
 </artifact>
