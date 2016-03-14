@@ -49,23 +49,26 @@
         <div class="modal-content">
             <div class="row">
                 <div class="col-md-7  center-container">
-                    <h3>Enter your device name serial number and then  register {{@uriParams.deviceType}} the agent from following link.</h3>
+                    <h3>Enter your device name serial number and then register {{@uriParams.deviceType}} the agent
+                        from following link.</h3>
                     <br/>
-                    <form id="downloadForm">
+                    <form id="downloadForm" method="GET" action="#">
                         <div class="control-group">
                             <div class="controls">
                                 Device Name: <input class="new-device-name" style="color:#3f3f3f;padding:5px"
-                                       type="text"
-                                       placeholder="Ex. drone"
-                                       name="deviceName" size="60" required></br>
-                                Serial Number: <input  style="color:#3f3f3f;padding:5px"
-                                       type="text"
-                                       placeholder="Ex. serial number"
-                                       name="serialNumber" size="60" required>
+                                                    type="text"
+                                                    placeholder="Ex. drone"
+                                                    name="deviceName" size="60" required></br>
+                                Serial Number: <input style="color:#3f3f3f;padding:5px"
+                                                      type="text"
+                                                      placeholder="Ex. serial number"
+                                                      name="serialNumber" size="60"
+                                                      class="device-serial-number" required>
                                 <br/>
                                 <input type="hidden" class="deviceType" name="deviceType"
                                        value="doormanager"/>
-                                <input type="hidden" class="owner" name="owner" value={{@user.username}} />
+                                <input type="hidden" class="sketchType" name="sketchType"
+                                       value="doormanager"/>
                             </div>
                         </div>
                         <br/>
@@ -74,6 +77,32 @@
                             <a class="btn-operations" onclick="downloadAgent()">Register Now</a>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-agent-downloading-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Device Agent will download shortly.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="download-device-modal-content-links" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Please download the file from following link(Press CTRL+C).</h3>
+                    <br/>
+
+                    <div>
+                        <input id="download-device-url" style="color:#3f3f3f;padding:5px"
+                               type="text" value="" placeholder="Type here" size="60">
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,7 +211,8 @@
         <li class="padding-top-double"><span class="circle">04</span>&nbsp;&nbsp;&nbsp;Copy downloaded Agent into your
             RaspberryPi.
         </li>
-        <li class="padding-top-double"><span class="circle">05</span>&nbsp;&nbsp;&nbsp; Run "Agent.sh" script with root privileges.
+        <li class="padding-top-double"><span class="circle">05</span>&nbsp;&nbsp;&nbsp; Run "Agent.sh" script with root
+            privileges.
         </li>
     </ul>
     <br>
@@ -237,15 +267,19 @@
             width: 50px;
             color: #fff;
         }
+
         .padding-top-double {
             padding-top: 20px;
         }
+
         .padding-double {
             padding: 20px;
         }
+
         .grey {
             color: #333;
         }
+
         hr {
             display: block;
             height: 1px;
@@ -255,21 +289,26 @@
             padding: 0;
             opacity: 0.2;
         }
+
         .light-grey {
             color: #7c7c7c;
         }
+
         .uppercase {
             text-transform: uppercase;
         }
+
         .grey-bg {
             background-color: #f6f4f4;
         }
+
         .doc-link {
             background: #11375B;
             padding: 20px;
             color: white;
             margin-top: 0;
         }
+
         .doc-link a {
             color: white;
         }

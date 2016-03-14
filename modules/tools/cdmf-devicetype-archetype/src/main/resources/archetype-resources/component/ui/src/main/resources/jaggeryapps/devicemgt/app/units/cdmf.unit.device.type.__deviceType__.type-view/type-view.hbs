@@ -11,7 +11,7 @@
 
     <h3 class="uppercase">What it Does</h3>
     <hr>
-    <p class="grey margin-top">Connect your qtewttwqtttyty to WSO2 IoT Server.</p>
+    <p class="grey margin-top">Connect your ${deviceType} to WSO2 IoT Server.</p>
     <br>
     <p>Add brief description what this device type does</p>
     <br/>
@@ -30,7 +30,12 @@
                     <h3>Name your device and download the agent from following link.</h3>
                     <br/>
 
-                    <form id="downloadForm" method="GET" action="{{@app.context}}/api/devices/sketch/download">
+                    <form id="downloadForm" method="GET"
+                          action="#">
+                        <div id="invalid-username-error-msg" class="alert alert-danger hidden"
+                             role="alert">
+                            <i class="icon fw fw-error"></i><span></span>
+                        </div>
                         <div class="control-group">
                             <div class="controls">
                                 <input class="new-device-name" style="color:#3f3f3f;padding:5px"
@@ -43,10 +48,21 @@
                             </div>
                         </div>
                         <div class="buttons" style="padding-bottom: 0px">
-                            <a class="btn btn-operations" onclick="downloadAgent()">Download Now</a> &nbsp;&nbsp;
+                            <a class="btn btn-operations" onclick="downloadAgent()">Download Now</a>
+                            &nbsp;&nbsp;
                             &nbsp;&nbsp;
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-agent-downloading-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Device Agent will download shortly.</h3>
                 </div>
             </div>
         </div>
@@ -159,7 +175,7 @@
     <hr>
     <ul class="list-unstyled">
         <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;Add how you are goining to
-            prepeya your device
+            prepare your device
         </li>
     </ul>
     <br>
@@ -168,6 +184,7 @@
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
     <h3 class="uppercase">${deviceType} Setup</h3>
     <hr>
+    <p class="grey margin-top">Add schematic diagram of this device type</p></br>
     <p class="grey margin-top">Click on the image to zoom</p>
     <center>
         <a href="{{@unit.publicUri}}/images/schematicsGuide.png" target="_blank">
@@ -189,18 +206,11 @@
             page.
         </li>
         <li class="padding-top-double"><span class="circle">02</span>&nbsp;&nbsp;&nbsp;Select one of
-            connected devices and check for available control operations.</li>
+            connected devices and check for available control operations.
+        </li>
     </ul>
     <br/>
-
-    <p class="grey margin-top">Click on the image to zoom</p>
-    <center>
-        <a href="{{@unit.publicUri}}/images/myDevices_analytics.png" target="_blank">
-            <img src="{{@unit.publicUri}}/images/myDevices_analytics.png" class="img-responsive">
-        </a>
-    </center>
-
-</div>
+    </div>
 
 <style type="text/css">
     .circle {

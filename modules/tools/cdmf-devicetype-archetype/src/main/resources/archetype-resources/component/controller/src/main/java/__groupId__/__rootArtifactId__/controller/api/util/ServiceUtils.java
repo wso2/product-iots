@@ -1,4 +1,3 @@
-package ${groupId}.${rootArtifactId}.controller.api.util;
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -16,6 +15,9 @@ package ${groupId}.${rootArtifactId}.controller.api.util;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+package ${groupId}.${rootArtifactId}.controller.api.util;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
@@ -25,14 +27,11 @@ import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 
 public class ServiceUtils {
     private static final Log log = LogFactory.getLog(ServiceUtils.class);
-
-    //TODO; replace this tenant domain
-    private static final String SUPER_TENANT = "carbon.super";
     private static final String SENSOR_STREAM_DEFINITION = "org.wso2.iot.devices.${nameOfTheSensor}";
     private static final String SENSOR_STREAM_VERSION = "1.0.0";
 
     /**
-     * sensor data are published to DAS
+     * Sensor data are published to DAS
      * @param owner name of device owner
      * @param deviceId unique identifier of the device
      * @param sensorValue current value of sensor which is set at agent side
@@ -41,7 +40,10 @@ public class ServiceUtils {
     public static boolean publishToDASSensorValue(String owner, String deviceId, float sensorValue) {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        ctx.setUsername(owner);
+        if (ctx.getTenantDomain(true) == null) {
+            ctx.setTenantDomain("carbon.super", true);
+        }
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
         Object metdaData[] = {owner, DeviceTypeConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};

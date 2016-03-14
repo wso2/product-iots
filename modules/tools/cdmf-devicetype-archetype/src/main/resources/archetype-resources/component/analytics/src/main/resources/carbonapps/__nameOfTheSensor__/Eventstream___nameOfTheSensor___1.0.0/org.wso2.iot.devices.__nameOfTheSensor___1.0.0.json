@@ -1,8 +1,8 @@
 {
   "name": "org.wso2.iot.devices.${nameOfTheSensor}",
   "version": "1.0.0",
-  "nickName": "AC Current Data",
-  "description": "AC Current data received from the Device",
+  "nickName": "${nameOfTheSensor}",
+  "description": "${nameOfTheSensor} data received from the Device",
   "metaData": [
     {"name":"owner","type":"STRING"},
     {"name":"deviceType","type":"STRING"},

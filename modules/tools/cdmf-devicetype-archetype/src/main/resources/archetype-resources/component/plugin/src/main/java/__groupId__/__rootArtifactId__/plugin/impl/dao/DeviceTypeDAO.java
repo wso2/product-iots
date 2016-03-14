@@ -1,4 +1,3 @@
-package ${groupId}.${rootArtifactId}.plugin.impl.dao;
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -17,14 +16,13 @@ package ${groupId}.${rootArtifactId}.plugin.impl.dao;
  * under the License.
  */
 
+package ${groupId}.${rootArtifactId}.plugin.impl.dao;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
 import ${groupId}.${rootArtifactId}.plugin.impl.dao.impl.DeviceTypeDAOImpl;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceDAO;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactory;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactoryInterface;
+import ${groupId}.${rootArtifactId}.plugin.exception.DeviceTypePluginException;
 
 
 import javax.naming.Context;
@@ -34,19 +32,17 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DeviceTypeDAO extends IotDeviceManagementDAOFactory
-        implements IotDeviceManagementDAOFactoryInterface {
+public class DeviceTypeDAO{
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAO.class);
     static DataSource dataSource;           // package local variable
-    private static ThreadLocal<Connection> currentConnection = new ThreadLocal<Connection>();
+    private static ThreadLocal<Connection> currentConnection = new ThreadLocal<>();
 
     public DeviceTypeDAO() {
         initDeviceTypeDAO();
     }
 
-    @Override
-    public IotDeviceDAO getIotDeviceDAO() {
+    public DeviceTypeDAOImpl getDeviceTypeDAO() {
         return new DeviceTypeDAOImpl();
     }
 
@@ -60,29 +56,29 @@ public class DeviceTypeDAO extends IotDeviceManagementDAOFactory
         }
     }
 
-    public static void beginTransaction() throws IotDeviceManagementDAOException {
+    public static void beginTransaction() throws DeviceTypePluginException {
         try {
             Connection conn = dataSource.getConnection();
             conn.setAutoCommit(false);
             currentConnection.set(conn);
         } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while retrieving datasource connection", e);
+            throw new DeviceTypePluginException("Error occurred while retrieving datasource connection", e);
         }
     }
 
-    public static Connection getConnection() throws IotDeviceManagementDAOException {
+    public static Connection getConnection() throws DeviceTypePluginException {
         if (currentConnection.get() == null) {
             try {
                 currentConnection.set(dataSource.getConnection());
             } catch (SQLException e) {
-                throw new IotDeviceManagementDAOException("Error occurred while retrieving data source connection",
+                throw new DeviceTypePluginException("Error occurred while retrieving data source connection",
                         e);
             }
         }
         return currentConnection.get();
     }
 
-    public static void commitTransaction() throws IotDeviceManagementDAOException {
+    public static void commitTransaction() throws DeviceTypePluginException {
         try {
             Connection conn = currentConnection.get();
             if (conn != null) {
@@ -94,13 +90,13 @@ public class DeviceTypeDAO extends IotDeviceManagementDAOFactory
                 }
             }
         } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while committing the transaction", e);
+            throw new DeviceTypePluginException("Error occurred while committing the transaction", e);
         } finally {
             closeConnection();
         }
     }
 
-    public static void closeConnection() throws IotDeviceManagementDAOException {
+    public static void closeConnection() throws DeviceTypePluginException {
 
 		Connection con = currentConnection.get();
 		if(con != null){
@@ -113,7 +109,7 @@ public class DeviceTypeDAO extends IotDeviceManagementDAOFactory
         currentConnection.remove();
     }
 
-    public static void rollbackTransaction() throws IotDeviceManagementDAOException {
+    public static void rollbackTransaction() throws DeviceTypePluginException {
         try {
             Connection conn = currentConnection.get();
             if (conn != null) {
@@ -125,7 +121,7 @@ public class DeviceTypeDAO extends IotDeviceManagementDAOFactory
                 }
             }
         } catch (SQLException e) {
-            throw new IotDeviceManagementDAOException("Error occurred while rollback the transaction", e);
+            throw new DeviceTypePluginException("Error occurred while rollback the transaction", e);
         } finally {
             closeConnection();
         }

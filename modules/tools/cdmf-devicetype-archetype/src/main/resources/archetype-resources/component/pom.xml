@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--/*
 * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -235,7 +236,7 @@
                 <version>${commons-json.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/json_2.0.0.wso2v1.jar
+                    ${basedir}/../../../../repository/components/plugins/json_${commons-json.version}.jar
                 </systemPath>
             </dependency>
             <dependency>

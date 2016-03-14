@@ -1,5 +1,3 @@
-package ${groupId}.${rootArtifactId}.controller.api.transport;
-
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -17,6 +15,8 @@ package ${groupId}.${rootArtifactId}.controller.api.transport;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+package ${groupId}.${rootArtifactId}.controller.api.transport;
 
 import ${groupId}.${rootArtifactId}.controller.api.exception.DeviceTypeException;
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
@@ -110,11 +110,11 @@ public class MQTTConnector extends MQTTTransportHandler {
             log.debug("Received MQTT message for: [OWNER-" + owner + "] & [DEVICE.ID-" + deviceId + "]");
         }
         if (messageData.length == 2) {
-            String lockerCurrentState = messageData[1];
+            String currentState = messageData[1];
             SensorDataManager.getInstance().setSensorRecord(deviceId, DeviceTypeConstants.SENSOR_READING,
-                    lockerCurrentState, Calendar.getInstance().getTimeInMillis());
+                    currentState, Calendar.getInstance().getTimeInMillis());
             if (log.isDebugEnabled()) {
-                log.debug("Current value of the sensor: " + lockerCurrentState);
+                log.debug("Current value of the sensor: " + currentState);
             }
         }
     }

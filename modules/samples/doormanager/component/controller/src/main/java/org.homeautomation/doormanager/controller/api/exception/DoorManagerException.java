@@ -1,4 +1,3 @@
-package org.homeautomation.doormanager.controller.api.exception;
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -16,20 +15,16 @@ package org.homeautomation.doormanager.controller.api.exception;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+package org.homeautomation.doormanager.controller.api.exception;
+
 public class DoorManagerException extends Exception {
 
     private static final long serialVersionUID = 2736466230451105441L;
 
     private String errorMessage;
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
+    @SuppressWarnings("unused")
     public DoorManagerException(String msg, DoorManagerException nestedEx) {
         super(msg, nestedEx);
         setErrorMessage(msg);
@@ -40,17 +35,29 @@ public class DoorManagerException extends Exception {
         setErrorMessage(message);
     }
 
+    @SuppressWarnings("unused")
     public DoorManagerException(String msg) {
         super(msg);
         setErrorMessage(msg);
     }
 
+    @SuppressWarnings("unused")
     public DoorManagerException() {
         super();
     }
 
+    @SuppressWarnings("unused")
     public DoorManagerException(Throwable cause) {
         super(cause);
+    }
+
+    @SuppressWarnings("unused")
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
 
