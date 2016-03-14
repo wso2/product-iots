@@ -50,8 +50,8 @@ public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase
     }
 
     @Test(description = "Verify the sample is available in Virtual devices section.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL_VERIFY,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL)
+          groups = Constants.TestSample.INSTALL_VERIFY,
+          dependsOnGroups = Constants.TestSample.SAMPLE_INSTALL)
     public void installationVerificationTest() throws IOException {
         EnrollDevicePage enrollDevicePage = adminDashboard.enrollNewDevice();
         Assert.assertTrue(enrollDevicePage.isInstalled());
@@ -61,4 +61,5 @@ public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase
     public void teardown() {
         driver.quit();
     }
+
 }

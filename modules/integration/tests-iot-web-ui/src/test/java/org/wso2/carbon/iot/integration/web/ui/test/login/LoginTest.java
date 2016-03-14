@@ -35,6 +35,7 @@ import java.io.IOException;
  * Test Login as Admin
  */
 public class LoginTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
@@ -57,4 +58,5 @@ public class LoginTest extends IOTIntegrationUIBaseTestCase {
     public void tearDown(){
         driver.quit();
     }
+
 }

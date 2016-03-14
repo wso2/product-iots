@@ -68,4 +68,5 @@ public class AdminFunctionsTest extends IOTIntegrationUIBaseTestCase {
     public void tearDown() throws Exception {
         driver.quit();
     }
+
 }

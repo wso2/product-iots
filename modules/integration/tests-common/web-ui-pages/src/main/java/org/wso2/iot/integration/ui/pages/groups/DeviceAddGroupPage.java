@@ -88,4 +88,5 @@ public class DeviceAddGroupPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.device.groups.add.emptyfrom.error"))).getText();
     }
+
 }

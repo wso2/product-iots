@@ -31,6 +31,7 @@ import java.io.IOException;
  * Class to represent the user listing page.
  */
 public class UserListingPage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -63,4 +64,5 @@ public class UserListingPage {
 
         return new UserListingPage(driver);
     }
+
 }

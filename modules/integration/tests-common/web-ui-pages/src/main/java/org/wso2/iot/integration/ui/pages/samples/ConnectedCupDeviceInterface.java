@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit;
  * This device is a virtual device, which allows users to change Temperature and Level values and put an order.
  */
 public class ConnectedCupDeviceInterface {
+
     private Log log = LogFactory.getLog(ConnectedCupDeviceInterface.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -109,4 +110,5 @@ public class ConnectedCupDeviceInterface {
         Action action = move.dragAndDropBy(slider, 0, val).build();
         action.perform();
     }
+
 }

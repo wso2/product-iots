@@ -21,6 +21,7 @@ package org.wso2.iot.integration.ui.pages.graphs;
  * Class to store graph data
  */
 public class Graph {
+
     private String graphId;
     private String yAxis;
     private String xAxis;
@@ -59,4 +60,5 @@ public class Graph {
         return String.format("The graph for graph id : %s, X - axis : %s, Y - axis : %s, legend : %s ", graphId,
                              xAxis, yAxis, legend);
     }
+
 }

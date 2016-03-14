@@ -32,6 +32,7 @@ import java.io.IOException;
  * This class represents the add user page of the IOT server.
  */
 public class AddUserPage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -75,4 +76,5 @@ public class AddUserPage {
 
         return new UserAddedConfirmationPage(driver);
     }
+
 }

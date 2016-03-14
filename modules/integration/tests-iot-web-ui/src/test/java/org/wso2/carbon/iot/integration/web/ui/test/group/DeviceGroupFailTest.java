@@ -34,6 +34,7 @@ import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
  * So the failing scenario is sending the form with empty group name.
  */
 public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
@@ -55,4 +56,5 @@ public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
     public void tearDown() throws Exception {
         driver.quit();
     }
+
 }

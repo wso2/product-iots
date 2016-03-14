@@ -37,6 +37,7 @@ import java.io.IOException;
  * Test cases for grouping feature of IOT server.
  */
 public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
     private IOTAdminDashboard adminDashboard;
 
@@ -65,4 +66,5 @@ public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
     public void tearDown() throws Exception {
         driver.quit();
     }
+
 }

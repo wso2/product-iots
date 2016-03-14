@@ -33,6 +33,7 @@ import java.io.IOException;
  * User registration page has the registration form for new users to enter the required data and the submit button.
  */
 public class NewUserRegisterPage {
+
     private WebDriver driver;
     private WebElement firstNameField;
     private WebElement lastNameField;
@@ -126,4 +127,5 @@ public class NewUserRegisterPage {
         passwordField.clear();
         passwordConfirmationField.clear();
     }
+
 }

@@ -35,6 +35,7 @@ import java.io.IOException;
  * This page lists the all device types which are currently installed in the IOT server.
  */
 public class EnrollDevicePage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
     private Log log = LogFactory.getLog(EnrollDevicePage.class);

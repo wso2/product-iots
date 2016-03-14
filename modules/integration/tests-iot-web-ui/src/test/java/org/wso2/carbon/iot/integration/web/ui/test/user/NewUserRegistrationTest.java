@@ -38,6 +38,7 @@ import java.io.IOException;
  * Test for registering a new user and login
  */
 public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
@@ -51,15 +52,15 @@ public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     public void userRegisterTest() throws IOException {
         LoginPage login = new LoginPage(driver);
         NewUserRegisterPage registerTest = login.registerNewUser();
-        LoginPage loginPage = registerTest.registerUser(Constants.REGISTER_USER_FIRST_NAME,
-                                                        Constants.REGISTER_USER_LAST_NAME,
-                                                        Constants.REGISTER_USER_EMAIL,
-                                                        Constants.REGISTER_USER_USER_NAME,
-                                                        Constants.REGISTER_USER_PASSWORD,
-                                                        Constants.REGISTER_USER_CONFIRM_PASSWORD);
+        LoginPage loginPage = registerTest.registerUser(Constants.User.Register.FIRST_NAME,
+                                                        Constants.User.Register.LAST_NAME,
+                                                        Constants.User.Register.EMAIL,
+                                                        Constants.User.Register.USER_NAME,
+                                                        Constants.User.Register.PASSWORD,
+                                                        Constants.User.Register.CONFIRM_PASSWORD);
 
-        IOTHomePage homePage = loginPage.loginAsUser(Constants.REGISTER_USER_USER_NAME,
-                                                     Constants.REGISTER_USER_PASSWORD);
+        IOTHomePage homePage = loginPage.loginAsUser(Constants.User.Register.USER_NAME,
+                                                     Constants.User.Register.PASSWORD);
 
         Assert.assertTrue(homePage.checkUserName());
     }
@@ -68,11 +69,12 @@ public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     public void logoutTest() throws IOException {
         IOTHomePage homePage = new IOTHomePage(driver);
         homePage.logout();
-        Assert.assertEquals(driver.getTitle(), Constants.IOT_SERVER_LOGIN_PAGE_TITLE);
+        Assert.assertEquals(driver.getTitle(), Constants.User.Login.PAGE_TITLE);
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
     }
+
 }

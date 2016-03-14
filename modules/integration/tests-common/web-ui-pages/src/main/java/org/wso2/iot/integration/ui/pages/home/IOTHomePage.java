@@ -34,6 +34,7 @@ import java.io.IOException;
  * This class represents the IOT server home page.
  */
 public class IOTHomePage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 

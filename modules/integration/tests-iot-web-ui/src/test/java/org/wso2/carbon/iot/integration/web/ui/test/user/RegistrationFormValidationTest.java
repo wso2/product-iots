@@ -42,6 +42,7 @@ import java.io.IOException;
  * - Password, username length
  */
 public class RegistrationFormValidationTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
     private NewUserRegisterPage registerPage;
@@ -140,4 +141,5 @@ public class RegistrationFormValidationTest extends IOTIntegrationUIBaseTestCase
     public void tearDown() {
         driver.quit();
     }
+
 }

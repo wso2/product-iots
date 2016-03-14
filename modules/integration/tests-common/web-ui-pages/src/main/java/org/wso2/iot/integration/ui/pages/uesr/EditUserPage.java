@@ -30,6 +30,7 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
  * This class represents the Edit user page of the IOT server
  */
 public class EditUserPage {
+
     private static final Log log = LogFactory.getLog(EditUserPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -47,4 +48,5 @@ public class EditUserPage {
     public void editUser(String password, String firstName, String lastName) {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.add.input.password.xpath")));
     }
+
 }

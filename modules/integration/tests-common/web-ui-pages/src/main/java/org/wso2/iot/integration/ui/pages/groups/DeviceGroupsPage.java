@@ -32,6 +32,7 @@ import java.util.List;
  * This class represents the Groups page.
  */
 public class DeviceGroupsPage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -73,4 +74,5 @@ public class DeviceGroupsPage {
         }
         return false;
     }
+
 }

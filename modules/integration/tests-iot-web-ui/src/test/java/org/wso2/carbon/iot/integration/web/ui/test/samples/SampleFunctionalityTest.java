@@ -42,10 +42,11 @@ import java.io.IOException;
  * 3. Test the stat graphs
  */
 public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driverDevice;
     private WebDriver driverServer;
     private ConnectedCupDeviceInterface sampleViewPage;
-    private ConnectedCupDeviceViewPage connectedCupDeviceViewPage;
+    private ConnectedCupDeviceViewPage deviceViewPage;
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws XPathExpressionException, XMLStreamException, IOException {
@@ -55,130 +56,132 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
         LoginUtils.login(driverServer, automationContext, getWebAppURL());
         driverServer.get(getWebAppURL() + Constants.IOT_DEVICES_URL);
         DevicesPage devicesPage = new DevicesPage(driverServer);
-        connectedCupDeviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
-        driverDevice.get(connectedCupDeviceViewPage.getDeviceLink());
+        deviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
+
+        //Opens the connected cup device interface in the browser.
+        driverDevice.get(deviceViewPage.getDeviceLink());
         sampleViewPage = new ConnectedCupDeviceInterface(driverDevice);
     }
 
     @Test(description = "Set the temperature level.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
+          groups = Constants.TestSample.VERIFY,
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY)
     public void setTemperatureTest() {
-        Assert.assertTrue(sampleViewPage.changeTemperature(Constants.IOT_CONNECTED_CUP_TEMPERATURE));
+        Assert.assertTrue(sampleViewPage.changeTemperature(Constants.ConnectedCup.TEMPERATURE));
     }
 
     @Test(description = "Set the coffee level.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
+          groups = Constants.TestSample.VERIFY,
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY)
     public void setCoffeeLevelTest() throws IOException {
-        Assert.assertTrue(sampleViewPage.changeCoffeeLevel(Constants.IOT_CONNECTED_CUP_LEVEl));
+        Assert.assertTrue(sampleViewPage.changeCoffeeLevel(Constants.ConnectedCup.COFFEE_LEVEl));
     }
 
     @Test(description = "Verify order coffee function.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
+          groups = Constants.TestSample.VERIFY,
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY)
     public void orderCoffeeTest() throws IOException, InterruptedException {
         Assert.assertTrue(sampleViewPage.orderCoffee());
     }
 
     @Test(description = "Test the graphs are present in device view.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+          groups = Constants.TestSample.VERIFY,
           dependsOnMethods = {"setTemperatureTest", "setCoffeeLevelTest", "orderCoffeeTest"})
     public void verifyGraphs() throws IOException {
-        Assert.assertTrue(connectedCupDeviceViewPage.isGraphsAvailable(2));
+        Assert.assertTrue(deviceViewPage.isGraphsAvailable(2));
     }
 
     @Test(description = "Test the Y axis name of Temperature graph.",
-          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          groups = {Constants.TestSample.VERIFY,
+                    Constants.TestSample.TEMPERATURE},
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphYAxisNameTest() throws IOException {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
-                                                                   Constants.IOT_CONNECTED_CUP_TEMPERATURE_ID,
-                                                                   Constants.IOT_CONNECTED_CUP_TEMPERATURE_Y_AXIS));
+        Assert.assertTrue(deviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
+                                                       Constants.ConnectedCup.TEMPERATURE_ID,
+                                                       Constants.ConnectedCup.TEMPERATURE_Y_AXIS));
     }
 
     @Test(description = "Test the X axis name of Temperature graph.",
-          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          groups = {Constants.TestSample.VERIFY,
+                    Constants.TestSample.TEMPERATURE},
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphXAxisNameTest() throws IOException {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
-                                                                   Constants.IOT_CONNECTED_CUP_TEMPERATURE_ID,
-                                                                   Constants.IOT_CONNECTED_CUP_TEMPERATURE_X_AXIS));
+        Assert.assertTrue(deviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
+                                                       Constants.ConnectedCup.TEMPERATURE_ID,
+                                                       Constants.ConnectedCup.TEMPERATURE_X_AXIS));
     }
 
     @Test(description = "Test the whether the Coffee Level graph legend is present.",
-          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          groups = {Constants.TestSample.VERIFY,
+                    Constants.TestSample.TEMPERATURE},
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphLegendTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphLegendName(Constants.IOT_CONNECTED_CUP_TEMPERATURE_ID,
-                                                                     Constants.IOT_CONNECTED_CUP_TEMPERATURE_LEGEND));
+        Assert.assertTrue(deviceViewPage.graphLegendName(Constants.ConnectedCup.TEMPERATURE_ID,
+                                                         Constants.ConnectedCup.TEMPERATURE_LEGEND));
     }
 
     @Test(description = "Test the whether the Temperature graph path is visible.",
-          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          groups = {Constants.TestSample.VERIFY,
+                    Constants.TestSample.TEMPERATURE},
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphPathTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.checkGraphPath(Constants.IOT_CONNECTED_CUP_TEMPERATURE_GRAPH_ID));
+        Assert.assertTrue(deviceViewPage.checkGraphPath(Constants.ConnectedCup.TEMPERATURE_GRAPH_ID));
     }
 
     @Test(description = "Test the whether the Temperature graph gets values.",
-          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
-                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          groups = {Constants.TestSample.VERIFY,
+                    Constants.TestSample.TEMPERATURE},
+          dependsOnGroups = Constants.TestSample.ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphDataPublisherTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.checkGraphValues(Constants.IOT_CONNECTED_CUP_TEMPERATURE_GRAPH_ID,
-                                                                      Constants.IOT_CONNECTED_CUP_TEMPERATURE));
+        Assert.assertTrue(deviceViewPage.checkGraphValues(Constants.ConnectedCup.TEMPERATURE_GRAPH_ID,
+                                                          Constants.ConnectedCup.TEMPERATURE));
     }
 
     @Test(description = "Test the Y axis name of Coffee Level graph.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE)
+          groups = Constants.TestSample.COFFEE_LEVEL,
+          dependsOnGroups = Constants.TestSample.TEMPERATURE)
     public void coffeeLevelGraphYAxisNameTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
-                                                                   Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
-                                                                   Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_Y_AXIS));
+        Assert.assertTrue(deviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
+                                                       Constants.ConnectedCup .COFFEE_LEVEL_ID,
+                                                       Constants.ConnectedCup.COFFEE_LEVEL_Y_AXIS));
     }
 
     @Test(description = "Test the X axis name of Coffee Level graph.",
-          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
-          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
-                             Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
+          groups =  Constants.TestSample.COFFEE_LEVEL,
+          dependsOnGroups = {Constants.TestSample.ENROLL_VERIFY,
+                             Constants.TestSample.TEMPERATURE})
     public void coffeeLevelGraphXAxisNameTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
-                                                                   Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
-                                                                   Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_X_AXIS));
+        Assert.assertTrue(deviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
+                                                       Constants.ConnectedCup.COFFEE_LEVEL_ID,
+                                                       Constants.ConnectedCup.COFFEE_LEVEL_X_AXIS));
     }
 
     @Test(description = "Test the whether the Coffee Level graph legend is present.",
-          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
-          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
+          groups =  Constants.TestSample.COFFEE_LEVEL,
+          dependsOnGroups = {Constants.TestSample.TEMPERATURE})
     public void coffeeLevelGraphLegendTest() throws IOException {
-        Assert.assertTrue(connectedCupDeviceViewPage.graphLegendName(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
-                                                                     Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_LEGEND));
+        Assert.assertTrue(deviceViewPage.graphLegendName(Constants.ConnectedCup.COFFEE_LEVEL_ID,
+                                                         Constants.ConnectedCup.COFFEE_LEVEL_LEGEND));
     }
 
     @Test(description = "Test the whether the Coffee Level graph path is visible.",
-          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
-          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
+          groups =  Constants.TestSample.COFFEE_LEVEL,
+          dependsOnGroups = {Constants.TestSample.TEMPERATURE})
     public void coffeeLevelGraphPathTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.checkGraphPath(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_GRAPH_ID));
+        Assert.assertTrue(deviceViewPage.checkGraphPath(Constants.ConnectedCup.COFFEE_LEVEL_GRAPH_ID));
     }
 
     @Test(description = "Test the whether the Coffee Level graph gets values.",
-          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE)
+          groups =  Constants.TestSample.COFFEE_LEVEL,
+          dependsOnGroups = Constants.TestSample.TEMPERATURE)
     public void coffeeLevelGraphDataPublisherTest() {
-        Assert.assertTrue(connectedCupDeviceViewPage.checkGraphValues(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_GRAPH_ID,
-                                                                      Constants.IOT_CONNECTED_CUP_LEVEl));
+        Assert.assertTrue(deviceViewPage.checkGraphValues(Constants.ConnectedCup.COFFEE_LEVEL_GRAPH_ID,
+                                                          Constants.ConnectedCup.COFFEE_LEVEl));
     }
 
     @AfterClass(alwaysRun = true)
@@ -186,4 +189,5 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
         driverServer.quit();
         driverDevice.quit();
     }
+
 }

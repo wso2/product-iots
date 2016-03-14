@@ -76,7 +76,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Verify the sample build process",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL)
+          groups = Constants.TestSample.SAMPLE_INSTALL)
     public void sampleBuildTest() throws IOException {
         String connectedCupDir = carbonHome + File.separator + "samples" + File.separator + "connectedcup";
         log.info("Connected cup Sample: " + connectedCupDir);
@@ -102,7 +102,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Verify the sample installation process",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL,
+          groups = Constants.TestSample.SAMPLE_INSTALL,
           dependsOnMethods = {"sampleBuildTest"})
     public void sampleInstallationTest() throws IOException {
 
@@ -127,7 +127,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test restarting the server",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL,
+          groups = Constants.TestSample.SAMPLE_INSTALL,
           dependsOnMethods = {"sampleInstallationTest"})
     public void serverRestartTest() {
         ServerConfigurationManager serverManager;
@@ -199,21 +199,18 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
             Future<?> f = service.submit(r);
 
             f.get(Constants.IOT_RESTART_THREAD_TIMEOUT, TimeUnit.MINUTES);
-          }
-        catch (final InterruptedException e) {
+        } catch (final InterruptedException e) {
             log.error("Interrupted "+e.getMessage());
             Assert.assertTrue(false);
-        }
-        catch (final TimeoutException e) {
+        }  catch (final TimeoutException e) {
             log.error("Timeout " + e.getMessage());
             Assert.assertTrue(false);
-        }
-        catch (final ExecutionException e) {
+        }  catch (final ExecutionException e) {
             log.error("Execution failed " + e.getMessage());
             Assert.assertTrue(false);
-        }
-        finally {
+        }  finally {
             service.shutdown();
         }
     }
+
 }

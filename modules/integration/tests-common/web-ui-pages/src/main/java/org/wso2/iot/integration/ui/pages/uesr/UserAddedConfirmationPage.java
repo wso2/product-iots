@@ -33,4 +33,5 @@ public class UserAddedConfirmationPage {
 
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.addUser.view.btn.xpath"))).click();
     }
+
 }

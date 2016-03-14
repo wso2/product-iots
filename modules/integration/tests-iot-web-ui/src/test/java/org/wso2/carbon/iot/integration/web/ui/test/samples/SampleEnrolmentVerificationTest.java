@@ -38,6 +38,7 @@ import java.io.IOException;
  * Test cases to check whether the sample is enrolled correctly.
  */
 public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver webDriver;
     private DevicesPage devicesPage;
     private ConnectedCupDeviceViewPage connectedCupDeviceViewPage;
@@ -52,15 +53,15 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     }
 
     @Test(description = "Verify enrolment of the sample device",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL)
+          groups = Constants.TestSample.ENROLL_VERIFY,
+          dependsOnGroups = Constants.TestSample.ENROLL)
     public void verifyEnrollmentTest() {
         Assert.assertTrue(devicesPage.isDeviceEnrolled(Constants.IOT_CONNECTED_CUP_NAME));
     }
 
     @Test(description = "Verify navigation to device view",
           dependsOnMethods = "verifyEnrollmentTest",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
+          groups = Constants.TestSample.ENROLL_VERIFY)
     public void verifyNavigationTest() throws IOException {
         connectedCupDeviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
         Assert.assertNotNull(connectedCupDeviceViewPage);
@@ -77,4 +78,5 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     public void tearDown() {
         webDriver.quit();
     }
+
 }

@@ -37,6 +37,7 @@ import java.io.IOException;
  *
  */
 public class LoginPage {
+
     private static final Log log = LogFactory.getLog(LoginPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -100,4 +101,5 @@ public class LoginPage {
         registerLink.click();
         return new NewUserRegisterPage(driver);
     }
+
 }

@@ -28,6 +28,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * This class contains the constants and common methods used in pages.
  */
 public class UIUtils {
+
     public static long webDriverTimeOut = 10;
     public static long webDriverTime = 60;
     public static int threadTimeout = 1000;

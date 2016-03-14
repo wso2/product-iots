@@ -38,6 +38,7 @@ import java.io.IOException;
  * Test cases to verify the enrolment process.
  */
 public class SampleEnrollmentTest extends IOTIntegrationUIBaseTestCase {
+
     private WebDriver driver;
     private ConnectedCupDeviceTypeViewPage connectedCupDeviceTypeViewPage;
 
@@ -52,14 +53,14 @@ public class SampleEnrollmentTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Verify the pop up modal is displayed.",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL,
-          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL_VERIFY)
+          groups = Constants.TestSample.ENROLL,
+          dependsOnGroups = Constants.TestSample.INSTALL_VERIFY)
     public void enrollDevicePopUpModalTest() throws InterruptedException, IOException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.isPopUpPresent());
     }
 
     @Test(description = "Test case for device enrolment",
-          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL,
+          groups = Constants.TestSample.ENROLL,
           dependsOnMethods = {"enrollDevicePopUpModalTest"})
     public void enrollDeviceTest() throws InterruptedException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.enrollDevice(Constants.IOT_CONNECTED_CUP_NAME));

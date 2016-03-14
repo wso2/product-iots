@@ -29,6 +29,7 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
  * Class to represent the user view.
  */
 public class ViewUserPage {
+
     private static final Log log = LogFactory.getLog(ViewUserPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -42,4 +43,5 @@ public class ViewUserPage {
             throw new IllegalStateException("This is not the User view page");
         }
     }
+
 }

@@ -40,6 +40,7 @@ import java.util.List;
  * 4. Delete the device.
  */
 public class DevicesPage {
+
     Log log = LogFactory.getLog(DevicesPage.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
@@ -98,7 +99,6 @@ public class DevicesPage {
      */
     private String getLink(WebElement element, String... lookupText) {
         String link = element.getAttribute("href");
-        log.info("Link -----------------------> " + link);
         boolean check = true;
         for (String s : lookupText) {
             if (!link.contains(s)) {
@@ -107,4 +107,5 @@ public class DevicesPage {
         }
         return check ? link : null;
     }
+
 }

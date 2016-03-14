@@ -30,6 +30,7 @@ import java.rmi.RemoteException;
 
 
 public class IOTIntegrationUIBaseTestCase {
+
     protected AutomationContext automationContext;
 
     protected void init() throws IOException, XMLStreamException, XPathExpressionException {
@@ -61,4 +62,5 @@ public class IOTIntegrationUIBaseTestCase {
     protected String getLoginURL() throws XPathExpressionException {
         return HomePageGenerator.getProductHomeURL(automationContext);
     }
+
 }

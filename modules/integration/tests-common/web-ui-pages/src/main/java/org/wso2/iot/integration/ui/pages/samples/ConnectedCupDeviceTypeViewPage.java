@@ -33,6 +33,7 @@ import java.io.IOException;
  * download the device agent.
  */
 public class ConnectedCupDeviceTypeViewPage {
+
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
@@ -78,4 +79,5 @@ public class ConnectedCupDeviceTypeViewPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.page.title"))).getText().contains("Connected Cup");
     }
+
 }

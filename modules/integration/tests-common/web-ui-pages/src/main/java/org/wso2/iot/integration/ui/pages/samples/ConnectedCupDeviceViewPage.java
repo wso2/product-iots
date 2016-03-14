@@ -31,6 +31,7 @@ import org.wso2.iot.integration.ui.pages.graphs.GraphHandler;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,7 +44,8 @@ import java.util.concurrent.TimeUnit;
  * In this class, device operations and device stats are validated.
  */
 public class ConnectedCupDeviceViewPage {
-    private HashMap<String, Graph> graphMap = new HashMap<>();
+
+    private Map<String, Graph> graphMap = new HashMap<>();
     private Log log = LogFactory.getLog(ConnectedCupDeviceViewPage.class);
     private WebDriver driverServer;
     private WebDriver driverDevice;
@@ -108,8 +110,6 @@ public class ConnectedCupDeviceViewPage {
      * @return : True if given axis contains the expected title. False otherwise or, there are no graphs present.
      */
     public boolean graphAxisName(String axis, String graphId, String axisName) {
-        log.info(graphMap.toString());
-
         if (graphMap.size() != 0) {
             if (axis.toLowerCase().contains("x")) {
                 return graphMap.get(graphId).getxAxis().contains(axisName);
@@ -128,7 +128,6 @@ public class ConnectedCupDeviceViewPage {
      * @return : True if legend contains the expected value. False otherwise or there are no graphs present.
      */
     public boolean graphLegendName(String graphId, String legend) {
-        log.info(graphMap.toString());
         if (graphMap.size() != 0) {
             if (graphMap.get(graphId) != null){
                 return graphMap.get(graphId).getLegend().contains(legend);
@@ -150,7 +149,7 @@ public class ConnectedCupDeviceViewPage {
         if (graph != null) {
             return handler.isPathAvailable(graph);
         } else {
-            log.error(String.format("Graph for Id %s is not present......", graphId));
+            log.error(String.format("Graph for Id %s is not present.", graphId));
             return false;
         }
     }
@@ -167,8 +166,9 @@ public class ConnectedCupDeviceViewPage {
         if (graph != null) {
             return handler.isPathGetValues(graph, value);
         } else {
-            log.error(String.format("Graph for Id %s is not present......", graphId));
+            log.error(String.format("Graph for Id %s is not present.", graphId));
             return false;
         }
     }
+
 }

@@ -25,12 +25,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -59,7 +60,7 @@ public class GraphHandler {
      * This method is to get all the elements of graphs and store in a Hash map.
      * This simplifies iterating through the DOM every time finding for an element when having multiple graphs.
      */
-    public HashMap<String, Graph> getGraphMap() {
+    public Map<String, Graph> getGraphMap() {
         HashMap<String, Graph> graphMap = new HashMap<>();
         WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(
@@ -78,7 +79,6 @@ public class GraphHandler {
                     By.tagName("span")).getText();
             g.setLegend(legend);
             graphMap.put(key, g);
-            log.info(g.toString());
         }
         return graphMap;
     }
@@ -90,7 +90,7 @@ public class GraphHandler {
         try {
             graphs = this.graphDiv.findElements(By.xpath("//*[contains(@class, \"chartWrapper\")]"));
         } catch (NoSuchElementException e) {
-            log.info("Graph element not found");
+            log.error(String.format("Graph element is not found. \n %s", e.getMessage()));
         }
         return graphs.size();
     }
@@ -106,7 +106,6 @@ public class GraphHandler {
         for (int i = 0; i < graphs.size() && graphs.size() > 0; i++) {
             WebElement element = graphs.get(i);
             if (element.getAttribute("id").toLowerCase().replace(" ", "").contains(graphId.toLowerCase())) {
-                log.info(">>>>>>>>>>>>>>>>>>> Graph for id: " + graphId + " is present ");
                 return element;
             }
         }
@@ -124,7 +123,7 @@ public class GraphHandler {
             WebElement graphContainer = getGraph(graph, uiElementMapper.getElement("iot.stat.graph.class.name"));
             return graphContainer != null && graphContainer.findElement(By.tagName("path")).isDisplayed();
         } catch (NoSuchElementException e) {
-            log.error("No element found. " + e.getMessage());
+            log.error(String.format("No element found. \n %s", e.getMessage()));
             return false;
         }
     }
@@ -145,7 +144,6 @@ public class GraphHandler {
             values = graphContainer.findElement(By.tagName("path")).getAttribute("d").split(",");
             for (String value : values) {
                 if (value.contains(val)) {
-                    log.info("Graph values : " + value);
                     return true;
                 }
             }
@@ -155,7 +153,8 @@ public class GraphHandler {
 
     /**
      * This method returns the WebElement for graph with the given class name.
-     * @param graph : Outer container of the graphs
+     *
+     * @param graph     : Outer container of the graphs
      * @param className : Class name of the graph needed.
      * @return the WebElement which defined by the given class name. Null if no element is found.
      */
