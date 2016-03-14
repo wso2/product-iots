@@ -37,8 +37,8 @@ public class DoorManagerUtils {
 
     public static String getDeviceProperty(List<Device.Property> deviceProperties, String propertyKey) {
         String deviceProperty = "";
-        for(Device.Property property :deviceProperties){
-            if(propertyKey.equals(property.getName())){
+        for (Device.Property property : deviceProperties) {
+            if (propertyKey.equals(property.getName())) {
                 deviceProperty = property.getValue();
             }
         }

@@ -20,18 +20,19 @@ package org.homeautomation.doormanager.controller.api;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.doormanager.controller.api.dto.DeviceJSON;
+import org.homeautomation.doormanager.controller.api.dto.UserInfo;
 import org.homeautomation.doormanager.controller.api.exception.DoorManagerException;
-import org.homeautomation.doormanager.controller.api.util.DoorManagerMQTTConnector;
+import org.homeautomation.doormanager.controller.api.transport.DoorManagerMQTTConnector;
 import org.homeautomation.doormanager.plugin.constants.DoorManagerConstants;
 import org.homeautomation.doormanager.plugin.exception.DoorManagerDeviceMgtPluginException;
+import org.homeautomation.doormanager.plugin.impl.DoorManager;
 import org.homeautomation.doormanager.plugin.impl.dao.DoorLockSafe;
-import org.homeautomation.doormanager.plugin.impl.dao.DoorManagerDAO;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.wso2.carbon.apimgt.annotations.api.API;
 import org.wso2.carbon.apimgt.annotations.device.DeviceType;
 import org.wso2.carbon.apimgt.annotations.device.feature.Feature;
 import org.wso2.carbon.context.CarbonContext;
-import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.DeviceManagement;
@@ -45,63 +46,37 @@ import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.user.api.UserStoreException;
 import org.wso2.carbon.user.api.UserStoreManager;
-import org.wso2.carbon.user.core.service.RealmService;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+@SuppressWarnings("NonJaxWsWebServices")
 @API(name = "doormanager", version = "1.0.0", context = "/doormanager")
 @DeviceType(value = "doormanager")
 public class DoorManagerControllerService {
 
-    private static final DoorManagerDAO DOOR_MANAGER_DAO = new DoorManagerDAO();
-
     private static Log log = LogFactory.getLog(DoorManagerControllerService.class);
-    private HttpServletResponse response;
+    private static String CURRENT_STATUS = "doorLockerCurrentStatus";
+    private DoorManager doorManager;
     private DoorManagerMQTTConnector doorManagerMQTTConnector;
-    private ConcurrentHashMap<String, DeviceJSON> deviceToIpMap = new ConcurrentHashMap<>();
 
-    private PrivilegedCarbonContext ctx;
+    DoorManagerControllerService() {
+        doorManager = new DoorManager();
+    }
 
     @Context  //injected response proxy supporting multiple thread
-
-    private UserStoreManager getUserStoreManager() throws UserStoreException {
-        String tenantDomain = CarbonContext.getThreadLocalCarbonContext().getTenantDomain();
-        PrivilegedCarbonContext.startTenantFlow();
-        ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(tenantDomain, true);
-        if (log.isDebugEnabled()) {
-            log.debug("Getting thread local carbon context for tenant domain: " + tenantDomain);
-        }
-        RealmService realmService = (RealmService) ctx.getOSGiService(RealmService.class, null);
-        return realmService.getTenantUserRealm(ctx.getTenantId()).getUserStoreManager();
-    }
-
-    /**
-     * Ends tenant flow.
-     */
-    private void endTenantFlow() {
-        PrivilegedCarbonContext.endTenantFlow();
-        ctx = null;
-        if (log.isDebugEnabled()) {
-            log.debug("Tenant flow ended");
-        }
-    }
-
     private boolean waitForServerStartup() {
         while (!DeviceManagement.isServerReady()) {
             try {
@@ -128,7 +103,7 @@ public class DoorManagerControllerService {
                     doorManagerMQTTConnector.connect();
                 } else {
                     log.warn("MQTT disabled in 'devicemgt-config.xml'. Hence, DoorManagerMQTTConnector" +
-                             " not started.");
+                            " not started.");
                 }
             }
         };
@@ -137,220 +112,83 @@ public class DoorManagerControllerService {
         connectorThread.start();
     }
 
+    /**
+     * Assign new user to lock
+     *
+     * @param owner        owner of the device
+     * @param deviceId     unique identifier for given device
+     * @param protocol     transport protocol which is being using here MQTT
+     * @param cardNumber   RFID card number
+     * @param userName     user name of RFID card owner
+     * @param emailAddress email address of RFID card owner
+     */
     @Path("controller/assign_user")
     @POST
     @Feature(code = "assign_user", name = "Assign new user to lock", type = "operation",
-            description = "Add new access card to user to control the lock with given policy")
-    public void assignUseToLock(@HeaderParam("owner") String owner,
-                                @HeaderParam("deviceId") String deviceId,
-                                @HeaderParam("protocol") String protocol,
-                                @FormParam("policy") String policy,
-                                @FormParam("cardNumber") String cardNumber,
-                                @FormParam("userName") String userName,
-                                @FormParam("emailAddress") String emailAddress,
-                                @Context HttpServletResponse response) {
-        try {
-            if (userName != null && cardNumber != null && deviceId != null) {
-                try {
-                    UserStoreManager userStoreManager = this.getUserStoreManager();
-                    DoorLockSafe doorLockSafe = new DoorLockSafe();
-                    if (userStoreManager.isExistingUser(userName)) {
-                        TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
-                        AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
-                        String accessToken = accessTokenInfo.getAccess_token();
-                        if (accessToken == null) {
-                            response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-                            return;
-                        }
-                        Map<String, String> claims = new HashMap<>();
-                        claims.put("http://wso2.org/claims/lock/accesstoken", accessToken);
-                        claims.put("http://wso2.org/claims/lock/refreshtoken", accessTokenInfo.getRefresh_token());
-                        claims.put("http://wso2.org/claims/lock/cardnumber", cardNumber);
-                        userStoreManager.setUserClaimValues(userName, claims, null);
-                        doorLockSafe.setAccessToken(accessTokenInfo.getAccess_token());
-                        doorLockSafe.setRefreshToken(accessTokenInfo.getRefresh_token());
-                        doorLockSafe.setDeviceId(deviceId);
-                        doorLockSafe.setOwner(owner);
-                        doorLockSafe.setEmailAddress(emailAddress);
-                        doorLockSafe.setUIDofUser(cardNumber);
-                        doorLockSafe.setPolicy(policy);
-                        doorLockSafe.setSerialNumber(deviceId);
-                        boolean status;
-                        try {
-                            DoorManagerDAO.beginTransaction();
-                            status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
-                            DoorManagerDAO.commitTransaction();
-                            if (status) {
-                                response.setStatus(Response.Status.OK.getStatusCode());
-                            } else {
-                                response.setStatus(Response.Status.FORBIDDEN.getStatusCode());
-                            }
-                        } catch (DoorManagerDeviceMgtPluginException e) {
-                            try {
-                                DoorManagerDAO.rollbackTransaction();
-                            } catch (DoorManagerDeviceMgtPluginException e1) {
-                                String msg = "Error while updating the enrollment of the Door Manager Locker device : "
-                                        + doorLockSafe.getOwner();
-                                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                                log.error(msg, e);
-                            }
-                        }
+            description = "Add new access card to user to control the lock ")
+    public void assignUserToLock(@HeaderParam("owner") String owner,
+                                 @HeaderParam("deviceId") String deviceId,
+                                 @HeaderParam("protocol") String protocol,
+                                 @FormParam("cardNumber") String cardNumber,
+                                 @FormParam("userName") String userName,
+                                 @FormParam("emailAddress") String emailAddress,
+                                 @Context HttpServletResponse response) {
 
-                        response.setStatus(Response.Status.OK.getStatusCode());
-                    } else {
-                        response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
+        if (userName != null && cardNumber != null && deviceId != null) {
+            try {
+                UserStoreManager userStoreManager = doorManager.getUserStoreManager();
+                DoorLockSafe doorLockSafe = new DoorLockSafe();
+                if (userStoreManager.isExistingUser(userName)) {
+                    TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
+                    AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
+                    String accessToken = accessTokenInfo.getAccess_token();
+                    if (accessToken == null) {
+                        response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
                     }
-                } catch (UserStoreException e) {
-                    response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                    log.error(e);
-                }
-            } else {
-                response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-            }
-
-        } catch (AccessTokenException e) {
-            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            log.error(e);
-        }
-    }
-
-   /* @Path("controller/registerNewUser")
-    @POST
-    @Feature(code = "registerNewUser", name = "Assign to new user", type = "operation",
-            description = "Assign to new user")
-    public void registerDoorLockSafe(@HeaderParam("owner") String owner,
-                                     @HeaderParam("deviceId") String deviceId,
-                                     @HeaderParam("protocol") String protocol,
-                                     @FormParam("policy") String policy,
-                                     @FormParam("UIDofRFID") String UIDofRFID,
-                                     @FormParam("userName") String userName,
-                                     @FormParam("emailAddress") String emailAddress,
-                                     @Context HttpServletResponse response) {
-        try {
-            TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
-            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, UIDofRFID);
-            DoorLockSafe doorLockSafe = new DoorLockSafe();
-            String accessToken = accessTokenInfo.getAccess_token();
-            if (accessToken == null) {
-                response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-            } else {
-                if (emailAddress != null && UIDofRFID != null && deviceId != null) {
-                    boolean status;
-                    doorLockSafe.setAccessToken(accessTokenInfo.getAccess_token());
-                    doorLockSafe.setRefreshToken(accessTokenInfo.getRefresh_token());
-                    doorLockSafe.setDeviceId(deviceId);
-                    doorLockSafe.setOwner(owner);
-                    doorLockSafe.setEmailAddress(emailAddress);
-                    doorLockSafe.setUIDofUser(UIDofRFID);
-                    doorLockSafe.setPolicy(policy);
-                    doorLockSafe.setSerialNumber(deviceId);
-                    try {
-                        DoorManagerDAO.beginTransaction();
-                        status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
-                        DoorManagerDAO.commitTransaction();
-                        if (status) {
-                            response.setStatus(Response.Status.OK.getStatusCode());
-                        } else {
-                            response.setStatus(Response.Status.FORBIDDEN.getStatusCode());
-                        }
-                    } catch (DoorManagerDeviceMgtPluginException e) {
-                        try {
-                            DoorManagerDAO.rollbackTransaction();
-                        } catch (DoorManagerDeviceMgtPluginException e1) {
-                            String msg = "Error while updating the enrollment of the Door Manager Locker device : "
-                                         + doorLockSafe.getOwner();
-                            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                            log.error(msg, e);
-                        }
-                    }
-                } else {
-                    response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-                }
-            }
-        } catch (AccessTokenException e) {
-            response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-            log.error(e);
-        }
-    }*/
-
-    /*@Path("controller/registerNewUser")
-    @POST
-    @Feature(code = "registerNewUser", name = "Assign to new user", type = "operation",
-            description = "Assign to new user")
-    public void registerDoorLockSafe(@HeaderParam("owner") String owner,
-                                     @HeaderParam("deviceId") String deviceId,
-                                     @HeaderParam("protocol") String protocol,
-                                     @FormParam("policy") String policy,
-                                     @FormParam("cardNumber") String cardNumber,
-                                     @FormParam("userName") String userName,
-                                     @FormParam("emailAddress") String emailAddress,
-                                     @Context HttpServletResponse response) {
-        try {
-            TokenClient accessTokenClient = new TokenClient(DoorManagerConstants.DEVICE_TYPE);
-            AccessTokenInfo accessTokenInfo = accessTokenClient.getAccessToken(deviceId, userName);
-            DoorLockSafe doorLockSafe = new DoorLockSafe();
-            String accessToken = accessTokenInfo.getAccess_token();
-            if (accessToken == null) {
-                response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-            } else {
-                if (emailAddress != null && cardNumber != null && deviceId != null) {
-                    boolean status;
+                    Map<String, String> claims = new HashMap<>();
+                    claims.put(DoorManagerConstants.DEVICE_CLAIMS_ACCESS_TOKEN, accessToken);
+                    claims.put(DoorManagerConstants.DEVICE_CLAIMS_REFRESH_TOKEN,
+                            accessTokenInfo.getRefresh_token());
+                    claims.put(DoorManagerConstants.DEVICE_CLAIMS_CARD_NUMBER, cardNumber);
+                    userStoreManager.setUserClaimValues(userName, claims, null);
                     doorLockSafe.setAccessToken(accessTokenInfo.getAccess_token());
                     doorLockSafe.setRefreshToken(accessTokenInfo.getRefresh_token());
                     doorLockSafe.setDeviceId(deviceId);
                     doorLockSafe.setOwner(owner);
                     doorLockSafe.setEmailAddress(emailAddress);
                     doorLockSafe.setUIDofUser(cardNumber);
-                    doorLockSafe.setPolicy(policy);
                     doorLockSafe.setSerialNumber(deviceId);
-                    try {
-                        UserStoreManager userStoreManager = this.getUserStoreManager();
-                        if (userStoreManager.isExistingUser(userName)) {
-                            if (accessToken == null) {
-                                response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
-                                return;
-                            }
-                            Map<String, String> claims = new HashMap<>();
-                            claims.put("http://wso2.org/claims/lock/accesstoken", accessToken);
-                            claims.put("http://wso2.org/claims/lock/refreshtoken", accessTokenInfo.getRefresh_token());
-                            claims.put("http://wso2.org/claims/lock/cardnumber", cardNumber);
-                            userStoreManager.setUserClaimValues(userName, claims, null);
-                        } else {
-                            response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
-                        }
-                        DoorManagerDAO.beginTransaction();
-                        status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
-                        DoorManagerDAO.commitTransaction();
-                        if (status) {
-                            response.setStatus(Response.Status.OK.getStatusCode());
-                        } else {
-                            response.setStatus(Response.Status.FORBIDDEN.getStatusCode());
-                        }
-                    } catch (DoorManagerDeviceMgtPluginException e) {
-                        try {
-                            DoorManagerDAO.rollbackTransaction();
-                        } catch (DoorManagerDeviceMgtPluginException e1) {
-                            String msg = "Error while updating the enrollment of the Door Manager Locker device : "
-                                    + doorLockSafe.getOwner();
-                            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                            log.error(msg, e);
-                        }
-                    } catch (UserStoreException e) {
-                        log.error(e);
+                    if (doorManager.assignUserToLock(doorLockSafe)) {
+                        response.setStatus(Response.Status.OK.getStatusCode());
+                    } else {
+                        response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
                     }
                 } else {
-                    response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
+                    response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
                 }
+            } catch (UserStoreException e) {
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+                log.error(e);
+            } catch (DoorManagerDeviceMgtPluginException | AccessTokenException e) {
+                log.error(e);
+                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
             }
-        } catch (AccessTokenException e) {
+        } else {
             response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-            log.error(e);
         }
-    }*/
+    }
 
-    @Path("controller/changeStatusOfDoorLockSafe")
+    /**
+     * Change status of door lock safe: LOCK/UNLOCK
+     *
+     * @param owner    owner of the device
+     * @param deviceId unique identifier for given device
+     * @param protocol transport protocol which is being using here MQTT
+     * @param state    status of lock safe: lock/unlock
+     */
+    @Path("controller/change-status")
     @POST
-    @Feature(code = "changeStatusOfDoorLockSafe", name = "Change status of door lock safe: LOCK/UNLOCK", type = "operation",
+    @Feature(code = "change-status", name = "Change status of door lock safe: LOCK/UNLOCK", type = "operation",
             description = "Change status of door lock safe: LOCK/UNLOCK")
     public void changeStatusOfDoorLockSafe(@HeaderParam("owner") String owner,
                                            @HeaderParam("deviceId") String deviceId,
@@ -364,8 +202,8 @@ public class DoorManagerControllerService {
             } else {
                 lockerCurrentState = 1;
             }
-            SensorDataManager.getInstance().setSensorRecord(deviceId, "door_locker_state",
-                                                            String.valueOf(lockerCurrentState), Calendar.getInstance().getTimeInMillis());
+            SensorDataManager.getInstance().setSensorRecord(deviceId, CURRENT_STATUS,
+                    String.valueOf(lockerCurrentState), Calendar.getInstance().getTimeInMillis());
             doorManagerMQTTConnector.sendCommandViaMQTT(owner, deviceId, "DoorManager:", state.toUpperCase());
             response.setStatus(Response.Status.OK.getStatusCode());
         } catch (DeviceManagementException e) {
@@ -376,78 +214,20 @@ public class DoorManagerControllerService {
         }
     }
 
-    /*@Path("controller/shareDoorLockSafe")
-    @POST
-    @Feature(code = "shareDoorLockSafe", name = "Share lock safe with new user", type = "operation",
-            description = "Share lock safe with new user")
-    public void shareDoorLockSafe(@HeaderParam("owner") String owner, @HeaderParam("deviceId") String deviceId,
-                             @HeaderParam("protocol") String protocol,
-                                  @FormParam("UIDofUser") String UIDofUser,@FormParam("policy") String policy,
-                                  @Context HttpServletResponse response) {
-        try {
-            DoorLockSafe doorLockSafe = new DoorLockSafe();
-            if(deviceId != null && UIDofUser != null && policy != null){
-                boolean status;
-                doorLockSafe.setDeviceId(deviceId);
-                doorLockSafe.setOwner(owner);
-                doorLockSafe.setPolicy(policy);
-                doorLockSafe.setSerialNumber(deviceId);
-                doorLockSafe.setUIDofUser(UIDofUser);
-                try{
-                    DoorManagerDAO.beginTransaction();
-                    status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().shareDoorLockSafe(doorLockSafe);
-                    DoorManagerDAO.commitTransaction();
-                    if(status){
-                        response.setStatus(Response.Status.OK.getStatusCode());
-                    }else{
-                        response.setStatus(Response.Status.FORBIDDEN.getStatusCode());
-                    }
-                }
-                catch (DoorManagerDeviceMgtPluginException e) {
-                    try {
-                        DoorManagerDAO.rollbackTransaction();
-                    } catch (DoorManagerDeviceMgtPluginException e1) {
-                        String msg = "Error while sharing the enrollment of the Door Manager Locker device : "
-                                + doorLockSafe.getOwner();
-                        response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                        log.error(msg, e);
-                    }
-                }
-            }else{
-                response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-            }
-        } catch (Exception e) {
-            response.setStatus(Response.Status.BAD_REQUEST.getStatusCode());
-            log.error(e);
-        }
-    }*/
-
-    @Path("controller/addDoorOpenedUser")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addDoorOpenedUser(final DeviceJSON lockSafeInfo) {
-        try {
-            if (lockSafeInfo.serialNumber != null && lockSafeInfo.UIDofUser != null) {
-                log.warn(lockSafeInfo.serialNumber);
-                log.warn(lockSafeInfo.UIDofUser);
-                deviceToIpMap.put(lockSafeInfo.serialNumber, lockSafeInfo);
-                return Response.ok(Response.Status.OK.getStatusCode()).build();
-            } else {
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-            }
-        } catch (Exception e) {
-            log.error(e);
-            return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
-        }
-    }
-
+    /**
+     * Request current status of door lock safe
+     *
+     * @param owner    owner of the device
+     * @param deviceId unique identifier for given device
+     * @param protocol transport protocol which is being using here MQTT
+     * @param response http servlet response object
+     */
     @GET
-    @Path("controller/requestStatusOfDoorLockSafe")
+    @Path("controller/current-status")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "requestStatusOfDoorLockSafe", name = "Door Locker Status", type = "monitor",
-            description = "Request door locker current status")
+    @Feature(code = "current-status", name = "Door Locker Status", type = "monitor",
+            description = "Request current status of door safe")
     public SensorRecord requestStatusOfDoorLockSafe(@HeaderParam("owner") String owner,
                                                     @HeaderParam("deviceId") String deviceId,
                                                     @HeaderParam("protocol") String protocol,
@@ -456,43 +236,91 @@ public class DoorManagerControllerService {
         DeviceValidator deviceValidator = new DeviceValidator();
         try {
             if (!deviceValidator.isExist(owner, CarbonContext.getThreadLocalCarbonContext().getTenantDomain(),
-                                         new DeviceIdentifier(deviceId, DoorManagerConstants.DEVICE_TYPE))) {
+                    new DeviceIdentifier(deviceId, DoorManagerConstants.DEVICE_TYPE))) {
                 response.setStatus(Response.Status.UNAUTHORIZED.getStatusCode());
             }
-        } catch (DeviceManagementException e) {
+            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId, CURRENT_STATUS);
+            response.setStatus(Response.Status.OK.getStatusCode());
+        } catch (DeviceControllerException | DeviceManagementException e) {
             response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId, "door_locker_state");
-        } catch (DeviceControllerException e) {
-            response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-        }
-        response.setStatus(Response.Status.OK.getStatusCode());
         return sensorRecord;
     }
 
-    @GET
-    @Path("controller/getRegisteredDoorLockSafe")
-    @Consumes(MediaType.APPLICATION_JSON)
+    /**
+     * @param userInfo user information which are required to test given user is authorized to open requested door
+     * @return if user is authorized open the the door allow to open it
+     */
+    @POST
+    @Path("controller/get_user_info")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRegisteredDoorLocks(@HeaderParam("owner") String owner,
-                                           @HeaderParam("deviceId") String deviceId,
-                                           @Context HttpServletResponse response) {
-        List<String> doorLockSafes;
-        try {
-            DoorManagerDAO.beginTransaction();
-            doorLockSafes = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().getRegisteredDoorLocks(deviceId);
-            DoorManagerDAO.commitTransaction();
-            response.setStatus(Response.Status.OK.getStatusCode());
-        } catch (DoorManagerDeviceMgtPluginException e) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @SuppressWarnings("unchecked") //This is to avoid unchecked call to put(k, v) into jsonObject. org.json.simple
+    // library uses raw type collections internally.
+    public Response get_user_info(final UserInfo userInfo) {
+        if (userInfo.userName != null && userInfo.cardNumber != null && userInfo.deviceId != null) {
             try {
-                DoorManagerDAO.rollbackTransaction();
-            } catch (DoorManagerDeviceMgtPluginException e1) {
-                String msg = "Error while updating the enrollment of the Door Manager Locker device : " + deviceId;
-                response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-                log.error(msg, e);
+                UserStoreManager userStoreManager = doorManager.getUserStoreManager();
+                if (userStoreManager.isExistingUser(userInfo.userName)) {
+                    String accessToken = userStoreManager.getUserClaimValue(userInfo.userName,
+                            DoorManagerConstants.DEVICE_CLAIMS_ACCESS_TOKEN, null);
+                    String cardNumber = userStoreManager.getUserClaimValue(userInfo.userName,
+                            DoorManagerConstants.DEVICE_CLAIMS_CARD_NUMBER, null);
+                    if (cardNumber != null) {
+                        if (cardNumber.equals(userInfo.cardNumber)) {
+                            if (accessToken != null) {
+                                JSONObject credentials = new JSONObject();
+                                credentials.put(DoorManagerConstants.DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN, accessToken);
+                                //return Response.ok(credentials, MediaType.APPLICATION_JSON_TYPE).build();
+                                return Response.status(Response.Status.OK).build();
+                            }
+                        }
+                        return Response.status(Response.Status.UNAUTHORIZED).build();
+                    }
+
+                } else {
+                    return Response.status(Response.Status.UNAUTHORIZED).build();
+                }
+            } catch (UserStoreException e) {
+                log.error(e);
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            } catch (JSONException e) {
+                log.error(e);
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
             }
         }
-        return Response.ok().build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    /*
+    private void sendCEPEvent(String deviceId, String cardId, boolean accessStatus){
+        String cepEventReciever = "http://localhost:9768/endpoints/LockEventReciever";
+
+		HttpClient httpClient = new SystemDefaultHttpClient();
+		HttpPost method = new HttpPost(cepEventReciever);
+		JsonObject event = new JsonObject();
+		JsonObject metaData = new JsonObject();
+
+		metaData.addProperty("deviceID", deviceId);
+		metaData.addProperty("cardID", cardId);
+
+		event.add("metaData", metaData);
+
+		String eventString = "{\"event\": " + event + "}";
+
+		try {
+			StringEntity entity = new StringEntity(eventString);
+			method.setEntity(entity);
+			if (cepEventReciever.startsWith("https")) {
+				method.setHeader("Authorization", "Basic " + Base64.encode(("admin" + ":" + "admin").getBytes()));
+			}
+			httpClient.execute(method).getEntity().getContent().close();
+		} catch (UnsupportedEncodingException e) {
+			log.error("Error while constituting CEP event"+ e.getMessage());
+		} catch (ClientProtocolException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		} catch (IOException e) {
+			log.error("Error while sending message to CEP "+ e.getMessage());
+		}
+	}*/
 }

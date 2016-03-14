@@ -1,4 +1,3 @@
-package ${groupId}.${rootArtifactId}.controller.api.dto;
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -16,6 +15,8 @@ package ${groupId}.${rootArtifactId}.controller.api.dto;
  * specific language governing permissions and limitations
  * under the License.
  */
+package ${groupId}.${rootArtifactId}.controller.api.dto;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

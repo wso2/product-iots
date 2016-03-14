@@ -25,9 +25,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>${version}</version>
-    <artifactId>${artifactId}</artifactId>
+    <artifactId>${project-base-package}.feature</artifactId>
     <packaging>pom</packaging>
-    <name> ${project.artifactId} </name>
+    <name>${project-base-package}.feature </name>
 	<url>http://wso2.org</url>
     <dependencies>
         <dependency>
@@ -131,7 +131,6 @@
                                     <type>war</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
-                                        <!--${basedir}/src/main/resources/webapps/-->
                                         ${project.build.directory}/maven-shared-archive-resources/webapps/
                                     </outputDirectory>
                                     <destFileName>${deviceType}_mgt.war</destFileName>
@@ -153,7 +152,6 @@
                                     <type>war</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
-                                        <!--${basedir}/src/main/resources/webapps/-->
                                         ${project.build.directory}/maven-shared-archive-resources/webapps/
                                     </outputDirectory>
                                     <destFileName>${deviceType}.war</destFileName>
@@ -199,6 +197,7 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon-p2-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>

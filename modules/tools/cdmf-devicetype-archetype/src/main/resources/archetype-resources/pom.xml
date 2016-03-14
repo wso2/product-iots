@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -234,24 +235,24 @@
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
         <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.jar.version>1.1.0.SNAPSHOT</carbon.device.mgt.jar.version>
+        <carbon-p2-plugin.version>1.5.3</carbon-p2-plugin.version>
+        <carbon.iot.device.mgt.version>2.0.4-SNAPSHOT</carbon.iot.device.mgt.version>
+        <carbon.iot.device.mgt.jar.version>2.0.4.SNAPSHOT</carbon.iot.device.mgt.jar.version>
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
-        <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
-        <carbon.iot.device.mgt.version>1.9.2-SNAPSHOT</carbon.iot.device.mgt.version>
-        <carbon.iot.device.mgt.jar.version>1.9.2.SNAPSHOT</carbon.iot.device.mgt.jar.version>
-        <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
+        <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-io.version>2.4</commons-io.version>
-        <!--XMPP/MQTT Version-->
+        <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
+        <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
         <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
         <cxf.version>2.6.1</cxf.version>
         <jackson.version>1.9.0</jackson.version>
-        <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
-        <wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
-        <wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>
-        <project-base-package>${groupId}.${rootArtifactId}</project-base-package>
+        <project-base-package>${project.groupId}.${rootArtifactId}</project-base-package>
         <junit.version>3.8.1</junit.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
         <org.apache.felix.version>1.4.0</org.apache.felix.version>
         <maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>

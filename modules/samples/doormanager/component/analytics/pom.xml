@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--/*
 * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -15,19 +16,19 @@
 * specific language governing permissions and limitations
 * under the License.
 */-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.homeautomation</groupId>
-        <artifactId>component</artifactId>
+        <artifactId>doormanager-component</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${groupId}.doormanager.analytics</artifactId>
+    <artifactId>org.homeautomation.doormanager.analytics</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name> ${groupId}.doormanager.analytics </name>
+    <name>org.homeautomation.doormanager.analytics</name>
     <url>http://wso2.org</url>
     <build>
         <plugins>
@@ -65,7 +66,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.5.5</version>
                 <configuration>
-                    <finalName>${project.artifactId}-1.0.0-SNAPSHOT</finalName>
+                    <finalName>org.homeautomation.doormanager.analytics-1.0.0-SNAPSHOT</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <descriptor>src/assembly/src.xml</descriptor>

@@ -25,11 +25,12 @@
 {{/zone}}
 
 {{#zone "device-thumbnail"}}
-    <img src="{{@unit.publicUri}}/images/current-sensor.png"/>
+    <img src="{{@unit.publicUri}}/images/deviceType.png"/>
 {{/zone}}
 
 {{#zone "operation-status"}}
-    <div id="div-operation-status" class="hidden" align="center" style="padding: 10px; margin-bottom: 5px">
+    <div id="div-operation-status" class="hidden" align="center"
+         style="padding: 10px; margin-bottom: 5px">
     </div>
 {{/zone}}
 
@@ -46,7 +47,8 @@
     <div class="media">
         <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
-                                  data-toggle="tab" aria-controls="device_statistics">Device Statistics</a>
+                                  data-toggle="tab" aria-controls="device_statistics">Device
+                                                                                      Statistics</a>
             </li>
             <ul class="list-group" role="tablist">
                 <li><a class="list-group-item" href="#policies" role="tab"
@@ -65,7 +67,8 @@
                 </div>
                 <div class="panel panel-default tab-pane" id="policy_compliance" role="tabpanel"
                      aria-labelledby="policy_compliance">
-                    <div class="panel-heading">Policy Compliance <span><a href="#" id="refresh-policy">
+                    <div class="panel-heading">Policy Compliance <span><a href="#"
+                                                                          id="refresh-policy">
                         <i class="fw fw-refresh"></i></a></span></div>
                     <div class="panel panel-default tab-pane" id="policies" role="tabpanel"
                          aria-labelledby="policies">
