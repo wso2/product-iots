@@ -23,6 +23,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
+import org.wso2.carbon.iot.integration.web.ui.test.common.Constants;
 import org.wso2.carbon.iot.integration.web.ui.test.common.LoginUtils;
 import org.wso2.carbon.iot.integration.web.ui.test.common.IOTIntegrationUIBaseTestCase;
 import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
@@ -48,8 +49,9 @@ public class SampleInstallationVerification extends IOTIntegrationUIBaseTestCase
         adminDashboard = new IOTAdminDashboard(driver);
     }
 
-    @Test(description = "Verify the sample is available in Virtual devices section.", groups = {"iot.install"},
-            dependsOnGroups = {"iot.sample"})
+    @Test(description = "Verify the sample is available in Virtual devices section.",
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL_VERIFY,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL)
     public void installationVerificationTest() throws IOException {
         EnrollDevicePage enrollDevicePage = adminDashboard.enrollNewDevice();
         Assert.assertTrue(enrollDevicePage.isInstalled());

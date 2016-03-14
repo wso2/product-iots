@@ -52,15 +52,15 @@ public class SampleEnrolmentVerificationTest extends IOTIntegrationUIBaseTestCas
     }
 
     @Test(description = "Verify enrolment of the sample device",
-          groups = {"iot.enroll.verify"},
-          dependsOnGroups = "iot.enroll")
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL)
     public void verifyEnrollmentTest() {
         Assert.assertTrue(devicesPage.isDeviceEnrolled(Constants.IOT_CONNECTED_CUP_NAME));
     }
 
     @Test(description = "Verify navigation to device view",
           dependsOnMethods = "verifyEnrollmentTest",
-          groups = {"iot.enroll.verify"})
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
     public void verifyNavigationTest() throws IOException {
         connectedCupDeviceViewPage = devicesPage.viewDevice(Constants.IOT_CONNECTED_CUP_NAME);
         Assert.assertNotNull(connectedCupDeviceViewPage);

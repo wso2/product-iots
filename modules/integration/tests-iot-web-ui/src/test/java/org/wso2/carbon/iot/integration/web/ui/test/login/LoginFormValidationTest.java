@@ -67,23 +67,23 @@ public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
         if (!alertUserName.isDisplayed()) Assert.assertTrue(false, "Alert for user name is not present.");
         if (!alertPassword.isDisplayed()) Assert.assertTrue(false, "Alert for password is not present.");
 
-            Assert.assertEquals(alertUserName.getText(), "Please enter a username");
-            Assert.assertEquals(alertPassword.getText(), "Please provide a password");
+            Assert.assertEquals(alertUserName.getText(), Constants.LOGIN_USER_NAME_ERROR);
+            Assert.assertEquals(alertPassword.getText(), Constants.LOGIN_PASSWORD_ERROR);
 
     }
 
     @Test(description = "Test for incorrect username")
     public void incorrectUserNameTest() throws Exception {
         clearForm();
-        userNameField.sendKeys("admin1");
+        userNameField.sendKeys(Constants.LOGIN_WRONG_USER_NAME);
         passwordField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getPassword());
         loginButton.click();
 
         WebElement alert = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")));
         if (alert.isDisplayed()) {
-            Assert.assertEquals(alert.getText(), "Incorrect username or password.!");
+            Assert.assertEquals(alert.getText(), Constants.LOGIN_FAILED_ERROR);
         } else {
-            Assert.assertTrue(false, "Alert is not present.");
+            Assert.assertTrue(false, Constants.ALERT_NOT_PRESENT);
         }
 
     }
@@ -92,14 +92,14 @@ public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
     public void incorrectPasswordTest() throws Exception {
         clearForm();
         userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getPassword());
-        passwordField.sendKeys("admnn");
+        passwordField.sendKeys(Constants.LOGIN_WRONG_USER_PASSWORD);
         loginButton.click();
 
         WebElement alert = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")));
         if (alert.isDisplayed()) {
-            Assert.assertEquals(alert.getText(), "Incorrect username or password.!");
+            Assert.assertEquals(alert.getText(), Constants.LOGIN_FAILED_ERROR);
         } else {
-            Assert.assertTrue(false, "Alert is not present.");
+            Assert.assertTrue(false, Constants.ALERT_NOT_PRESENT);
         }
     }
 
@@ -108,14 +108,14 @@ public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
     public void shortPasswordTest() throws Exception {
         clearForm();
         userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getUserName());
-        passwordField.sendKeys("ad");
+        passwordField.sendKeys(Constants.LOGIN_SHORT_PASSWORD);
         loginButton.click();
 
         WebElement alert = driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error")));
         if (alert.isDisplayed()) {
-            Assert.assertEquals(alert.getText(), "Your password must be at least 3 characters long");
+            Assert.assertEquals(alert.getText(), Constants.LOGIN_SHORT_PASSWORD_ERROR);
         } else {
-            Assert.assertTrue(false, "Alert is not present.");
+            Assert.assertTrue(false, Constants.ALERT_NOT_PRESENT);
         }
     }
 

@@ -50,18 +50,16 @@ public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     @Test(description = "Verify new User registration")
     public void userRegisterTest() throws IOException {
         LoginPage login = new LoginPage(driver);
-        UIElementMapper uiElementMapper = UIElementMapper.getInstance();
         NewUserRegisterPage registerTest = login.registerNewUser();
-        LoginPage loginPage = registerTest.registerUser(
-                uiElementMapper.getElement("iot.user.add.firstname"),
-                uiElementMapper.getElement("iot.user.add.lastname"),
-                uiElementMapper.getElement("iot.user.add.email"),
-                uiElementMapper.getElement("iot.user.add.username"),
-                uiElementMapper.getElement("iot.user.add.password"),
-                uiElementMapper.getElement("iot.user.add.password"));
+        LoginPage loginPage = registerTest.registerUser(Constants.REGISTER_USER_FIRST_NAME,
+                                                        Constants.REGISTER_USER_LAST_NAME,
+                                                        Constants.REGISTER_USER_EMAIL,
+                                                        Constants.REGISTER_USER_USER_NAME,
+                                                        Constants.REGISTER_USER_PASSWORD,
+                                                        Constants.REGISTER_USER_CONFIRM_PASSWORD);
 
-        IOTHomePage homePage = loginPage.loginAsUser(uiElementMapper.getElement("iot.user.add.username"),
-                                                     uiElementMapper.getElement("iot.user.add.password"));
+        IOTHomePage homePage = loginPage.loginAsUser(Constants.REGISTER_USER_USER_NAME,
+                                                     Constants.REGISTER_USER_PASSWORD);
 
         Assert.assertTrue(homePage.checkUserName());
     }
@@ -70,7 +68,7 @@ public class NewUserRegistrationTest extends IOTIntegrationUIBaseTestCase {
     public void logoutTest() throws IOException {
         IOTHomePage homePage = new IOTHomePage(driver);
         homePage.logout();
-        Assert.assertEquals(driver.getTitle(), "Login | IoT Server");
+        Assert.assertEquals(driver.getTitle(), Constants.IOT_SERVER_LOGIN_PAGE_TITLE);
     }
 
     @AfterClass(alwaysRun = true)

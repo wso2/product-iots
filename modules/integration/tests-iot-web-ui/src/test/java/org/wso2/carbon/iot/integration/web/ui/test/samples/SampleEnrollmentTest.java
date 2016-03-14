@@ -52,14 +52,14 @@ public class SampleEnrollmentTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Verify the pop up modal is displayed.",
-          groups = {"iot.enroll"},
-          dependsOnGroups = {"iot.install"})
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL_VERIFY)
     public void enrollDevicePopUpModalTest() throws InterruptedException, IOException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.isPopUpPresent());
     }
 
     @Test(description = "Test case for device enrolment",
-          groups = {"iot.enroll"},
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL,
           dependsOnMethods = {"enrollDevicePopUpModalTest"})
     public void enrollDeviceTest() throws InterruptedException {
         Assert.assertTrue(connectedCupDeviceTypeViewPage.enrollDevice(Constants.IOT_CONNECTED_CUP_NAME));

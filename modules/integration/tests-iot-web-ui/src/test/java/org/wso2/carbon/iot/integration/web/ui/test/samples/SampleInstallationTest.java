@@ -64,7 +64,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     private Log log = LogFactory.getLog(SampleInstallationTest.class);
     private Process tempProcess = null;
     private Properties properties = System.getProperties();
-    private String carbonHome = properties.getProperty("carbon.home");
+    private String carbonHome = properties.getProperty(Constants.CARBON_HOME);
     private String[] cmdArray;
     private LogViewerClient logViewerClient;
 
@@ -75,14 +75,14 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         logViewerClient = new LogViewerClient(getBackendURL(), getSessionCookie(automationContext));
     }
 
-    @Test(groups = {"iot.sample"},
-          description = "Verify the sample build process")
+    @Test(description = "Verify the sample build process",
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL)
     public void sampleBuildTest() throws IOException {
         String connectedCupDir = carbonHome + File.separator + "samples" + File.separator + "connectedcup";
         log.info("Connected cup Sample: " + connectedCupDir);
         File dir = new File(connectedCupDir);
         try {
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty(Constants.OS_NAME).toLowerCase().contains("windows")) {
                 log.info("Executing maven clean install --------------------------------");
                 cmdArray = new String[]{"cmd.exe", "/c", "mvn clean install"};
                 tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
@@ -92,7 +92,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
                 tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
             }
 
-            boolean buildStatus = waitForMessage(tempProcess.getInputStream(), "BUILD SUCCESS");
+            boolean buildStatus = waitForMessage(tempProcess.getInputStream(), Constants.BUILD_SUCCESS_MSG);
             Assert.assertTrue(buildStatus, "Building the sample was not successful");
         } finally {
             if (tempProcess != null) {
@@ -101,23 +101,23 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(groups = {"iot.sample"},
-          description = "Verify the sample installation process",
+    @Test(description = "Verify the sample installation process",
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL,
           dependsOnMethods = {"sampleBuildTest"})
     public void sampleInstallationTest() throws IOException {
 
-        log.info("CARBON_HOME: " + System.getProperty("carbon.home"));
+        log.info("CARBON_HOME: " + System.getProperty(Constants.CARBON_HOME));
         File dir = new File(carbonHome);
         log.info("Sample installation started : mvn clean install -f device-deployer.xml");
         try {
-            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            if (System.getProperty(Constants.OS_NAME).toLowerCase().contains("windows")) {
                 cmdArray = new String[]{"cmd.exe", "/c", "mvn clean install -f device-deployer.xml"};
                 tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
             } else {
                 cmdArray = new String[]{"mvn", "clean", "install", "-f", "device-deployer.xml"};
                 tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
             }
-            boolean buildStatus = waitForMessage(tempProcess.getInputStream(), "BUILD SUCCESS");
+            boolean buildStatus = waitForMessage(tempProcess.getInputStream(), Constants.BUILD_SUCCESS_MSG);
             Assert.assertTrue(buildStatus, "Sample installation was not successful");
         } finally {
             if (tempProcess != null) {
@@ -126,8 +126,8 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         }
     }
 
-    @Test(groups = {"iot.sample"},
-          description = "Test restarting the server",
+    @Test(description = "Test restarting the server",
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_INSTALL,
           dependsOnMethods = {"sampleInstallationTest"})
     public void serverRestartTest() {
         ServerConfigurationManager serverManager;

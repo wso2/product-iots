@@ -51,14 +51,14 @@ public class DeviceGroupTest extends IOTIntegrationUIBaseTestCase {
     @Test(description = "Test for adding a new device group.")
     public void addNewGroupTest() throws IOException {
         DeviceAddGroupPage addGroupPage = adminDashboard.addGroup();
-        addGroupPage.addNewGroup("group1", "This is test group");
+        addGroupPage.addNewGroup(Constants.GROUP_NAME, Constants.GROUP_DESCRIPTION);
     }
 
     @Test(description = "Check whether the created group exists", dependsOnMethods = {"addNewGroupTest"})
     public void isGroupCreatedTest() throws IOException, XPathExpressionException {
         driver.get(getWebAppURL() + Constants.IOT_HOME_URL);
         DeviceGroupsPage groupsPage = adminDashboard.viewGroups();
-        Assert.assertTrue(groupsPage.isGroupCreated("group1"));
+        Assert.assertTrue(groupsPage.isGroupCreated(Constants.GROUP_NAME));
     }
 
     @AfterClass(alwaysRun = true)

@@ -61,36 +61,37 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Set the temperature level.",
-          groups = {"iot.sample.verify"},
-          dependsOnGroups = "iot.enroll.verify")
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
     public void setTemperatureTest() {
         Assert.assertTrue(sampleViewPage.changeTemperature(Constants.IOT_CONNECTED_CUP_TEMPERATURE));
     }
 
     @Test(description = "Set the coffee level.",
-          groups = {"iot.sample.verify"},
-          dependsOnGroups = "iot.enroll.verify")
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
     public void setCoffeeLevelTest() throws IOException {
         Assert.assertTrue(sampleViewPage.changeCoffeeLevel(Constants.IOT_CONNECTED_CUP_LEVEl));
     }
 
     @Test(description = "Verify order coffee function.",
-          groups = {"iot.sample.verify"},
-          dependsOnGroups = "iot.enroll.verify")
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY)
     public void orderCoffeeTest() throws IOException, InterruptedException {
         Assert.assertTrue(sampleViewPage.orderCoffee());
     }
 
     @Test(description = "Test the graphs are present in device view.",
-          groups = {"iot.sample.verify"},
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
           dependsOnMethods = {"setTemperatureTest", "setCoffeeLevelTest", "orderCoffeeTest"})
     public void verifyGraphs() throws IOException {
         Assert.assertTrue(connectedCupDeviceViewPage.isGraphsAvailable(2));
     }
 
     @Test(description = "Test the Y axis name of Temperature graph.",
-          groups = {"iot.sample.verify", "sample.temp"},
-          dependsOnGroups = {"iot.enroll.verify"},
+          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphYAxisNameTest() throws IOException {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
@@ -99,8 +100,9 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the X axis name of Temperature graph.",
-          groups = {"iot.sample.verify", "sample.temp"},
-          dependsOnGroups = {"iot.enroll.verify"},
+          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphXAxisNameTest() throws IOException {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
@@ -109,8 +111,9 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the whether the Coffee Level graph legend is present.",
-          groups = {"iot.sample.verify", "sample.temp"},
-          dependsOnGroups = {"iot.enroll.verify"},
+          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphLegendTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphLegendName(Constants.IOT_CONNECTED_CUP_TEMPERATURE_ID,
@@ -118,16 +121,18 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the whether the Temperature graph path is visible.",
-          groups = {"iot.sample.verify", "sample.temp"},
-          dependsOnGroups = {"iot.enroll.verify"},
+          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphPathTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.checkGraphPath(Constants.IOT_CONNECTED_CUP_TEMPERATURE_GRAPH_ID));
     }
 
     @Test(description = "Test the whether the Temperature graph gets values.",
-          groups = {"iot.sample.verify", "sample.temp"},
-          dependsOnGroups = {"iot.enroll.verify"},
+          groups = {Constants.IOT_TEST_GROUP_SAMPLE_VERIFY,
+                    Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE},
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
           dependsOnMethods = {"verifyGraphs"})
     public void temperatureGraphDataPublisherTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.checkGraphValues(Constants.IOT_CONNECTED_CUP_TEMPERATURE_GRAPH_ID,
@@ -135,8 +140,8 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the Y axis name of Coffee Level graph.",
-          groups = {"iot.sample.coffee"},
-          dependsOnGroups = {"sample.temp"})
+          groups = Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE)
     public void coffeeLevelGraphYAxisNameTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_Y_AXIS,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
@@ -144,8 +149,9 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the X axis name of Coffee Level graph.",
-          groups = {"iot.sample.coffee"},
-          dependsOnGroups = {"iot.enroll.verify", "sample.temp"})
+          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
+          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_ENROLL_VERIFY,
+                             Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
     public void coffeeLevelGraphXAxisNameTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.graphAxisName(Constants.IOT_GRAPH_X_AXIS,
                                                                    Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
@@ -153,23 +159,23 @@ public class SampleFunctionalityTest extends IOTIntegrationUIBaseTestCase {
     }
 
     @Test(description = "Test the whether the Coffee Level graph legend is present.",
-          groups = {"iot.sample.coffee"},
-          dependsOnGroups = {"sample.temp"})
+          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
+          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
     public void coffeeLevelGraphLegendTest() throws IOException {
         Assert.assertTrue(connectedCupDeviceViewPage.graphLegendName(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_ID,
                                                                      Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_LEGEND));
     }
 
     @Test(description = "Test the whether the Coffee Level graph path is visible.",
-          groups = {"iot.sample.coffee"},
-          dependsOnGroups = {"sample.temp"})
+          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
+          dependsOnGroups = {Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE})
     public void coffeeLevelGraphPathTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.checkGraphPath(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_GRAPH_ID));
     }
 
     @Test(description = "Test the whether the Coffee Level graph gets values.",
-          groups = {"iot.sample.coffee"},
-          dependsOnGroups = {"sample.temp"})
+          groups =  Constants.IOT_TEST_GROUP_SAMPLE_COFFEELEVEL,
+          dependsOnGroups = Constants.IOT_TEST_GROUP_SAMPLE_TEMPERATURE)
     public void coffeeLevelGraphDataPublisherTest() {
         Assert.assertTrue(connectedCupDeviceViewPage.checkGraphValues(Constants.IOT_CONNECTED_CUP_COFFEE_LEVEL_GRAPH_ID,
                                                                       Constants.IOT_CONNECTED_CUP_LEVEl));

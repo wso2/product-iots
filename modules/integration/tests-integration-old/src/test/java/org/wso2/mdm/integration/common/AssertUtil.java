@@ -33,8 +33,7 @@ public class AssertUtil {
      * @param realPayload         real json string.
      * @param mustMatch           If the real and expected must match, in order to become the test successful or not.
      */
-    public static void jsonPayloadCompare(String expectedJsonPayload, String realPayload,
-                                          boolean mustMatch) {
+    public static void jsonPayloadCompare(String expectedJsonPayload, String realPayload, boolean mustMatch) {
         JsonElement jsonElement = new JsonParser().parse(expectedJsonPayload);
         JsonObject expectedPayloadObject = jsonElement.getAsJsonObject();
         jsonElement = new JsonParser().parse(realPayload);

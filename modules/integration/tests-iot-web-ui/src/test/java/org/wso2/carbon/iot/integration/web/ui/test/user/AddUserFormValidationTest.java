@@ -94,10 +94,10 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
     public void shortUserNameTest() {
         clearForm();
 
-        firstNameField.sendKeys("User");
-        lastNameField.sendKeys("User");
-        emailField.sendKeys("user@wso2.com");
-        userNameField.sendKeys("us");
+        firstNameField.sendKeys(Constants.ADD_USER_FIRST_NAME);
+        lastNameField.sendKeys(Constants.ADD_USER_LAST_NAME);
+        emailField.sendKeys(Constants.ADD_USER_EMAIL);
+        userNameField.sendKeys(Constants.ADD_USER_SHORT_USER_NAME);
 
         addUserButton.click();
 
@@ -108,7 +108,7 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
             Assert.assertTrue(false, "Alert for short user name is not displayed.");
         }
 
-        Assert.assertEquals(alert.getText(), "Username must be between 3 and 30 characters long.");
+        Assert.assertEquals(alert.getText(), Constants.ADD_USER_SHORT_USER_NAME_ERROR_MSG);
     }
 
     @Test(description = "Test for empty first name")
@@ -116,9 +116,9 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
         clearForm();
 
         firstNameField.sendKeys("");
-        lastNameField.sendKeys("User");
-        emailField.sendKeys("user@wso2.com");
-        userNameField.sendKeys("user1");
+        lastNameField.sendKeys(Constants.ADD_USER_LAST_NAME);
+        emailField.sendKeys(Constants.ADD_USER_EMAIL);
+        userNameField.sendKeys(Constants.ADD_USER_USER_NAME);
 
         addUserButton.click();
 
@@ -129,17 +129,17 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
             Assert.assertTrue(false, "Alert for First name is not displayed.");
         }
 
-        Assert.assertEquals(alert.getText(), "Firstname is a required field. It cannot be empty.");
+        Assert.assertEquals(alert.getText(), Constants.ADD_USER_FIRST_NAME_ERROR_MSG);
     }
 
     @Test(description = "Test for empty last name")
     public void emptyLastNameTest() {
         clearForm();
 
-        firstNameField.sendKeys("User");
+        firstNameField.sendKeys(Constants.ADD_USER_FIRST_NAME);
         lastNameField.sendKeys("");
-        emailField.sendKeys("user@wso2.com");
-        userNameField.sendKeys("user1");
+        emailField.sendKeys(Constants.ADD_USER_EMAIL);
+        userNameField.sendKeys(Constants.ADD_USER_USER_NAME);
 
         addUserButton.click();
 
@@ -150,17 +150,17 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
             Assert.assertTrue(false, "Alert for Last name is not displayed.");
         }
 
-        Assert.assertEquals(alert.getText(), "Lastname is a required field. It cannot be empty.");
+        Assert.assertEquals(alert.getText(), Constants.ADD_USER_LAST_NAME_ERROR_MSG);
     }
 
     @Test(description = "Test for empty email name")
     public void emptyEmailTest() {
         clearForm();
 
-        firstNameField.sendKeys("User");
-        lastNameField.sendKeys("User");
+        firstNameField.sendKeys(Constants.ADD_USER_FIRST_NAME);
+        lastNameField.sendKeys(Constants.ADD_USER_LAST_NAME);
         emailField.sendKeys("");
-        userNameField.sendKeys("user1");
+        userNameField.sendKeys(Constants.ADD_USER_USER_NAME);
 
         addUserButton.click();
 
@@ -171,17 +171,17 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
             Assert.assertTrue(false, "Alert for E-mail is not displayed.");
         }
 
-        Assert.assertEquals(alert.getText(), "Email is a required field. It cannot be empty.");
+        Assert.assertEquals(alert.getText(), Constants.ADD_USER_NO_EMAIL_ERROR_MSG);
     }
 
     @Test(description = "Test for incorrect email")
     public void incorrectEmailTest() {
         clearForm();
 
-        firstNameField.sendKeys("User");
-        lastNameField.sendKeys("User");
-        emailField.sendKeys("user.com");
-        userNameField.sendKeys("user1");
+        firstNameField.sendKeys(Constants.ADD_USER_FIRST_NAME);
+        lastNameField.sendKeys(Constants.ADD_USER_LAST_NAME);
+        emailField.sendKeys(Constants.ADD_USER_EMAIL_ERROR);
+        userNameField.sendKeys(Constants.ADD_USER_USER_NAME);
 
         addUserButton.click();
 
@@ -192,7 +192,7 @@ public class AddUserFormValidationTest extends IOTIntegrationUIBaseTestCase {
             Assert.assertTrue(false, "Alert for incorrect E-mail is not displayed.");
         }
 
-        Assert.assertEquals(alert.getText(), "Provided email is invalid. Please check.");
+        Assert.assertEquals(alert.getText(), Constants.ADD_USER_WRONG_EMAIL_ERROR_MSG);
     }
 
     private void clearForm() {

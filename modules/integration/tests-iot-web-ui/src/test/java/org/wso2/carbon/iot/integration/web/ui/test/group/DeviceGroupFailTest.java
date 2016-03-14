@@ -48,7 +48,7 @@ public class DeviceGroupFailTest extends IOTIntegrationUIBaseTestCase {
         driver.get(getWebAppURL() + Constants.IOT_GROUP_ADD_URL);
         DeviceAddGroupPage addGroupPage = new DeviceAddGroupPage(driver);
 
-        Assert.assertEquals(addGroupPage.submitEmptyForm(), "Group Name is a required field. It cannot be empty.");
+        Assert.assertEquals(addGroupPage.submitEmptyForm(), Constants.GROUP_NAME_FIELD_ERROR);
     }
 
     @AfterClass(alwaysRun = true)
