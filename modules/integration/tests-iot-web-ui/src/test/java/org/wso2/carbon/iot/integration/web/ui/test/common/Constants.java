@@ -71,7 +71,7 @@ public class Constants {
 
     public static final int IOT_RESTART_THREAD_TIMEOUT = 30;
 
-    public static final String IOT_CONNECTED_CUP_LEVEl = "75";
+    public static final String IOT_CONNECTED_CUP_LEVEl = "35";
     public static final String IOT_CONNECTED_CUP_TEMPERATURE = "53";
 
     public static final String IOT_GRAPH_X_AXIS = "x";

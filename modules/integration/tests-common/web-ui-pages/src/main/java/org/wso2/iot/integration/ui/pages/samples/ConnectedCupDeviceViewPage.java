@@ -31,6 +31,7 @@ import org.wso2.iot.integration.ui.pages.graphs.GraphHandler;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class represents the Connected cup device view page.
@@ -162,6 +163,7 @@ public class ConnectedCupDeviceViewPage {
      */
     public boolean checkGraphValues(String graphId, String value) {
         WebElement graph = handler.getGraphById(graphId);
+        driverServer.manage().timeouts().implicitlyWait(UIUtils.webDriverTime, TimeUnit.SECONDS);
         if (graph != null) {
             return handler.isPathGetValues(graph, value);
         } else {
