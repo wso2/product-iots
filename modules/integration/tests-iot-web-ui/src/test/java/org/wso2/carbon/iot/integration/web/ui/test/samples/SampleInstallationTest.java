@@ -65,7 +65,7 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
     private Process tempProcess = null;
     private Properties properties = System.getProperties();
     private String carbonHome = properties.getProperty(Constants.CARBON_HOME);
-    private String[] cmdArray;
+    private String[] commands;
     private LogViewerClient logViewerClient;
 
     @BeforeClass(alwaysRun = true)
@@ -84,12 +84,12 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         try {
             if (System.getProperty(Constants.OS_NAME).toLowerCase().contains("windows")) {
                 log.info("Executing maven clean install --------------------------------");
-                cmdArray = new String[]{"cmd.exe", "/c", "mvn clean install"};
-                tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
+                commands = new String[]{"cmd.exe", "/c", "mvn clean install"};
+                tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             } else {
                 log.info("Executing maven clean install --------------------------------");
-                cmdArray = new String[]{"mvn", "clean", "install"};
-                tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
+                commands = new String[]{"mvn", "clean", "install"};
+                tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             }
 
             boolean buildStatus = waitForMessage(tempProcess.getInputStream(), Constants.BUILD_SUCCESS_MSG);
@@ -111,11 +111,11 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
         log.info("Sample installation started : mvn clean install -f device-deployer.xml");
         try {
             if (System.getProperty(Constants.OS_NAME).toLowerCase().contains("windows")) {
-                cmdArray = new String[]{"cmd.exe", "/c", "mvn clean install -f device-deployer.xml"};
-                tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
+                commands = new String[]{"cmd.exe", "/c", "mvn clean install -f device-deployer.xml"};
+                tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             } else {
-                cmdArray = new String[]{"mvn", "clean", "install", "-f", "device-deployer.xml"};
-                tempProcess = Runtime.getRuntime().exec(cmdArray, null, dir);
+                commands = new String[]{"mvn", "clean", "install", "-f", "device-deployer.xml"};
+                tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             }
             boolean buildStatus = waitForMessage(tempProcess.getInputStream(), Constants.BUILD_SUCCESS_MSG);
             Assert.assertTrue(buildStatus, "Sample installation was not successful");
