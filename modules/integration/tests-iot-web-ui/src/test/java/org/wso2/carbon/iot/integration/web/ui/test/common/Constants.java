@@ -60,7 +60,7 @@ public class Constants {
     public static final String ADD_USER_FIRST_NAME_ERROR_MSG = "Firstname is a required field. It cannot be empty.";
     public static final String ADD_USER_LAST_NAME_ERROR_MSG = "Lastname is a required field. It cannot be empty.";
     public static final String ADD_USER_NO_EMAIL_ERROR_MSG = "Email is a required field. It cannot be empty.";
-    public static final String ADD_USER_WRONG_EMAIL_ERROR_MSG = "Email is a required field. It cannot be empty.";
+    public static final String ADD_USER_WRONG_EMAIL_ERROR_MSG = "Provided email is invalid. Please check.";
 
     public static final String ALERT_NOT_PRESENT = "Alert is not present.";
 

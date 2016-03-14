@@ -70,7 +70,7 @@ public class GraphHandler {
             Graph g = new Graph();
             String key = e.getAttribute("id").split("-")[1];
             g.setGraphId(key.toLowerCase().replace(" ", ""));
-            String xAxis = e.findElement(By.xpath(uiElementMapper.getElement("ot.stat.graph.xAxis.xpath"))).getText();
+            String xAxis = e.findElement(By.xpath(uiElementMapper.getElement("iot.stat.graph.xAxis.xpath"))).getText();
             g.setxAxis(xAxis);
             String yAxis = e.findElement(By.xpath("//*[contains(@id, \"y_axis-" + key + "\")]")).getText();
             g.setyAxis(yAxis);

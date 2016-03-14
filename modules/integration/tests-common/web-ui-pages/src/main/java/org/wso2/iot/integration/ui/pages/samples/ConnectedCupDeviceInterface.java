@@ -76,6 +76,7 @@ public class ConnectedCupDeviceInterface {
             WebElement tempSlider = driver.findElement(By.xpath(
                     uiElementMapper.getElement("iot.sample.temperature.xpath")));
             moveSlider(tempSlider, Integer.parseInt(temp));
+            driver.manage().timeouts().implicitlyWait(UIUtils.webDriverTime, TimeUnit.SECONDS);
             return true;
         }
         return false;
@@ -107,6 +108,5 @@ public class ConnectedCupDeviceInterface {
         Actions move = new Actions(driver);
         Action action = move.dragAndDropBy(slider, 0, val).build();
         action.perform();
-
     }
 }

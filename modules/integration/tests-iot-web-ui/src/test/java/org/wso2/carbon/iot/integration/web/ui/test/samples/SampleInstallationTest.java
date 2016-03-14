@@ -190,7 +190,8 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
                             }
                         }
                     } catch (RemoteException | LogViewerLogViewerException e) {
-                        e.printStackTrace();
+                        log.error("Error reading logs. \n" + e.getMessage());
+                        Assert.assertTrue(false);
                     }
                 }
             };

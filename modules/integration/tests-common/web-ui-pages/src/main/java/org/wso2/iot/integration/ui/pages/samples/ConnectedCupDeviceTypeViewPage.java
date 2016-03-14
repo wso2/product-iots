@@ -21,6 +21,8 @@ package org.wso2.iot.integration.ui.pages.samples;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
@@ -52,8 +54,9 @@ public class ConnectedCupDeviceTypeViewPage {
         WebElement createInstanceBtn = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstanceBtn.xpath")));
         createInstanceBtn.click();
-
-        Thread.sleep(UIUtils.threadTimeout);
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(
+                uiElementMapper.getElement("iot.sample.modal.popup.xpath")))));
 
         return driver.findElement(By.xpath(uiElementMapper.getElement("iot.sample.modal.popup.xpath"))).isDisplayed();
     }
@@ -66,7 +69,6 @@ public class ConnectedCupDeviceTypeViewPage {
      * @return : True if navigates to the Device type view page without errors. False otherwise.
      */
     public boolean enrollDevice(String name) {
-
         WebElement nameField = driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.createInstance.nameField.xpath")));
         WebElement createButton = driver.findElement(By.xpath(

@@ -78,7 +78,6 @@ public class ConnectedCupDeviceViewPage {
         return new ConnectedCupDeviceInterface(driverDevice);
     }
 
-
     /**
      * Gets the connected cup device web app URL.
      * @return : Link of the connected cup device web app.
@@ -91,7 +90,6 @@ public class ConnectedCupDeviceViewPage {
                 uiElementMapper.getElement("iot.sample.connectedcup.gotodevice.xpath"))).getAttribute("href");
     }
 
-
     /**
      * This method checks whether there are expected number of graphs are available in the UI.
      * @param count : Number of graphs expected.
@@ -100,7 +98,6 @@ public class ConnectedCupDeviceViewPage {
     public boolean isGraphsAvailable(int count) {
         return handler.getGraphCount() == count;
     }
-
 
     /**
      * Checks whether the selected graph axes represent the given values.
@@ -119,6 +116,7 @@ public class ConnectedCupDeviceViewPage {
                 return graphMap.get(graphId).getyAxis().contains(axisName);
             }
         }
+        log.error("There are no graphs found.");
         return false;
     }
 
@@ -131,12 +129,13 @@ public class ConnectedCupDeviceViewPage {
     public boolean graphLegendName(String graphId, String legend) {
         log.info(graphMap.toString());
         if (graphMap.size() != 0) {
-            try {
+            if (graphMap.get(graphId) != null){
                 return graphMap.get(graphId).getLegend().contains(legend);
-            } catch (NullPointerException e) {
-                log.info("Null Pointer" + e.getMessage());
             }
+            log.error(String.format("Graph for %s is not found.", graphId));
+            return false;
         }
+        log.error("There are no graphs found.");
         return false;
     }
 

@@ -46,8 +46,8 @@ public class LoginTest extends IOTIntegrationUIBaseTestCase {
 
     @Test(description = "Verify login to IOT server dashboard")
     public void testAdminLogin() throws IOException, XPathExpressionException {
-        LoginPage test = new LoginPage(driver);
-        IOTAdminDashboard dashboard = test.loginAsAdmin(
+        LoginPage loginPage = new LoginPage(driver);
+        IOTAdminDashboard dashboard = loginPage.loginAsAdmin(
                 automationContext.getSuperTenant().getTenantAdmin().getUserName(),
                 automationContext.getSuperTenant().getTenantAdmin().getPassword());
         dashboard.logout();

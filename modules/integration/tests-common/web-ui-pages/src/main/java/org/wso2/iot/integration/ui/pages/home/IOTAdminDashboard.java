@@ -132,5 +132,5 @@ public class IOTAdminDashboard {
         return new DevicesPage(driver);
     }
 
-    //ToDo : Need to add device and policy methods
+    //ToDo : Need to add policy methods
 }
