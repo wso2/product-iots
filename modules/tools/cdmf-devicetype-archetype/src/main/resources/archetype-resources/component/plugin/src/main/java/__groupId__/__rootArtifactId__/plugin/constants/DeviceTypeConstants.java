@@ -1,4 +1,3 @@
-package ${groupId}.${rootArtifactId}.plugin.constants;
 /*
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -16,10 +15,15 @@ package ${groupId}.${rootArtifactId}.plugin.constants;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+package ${groupId}.${rootArtifactId}.plugin.constants;
+
 public class DeviceTypeConstants {
     public final static String DEVICE_TYPE = "${deviceType}";
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "${deviceType}_DEVICE_ID";
     public final static String SENSOR_READING = "sensorValue";
     public static final String DATA_SOURCE_NAME = "jdbc/${deviceType}DM_DB";
+    public final static String DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN = "accessToken";
+    public final static String DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN = "refreshToken";
 }

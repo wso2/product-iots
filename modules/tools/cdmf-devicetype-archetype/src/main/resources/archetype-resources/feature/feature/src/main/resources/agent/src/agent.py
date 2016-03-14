@@ -70,7 +70,8 @@ if sys.version_info<(2,6,0):
 parser = argparse.ArgumentParser(description="Python service to push RPi info to the Device Cloud")
 parser.add_argument("-l", "--log", help="file to write log to (default '" + LOG_FILENAME + "')")
 
-help_string_for_data_push_interval = "time interval between successive locker status push to server(default '" + str(PUSH_INTERVAL) + "')"
+help_string_for_data_push_interval = "time interval between successive locker status push to server(default '" + \
+                                     str(PUSH_INTERVAL) + "')"
 parser.add_argument("-i", "--interval", type=int, help=help_string_for_data_push_interval)
 
 args = parser.parse_args()
@@ -137,7 +138,8 @@ def registerAgent():
     if sys.version_info<(2,7,9):
         dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT)
     else:
-        dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT, context=ssl._create_unverified_context())
+        dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT
+                                                , context=ssl._create_unverified_context())
     #TODO need to get server certificate when initializing https connection
     dcConncection.set_debuglevel(1)
     dcConncection.connect()
@@ -205,7 +207,8 @@ def pushSensorValue():
     if sys.version_info<(2,7,9):
         dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT)
     else:
-        dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT, context=ssl._create_unverified_context())
+        dcConncection = httplib.HTTPSConnection(host=SERVER_IP, port=SERVER_PORT
+                                                , context=ssl._create_unverified_context())
     #TODO need to get server certificate when initializing https connection
     dcConncection.set_debuglevel(1)
     dcConncection.connect()

@@ -27,4 +27,8 @@ public class DoorManagerConstants {
     public static final String DATA_SOURCE_NAME = "jdbc/doormanagerDM_DB";
     public final static String DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN = "ACCESS_TOKEN";
     public final static String DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN = "REFRESH_TOKEN";
+    public final static String DEVICE_CLAIMS_ACCESS_TOKEN = "http://wso2.org/claims/lock/accesstoken";
+    public final static String DEVICE_CLAIMS_REFRESH_TOKEN = "http://wso2.org/claims/lock/refreshtoken";
+    public final static String DEVICE_CLAIMS_CARD_NUMBER = "http://wso2.org/claims/lock/cardnumber";
+
 }

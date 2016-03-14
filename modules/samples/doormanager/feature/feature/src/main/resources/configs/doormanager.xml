@@ -18,7 +18,7 @@
   -->
 
 <DeviceTypeConfigurations>
-  <DeviceTypeConfig type="doormanager">
-    <DatasourceName>jdbc/doormanagerDM_DB</DatasourceName>
-  </DeviceTypeConfig>
+    <DeviceTypeConfig type="doormanager">
+        <DatasourceName>jdbc/doormanagerDM_DB</DatasourceName>
+    </DeviceTypeConfig>
 </DeviceTypeConfigurations>
