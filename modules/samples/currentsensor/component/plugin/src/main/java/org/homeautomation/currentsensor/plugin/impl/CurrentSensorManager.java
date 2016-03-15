@@ -18,7 +18,6 @@
 
 package org.homeautomation.currentsensor.plugin.impl;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.homeautomation.currentsensor.plugin.impl.dao.CurrentSensorDAO;
@@ -34,7 +33,6 @@ import org.wso2.carbon.device.mgt.iot.util.iotdevice.util.IotDeviceManagementUti
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This represents the Current Sensor implementation of DeviceManagerService.
  */
@@ -42,8 +40,6 @@ public class CurrentSensorManager implements DeviceManager {
 
     private static final IotDeviceManagementDAOFactoryInterface iotDeviceManagementDAOFactory = new CurrentSensorDAO();
     private static final Log log = LogFactory.getLog(CurrentSensorManager.class);
-
-
 
     @Override
     public FeatureManager getFeatureManager() {
@@ -72,8 +68,7 @@ public class CurrentSensorManager implements DeviceManager {
                 log.debug("Enrolling a new Current Sensor device : " + device.getDeviceIdentifier());
             }
             CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().addIotDevice(
-                    iotDevice);
+            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().addIotDevice(iotDevice);
             CurrentSensorDAO.commitTransaction();
         } catch (IotDeviceManagementDAOException e) {
             try {
@@ -98,8 +93,7 @@ public class CurrentSensorManager implements DeviceManager {
                 log.debug("Modifying the Current Sensor device enrollment data");
             }
             CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
+            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().updateIotDevice(iotDevice);
             CurrentSensorDAO.commitTransaction();
         } catch (IotDeviceManagementDAOException e) {
             try {
@@ -109,7 +103,7 @@ public class CurrentSensorManager implements DeviceManager {
                 log.warn(msg, iotDAOEx);
             }
             String msg = "Error while updating the enrollment of the Current Sensor device : " +
-                    device.getDeviceIdentifier();
+                         device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -124,8 +118,7 @@ public class CurrentSensorManager implements DeviceManager {
                 log.debug("Dis-enrolling Current Sensor device : " + deviceId);
             }
             CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .deleteIotDevice(deviceId.getId());
+            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().deleteIotDevice(deviceId.getId());
             CurrentSensorDAO.commitTransaction();
         } catch (IotDeviceManagementDAOException e) {
             try {
@@ -148,15 +141,12 @@ public class CurrentSensorManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Checking the enrollment of Current Sensor device : " + deviceId.getId());
             }
-            IotDevice iotDevice =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getIotDevice(
-                            deviceId.getId());
+            IotDevice iotDevice = iotDeviceManagementDAOFactory.getIotDeviceDAO().getIotDevice(deviceId.getId());
             if (iotDevice != null) {
                 isEnrolled = true;
             }
         } catch (IotDeviceManagementDAOException e) {
-            String msg = "Error while checking the enrollment status of Current Sensor device : " +
-                    deviceId.getId();
+            String msg = "Error while checking the enrollment status of Current Sensor device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -193,8 +183,7 @@ public class CurrentSensorManager implements DeviceManager {
     }
 
     @Override
-    public boolean setOwnership(DeviceIdentifier deviceId, String ownershipType)
-            throws DeviceManagementException {
+    public boolean setOwnership(DeviceIdentifier deviceId, String ownershipType) throws DeviceManagementException {
         return true;
     }
 
@@ -203,8 +192,8 @@ public class CurrentSensorManager implements DeviceManager {
     }
 
     @Override
-    public boolean setStatus(DeviceIdentifier deviceId, String currentOwner,
-                             EnrolmentInfo.Status status) throws DeviceManagementException {
+    public boolean setStatus(DeviceIdentifier deviceId, String currentOwner, EnrolmentInfo.Status status)
+            throws DeviceManagementException {
         return false;
     }
 
@@ -233,8 +222,7 @@ public class CurrentSensorManager implements DeviceManager {
                         "updating the details of Current Sensor device : " + deviceIdentifier);
             }
             CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
+            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().updateIotDevice(iotDevice);
             CurrentSensorDAO.commitTransaction();
         } catch (IotDeviceManagementDAOException e) {
             try {
@@ -243,8 +231,7 @@ public class CurrentSensorManager implements DeviceManager {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg =
-                    "Error while updating the Current Sensor device : " + deviceIdentifier;
+            String msg = "Error while updating the Current Sensor device : " + deviceIdentifier;
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -258,8 +245,7 @@ public class CurrentSensorManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Fetching the details of all Current Sensor devices");
             }
-            List<IotDevice> iotDevices =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getAllIotDevices();
+            List<IotDevice> iotDevices = iotDeviceManagementDAOFactory.getIotDeviceDAO().getAllIotDevices();
             if (iotDevices != null) {
                 devices = new ArrayList<Device>();
                 for (IotDevice iotDevice : iotDevices) {

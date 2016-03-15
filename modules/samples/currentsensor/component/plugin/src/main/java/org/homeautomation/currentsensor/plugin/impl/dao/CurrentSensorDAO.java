@@ -34,8 +34,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
-        implements IotDeviceManagementDAOFactoryInterface {
+public class CurrentSensorDAO extends IotDeviceManagementDAOFactory implements IotDeviceManagementDAOFactoryInterface {
 
     private static final Log log = LogFactory.getLog(CurrentSensorDAO.class);
     static DataSource dataSource;           // package local variable
@@ -50,13 +49,12 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
         return new CurrentSensorDeviceDAOImpl();
     }
 
-    public static void initCurrentSensorDAO(){
+    public static void initCurrentSensorDAO() {
         try {
             Context ctx = new InitialContext();
             dataSource = (DataSource) ctx.lookup(CurrentSensorConstants.DATA_SOURCE_NAME);
         } catch (NamingException e) {
-            log.error("Error while looking up the data source: " +
-                      CurrentSensorConstants.DATA_SOURCE_NAME);
+            log.error("Error while looking up the data source: " + CurrentSensorConstants.DATA_SOURCE_NAME);
         }
     }
 
@@ -75,8 +73,7 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
             try {
                 currentConnection.set(dataSource.getConnection());
             } catch (SQLException e) {
-                throw new IotDeviceManagementDAOException("Error occurred while retrieving data source connection",
-                        e);
+                throw new IotDeviceManagementDAOException("Error occurred while retrieving data source connection", e);
             }
         }
         return currentConnection.get();
@@ -90,7 +87,7 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("Datasource connection associated with the current thread is null, hence commit " +
-                            "has not been attempted");
+                              "has not been attempted");
                 }
             }
         } catch (SQLException e) {
@@ -101,15 +98,14 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
     }
 
     public static void closeConnection() throws IotDeviceManagementDAOException {
-
-		Connection con = currentConnection.get();
-		if(con != null){
-			try {
-				con.close();
-			} catch (SQLException e) {
-				log.error("Error occurred while close the connection");
-			}
-		}
+        Connection con = currentConnection.get();
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                log.error("Error occurred while close the connection");
+            }
+        }
         currentConnection.remove();
     }
 
@@ -121,7 +117,7 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("Datasource connection associated with the current thread is null, hence rollback " +
-                            "has not been attempted");
+                              "has not been attempted");
                 }
             }
         } catch (SQLException e) {
@@ -130,4 +126,5 @@ public class CurrentSensorDAO extends IotDeviceManagementDAOFactory
             closeConnection();
         }
     }
+
 }

@@ -27,4 +27,5 @@ public class CurrentSensorConstants {
     public final static String SENSOR_POWER = "power";
     public final static String SENSOR_FLOWRATE = "flowrate";
     public static final String DATA_SOURCE_NAME = "jdbc/currentsensorDM_DB";
+
 }

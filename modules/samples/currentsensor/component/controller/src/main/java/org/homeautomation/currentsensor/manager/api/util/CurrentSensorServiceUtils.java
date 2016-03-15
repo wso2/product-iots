@@ -26,23 +26,19 @@ import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfiguration
 import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 
 public class CurrentSensorServiceUtils {
-    private static final Log log = LogFactory.getLog(CurrentSensorServiceUtils.class);
 
-    //TODO; replace this tenant domain
-    private static final String SUPER_TENANT = "carbon.super";
+    private static final Log log = LogFactory.getLog(CurrentSensorServiceUtils.class);
     private static final String CURRENT_STREAM_DEFINITION = "org.wso2.iot.devices.current";
     private static final String POWER_STREAM_DEFINITION = "org.wso2.iot.devices.power";
     private static final String FLOWRATE_STREAM_DEFINITION = "org.wso2.iot.devices.flowrate";
 
-    public static boolean publishToDASCurrent(String owner, String deviceId, float current) {
-        PrivilegedCarbonContext.startTenantFlow();
+    public static boolean publishToDASCurrent(String deviceId, float current) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        String owner = ctx.getUsername();
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadCurrent[] = {current};
-
         try {
             deviceAnalyticsService.publishEvent(CURRENT_STREAM_DEFINITION, "1.0.0", metdaData, new Object[0], payloadCurrent);
         } catch (DataPublisherConfigurationException e) {
@@ -53,15 +49,13 @@ public class CurrentSensorServiceUtils {
         return true;
     }
 
-    public static boolean publishToDASPower(String owner, String deviceId, float power) {
-        PrivilegedCarbonContext.startTenantFlow();
+    public static boolean publishToDASPower(String deviceId, float power) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        String owner = ctx.getUsername();
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadPower[] = {power};
-
         try {
             deviceAnalyticsService.publishEvent(POWER_STREAM_DEFINITION, "1.0.0", metdaData, new Object[0], payloadPower);
         } catch (DataPublisherConfigurationException e) {
@@ -72,15 +66,13 @@ public class CurrentSensorServiceUtils {
         return true;
     }
 
-    public static boolean publishToDASFlowRate(String owner, String deviceId, float flowRate) {
-        PrivilegedCarbonContext.startTenantFlow();
+    public static boolean publishToDASFlowRate(String deviceId, float flowRate) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        String owner = ctx.getUsername();
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payload[] = {flowRate};
-
         try {
             deviceAnalyticsService.publishEvent(FLOWRATE_STREAM_DEFINITION, "1.0.0", metdaData, new Object[0], payload);
         } catch (DataPublisherConfigurationException e) {

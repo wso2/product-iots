@@ -41,12 +41,10 @@ import java.util.Map;
  */
 public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
 
-
     private static final Log log = LogFactory.getLog(CurrentSensorDeviceDAOImpl.class);
 
     @Override
-    public IotDevice getIotDevice(String iotDeviceId)
-            throws IotDeviceManagementDAOException {
+    public IotDevice getIotDevice(String iotDeviceId) throws IotDeviceManagementDAOException {
         Connection conn = null;
         PreparedStatement stmt = null;
         IotDevice iotDevice = null;
@@ -54,24 +52,20 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
         try {
             conn = CurrentSensorDAO.getConnection();
             String selectDBQuery =
-                    "SELECT CURRENT_SENSOR_DEVICE_ID, DEVICE_NAME" +
-                            " FROM CURRENT_SENSOR_DEVICE WHERE CURRENT_SENSOR_DEVICE_ID = ?";
+                    "SELECT CURRENT_SENSOR_DEVICE_ID, DEVICE_NAME FROM CURRENT_SENSOR_DEVICE WHERE " +
+                    "CURRENT_SENSOR_DEVICE_ID = ?";
             stmt = conn.prepareStatement(selectDBQuery);
             stmt.setString(1, iotDeviceId);
             resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
                 iotDevice = new IotDevice();
-                iotDevice.setIotDeviceName(resultSet.getString(
-                        CurrentSensorConstants.DEVICE_PLUGIN_DEVICE_NAME));
+                iotDevice.setIotDeviceName(resultSet.getString(CurrentSensorConstants.DEVICE_PLUGIN_DEVICE_NAME));
                 Map<String, String> propertyMap = new HashMap<String, String>();
-
-
                 iotDevice.setDeviceProperties(propertyMap);
-
                 if (log.isDebugEnabled()) {
                     log.debug("Current Sensor device " + iotDeviceId + " data has been fetched from " +
-                            "Current Sensor database.");
+                              "Current Sensor database.");
                 }
             }
         } catch (SQLException e) {
@@ -82,7 +76,6 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
             IotDeviceManagementDAOUtil.cleanupResources(stmt, resultSet);
             CurrentSensorDAO.closeConnection();
         }
-
         return iotDevice;
     }
 
@@ -96,26 +89,23 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
             conn = CurrentSensorDAO.getConnection();
             String createDBQuery =
                     "INSERT INTO CURRENT_SENSOR_DEVICE(CURRENT_SENSOR_DEVICE_ID, DEVICE_NAME) VALUES (?, ?)";
-
             stmt = conn.prepareStatement(createDBQuery);
             stmt.setString(1, iotDevice.getIotDeviceId());
             stmt.setString(2, iotDevice.getIotDeviceName());
             if (iotDevice.getDeviceProperties() == null) {
                 iotDevice.setDeviceProperties(new HashMap<String, String>());
             }
-
-
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 status = true;
                 if (log.isDebugEnabled()) {
                     log.debug("Current Sensor device " + iotDevice.getIotDeviceId() + " data has been" +
-                            " added to the Current Sensor database.");
+                              " added to the Current Sensor database.");
                 }
             }
         } catch (SQLException e) {
             String msg = "Error occurred while adding the Current Sensor device '" +
-                    iotDevice.getIotDeviceId() + "' to the Current Sensor db.";
+                         iotDevice.getIotDeviceId() + "' to the Current Sensor db.";
             log.error(msg, e);
             throw new IotDeviceManagementDAOException(msg, e);
         } finally {
@@ -125,8 +115,7 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
     }
 
     @Override
-    public boolean updateIotDevice(IotDevice iotDevice)
-            throws IotDeviceManagementDAOException {
+    public boolean updateIotDevice(IotDevice iotDevice) throws IotDeviceManagementDAOException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -134,26 +123,23 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
             conn = CurrentSensorDAO.getConnection();
             String updateDBQuery =
                     "UPDATE CURRENT_SENSOR_DEVICE SET  DEVICE_NAME = ? WHERE CURRENT_SENSOR_DEVICE_ID = ?";
-
             stmt = conn.prepareStatement(updateDBQuery);
-
             if (iotDevice.getDeviceProperties() == null) {
                 iotDevice.setDeviceProperties(new HashMap<String, String>());
             }
             stmt.setString(1, iotDevice.getIotDeviceName());
-
             stmt.setString(2, iotDevice.getIotDeviceId());
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 status = true;
                 if (log.isDebugEnabled()) {
                     log.debug("Current Sensor device " + iotDevice.getIotDeviceId() + " data has been" +
-                            " modified.");
+                              " modified.");
                 }
             }
         } catch (SQLException e) {
             String msg = "Error occurred while modifying the Current Sensor device '" +
-                    iotDevice.getIotDeviceId() + "' data.";
+                         iotDevice.getIotDeviceId() + "' data.";
             log.error(msg, e);
             throw new IotDeviceManagementDAOException(msg, e);
         } finally {
@@ -163,8 +149,7 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
     }
 
     @Override
-    public boolean deleteIotDevice(String iotDeviceId)
-            throws IotDeviceManagementDAOException {
+    public boolean deleteIotDevice(String iotDeviceId) throws IotDeviceManagementDAOException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -179,7 +164,7 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
                 status = true;
                 if (log.isDebugEnabled()) {
                     log.debug("Current Sensor device " + iotDeviceId + " data has deleted" +
-                            " from the Current Sensor database.");
+                              " from the Current Sensor database.");
                 }
             }
         } catch (SQLException e) {
@@ -193,9 +178,7 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
     }
 
     @Override
-    public List<IotDevice> getAllIotDevices()
-            throws IotDeviceManagementDAOException {
-
+    public List<IotDevice> getAllIotDevices() throws IotDeviceManagementDAOException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
@@ -205,17 +188,14 @@ public class CurrentSensorDeviceDAOImpl implements IotDeviceDAO {
         try {
             conn = CurrentSensorDAO.getConnection();
             String selectDBQuery =
-                    "SELECT CURRENT_SENSOR_DEVICE_ID, DEVICE_NAME " +
-                            "FROM CURRENT_SENSOR_DEVICE";
+                    "SELECT CURRENT_SENSOR_DEVICE_ID, DEVICE_NAME FROM CURRENT_SENSOR_DEVICE";
             stmt = conn.prepareStatement(selectDBQuery);
             resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 iotDevice = new IotDevice();
                 iotDevice.setIotDeviceId(resultSet.getString(CurrentSensorConstants.DEVICE_PLUGIN_DEVICE_ID));
                 iotDevice.setIotDeviceName(resultSet.getString(CurrentSensorConstants.DEVICE_PLUGIN_DEVICE_NAME));
-
                 Map<String, String> propertyMap = new HashMap<String, String>();
-
                 iotDevice.setDeviceProperties(propertyMap);
                 iotDevices.add(iotDevice);
             }
