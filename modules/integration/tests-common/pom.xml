@@ -31,9 +31,9 @@
     <name>WSO2 IoT Server - Integration Test Common</name>
 
     <modules>
-        <module>admin-clients</module>
-        <module>integration-test-utils</module>
-        <module>ui-pages</module>
+        <!--<module>admin-clients</module>-->
+        <!--<module>integration-test-utils</module>-->
+        <module>web-ui-pages</module>
     </modules>
 
 </project>
