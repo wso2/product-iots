@@ -42,9 +42,8 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
     private static String serverName = DeviceManagementConfigurationManager.getInstance().
             getDeviceManagementServerInfo().getName();
 
-    private static String subscribeTopic = "wso2" + File.separator + "+" + File.separator +
-                                           ConnectedCupConstants.DEVICE_TYPE + File.separator + "+" + File.separator
-                                           + "connected_publisher";
+    private static String subscribeTopic = "wso2/+/" + ConnectedCupConstants.DEVICE_TYPE + "/+/"
+            + "connected_publisher";
 
     private static String iotServerSubscriber = UUID.randomUUID().toString().substring(0, 5);
 
