@@ -236,7 +236,7 @@
                 <version>${commons-json.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/json_2.0.0.wso2v1.jar
+                    ${basedir}/../../../../repository/components/plugins/json_3.0.0.wso2v1.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -273,11 +273,11 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <modules>
-        <module>plugin</module>
-        <module>controller</module>
-        <module>manager</module>
-        <module>analytics</module>
-        <module>ui</module>
-    </modules>
+  <modules>
+    <module>plugin</module>
+    <module>controller</module>
+    <module>manager</module>
+    <module>analytics</module>
+    <module>ui</module>
+  </modules>
 </project>

@@ -241,7 +241,7 @@
                 <version>${commons-json.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/json_2.0.0.wso2v1.jar
+                    ${basedir}/../../../../repository/components/plugins/json_3.0.0.wso2v1.jar
                 </systemPath>
             </dependency>
             <dependency>
