@@ -273,11 +273,11 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-  <modules>
-    <module>plugin</module>
-    <module>controller</module>
-    <module>manager</module>
-    <module>analytics</module>
-    <module>ui</module>
-  </modules>
+    <modules>
+        <module>plugin</module>
+        <module>controller</module>
+        <module>manager</module>
+        <module>analytics</module>
+        <module>ui</module>
+    </modules>
 </project>
