@@ -40,11 +40,7 @@ import org.wso2.carbon.device.mgt.iot.service.DeviceTypeService;
 
 public class ServiceComponent {
 
-
     private ServiceRegistration currentSensorServiceRegRef;
-
-
-
     private static final Log log = LogFactory.getLog(ServiceComponent.class);
 
     protected void activate(ComponentContext ctx) {
@@ -53,15 +49,8 @@ public class ServiceComponent {
         }
         try {
             BundleContext bundleContext = ctx.getBundleContext();
-
-
-            currentSensorServiceRegRef =
-                    bundleContext.registerService(DeviceManagementService.class.getName(), new
-                                                          CurrentSensorManagerService(),
-                                                  null);
-
-
-
+            currentSensorServiceRegRef = bundleContext.registerService(DeviceManagementService.class.getName(),
+                                                                       new CurrentSensorManagerService(), null);
             if (log.isDebugEnabled()) {
                 log.debug("Current Sensor Management Service Component has been successfully activated");
             }
@@ -69,7 +58,6 @@ public class ServiceComponent {
             log.error("Error occurred while activating Current Sensor Management Service Component", e);
         }
     }
-
 
     protected void deactivate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {
@@ -79,7 +67,6 @@ public class ServiceComponent {
             if (currentSensorServiceRegRef != null) {
                 currentSensorServiceRegRef.unregister();
             }
-
             if (log.isDebugEnabled()) {
                 log.debug(
                         "Current Sensor Management Service Component has been successfully de-activated");
@@ -89,20 +76,16 @@ public class ServiceComponent {
         }
     }
 
-
     protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
-		/* This is to avoid this component getting initialized before the
-		common registered */
+        /* This is to avoid this component getting initialized before the
+        common registered */
         if (log.isDebugEnabled()) {
             log.debug("Data source service set to mobile service component");
         }
     }
 
-    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService)  {
+    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService) {
         //do nothing
     }
-
-
-
 
 }

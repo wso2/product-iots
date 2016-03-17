@@ -31,15 +31,11 @@ public class CurrentSensorUtils {
     private static Log log = LogFactory.getLog(CurrentSensorUtils.class);
 
     public static String getDeviceProperty(Map<String, String> deviceProperties, String property) {
-
         String deviceProperty = deviceProperties.get(property);
-
         if (deviceProperty == null) {
             return "";
         }
-
         return deviceProperty;
     }
-
 
 }

@@ -30,6 +30,7 @@ import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.analytics.service.DeviceAnalyticsService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
+
 import javax.ws.rs.HttpMethod;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,10 +43,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 public class ConnectedCupServiceUtils {
-    private static final Log log = LogFactory.getLog(ConnectedCupServiceUtils.class);
 
-    //TODO; replace this tenant domain
-    private static final String SUPER_TENANT = "carbon.super";
+    private static final Log log = LogFactory.getLog(ConnectedCupServiceUtils.class);
     private static final String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
     private static final String COFFEE_LEVEL_STREAM_DEFINITION = "org.wso2.iot.devices.coffeelevel";
 
@@ -61,23 +60,19 @@ public class ConnectedCupServiceUtils {
 
         if (!fireAndForgot) {
             HttpURLConnection httpConnection = getHttpConnection(urlString);
-
             try {
                 httpConnection.setRequestMethod(HttpMethod.GET);
             } catch (ProtocolException e) {
                 String errorMsg =
-                        "Protocol specific error occurred when trying to set method to GET" +
-                        " for:" + urlString;
+                        "Protocol specific error occurred when trying to set method to GET for:" + urlString;
                 log.error(errorMsg);
                 throw new DeviceManagementException(errorMsg, e);
             }
-
             responseMsg = readResponseFromGetRequest(httpConnection);
 
         } else {
             CloseableHttpAsyncClient httpclient = null;
             try {
-
                 httpclient = HttpAsyncClients.createDefault();
                 httpclient.start();
                 HttpGet request = new HttpGet(urlString);
@@ -99,9 +94,7 @@ public class ConnectedCupServiceUtils {
                                 latch.countDown();
                             }
                         });
-
                 latch.await();
-
             } catch (InterruptedException e) {
                 if (log.isDebugEnabled()) {
                     log.debug("Sync Interrupted");
@@ -110,7 +103,6 @@ public class ConnectedCupServiceUtils {
                 try {
                     if (httpclient != null) {
                         httpclient.close();
-
                     }
                 } catch (IOException e) {
                     if (log.isDebugEnabled()) {
@@ -119,7 +111,6 @@ public class ConnectedCupServiceUtils {
                 }
             }
         }
-
         return responseMsg;
     }
 
@@ -129,57 +120,45 @@ public class ConnectedCupServiceUtils {
 
 	/* This methods creates and returns a http connection object */
 
-    public static HttpURLConnection getHttpConnection(String urlString) throws
-                                                                        DeviceManagementException {
-
+    public static HttpURLConnection getHttpConnection(String urlString) throws DeviceManagementException {
         URL connectionUrl = null;
         HttpURLConnection httpConnection;
-
         try {
             connectionUrl = new URL(urlString);
             httpConnection = (HttpURLConnection) connectionUrl.openConnection();
         } catch (MalformedURLException e) {
-            String errorMsg =
-                    "Error occured whilst trying to form HTTP-URL from string: " + urlString;
+            String errorMsg = "Error occured whilst trying to form HTTP-URL from string: " + urlString;
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         } catch (IOException e) {
-            String errorMsg = "Error occured whilst trying to open a connection to: " +
-                              connectionUrl.toString();
+            String errorMsg = "Error occured whilst trying to open a connection to: " + connectionUrl.toString();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
-
         return httpConnection;
     }
 
 	/* This methods reads and returns the response from the connection */
 
-    public static String readResponseFromGetRequest(HttpURLConnection httpConnection)
-            throws DeviceManagementException {
+    public static String readResponseFromGetRequest(HttpURLConnection httpConnection) throws DeviceManagementException {
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new InputStreamReader(
-                    httpConnection.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
         } catch (IOException e) {
             String errorMsg =
-                    "There is an issue with connecting the reader to the input stream at: " +
-                    httpConnection.getURL();
+                    "There is an issue with connecting the reader to the input stream at: " + httpConnection.getURL();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
-
         String responseLine;
         StringBuilder completeResponse = new StringBuilder();
-
         try {
             while ((responseLine = bufferedReader.readLine()) != null) {
                 completeResponse.append(responseLine);
             }
         } catch (IOException e) {
             String errorMsg =
-                    "Error occured whilst trying read from the connection stream at: " +
-                    httpConnection.getURL();
+                    "Error occured whilst trying read from the connection stream at: " + httpConnection.getURL();
             log.error(errorMsg);
             throw new DeviceManagementException(errorMsg, e);
         }
@@ -187,25 +166,24 @@ public class ConnectedCupServiceUtils {
             bufferedReader.close();
         } catch (IOException e) {
             log.error(
-                    "Could not succesfully close the bufferedReader to the connection at: " +
-                    httpConnection.getURL());
+                    "Could not succesfully close the bufferedReader to the connection at: " + httpConnection.getURL());
         }
-
         return completeResponse.toString();
     }
 
     public static boolean publishToDAS(String owner, String deviceId, String sensor, float values) {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        ctx.setTenantDomain(SUPER_TENANT, true);
+        ctx.setUsername(owner);
+        if (ctx.getTenantDomain(true) == null) {
+            ctx.setTenantDomain("carbon.super", true);
+        }
         DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
                 DeviceAnalyticsService.class, null);
-        Object metdaData[] = {owner, ConnectedCupConstants.DEVICE_TYPE, deviceId,
-                              System.currentTimeMillis()};
+        Object metdaData[] = {owner, ConnectedCupConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {values};
-
         try {
-            switch (sensor){
+            switch (sensor) {
                 case "temperature":
                     deviceAnalyticsService.publishEvent(TEMPERATURE_STREAM_DEFINITION, "1.0.0", metdaData,
                                                         new Object[0], payloadData);
@@ -214,7 +192,6 @@ public class ConnectedCupServiceUtils {
                     deviceAnalyticsService.publishEvent(COFFEE_LEVEL_STREAM_DEFINITION, "1.0.0", metdaData,
                                                         new Object[0], payloadData);
             }
-
         } catch (DataPublisherConfigurationException e) {
             return false;
         } finally {

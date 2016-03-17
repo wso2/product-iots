@@ -25,7 +25,7 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
-    <jaxrs:server id="ConnectedCupmanager" address="/connectedcup">
+    <jaxrs:server id="ConnectedCupmanager" address="/">
         <jaxrs:serviceBeans>
             <bean id="ConnectedCupManagerService"
                   class="org.coffeeking.manager.service.ConnectedCupManagerService">
