@@ -34,14 +34,14 @@ public class ServiceUtils {
      *
      * @param owner       name of device owner
      * @param deviceId    unique identifier of the device
-     * @param sensorValue current value of sensor which is set at agent side
+     * @param sensorValue value of sensor which is set at agent side
      * @return status
      */
     public static boolean publishTemperatureToDAS(String owner, String deviceId,
                                                   String sensorValue) {
         float temperature = Float.parseFloat(sensorValue);
-        Object payloadCurrent[] = {temperature};
-        return publishToDAS(owner, deviceId, payloadCurrent, ORG_WSO2_IOT_DEVICES_TEMPERATURE);
+        Object payload[] = {temperature};
+        return publishToDAS(owner, deviceId, payload, ORG_WSO2_IOT_DEVICES_TEMPERATURE);
     }
 
     /**
@@ -49,17 +49,17 @@ public class ServiceUtils {
      *
      * @param owner       name of device owner
      * @param deviceId    unique identifier of the device
-     * @param sensorValue current value of sensor which is set at agent side
+     * @param sensorValue value of sensor which is set at agent side
      * @return status
      */
     public static boolean publishHumidityToDAS(String owner, String deviceId,
                                                String sensorValue) {
         float humidity = Float.parseFloat(sensorValue);
-        Object payloadCurrent[] = {humidity};
-        return publishToDAS(owner, deviceId, payloadCurrent, ORG_WSO2_IOT_DEVICES_HUMIDITY);
+        Object payload[] = {humidity};
+        return publishToDAS(owner, deviceId, payload, ORG_WSO2_IOT_DEVICES_HUMIDITY);
     }
 
-    private static boolean publishToDAS(String owner, String deviceId, Object[] payloadCurrent,
+    private static boolean publishToDAS(String owner, String deviceId, Object[] payload,
                                         String definition) {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
@@ -72,7 +72,7 @@ public class ServiceUtils {
         Object metaData[] = {owner, DeviceTypeConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         try {
             deviceAnalyticsService.publishEvent(definition, SENSOR_STREAM_VERSION, metaData,
-                                                new Object[0], payloadCurrent);
+                                                new Object[0], payload);
         } catch (DataPublisherConfigurationException e) {
             return false;
         } finally {

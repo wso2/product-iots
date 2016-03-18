@@ -49,7 +49,7 @@ public class ServiceComponent {
                 log.debug("firealarm Management Service Component has been successfully activated");
             }
         } catch (Throwable e) {
-            log.error("Error occurred while activating Current Sensor Management Service Component", e);
+            log.error("Error occurred while activating Fire Alarm Management Service Component", e);
         }
     }
 
@@ -62,7 +62,7 @@ public class ServiceComponent {
                 serviceRegistration.unregister();
             }
             if (log.isDebugEnabled()) {
-                log.debug("Current Sensor Management Service Component has been successfully de-activated");
+                log.debug("Fire Alarm Management Service Component has been successfully de-activated");
             }
         } catch (Throwable e) {
             log.error("Error occurred while de-activating Iot Device Management bundle", e);
