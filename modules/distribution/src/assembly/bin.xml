@@ -667,6 +667,16 @@
             </includes>
         </fileSet>
         <!-- End of "portal" app specific modifications -->
+        <!-- Adding analytics theme to extensions -->
+        <fileSet>
+            <directory>
+                src/repository/jaggeryapps/ues/themes
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/extensions/themes</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -726,6 +736,12 @@
         <file>
             <source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/jaggeryapps/ues/configs/designer.json</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/configs
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
