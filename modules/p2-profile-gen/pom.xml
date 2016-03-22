@@ -144,9 +144,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.common.api.feature:${carbon.device.mgt.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.jwt.client.extension.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of Device Management Features -->
 
                                 <!-- Mobile Device Management Features -->
@@ -671,7 +671,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.hbase.server.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -792,7 +792,7 @@
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
                                 </featureArtifactDef>
 
-				<!-- MB Features -->
+                                <!-- MB Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.messaging:org.wso2.carbon.andes.feature:${carbon.messaging.version}
                                 </featureArtifactDef>
@@ -804,6 +804,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.oauth2.grant.jwt.feature:${identity.jwt.extension.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -870,6 +873,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.jwt.client.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1525,7 +1532,7 @@
                                     <id>org.wso2.carbon.analytics.datasource.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.carbon.analytics.datasource.hbase.server.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
@@ -1699,6 +1706,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.oauth2.grant.jwt.feature.group</id>
+                                    <version>${identity.jwt.extension.version}</version>
                                 </feature>
                             </features>
                         </configuration>
