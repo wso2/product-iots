@@ -994,10 +994,10 @@
 
         <!--Jaggery -->
         <jaggery.version>0.12.0</jaggery.version>
-        <jaggery.extensions.version>1.5.0-M1</jaggery.extensions.version>
-        <jaggery.extensions.sso.version>1.5.0-M1</jaggery.extensions.sso.version>
-        <jaggery.extensions.carbon.version>1.5.0-M1</jaggery.extensions.carbon.version>
-        <jaggery.extensions.test.version>1.5.0-M1</jaggery.extensions.test.version>
+        <jaggery.extensions.version>1.5.2</jaggery.extensions.version>
+        <jaggery.extensions.sso.version>1.5.2</jaggery.extensions.sso.version>
+        <jaggery.extensions.carbon.version>1.5.2</jaggery.extensions.carbon.version>
+        <jaggery.extensions.test.version>1.5.2</jaggery.extensions.test.version>
 
         <!--Testing -->
         <test.framework.version>4.4.2</test.framework.version>
@@ -1076,7 +1076,7 @@
         <!--DAS-->
         <carbon.analytics.version>1.0.6-SNAPSHOT</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
-        <carbon.dashboard.version>1.0.9</carbon.dashboard.version>
+        <carbon.dashboard.version>1.0.14-SNAPSHOT</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
         <carbon.event-processing.version>2.0.12</carbon.event-processing.version>
         <carbon.data.version>4.3.5-SNAPSHOT</carbon.data.version>

@@ -1,0 +1,239 @@
+body.dashboard {
+    background: #fff;
+}
+
+.dropdown-menu {
+    border: 1px solid #ccc;
+}
+
+.dashboard .btn-default.active,
+.dashboard .btn-default.active:focus {
+    background-color: #29313E;
+    color: #fff;
+}
+
+.dashboard .btn-default.active:hover {
+    background-color: #53627B;
+    color: #fff;
+}
+
+.dashboard .page-header {
+    background: #29313e;
+    min-height: 50px;
+    padding: 0;
+    color: #ebeced;
+}
+
+.dashboard .page-header .page-title > h1 {
+    padding: 15px 15px 0 15px;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.dashboard .page-header .page-title > h1 > .icon {
+    font-size: 24px;
+    margin-top: -5px;
+    margin-right: 5px;
+}
+
+.dashboard .page-header .navbar-header {
+    margin-right: 15px;
+    margin-left: 15px;
+    float: none;
+}
+
+@media (min-width: 768px) {
+    .dashboard .page-header .navbar-collapse.collapse {
+        display: none !important;
+    }
+    .page-header .container-fluid {
+        padding: 0 15px;
+    }
+    .navbar-nav > li > a {
+        padding: 10px 0;
+    }
+}
+
+.nav > li > a > .icon {
+    margin-right: 8px;
+}
+
+.nav > li > a > .badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff124a;
+}
+
+.dashboard .page-header .auth {
+    margin-bottom: 0;
+    padding: 6px 0;
+}
+
+.dashboard .page-content {
+    overflow: inherit;
+}
+
+.dashboard .footer {
+    background: #0d1219;
+}
+
+.dashboard .gadget-wrapper {
+    border: 1px dashed #e4e4e4;
+}
+
+.dashboard .gadget .gadget-heading {
+    background: transparent;
+    border-bottom: none;
+    color: #29313e;
+}
+
+.gadget .gadget-heading > .gadget-title {
+    font-size: 20px;
+}
+
+.gadget .gadget-heading > .gadget-actions button {
+    border: none;
+}
+
+.sidebar-wrapper hr {
+    border-top-color: #ebeced;
+}
+
+.sidebar-toggle-button {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    background: #438cad;
+    color: #ffffff;
+    margin-left: -15px;
+}
+
+.sidebar-toggle-button > .icon {
+    line-height: 48px;
+}
+
+.sidebar-nav {
+    background: #29313e;
+    color: #e3e5e6;
+}
+
+.nav.pages {
+    text-transform: uppercase;
+}
+
+.nav.pages > li {
+    line-height: 20px;
+}
+
+.nav > li {
+    text-indent: 0;
+    line-height: 10px;
+}
+
+.nav > li > a {
+    border-radius: 0;
+    color: #e3e5e6;
+    background: transparent;
+}
+
+.collapse-nav-sub > li > a {
+    padding: 4px 10px;
+    font-size: 21px;
+}
+
+.collapse-nav-sub > li > a > .icon {
+    margin: 0;
+}
+
+.page-header .fw-inverse {
+    color: #29313e;
+}
+
+.nav li:hover > a,
+.nav li.open > a,
+.nav li.open > a:focus,
+.nav li.open > a:hover {
+    background: #1a2332;
+}
+
+.nav > li > a:focus {
+    background: transparent;
+}
+
+.nav.pages > li.active a {
+    background: #121822;
+    border-left: 5px solid #438cad;
+}
+
+.navbar-collapse {
+    padding: 15px;
+    background: #1A2331;
+}
+
+.navbar-collapse li:hover > a {
+    background: #29313E;
+}
+
+.sidebar-nav .user {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.sidebar-nav .user > .user-image {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav .user > .user-image > .default .icon {
+    font-size: 25px;
+}
+
+.sidebar-nav .user > .user-image > .default .icon .fw-inverse,
+.sidebar-nav .user > .user-image > .default .icon .fa-inverse {
+    color: #29313e;
+}
+
+.widget .gadget-wrapper {
+    border: none;
+}
+
+.widget .ues-component-heading {
+    display: none !important;
+    height: 0;
+}
+
+.widget .ues-component {
+   height: auto;
+}
+
+.widget.form-control-widget {
+    height: 35px !important;
+}
+
+.dropdown-menu.arrow.arrow-top-right:before {
+    right: 20px;
+}
+
+.dropdown-menu.arrow:before,
+.dropdown-menu.arrow.arrow-top-left:before {
+    top: -10px;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #e4e4e4;
+    border-left: 10px solid transparent;
+}
+
+.dropdown-menu.alerts {
+    min-width: 400px;
+    max-width: 100%;
+    line-height: 1.2;
+}
+
+ul.sidebar-messages > li:first-child {
+    margin-top: 0;
+}
+
+ul.sidebar-messages > li:last-child {
+    margin-bottom: 0;
+}

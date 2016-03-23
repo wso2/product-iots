@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Date Range Picker" description="g1" height="250">
+        <Require feature="pubsub-2"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <head>
+
+          <!-- Custom Theme -->
+          <link rel="stylesheet" type="text/css" href="/portal/libs/bootstrap_3.3.5/css/bootstrap.min.css" />
+          <link rel="stylesheet" type="text/css" href="/portal/libs/font-wso2_1.0.0/css/font-wso2.min.css" />
+          <link rel="stylesheet" type="text/css" href="/portal/libs/theme-wso2_1.0/css/theme-wso2.css" />
+          <link rel="stylesheet" type="text/css" href="/portal/extensions/themes/analytics/css/gadget.css" />
+          
+          <!-- jQuery -->
+          <script src="../commons/js/jquery-1.10.2.js"></script> 
+           
+          <!-- Include Date Range Picker -->
+          <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+          <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+          <script type="text/javascript" src="js/moment.min.js"></script>
+          <script type="text/javascript" src="js/daterangepicker.js"></script>
+
+          <!-- Custom -->
+          <link rel="stylesheet" type="text/css" href="css/custom.css" />
+          <script src="../commons/js/gadget-utils.js"></script>
+          <scr`````ipt src="js/main.js"></script>
+
+        </head>
+        <body>
+            
+            <div class="clearfix">
+                <div class="btn-group pull-right" id="date-select">
+                    <div id="reportrange" class="btn-group" role="group">
+                        <button id="btnLastHour" type="button" class="btn btn-default">Last Hour</button>
+                        <button id="btnLastDay"  type="button" class="btn btn-default">Yesterday</button>
+                        <button id="btnLastMonth" type="button" class="btn btn-default">Last 30 Days</button>
+                        <button id="btnLastYear" type="button" class="btn btn-default">Last Year</button>
+                        <button id="btnCustomRange" type="button" class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span>
+                            <b class="caret"></b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </body>
+        ]]>
+    </Content>
+</Module>
