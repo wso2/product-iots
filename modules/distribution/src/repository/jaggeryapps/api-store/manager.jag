@@ -19,19 +19,19 @@ var getAPIPublisherURL = function() {
     var result,log=new Log();
     var store = getAPIStoreObj();
     try {
-    result = store.getAPIPublisherURL();
-    if (log.isDebugEnabled()) {
-    log.debug("getAPIPublisherURL : ");
-    }
-    return {
-    error:false,
-    url:result
-    };
+        result = store.getAPIPublisherURL();
+        if (log.isDebugEnabled()) {
+            log.debug("getAPIPublisherURL : ");
+        }
+        return {
+            error:false,
+            url:result
+        };
     } catch (e) {
-    return {
-    error:true,
-    message:e.message.split(":")[1]
-    };
+        return {
+            error:true,
+            message:e.message.split(":")[1]
+        };
     }
 
 };
@@ -44,7 +44,7 @@ var getServer = function() {
 };
 
 var isSelfSignupEnabled = function(){
-	return 	getAPIStoreObj().isSelfSignupEnabled();
+    return 	getAPIStoreObj().isSelfSignupEnabled();
 };
 
 var isSelfSignupEnabledForTenantUser = function(tenantDomain){
@@ -52,16 +52,16 @@ var isSelfSignupEnabledForTenantUser = function(tenantDomain){
     try {
 
         if (tenantDomain == null) {
-             return  getAPIStoreObj().isSelfSignupEnabledForTenant("carbon.super");
+            return  getAPIStoreObj().isSelfSignupEnabledForTenant("carbon.super");
         } else {
-             return  getAPIStoreObj().isSelfSignupEnabledForTenant(tenantDomain);
+            return  getAPIStoreObj().isSelfSignupEnabledForTenant(tenantDomain);
         }
     } catch (e) {
         log.error(e.message);
         return false;
     }
-    
-    
+
+
 };
 
 var getAdminCookie = function() {
@@ -110,15 +110,15 @@ var loadTenantRegistry = function (tenantDomain) {
             error:true,
             message:e.message
         };
-    }    
+    }
 };
 
 var loadTenantAxisConfiguration = function (tenantDomain) {
- 
+
     try {
-        if (tenantDomain != null && tenantDomain != "") {  
-             
-           getAPIStoreObj().loadAxisConfigOfTenant(String(tenantDomain));
+        if (tenantDomain != null && tenantDomain != "") {
+
+            getAPIStoreObj().loadAxisConfigOfTenant(String(tenantDomain));
             return
             {
                 error:false
@@ -130,16 +130,16 @@ var loadTenantAxisConfiguration = function (tenantDomain) {
             error:true,
             message:e.message
         };
-    }    
+    }
 };
 
 var getActiveTenantDomains=function(){
     var tenantDomains,
-    		log = new Log(),
+            log = new Log(),
             store = jagg.module("manager").getAPIStoreObj();
 
-	try {
-		tenantDomains = store.getActiveTenantDomains();
+    try {
+        tenantDomains = store.getActiveTenantDomains();
         tenantDomains = parse(stringify(tenantDomains));
         if (log.isDebugEnabled()) {
             log.debug("isTenantMode : " + stringify(api));

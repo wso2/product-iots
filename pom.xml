@@ -1053,10 +1053,10 @@
         <mdm.version>2.0.0-SNAPSHOT</mdm.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>4.3.2-SNAPSHOT</carbon.api.mgt.version>
+        <carbon.api.mgt.version>5.0.3</carbon.api.mgt.version>
 
         <!-- Carbon Mediation -->
-        <carbon.mediation.version>4.4.11</carbon.mediation.version>
+        <carbon.mediation.version>4.5.1</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.0.11-SNAPSHOT</carbon.analytics.common.version>
@@ -1122,6 +1122,9 @@
         <carbon.messaging.version>3.1.0</carbon.messaging.version>
         <product.mb.version>3.1.0</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
+
+        <!--JWT grant type extension feature-->
+        <identity.jwt.extension.version>1.0.0</identity.jwt.extension.version>
     </properties>
 
     <scm>
