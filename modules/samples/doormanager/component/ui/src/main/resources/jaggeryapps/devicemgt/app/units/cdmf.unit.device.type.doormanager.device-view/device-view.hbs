@@ -46,12 +46,10 @@
     <div class="media">
 
         <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
-            <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
-                                  data-toggle="tab" aria-controls="device_statistics">Device Statistics</a>
-            </li>
             <ul class="list-group" role="tablist">
-                <li><a class="list-group-item" href="#policies" role="tab"
-                       data-toggle="tab" aria-controls="policies">Policies</a>
+                <li class="active">
+                    <a class="list-group-item" href="#device_statistics" role="tab" data-toggle="tab"
+                       aria-controls="device_statistics">Device Statistics</a>
                 </li>
                 <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
                        aria-controls="event_log">Operations Log</a></li>
@@ -63,38 +61,6 @@
                      id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
                     <div class="panel-heading">Device Statistics</div>
                     {{unit "iot.unit.device.stats" device=device}}
-                </div>
-                <div class="panel panel-default tab-pane" id="policy_compliance" role="tabpanel"
-                     aria-labelledby="policy_compliance">
-                    <div class="panel-heading">Policy Compliance <span><a href="#" id="refresh-policy">
-                        <i class="fw fw-refresh"></i></a></span></div>
-                    <div class="panel panel-default tab-pane" id="policies" role="tabpanel"
-                         aria-labelledby="policies">
-                        <div class="panel-heading">Policies</div>
-                        <div class="panel-body">
-                            <div id="policy-spinner" class="wr-advance-operations-init hidden">
-                                <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fw fw-settings fw-spin fw-2x"></i>
-                                &nbsp;&nbsp;&nbsp;
-                                Loading Policies . . .
-                                <br>
-                                <br>
-                            </div>
-                            <div id="policy-list-container">
-                                <div class="panel-body">
-                                    No policies found
-                                </div>
-                                <br class="c-both"/>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="padding-left"
-                       href="{{@app.context}}/policy/add/{{device.type}}?deviceId={{device.deviceIdentifier}}">
-                                        <span class="fw-stack">
-                                            <i class="fw fw-ring fw-stack-2x"></i>
-                                            <i class="fw fw-policy fw-stack-1x"></i>
-                                        </span> Add device specific policy</a>
                 </div>
                 <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
                      aria-labelledby="event_log">
