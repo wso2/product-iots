@@ -42,7 +42,7 @@
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
-        <module>modules/integration</module>
+        <!--<module>modules/integration</module>-->
     </modules>
 
     <dependencyManagement>
@@ -1049,7 +1049,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>2.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.1.0-SNAPSHOT</carbon.device.mgt.plugin.version>
         <mdm.version>2.0.0-SNAPSHOT</mdm.version>
 
         <!-- API Management -->

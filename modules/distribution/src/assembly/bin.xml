@@ -744,6 +744,17 @@
             <fileMode>755</fileMode>
         </file>
         <!-- End of "portal" app specific modifications -->
+
+        <!-- Copying email-sender-config.xml -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/email-sender-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war
@@ -768,26 +779,26 @@
             </outputDirectory>
             <destName>devicemgt_admin.war</destName>
         </file>
-        <file>
-            <source>
-                ../tools/mdm-android-agent-archetype/target/mdm-android-agent-archetype-${mdm.android.agent.archetype.version}.jar
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/android-agent.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--../tools/mdm-android-agent-archetype/target/mdm-android-agent-archetype-${mdm.android.agent.archetype.version}.jar-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/tools-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
+        <!--<file>-->
+            <!--<source>../tools/mdm-android-agent-archetype/README.txt</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/tools-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
+        <!--<file>-->
+            <!--<source>../tools/mdm-android-agent-archetype/android-agent.sh</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/tools-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
         <!-- Copying synapse.properties file -->
         <file>
             <source>src/repository/conf/synapse.properties</source>
@@ -1037,14 +1048,14 @@
             <fileMode>644</fileMode>
         </file>
         <!--Notification Config File-->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/notification-messages.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/notification-messages.xml-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
+            <!--<filtered>true</filtered>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
         <!-- Copying the modified registry.xml file-->
         <file>
             <source>
@@ -1102,59 +1113,59 @@
             <fileMode>644</fileMode>
         </file>
         <!-- Copying ANDROID SENSE H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/AndroidSenseDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>AndroidSenseDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying ARDUINO H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/ArduinoDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>ArduinoDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying DIGITAL DISPLAY H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DigitalDisplayDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>DigitalDisplayDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying DRONE ANALYZER H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DroneAnalyzerDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>DroneAnalyzerDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying RASPBERRY-PI H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/RaspberryPiDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>RaspberryPiDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying VIRTUAL-FIREALARM H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/VirtualFireAlarmDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>VirtualFireAlarmDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/AndroidSenseDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>AndroidSenseDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
+        <!--&lt;!&ndash; Copying ARDUINO H2 database &ndash;&gt;-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/ArduinoDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>ArduinoDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
+        <!--&lt;!&ndash; Copying DIGITAL DISPLAY H2 database &ndash;&gt;-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DigitalDisplayDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>DigitalDisplayDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
+        <!--&lt;!&ndash; Copying DRONE ANALYZER H2 database &ndash;&gt;-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DroneAnalyzerDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>DroneAnalyzerDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
+        <!--&lt;!&ndash; Copying RASPBERRY-PI H2 database &ndash;&gt;-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/RaspberryPiDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>RaspberryPiDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
+        <!--&lt;!&ndash; Copying VIRTUAL-FIREALARM H2 database &ndash;&gt;-->
+        <!--<file>-->
+            <!--<source>-->
+                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/VirtualFireAlarmDM_DB.h2.db-->
+            <!--</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
+            <!--<destName>VirtualFireAlarmDM_DB.h2.db</destName>-->
+            <!--<fileMode>644</fileMode>-->
+        <!--</file>-->
         <!-- Copying MOBILE-ANDROID H2 database -->
         <file>
             <source>
