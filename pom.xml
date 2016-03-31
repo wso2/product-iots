@@ -1059,7 +1059,7 @@
         <carbon.mediation.version>4.5.1</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.0.11</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.12-SNAPSHOT</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1074,7 +1074,7 @@
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
 
         <!--DAS-->
-        <carbon.analytics.version>1.0.5</carbon.analytics.version>
+        <carbon.analytics.version>1.0.6-SNAPSHOT</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <carbon.dashboard.version>1.0.13</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
