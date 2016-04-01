@@ -106,10 +106,6 @@
                                     org.wso2.carbon:org.wso2.carbon.ndatasource.feature:${carbon.platform.version}
                                 </featureArtifactDef>-->
 
-                                <featureArtifactDef>
-                                    org.wso2.carbon.uuf:org.wso2.carbon.uuf.ui.feature:${uuf.version}
-                                </featureArtifactDef>
-
                                 <!-- Device Management Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.feature:${carbon.device.mgt.version}
@@ -824,11 +820,6 @@
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
-                                <feature>
-                                    <id>org.wso2.carbon.uuf.ui.feature.group</id>
-                                    <version>${uuf.version}</version>
-                                </feature>
-
                                 <!-- IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.iot.styles.feature.group</id>
