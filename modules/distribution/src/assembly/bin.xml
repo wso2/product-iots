@@ -744,22 +744,22 @@
             <fileMode>755</fileMode>
         </file>
         <!-- End of "portal" app specific modifications -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-windows-agent.war-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-windows-agent.war
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-admin.war
@@ -767,26 +767,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <destName>devicemgt_admin.war</destName>
-        </file>
-        <file>
-            <source>
-                ../tools/mdm-android-agent-archetype/target/mdm-android-agent-archetype-${mdm.android.agent.archetype.version}.jar
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>../tools/mdm-android-agent-archetype/android-agent.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/tools
-            </outputDirectory>
-            <fileMode>755</fileMode>
         </file>
         <!-- Copying synapse.properties file -->
         <file>
@@ -1111,6 +1091,24 @@
             <destName>AndroidSenseDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
+        <!-- Copying ANDROID SENSE H2 database -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/AndroidSenseDM_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>AndroidSenseDM_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying MOBILE-WINDOWS H2 database -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>WSO2MobileWindows_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
         <!-- Copying ARDUINO H2 database -->
         <file>
             <source>
@@ -1157,23 +1155,23 @@
             <fileMode>644</fileMode>
         </file>
         <!-- Copying MOBILE-ANDROID H2 database -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileAndroid_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>WSO2MobileAndroid_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash; Copying MOBILE-WINDOWS H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>WSO2MobileWindows_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileAndroid_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>WSO2MobileAndroid_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying MOBILE-WINDOWS H2 database -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
+            <destName>WSO2MobileWindows_DB.h2.db</destName>
+            <fileMode>644</fileMode>
+        </file>
         <file>
             <source>src/repository/conf/carbon.xml
             </source>
