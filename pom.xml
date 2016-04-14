@@ -493,11 +493,6 @@
                 <artifactId>org.wso2.carbon.policy.mgt.core</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
-            <!--<dependency>-->
-            <!--<groupId>org.wso2.carbon.devicemgt</groupId>-->
-            <!--<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>-->
-            <!--<version>${carbon.device.mgt.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
                 <artifactId>org.wso2.carbon.certificate.mgt.core</artifactId>
@@ -1054,7 +1049,7 @@
         <carbon.mediation.version>4.5.1</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.0.11</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.12-alpha</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1069,11 +1064,11 @@
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
 
         <!--DAS-->
-        <carbon.analytics.version>1.0.5</carbon.analytics.version>
+        <carbon.analytics.version>1.0.6-ALPHA</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <carbon.dashboard.version>1.0.13</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.12</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.13-alpha</carbon.event-processing.version>
         <carbon.data.version>4.3.4</carbon.data.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
@@ -1112,8 +1107,8 @@
         <project.scm.id>github-scm</project.scm.id>
 
         <!-- MB Features -->
-        <carbon.messaging.version>3.1.0</carbon.messaging.version>
-        <product.mb.version>3.1.0</product.mb.version>
+        <carbon.messaging.version>3.1.2</carbon.messaging.version>
+        <product.mb.version>3.1.2</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
 
         <!--JWT grant type extension feature-->
@@ -1303,16 +1298,6 @@
             </snapshots>
             <releases>
                 <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>wso2-staging</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonapimgt-174/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
             </releases>
         </repository>
     </repositories>

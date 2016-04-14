@@ -175,6 +175,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.event.adapter.extensions.server.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
                                 <!-- IoT Device Management Features -->
 
                                 <!-- Carbon Deployment Features -->
@@ -723,7 +726,7 @@
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.stream.persistence.server.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.event-processing:org.wso2.carbon.event.execution.manager.feature:${carbon.event-processing.version}
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.event.execution.manager.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
                                 <!-- START - Tools -->
                                 <featureArtifactDef>
@@ -746,21 +749,15 @@
 
                                 <!-- MB Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.messaging:org.wso2.carbon.andes.feature:${carbon.messaging.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.mb:org.wso2.mb.styles.feature:${product.mb.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.mb:org.wso2.stratos.mb.dashboard.ui.feature:${product.mb.version}
+                                    org.wso2.carbon.messaging:org.wso2.carbon.andes.server.feature:${carbon.messaging.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
                                 </featureArtifactDef>
                                 <!--JWT grant type handler-->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.wso2.carbon.identity:org.wso2.carbon.identity.oauth2.grant.jwt.feature:${identity.jwt.extension.version}-->
-                                <!--</featureArtifactDef>-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.oauth2.grant.jwt.feature:${identity.jwt.extension.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -878,7 +875,10 @@
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-
+                                <feature>
+                                    <id>org.wso2.carbon.event.adapter.extensions.server.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                                 <!-- Carbon Deployment Features -->
                                 <feature>
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
@@ -1544,7 +1544,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.event.execution.manager.feature.group</id>
-                                    <version>${carbon.event-processing.version}</version>
+                                    <version>${carbon.analytics.common.version}</version>
                                 </feature>
 
                                 <!-- ************** END - EVENT PROCESSING FEATURES ************ -->
@@ -1567,26 +1567,18 @@
                                     <version>${carbon.dashboard.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.messaging.andes.feature.group</id>
+                                    <id>org.wso2.carbon.andes.server.feature.group</id>
                                     <version>${carbon.messaging.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.mb.styles.feature.group</id>
-                                    <version>${product.mb.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.stratos.mb.dashboard.ui.feature.group</id>
-                                    <version>${product.mb.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
                                 </feature>
                                 <!--jwt grant type handler-->
-                                <!--<feature>-->
-                                    <!--<id>org.wso2.carbon.identity.oauth2.grant.jwt.feature.group</id>-->
-                                    <!--<version>${identity.jwt.extension.version}</version>-->
-                                <!--</feature>-->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.oauth2.grant.jwt.feature.group</id>
+                                    <version>${identity.jwt.extension.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
