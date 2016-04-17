@@ -26,7 +26,7 @@
     <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
 
     <!-- This parameter is used when adding api management capability to other products like GReg, AS, DSS etc.-->
-    <GatewayType>None</GatewayType>
+    <GatewayType>Synapse</GatewayType>
 
     <!-- This parameter is used to enable the securevault support when try to publish endpoint secured APIs. Values should be "true" or "false".
 	By default secure vault is disabled.-->
@@ -94,7 +94,7 @@
 			jwt token, he needs to enable this parameter.
 			The DefaultClaimsRetriever class adds user claims from the default carbon user store.
 		-->
-        <!--ClaimsRetrieverImplClass>org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever</ClaimsRetrieverImplClass-->
+        <ClaimsRetrieverImplClass>org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
 
         <!--
 			The dialectURI under which the claimURIs that need to be appended to the
@@ -102,17 +102,17 @@
 			same value is used in the keys for appending the default properties to the
 			JWT.
 		-->
-        <!--ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI-->
+        <ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI>
 
         <!--
 		Signature algorithm. Accepts "SHA256withRSA" or "NONE". To disable signing explicitly specify "NONE".
 	-->
-        <!--SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm-->
+        <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
 
         <!--
 			Enable/Disable JWT generation. Default is false.
 		-->
-        <!--EnableTokenGeneration>false</EnableTokenGeneration-->
+        <EnableTokenGeneration>true</EnableTokenGeneration>
 
         <!--
 			Remove OAuth headers from outgoing message or keep with it.
@@ -161,7 +161,7 @@
                 <!--
 							Endpoint URLs for the APIs hosted in this API gateway.
 					-->
-                <GatewayEndpoint>http://${carbon.local.ip}:${mgt.transport.http.port},https://${carbon.local.ip}:${mgt.transport.https.port}</GatewayEndpoint>
+                <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
             </Environment>
         </Environments>
 

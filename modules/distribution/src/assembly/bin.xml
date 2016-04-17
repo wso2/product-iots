@@ -523,6 +523,13 @@
             <directory>src/api-resources/synapse-configs/default/sequences</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>src/api-resources/api_templates</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/api_templates</outputDirectory>
+            <includes>
+                <include>**/**.xml</include>
+            </includes>
+        </fileSet>
 
         <!-- Copying synapse-config directory -->
         <fileSet>
