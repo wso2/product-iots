@@ -39,6 +39,7 @@
     <modules>
         <module>modules/tools</module>
         <module>modules/iotserver-ui</module>
+        <module>modules/iot-extensions</module>
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
@@ -493,14 +494,14 @@
                 <artifactId>org.wso2.carbon.policy.mgt.core</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
-            <!--<dependency>-->
-            <!--<groupId>org.wso2.carbon.devicemgt</groupId>-->
-            <!--<artifactId>org.wso2.carbon.device.mgt.analytics</artifactId>-->
-            <!--<version>${carbon.device.mgt.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
                 <artifactId>org.wso2.carbon.certificate.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.identity.jwt.client.extension</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
 
@@ -978,6 +979,85 @@
                 <version>${cipher.tool.version}</version>
             </dependency>
 
+
+            <!--http client dependencies-->
+            <dependency>
+                <groupId>org.apache.httpcomponents.wso2</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.orbit.org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.json-simple.wso2</groupId>
+                <artifactId>json-simple</artifactId>
+                <version>${json-simple.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>${json.path.version}</version>
+            </dependency>
+
+            <!--websocket dependency-->
+            <dependency>
+                <groupId>javax.websocket</groupId>
+                <artifactId>javax.websocket-api</artifactId>
+                <version>${javax.websocket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-websocket-api</artifactId>
+                <version>${tomcat.websocket.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${javax.version}</version>
+            </dependency>
+            <!--Das extension dependency-->
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.input.adapter.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.stream.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.databridge.commons</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.carbon.event.input.adapter.extensions</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.carbon.event.output.adapter.extensions.ui</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <!--mqtt-->
+            <dependency>
+                <groupId>org.eclipse.paho</groupId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <version>${eclipse.paho.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -1027,6 +1107,7 @@
 
         <!-- Carbon Identity -->
         <carbon.identity.version>5.0.7</carbon.identity.version>
+        <carbon.identity.version.range>[5.0.7, 6.0.0)</carbon.identity.version.range>
 
         <!-- Carbon Multi-tenancy -->
         <carbon.multitenancy.version>4.5.0</carbon.multitenancy.version>
@@ -1054,7 +1135,7 @@
         <carbon.mediation.version>4.5.1</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.0.11</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.0.12-alpha</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1069,11 +1150,11 @@
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
 
         <!--DAS-->
-        <carbon.analytics.version>1.0.5</carbon.analytics.version>
+        <carbon.analytics.version>1.0.6-ALPHA</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <carbon.dashboard.version>1.0.13</carbon.dashboard.version>
         <shindig.version>1.0.0</shindig.version>
-        <carbon.event-processing.version>2.0.12</carbon.event-processing.version>
+        <carbon.event-processing.version>2.0.13-alpha</carbon.event-processing.version>
         <carbon.data.version>4.3.4</carbon.data.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
@@ -1112,12 +1193,26 @@
         <project.scm.id>github-scm</project.scm.id>
 
         <!-- MB Features -->
-        <carbon.messaging.version>3.1.0</carbon.messaging.version>
-        <product.mb.version>3.1.0</product.mb.version>
+        <carbon.messaging.version>3.1.2</carbon.messaging.version>
+        <product.mb.version>3.1.2</product.mb.version>
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
 
         <!--JWT grant type extension feature-->
         <identity.jwt.extension.version>1.0.0</identity.jwt.extension.version>
+        <!--http client version-->
+        <httpclient.version>4.3.1.wso2v2</httpclient.version>
+        <httpclient.version.range>[4.3.1, 5.0.0)</httpclient.version.range>
+        <httpcore.version>4.3.3.wso2v1</httpcore.version>
+        <!--json version-->
+        <json-simple.version>1.1.wso2v1</json-simple.version>
+        <json.path.version>0.9.1</json.path.version>
+        <!--websocket related lib versions-->
+        <tomcat.websocket.version>7.0.54</tomcat.websocket.version>
+        <javax.websocket.version>1.0</javax.websocket.version>
+        <javax.version>2.0</javax.version>
+
+        <!--mqtt version-->
+        <eclipse.paho.version>1.0.2</eclipse.paho.version>
     </properties>
 
     <scm>
@@ -1303,16 +1398,6 @@
             </snapshots>
             <releases>
                 <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>wso2-staging</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbonapimgt-174/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
             </releases>
         </repository>
     </repositories>

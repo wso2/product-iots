@@ -111,6 +111,9 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.4.3.jar</exclude>
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.3.2.jar</exclude>
+                <!--<exclude>**/libthrift_0.8.0.wso2v1.jar</exclude>-->
+                <exclude>**/am#sample#calculator#v1.war</exclude>
+                <exclude>**/api.war</exclude>
             </excludes>
         </fileSet>
 
@@ -216,6 +219,7 @@
                 <include>**/api-manager.xml</include>
                 <include>**/sso-idp-config.xml</include>
                 <include>**/application-authentication.xml</include>
+                <include>**/broker.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -518,6 +522,13 @@
         <fileSet>
             <directory>src/api-resources/synapse-configs/default/sequences</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/api-resources/api_templates</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/api_templates</outputDirectory>
+            <includes>
+                <include>**/**.xml</include>
+            </includes>
         </fileSet>
 
         <!-- Copying synapse-config directory -->
@@ -844,12 +855,6 @@
         </file>
         <!-- Copying event-broker.xml -->
         <file>
-            <source>src/repository/conf/event-broker.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/messaging-event-broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
@@ -876,15 +881,6 @@
         </file>
         <!-- Copying thrift-authentication.xml -->
         <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/thrift-authentication.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>src/repository/conf/application-authenticators.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/
             </outputDirectory>
@@ -903,6 +899,20 @@
             </outputDirectory>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/repository/conf/identity/thrift-authentication.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
+                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!-- Copying governance.xml -->
         <file>
             <source>
@@ -914,6 +924,12 @@
         <!-- Copying api-manager.xml -->
         <file>
             <source>src/repository/conf/api-manager.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying broker.xml -->
+        <file>
+            <source>src/repository/conf/broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
@@ -1370,6 +1386,14 @@
         </file>
         <file>
             <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/websocket-validation.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/device-analytics-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
@@ -1378,7 +1402,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>

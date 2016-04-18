@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<IdentityProvider>
+	<IdentityProviderName>CDMF_DEFAULT_IDP</IdentityProviderName>
+	<DisplayName>CDMF_DEFAULT_IDP</DisplayName>
+	<IdentityProviderDescription></IdentityProviderDescription>
+	<Alias>https://localhost:9443/oauth2/token</Alias>
+	<IsPrimary>true</IsPrimary>
+	<IsFederationHub></IsFederationHub>
+	<HomeRealmId></HomeRealmId>
+	<ProvisioningRole></ProvisioningRole>
+	<FederatedAuthenticatorConfigs></FederatedAuthenticatorConfigs>
+	<DefaultAuthenticatorConfig>
+	</DefaultAuthenticatorConfig>
+	<ProvisioningConnectorConfigs>
+		<!--<ProvisioningConnectorConfig>
+			<ProvisioningProperties>
+			</ProvisioningProperties>
+		</ProvisioningConnectorConfig>-->
+	</ProvisioningConnectorConfigs>
+	<!--<DefaultProvisioningConnectorConfig></DefaultProvisioningConnectorConfig>-->
+	<ClaimConfig></ClaimConfig>
+	<Certificate>
+		MIIFkzCCA3sCBAKkVfcwDQYJKoZIhvcNAQEFBQAwgY0xCzAJBgNVBAYTAlNMMRAwDgYDVQQIEwdXZXN0ZXJuMRAwDgYDVQQHEwdDb2xvbWJvMQ0wCwYDVQQKEwRXU08yMRQwEgYDVQQLEwtFbmdpbmVlcmluZzESMBAGA1UEAxMJbG9jYWxob3N0MSEwHwYJKoZIhvcNAQkBFhJpb3RzZXJ2ZXJAd3NvMi5jb20wHhcNMTUxMjE3MTMxMTA0WhcNMTcxMjE2MTMxMTA0WjCBjTELMAkGA1UEBhMCU0wxEDAOBgNVBAgTB1dlc3Rlcm4xEDAOBgNVBAcTB0NvbG9tYm8xDTALBgNVBAoTBFdTTzIxFDASBgNVBAsTC0VuZ2luZWVyaW5nMRIwEAYDVQQDEwlsb2NhbGhvc3QxITAfBgkqhkiG9w0BCQEWEmlvdHNlcnZlckB3c28yLmNvbTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBALkiGVQ9tZOKIi/gD/toV+enq+neqOBGYQ8Fq/ABOWnK2QpGWm81+Rets5GbQ6W//D8C5TOBGqK7z+LAgdmILr1XLkvrXWoan0GPdDJ1wpc2/6XDZvM5f7Y8cmRqVPJv7AF+ImgF9dqv97gYCiujy+nNHd5Nk/60pco2LBV5SyLqqrzKXEnSGrS4zoYWpPeJ9YrXPEkW7A6AxTQK0yU9Ej4TktgafbTueythrLomKiZJj4wPxm2lA2lAZscDdws9NWrI5z/LUVLbUMxrY10Nig1liX5b1mrUk5bb1d2tqwkPrpRILKoOBJtI674SQS3GziiUiCJGIO/EGGRn1AJsC/SvnnEez3WKY/DgJ6102MWK/yWtY8NYHUX2anwMBS7UpT5A4BXdsfBz3R+iPF99FxdAGGsS4GQuuPocZaycLqoPCxpTSSxBsKMUcKpn3yaiQRd6uDuiTNt7odDOQj0Tno7uokh/HILgbzvj9EExDOsdwLVvqYmUHBPeLmiICWXfi4kyH/twPOZtV9eVnfWYx5Kwg+2Y4fIb3q4ABr0hzxaMYHQo6NOukSH1BcdAWiQIXbSFFaTZD8p6OfiZpHcQ59HT/Z8GBlCFL2xkYJFmOhXI/Cu+xrcwqEIInv7d8w3eiNQ7MneomEptLbBk9+kMsP0ubo34oOGHR9qk3Lj580c/AgMBAAEwDQYJKoZIhvcNAQEFBQADggIBADw70g2/wrgzrAM8OXBlthGbCEaXZpKwq9IJN0qu+/l+PNwF7csQhj+qW+zMrWaH1DGWJroaei1+NFFrj/pvp61rF/ZeTPGVJd7puCq++SevqIrzKyAEBtwtpXmcFhBpV/FrQAv3ODOJ3bN2wSRPZHUvARTBB3RaUI06g1jCaBzjDEGoMfSxdr5/Ty2WxTI9u9RlIs3Q52AiOmROtLPiEQZQIqfNO3cxCEWojHxPqVEZA/kQYy+rryj4H0zzSrj7QFlQhsMDw5j8bv9AcvTEGmwp29avsgnceDWinI6lwtd8zqh0ZW9QJdH0BRNCM/EkTlTUHeEg04/sOgOrlWcvEfVxDqNEtbUzU9UFxl0lkQkuRn1UdxZlvhWaFnel5iRC9b7OZvi2mkVujLyxEWlJB1tuyMLQxu6PfabBVODP5V8/+uyiiK/gwrB5rYl8RHxGoznJnI1Y3HVzKlA849CrMBaY5vnhE03cNja7QroPzLmmuXBLk2LbI1lu5nJAqKpBUPMI/IU3pF4Q7VTD2ZANI+ktGgGlM8AK4OJHWOhj8W289pWTHVjG8syPLTsaYkhgLjzZl/g9cUwn/96NJNvzd3dkT+7VgE+BJOLofq25CjZcN1M7MhWdl3vbWNj9vzL0+FCnwca8UecfvFS39PIekIvqbtP+Gw8NiYOUGIllZ0JH
+	</Certificate>
+	<PermissionAndRoleConfig></PermissionAndRoleConfig>
+	<JustInTimeProvisioningConfig></JustInTimeProvisioningConfig>
+</IdentityProvider>
