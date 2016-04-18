@@ -83,5 +83,4 @@ public class DoorManagerUtils {
         cleanupResources(null, stmt, rs);
     }
 
-
 }

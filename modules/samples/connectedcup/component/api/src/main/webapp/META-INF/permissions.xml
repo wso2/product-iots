@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<!-- This file contains the list of permissions that are associated with URL end points
+    of the web app. Each permission should contain the name, permission path ,API path
+    (URL) , HTTP method and OAUTH2 authorization scope (not-required).
+    When defining dynamic paths for APIs, path variables are denoted by '*' notation.
+    NOTE: All the endpoints of the web app should be available in this file. Otherwise
+    it will result 403 error at the runtime.
+-->
+<PermissionConfiguration>
+
+    <APIVersion></APIVersion>
+    <!-- Device related APIs -->
+    <Permission>
+        <name>Get device</name>
+        <path>/device-mgt/user/devices/list</path>
+        <url>/devices/*</url>
+        <method>GET</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Remove device</name>
+        <path>/device-mgt/user/devices/remove</path>
+        <url>/devices/*</url>
+        <method>DELETE</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Update device</name>
+        <path>/device-mgt/user/devices/update</path>
+        <url>/devices/*</url>
+        <method>POST</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Get coffee level</name>
+        <path>/device-mgt/user/device/coffeelevel</path>
+        <url>/device/coffeelevel</url>
+        <method>GET</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Get temperature</name>
+        <path>/device-mgt/user/device/temperature</path>
+        <url>/device/temperature</url>
+        <method>GET</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Order coffee cup</name>
+        <path>/device-mgt/user/device/ordercoffee</path>
+        <url>/device/ordercoffee</url>
+        <method>POST</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+</PermissionConfiguration>

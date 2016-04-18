@@ -31,6 +31,7 @@ import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 import java.util.List;
 
 public class DeviceTypeManagerService implements DeviceManagementService {
+
     private DeviceManager deviceManager;
 
     @Override
@@ -47,11 +48,6 @@ public class DeviceTypeManagerService implements DeviceManagementService {
     @Override
     public boolean isSharedWithAllTenants() {
         return true;
-    }
-
-    @Override
-    public String[] getSharedTenantsDomain() {
-        return new String[0];
     }
 
     @Override

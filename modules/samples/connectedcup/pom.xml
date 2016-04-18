@@ -31,7 +31,7 @@
 
     <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
     <artifactId>device.mgt.iot.connectedcup-parent</artifactId>
-    <version>2.0.4-SNAPSHOT</version>
+    <version>2.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 IoTS(Device Types) - Connected Cup Component</name>
     <description>WSO2 IoTS(Device Types) - Connected Cup Component</description>
@@ -155,6 +155,218 @@
                 <version>4.1</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+                <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
+                <version>${carbon.device.mgt.plugin.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.apimgt.webapp.publisher</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.webapp.publisher_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
+                <version>${carbon.kernel.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.ndatasource.core_${carbon.kernel.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.iot</artifactId>
+                <version>${carbon.device.mgt.plugin.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot_${carbon.iot.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.core_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.common_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.certificate.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.certificate.mgt.core_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.apimgt.annotations</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.annotations_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.analytics.data.publisher</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.analytics.data.publisher_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient.wso2</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${commons-httpclient.orbit.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/commons-httpclient_3.1.0.wso2v2.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.utils</artifactId>
+                <version>${carbon.kernel.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.bouncycastle.wso2</groupId>
+                        <artifactId>bcprov-jdk15on</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.wso2.carbon</groupId>
+                        <artifactId>org.wso2.carbon.user.api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.wso2.carbon</groupId>
+                        <artifactId>org.wso2.carbon.queuing</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.wso2.carbon</groupId>
+                        <artifactId>org.wso2.carbon.base</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.axis2.wso2</groupId>
+                        <artifactId>axis2</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.igniterealtime.smack.wso2</groupId>
+                        <artifactId>smack</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.igniterealtime.smack.wso2</groupId>
+                        <artifactId>smackx</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jaxen</groupId>
+                        <artifactId>jaxen</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-fileupload.wso2</groupId>
+                        <artifactId>commons-fileupload</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.ant.wso2</groupId>
+                        <artifactId>ant</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.ant.wso2</groupId>
+                        <artifactId>ant</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-httpclient.wso2</groupId>
+                        <artifactId>commons-httpclient</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.eclipse.equinox</groupId>
+                        <artifactId>javax.servlet</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.wso2.carbon</groupId>
+                        <artifactId>org.wso2.carbon.registry.api</artifactId>
+                    </exclusion>
+                </exclusions>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.utils_${carbon.kernel.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.igniterealtime.smack.wso2</groupId>
+                <artifactId>smack</artifactId>
+                <version>${smack.wso2.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/smack_3.0.4.wso2v1.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.igniterealtime.smack.wso2</groupId>
+                <artifactId>smackx</artifactId>
+                <version>${smackx.wso2.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/smackx_3.0.4.wso2v1.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.json.wso2</groupId>
+                <artifactId>json</artifactId>
+                <version>${commons-json.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/json_3.0.0.wso2v1.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.4.0.wso2v1</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/commons-codec_1.4.0.wso2v1.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.extensions</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.extensions_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.apimgt.application.extension</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+                <scope>system</scope>
+                <systemPath>
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.apimgt.application.extension_${carbon.device.mgt.jar.version}.jar
+                </systemPath>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -230,8 +442,8 @@
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
-        <carbon.device.mgt.plugin.version>2.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>
-        <carbon.iot.device.mgt.jar.version>2.0.4.SNAPSHOT</carbon.iot.device.mgt.jar.version>
+        <carbon.device.mgt.plugin.version>2.1.0-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.iot.device.mgt.jar.version>2.1.0.SNAPSHOT</carbon.iot.device.mgt.jar.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
         <!--XMPP/MQTT Version-->
