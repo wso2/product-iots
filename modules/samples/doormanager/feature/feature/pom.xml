@@ -38,13 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.homeautomation</groupId>
-            <artifactId>${project-base-package}.manager</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>org.homeautomation</groupId>
-            <artifactId>${project-base-package}.controller</artifactId>
+            <artifactId>${project-base-package}.api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
@@ -120,7 +114,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-jaxrs-manager-war</id>
+                        <id>copy-jaxrs-api-war</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy</goal>
@@ -129,28 +123,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.homeautomation</groupId>
-                                    <artifactId>${project-base-package}.manager</artifactId>
-                                    <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
-                                    </outputDirectory>
-                                    <destFileName>doormanager_mgt.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-controller-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.homeautomation</groupId>
-                                    <artifactId>${project-base-package}.controller</artifactId>
+                                    <artifactId>${project-base-package}.api</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
@@ -213,7 +186,7 @@
                             <adviceFile>
                                 <properties>
                                     <propertyDef>org.wso2.carbon.p2.category.type:server</propertyDef>
-                                    <propertyDef>org.eclipse.equinox.p2.type.group:false</propertyDef>
+                                    <propertyDef>org.eclipse.equinox.p2.type.group:true</propertyDef>
                                 </properties>
                             </adviceFile>
                             <bundles>

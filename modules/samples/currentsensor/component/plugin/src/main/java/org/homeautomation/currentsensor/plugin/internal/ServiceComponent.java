@@ -25,26 +25,15 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-import org.wso2.carbon.device.mgt.iot.service.DeviceTypeService;
 
 /**
- * @scr.component name="org.wso2.carbon.device.mgt.iot.currentsensor.plugin.internal.CurrentSensorManagementServiceComponent"
+ * @scr.component name="org.homeautomation.currentsensor.plugin.internal.ServiceComponent"
  * immediate="true"
- * @scr.reference name="org.wso2.carbon.device.mgt.iot.service.DeviceTypeService"
- * interface="org.wso2.carbon.device.mgt.iot.service.DeviceTypeService"
- * cardinality="1..1"
- * policy="dynamic"
- * bind="setDeviceTypeService"
- * unbind="unsetDeviceTypeService"
  */
 
 public class ServiceComponent {
 
-
     private ServiceRegistration currentSensorServiceRegRef;
-
-
-
     private static final Log log = LogFactory.getLog(ServiceComponent.class);
 
     protected void activate(ComponentContext ctx) {
@@ -53,15 +42,10 @@ public class ServiceComponent {
         }
         try {
             BundleContext bundleContext = ctx.getBundleContext();
-
-
             currentSensorServiceRegRef =
                     bundleContext.registerService(DeviceManagementService.class.getName(), new
                                                           CurrentSensorManagerService(),
                                                   null);
-
-
-
             if (log.isDebugEnabled()) {
                 log.debug("Current Sensor Management Service Component has been successfully activated");
             }
@@ -69,7 +53,6 @@ public class ServiceComponent {
             log.error("Error occurred while activating Current Sensor Management Service Component", e);
         }
     }
-
 
     protected void deactivate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {
@@ -88,21 +71,5 @@ public class ServiceComponent {
             log.error("Error occurred while de-activating Iot Device Management bundle", e);
         }
     }
-
-
-    protected void setDeviceTypeService(DeviceTypeService deviceTypeService) {
-		/* This is to avoid this component getting initialized before the
-		common registered */
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service set to mobile service component");
-        }
-    }
-
-    protected void unsetDeviceTypeService(DeviceTypeService deviceTypeService)  {
-        //do nothing
-    }
-
-
-
 
 }

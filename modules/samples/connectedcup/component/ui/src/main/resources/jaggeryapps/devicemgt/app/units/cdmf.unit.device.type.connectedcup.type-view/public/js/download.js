@@ -36,31 +36,31 @@ function showPopup() {
     $(modalPopup).show();
     setPopupMaxHeight();
     $('#downloadForm').validate({
-        rules: {
-            deviceName: {
-                minlength: 4,
-                required: true
-            }
-        },
-        highlight: function (element) {
-            $(element).closest('.control-group').removeClass('success').addClass('error');
-        },
-        success: function (element) {
-            $(element).closest('.control-group').removeClass('error').addClass('success');
-            $('label[for=deviceName]').remove();
-        }
-    });
+                                    rules: {
+                                        deviceName: {
+                                            minlength: 4,
+                                            required: true
+                                        }
+                                    },
+                                    highlight: function (element) {
+                                        $(element).closest('.control-group').removeClass('success').addClass('error');
+                                    },
+                                    success: function (element) {
+                                        $(element).closest('.control-group').removeClass('error').addClass('success');
+                                        $('label[for=deviceName]').remove();
+                                    }
+                                });
     var deviceType = "";
     $('.deviceType').each(function () {
         if (this.value != "") {
             deviceType = this.value;
         }
     });
-    if (deviceType == 'digitaldisplay'){
+    if (deviceType == 'digitaldisplay') {
         $('.sketchType').remove();
         $('input[name="sketchType"][value="digitaldisplay"]').prop('checked', true);
         $("label[for='digitaldisplay']").text("Simple Agent");
-    }else{
+    } else {
         $('.sketchTypes').remove();
     }
 }
@@ -106,16 +106,16 @@ function attachEvents() {
             if (deviceName && deviceName.length >= 4) {
                 payload.deviceName = deviceName;
                 invokerUtil.post(
-                    downloadDeviceAPI,
-                    payload,
-                    function (data, textStatus, jqxhr) {
-                        doAction(data);
-                    },
-                    function (data) {
-                        doAction(data);
-                    }
+                        downloadDeviceAPI,
+                        payload,
+                        function (data, textStatus, jqxhr) {
+                            doAction(data);
+                        },
+                        function (data) {
+                            doAction(data);
+                        }
                 );
-            }else if(deviceName){
+            } else if (deviceName) {
                 $('.controls').append('<label for="deviceName" generated="true" class="error" style="display: inline-block;">Please enter at least 4 characters.</label>');
                 $('.control-group').removeClass('success').addClass('error');
             } else {
@@ -137,7 +137,7 @@ function downloadAgent() {
     var $inputs = $('#downloadForm :input');
 
     var values = {};
-    $inputs.each(function() {
+    $inputs.each(function () {
         values[this.name] = $(this).val();
     });
 
@@ -145,18 +145,17 @@ function downloadAgent() {
     payload.name = $inputs[0].value;
     payload.owner = $inputs[1].value;
 
-    var connectedCupRegisterURL = "/connectedcup_mgt/connectedcup/cup/register?" +
-                                                        "name=" + encodeURI(payload.name) + "&owner=" + payload.owner;
+    var connectedCupRegisterURL = "/connectedcup_mgt/manager/device?name=" + encodeURI(payload.name);
 
     invokerUtil.post(
-        connectedCupRegisterURL,
-        payload,
-        function (data, textStatus, jqxhr) {
-            hidePopup();
-        },
-        function (data) {
-            hidePopup();
-        }
+            connectedCupRegisterURL,
+            payload,
+            function (data, textStatus, jqxhr) {
+                hidePopup();
+            },
+            function (data) {
+                hidePopup();
+            }
     );
 
     var deviceName;

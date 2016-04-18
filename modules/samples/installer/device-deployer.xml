@@ -16,7 +16,8 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.wso2</groupId>
         <artifactId>wso2</artifactId>
@@ -35,6 +36,7 @@
         <!-- STEP#1 ADD THE LOCATION OF YOUR DEVICE-TYPE -->
         <module>samples/connectedcup</module>
         <module>samples/currentsensor</module>
+        <module>samples/doormanager</module>
         <module>samples/firealarm</module>
     </modules>
 
@@ -60,13 +62,16 @@
                             <featureArtifacts>
                                 <featureArtifactDef>
                                     <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
-                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:2.0.4-SNAPSHOT
+                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:2.1.0-SNAPSHOT
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.homeautomation:org.homeautomation.currentsensor.feature:2.0.4-SNAPSHOT
+                                    org.homeautomation:org.homeautomation.currentsensor.feature:2.1.0-SNAPSHOT
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.homeautomation:org.homeautomation.firealarm.feature:1.0.0-SNAPSHOT
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.homeautomation:org.homeautomation.doormanager.feature:1.0.0-SNAPSHOT
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -95,14 +100,18 @@
                                 <!-- STEP#3. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
-                                    <version>2.0.4-SNAPSHOT</version>
+                                    <version>2.1.0-SNAPSHOT</version>
                                 </feature>
                                 <feature>
                                     <id>org.homeautomation.currentsensor.feature.group</id>
-                                    <version>2.0.4-SNAPSHOT</version>
+                                    <version>2.1.0-SNAPSHOT</version>
                                 </feature>
                                 <feature>
                                     <id>org.homeautomation.firealarm.feature.group</id>
+                                    <version>1.0.0-SNAPSHOT</version>
+                                </feature>
+                                <feature>
+                                    <id>org.homeautomation.doormanager.feature.group</id>
                                     <version>1.0.0-SNAPSHOT</version>
                                 </feature>
                             </features>
@@ -119,7 +128,8 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true" dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                <replace token="false" value="true"
+                                         dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>
