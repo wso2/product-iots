@@ -760,14 +760,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-admin.war
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <destName>devicemgt_admin.war</destName>
-        </file>
         <!-- Copying synapse.properties file -->
         <file>
             <source>src/repository/conf/synapse.properties</source>
