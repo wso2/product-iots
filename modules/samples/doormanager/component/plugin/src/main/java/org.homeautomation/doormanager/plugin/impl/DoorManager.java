@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.homeautomation.doormanager.plugin.exception.DoorManagerDeviceMgtPluginException;
 import org.homeautomation.doormanager.plugin.impl.dao.DoorLockSafe;
-import org.homeautomation.doormanager.plugin.impl.dao.DoorManagerDAO;
+import org.homeautomation.doormanager.plugin.impl.dao.DoorManagerDAOUtil;
 import org.wso2.carbon.context.CarbonContext;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.common.*;
@@ -39,7 +39,7 @@ import java.util.List;
 public class DoorManager implements DeviceManager {
 
     private static final Log log = LogFactory.getLog(DoorManager.class);
-    private static final DoorManagerDAO DOOR_MANAGER_DAO = new DoorManagerDAO();
+    private static final DoorManagerDAOUtil DOOR_MANAGER_DAO = new DoorManagerDAOUtil();
     private PrivilegedCarbonContext ctx;
 
     @Override
@@ -65,12 +65,12 @@ public class DoorManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Enrolling a new Automatic Door Locker device : " + device.getDeviceIdentifier());
             }
-            DoorManagerDAO.beginTransaction();
+            DoorManagerDAOUtil.beginTransaction();
             status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().addDevice(device);
-            DoorManagerDAO.commitTransaction();
+            DoorManagerDAOUtil.commitTransaction();
         } catch (DoorManagerDeviceMgtPluginException e) {
             try {
-                DoorManagerDAO.rollbackTransaction();
+                DoorManagerDAOUtil.rollbackTransaction();
             } catch (DoorManagerDeviceMgtPluginException e1) {
                 e1.printStackTrace();
             }
@@ -88,12 +88,12 @@ public class DoorManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Modifying the Automatic Door Locker device enrollment data");
             }
-            DoorManagerDAO.beginTransaction();
+            DoorManagerDAOUtil.beginTransaction();
             status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().updateDevice(device);
-            DoorManagerDAO.commitTransaction();
+            DoorManagerDAOUtil.commitTransaction();
         } catch (DoorManagerDeviceMgtPluginException e) {
             try {
-                DoorManagerDAO.rollbackTransaction();
+                DoorManagerDAOUtil.rollbackTransaction();
             } catch (DoorManagerDeviceMgtPluginException e1) {
                 e1.printStackTrace();
             }
@@ -112,12 +112,12 @@ public class DoorManager implements DeviceManager {
             if (log.isDebugEnabled()) {
                 log.debug("Dis-enrolling Automatic Door Locker device : " + deviceId);
             }
-            DoorManagerDAO.beginTransaction();
+            DoorManagerDAOUtil.beginTransaction();
             status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().deleteDevice(deviceId.getId());
-            DoorManagerDAO.commitTransaction();
+            DoorManagerDAOUtil.commitTransaction();
         } catch (DoorManagerDeviceMgtPluginException e) {
             try {
-                DoorManagerDAO.rollbackTransaction();
+                DoorManagerDAOUtil.rollbackTransaction();
             } catch (DoorManagerDeviceMgtPluginException e1) {
                 e1.printStackTrace();
             }
@@ -215,12 +215,12 @@ public class DoorManager implements DeviceManager {
                 log.debug(
                         "updating the details of Automatic Door Locker device : " + deviceIdentifier);
             }
-            DoorManagerDAO.beginTransaction();
+            DoorManagerDAOUtil.beginTransaction();
             status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().updateDevice(device);
-            DoorManagerDAO.commitTransaction();
+            DoorManagerDAOUtil.commitTransaction();
         } catch (DoorManagerDeviceMgtPluginException e) {
             try {
-                DoorManagerDAO.rollbackTransaction();
+                DoorManagerDAOUtil.rollbackTransaction();
             } catch (DoorManagerDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
@@ -267,27 +267,16 @@ public class DoorManager implements DeviceManager {
         return realmService.getTenantUserRealm(ctx.getTenantId()).getUserStoreManager();
     }
 
-    /**
-     * Ends tenant flow.
-     */
-    private void endTenantFlow() {
-        PrivilegedCarbonContext.endTenantFlow();
-        ctx = null;
-        if (log.isDebugEnabled()) {
-            log.debug("Tenant flow ended");
-        }
-    }
-
     public boolean assignUserToLock(DoorLockSafe doorLockSafe) throws DoorManagerDeviceMgtPluginException {
         boolean status;
         try {
-            DoorManagerDAO.beginTransaction();
+            DoorManagerDAOUtil.beginTransaction();
             status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().registerDoorLockSafe(doorLockSafe);
-            DoorManagerDAO.commitTransaction();
+            DoorManagerDAOUtil.commitTransaction();
             return status;
         } catch (DoorManagerDeviceMgtPluginException e) {
             try {
-                DoorManagerDAO.rollbackTransaction();
+                DoorManagerDAOUtil.rollbackTransaction();
                 throw new DoorManagerDeviceMgtPluginException(e);
             } catch (DoorManagerDeviceMgtPluginException e1) {
                 String msg = "Error while adding new access card to user to control the lock "
@@ -301,9 +290,9 @@ public class DoorManager implements DeviceManager {
     public boolean checkCardDoorAssociation(String cardNumber, String deviceId)
             throws DoorManagerDeviceMgtPluginException {
         boolean status;
-        DoorManagerDAO.beginTransaction();
+        DoorManagerDAOUtil.beginTransaction();
         status = DOOR_MANAGER_DAO.getAutomaticDoorLockerDeviceDAO().checkCardDoorAssociation(cardNumber, deviceId);
-        DoorManagerDAO.commitTransaction();
+        DoorManagerDAOUtil.commitTransaction();
         return status;
     }
 

@@ -18,32 +18,23 @@
 
 package org.homeautomation.currentsensor.plugin.impl;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.currentsensor.plugin.impl.dao.CurrentSensorDAO;
+import org.homeautomation.currentsensor.plugin.exception.CurrentSensorDeviceMgtPluginException;
+import org.homeautomation.currentsensor.plugin.impl.dao.CurrentSensorDAOUtil;
 import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.mgt.common.configuration.mgt.TenantConfiguration;
 import org.wso2.carbon.device.mgt.common.license.mgt.License;
 import org.wso2.carbon.device.mgt.common.license.mgt.LicenseManagementException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOException;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dao.IotDeviceManagementDAOFactoryInterface;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.dto.IotDevice;
-import org.wso2.carbon.device.mgt.iot.util.iotdevice.util.IotDeviceManagementUtil;
-
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * This represents the Current Sensor implementation of DeviceManagerService.
  */
 public class CurrentSensorManager implements DeviceManager {
 
-    private static final IotDeviceManagementDAOFactoryInterface iotDeviceManagementDAOFactory = new CurrentSensorDAO();
     private static final Log log = LogFactory.getLog(CurrentSensorManager.class);
-
-
+    private static final CurrentSensorDAOUtil CURRENT_SENSOR_DAO_UTIL = new CurrentSensorDAOUtil();
 
     @Override
     public FeatureManager getFeatureManager() {
@@ -66,23 +57,21 @@ public class CurrentSensorManager implements DeviceManager {
     @Override
     public boolean enrollDevice(Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Enrolling a new Current Sensor device : " + device.getDeviceIdentifier());
+                log.debug("Enrolling a new Connected Cup device : " + device.getDeviceIdentifier());
             }
-            CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO().addIotDevice(
-                    iotDevice);
-            CurrentSensorDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+            CurrentSensorDAOUtil.beginTransaction();
+            status = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().addDevice(device);
+            CurrentSensorDAOUtil.commitTransaction();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
             try {
-                CurrentSensorDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+                CurrentSensorDAOUtil.rollbackTransaction();
+            } catch (CurrentSensorDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device enrol transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg = "Error while enrolling the Current Sensor device : " + device.getDeviceIdentifier();
+            String msg = "Error while enrolling the Connected Cup device : " + device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -92,24 +81,22 @@ public class CurrentSensorManager implements DeviceManager {
     @Override
     public boolean modifyEnrollment(Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Modifying the Current Sensor device enrollment data");
+                log.debug("Modifying the Connected Cup device enrollment data");
             }
-            CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
-            CurrentSensorDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+            CurrentSensorDAOUtil.beginTransaction();
+            status = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().updateDevice(device);
+            CurrentSensorDAOUtil.commitTransaction();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
             try {
-                CurrentSensorDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+                CurrentSensorDAOUtil.rollbackTransaction();
+            } catch (CurrentSensorDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg = "Error while updating the enrollment of the Current Sensor device : " +
-                    device.getDeviceIdentifier();
+            String msg = "Error while updating the enrollment of the Connected Cup device : " +
+                         device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -121,20 +108,19 @@ public class CurrentSensorManager implements DeviceManager {
         boolean status;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Dis-enrolling Current Sensor device : " + deviceId);
+                log.debug("Dis-enrolling Connected Cup device : " + deviceId);
             }
-            CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .deleteIotDevice(deviceId.getId());
-            CurrentSensorDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+            CurrentSensorDAOUtil.beginTransaction();
+            status = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().deleteDevice(deviceId.getId());
+            CurrentSensorDAOUtil.commitTransaction();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
             try {
-                CurrentSensorDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+                CurrentSensorDAOUtil.rollbackTransaction();
+            } catch (CurrentSensorDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device dis enrol transaction :" + deviceId.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg = "Error while removing the Current Sensor device : " + deviceId.getId();
+            String msg = "Error while removing the Connected Cup device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -146,17 +132,15 @@ public class CurrentSensorManager implements DeviceManager {
         boolean isEnrolled = false;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Checking the enrollment of Current Sensor device : " + deviceId.getId());
+                log.debug("Checking the enrollment of Connected Cup device : " + deviceId.getId());
             }
-            IotDevice iotDevice =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getIotDevice(
-                            deviceId.getId());
+            Device iotDevice = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().getDevice(deviceId.getId());
             if (iotDevice != null) {
                 isEnrolled = true;
             }
-        } catch (IotDeviceManagementDAOException e) {
-            String msg = "Error while checking the enrollment status of Current Sensor device : " +
-                    deviceId.getId();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
+            String msg = "Error while checking the enrollment status of Connected Cup device : " +
+                         deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -177,15 +161,13 @@ public class CurrentSensorManager implements DeviceManager {
     @Override
     public Device getDevice(DeviceIdentifier deviceId) throws DeviceManagementException {
         Device device;
-        try {
-            if (log.isDebugEnabled()) {
-                log.debug("Getting the details of Current Sensor device : " + deviceId.getId());
-            }
-            IotDevice iotDevice = iotDeviceManagementDAOFactory.getIotDeviceDAO().
-                    getIotDevice(deviceId.getId());
-            device = IotDeviceManagementUtil.convertToDevice(iotDevice);
-        } catch (IotDeviceManagementDAOException e) {
-            String msg = "Error while fetching the Current Sensor device : " + deviceId.getId();
+        try {if (log.isDebugEnabled()) {
+            log.debug("Getting the details of Connected Cup device : " + deviceId.getId());
+        }
+            device = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().getDevice(deviceId.getId());
+
+        } catch (CurrentSensorDeviceMgtPluginException e) {
+            String msg = "Error while fetching the Connected Cup device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -220,31 +202,29 @@ public class CurrentSensorManager implements DeviceManager {
 
     @Override
     public boolean requireDeviceAuthorization() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean updateDeviceInfo(DeviceIdentifier deviceIdentifier, Device device) throws DeviceManagementException {
         boolean status;
-        IotDevice iotDevice = IotDeviceManagementUtil.convertToIotDevice(device);
         try {
             if (log.isDebugEnabled()) {
                 log.debug(
-                        "updating the details of Current Sensor device : " + deviceIdentifier);
+                        "updating the details of Connected Cup device : " + deviceIdentifier);
             }
-            CurrentSensorDAO.beginTransaction();
-            status = iotDeviceManagementDAOFactory.getIotDeviceDAO()
-                    .updateIotDevice(iotDevice);
-            CurrentSensorDAO.commitTransaction();
-        } catch (IotDeviceManagementDAOException e) {
+            CurrentSensorDAOUtil.beginTransaction();
+            status = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().updateDevice(device);
+            CurrentSensorDAOUtil.commitTransaction();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
             try {
-                CurrentSensorDAO.rollbackTransaction();
-            } catch (IotDeviceManagementDAOException iotDAOEx) {
+                CurrentSensorDAOUtil.rollbackTransaction();
+            } catch (CurrentSensorDeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
             String msg =
-                    "Error while updating the Current Sensor device : " + deviceIdentifier;
+                    "Error while updating the Connected Cup device : " + deviceIdentifier;
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -256,18 +236,11 @@ public class CurrentSensorManager implements DeviceManager {
         List<Device> devices = null;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Fetching the details of all Current Sensor devices");
+                log.debug("Fetching the details of all Connected Cup devices");
             }
-            List<IotDevice> iotDevices =
-                    iotDeviceManagementDAOFactory.getIotDeviceDAO().getAllIotDevices();
-            if (iotDevices != null) {
-                devices = new ArrayList<Device>();
-                for (IotDevice iotDevice : iotDevices) {
-                    devices.add(IotDeviceManagementUtil.convertToDevice(iotDevice));
-                }
-            }
-        } catch (IotDeviceManagementDAOException e) {
-            String msg = "Error while fetching all Current Sensor devices.";
+            devices = CURRENT_SENSOR_DAO_UTIL.getCurrentSensorDeviceDAO().getAllDevices();
+        } catch (CurrentSensorDeviceMgtPluginException e) {
+            String msg = "Error while fetching all Connected Cup devices.";
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }

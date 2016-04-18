@@ -14,3 +14,15 @@ org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../data
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.homeautomation.doormanager_${feature.version}/database/,target:${installFolder}/../../database/,overwrite:true);\
 org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../deployment/server/carbonapps/);\
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.homeautomation.doormanager_${feature.version}/carbonapps/,target:${installFolder}/../../deployment/server/carbonapps/,overwrite:true);\
+
+instructions.unconfigure = \
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/doormanager.json);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/doormanager.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/doormanager.war);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/doormanager);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../dbscripts/cdm/plugins/doormanager);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../resources/sketches/doormanager);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/datasources/doormanager-datasources.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../database/doormanagerDM_DB.h2.db);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.doormanager.device-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.doormanager.type-view);\
