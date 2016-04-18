@@ -19,6 +19,7 @@
 package org.coffeeking.api.exception;
 
 public class ConnectedCupException extends Exception {
+
     private static final long serialVersionUID = 118512086957330189L;
 
     public ConnectedCupException(String errorMessage) {
@@ -28,4 +29,5 @@ public class ConnectedCupException extends Exception {
     public ConnectedCupException(String errorMessage, Throwable throwable) {
         super(errorMessage, throwable);
     }
+
 }

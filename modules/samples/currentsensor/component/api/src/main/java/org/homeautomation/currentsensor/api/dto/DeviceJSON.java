@@ -27,11 +27,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeviceJSON {
-    @XmlElement(required = true) public String owner;
-    @XmlElement(required = true) public String deviceId;
-    @XmlElement(required = true) public String reply;
-    @XmlElement public Long time;
-    @XmlElement public String key;
-    @XmlElement public float current;
-    @XmlElement public float flow_rate;
+
+    @XmlElement(required = true)
+    public String owner;
+    @XmlElement(required = true)
+    public String deviceId;
+    @XmlElement(required = true)
+    public String reply;
+    @XmlElement
+    public Long time;
+    @XmlElement
+    public String key;
+    @XmlElement
+    public float current;
+    @XmlElement
+    public float flow_rate;
+
 }
