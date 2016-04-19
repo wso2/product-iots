@@ -86,11 +86,11 @@ public class Constants {
             public static final String EMAIL_ERROR = "user.com";
             public static final String USER_NAME = "user";
             public static final String SHORT_USER_NAME = "us";
-            public static final String SHORT_USER_NAME_ERROR_MSG = "Username must be between 3 and 30 characters long.";
+            public static final String SHORT_USER_NAME_ERROR_MSG = "Provided username is invalid.";
             public static final String FIRST_NAME_ERROR_MSG = "Firstname is a required field. It cannot be empty.";
             public static final String LAST_NAME_ERROR_MSG = "Lastname is a required field. It cannot be empty.";
             public static final String NO_EMAIL_ERROR_MSG = "Email is a required field. It cannot be empty.";
-            public static final String WRONG_EMAIL_ERROR_MSG = "Provided email is invalid. Please check.";
+            public static final String WRONG_EMAIL_ERROR_MSG = "Provided email is invalid.";
 
         }
 
