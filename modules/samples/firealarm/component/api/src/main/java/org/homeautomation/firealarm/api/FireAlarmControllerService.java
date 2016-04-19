@@ -54,38 +54,6 @@ public interface FireAlarmControllerService {
     /**
      * @param owner    device owner
      * @param deviceId unique identifier for given device type
-     * @param protocol name of supported protocol. here MQTT is used
-     * @return sensor record
-     */
-    @Path("device/read-temperature")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-temperature", name = "Temperature", type = "monitor",
-            description = "Request temperature reading from device")
-    Response readTemperature(@HeaderParam("owner") String owner,
-                                    @HeaderParam("deviceId") String deviceId,
-                                    @HeaderParam("protocol") String protocol);
-
-    /**
-     * @param owner    device owner
-     * @param deviceId unique identifier for given device type
-     * @param protocol name of supported protocol. here MQTT is used
-     * @return sensor record
-     */
-    @Path("device/read-humidity")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-humidity", name = "Humidity", type = "monitor",
-            description = "Request humidity reading from device")
-    Response readHumidity(@HeaderParam("owner") String owner,
-                                 @HeaderParam("deviceId") String deviceId,
-                                 @HeaderParam("protocol") String protocol);
-
-    /**
-     * @param owner    device owner
-     * @param deviceId unique identifier for given device type
      * @param protocol name of supported protocol. Here MQTT is used
      * @param state    change status of buzzer: on/off
      */

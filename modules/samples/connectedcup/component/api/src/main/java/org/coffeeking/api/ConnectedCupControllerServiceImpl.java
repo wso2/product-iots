@@ -24,17 +24,33 @@ import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.coffeeking.api.transport.ConnectedCupMQTTConnector;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.service.IoTServerStartupListener;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class ConnectedCupControllerServiceImpl implements ConnectedCupControllerService {
 
     private static Log log = LogFactory.getLog(ConnectedCupControllerServiceImpl.class);
     private static ConnectedCupMQTTConnector connectedCupMQTTConnector;
+
+    @Path("device/ordercoffee")
+    @POST
+    public Response orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String deviceOwner) {
+        log.info("Coffee ordered....!");
+
+        if (log.isDebugEnabled()) {
+            log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
+        }
+        return Response.ok().entity("Coffee ordered.").build();
+    }
 
     public ConnectedCupMQTTConnector getConnectedCupMQTTConnector() {
         return ConnectedCupControllerServiceImpl.connectedCupMQTTConnector;
@@ -73,46 +89,4 @@ public class ConnectedCupControllerServiceImpl implements ConnectedCupController
         return false;
     }
 
-    public Response readCoffeeLevel(String owner, String deviceId) {
-        if (log.isDebugEnabled()) {
-            log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
-        }
-
-        try {
-            String mqttResource = ConnectedCupConstants.LEVEL_CONTEXT.replace("/", "");
-            connectedCupMQTTConnector.publishDeviceData(owner, deviceId, mqttResource, "");
-
-            SensorRecord sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           ConnectedCupConstants.SENSOR_LEVEL);
-            return Response.ok().entity(sensorRecord).build();
-        } catch (DeviceControllerException | TransportHandlerException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    public Response readTemperature(String owner, String deviceId) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("Sending request to read connected cup temperature of device " + "[" + deviceId + "] via MQTT");
-        }
-        try {
-            String mqttResource = ConnectedCupConstants.TEMPERATURE_CONTEXT.replace("/", "");
-            connectedCupMQTTConnector.publishDeviceData(owner, deviceId, mqttResource, "");
-
-            SensorRecord sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           ConnectedCupConstants.SENSOR_TEMPERATURE);
-            return Response.ok().entity(sensorRecord).build();
-        } catch (DeviceControllerException | TransportHandlerException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    public Response orderCoffee(String deviceId, String deviceOwner) {
-        log.info("Coffee ordered....!");
-
-        if (log.isDebugEnabled()) {
-            log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
-        }
-        return Response.ok().entity("Coffee ordered.").build();
-    }
 }

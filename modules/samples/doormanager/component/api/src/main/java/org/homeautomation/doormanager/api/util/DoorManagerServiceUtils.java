@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.homeautomation.doormanager.plugin.constants.DoorManagerConstants;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.data.publisher.exception.DataPublisherConfigurationException;
-import org.wso2.carbon.device.mgt.analytics.data.publisher.service.DeviceAnalyticsService;
+import org.wso2.carbon.device.mgt.analytics.data.publisher.service.EventsPublisherService;
 
 public class DoorManagerServiceUtils {
 
@@ -53,8 +53,8 @@ public class DoorManagerServiceUtils {
         if (ctx.getTenantDomain(true) == null) {
             ctx.setTenantDomain("carbon.super", true);
         }
-        DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-                DeviceAnalyticsService.class, null);
+        EventsPublisherService deviceAnalyticsService = (EventsPublisherService) ctx.getOSGiService(
+                EventsPublisherService.class, null);
         Object metaData[] = {owner, DoorManagerConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         try {
             deviceAnalyticsService.publishEvent(definition, STREAM_DEFINITION_VERSION, metaData,

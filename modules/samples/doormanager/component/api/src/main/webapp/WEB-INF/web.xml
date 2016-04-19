@@ -21,13 +21,10 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <display-name>Sample-Webapp-Controller</display-name>
+
     <servlet>
-        <description>JAX-WS/JAX-RS Endpoint</description>
-        <display-name>JAX-WS/JAX-RS Servlet</display-name>
         <servlet-name>CXFServlet</servlet-name>
-        <servlet-class>
-            org.apache.cxf.transport.servlet.CXFServlet
-        </servlet-class>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -40,8 +37,17 @@
     </context-param>
     <context-param>
         <param-name>doAuthentication</param-name>
-        <param-value>false</param-value>
+        <param-value>true</param-value>
     </context-param>
+    <context-param>
+        <param-name>isSharedWithAllTenants</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>providerTenantDomain</param-name>
+        <param-value>carbon.super</param-value>
+    </context-param>
+
     <!--publish to apim-->
     <context-param>
         <param-name>managed-api-enabled</param-name>
@@ -51,16 +57,5 @@
         <param-name>managed-api-owner</param-name>
         <param-value>admin</param-value>
     </context-param>
-    <context-param>
-        <param-name>managed-api-context-template</param-name>
-        <param-value>/doormanager/{version}</param-value>
-    </context-param>
-    <context-param>
-        <param-name>managed-api-application</param-name>
-        <param-value>doormanager</param-value>
-    </context-param>
-    <context-param>
-        <param-name>managed-api-isSecured</param-name>
-        <param-value>true</param-value>
-    </context-param>
+
 </web-app>

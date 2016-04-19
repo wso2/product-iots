@@ -36,11 +36,19 @@ import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
 import org.wso2.carbon.device.mgt.iot.util.ZipArchive;
 import org.wso2.carbon.device.mgt.iot.util.ZipUtil;
 import org.wso2.carbon.identity.jwt.client.extension.JWTClient;
-import org.wso2.carbon.identity.jwt.client.extension.JWTClientManager;
 import org.wso2.carbon.identity.jwt.client.extension.dto.AccessTokenInfo;
 import org.wso2.carbon.identity.jwt.client.extension.exception.JWTClientException;
 import org.wso2.carbon.user.api.UserStoreException;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -48,51 +56,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.UUID;
 
+@Path("enrollment")
 public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
 
     private static Log log = LogFactory.getLog(FireAlarmManagerServiceImpl.class);
-
     private static ApiApplicationKey apiApplicationKey;
     private static final String KEY_TYPE = "PRODUCTION";
 
-    /**
-     * Generate UUID
-     *
-     * @return generated UUID
-     */
-    private static String shortUUID() {
-        UUID uuid = UUID.randomUUID();
-        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
-        return Long.toString(l, Character.MAX_RADIX);
-    }
-
-    private boolean register(String deviceId,String name) {
-
-        try {
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
-            if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-                return false;
-            }
-            Device device = new Device();
-            device.setDeviceIdentifier(deviceId);
-            EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
-            enrolmentInfo.setDateOfEnrolment(new Date().getTime());
-            enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
-            enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
-            device.setName(name);
-            device.setType(DeviceTypeConstants.DEVICE_TYPE);
-            enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
-            device.setEnrolmentInfo(enrolmentInfo);
-            boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
-            return added;
-        } catch (DeviceManagementException e) {
-            return false;
-        }
-    }
-
-    public Response removeDevice(String deviceId) {
+    @Path("devices/{device_id}")
+    @DELETE
+    public Response removeDevice(@PathParam("device_id") String deviceId) {
         try {
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
             deviceIdentifier.setId(deviceId);
@@ -109,7 +82,9 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
         }
     }
 
-    public Response updateDevice(String deviceId, String name) {
+    @Path("devices/{device_id}")
+    @PUT
+    public Response updateDevice(@PathParam("device_id") String deviceId, @QueryParam("name") String name) {
         try {
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
             deviceIdentifier.setId(deviceId);
@@ -130,7 +105,11 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
         }
     }
 
-    public Response getDevice(String deviceId) {
+    @Path("devices/{device_id}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDevice(@PathParam("device_id") String deviceId) {
         try {
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
             deviceIdentifier.setId(deviceId);
@@ -142,7 +121,10 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
         }
     }
 
-    public Response downloadSketch(String deviceName) {
+    @Path("devices/download")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response downloadSketch(@QueryParam("deviceName") String deviceName) {
         try {
             ZipArchive zipFile = createDownloadFile(APIUtil.getAuthenticatedUser(), deviceName);
             Response.ResponseBuilder response = Response.ok(FileUtils.readFileToByteArray(zipFile.getZipFile()));
@@ -166,7 +148,9 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
         }
     }
 
-    public Response generateSketchLink(String deviceName) {
+    @Path("devices/generate_link")
+    @GET
+    public Response generateSketchLink(@QueryParam("deviceName") String deviceName) {
         try {
             ZipArchive zipFile = createDownloadFile(APIUtil.getAuthenticatedUser(), deviceName);
             Response.ResponseBuilder rb = Response.ok(zipFile.getDeviceId());
@@ -203,14 +187,14 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
             apiApplicationKey = apiManagementProviderService.generateAndRetrieveApplicationKeys(
                     DeviceTypeConstants.DEVICE_TYPE, tags, KEY_TYPE, applicationUsername, true);
         }
-        JWTClient jwtClient = JWTClientManager.getInstance().getJWTClient();
+        JWTClient jwtClient = APIUtil.getJWTClientManagerService().getJWTClient();
         String scopes = "device_type_" + DeviceTypeConstants.DEVICE_TYPE + " device_" + deviceId;
         AccessTokenInfo accessTokenInfo = jwtClient.getAccessToken(apiApplicationKey.getConsumerKey(),
                                                                    apiApplicationKey.getConsumerSecret(), owner,
                                                                    scopes);
         //create token
-        String accessToken = accessTokenInfo.getAccess_token();
-        String refreshToken = accessTokenInfo.getRefresh_token();
+        String accessToken = accessTokenInfo.getAccessToken();
+        String refreshToken = accessTokenInfo.getRefreshToken();
         //Register the device with CDMF
         boolean status = register(deviceId, deviceName);
         if (!status) {
@@ -223,6 +207,44 @@ public class FireAlarmManagerServiceImpl implements FireAlarmManagerService{
                                                    deviceName, accessToken, refreshToken);
         zipFile.setDeviceId(deviceId);
         return zipFile;
+    }
+
+
+    /**
+     * Generate UUID
+     *
+     * @return generated UUID
+     */
+    private static String shortUUID() {
+        UUID uuid = UUID.randomUUID();
+        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
+        return Long.toString(l, Character.MAX_RADIX);
+    }
+
+    private boolean register(String deviceId,String name) {
+
+        try {
+            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+            deviceIdentifier.setId(deviceId);
+            deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
+            if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+                return false;
+            }
+            Device device = new Device();
+            device.setDeviceIdentifier(deviceId);
+            EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+            enrolmentInfo.setDateOfEnrolment(new Date().getTime());
+            enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
+            enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+            device.setName(name);
+            device.setType(DeviceTypeConstants.DEVICE_TYPE);
+            enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
+            device.setEnrolmentInfo(enrolmentInfo);
+            boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
+            return added;
+        } catch (DeviceManagementException e) {
+            return false;
+        }
     }
 
 }

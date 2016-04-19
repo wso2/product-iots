@@ -28,7 +28,6 @@ import org.homeautomation.doormanager.plugin.constants.DoorManagerConstants;
 import org.wso2.carbon.device.mgt.analytics.data.publisher.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
 import org.wso2.carbon.device.mgt.iot.transport.mqtt.MQTTTransportHandler;
 
@@ -117,8 +116,6 @@ public class DoorManagerMQTTConnector extends MQTTTransportHandler {
                 lockerStatus = 1;
             }
             try {
-                SensorDataManager.getInstance().setSensorRecord(deviceId, "doorLockerCurrentStatus",
-                                                                String.valueOf(lockerStatus), Calendar.getInstance().getTimeInMillis());
                 if (!DoorManagerServiceUtils.publishToDASLockerStatus(owner, deviceId, lockerStatus)) {
                     log.warn("An error occurred while trying to publish  with ID [" + deviceId + "] of owner ["
                              + owner + "]");

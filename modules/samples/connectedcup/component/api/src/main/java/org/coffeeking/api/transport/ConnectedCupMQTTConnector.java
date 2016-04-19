@@ -31,7 +31,6 @@ import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.core.service.DeviceManagementProviderService;
 import org.wso2.carbon.device.mgt.iot.config.server.DeviceManagementConfigurationManager;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
 import org.wso2.carbon.device.mgt.iot.transport.mqtt.MQTTTransportHandler;
 import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
@@ -138,18 +137,6 @@ public class ConnectedCupMQTTConnector extends MQTTTransportHandler {
                         String owner = device.getEnrolmentInfo().getOwner();
                         ctx.setTenantDomain(MultitenantUtils.getTenantDomain(owner), true);
                         ctx.setUsername(owner);
-                        switch (messageData[0]) {
-                            case "temperature":
-                                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_TEMPERATURE,
-                                                                                String.valueOf(messageData[1]),
-                                                                                Calendar.getInstance().getTimeInMillis());
-                                break;
-                            case "coffeelevel":
-                                SensorDataManager.getInstance().setSensorRecord(deviceId, ConnectedCupConstants.SENSOR_LEVEL,
-                                                                                String.valueOf(messageData[1]),
-                                                                                Calendar.getInstance().getTimeInMillis());
-                                break;
-                        }
                         if (!ConnectedCupServiceUtils.publishToDAS(deviceId, messageData[0], Float.parseFloat
                                 (messageData[1]))) {
                             log.error("MQTT Subscriber: Publishing data to DAS failed.");

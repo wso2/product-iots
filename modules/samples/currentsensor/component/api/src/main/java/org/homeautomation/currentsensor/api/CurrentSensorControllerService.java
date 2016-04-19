@@ -46,42 +46,6 @@ public interface CurrentSensorControllerService {
                               @PathParam("ip") String deviceIP, @PathParam("port") String devicePort);
 
     /**
-     * @param deviceId
-     * @return
-     */
-    @Path("device/read-current")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-current", name = "Current", type = "monitor",
-            description = "Request current reading from Arduino agent")
-    Response requestCurrent(@HeaderParam("deviceId") String deviceId);
-
-    /**
-     * @param deviceId
-     * @return
-     */
-    @Path("device/read-power")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-power", name = "Power", type = "monitor",
-            description = "Request power reading from Arduino agent")
-    Response requestPower(@HeaderParam("deviceId") String deviceId);
-
-    /**
-     * @param deviceId
-     * @return
-     */
-    @Path("device/read-flowrate")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-flowrate", name = "Flow Rate", type = "monitor",
-            description = "Request flow rate reading from Arduino agent")
-    Response requestFlowRate(@HeaderParam("deviceId") String deviceId);
-
-    /**
      * @param dataMsg
      */
     @Path("device/push-data")

@@ -21,6 +21,7 @@ package org.homeautomation.firealarm.api.util;
 import org.wso2.carbon.apimgt.application.extension.APIManagementProviderService;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.core.service.DeviceManagementProviderService;
+import org.wso2.carbon.identity.jwt.client.extension.service.JWTClientManagerService;
 
 /**
  * This class provides utility functions used by REST-API.
@@ -64,4 +65,16 @@ public class APIUtil {
         }
         return apiManagementProviderService;
     }
+
+    public static JWTClientManagerService getJWTClientManagerService() {
+        PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+        JWTClientManagerService jwtClientManagerService =
+                (JWTClientManagerService) ctx.getOSGiService(JWTClientManagerService.class, null);
+        if (jwtClientManagerService == null) {
+            String msg = "JWT Client manager service has not initialized.";
+            throw new IllegalStateException(msg);
+        }
+        return jwtClientManagerService;
+    }
+
 }
