@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.homeautomation.currentsensor.plugin.constants.CurrentSensorConstants;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.data.publisher.exception.DataPublisherConfigurationException;
-import org.wso2.carbon.device.mgt.analytics.data.publisher.service.DeviceAnalyticsService;
+import org.wso2.carbon.device.mgt.analytics.data.publisher.service.EventsPublisherService;
 
 public class CurrentSensorServiceUtils {
 
@@ -34,8 +34,8 @@ public class CurrentSensorServiceUtils {
 
     public static boolean publishToDASCurrent(String deviceId, float current) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-                DeviceAnalyticsService.class, null);
+        EventsPublisherService deviceAnalyticsService = (EventsPublisherService) ctx.getOSGiService(
+                EventsPublisherService.class, null);
         String owner = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {current};
@@ -50,8 +50,8 @@ public class CurrentSensorServiceUtils {
 
     public static boolean publishToDASPower(String deviceId, float power) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-                DeviceAnalyticsService.class, null);
+        EventsPublisherService deviceAnalyticsService = (EventsPublisherService) ctx.getOSGiService(
+                EventsPublisherService.class, null);
         String owner = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {power};
@@ -66,8 +66,8 @@ public class CurrentSensorServiceUtils {
 
     public static boolean publishToDASFlowRate(String deviceId, float flowRate) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-                DeviceAnalyticsService.class, null);
+        EventsPublisherService deviceAnalyticsService = (EventsPublisherService) ctx.getOSGiService(
+                EventsPublisherService.class, null);
         String owner = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
         Object metdaData[] = {owner, CurrentSensorConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {flowRate};

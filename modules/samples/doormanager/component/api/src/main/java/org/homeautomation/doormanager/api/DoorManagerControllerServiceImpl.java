@@ -38,22 +38,27 @@ import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.DeviceType;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.service.IoTServerStartupListener;
 import org.wso2.carbon.identity.jwt.client.extension.JWTClient;
-import org.wso2.carbon.identity.jwt.client.extension.JWTClientManager;
 import org.wso2.carbon.identity.jwt.client.extension.dto.AccessTokenInfo;
 import org.wso2.carbon.identity.jwt.client.extension.exception.JWTClientException;
 import org.wso2.carbon.user.api.UserStoreException;
 import org.wso2.carbon.user.api.UserStoreManager;
-import javax.ws.rs.core.Context;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DoorManagerControllerServiceImpl implements DoorManagerControllerService{
+public class DoorManagerControllerServiceImpl implements DoorManagerControllerService {
 
     private static Log log = LogFactory.getLog(DoorManagerControllerServiceImpl.class);
     private static String CURRENT_STATUS = "doorLockerCurrentStatus";
@@ -66,7 +71,6 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
         doorManager = new DoorManager();
     }
 
-    @Context  //injected response proxy supporting multiple thread
     private boolean waitForServerStartup() {
         while (!IoTServerStartupListener.isServerReady()) {
             try {
@@ -102,9 +106,14 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
         connectorThread.start();
     }
 
-
-    public Response assignUserToLock(String owner, String deviceId, String protocol, String cardNumber, String userName,
-                                     String emailAddress) {
+    @Path("device/assign-user")
+    @POST
+    public Response assignUserToLock(@HeaderParam("owner") String owner,
+                                     @HeaderParam("deviceId") String deviceId,
+                                     @HeaderParam("protocol") String protocol,
+                                     @FormParam("cardNumber") String cardNumber,
+                                     @FormParam("userName") String userName,
+                                     @FormParam("emailAddress") String emailAddress) {
 
         if (userName != null && cardNumber != null && deviceId != null) {
             try {
@@ -119,22 +128,22 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
                         apiApplicationKey = apiManagementProviderService.generateAndRetrieveApplicationKeys(
                                 DoorManagerConstants.DEVICE_TYPE, tags, KEY_TYPE, applicationUsername, true);
                     }
-                    JWTClient jwtClient = JWTClientManager.getInstance().getJWTClient();
+                    JWTClient jwtClient = APIUtil.getJWTClientManagerService().getJWTClient();
                     String scopes = "device_type_" + DoorManagerConstants.DEVICE_TYPE + " device_" + deviceId;
                     AccessTokenInfo accessTokenInfo = jwtClient.getAccessToken(apiApplicationKey.getConsumerKey(),
                                                                                apiApplicationKey.getConsumerSecret(), owner, scopes);
-                    String accessToken = accessTokenInfo.getAccess_token();
+                    String accessToken = accessTokenInfo.getAccessToken();
                     if (accessToken == null) {
                         return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
                     }
                     Map<String, String> claims = new HashMap<>();
                     claims.put(DoorManagerConstants.DEVICE_CLAIMS_ACCESS_TOKEN, accessToken);
                     claims.put(DoorManagerConstants.DEVICE_CLAIMS_REFRESH_TOKEN,
-                               accessTokenInfo.getRefresh_token());
+                               accessTokenInfo.getRefreshToken());
                     claims.put(DoorManagerConstants.DEVICE_CLAIMS_CARD_NUMBER, cardNumber);
                     userStoreManager.setUserClaimValues(userName, claims, null);
-                    doorLockSafe.setAccessToken(accessTokenInfo.getAccess_token());
-                    doorLockSafe.setRefreshToken(accessTokenInfo.getRefresh_token());
+                    doorLockSafe.setAccessToken(accessTokenInfo.getAccessToken());
+                    doorLockSafe.setRefreshToken(accessTokenInfo.getRefreshToken());
                     doorLockSafe.setDeviceId(deviceId);
                     doorLockSafe.setOwner(owner);
                     doorLockSafe.setEmailAddress(emailAddress);
@@ -162,7 +171,12 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
         }
     }
 
-    public Response changeStatusOfDoorLockSafe(String owner, String deviceId, String protocol, String state) {
+    @Path("device/change-status")
+    @POST
+    public Response changeStatusOfDoorLockSafe(@HeaderParam("owner") String owner,
+                                        @HeaderParam("deviceId") String deviceId,
+                                        @HeaderParam("protocol") String protocol,
+                                        @FormParam("state") String state) {
         try {
             int lockerCurrentState;
             if (state.toUpperCase().equals("LOCK")) {
@@ -170,8 +184,6 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
             } else {
                 lockerCurrentState = 1;
             }
-            SensorDataManager.getInstance().setSensorRecord(deviceId, CURRENT_STATUS,
-                                                            String.valueOf(lockerCurrentState), Calendar.getInstance().getTimeInMillis());
             doorManagerMQTTConnector.sendCommandViaMQTT(owner, deviceId, "DoorManager:", state.toUpperCase());
             return Response.ok().build();
         } catch (DeviceManagementException e) {
@@ -181,16 +193,11 @@ public class DoorManagerControllerServiceImpl implements DoorManagerControllerSe
         }
     }
 
-    public Response requestStatusOfDoorLockSafe(String owner, String deviceId, String protocol) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId, CURRENT_STATUS);
-            return Response.ok(sensorRecord).entity(sensorRecord).build();
-        } catch (DeviceControllerException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-    }
-
+    @GET
+    @Path("device/get-user-info")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @SuppressWarnings("unchecked")
     public Response get_user_info(final UserInfo userInfo) {
         if (userInfo.userName != null && userInfo.cardNumber != null && userInfo.deviceId != null) {
             try {

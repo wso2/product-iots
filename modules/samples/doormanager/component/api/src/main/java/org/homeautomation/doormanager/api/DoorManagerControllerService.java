@@ -78,22 +78,6 @@ public interface DoorManagerControllerService {
                                                @FormParam("state") String state);
 
     /**
-     * Request current status of door lock safe
-     *
-     * @param owner    owner of the device
-     * @param deviceId unique identifier for given device
-     * @param protocol transport protocol which is being using here MQTT
-     */
-    @GET
-    @Path("device/current-status")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "current-status", name = "Door Locker Status", type = "monitor",
-            description = "Request current status of door safe")
-    Response requestStatusOfDoorLockSafe(@HeaderParam("owner") String owner, @HeaderParam("deviceId") String deviceId,
-                                         @HeaderParam("protocol") String protocol);
-
-    /**
      * @param userInfo user information which are required to test given user is authorized to open requested door
      * @return if user is authorized open the the door allow to open it
      */

@@ -24,10 +24,17 @@ import org.homeautomation.currentsensor.api.dto.DeviceJSON;
 import org.homeautomation.currentsensor.api.util.CurrentSensorServiceUtils;
 import org.homeautomation.currentsensor.plugin.constants.CurrentSensorConstants;
 import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.service.IoTServerStartupListener;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,18 +44,10 @@ public class CurrentSensorControllerServiceImpl implements CurrentSensorControll
     private static Log log = LogFactory.getLog(CurrentSensorControllerServiceImpl.class);
     private ConcurrentHashMap<String, String> deviceToIpMap = new ConcurrentHashMap<>();
 
-    private boolean waitForServerStartup() {
-        while (!IoTServerStartupListener.isServerReady()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Response registerDeviceIP(String owner, String deviceId, String deviceIP, String devicePort) {
+    @Path("device/register/{owner}/{deviceId}/{ip}/{port}")
+    @POST
+    public Response registerDeviceIP(@PathParam("owner") String owner, @PathParam("deviceId") String deviceId,
+                              @PathParam("ip") String deviceIP, @PathParam("port") String devicePort) {
         //TODO:: Need to get IP from the request itself
         String result;
 
@@ -64,48 +63,15 @@ public class CurrentSensorControllerServiceImpl implements CurrentSensorControll
         return Response.ok().entity(result).build();
     }
 
-    public Response requestCurrent(String deviceId) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           CurrentSensorConstants.SENSOR_CURRENT);
-        } catch (DeviceControllerException e) {
-            Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-
-        return Response.ok().entity(sensorRecord).build();
-    }
-
-    public Response requestPower(String deviceId) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           CurrentSensorConstants.SENSOR_POWER);
-        } catch (DeviceControllerException e) {
-            Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-        return Response.ok().entity(sensorRecord).build();
-    }
-
-    public Response requestFlowRate(String deviceId) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           CurrentSensorConstants.SENSOR_FLOWRATE);
-        } catch (DeviceControllerException e) {
-            Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-        return Response.ok().entity(sensorRecord).build();
-    }
-
+    @Path("device/push-data")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response pushData(final DeviceJSON dataMsg) {
-
         String owner = dataMsg.owner;
         String deviceId = dataMsg.deviceId;
         String deviceIp = dataMsg.reply;
         float current = dataMsg.current;
         float flow_rate = dataMsg.flow_rate;
-
         String registeredIp = deviceToIpMap.get(deviceId);
 
         if (registeredIp == null) {
@@ -117,19 +83,6 @@ public class CurrentSensorControllerServiceImpl implements CurrentSensorControll
                      " is already registered under some other IP. Re-registration required");
             return Response.status(Response.Status.CONFLICT.getStatusCode()).build();
         }
-
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_CURRENT,
-                                                        String.valueOf(current),
-                                                        Calendar.getInstance().getTimeInMillis());
-
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_POWER,
-                                                        String.valueOf(current * 230),
-                                                        Calendar.getInstance().getTimeInMillis());
-
-        SensorDataManager.getInstance().setSensorRecord(deviceId, CurrentSensorConstants.SENSOR_FLOWRATE,
-                                                        String.valueOf(flow_rate),
-                                                        Calendar.getInstance().getTimeInMillis());
-
         if (!CurrentSensorServiceUtils.publishToDASCurrent(dataMsg.deviceId, current)) {
             log.warn("An error occured whilst trying to publish pin data of Current Sensor Data with ID [" + deviceId +
                      "] of owner [" + owner + "]");
@@ -148,6 +101,17 @@ public class CurrentSensorControllerServiceImpl implements CurrentSensorControll
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return Response.ok().build();
+    }
+
+    private boolean waitForServerStartup() {
+        while (!IoTServerStartupListener.isServerReady()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

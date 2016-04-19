@@ -28,7 +28,7 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.analytics.data.publisher.exception.DataPublisherConfigurationException;
-import org.wso2.carbon.device.mgt.analytics.data.publisher.service.DeviceAnalyticsService;
+import org.wso2.carbon.device.mgt.analytics.data.publisher.service.EventsPublisherService;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 
 import javax.ws.rs.HttpMethod;
@@ -195,8 +195,8 @@ public class ConnectedCupServiceUtils {
 
     public static boolean publishToDAS(String deviceId, String sensor, float values) {
         PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        DeviceAnalyticsService deviceAnalyticsService = (DeviceAnalyticsService) ctx.getOSGiService(
-                DeviceAnalyticsService.class, null);
+        EventsPublisherService deviceAnalyticsService = (EventsPublisherService) ctx.getOSGiService(
+                EventsPublisherService.class, null);
         String owner = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
         Object metdaData[] = {owner, ConnectedCupConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {values};

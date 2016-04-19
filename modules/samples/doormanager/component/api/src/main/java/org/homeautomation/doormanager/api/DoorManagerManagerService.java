@@ -32,6 +32,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path("enrollment")
 @SuppressWarnings("NonJaxWsWebServices")
 @DeviceType(value = "doormanager")
 @API(name = "doormanager_mgt", version = "1.0.0", context = "/doormanager_mgt" , tags = {"doormanager"})
@@ -40,7 +41,6 @@ public interface DoorManagerManagerService {
     @Path("devices/{device_id}")
     @DELETE
     Response removeDevice(@PathParam("device_id") String deviceId);
-
 
     @Path("devices/{device_id}")
     @PUT

@@ -31,27 +31,14 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@API( name="connectedcup", version="1.0.0", context="/connectedcup" , tags = {"connectedcup"})
-@DeviceType( value = "connectedcup")
+@API(name = "connectedcup", version = "1.0.0", context = "/connectedcup", tags = {"connectedcup"})
+@DeviceType(value = "connectedcup")
 public interface ConnectedCupControllerService {
-
-    @Path("device/coffeelevel")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "coffeelevel", name = "Coffee Level", type = "monitor",
-            description = "Request Coffee Level from Connected cup")
-    Response readCoffeeLevel(@HeaderParam("owner") String owner, @HeaderParam("deviceId") String deviceId);
-
-    @Path("device/temperature")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "temperature", name = "Temperature", type = "monitor",
-            description = "Request Temperature reading from Connected cup")
-    Response readTemperature(@HeaderParam("owner") String owner, @HeaderParam("deviceId") String deviceId);
-
 
     @Path("device/ordercoffee")
     @POST
+    @Feature(code = "ordercoffee", name = "Order Coffee", type = "control",
+            description = "Order coffee cup")
     Response orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String deviceOwner);
 
 }

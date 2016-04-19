@@ -32,6 +32,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path("enrollment")
 @API(name = "currentsensor_mgt", version = "1.0.0", context = "/currentsensor_mgt", tags = {"currentsensor"})
 @DeviceType(value = "currentsensor")
 public interface CurrentSensorManagerService {

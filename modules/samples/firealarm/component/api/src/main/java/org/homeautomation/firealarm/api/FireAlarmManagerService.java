@@ -32,6 +32,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path("enrollment")
 @SuppressWarnings("NonJaxWsWebServices")
 @API(name = "firealarm_mgt", version = "1.0.0", context = "/firealarm_mgt" ,tags = {"firealarm"})
 @DeviceType(value = "firealarm")
@@ -55,7 +56,6 @@ public interface FireAlarmManagerService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     Response downloadSketch(@QueryParam("deviceName") String deviceName);
-
 
     @Path("devices/generate_link")
     @GET

@@ -27,7 +27,6 @@ import org.homeautomation.firealarm.api.util.ServiceUtils;
 import org.homeautomation.firealarm.plugin.constants.DeviceTypeConstants;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
 import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
 import org.wso2.carbon.device.mgt.iot.transport.mqtt.MQTTTransportHandler;
 
@@ -110,12 +109,6 @@ public class MQTTConnector extends MQTTTransportHandler {
             log.debug("Received MQTT message for: [OWNER-" + owner + "] & [DEVICE.ID-" + deviceId + "]");
         }
         if (messageData.length == 4) {
-            SensorDataManager.getInstance().setSensorRecord(deviceId, DeviceTypeConstants.SENSOR_TEMPERATURE,
-                                                            messageData[1], Calendar.getInstance().getTimeInMillis());
-            SensorDataManager.getInstance().setSensorRecord(deviceId, DeviceTypeConstants.SENSOR_HUMIDITY,
-                                                            messageData[3], Calendar.getInstance().getTimeInMillis());
-
-
             if (!ServiceUtils.publishTemperatureToDAS(owner, deviceId, messageData[1])) {
                 log.error("MQTT Subscriber: Publishing data to DAS failed.");
             }
