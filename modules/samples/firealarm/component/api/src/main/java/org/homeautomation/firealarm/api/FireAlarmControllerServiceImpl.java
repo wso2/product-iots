@@ -23,19 +23,54 @@ import org.apache.commons.logging.LogFactory;
 import org.homeautomation.firealarm.api.dto.DeviceJSON;
 import org.homeautomation.firealarm.api.exception.DeviceTypeException;
 import org.homeautomation.firealarm.api.transport.MQTTConnector;
-import org.homeautomation.firealarm.plugin.constants.DeviceTypeConstants;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorDataManager;
-import org.wso2.carbon.device.mgt.iot.sensormgt.SensorRecord;
 import org.wso2.carbon.device.mgt.iot.service.IoTServerStartupListener;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class FireAlarmControllerServiceImpl implements FireAlarmControllerService {
 
     private static Log log = LogFactory.getLog(FireAlarmControllerServiceImpl.class);
     private MQTTConnector mqttConnector;
+
+    @Path("device/register")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerDevice(final DeviceJSON agentInfo) {
+        if ((agentInfo.deviceId != null) && (agentInfo.owner != null)) {
+            return Response.status(Response.Status.OK).entity("Device has been registered successfully").build();
+        }
+        return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Message body not " +
+                                                                      "well-formed and still invalid").build();
+    }
+
+    @Path("device/change-status")
+    @POST
+    public Response changeBuzzerState(@HeaderParam("owner") String owner,
+                               @HeaderParam("deviceId") String deviceId,
+                               @HeaderParam("protocol") String protocol,
+                               @FormParam("state") String state) {
+        try {
+            mqttConnector.sendCommandViaMQTT(owner, deviceId, "buzzer:", state.toUpperCase());
+            return Response.ok().build();
+        } catch (DeviceManagementException e) {
+            log.error(e);
+            return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+        } catch (DeviceTypeException e) {
+            log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        }
+    }
 
     private boolean waitForServerStartup() {
         while (!IoTServerStartupListener.isServerReady()) {
@@ -72,49 +107,6 @@ public class FireAlarmControllerServiceImpl implements FireAlarmControllerServic
         Thread connectorThread = new Thread(connector);
         connectorThread.setDaemon(true);
         connectorThread.start();
-    }
-
-    public Response registerDevice(final DeviceJSON agentInfo) {
-        if ((agentInfo.deviceId != null) && (agentInfo.owner != null)) {
-            return Response.status(Response.Status.OK).entity("Device has been registered successfully").build();
-        }
-        return Response.status(Response.Status.NOT_ACCEPTABLE).entity("Message body not " +
-                                                                      "well-formed and still invalid").build();
-    }
-
-    public Response readTemperature(String owner, String deviceId, String protocol) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           DeviceTypeConstants.SENSOR_TEMPERATURE);
-        } catch (DeviceControllerException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-        return Response.ok().entity(sensorRecord).build();
-    }
-
-    public Response readHumidity(String owner, String deviceId, String protocol) {
-        SensorRecord sensorRecord = null;
-        try {
-            sensorRecord = SensorDataManager.getInstance().getSensorRecord(deviceId,
-                                                                           DeviceTypeConstants.SENSOR_HUMIDITY);
-        } catch (DeviceControllerException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
-        return Response.ok().entity(sensorRecord).build();
-    }
-
-    public Response changeBuzzerState(String owner, String deviceId, String protocol, String state) {
-        try {
-            mqttConnector.sendCommandViaMQTT(owner, deviceId, "buzzer:", state.toUpperCase());
-            return Response.ok().build();
-        } catch (DeviceManagementException e) {
-            log.error(e);
-            return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
-        } catch (DeviceTypeException e) {
-            log.error(e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        }
     }
 
 }

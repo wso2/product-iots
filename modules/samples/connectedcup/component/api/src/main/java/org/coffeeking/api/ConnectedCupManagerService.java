@@ -32,6 +32,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path("enrollment")
 @API( name="connectedcup_mgt", version="1.0.0", context="/connectedcup_mgt", tags = {"connectedcup"})
 @DeviceType("connectedcup")
 public interface ConnectedCupManagerService {
