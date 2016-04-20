@@ -343,11 +343,12 @@ public class UIEventAdapter implements OutputEventAdapter {
         // get all subscribed web-socket sessions.
         CopyOnWriteArrayList<CEPWebSocketSession> cepWebSocketSessions =
                 uiOutputCallbackControllerServiceImpl.getSessions(tenantId, streamId);
-
-        for (CEPWebSocketSession cepWebSocketSession : cepWebSocketSessions) {
-            boolean isValidSession = validateEventAgainstSessionFilters(event, cepWebSocketSession);
-            if (isValidSession) {
-                validSessions.add(cepWebSocketSession);
+        if (cepWebSocketSessions != null) {
+            for (CEPWebSocketSession cepWebSocketSession : cepWebSocketSessions) {
+                boolean isValidSession = validateEventAgainstSessionFilters(event, cepWebSocketSession);
+                if (isValidSession) {
+                    validSessions.add(cepWebSocketSession);
+                }
             }
         }
         return validSessions;
