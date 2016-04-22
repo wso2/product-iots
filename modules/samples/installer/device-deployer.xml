@@ -38,6 +38,8 @@
         <module>samples/currentsensor</module>
         <module>samples/doormanager</module>
         <module>samples/firealarm</module>
+        <!--<module>samples/digitaldisplay</module>-->
+        <!--<module>samples/droneanalyzer</module>-->
     </modules>
 
     <build>
@@ -73,6 +75,12 @@
                                 <featureArtifactDef>
                                     org.homeautomation:org.homeautomation.doormanager.feature:1.0.0-SNAPSHOT
                                 </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.homeautomation:org.homeautomation.digitaldisplay.feature:2.1.0-SNAPSHOT-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef>-->
+                                    <!--org.homeautomation:org.homeautomation.droneanalyzer.feature:2.1.0-SNAPSHOT-->
+                                <!--</featureArtifactDef>-->
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -114,6 +122,14 @@
                                     <id>org.homeautomation.doormanager.feature.group</id>
                                     <version>1.0.0-SNAPSHOT</version>
                                 </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.homeautomation.digitaldisplay.feature.group</id>-->
+                                    <!--<version>2.1.0-SNAPSHOT</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                    <!--<id>org.homeautomation.droneanalyzer.feature.group</id>-->
+                                    <!--<version>2.1.0-SNAPSHOT</version>-->
+                                <!--</feature>-->
                             </features>
                         </configuration>
                     </execution>

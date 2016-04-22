@@ -1126,24 +1126,6 @@
             <destName>ArduinoDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying DIGITAL DISPLAY H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DigitalDisplayDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>DigitalDisplayDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying DRONE ANALYZER H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/DroneAnalyzerDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>DroneAnalyzerDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
         <!-- Copying RASPBERRY-PI H2 database -->
         <file>
             <source>

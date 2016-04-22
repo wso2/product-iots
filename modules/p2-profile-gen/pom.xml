@@ -164,17 +164,15 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.digitaldisplay.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.droneanalyzer.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.devicetypes.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+
                                 <!-- IoT Device Management Features -->
 
                                 <!-- Carbon Deployment Features -->
@@ -864,19 +862,15 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.digitaldisplay.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.droneanalyzer.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.devicetypes.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- Carbon Deployment Features -->
