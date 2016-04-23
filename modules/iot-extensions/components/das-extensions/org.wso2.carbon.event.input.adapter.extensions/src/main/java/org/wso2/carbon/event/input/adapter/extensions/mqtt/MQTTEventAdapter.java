@@ -114,8 +114,20 @@ public class MQTTEventAdapter implements InputEventAdapter {
 
     @Override
     public void disconnect() {
-        if (mqttAdapterListener != null) {
-            mqttAdapterListener.stopListener(eventAdapterConfiguration.getName());
+        //when mqtt and this feature  both together then this method becomes a blocking method, Therefore
+        // have used a thread to skip it.
+        try {
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    if (mqttAdapterListener != null) {
+                        mqttAdapterListener.stopListener(eventAdapterConfiguration.getName());
+                    }
+                }
+            });
+            thread.start();
+            thread.join(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
