@@ -21,9 +21,9 @@ package ${groupId}.${rootArtifactId}.plugin.impl.dao.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
-import ${groupId}.${rootArtifactId}.plugin.exception.DeviceTypePluginException;
+import ${groupId}.${rootArtifactId}.plugin.exception.DeviceMgtPluginException;
 import ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO;
-import ${groupId}.${rootArtifactId}.plugin.impl.dao.util.DeviceTypeUtils;
+import ${groupId}.${rootArtifactId}.plugin.impl.util.DeviceTypeUtils;
 import org.wso2.carbon.device.mgt.common.Device;
 
 import java.sql.Connection;
@@ -43,7 +43,7 @@ public class DeviceTypeDAOImpl {
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAOImpl.class);
 
-    public Device getDevice(String deviceId) throws DeviceTypePluginException {
+    public Device getDevice(String deviceId) throws DeviceMgtPluginException {
         Connection conn = null;
         PreparedStatement stmt = null;
         Device iotDevice = null;
@@ -61,8 +61,6 @@ public class DeviceTypeDAOImpl {
                 iotDevice = new Device();
                 iotDevice.setName(resultSet.getString(
                         DeviceTypeConstants.DEVICE_PLUGIN_DEVICE_NAME));
-                List<Device.Property> propertyList = new ArrayList<>();
-                iotDevice.setProperties(propertyList);
                 if (log.isDebugEnabled()) {
                     log.debug("${deviceType} device " + deviceId + " data has been fetched from " +
                             "${deviceType} database.");
@@ -71,7 +69,7 @@ public class DeviceTypeDAOImpl {
         } catch (SQLException e) {
             String msg = "Error occurred while fetching ${deviceType} device : '" + deviceId + "'";
             log.error(msg, e);
-            throw new DeviceTypePluginException(msg, e);
+            throw new DeviceMgtPluginException(msg, e);
         } finally {
             DeviceTypeUtils.cleanupResources(stmt, resultSet);
             DeviceTypeDAO.closeConnection();
@@ -79,7 +77,7 @@ public class DeviceTypeDAOImpl {
         return iotDevice;
     }
 
-    public boolean addDevice(Device device) throws DeviceTypePluginException {
+    public boolean addDevice(Device device) throws DeviceMgtPluginException {
         boolean status = false;
         Connection conn;
         PreparedStatement stmt = null;
@@ -102,14 +100,14 @@ public class DeviceTypeDAOImpl {
             String msg = "Error occurred while adding the ${deviceType} device '" +
                     device.getDeviceIdentifier() + "' to the ${deviceType} db.";
             log.error(msg, e);
-            throw new DeviceTypePluginException(msg, e);
+            throw new DeviceMgtPluginException(msg, e);
         } finally {
             DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    public boolean updateDevice(Device device) throws DeviceTypePluginException {
+    public boolean updateDevice(Device device) throws DeviceMgtPluginException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -135,14 +133,14 @@ public class DeviceTypeDAOImpl {
             String msg = "Error occurred while modifying the ${deviceType} device '" +
                     device.getDeviceIdentifier() + "' data.";
             log.error(msg, e);
-            throw new DeviceTypePluginException(msg, e);
+            throw new DeviceMgtPluginException(msg, e);
         } finally {
             DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    public boolean deleteDevice(String deviceId) throws DeviceTypePluginException {
+    public boolean deleteDevice(String deviceId) throws DeviceMgtPluginException {
         boolean status = false;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -163,14 +161,14 @@ public class DeviceTypeDAOImpl {
         } catch (SQLException e) {
             String msg = "Error occurred while deleting ${deviceType} device " + deviceId;
             log.error(msg, e);
-            throw new DeviceTypePluginException(msg, e);
+            throw new DeviceMgtPluginException(msg, e);
         } finally {
             DeviceTypeUtils.cleanupResources(stmt, null);
         }
         return status;
     }
 
-    public List<Device> getAllDevices() throws DeviceTypePluginException {
+    public List<Device> getAllDevices() throws DeviceMgtPluginException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
@@ -197,7 +195,7 @@ public class DeviceTypeDAOImpl {
         } catch (SQLException e) {
             String msg = "Error occurred while fetching all ${deviceType} device data'";
             log.error(msg, e);
-            throw new DeviceTypePluginException(msg, e);
+            throw new DeviceMgtPluginException(msg, e);
         } finally {
             DeviceTypeUtils.cleanupResources(stmt, resultSet);
             DeviceTypeDAO.closeConnection();

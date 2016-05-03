@@ -37,12 +37,14 @@ DEVICE_OWNER = configParser.get('Device-Configurations', 'owner')
 DEVICE_ID = configParser.get('Device-Configurations', 'deviceId')
 DEVICE_NAME = configParser.get('Device-Configurations', 'device-name')
 DEVICE_TYPE = configParser.get('Device-Configurations', 'device-type')
+SERVER_NAME = configParser.get('Device-Configurations', 'server-name')
 MQTT_EP = configParser.get('Device-Configurations', 'mqtt-ep')
 AUTH_TOKEN = configParser.get('Device-Configurations', 'auth-token')
 CONTROLLER_CONTEXT = configParser.get('Device-Configurations', 'controller-context')
 DEVICE_INFO = '{"owner":"' + DEVICE_OWNER + '","deviceId":"' + DEVICE_ID + '",'
 HTTPS_EP = configParser.get('Device-Configurations', 'https-ep')
 DEVICE_DATA = '"sensorValue":"{sensorValue}"'
+SENSOR_STATS = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","type":"'+ DEVICE_TYPE +'","deviceId":"' + DEVICE_ID + '","time":{:.2f}}},"payloadData":{{"temperature":{:.2f}}}}}}}'
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

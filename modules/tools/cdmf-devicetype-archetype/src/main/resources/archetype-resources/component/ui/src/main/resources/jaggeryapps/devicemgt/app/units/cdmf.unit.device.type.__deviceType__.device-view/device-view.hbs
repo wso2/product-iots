@@ -1,21 +1,3 @@
-<!--
-/*
-* Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-* WSO2 Inc. licenses this file to you under the Apache License,
-* Version 2.0 (the "License"); you may not use this file except
-* in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-* KIND, either express or implied.  See the License for the
-* specific language governing permissions and limitations
-* under the License.
-*/-->
 {{#zone "topCss"}}
     <style>
         .thumbnail.icon:before {
@@ -28,18 +10,12 @@
     <img src="{{@unit.publicUri}}/images/deviceType.png"/>
 {{/zone}}
 
-{{#zone "operation-status"}}
-    <div id="div-operation-status" class="hidden" align="center"
-         style="padding: 10px; margin-bottom: 5px">
-    </div>
-{{/zone}}
-
 {{#zone "device-opetations"}}
     <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
         Operations
     </div>
     <div class="add-margin-top-4x">
-        {{unit "iot.unit.device.operation-bar" device=device}}
+        {{unit "iot.unit.device.operation-bar" device=device backendApiUri=backendApiUri autoCompleteParams=autoCompleteParams}}
     </div>
 {{/zone}}
 
@@ -47,12 +23,9 @@
     <div class="media">
         <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <ul class="list-group" role="tablist">
-                <li class="active">
-                    <a class="list-group-item" href="#device_statistics" role="tab" data-toggle="tab"
-                       aria-controls="device_statistics">Device Statistics</a>
-                </li>
-                <li><a class="list-group-item" href="#policies" role="tab"
-                       data-toggle="tab" aria-controls="policies">Policies</a>
+                <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
+                                      data-toggle="tab" aria-controls="device_statistics">Device
+                    Statistics</a>
                 </li>
                 <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
                        aria-controls="event_log">Operations Log</a></li>
@@ -60,43 +33,11 @@
         </div>
         <div class="media-body add-padding-left-5x remove-padding-xs tab-content">
             <div class="panel-group tab-content">
+
                 <div class="panel panel-default tab-pane active"
                      id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
                     <div class="panel-heading">Device Statistics</div>
-                    {{unit "iot.unit.device.stats" device=device}}
-                </div>
-                <div class="panel panel-default tab-pane" id="policy_compliance" role="tabpanel"
-                     aria-labelledby="policy_compliance">
-                    <div class="panel-heading">Policy Compliance <span><a href="#"
-                                                                          id="refresh-policy">
-                        <i class="fw fw-refresh"></i></a></span></div>
-                    <div class="panel panel-default tab-pane" id="policies" role="tabpanel"
-                         aria-labelledby="policies">
-                        <div class="panel-heading">Policies</div>
-                        <div class="panel-body">
-                            <div id="policy-spinner" class="wr-advance-operations-init hidden">
-                                <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fw fw-settings fw-spin fw-2x"></i>
-                                &nbsp;&nbsp;&nbsp;
-                                Loading Policies . . .
-                                <br>
-                                <br>
-                            </div>
-                            <div id="policy-list-container">
-                                <div class="panel-body">
-                                    No policies found
-                                </div>
-                                <br class="c-both"/>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="padding-left"
-                       href="{{@app.context}}/policy/add/{{device.type}}?deviceId={{device.deviceIdentifier}}">
-                                        <span class="fw-stack">
-                                            <i class="fw fw-ring fw-stack-2x"></i>
-                                            <i class="fw fw-policy fw-stack-1x"></i>
-                                        </span> Add device specific policy</a>
+                    {{unit "cdmf.unit.device.type.${deviceType}.realtime.analytics-view" device=device}}
                 </div>
                 <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
                      aria-labelledby="event_log">
@@ -125,6 +66,3 @@
         </div>
     </div>
 {{/zone}}
-
-
-

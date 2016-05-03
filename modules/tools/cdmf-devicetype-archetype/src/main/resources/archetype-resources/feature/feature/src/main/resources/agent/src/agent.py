@@ -27,7 +27,7 @@ import signal
 import ssl
 import sys
 import threading
-import time
+import time, calendar
 from functools import wraps
 
 import mqttHandler
@@ -90,7 +90,7 @@ SERVER_ENDPOINT = iotUtils.HTTPS_EP.split(":")
 SERVER_IP = SERVER_ENDPOINT[1].replace('//', '')
 SERVER_PORT = int(SERVER_ENDPOINT[2])
 API_ENDPOINT_CONTEXT = iotUtils.CONTROLLER_CONTEXT
-REGISTER_ENDPOINT = str(API_ENDPOINT_CONTEXT) + '/register'
+REGISTER_ENDPOINT = str(API_ENDPOINT_CONTEXT) + '/device/register'
 PUSH_SENSOR_VALUE_ENDPOINT = str(API_ENDPOINT_CONTEXT) + '/push-sensor-value'
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -240,8 +240,12 @@ def main():
     while True:
         try:
             if(iotUtils.IS_REGISTERED):
-                mqttHandler.sendSensorValue("Sensor:"+str(getSensorValue()))
-                pushSensorValue()
+                currentTime = calendar.timegm(time.gmtime())
+                tempValue = getSensorValue()
+                PUSH_DATA = iotUtils.SENSOR_STATS.format(currentTime, tempValue)
+                mqttHandler.sendSensorValue(PUSH_DATA)
+                print '~~~~~~~~~~~~~~~~~~~~~~~~ Publishing Device-Data ~~~~~~~~~~~~~~~~~~~~~~~~~'
+                print ('PUBLISHED DATA: ' + PUSH_DATA)
             else:
                 registerAgent()
             time.sleep(PUSH_INTERVAL)
