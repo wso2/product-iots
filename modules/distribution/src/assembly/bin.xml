@@ -111,9 +111,7 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.4.3.jar</exclude>
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.3.2.jar</exclude>
-                <!--<exclude>**/libthrift_0.8.0.wso2v1.jar</exclude>-->
-                <exclude>**/am#sample#calculator#v1.war</exclude>
-                <exclude>**/api.war</exclude>
+                <exclude>**/conf/log4j.properties</exclude>
             </excludes>
         </fileSet>
 
@@ -220,6 +218,7 @@
                 <include>**/sso-idp-config.xml</include>
                 <include>**/application-authentication.xml</include>
                 <include>**/broker.xml</include>
+                <include>**/log4j.properties</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -436,6 +435,8 @@
             </outputDirectory>
             <excludes>
                 <exclude>appmoauth2.war</exclude>
+                <exclude>am#sample#calculator#v1.war</exclude>
+                <exclude>api.war</exclude>
             </excludes>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
@@ -937,7 +938,7 @@
         <!--cdm config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cdm-config.xml
+                src/repository/conf/cdm-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
@@ -1379,6 +1380,16 @@
                 src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying product specific log4j.properties that has unnecessary logs printed by third parties
+        components suppressed -->
+        <file>
+            <source>
+                src/repository/conf/log4j.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
