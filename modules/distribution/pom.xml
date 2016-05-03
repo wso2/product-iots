@@ -260,6 +260,12 @@ d                                        <exclude name="**/shindig.properties" /
 										<exclude name="**/*.iml"/>
 										<exclude name="**/.DS_Store"/>
 										<exclude name="**/target/"/>
+										<exclude name="**/currentsensor/**"/>
+										<exclude name="**/digitaldisplay/**"/>
+										<exclude name="**/doormanager/**"/>
+										<exclude name="**/droneanalyzer/**"/>
+										<exclude name="**/firealarm/**"/>
+										<exclude name="**/installer/**"/>
 									</fileset>
 								</copy>
 
