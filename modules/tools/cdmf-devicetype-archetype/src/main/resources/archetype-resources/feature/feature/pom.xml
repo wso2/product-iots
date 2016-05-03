@@ -37,20 +37,13 @@
         </dependency>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>${project-base-package}.manager</artifactId>
-            <version>${version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${project-base-package}.controller</artifactId>
+            <artifactId>${project-base-package}.api</artifactId>
             <version>${version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>com.h2database.wso2</groupId>
             <artifactId>h2-database-engine</artifactId>
-            <version>1.2.140.wso2v3</version>
         </dependency>
     </dependencies>
     <build>
@@ -93,24 +86,13 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
-                                    <artifactId>${project-base-package}.analytics</artifactId>
-                                    <version>${version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
-                                    </outputDirectory>
-                                    <includes>**/*</includes>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${groupId}</groupId>
                                     <artifactId>${project-base-package}.ui
                                     </artifactId>
                                     <version>${project.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps
+                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps/devicemgt
                                     </outputDirectory>
                                     <includes>**/*</includes>
                                 </artifactItem>
@@ -118,7 +100,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-jaxrs-manager-war</id>
+                        <id>copy-jaxrs-war</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy</goal>
@@ -127,28 +109,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
-                                    <artifactId>${project-base-package}.manager</artifactId>
-                                    <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/webapps/
-                                    </outputDirectory>
-                                    <destFileName>${deviceType}_mgt.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-jaxrs-controller-war</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${groupId}</groupId>
-                                    <artifactId>${project-base-package}.controller</artifactId>
+                                    <artifactId>${project-base-package}.api</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
@@ -159,6 +120,7 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
             <plugin>
@@ -175,7 +137,7 @@
                         <configuration>
                             <tasks>
                                 <property name="db.dir"
-                                          value="src/main/resources/database"/>
+                                          value="target/maven-shared-archive-resources/database"/>
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
@@ -225,6 +187,11 @@
                                 <importFeatureDef>org.wso2.carbon.device.mgt.server:${carbon.device.mgt.version}
                                 </importFeatureDef>
                             </importFeatures>
+                            <!--<includedFeatures>
+                                <includedFeatureDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.analytics.feature:${carbon.devicemgt.plugins.version}
+                                </includedFeatureDef>
+                            </includedFeatures>-->
                         </configuration>
                     </execution>
                 </executions>

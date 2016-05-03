@@ -21,7 +21,8 @@ package ${groupId}.${rootArtifactId}.plugin.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO;
-import ${groupId}.${rootArtifactId}.plugin.exception.DeviceTypePluginException;
+import ${groupId}.${rootArtifactId}.plugin.exception.DeviceMgtPluginException;
+import ${groupId}.${rootArtifactId}.plugin.impl.feature.DeviceTypeFeatureManager;
 import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
@@ -43,12 +44,12 @@ import java.util.List;
 public class DeviceTypeManager implements DeviceManager {
 
     private static final Log log = LogFactory.getLog(DeviceTypeManager.class);
-
     private static final DeviceTypeDAO deviceTypeDAO = new DeviceTypeDAO();
+    private FeatureManager featureManager = new DeviceTypeFeatureManager();
 
     @Override
     public FeatureManager getFeatureManager() {
-        return null;
+        return featureManager;
     }
 
     @Override
@@ -74,10 +75,10 @@ public class DeviceTypeManager implements DeviceManager {
             DeviceTypeDAO.beginTransaction();
             status = deviceTypeDAO.getDeviceTypeDAO().addDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (DeviceTypePluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 log.warn("Error occurred while roll back the device enrol transaction :" + device.toString(), iotDAOEx);
             }
             String msg = "Error while enrolling the ${rootArtifactId} device : " + device.getDeviceIdentifier();
@@ -97,10 +98,10 @@ public class DeviceTypeManager implements DeviceManager {
             DeviceTypeDAO.beginTransaction();
             status = deviceTypeDAO.getDeviceTypeDAO().updateDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (DeviceTypePluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -122,10 +123,10 @@ public class DeviceTypeManager implements DeviceManager {
             DeviceTypeDAO.beginTransaction();
             status = deviceTypeDAO.getDeviceTypeDAO().deleteDevice(deviceId.getId());
             DeviceTypeDAO.commitTransaction();
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (DeviceTypePluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device dis enrol transaction :" + deviceId.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -148,7 +149,7 @@ public class DeviceTypeManager implements DeviceManager {
             if (iotDevice != null) {
                 isEnrolled = true;
             }
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             String msg = "Error while checking the enrollment status of ${rootArtifactId} device : " +
                     deviceId.getId();
             log.error(msg, e);
@@ -176,7 +177,7 @@ public class DeviceTypeManager implements DeviceManager {
                 log.debug("Getting the details of ${rootArtifactId} device : " + deviceId.getId());
             }
             device = deviceTypeDAO.getDeviceTypeDAO().getDevice(deviceId.getId());
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             String msg = "Error while fetching the ${rootArtifactId} device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
@@ -225,10 +226,10 @@ public class DeviceTypeManager implements DeviceManager {
             DeviceTypeDAO.beginTransaction();
             status = deviceTypeDAO.getDeviceTypeDAO().updateDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (DeviceTypePluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
@@ -248,7 +249,7 @@ public class DeviceTypeManager implements DeviceManager {
                 log.debug("Fetching the details of all ${rootArtifactId} devices");
             }
             devices = deviceTypeDAO.getDeviceTypeDAO().getAllDevices();
-        } catch (DeviceTypePluginException e) {
+        } catch (DeviceMgtPluginException e) {
             String msg = "Error while fetching all ${rootArtifactId} devices.";
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
