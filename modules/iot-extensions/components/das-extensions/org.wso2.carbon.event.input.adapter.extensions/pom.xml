@@ -154,7 +154,9 @@
                             org.apache.commons.httpclient.protocol,
                             org.apache.commons.pool,
                             org.apache.commons.pool.impl,
-                            org.apache.log4j
+                            org.apache.log4j,
+                            org.wso2.carbon.base,
+                            org.wso2.carbon.core.util
                         </Import-Package>
                     </instructions>
                 </configuration>

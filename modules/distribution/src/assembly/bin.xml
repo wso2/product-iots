@@ -780,6 +780,13 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/repository/conf/etc/device-analytics-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <destName>device-analytics-config.xml</destName>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!-- Copying synapse-handlers.xml file -->
         <file>
             <source>src/repository/conf/synapse-handlers.xml</source>

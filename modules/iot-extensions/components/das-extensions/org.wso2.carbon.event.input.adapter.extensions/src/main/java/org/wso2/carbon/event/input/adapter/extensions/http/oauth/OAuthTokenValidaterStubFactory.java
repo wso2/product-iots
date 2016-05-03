@@ -32,6 +32,7 @@ import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.log4j.Logger;
+import org.wso2.carbon.core.util.Utils;
 import org.wso2.carbon.event.input.adapter.core.InputEventAdapterConfiguration;
 import org.wso2.carbon.event.input.adapter.extensions.http.oauth.exception.OAuthTokenValidationException;
 import org.wso2.carbon.event.input.adapter.extensions.http.util.HTTPEventAdapterConstants;
@@ -91,8 +92,8 @@ public class OAuthTokenValidaterStubFactory extends BasePoolableObjectFactory {
 	private OAuth2TokenValidationServiceStub generateStub() throws OAuthTokenValidationException {
 		OAuth2TokenValidationServiceStub stub;
 		try {
-			URL hostURL = new URL(eventAdapterConfiguration.getProperties().get(
-					HTTPEventAdapterConstants.TOKEN_VALIDATION_ENDPOINT_URL));
+			URL hostURL = new URL(Utils.replaceSystemProperty(eventAdapterConfiguration.getProperties().get(
+					HTTPEventAdapterConstants.TOKEN_VALIDATION_ENDPOINT_URL)));
 			if (hostURL != null) {
 				stub = new OAuth2TokenValidationServiceStub(hostURL.toString());
 				if (stub != null) {
