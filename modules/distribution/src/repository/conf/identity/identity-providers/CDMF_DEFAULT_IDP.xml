@@ -20,7 +20,7 @@
 	<IdentityProviderName>CDMF_DEFAULT_IDP</IdentityProviderName>
 	<DisplayName>CDMF_DEFAULT_IDP</DisplayName>
 	<IdentityProviderDescription></IdentityProviderDescription>
-	<Alias>https://localhost:9443/oauth2/token</Alias>
+	<Alias>JwtIdentityAudience</Alias>
 	<IsPrimary>true</IsPrimary>
 	<IsFederationHub></IsFederationHub>
 	<HomeRealmId></HomeRealmId>

@@ -18,6 +18,7 @@
 package org.wso2.carbon.event.input.adapter.extensions.mqtt.util;
 
 import org.wso2.carbon.event.input.adapter.extensions.mqtt.Constants;
+import org.wso2.carbon.event.input.adapter.extensions.util.PropertyUtils;
 
 import java.util.Map;
 
@@ -108,8 +109,8 @@ public class MQTTBrokerConnectionConfiguration {
         if (brokerScopes == null) {
             this.brokerScopes = Constants.EMPTY_STRING;
         }
-        this.brokerUrl = brokerUrl;
-        this.dcrUrl = dcrUrl;
+        this.brokerUrl = PropertyUtils.replaceMqttProperty(brokerUrl);
+        this.dcrUrl = PropertyUtils.replaceMqttProperty(dcrUrl);
         this.contentValidatorClassName = contentValidatorClassName;
         if (cleanSession != null) {
             this.cleanSession = Boolean.parseBoolean(cleanSession);
