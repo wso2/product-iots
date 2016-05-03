@@ -28,6 +28,7 @@ import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorization
 import org.wso2.carbon.analytics.dataservice.commons.SORT;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
 import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
+import org.wso2.carbon.device.mgt.common.group.mgt.DeviceGroupConstants;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -49,7 +50,8 @@ public class ConnectedCupControllerServiceImpl implements ConnectedCupController
     public Response orderCoffee(@QueryParam("deviceId") String deviceId) {
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                                                 ConnectedCupConstants.DEVICE_TYPE))) {
+                                                 ConnectedCupConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.
+                                                DEFAULT_OPERATOR_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             log.info("Coffee ordered....!");
@@ -77,7 +79,7 @@ public class ConnectedCupControllerServiceImpl implements ConnectedCupController
 
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                       ConnectedCupConstants.DEVICE_TYPE))) {
+                       ConnectedCupConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.DEFAULT_STATS_MONITOR_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             List<SensorRecord> sensorDatas;

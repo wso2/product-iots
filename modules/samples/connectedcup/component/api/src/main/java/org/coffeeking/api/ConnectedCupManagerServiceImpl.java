@@ -27,6 +27,7 @@ import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
 import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
+import org.wso2.carbon.device.mgt.common.group.mgt.DeviceGroupConstants;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -56,7 +57,8 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier, DeviceGroupConstants.
+                    Permissions.DEFAULT_ADMIN_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             boolean removed = APIUtil.getDeviceManagementService().disenrollDevice(
@@ -81,7 +83,8 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
         try {
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier, DeviceGroupConstants.
+                    Permissions.DEFAULT_ADMIN_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
