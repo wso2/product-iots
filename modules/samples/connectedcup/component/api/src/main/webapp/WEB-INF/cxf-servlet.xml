@@ -29,7 +29,6 @@
         <jaxrs:serviceBeans>
             <bean id="ConnectedCupControllerService"
                   class="org.coffeeking.api.ConnectedCupControllerServiceImpl">
-                <property name="connectedCupMQTTConnector" ref="communicationHandler"/>
             </bean>
             <bean id="ConnectedCupManagerService"
                   class="org.coffeeking.api.ConnectedCupManagerServiceImpl">
@@ -39,9 +38,5 @@
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
         </jaxrs:providers>
     </jaxrs:server>
-
-    <bean
-            id="communicationHandler" class="org.coffeeking.api.transport.ConnectedCupMQTTConnector">
-    </bean>
 
 </beans>

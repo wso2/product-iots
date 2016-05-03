@@ -36,11 +36,11 @@ public class MQTTContentValidator implements ContentValidator {
 	private static final Log log = LogFactory.getLog(MQTTContentValidator.class);
 
 	@Override
-	public ContentInfo validate(Map<String, String> params) {
+	public ContentInfo validate(String msgPayload, Map<String, String> params) {
 		String topic = params.get(Constants.TOPIC);
 		String topics[] = topic.split("/");
 
-		String msg = params.get(Constants.PAYLOAD);
+		String msg = msgPayload;
 		String deviceIdJsonPath = params.get(Constants.DEVICE_ID_JSON_PATH);
 		String deviceIdInTopicHierarchyLevel = params.get(Constants.DEVICE_ID_TOPIC_HIERARCHY_INDEX);
 		int deviceIdInTopicHierarchyLevelIndex = 0;

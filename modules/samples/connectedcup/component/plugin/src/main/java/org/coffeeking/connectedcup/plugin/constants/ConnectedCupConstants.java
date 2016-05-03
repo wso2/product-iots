@@ -7,8 +7,6 @@ public class ConnectedCupConstants {
     public final static String DEVICE_TYPE = "connectedcup";
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "CONNECTED_CUP_DEVICE_ID";
-    public final static String DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN = "accessToken";
-    public final static String DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN = "refreshToken";
     public final static String ORDER_ON = "YES";
     public final static String ORDER_OFF = "NO";
 

@@ -20,9 +20,7 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
 
     private static ConnectedCupMQttTransportHandler connectedCupMQttTransportHandler;
 
-    private static String publishTopic = "wso2" + File.separator + "%s" + File.separator +
-            DEVICE_TYPE + File.separator + "%s" + File.separator
-            + "connected_publisher";
+    private static String publishTopic = "wso2/%s/" + DEVICE_TYPE + "/%s";
 
     protected ConnectedCupMQttTransportHandler() {
         super(iotServerSubscriber, DEVICE_TYPE, "tcp://localhost:1883", "");
@@ -32,6 +30,10 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
 
     public ScheduledFuture<?> getDataPushServiceHandler() {
         return dataPushServiceHandler;
+    }
+
+    public void setToken(String token) {
+        setUsernameAndPassword(token, "");
     }
 
     @Override
@@ -61,7 +63,6 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
         };
 
         Thread connectorThread = new Thread(connect);
-        connectorThread.setDaemon(true);
         connectorThread.start();
 
     }
@@ -70,9 +71,9 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
     public void processIncomingMessage(MqttMessage message, String... messageParams) {
     }
 
-    public void publishToConnectedCup(String owner , String deviceId, String payLoad, int qos, boolean retained)
+    public void publishToConnectedCup(String deviceOwner , String deviceId, String payLoad, String tenantDomain, int qos, boolean retained)
             throws TransportHandlerException{
-        String topic = String.format(publishTopic,owner,deviceId);
+        String topic = String.format(publishTopic, tenantDomain, deviceId);
         publishToQueue(topic, payLoad, qos, retained);
     }
 
@@ -102,7 +103,6 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
         };
 
         Thread terminatorThread = new Thread(stopConnection);
-        terminatorThread.setDaemon(true);
         terminatorThread.start();
     }
 
@@ -135,7 +135,6 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
     public static ConnectedCupMQttTransportHandler getInstance(){
         if(connectedCupMQttTransportHandler == null){
             connectedCupMQttTransportHandler = new ConnectedCupMQttTransportHandler();
-            connectedCupMQttTransportHandler.connect();
         }
         return connectedCupMQttTransportHandler;
     }

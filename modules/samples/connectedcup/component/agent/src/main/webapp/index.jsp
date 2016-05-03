@@ -39,6 +39,11 @@
         request.getSession().setAttribute("deviceOwner", deviceOwner);
     }
 
+    String tenantDomain = request.getParameter("tenantDomain");
+    if (tenantDomain != null) {
+        request.getSession().setAttribute("tenantDomain", tenantDomain);
+    }
+
     String token = request.getParameter("token");
     if (token != null) {
         request.getSession().setAttribute("token", token);
@@ -116,12 +121,16 @@
     function sendData() {
         var deviceId = '<%=request.getSession().getAttribute("deviceId")%>';
         var deviceOwner = '<%=request.getSession().getAttribute("deviceOwner")%>';
-        var tempPayload = "temperature:" + temperature;
-        var levelPayload = "coffeelevel:" + coffee_amount;
+        var tenantDomain = '<%=request.getSession().getAttribute("tenantDomain")%>';
+        if (tenantDomain == null) {
+            tenantDomain = "carbon.super";
+        }
+        var tempPayload = temperature;
+        var levelPayload = coffee_amount;
         $.post("/connected-cup-agent/push_temperature?deviceId=" + deviceId + "&deviceOwner=" + deviceOwner +
-               "&payload=" + tempPayload);
+               "&payload=" + tempPayload + "&tenantDomain=" + tenantDomain );
         $.post("/connected-cup-agent/push_level?deviceId=" + deviceId + "&deviceOwner=" + deviceOwner +
-               "&payload=" + levelPayload);
+               "&payload=" + levelPayload + "&tenantDomain=" + tenantDomain);
         setTimeout(sendData, 5000);
     }
 

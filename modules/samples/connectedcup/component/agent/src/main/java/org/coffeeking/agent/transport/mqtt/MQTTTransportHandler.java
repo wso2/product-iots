@@ -100,6 +100,11 @@ public abstract class MQTTTransportHandler
         this.initSubscriber();
     }
 
+    public void setUsernameAndPassword (String username, String password) {
+        options.setUserName(username);
+        options.setPassword(password.toCharArray());
+    }
+
     public void setTimeoutInterval(int timeoutInterval) {
         this.timeoutInterval = timeoutInterval;
     }

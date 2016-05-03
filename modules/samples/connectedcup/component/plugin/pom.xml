@@ -21,14 +21,14 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>device-mgt-iot-connectedcup</artifactId>
-		<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-		<version>2.1.0-SNAPSHOT</version>
+		<groupId>org.coffeeking</groupId>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-	<version>2.1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
         <name>WSO2 IoTS(Device Types) - Connected Cup CDMF Plugin</name>
         <description>WSO2 IoTS(Device Types) - Connected Cup CDMF Plugin</description>
@@ -64,19 +64,19 @@
 							org.osgi.framework,
 							org.osgi.service.component,
 							org.apache.commons.logging,
-							javax.xml.bind.*,
-							javax.naming,
-							javax.sql,
-							javax.xml.bind.annotation.*,
-							javax.xml.parsers,
-							javax.net,
-							javax.net.ssl,
-							org.w3c.dom,
+							javax.xml.bind.*;resolution:=optional,
+							javax.naming;resolution:=optional,
+							javax.sql;resolution:=optional,
+							javax.xml.bind.annotation.*;resolution:=optional,
+							javax.net;resolution:=optional,
+							javax.net.ssl;resolution:=optional,
+							org.w3c.dom;resolution:=optional,
 							org.wso2.carbon.device.mgt.common.*,
 							org.wso2.carbon.device.mgt.common,
 							org.wso2.carbon.context.*,
 							org.wso2.carbon.ndatasource.core,
 							org.wso2.carbon.device.mgt.iot.*,
+							javax.xml.parsers.*;resolution:=optional
 						</Import-Package>
 
 						<Export-Package>

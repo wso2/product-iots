@@ -26,10 +26,12 @@ import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
+import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -47,13 +49,16 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
 
     private static Log log = LogFactory.getLog(ConnectedCupManagerServiceImpl.class);
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @DELETE
     public Response removeDevice(@PathParam("device_id") String deviceId) {
         try {
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            }
             boolean removed = APIUtil.getDeviceManagementService().disenrollDevice(
                     deviceIdentifier);
             if (removed) {
@@ -63,16 +68,22 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
             }
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        }catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
         }
     }
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @PUT
     public Response updateDevice(@PathParam("device_id") String deviceId, @QueryParam("name") String name) {
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
         try {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            }
             Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             device.setDeviceIdentifier(deviceId);
             device.getEnrolmentInfo().setDateOfLastUpdate(new Date().getTime());
@@ -87,29 +98,42 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
         } catch (DeviceManagementException e) {
             log.error(e.getErrorMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
         }
     }
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDevice(@PathParam("device_id") String deviceId) {
+
         DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
         deviceIdentifier.setId(deviceId);
         deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
         try {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            }
             Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             return Response.ok().entity(device).build();
         } catch (DeviceManagementException ex) {
             log.error("Error occurred while retrieving device with Id " + deviceId + "\n" + ex);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
         }
     }
 
-    private boolean register(String deviceId, String name) {
+    @Path("/devices")
+    @POST
+    public boolean register(@QueryParam("name") String name) {
         try {
             DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+            String deviceId = shortUUID();
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
             if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
@@ -121,12 +145,12 @@ public class ConnectedCupManagerServiceImpl implements ConnectedCupManagerServic
             enrolmentInfo.setDateOfEnrolment(new Date().getTime());
             enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
             enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
             device.setName(name);
             device.setType(ConnectedCupConstants.DEVICE_TYPE);
             enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
             device.setEnrolmentInfo(enrolmentInfo);
-            boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
-            return added;
+            return APIUtil.getDeviceManagementService().enrollDevice(device);
         } catch (DeviceManagementException e) {
             return false;
         }

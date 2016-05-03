@@ -18,7 +18,7 @@
     <div class="add-margin-top-4x">
         <div class="add-margin-top-4x">
             <div class="buttons">
-                <a class="btn-operations" target="_blank"  href="https://{{../device.ip}}:9443/connected-cup-agent/index.jsp?deviceOwner={{@user.username}}&deviceId={{../device.deviceIdentifier}}&token={{../device.accessToken}}" >Go To Device</a>
+                <a class="btn-operations" target="_blank"  href="https://{{../device.ip}}:9443/connected-cup-agent/index.jsp?deviceOwner={{@user.username}}&tenantDomain={{@user.domain}}&deviceId={{../device.deviceIdentifier}}&token={{../device.accessToken}}" >Go To Device</a>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
                 <div class="panel panel-default tab-pane active"
                      id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
                     <div class="panel-heading">Device Statistics</div>
-                    {{unit "iot.unit.device.stats" device=device}}
+                    {{unit "cdmf.unit.device.type.connectedcup.realtime.analytics-view" device=device}}
                 </div>
                 <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
                      aria-labelledby="event_log">

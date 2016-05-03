@@ -34,9 +34,9 @@ public class HTTPContentValidator implements ContentValidator {
 	private static String JSON_ARRAY_START_CHAR = "[";
 
 	@Override
-	public ContentInfo validate(Map<String, String> paramMap) {
+	public ContentInfo validate(String msgPayload, Map<String, String> paramMap) {
 		String deviceId = paramMap.get("deviceId");
-		String msg = paramMap.get(HTTPEventAdapterConstants.PAYLOAD_TAG);
+		String msg = msgPayload;
 		String deviceIdJsonPath = paramMap.get(HTTPEventAdapterConstants.DEVICE_ID_JSON_PATH);
 		boolean status;
 		if (msg.startsWith(JSON_ARRAY_START_CHAR)) {
