@@ -36,7 +36,7 @@
             <version>${version}</version>
         </dependency>
         <dependency>
-            <groupId>${deviceType}</groupId>
+            <groupId>${groupId}</groupId>
             <artifactId>${project-base-package}.api</artifactId>
             <version>${version}</version>
             <type>war</type>
@@ -108,7 +108,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>${deviceType}</groupId>
+                                    <groupId>${groupId}</groupId>
                                     <artifactId>${project-base-package}.api</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
