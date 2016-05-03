@@ -20,73 +20,98 @@ package org.coffeeking.api;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coffeeking.api.util.APIUtil;
+import org.coffeeking.api.util.SensorRecord;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
-import org.coffeeking.api.transport.ConnectedCupMQTTConnector;
-import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-import org.wso2.carbon.device.mgt.iot.exception.DeviceControllerException;
-import org.wso2.carbon.device.mgt.iot.service.IoTServerStartupListener;
-import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
+import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
+import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
+import org.wso2.carbon.analytics.dataservice.commons.SORT;
+import org.wso2.carbon.analytics.dataservice.commons.SortByField;
+import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnectedCupControllerServiceImpl implements ConnectedCupControllerService {
 
     private static Log log = LogFactory.getLog(ConnectedCupControllerServiceImpl.class);
-    private static ConnectedCupMQTTConnector connectedCupMQTTConnector;
 
     @Path("device/ordercoffee")
     @POST
-    public Response orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String deviceOwner) {
-        log.info("Coffee ordered....!");
-
-        if (log.isDebugEnabled()) {
-            log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
-        }
-        return Response.ok().entity("Coffee ordered.").build();
-    }
-
-    public ConnectedCupMQTTConnector getConnectedCupMQTTConnector() {
-        return ConnectedCupControllerServiceImpl.connectedCupMQTTConnector;
-    }
-
-    public void setConnectedCupMQTTConnector(
-            final ConnectedCupMQTTConnector connectedCupMQTTConnector) {
-
-        Runnable connector = new Runnable() {
-            public void run() {
-                if (waitForServerStartup()) {
-                    return;
-                }
-                ConnectedCupControllerServiceImpl.connectedCupMQTTConnector = connectedCupMQTTConnector;
-                if (MqttConfig.getInstance().isEnabled()) {
-                    connectedCupMQTTConnector.connect();
-                } else {
-                    log.warn("MQTT disabled in 'devicemgt-config.xml'. " +
-                             "Hence, ConnectedCupMQTTConnector not started.");
-                }
+    public Response orderCoffee(@QueryParam("deviceId") String deviceId) {
+        try {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
+                                                 ConnectedCupConstants.DEVICE_TYPE))) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
-        };
-        Thread connectorThread = new Thread(connector);
-        connectorThread.setDaemon(true);
-        connectorThread.start();
+            log.info("Coffee ordered....!");
+            if (log.isDebugEnabled()) {
+                log.debug("Sending request to read liquid level value of device [" + deviceId + "] via MQTT");
+            }
+            return Response.ok().entity("Coffee ordered.").build();
+        } catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        }
     }
 
-    private boolean waitForServerStartup() {
-        while (!IoTServerStartupListener.isServerReady()) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return true;
+    @Path("stats/{deviceId}/sensors/{sensorName}")
+    @GET
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response getDeviceStats(@PathParam("deviceId") String deviceId, @PathParam("sensorName") String sensor,
+                                               @QueryParam("from") long from, @QueryParam("to") long to) {
+        String fromDate = String.valueOf(from);
+        String toDate = String.valueOf(to);
+        String query = " deviceId:" + deviceId + " AND deviceType:" +
+                ConnectedCupConstants.DEVICE_TYPE + " AND time : [" + fromDate + " TO " + toDate + "]";
+        String sensorTableName = getSensorEventTableName(sensor);
+
+        try {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
+                       ConnectedCupConstants.DEVICE_TYPE))) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
+            List<SensorRecord> sensorDatas;
+            List<SortByField> sortByFields = new ArrayList<>();
+            SortByField sortByField = new SortByField("time", SORT.ASC, false);
+            sortByFields.add(sortByField);
+            sensorDatas = APIUtil.getAllEventsForDevice(sensorTableName, query, sortByFields);
+            return Response.ok().entity(sensorDatas).build();
+        } catch (AnalyticsException e) {
+            String errorMsg = "Error on retrieving stats on table " + sensorTableName + " with query " + query;
+            log.error(errorMsg);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(errorMsg).build();
+        } catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
         }
-        return false;
+    }
+
+    /**
+     * get the event table from the sensor name.
+     */
+    private String getSensorEventTableName(String sensorName) {
+        String sensorEventTableName;
+        switch (sensorName) {
+            case "temperature":
+                sensorEventTableName = "DEVICE_TEMPERATURE_SUMMARY";
+                break;
+            case "coffeelevel":
+                sensorEventTableName = "DEVICE_COFFEELEVEL_SUMMARY";
+                break;
+            default:
+                sensorEventTableName = "";
+        }
+        return sensorEventTableName;
     }
 
 }

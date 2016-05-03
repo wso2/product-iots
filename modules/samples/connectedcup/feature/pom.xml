@@ -21,16 +21,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+        <groupId>org.coffeeking</groupId>
         <artifactId>device.mgt.iot.connectedcup-parent</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>connected-cup-feature-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>WSO2 IoTS(Device Types) - Connected Cup Feature Parent</name>
     <description>WSO2 IoTS(Device Types) - Connected Cup Feature Parent</description>
     <url>http://wso2.org</url>

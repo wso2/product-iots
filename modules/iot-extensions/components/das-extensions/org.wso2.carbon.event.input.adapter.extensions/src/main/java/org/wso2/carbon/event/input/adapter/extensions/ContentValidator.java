@@ -29,5 +29,5 @@ public interface ContentValidator {
 	 * @param params that related to input adapter to identify the client and the content
 	 * @return
 	 */
-	ContentInfo validate(Map<String, String> params);
+	ContentInfo validate(String msgPayload, Map<String, String> params);
 }

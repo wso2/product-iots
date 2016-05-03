@@ -28,8 +28,7 @@
         STRING -i,
         time LONG -i",primaryKeys "deviceType, deviceId, owner, time");
 
-
-        insert overwrite table DeviceCoffeeLevelSummaryData select coffeelevel, meta_deviceType as deviceType,
+        insert into table DeviceCoffeeLevelSummaryData select coffeelevel, meta_deviceType as deviceType,
         meta_deviceId as deviceId, meta_owner as owner, cast(meta_time/1000 as BIGINT)as time from
         DeviceCoffeeLevelData group by coffeelevel, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as
         BIGINT);

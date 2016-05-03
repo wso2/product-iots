@@ -22,10 +22,12 @@ import org.wso2.carbon.apimgt.annotations.api.API;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.DeviceType;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.Feature;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -39,6 +41,16 @@ public interface ConnectedCupControllerService {
     @POST
     @Feature(code = "ordercoffee", name = "Order Coffee", type = "control",
             description = "Order coffee cup")
-    Response orderCoffee(@QueryParam("deviceId") String deviceId, @QueryParam("deviceOwner") String deviceOwner);
+    Response orderCoffee(@QueryParam("deviceId") String deviceId);
+
+    /**
+     * Retrieve Sensor data for the device type
+     */
+    @Path("stats/{deviceId}/sensors/{sensorName}")
+    @GET
+    @Consumes("application/json")
+    @Produces("application/json")
+    Response getDeviceStats(@PathParam("deviceId") String deviceId, @PathParam("sensorName") String sensor,
+                                        @QueryParam("from") long from, @QueryParam("to") long to);
 
 }

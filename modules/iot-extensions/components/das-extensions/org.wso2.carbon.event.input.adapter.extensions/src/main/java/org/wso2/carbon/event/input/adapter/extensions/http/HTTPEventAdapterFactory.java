@@ -120,7 +120,6 @@ public class HTTPEventAdapterFactory extends InputEventAdapterFactory {
 		contentValidator.setRequired(false);
 		contentValidator.setHint(
 				resourceBundle.getString(HTTPEventAdapterConstants.ADAPTER_CONF_CONTENT_VALIDATOR_CLASSNAME_HINT));
-		propertyList.add(contentValidator);
 		contentValidator.setDefaultValue(HTTPEventAdapterConstants.DEFAULT);
 		propertyList.add(contentValidator);
 
@@ -131,7 +130,6 @@ public class HTTPEventAdapterFactory extends InputEventAdapterFactory {
 		contentValidatorParams.setRequired(false);
 		contentValidatorParams.setHint(
 				resourceBundle.getString(HTTPEventAdapterConstants.ADAPTER_CONF_CONTENT_VALIDATOR_PARAMS_HINT));
-		propertyList.add(contentValidatorParams);
 		contentValidatorParams.setDefaultValue(HTTPEventAdapterConstants.MQTT_CONTENT_VALIDATION_DEFAULT_PARAMETERS);
 		propertyList.add(contentValidatorParams);
 		return propertyList;

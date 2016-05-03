@@ -25,9 +25,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+    <groupId>org.wso2.iot.devicemgt-plugins</groupId>
     <artifactId>devicetype-feature-installation</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Creating custom distribution</name>
     <url>http://wso2.org</url>
@@ -35,11 +35,6 @@
     <modules>
         <!-- STEP#1 ADD THE LOCATION OF YOUR DEVICE-TYPE -->
         <module>samples/connectedcup</module>
-        <module>samples/currentsensor</module>
-        <module>samples/doormanager</module>
-        <module>samples/firealarm</module>
-        <!--<module>samples/digitaldisplay</module>-->
-        <!--<module>samples/droneanalyzer</module>-->
     </modules>
 
     <build>
@@ -64,23 +59,8 @@
                             <featureArtifacts>
                                 <featureArtifactDef>
                                     <!-- STEP#2. ADD YOUR DEVICE TYPE FEATURE HERE  "< GROUP_ID:ARTIFACT_ID:VERSION >" -->
-                                    org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.feature:2.1.0-SNAPSHOT
+                                    org.coffeeking:org.coffeeking.connectedcup.feature:1.0.0-SNAPSHOT
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.homeautomation:org.homeautomation.currentsensor.feature:2.1.0-SNAPSHOT
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.homeautomation:org.homeautomation.firealarm.feature:1.0.0-SNAPSHOT
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.homeautomation:org.homeautomation.doormanager.feature:1.0.0-SNAPSHOT
-                                </featureArtifactDef>
-                                <!--<featureArtifactDef>-->
-                                    <!--org.homeautomation:org.homeautomation.digitaldisplay.feature:2.1.0-SNAPSHOT-->
-                                <!--</featureArtifactDef>-->
-                                <!--<featureArtifactDef>-->
-                                    <!--org.homeautomation:org.homeautomation.droneanalyzer.feature:2.1.0-SNAPSHOT-->
-                                <!--</featureArtifactDef>-->
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -108,28 +88,8 @@
                                 <!-- STEP#3. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
-                                    <version>2.1.0-SNAPSHOT</version>
-                                </feature>
-                                <feature>
-                                    <id>org.homeautomation.currentsensor.feature.group</id>
-                                    <version>2.1.0-SNAPSHOT</version>
-                                </feature>
-                                <feature>
-                                    <id>org.homeautomation.firealarm.feature.group</id>
                                     <version>1.0.0-SNAPSHOT</version>
                                 </feature>
-                                <feature>
-                                    <id>org.homeautomation.doormanager.feature.group</id>
-                                    <version>1.0.0-SNAPSHOT</version>
-                                </feature>
-                                <!--<feature>-->
-                                    <!--<id>org.homeautomation.digitaldisplay.feature.group</id>-->
-                                    <!--<version>2.1.0-SNAPSHOT</version>-->
-                                <!--</feature>-->
-                                <!--<feature>-->
-                                    <!--<id>org.homeautomation.droneanalyzer.feature.group</id>-->
-                                    <!--<version>2.1.0-SNAPSHOT</version>-->
-                                <!--</feature>-->
                             </features>
                         </configuration>
                     </execution>

@@ -24,6 +24,7 @@ import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.DeviceType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -37,19 +38,23 @@ import javax.ws.rs.core.Response;
 @DeviceType("connectedcup")
 public interface ConnectedCupManagerService {
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @DELETE
     Response removeDevice(@PathParam("device_id") String deviceId);
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @PUT
     Response updateDevice(@PathParam("device_id") String deviceId,
                           @QueryParam("name") String name);
 
-    @Path("devices/{device_id}")
+    @Path("/devices/{device_id}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     Response getDevice(@PathParam("device_id") String deviceId);
+
+    @Path("/devices")
+    @POST
+    boolean register(@QueryParam("name") String name);
 
 }

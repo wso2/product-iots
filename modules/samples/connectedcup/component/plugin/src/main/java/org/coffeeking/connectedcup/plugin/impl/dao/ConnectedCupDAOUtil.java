@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.coffeeking.connectedcup.plugin.exception.ConnectedCupDeviceMgtPluginException;
-import org.coffeeking.connectedcup.plugin.impl.dao.impl.ConnectedCupDAO;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

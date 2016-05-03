@@ -23,7 +23,7 @@
     <property name="target-dir" value="target/carbonapps"/>
     <property name="src-dir" value="src/main/resources/carbonapps"/>
 
-    <property name="Temperature_Sensor_dir" value="Temperature_Sensor"/>
+    <property name="ConnectedCup_dir" value="ConnectedCup"/>
     <property name="CoffeeLevel_Sensor_dir" value="CoffeeLevel_Sensor"/>
 
     <target name="clean">
@@ -32,8 +32,8 @@
 
     <target name="zip" depends="clean">
         <mkdir dir="${target-dir}"/>
-        <zip destfile="${target-dir}/${Temperature_Sensor_dir}.car">
-            <zipfileset dir="${src-dir}/${Temperature_Sensor_dir}"/>
+        <zip destfile="${target-dir}/${ConnectedCup_dir}.car">
+            <zipfileset dir="${src-dir}/${ConnectedCup_dir}"/>
         </zip>
         <zip destfile="${target-dir}/${CoffeeLevel_Sensor_dir}.car">
             <zipfileset dir="${src-dir}/${CoffeeLevel_Sensor_dir}"/>

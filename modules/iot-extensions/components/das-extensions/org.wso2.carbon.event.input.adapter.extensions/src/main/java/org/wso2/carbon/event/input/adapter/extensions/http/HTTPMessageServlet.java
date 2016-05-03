@@ -30,6 +30,7 @@ import org.wso2.carbon.event.input.adapter.extensions.http.util.AuthenticationIn
 import org.wso2.carbon.event.input.adapter.extensions.http.util.HTTPContentValidator;
 import org.wso2.carbon.event.input.adapter.extensions.http.util.HTTPEventAdapterConstants;
 import org.wso2.carbon.event.input.adapter.extensions.internal.EventAdapterServiceDataHolder;
+import org.wso2.carbon.event.input.adapter.extensions.mqtt.exception.MQTTContentValidatorInitializationException;
 import org.wso2.carbon.identity.oauth2.stub.OAuth2TokenValidationServiceStub;
 import org.wso2.carbon.identity.oauth2.stub.dto.OAuth2TokenValidationRequestDTO;
 import org.wso2.carbon.identity.oauth2.stub.dto.OAuth2TokenValidationRequestDTO_OAuth2AccessToken;
@@ -64,7 +65,8 @@ public class HTTPMessageServlet extends HttpServlet {
 	private static String cookie;
 	private static Log log = LogFactory.getLog(HTTPMessageServlet.class);
 	private GenericObjectPool stubs;
-
+	private static Map<String, String> contentValidationProperties;
+	private static ContentValidator contentValidator;
 	private InputEventAdapterListener eventAdaptorListener;
 	private int tenantId;
 	private String exposedTransports;
@@ -76,6 +78,38 @@ public class HTTPMessageServlet extends HttpServlet {
 		this.exposedTransports = eventAdapterConfiguration.getProperties().get(
 				HTTPEventAdapterConstants.EXPOSED_TRANSPORTS);
 		this.stubs = new GenericObjectPool(new OAuthTokenValidaterStubFactory(eventAdapterConfiguration));
+		this.contentValidationProperties = new HashMap<String, String>();
+		String contentValidationParams = eventAdapterConfiguration.getProperties().get(
+				HTTPEventAdapterConstants.ADAPTER_CONF_CONTENT_VALIDATOR_PARAMS);
+		if (contentValidationParams != null && !contentValidationParams.isEmpty()) {
+			String validationParams[] = contentValidationParams.split(",");
+			for (String validationParam : validationParams) {
+				String[] validationProperty = validationParam.split(":");
+				if (validationProperty.length == 2) {
+					contentValidationProperties.put(validationProperty[0], validationProperty[1]);
+				}
+			}
+		}
+
+		String className = eventAdapterConfiguration.getProperties().get(
+				HTTPEventAdapterConstants.ADAPTER_CONF_CONTENT_VALIDATOR_CLASSNAME);
+		if (HTTPEventAdapterConstants.DEFAULT.equals(className)) {
+			contentValidator = new HTTPContentValidator();
+		} else {
+			try {
+				Class<? extends ContentValidator> contentValidatorClass = Class.forName(className)
+						.asSubclass(ContentValidator.class);
+				contentValidator = contentValidatorClass.newInstance();
+			} catch (ClassNotFoundException e) {
+				throw new MQTTContentValidatorInitializationException(
+						"Unable to find the class authorizer: " + className, e);
+			} catch (InstantiationException e) {
+				throw new MQTTContentValidatorInitializationException(
+						"Unable to create an instance of :" + className, e);
+			} catch (IllegalAccessException e) {
+				throw new MQTTContentValidatorInitializationException("Access of the instance in not allowed.", e);
+			}
+		}
 	}
 
 	private String getBearerToken(HttpServletRequest request) {
@@ -254,22 +288,19 @@ public class HTTPMessageServlet extends HttpServlet {
 				return;
 			}
 		} else {
-			if (req.isSecure()) {
-				authenticationInfo = this.checkAuthentication(req);
-				int tenantId = authenticationInfo != null ? authenticationInfo.getTenantId() : -1;
-				if (tenantId == -1) {
-					res.getOutputStream().write(AUTH_FAILURE_RESPONSE.getBytes());
-					res.setStatus(401);
-					log.error("Authentication failed for the request");
-					return;
-				} else if (tenantId != this.tenantId) {
-					res.getOutputStream().write(AUTH_FAILURE_RESPONSE.getBytes());
-					res.setStatus(401);
-					log.error("Authentication failed for the request");
-					return;
-				}
+			authenticationInfo = this.checkAuthentication(req);
+			int tenantId = authenticationInfo != null ? authenticationInfo.getTenantId() : -1;
+			if (tenantId == -1) {
+				res.getOutputStream().write(AUTH_FAILURE_RESPONSE.getBytes());
+				res.setStatus(401);
+				log.error("Authentication failed for the request");
+				return;
+			} else if (tenantId != this.tenantId) {
+				res.getOutputStream().write(AUTH_FAILURE_RESPONSE.getBytes());
+				res.setStatus(401);
+				log.error("Authentication failed for the request");
+				return;
 			}
-
 		}
 
 		if (log.isDebugEnabled()) {
@@ -278,23 +309,22 @@ public class HTTPMessageServlet extends HttpServlet {
 
 		if (authenticationInfo != null) {
 			Map<String, String> paramMap = new HashMap<>();
+			paramMap.putAll(contentValidationProperties);
 			Enumeration<String> reqParameterNames = req.getParameterNames();
 			while (reqParameterNames.hasMoreElements()) {
-				paramMap.put(reqParameterNames.nextElement(), req.getParameter(reqParameterNames.nextElement()));
+				String paramterName = reqParameterNames.nextElement();
+				paramMap.put(paramterName, req.getParameter(paramterName));
 			}
 			paramMap.put(HTTPEventAdapterConstants.USERNAME_TAG, authenticationInfo.getUsername());
 			paramMap.put(HTTPEventAdapterConstants.TENANT_DOMAIN_TAG, authenticationInfo.getTenantDomain());
-			paramMap.put(HTTPEventAdapterConstants.PAYLOAD_TAG, data);
-			ContentValidator contentValidator = new HTTPContentValidator();
-			ContentInfo contentInfo = contentValidator.validate(paramMap);
-			if (contentInfo != null && contentInfo.isValidContent()) {
-				HTTPEventAdapter.executorService.submit(new HTTPRequestProcessor(eventAdaptorListener,
-																				 contentInfo.getMsgText(), tenantId));
-
+			if (contentValidator != null) {
+				ContentInfo contentInfo = contentValidator.validate(data, paramMap);
+				if (contentInfo != null && contentInfo.isValidContent()) {
+					HTTPEventAdapter.executorService.submit(new HTTPRequestProcessor(eventAdaptorListener,
+															contentInfo.getMsgText(), tenantId));
+				}
 			}
-
 		}
-
 	}
 
 	@Override

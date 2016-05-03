@@ -32,43 +32,43 @@
     <Permission>
         <name>Get device</name>
         <path>/device-mgt/user/devices/list</path>
-        <url>/devices/*</url>
+        <url>/enrollment/devices/*</url>
         <method>GET</method>
         <scope>connectedcup_user</scope>
     </Permission>
     <Permission>
         <name>Remove device</name>
         <path>/device-mgt/user/devices/remove</path>
-        <url>/devices/*</url>
+        <url>/enrollment/devices/*</url>
         <method>DELETE</method>
         <scope>connectedcup_user</scope>
     </Permission>
     <Permission>
         <name>Update device</name>
         <path>/device-mgt/user/devices/update</path>
-        <url>/devices/*</url>
+        <url>/enrollment/devices/*</url>
+        <method>PUT</method>
+        <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>Register a device</name>
+        <path>/device-mgt/user/devices</path>
+        <url>/enrollment/devices</url>
         <method>POST</method>
-        <scope>connectedcup_user</scope>
-    </Permission>
-    <Permission>
-        <name>Get coffee level</name>
-        <path>/device-mgt/user/device/coffeelevel</path>
-        <url>/device/coffeelevel</url>
-        <method>GET</method>
-        <scope>connectedcup_user</scope>
-    </Permission>
-    <Permission>
-        <name>Get temperature</name>
-        <path>/device-mgt/user/device/temperature</path>
-        <url>/device/temperature</url>
-        <method>GET</method>
         <scope>connectedcup_user</scope>
     </Permission>
     <Permission>
         <name>Order coffee cup</name>
-        <path>/device-mgt/user/device/ordercoffee</path>
+        <path>/device-mgt/user/operation</path>
         <url>/device/ordercoffee</url>
         <method>POST</method>
         <scope>connectedcup_user</scope>
+    </Permission>
+    <Permission>
+        <name>get device stats</name>
+        <path>/device-mgt/user/stats</path>
+        <url>/stats/*/sensors/*</url>
+        <method>GET</method>
+        <scope>android_sense_device</scope>
     </Permission>
 </PermissionConfiguration>

@@ -23,36 +23,36 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<parent>
-		<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+		<groupId>org.coffeeking</groupId>
 		<artifactId>connected-cup-feature-parent</artifactId>
-		<version>2.1.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.coffeeking.connectedcup.feature</artifactId>
 	<packaging>pom</packaging>
-	<version>2.1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>WSO2 IoTS(Device Types) - Connected Cup Feature</name>
 	<description>WSO2 IoTS(Device Types) - Connected Cup Feature</description>
 	<url>http://wso2.org</url>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-			<version>${carbon.device.mgt.plugin.version}</version>
+			<version>${wso2.iot.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.api</artifactId>
-			<version>${carbon.device.mgt.plugin.version}</version>
+			<version>${wso2.iot.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
-			<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.agent</artifactId>
-			<version>${carbon.device.mgt.plugin.version}</version>
+			<version>${wso2.iot.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
@@ -102,7 +102,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+                                    <groupId>org.coffeeking</groupId>
                                     <artifactId>org.coffeeking.connectedcup.analytics
                                     </artifactId>
                                     <version>${project.version}</version>
@@ -114,7 +114,7 @@
                                     <includes>**/*</includes>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+                                    <groupId>org.coffeeking</groupId>
                                     <artifactId>org.coffeeking.connectedcup.ui
                                     </artifactId>
                                     <version>${project.version}</version>
@@ -137,7 +137,7 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+									<groupId>org.coffeeking</groupId>
 									<artifactId>org.coffeeking.connectedcup.api</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
@@ -145,7 +145,7 @@
 									<destFileName>connectedcup.war</destFileName>
 								</artifactItem>
 								<artifactItem>
-									<groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+									<groupId>org.coffeeking</groupId>
 									<artifactId>org.coffeeking.connectedcup.agent</artifactId>
 									<type>war</type>
 									<overWrite>true</overWrite>
@@ -219,7 +219,7 @@
 							</adviceFile>
 							<bundles>
 								<bundleDef>
-									org.wso2.carbon.devicemgt-plugins:org.coffeeking.connectedcup.plugin:${carbon.device.mgt.plugin.version}
+									org.coffeeking:org.coffeeking.connectedcup.plugin:${wso2.iot.version}
 								</bundleDef>
 							</bundles>
 							<importFeatures>

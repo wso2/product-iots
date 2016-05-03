@@ -31,8 +31,13 @@ function onRequest(context) {
 
         if (device && device.status != "error") {
             log.info(device);
-            var deviceProperties = device.properties;
-            device.accessToken = deviceProperties.accessToken;
+            var constants = require("/app/modules/constants.js");
+            var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
+            var token = "";
+            if (tokenPair) {
+                token =  tokenPair.accessToken;
+            }
+            device.accessToken = token;
             device.ip = serverIp;
             return {"device": device};
         }

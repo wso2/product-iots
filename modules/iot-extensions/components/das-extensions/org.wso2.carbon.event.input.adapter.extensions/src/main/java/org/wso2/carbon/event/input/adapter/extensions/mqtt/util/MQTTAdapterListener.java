@@ -240,8 +240,7 @@ public class MQTTAdapterListener implements MqttCallback, Runnable {
                 ContentInfo contentInfo;
                 synchronized (contentValidationParams) {
                     contentValidationParams.put(Constants.TOPIC, topic);
-                    contentValidationParams.put(Constants.PAYLOAD, msgText);
-                    contentInfo = contentValidator.validate(contentValidationParams);
+                    contentInfo = contentValidator.validate(msgText,contentValidationParams);
                     contentValidationParams.remove(Constants.TOPIC);
                     contentValidationParams.remove(Constants.PAYLOAD);
                 }
