@@ -108,7 +108,7 @@ function attachEvents() {
                         doAction(data);
                     }
                 );
-            } else if (deviceName) {
+            }else if(deviceName){
                 $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
                                       'style="display: inline-block;">Please enter at least 4 ' +
                                       'characters.</label>');
@@ -128,40 +128,22 @@ function attachEvents() {
 }
 
 function downloadAgent() {
-    var deviceName = "";
+    var deviceName;
     $('.new-device-name').each(function () {
         if (this.value != "") {
             deviceName = this.value;
         }
     });
-    var deviceType = "";
-    $('.deviceType').each(function () {
-        if (this.value != "") {
-            deviceType = this.value;
-        }
-    });
-    var sketchType = "";
-    $('.sketchType').each(function () {
-        if (this.value != "") {
-            sketchType = this.value;
-        }
-    });
     var deviceNameFormat = /^[^~?!#$:;%^*`+={}\[\]\\()|<>,'"]{1,30}$/;
     if (deviceName && deviceNameFormat.test(deviceName)) {
+        $('#downloadForm').submit();
+        hidePopup();
         $(modalPopupContent).html($('#device-agent-downloading-content').html());
-        var successCallback = function (data) {
-            data = JSON.parse(data);
+        showPopup();
+        setTimeout(function () {
             hidePopup();
-            window.location = "/devicemgt/api/devices/sketch/download/" + data.responseContent;
-        };
-        var generateLink = "/" + deviceType + "_mgt/manager/device/" + sketchType
-                           + "/generate_link?deviceName=" + deviceName;
-        invokerUtil.get(generateLink, successCallback, function (message) {
-            console.log(message.content);
-            hidePopup();
-            doAction(data);
-        });
-    } else {
+        }, 1000);
+    }else {
         $("#invalid-username-error-msg span").text("Invalid device name");
         $("#invalid-username-error-msg").removeClass("hidden");
     }
@@ -173,7 +155,14 @@ function doAction(data) {
         document.write(data);
     }
 
-    if (data.status == "401") {
+    if (data.status == "200") {
+        $(modalPopupContent).html($('#download-device-modal-content-links').html());
+        $("input#download-device-url").val(data.responseText);
+        $("input#download-device-url").focus(function () {
+            $(this).select();
+        });
+        showPopup();
+    } else if (data.status == "401") {
         $(modalPopupContent).html($('#device-401-content').html());
         $("#device-401-link").click(function () {
             window.location = "/devicemgt/login";

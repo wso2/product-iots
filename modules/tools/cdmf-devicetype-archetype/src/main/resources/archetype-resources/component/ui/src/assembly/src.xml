@@ -29,7 +29,7 @@
     <baseDirectory>${basedir}/src</baseDirectory>
     <fileSets>
         <fileSet>
-            <directory>${basedir}/src/main/resources/jaggeryapps/</directory>
+            <directory>${basedir}/src/main/resources/jaggeryapps/devicemgt</directory>
             <outputDirectory>/</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>

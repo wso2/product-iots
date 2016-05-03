@@ -20,6 +20,8 @@ package ${groupId}.${rootArtifactId}.plugin.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import ${groupId}.${rootArtifactId}.plugin.exception.DeviceMgtPluginException;
+import ${groupId}.${rootArtifactId}.plugin.impl.util.DeviceTypeUtils;
 import ${groupId}.${rootArtifactId}.plugin.impl.DeviceTypeManagerService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -44,6 +46,18 @@ public class ServiceComponent {
             serviceRegistration =
                     bundleContext.registerService(DeviceManagementService.class.getName(), new
                                     DeviceTypeManagerService(), null);
+            String setupOption = System.getProperty("setup");
+            if (setupOption != null) {
+                if (log.isDebugEnabled()) {
+                    log.debug("-Dsetup is enabled. Iot Device management repository schema initialization is about " +
+                            "to begin");
+                }
+                try {
+                    DeviceTypeUtils.setupDeviceManagementSchema();
+                } catch (DeviceMgtPluginException e) {
+                    log.error("Exception occurred while initializing device management database schema", e);
+                }
+            }
             if (log.isDebugEnabled()) {
                 log.debug("${rootArtifactId} Management Service Component has been successfully activated");
             }

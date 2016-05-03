@@ -26,4 +26,11 @@ public class DeviceTypeConstants {
     public static final String DATA_SOURCE_NAME = "jdbc/${deviceType}DM_DB";
     public final static String DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN = "accessToken";
     public final static String DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN = "refreshToken";
+    public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
+    public final static String STATE_ON = "ON";
+    public final static String STATE_OFF = "OFF";
+    public final static String SENSOR_CONTEXT = "SENSOR";
+    public final static String TEMPERATURE_EVENT_TABLE = "DEVICE_TEMPERATURE_SUMMARY";
+    public final static String TEMPERATURE_STREAM_DEFINITION = "org.wso2.iot.devices.temperature";
+    public final static String TEMPERATURE_STREAM_DEFINITION_VERSION = "1.0.0";
 }

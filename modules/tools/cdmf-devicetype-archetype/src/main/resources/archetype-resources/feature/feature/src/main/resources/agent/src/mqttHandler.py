@@ -69,15 +69,16 @@ def main():
     DEV_OWNER = iotUtils.DEVICE_OWNER
     DEV_ID = iotUtils.DEVICE_ID
     DEV_TYPE =iotUtils.DEVICE_TYPE
-    
+    TANENT_DOMAIN = iotUtils.SERVER_NAME
     global TOPIC_TO_SUBSCRIBE
-    TOPIC_TO_SUBSCRIBE = "wso2/iot/" + DEV_OWNER + "/" + DEV_TYPE + "/" + DEV_ID + "/subscriber"
+    TOPIC_TO_SUBSCRIBE = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID
     global TOPIC_TO_PUBLISH
-    TOPIC_TO_PUBLISH = "wso2/iot/" + DEV_OWNER + "/" + DEV_TYPE + "/" + DEV_ID + "/publisher"
+    TOPIC_TO_PUBLISH = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/temperature"
 
     print ("MQTT_LISTENER: MQTT_ENDPOINT is " + str(MQTT_ENDPOINT))
     print ("MQTT_LISTENER: MQTT_TOPIC is " + TOPIC_TO_SUBSCRIBE)
     global mqttClient
+    mqttClient.username_pw_set(iotUtils.AUTH_TOKEN, password = "")
     mqttClient.on_connect = on_connect
     mqttClient.on_message = on_message
 
