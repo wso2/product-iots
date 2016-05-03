@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ you may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<DeviceMgtConfiguration>
+	<ManagementRepository>
+		<DataSourceConfiguration>
+			<JndiLookupDefinition>
+				<Name>jdbc/DM_DS</Name>
+			</JndiLookupDefinition>
+		</DataSourceConfiguration>
+	</ManagementRepository>
+	<IdentityConfiguration>
+		<ServerUrl>https://localhost:9443</ServerUrl>
+		<AdminUsername>admin</AdminUsername>
+		<AdminPassword>admin</AdminPassword>
+	</IdentityConfiguration>
+	<PolicyConfiguration>
+		<MonitoringClass>org.wso2.carbon.policy.mgt</MonitoringClass>
+		<MonitoringEnable>false</MonitoringEnable>
+		<MonitoringFrequency>60000</MonitoringFrequency>
+		<MaxRetries>5</MaxRetries>
+		<MinRetriesToMarkUnreachable>8</MinRetriesToMarkUnreachable>
+		<MinRetriesToMarkInactive>20</MinRetriesToMarkInactive>
+	</PolicyConfiguration>
+	<TaskConfiguration>
+		<Enable>false</Enable>
+		<Frequency>600000</Frequency>
+		<TaskClass>org.wso2.carbon.device.mgt.core.task.impl.DeviceDetailsRetrieverTask</TaskClass>
+		<Operations>
+			<Operation>
+				<Name>DEVICE_INFO</Name>
+				<RecurrentTimes>1</RecurrentTimes>
+			</Operation>
+			<Operation>
+				<Name>APPLICATION_LIST</Name>
+				<RecurrentTimes>5</RecurrentTimes>
+			</Operation>
+			<Operation>
+				<Name>DEVICE_LOCATION</Name>
+				<RecurrentTimes>1</RecurrentTimes>
+			</Operation>
+		</Operations>
+	</TaskConfiguration>
+</DeviceMgtConfiguration>
+
