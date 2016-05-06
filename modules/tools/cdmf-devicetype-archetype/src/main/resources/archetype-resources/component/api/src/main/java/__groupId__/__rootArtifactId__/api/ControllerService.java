@@ -65,29 +65,6 @@ public interface ControllerService {
 
     /**
      * @param deviceId unique identifier for given device type
-     * @param response
-     * @return
-     */
-    /*@Path("device/{deviceId}/read-current-status")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Feature(code = "read-current-status", name = "Read current status of sensor On or Off", type = "monitor",
-            description = "Request current status of sensor from device")
-    public Response readCurrentStatus(@PathParam("deviceId") String deviceId,
-                                       @Context HttpServletResponse response);*/
-
-    /**
-     * @param agentInfo receive current status of sensor and device metadata
-     * @param response
-     */
-    /*@Path("controller/push-sensor-value")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void pushData(final DeviceJSON agentInfo, @Context HttpServletResponse response) ;*/
-
-    /**
-     * @param deviceId unique identifier for given device type
      * @param state    change status of sensor: on/off
      * @param response
      */
