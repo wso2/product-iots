@@ -1027,11 +1027,6 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.analytics-common</groupId>
-                <artifactId>org.wso2.carbon.event.input.adapter.core</artifactId>
-                <version>${carbon.analytics.common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.analytics-common</groupId>
                 <artifactId>org.wso2.carbon.event.stream.core</artifactId>
                 <version>${carbon.analytics.common.version}</version>
             </dependency>
@@ -1039,12 +1034,6 @@
                 <groupId>org.wso2.carbon.analytics-common</groupId>
                 <artifactId>org.wso2.carbon.databridge.commons</artifactId>
                 <version>${carbon.analytics.common.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.carbon.event.input.adapter.extensions</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>

@@ -37,10 +37,6 @@
     <dependencies>
         <dependency>
             <groupId>org.wso2.iot</groupId>
-            <artifactId>org.wso2.carbon.event.input.adapter.extensions</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.iot</groupId>
             <artifactId>org.wso2.carbon.event.output.adapter.extensions.ui</artifactId>
         </dependency>
     </dependencies>
@@ -94,15 +90,11 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>
-                                    org.wso2.iot:org.wso2.carbon.event.input.adapter.extensions:${carbon.iot.device.mgt.version}
-                                </bundleDef>
-                                <bundleDef>
                                     org.wso2.iot:org.wso2.carbon.event.output.adapter.extensions.ui:${carbon.iot.device.mgt.version}
                                 </bundleDef>
                             </bundles>
                             <importFeatures>
                                 <importFeatureDef>org.wso2.carbon.core.server:${carbon.kernel.version}</importFeatureDef>
-                                <importFeatureDef>org.wso2.carbon.identity.jwt.client.extension:${carbon.device.mgt.version}</importFeatureDef>
                             </importFeatures>
                         </configuration>
                     </execution>
