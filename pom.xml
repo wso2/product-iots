@@ -1042,11 +1042,20 @@
             </dependency>
             <!--mqtt-->
             <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization</artifactId>
+                <version>${carbon.iot.device.mgt.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.eclipse.paho</groupId>
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${eclipse.paho.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.wso2.andes.wso2</groupId>
+                <artifactId>andes</artifactId>
+                <version>${carbon.messaging.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

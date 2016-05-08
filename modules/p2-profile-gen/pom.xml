@@ -158,6 +158,9 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.adapter.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -388,6 +391,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.iot:org.wso2.carbon.event.adapter.extensions.server.feature:${carbon.iot.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.iot:org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature:${carbon.iot.device.mgt.version}
                                 </featureArtifactDef>
 
                                 <!-- Mediation Features -->
@@ -783,6 +789,10 @@
                                     <id>org.wso2.carbon.event.adapter.extensions.server.feature.group</id>
                                     <version>${carbon.iot.device.mgt.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
+                                    <version>${carbon.iot.device.mgt.version}</version>
+                                </feature>
                                 <!-- End of IoTServer Features -->
 
                                 <!-- Device Management Features -->
@@ -851,6 +861,10 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.adapter.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
