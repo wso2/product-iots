@@ -742,22 +742,6 @@
             <fileMode>755</fileMode>
         </file>
         <!-- End of "portal" app specific modifications -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-android-agent.war
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/mdm-windows-agent.war
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
         <!-- Copying synapse.properties file -->
         <file>
             <source>src/repository/conf/synapse.properties</source>
@@ -1022,16 +1006,6 @@
         <!--cdm plugin config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/mobile-config.xml
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/conf/etc/device-mgt-plugin-configs/mobile
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat
@@ -1075,24 +1049,6 @@
             <destName>AndroidSenseDM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying ANDROID SENSE H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/AndroidSenseDM_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>AndroidSenseDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying MOBILE-WINDOWS H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2MobileWindows_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
         <!-- Copying ARDUINO H2 database -->
         <file>
             <source>
@@ -1118,24 +1074,6 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
             <destName>VirtualFireAlarmDM_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying MOBILE-ANDROID H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileAndroid_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2MobileAndroid_DB.h2.db</destName>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying MOBILE-WINDOWS H2 database -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MobileWindows_DB.h2.db
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2MobileWindows_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
         <file>
