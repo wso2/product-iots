@@ -569,9 +569,6 @@
 
                                 <!-- API Management Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.publisher.feature:${carbon.api.mgt.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.store.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -1386,10 +1383,6 @@
                                 <!-- End of Governance Features -->
 
                                 <!-- API Manager Publisher and Store Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.apimgt.publisher.feature.group</id>
-                                    <version>${carbon.api.mgt.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.store.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
