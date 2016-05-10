@@ -515,9 +515,6 @@
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.store.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.startup.publisher.feature:${carbon.api.mgt.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.authenticator.oidc.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -576,9 +573,6 @@
                                 <!--START - Analytics Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.core.feature:${carbon.analytics.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.core.server.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.feature:${carbon.analytics.version}
@@ -1260,11 +1254,6 @@
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.apimgt.startup.publisher.feature.group</id>
-                                    <version>${carbon.api.mgt.version}</version>
-                                </feature>
-
-                                <feature>
                                     <id>org.wso2.carbon.apimgt.authenticator.oidc.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
@@ -1315,10 +1304,6 @@
                                 <!-- START - Analytics Features -->
                                 <feature>
                                     <id>org.wso2.carbon.analytics.core.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.analytics.core.server.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
