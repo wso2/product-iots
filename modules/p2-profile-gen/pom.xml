@@ -198,9 +198,6 @@
                                     org.jaggeryjs.modules:i18n.feature:${jaggery.extensions.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.jaggeryjs.modules:jaggery-test.feature:${jaggery.extensions.test.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.jaggeryjs.modules:ws.feature:${jaggery.extensions.version}
                                 </featureArtifactDef>
                                 <!-- End of Jaggery Features -->
@@ -868,10 +865,6 @@
                                 <feature>
                                     <id>org.jaggeryjs.modules.i18n.feature.group</id>
                                     <version>${jaggery.extensions.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.jaggeryjs.modules.jaggery-test.feature.group</id>
-                                    <version>${jaggery.extensions.test.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.modules.ws.feature.group</id>
