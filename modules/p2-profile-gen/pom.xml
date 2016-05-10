@@ -523,9 +523,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.hostobjects.oidc.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
-                                <!--<featureArtifactDef>-->
-                                <!--org.wso2.carbon.apimgt:org.wso2.carbon.forum.server.feature:${carbon.api.mgt.version}-->
-                                <!--</featureArtifactDef>-->
                                 <!-- End of API Management Features -->
 
                                 <!--- TCP Transport -->
@@ -688,15 +685,8 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.event.execution.manager.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
-                                <!-- START - Tools -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.commons:org.wso2.carbon.tryit.feature:${carbon.commons.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.event-processing:org.wso2.carbon.siddhi.tryit.feature:${carbon.event-processing.version}
-                                </featureArtifactDef>
-                                <!-- END - Tools -->
-                                <featureArtifactDef>
+                                
+				<featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <!--End of DAS Feature-->
@@ -1463,16 +1453,6 @@
                                 </feature>
 
                                 <!-- ************** END - EVENT PROCESSING FEATURES ************ -->
-                                <!--START - Tools-->
-                                <feature>
-                                    <id>org.wso2.carbon.tryit.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.siddhi.tryit.feature.group</id>
-                                    <version>${carbon.event-processing.version}</version>
-                                </feature>
-                                <!--END - Tools-->
                                 <feature>
                                     <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
                                     <version>${carbon.dashboard.version}</version>
