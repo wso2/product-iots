@@ -472,21 +472,7 @@
             </excludes>
         </fileSet>
 
-        <!-- Copying API Manager Publisher and Store Jaggery apps -->
-        <fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-publisher/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-publisher
-            </outputDirectory>
-            <excludes>
-                <exclude>publisherLogo/**</exclude>
-                <exclude>publisherTheme/**</exclude>
-                <exclude>publisherSite/**</exclude>
-                <exclude>footer/**</exclude>
-                <exclude>localstyles.css</exclude>
-            </excludes>
-        </fileSet>
+        <!-- Copying API Manager Store Jaggery app -->
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/
@@ -951,15 +937,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying remote-appmanager-config.xml -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/remote-appmanager-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <!--certificate config file-->
         <file>
             <source>
@@ -1003,15 +980,6 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/tasks-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <!--app management config file-->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/app-manager.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <!--License Config file-->
