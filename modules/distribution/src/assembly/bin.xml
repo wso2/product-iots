@@ -897,6 +897,13 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
+
+	<!-- Copy APILifeCycle.xml -->
+	<file>
+            <source>src/repository/resources/lifecycles/APILifeCycle.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/lifecycles</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
         <!-- Copying broker.xml -->
         <file>
             <source>src/repository/conf/broker.xml</source>
