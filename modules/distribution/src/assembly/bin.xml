@@ -1352,6 +1352,22 @@
         </file>
         <file>
             <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/mqtt.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/xmpp.properties
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot/devicemgt-config.xsd
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/iot</outputDirectory>
