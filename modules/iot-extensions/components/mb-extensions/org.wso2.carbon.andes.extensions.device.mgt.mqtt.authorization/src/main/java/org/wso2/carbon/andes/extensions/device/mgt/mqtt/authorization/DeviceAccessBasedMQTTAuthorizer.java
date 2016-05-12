@@ -24,8 +24,10 @@ import org.wso2.andes.configuration.enums.MQTTAuthoriztionPermissionLevel;
 import org.wso2.andes.mqtt.MQTTAuthorizationSubject;
 import org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.internal.AuthorizationDataHolder;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
-import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
-import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
+import org.wso2.carbon.user.api.UserRealm;
+import org.wso2.carbon.user.api.UserStoreException;
+
+import java.util.List;
 
 /**
  * Authorize the connecting users against Carbon Permission Model. Intended usage is
@@ -35,35 +37,32 @@ import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorization
  */
 public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
     private static final Logger logger = Logger.getLogger(DeviceAccessBasedMQTTAuthorizer.class);
+    private static final String CONNECTION_PERMISSION = "/permission/admin/device-mgt/user";
+    private static final String SCOPE_IDENTIFIER = "scope";
+
     /**
      * {@inheritDoc} Authorize the user against carbon device mgt model.
      */
     @Override
     public boolean isAuthorizedForTopic(MQTTAuthorizationSubject authorizationSubject, String topic,
                                         MQTTAuthoriztionPermissionLevel permissionLevel) {
-        try {
-            String topics[] = topic.split("/");
-            if (topics.length < 3) {
-                return false;
-            }
-            String tenantIdFromTopic = topics[0];
-            if (!tenantIdFromTopic.equals(authorizationSubject.getTenantDomain())) {
-                return false;
-            }
-            String deviceTypeFromTopic = topics[1];
-            String deviceIdFromTopic = topics[2];
-            PrivilegedCarbonContext.startTenantFlow();
-            PrivilegedCarbonContext.getThreadLocalCarbonContext().setTenantDomain(
-                    authorizationSubject.getTenantDomain(), true);
-            PrivilegedCarbonContext.getThreadLocalCarbonContext().setUsername(authorizationSubject.getUsername());
-            return AuthorizationDataHolder.getInstance().getDeviceAccessAuthorizationService().isUserAuthorized(
-                    new DeviceIdentifier(deviceIdFromTopic, deviceTypeFromTopic));
-        } catch (DeviceAccessAuthorizationException e) {
-            logger.error("Failed on Device Access Authorization for user " + authorizationSubject.getUsername(), e);
-        } finally {
-            PrivilegedCarbonContext.endTenantFlow();
+        String topics[] = topic.split("/");
+        if (topics.length < 3) {
+            return false;
         }
-        return false;
+        String tenantIdFromTopic = topics[0];
+        if (!tenantIdFromTopic.equals(authorizationSubject.getTenantDomain())) {
+            return false;
+        }
+        String deviceTypeFromTopic = topics[1];
+        String deviceIdFromTopic = topics[2];
+        List<String> scopes = (List<String>) authorizationSubject.getProperties().get(SCOPE_IDENTIFIER);
+        if (scopes != null) {
+            for (String scope : scopes) {
+                //TODO : have to validate token with scopes.
+            }
+        }
+        return true;
     }
 
     /**
@@ -71,6 +70,36 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
      */
     @Override
     public boolean isAuthorizedToConnect(MQTTAuthorizationSubject authorizationSubject) {
-        return true;
+        return isUserAuthorized(authorizationSubject, CONNECTION_PERMISSION, "ui.execute");
+    }
+
+    /**
+     * Check whether the client is authorized with the given permission and action.
+     *
+     * @param authorizationSubject this contains the client information
+     * @param permission           Carbon permission that requires for the use
+     * @param action               Carbon permission action that requires for the given permission.
+     * @return boolean - true if user is authorized else return false.
+     */
+    private boolean isUserAuthorized(MQTTAuthorizationSubject authorizationSubject, String permission, String action) {
+        String username = authorizationSubject.getUsername();
+        try {
+            PrivilegedCarbonContext.startTenantFlow();
+            PrivilegedCarbonContext.getThreadLocalCarbonContext().setTenantDomain(
+                    authorizationSubject.getTenantDomain(), true);
+            int tenantId = PrivilegedCarbonContext.getThreadLocalCarbonContext().getTenantId();
+            UserRealm userRealm = AuthorizationDataHolder.getInstance().getRealmService()
+                    .getTenantUserRealm(tenantId);
+            if (userRealm != null && userRealm.getAuthorizationManager() != null) {
+                return userRealm.getAuthorizationManager().isUserAuthorized(username, permission, action);
+            }
+            return false;
+        } catch (UserStoreException e) {
+            String errorMsg = String.format("Unable to authorize the user : %s", username);
+            logger.error(errorMsg, e);
+            return false;
+        } finally {
+            PrivilegedCarbonContext.endTenantFlow();
+        }
     }
 }

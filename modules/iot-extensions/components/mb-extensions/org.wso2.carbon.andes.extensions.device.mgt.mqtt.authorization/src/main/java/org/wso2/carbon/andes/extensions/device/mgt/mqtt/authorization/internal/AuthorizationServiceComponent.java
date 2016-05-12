@@ -21,7 +21,6 @@ package org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.internal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.service.component.ComponentContext;
-import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationService;
 import org.wso2.carbon.user.core.service.RealmService;
 
 /**
@@ -32,12 +31,6 @@ import org.wso2.carbon.user.core.service.RealmService;
  * policy="dynamic"
  * bind="setRealmService"
  * unbind="unsetRealmService"
- * @scr.reference name="org.wso2.carbon.device.access.authorization"
- * interface="org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationService"
- * cardinality="1..1"
- * policy="dynamic"
- * bind="setDeviceAccessAuthorizationService"
- * unbind="unsetDeviceAccessAuthorizationService"
  */
 @SuppressWarnings("unused")
 public class AuthorizationServiceComponent {
@@ -74,20 +67,6 @@ public class AuthorizationServiceComponent {
             log.debug("Unsetting Realm Service");
         }
         AuthorizationDataHolder.getInstance().setRealmService(null);
-    }
-
-    protected void setDeviceAccessAuthorizationService(DeviceAccessAuthorizationService deviceAccessAuthorizationService) {
-        if (log.isDebugEnabled()) {
-            log.debug("Setting Device Access Authorization Service");
-        }
-        AuthorizationDataHolder.getInstance().setDeviceAccessAuthorizationService(deviceAccessAuthorizationService);
-    }
-
-    protected void unsetDeviceAccessAuthorizationService(DeviceAccessAuthorizationService deviceAccessAuthorizationService) {
-        if (log.isDebugEnabled()) {
-            log.debug("Removing Device Access Authorization Service");
-        }
-        AuthorizationDataHolder.getInstance().setDeviceAccessAuthorizationService(null);
     }
 
 }

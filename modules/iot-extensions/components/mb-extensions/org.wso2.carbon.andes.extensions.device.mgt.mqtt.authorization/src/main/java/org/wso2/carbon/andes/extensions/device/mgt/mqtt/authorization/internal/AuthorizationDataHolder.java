@@ -18,7 +18,6 @@
 
 package org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.internal;
 
-import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationService;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.user.core.tenant.TenantManager;
 
@@ -26,7 +25,6 @@ public class AuthorizationDataHolder {
 
     private RealmService realmService;
     private TenantManager tenantManager;
-    private DeviceAccessAuthorizationService deviceAccessAuthorizationService;
 
     private static AuthorizationDataHolder thisInstance = new AuthorizationDataHolder();
 
@@ -54,14 +52,6 @@ public class AuthorizationDataHolder {
 
     public TenantManager getTenantManager() {
         return tenantManager;
-    }
-
-    public DeviceAccessAuthorizationService getDeviceAccessAuthorizationService() {
-        return deviceAccessAuthorizationService;
-    }
-
-    public void setDeviceAccessAuthorizationService(DeviceAccessAuthorizationService deviceAccessAuthorizationService) {
-        this.deviceAccessAuthorizationService = deviceAccessAuthorizationService;
     }
 
 }
