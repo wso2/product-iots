@@ -136,15 +136,14 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 					REQUIRED: Clients will authorized before publishing. this will execute the class given in authorzier
 					Note: authentication should be REQUIRED for authorization to be REQUIRED.
 			   -->
-				<authorization>NOT_REQUIRED</authorization>
+				<authorization>REQUIRED</authorization>
 
 				<!--Class name of the authorizer to use. class should
 					inherit from org.dna.mqtt.moquette.server.IAutherizer
 					Note: default implementation authorizes against carbon permission with the topic.
 				-->
 				<!--connectionPermission is required for a user to connect to broker-->
-				<authorizer class="org.wso2.carbon.andes.authorization.andes.CarbonPermissionBasedMQTTAuthorizer">
-					<property name="connectionPermission">/permission/admin/mqtt/connect</property>
+				<authorizer class="org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.DeviceAccessBasedMQTTAuthorizer">
 				</authorizer>
 			</security>
 		</mqtt>

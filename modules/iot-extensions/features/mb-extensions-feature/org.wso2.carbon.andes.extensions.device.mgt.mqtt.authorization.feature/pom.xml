@@ -21,53 +21,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <artifactId>das-extensions-feature</artifactId>
+        <artifactId>mb-extensions-feature</artifactId>
         <groupId>org.wso2.iot</groupId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.carbon.event.adapter.extensions.server.feature</artifactId>
+    <artifactId>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - Event Input Adapter Server Feature</name>
+    <name>WSO2 Carbon - MQTT Authorization Feature</name>
     <url>http://wso2.org</url>
-    <description>This feature contains the bundles required for Input Event Adapter functionality</description>
+    <description>This feature contains the bundles required for mqtt authorization</description>
 
     <dependencies>
         <dependency>
             <groupId>org.wso2.iot</groupId>
-            <artifactId>org.wso2.carbon.event.output.adapter.extensions.ui</artifactId>
+            <artifactId>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization</artifactId>
         </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.wso2.iot</groupId>
-                                    <artifactId>org.wso2.carbon.event.output.adapter.extensions.ui.endpoint</artifactId>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                    <type>war</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/maven-shared-archive-resources/webapps/</outputDirectory>
-                                    <destFileName>secured-outputui.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
@@ -80,7 +54,7 @@
                             <goal>p2-feature-gen</goal>
                         </goals>
                         <configuration>
-                            <id>org.wso2.carbon.event.adapter.extensions.server</id>
+                            <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization</id>
                             <propertiesFile>../../etc/feature.properties</propertiesFile>
                             <adviceFile>
                                 <properties>
@@ -90,7 +64,7 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>
-                                    org.wso2.iot:org.wso2.carbon.event.output.adapter.extensions.ui:${carbon.iot.device.mgt.version}
+                                    org.wso2.iot:org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization:${carbon.iot.device.mgt.version}
                                 </bundleDef>
                             </bundles>
                             <importFeatures>

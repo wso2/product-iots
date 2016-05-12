@@ -20,7 +20,7 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
 
     private static ConnectedCupMQttTransportHandler connectedCupMQttTransportHandler;
 
-    private static String publishTopic = "wso2/%s/" + DEVICE_TYPE + "/%s";
+    private static String publishTopic = "%s/" + DEVICE_TYPE + "/%s";
 
     protected ConnectedCupMQttTransportHandler() {
         super(iotServerSubscriber, DEVICE_TYPE, "tcp://localhost:1883", "");
