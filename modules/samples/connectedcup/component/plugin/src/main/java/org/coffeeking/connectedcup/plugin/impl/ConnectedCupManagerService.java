@@ -57,7 +57,7 @@ public class ConnectedCupManagerService implements DeviceManagementService{
 
 	@Override
 	public ProvisioningConfig getProvisioningConfig() {
-		return new ProvisioningConfig("carbon.super", true);
+		return new ProvisioningConfig("carbon.super", false);
 	}
 
 	@Override
