@@ -55,7 +55,7 @@ public class MQTTConnector extends MQTTTransportHandler {
 
     private static final String publisherContext = "publisher";
     private static final String subscriberContext = "subscriber";
-    private static final String subscribeTopic = "wso2/" + DeviceTypeConstants.DEVICE_TYPE + "/+/" + publisherContext;
+    private static final String subscribeTopic = "wso2/+/"+ DeviceTypeConstants.DEVICE_TYPE + "/+/" + publisherContext;
     private static final String KEY_TYPE = "PRODUCTION";
     private static final String EMPTY_STRING = "";
     private static final String JSON_SERIAL_KEY = "SerialNumber";
