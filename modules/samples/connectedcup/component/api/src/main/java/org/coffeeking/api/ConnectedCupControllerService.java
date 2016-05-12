@@ -39,8 +39,7 @@ public interface ConnectedCupControllerService {
 
     @Path("device/ordercoffee")
     @POST
-    @Feature(code = "ordercoffee", name = "Order Coffee", type = "control",
-            description = "Order coffee cup")
+    @Feature(code = "ordercoffee", name = "Order Coffee", description = "Order coffee cup")
     Response orderCoffee(@QueryParam("deviceId") String deviceId);
 
     /**
