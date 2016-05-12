@@ -329,7 +329,6 @@
 #end
 </inSequence>
 <outSequence>
-<class name="org.wso2.carbon.apimgt.usage.publisher.APIMgtResponseHandler"/>
 ## check and set response caching
 #if($responseCacheEnabled)
 <cache scope="per-host" collector="true"/>
@@ -343,6 +342,7 @@
         #if($handlers.size() > 0)
 <handlers xmlns="http://ws.apache.org/ns/synapse">
 #foreach($handler in $handlers)
+#if($handler.className != 'org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageHandler')
 <handler xmlns="http://ws.apache.org/ns/synapse" class="$handler.className">
     #if($handler.hasProperties())
     #set ($map = $handler.getProperties() )
@@ -351,6 +351,7 @@
     #end
     #end
 </handler>
+#end
 #end
 </handlers>
         #end

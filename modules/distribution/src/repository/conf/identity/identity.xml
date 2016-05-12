@@ -130,7 +130,7 @@
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>password</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>refresh_token</GrantTypeName>
@@ -157,7 +157,7 @@
         <OAuthCallbackHandlers>
             <OAuthCallbackHandler Class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.DeviceMgtOAuthCallbackHandler"/>
         </OAuthCallbackHandlers>
-        <OAuthScopeValidator class="org.wso2.carbon.device.mgt.oauth.extensions.validators.PermissionBasedScopeValidator"/>
+        <OAuthScopeValidator class="org.wso2.carbon.identity.oauth2.validators.JDBCScopeValidator"/>
         <TokenValidators>
             <TokenValidator type="bearer" class="org.wso2.carbon.identity.oauth2.validators.DefaultOAuth2TokenValidator"/>
         </TokenValidators>

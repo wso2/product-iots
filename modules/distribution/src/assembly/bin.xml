@@ -489,6 +489,13 @@
                 <exclude>jagg/jagg.jag</exclude>
             </excludes>
         </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-publisher/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-publisher
+            </outputDirectory>
+        </fileSet>
 
         <!--============ Added with API Features ===============-->
         <fileSet>
@@ -510,6 +517,12 @@
             <directory>src/api-resources/synapse-configs/default/sequences</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
         </fileSet>
+
+        <fileSet>
+            <directory>src/api-resources/synapse-configs/default/sequences</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/server/synapse-configs/default/sequences</outputDirectory>
+        </fileSet>
+
         <fileSet>
             <directory>src/api-resources/api_templates</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/api_templates</outputDirectory>
