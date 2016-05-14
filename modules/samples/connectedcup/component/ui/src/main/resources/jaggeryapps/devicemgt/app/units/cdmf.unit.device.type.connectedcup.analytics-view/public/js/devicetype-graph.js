@@ -18,7 +18,7 @@
 
 var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
-function drawGraph(from, to) {
+function drawGraph_connectedcup(from, to) {
     retrieveDataAndDrawLineGraph("temperature", from, to);
     retrieveDataAndDrawLineGraph("coffeelevel", from, to);
 }

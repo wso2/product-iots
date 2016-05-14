@@ -17,7 +17,7 @@
   ~ under the License.
   -->
 
-<eventReceiver name="EventReceiver_ConnectedCup" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
+<eventReceiver name="connected_cup_receiver" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
     <from eventAdapterType="oauth-mqtt">
         <property name="topic">carbon.super/connectedcup/#</property>
         <property name="username">admin</property>

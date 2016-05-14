@@ -17,6 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Sparkscripts" version="1.0.0" type="analytics/spark" serverRole="DataAnalyticsServer">
+<artifact name="coffee_level_script" version="1.0.0" type="analytics/spark" serverRole="DataAnalyticsServer">
     <file>coffee_level_script.xml</file>
 </artifact>
