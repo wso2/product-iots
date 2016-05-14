@@ -17,7 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Eventstream_coffeelevel" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
-	<file>org.wso2.iot.devices.coffeelevel_1.0.0.json</file>
+<artifact name="connected_cup_publisher" version="1.0.0" type="event/publisher" serverRole="DataAnalyticsServer">
+    <file>connected_cup_publisher.xml</file>
 </artifact>
-

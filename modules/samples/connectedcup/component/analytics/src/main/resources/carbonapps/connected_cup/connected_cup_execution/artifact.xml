@@ -17,7 +17,7 @@
   ~ under the License.
   -->
 
-<artifact name="EventStream_ConnectedCup" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
-	<file>org.wso2.iot.connectedcup_1.0.0.json</file>
+<artifact name="connected_cup_execution" version="1.0.0" type="event/execution-plan" serverRole="DataAnalyticsServer">
+	<file>connected_cup_execution.siddhiql</file>
 </artifact>
 

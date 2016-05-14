@@ -17,12 +17,13 @@
   ~ under the License.
   -->
 
-<eventReceiver name="connectedcup_reciever" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
+<eventReceiver name="EventReceiver_ConnectedCup" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
     <from eventAdapterType="oauth-mqtt">
         <property name="topic">carbon.super/connectedcup/#</property>
         <property name="username">admin</property>
-        <property name="contentValidationParams">device_id_json_path:event.metaData.deviceId,device_id_topic_hierarchy_index:3</property>
-        <property name="contentValidation">org.wso2.carbon.device.mgt.iot.input.adapter.mqtt.util.MQTTContentValidator</property>
+        <property name="contentValidatorParams">device_id_json_path:event.metaData.deviceId,device_id_topic_hierarchy_index:2</property>
+        <property name="contentValidator">org.wso2.carbon.device.mgt.iot.input.adapter.mqtt.util.MQTTContentValidator</property>
+        <property name="contentTransformer">default</property>
         <property name="dcrUrl">https://localhost:${carbon.https.port}/dynamic-client-web/register</property>
         <property name="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
         <property name="cleanSession">true</property>

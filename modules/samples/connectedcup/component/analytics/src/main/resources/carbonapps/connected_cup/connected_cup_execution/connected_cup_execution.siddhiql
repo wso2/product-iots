@@ -1,8 +1,8 @@
 /* Enter a unique ExecutionPlan */
-@Plan:name('connectedcup_execution')
+@Plan:name('connected_cup_execution')
 
 /* Enter a unique description for ExecutionPlan */
--- @Plan:description('connectedcup_execution')
+-- @Plan:description('connected_cup_execution')
 
 /* define streams/tables and write queries here ... */
 
