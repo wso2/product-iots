@@ -57,5 +57,9 @@
 			</Operation>
 		</Operations>
 	</TaskConfiguration>
+	<DTDeploymentConfiguration>
+	        <DTHostAddress>localhost</DTHostAddress>
+	        <DTHostPort>9443</DTHostPort>
+	</DTDeploymentConfiguration>
 </DeviceMgtConfiguration>
 
