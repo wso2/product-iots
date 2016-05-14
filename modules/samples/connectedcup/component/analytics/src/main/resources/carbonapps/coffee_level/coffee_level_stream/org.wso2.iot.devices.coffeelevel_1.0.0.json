@@ -1,7 +1,7 @@
 {
   "name": "org.wso2.iot.devices.coffeelevel",
   "version": "1.0.0",
-  "nickName": "Coffee Level Data",
+  "nickName": "CoffeeLevel",
   "description": "Coffee Level data received from the Device",
   "metaData": [
     {"name":"owner","type":"STRING"},     
@@ -15,6 +15,3 @@
     }
   ]
 }
-	
-
-				                                    		
