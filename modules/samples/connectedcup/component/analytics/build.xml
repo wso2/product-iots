@@ -23,8 +23,8 @@
     <property name="target-dir" value="target/carbonapps"/>
     <property name="src-dir" value="src/main/resources/carbonapps"/>
 
-    <property name="ConnectedCup_dir" value="ConnectedCup"/>
-    <property name="CoffeeLevel_Sensor_dir" value="CoffeeLevel_Sensor"/>
+    <property name="ConnectedCup_dir" value="connected_cup"/>
+    <property name="CoffeeLevel_Sensor_dir" value="coffee_level"/>
 
     <target name="clean">
         <delete dir="${target-dir}" />

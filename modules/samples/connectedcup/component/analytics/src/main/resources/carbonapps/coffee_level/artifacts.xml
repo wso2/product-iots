@@ -18,10 +18,10 @@
   -->
 
 <artifacts>
-    <artifact name="ConnectedCup_CAPP" version="1.0.0" type="carbon/application">
-		<dependency artifact="EventStream_ConnectedCup" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="EventReceiver_ConnectedCup" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-        <dependency artifact="EventPublisher_ConnectedCup" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-        <dependency artifact="EventExecution_ConnectedCup" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+    <artifact name="coffee_level" version="1.0.0" type="carbon/application">
+		<dependency artifact="coffee_level_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="coffee_level_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="coffee_level_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="coffee_level_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
     </artifact>
 </artifacts>

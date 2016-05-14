@@ -17,6 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Eventreceiver_coffeelevel" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
-    <file>EventReceiver_coffeelevel.xml</file>
+<artifact name="Sparkscripts" version="1.0.0" type="analytics/spark" serverRole="DataAnalyticsServer">
+    <file>coffee_level_script.xml</file>
 </artifact>

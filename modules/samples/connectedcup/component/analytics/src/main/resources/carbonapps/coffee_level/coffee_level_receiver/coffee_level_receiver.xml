@@ -17,6 +17,11 @@
   ~ under the License.
   -->
 
-<artifact name="EventReceiver_ConnectedCup" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
-    <file>EventReceiver_ConnectedCup.xml</file>
-</artifact>
+<eventReceiver name="coffee_level_receiver" statistics="disable" trace="disable"
+               xmlns="http://wso2.org/carbon/eventreceiver">
+    <from eventAdapterType="wso2event">
+        <property name="events.duplicated.in.cluster">false</property>
+    </from>
+    <mapping customMapping="disable" type="wso2event"/>
+    <to streamName="org.wso2.iot.devices.coffeelevel" version="1.0.0"/>
+</eventReceiver>
