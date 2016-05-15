@@ -145,7 +145,7 @@ function downloadAgent() {
     payload.name = $inputs[0].value;
     payload.owner = $inputs[1].value;
 
-    var connectedCupRegisterURL = "/connectedcup/enrollment/devices?name=" + encodeURI(payload.name);
+    var connectedCupRegisterURL = "/connectedcup/device/register?name=" + encodeURI(payload.name);
 
     invokerUtil.post(
             connectedCupRegisterURL,
