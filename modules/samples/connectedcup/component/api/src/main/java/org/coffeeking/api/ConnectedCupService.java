@@ -19,6 +19,7 @@
 package org.coffeeking.api;
 
 import org.wso2.carbon.apimgt.annotations.api.API;
+import org.wso2.carbon.apimgt.annotations.api.Permission;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.DeviceType;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.Feature;
 
@@ -35,11 +36,12 @@ import javax.ws.rs.core.Response;
 
 @API(name = "connectedcup", version = "1.0.0", context = "/connectedcup", tags = {"connectedcup"})
 @DeviceType(value = "connectedcup")
-public interface ConnectedCupControllerService {
+public interface ConnectedCupService {
 
     @Path("device/ordercoffee")
     @POST
     @Feature(code = "ordercoffee", name = "Order Coffee", description = "Order coffee cup")
+    @Permission(scope = "connectedcup_user", permissions = {"/permission/admin/device-mgt/user/operations"})
     Response orderCoffee(@QueryParam("deviceId") String deviceId);
 
     /**
@@ -49,7 +51,13 @@ public interface ConnectedCupControllerService {
     @GET
     @Consumes("application/json")
     @Produces("application/json")
+    @Permission(scope = "connectedcup_user", permissions = {"/permission/admin/device-mgt/user/stats"})
     Response getDeviceStats(@PathParam("deviceId") String deviceId, @PathParam("sensorName") String sensor,
                                         @QueryParam("from") long from, @QueryParam("to") long to);
+
+    @Path("device/register")
+    @POST
+    @Permission(scope = "connectedcup_user", permissions = {"/permission/admin/device-mgt/user/devices"})
+    boolean register(@QueryParam("name") String name);
 
 }
