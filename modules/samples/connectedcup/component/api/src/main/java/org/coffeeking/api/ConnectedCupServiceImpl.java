@@ -23,7 +23,10 @@ import org.apache.commons.logging.LogFactory;
 import org.coffeeking.api.util.APIUtil;
 import org.coffeeking.api.util.SensorRecord;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
+import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
+import org.wso2.carbon.device.mgt.common.DeviceManagementException;
+import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
 import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
 import org.wso2.carbon.analytics.dataservice.commons.SORT;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
@@ -38,12 +41,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-public class ConnectedCupControllerServiceImpl implements ConnectedCupControllerService {
+public class ConnectedCupServiceImpl implements ConnectedCupService {
 
-    private static Log log = LogFactory.getLog(ConnectedCupControllerServiceImpl.class);
+    private static Log log = LogFactory.getLog(ConnectedCupServiceImpl.class);
 
     @Path("device/ordercoffee")
     @POST
@@ -114,6 +121,40 @@ public class ConnectedCupControllerServiceImpl implements ConnectedCupController
                 sensorEventTableName = "";
         }
         return sensorEventTableName;
+    }
+
+    @Path("device/register")
+    @POST
+    public boolean register(@QueryParam("name") String name) {
+        try {
+            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+            String deviceId = shortUUID();
+            deviceIdentifier.setId(deviceId);
+            deviceIdentifier.setType(ConnectedCupConstants.DEVICE_TYPE);
+            if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
+                return false;
+            }
+            Device device = new Device();
+            device.setDeviceIdentifier(deviceId);
+            EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+            enrolmentInfo.setDateOfEnrolment(new Date().getTime());
+            enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
+            enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
+            device.setName(name);
+            device.setType(ConnectedCupConstants.DEVICE_TYPE);
+            enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
+            device.setEnrolmentInfo(enrolmentInfo);
+            return APIUtil.getDeviceManagementService().enrollDevice(device);
+        } catch (DeviceManagementException e) {
+            return false;
+        }
+    }
+
+    private static String shortUUID() {
+        UUID uuid = UUID.randomUUID();
+        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
+        return Long.toString(l, Character.MAX_RADIX);
     }
 
 }

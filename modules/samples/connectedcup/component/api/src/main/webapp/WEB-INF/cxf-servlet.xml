@@ -27,11 +27,8 @@
 
     <jaxrs:server id="ConnectedCup" address="/">
         <jaxrs:serviceBeans>
-            <bean id="ConnectedCupControllerService"
-                  class="org.coffeeking.api.ConnectedCupControllerServiceImpl">
-            </bean>
-            <bean id="ConnectedCupManagerService"
-                  class="org.coffeeking.api.ConnectedCupManagerServiceImpl">
+            <bean id="ConnectedCupService"
+                  class="org.coffeeking.api.ConnectedCupServiceImpl">
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>

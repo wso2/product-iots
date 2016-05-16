@@ -17,11 +17,11 @@
   ~ under the License.
   -->
 
-<eventReceiver name="EventReceiver_coffeelevel" statistics="disable" trace="disable"
-               xmlns="http://wso2.org/carbon/eventreceiver">
-    <from eventAdapterType="wso2event">
-        <property name="events.duplicated.in.cluster">false</property>
-    </from>
-    <mapping customMapping="disable" type="wso2event"/>
-    <to streamName="org.wso2.iot.devices.coffeelevel" version="1.0.0"/>
-</eventReceiver>
+<artifacts>
+    <artifact name="connected_cup" version="1.0.0" type="carbon/application">
+		<dependency artifact="connected_cup_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="connected_cup_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="connected_cup_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="connected_cup_execution" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+    </artifact>
+</artifacts>

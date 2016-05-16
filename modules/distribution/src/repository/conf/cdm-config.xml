@@ -57,5 +57,10 @@
 			</Operation>
 		</Operations>
 	</TaskConfiguration>
+	<DTDeploymentConfiguration>
+		<!-- Hostname and port of Device Type Management node goes here -->
+	        <DTHostAddress>localhost</DTHostAddress>
+	        <DTHostPort>9443</DTHostPort>
+	</DTDeploymentConfiguration>
 </DeviceMgtConfiguration>
 

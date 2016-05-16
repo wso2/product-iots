@@ -17,9 +17,7 @@
   ~ under the License.
   -->
 
-<eventPublisher name="EventPublisher_ConnectedCup" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
-    <from streamName="org.wso2.iot.connectedcup" version="1.0.0"/>
-    <mapping customMapping="disable" type="wso2event"/>
-    <to eventAdapterType="iot-ui"/>
-</eventPublisher>
+<artifact name="connected_cup_stream" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
+	<file>org.wso2.iot.connectedcup_1.0.0.json</file>
+</artifact>
 

@@ -17,7 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="EventExecution_ConnectedCup" version="1.0.0" type="event/execution-plan" serverRole="DataAnalyticsServer">
-	<file>EventExecution_ConnectedCup.siddhiql</file>
+<artifact name="coffee_level_receiver" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
+    <file>coffee_level_receiver.xml</file>
 </artifact>
-

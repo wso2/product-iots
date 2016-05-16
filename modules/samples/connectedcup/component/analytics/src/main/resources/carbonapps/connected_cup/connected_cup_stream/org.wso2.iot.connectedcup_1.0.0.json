@@ -1,7 +1,7 @@
 {
   "name": "org.wso2.iot.connectedcup",
   "version": "1.0.0",
-  "nickName": "connectedcup stream",
+  "nickName": "connectedcup",
   "description": "This hold the device type stream of connectedcup",
   "metaData": [
     {"name": "owner", "type": "STRING"},

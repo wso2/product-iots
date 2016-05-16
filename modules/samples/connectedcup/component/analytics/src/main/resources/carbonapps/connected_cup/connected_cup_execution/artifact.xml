@@ -17,6 +17,7 @@
   ~ under the License.
   -->
 
-<artifact name="Eventreceiver_coffeelevel" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
-    <file>EventReceiver_coffeelevel.xml</file>
+<artifact name="connected_cup_execution" version="1.0.0" type="event/execution-plan" serverRole="DataAnalyticsServer">
+	<file>connected_cup_execution.siddhiql</file>
 </artifact>
+

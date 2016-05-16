@@ -17,6 +17,6 @@
   ~ under the License.
   -->
 
-<artifact name="Sparkscripts" version="1.0.0" type="analytics/spark" serverRole="DataAnalyticsServer">
-    <file>CoffeeLevel_Sensor_Script.xml</file>
+<artifact name="coffee_level_store" version="1.0.0" type="analytics/eventstore" serverRole="DataAnalyticsServer">
+    <file>org_wso2_iot_devices_coffeelevel.xml</file>
 </artifact>
