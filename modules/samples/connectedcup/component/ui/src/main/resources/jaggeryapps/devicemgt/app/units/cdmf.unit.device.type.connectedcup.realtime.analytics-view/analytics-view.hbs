@@ -1,6 +1,5 @@
-{{#zone "topCss"}}
-    {{css "css/graph.css"}}
-{{/zone}}
+{{unit "cdmf.unit.lib.rickshaw-graph"}}
+
 <div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
     <div class="chartWrapper" id="chartWrapper">
         <div id="y_axis" class="custom_y_axis">Temperature</div>
@@ -21,8 +20,6 @@
 </a>
 <!-- /statistics -->
 {{#zone "bottomJs"}}
-    {{js "js/d3.min.js"}}
-    {{js "js/rickshaw.min.js"}}
     {{js "js/moment.min.js"}}
     {{js "js/socket.io.min.js"}}
     {{js "js/device-stats.js"}}
