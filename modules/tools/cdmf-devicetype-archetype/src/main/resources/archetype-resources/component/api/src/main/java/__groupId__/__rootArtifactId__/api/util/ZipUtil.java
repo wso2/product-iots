@@ -18,12 +18,10 @@
 
 package ${groupId}.${rootArtifactId}.api.util;
 
+import ${groupId}.${rootArtifactId}.plugin.mqtt.MqttConfig;
+
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
-import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-import org.wso2.carbon.device.mgt.iot.controlqueue.xmpp.XmppConfig;
-import org.wso2.carbon.device.mgt.iot.exception.IoTException;
-import org.wso2.carbon.device.mgt.iot.util.IoTUtil;
-import org.wso2.carbon.device.mgt.iot.util.IotDeviceManagementUtil;
+import org.wso2.carbon.device.mgt.iot.util.Utils;
 import org.wso2.carbon.device.mgt.iot.util.ZipArchive;
 import org.wso2.carbon.utils.CarbonUtils;
 
@@ -50,30 +48,24 @@ public class ZipUtil {
 
         String sketchFolder = "repository" + File.separator + "resources" + File.separator + "sketches";
         String archivesPath = CarbonUtils.getCarbonHome() + File.separator + sketchFolder + File.separator + "archives" +
-                        File.separator + deviceId;
+                File.separator + deviceId;
         String templateSketchPath = sketchFolder + File.separator + deviceType;
         String iotServerIP;
 
         try {
-            iotServerIP = IoTUtil.getHostName();
+            iotServerIP = Utils.getServerUrl();
             String httpsServerPort = System.getProperty(HTTPS_PORT_PROPERTY);
             String httpServerPort = System.getProperty(HTTP_PORT_PROPERTY);
             String httpsServerEP = HTTPS_PROTOCOL_APPENDER + iotServerIP + ":" + httpsServerPort;
             String httpServerEP = HTTP_PROTOCOL_APPENDER + iotServerIP + ":" + httpServerPort;
             String apimEndpoint = httpsServerEP;
-            String mqttEndpoint = MqttConfig.getInstance().getMqttQueueEndpoint();
+            String mqttEndpoint = MqttConfig.getInstance().getBrokerEndpoint();
             if (mqttEndpoint.contains(LOCALHOST)) {
                 mqttEndpoint = mqttEndpoint.replace(LOCALHOST, iotServerIP);
             }
-            String xmppEndpoint = XmppConfig.getInstance().getXmppEndpoint();
-            int indexOfChar = xmppEndpoint.lastIndexOf(":");
-            if (indexOfChar != -1) {
-                xmppEndpoint = xmppEndpoint.substring(0, indexOfChar);
-            }
-            xmppEndpoint = xmppEndpoint + ":" + XmppConfig.getInstance().getSERVER_CONNECTION_PORT();
 
             Map<String, String> contextParams = new HashMap<>();
-            contextParams.put("SERVER_NAME", "wso2/" + APIUtil.getTenantDomainOftheUser());
+            contextParams.put("SERVER_NAME", APIUtil.getTenantDomainOftheUser());
             contextParams.put("DEVICE_OWNER", owner);
             contextParams.put("DEVICE_ID", deviceId);
             contextParams.put("DEVICE_NAME", deviceName);
@@ -81,15 +73,12 @@ public class ZipUtil {
             contextParams.put("HTTP_EP", httpServerEP);
             contextParams.put("APIM_EP", apimEndpoint);
             contextParams.put("MQTT_EP", mqttEndpoint);
-            contextParams.put("XMPP_EP", xmppEndpoint);
             contextParams.put("DEVICE_TOKEN", token);
             contextParams.put("DEVICE_REFRESH_TOKEN", refreshToken);
 
             ZipArchive zipFile;
-            zipFile = IotDeviceManagementUtil.getSketchArchive(archivesPath, templateSketchPath, contextParams);
+            zipFile = Utils.getSketchArchive(archivesPath, templateSketchPath, contextParams, deviceName);
             return zipFile;
-        } catch (IoTException e) {
-            throw new DeviceManagementException(e.getMessage());
         } catch (IOException e) {
             throw new DeviceManagementException("Zip File Creation Failed", e);
         }

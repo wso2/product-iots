@@ -19,8 +19,10 @@
 package ${groupId}.${rootArtifactId}.api.util;
 
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.wso2.carbon.device.mgt.analytics.data.publisher.exception.DataPublisherConfigurationException;
 import org.wso2.carbon.device.mgt.analytics.data.publisher.service.EventsPublisherService;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
@@ -28,9 +30,11 @@ import org.wso2.carbon.context.PrivilegedCarbonContext;
 
 public class ServiceUtils {
     private static final Log log = LogFactory.getLog(ServiceUtils.class);
+
     /**
      * Sensor data are published to DAS
-     * @param deviceId unique identifier of the device
+     *
+     * @param deviceId    unique identifier of the device
      * @param sensorValue current value of sensor which is set at agent side
      * @return
      */
@@ -42,8 +46,8 @@ public class ServiceUtils {
         Object metdaData[] = {owner, DeviceTypeConstants.DEVICE_TYPE, deviceId, System.currentTimeMillis()};
         Object payloadData[] = {sensorValue};
         try {
-            deviceAnalyticsService.publishEvent(DeviceTypeConstants.TEMPERATURE_STREAM_DEFINITION,
-                    DeviceTypeConstants.TEMPERATURE_STREAM_DEFINITION_VERSION, metdaData, new Object[0], payloadData);
+            deviceAnalyticsService.publishEvent(DeviceTypeConstants.SENSOR_STREAM_DEFINITION,
+                    DeviceTypeConstants.SENSOR_STREAM_DEFINITION_VERSION, metdaData, new Object[0], payloadData);
         } catch (DataPublisherConfigurationException e) {
             return false;
         }

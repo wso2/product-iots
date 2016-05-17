@@ -26,40 +26,40 @@
     it will result 403 error at the runtime.
 -->
 <PermissionConfiguration>
-	<APIVersion></APIVersion>
-	<!-- Device related APIs -->
-	<Permission>
-		<name>Get device</name>
-		<path>/device-mgt/${deviceType}/user</path>
-		<url>/enrollment/devices/*</url>
-		<method>GET</method>
-		<scope>${deviceType}_user</scope>
-	</Permission>
-	<Permission>
-		<name>Remove device</name>
-		<path>/device-mgt/${deviceType}/user</path>
-		<url>/enrollment/devices/*</url>
-		<method>DELETE</method>
-		<scope>${deviceType}_user</scope>
-	</Permission>
-	<Permission>
-		<name>Download device</name>
-		<path>/device-mgt/user</path>
-        <url>/enrollment/devices/download</url>
-		<method>GET</method>
-		<scope>${deviceType}_user</scope>
-	</Permission>
-	<Permission>
-		<name>Update device</name>
-		<path>/device-mgt/${deviceType}/user</path>
-		<url>/enrollment/devices/*</url>
-		<method>POST</method>
-		<scope>${deviceType}_user</scope>
-	</Permission>
+    <APIVersion></APIVersion>
+    <!-- Device related APIs -->
+    <Permission>
+        <name>Get device</name>
+        <path>/device-mgt/${deviceType}/user</path>
+        <url>/device/*</url>
+        <method>GET</method>
+        <scope>${deviceType}_user</scope>
+    </Permission>
+    <Permission>
+        <name>Remove device</name>
+        <path>/device-mgt/${deviceType}/user</path>
+        <url>/device/*</url>
+        <method>DELETE</method>
+        <scope>${deviceType}_user</scope>
+    </Permission>
+    <Permission>
+        <name>Download device</name>
+        <path>/device-mgt/${deviceType}/user</path>
+        <url>/device/download</url>
+        <method>GET</method>
+        <scope>${deviceType}_user</scope>
+    </Permission>
+    <Permission>
+        <name>Update device</name>
+        <path>/device-mgt/${deviceType}/user</path>
+        <url>/device/*</url>
+        <method>POST</method>
+        <scope>${deviceType}_user</scope>
+    </Permission>
     <Permission>
         <name>Get Devices</name>
         <path>/device-mgt/${deviceType}/user</path>
-        <url>/enrollment/devices</url>
+        <url>/device</url>
         <method>GET</method>
         <scope>${deviceType}_user</scope>
     </Permission>
