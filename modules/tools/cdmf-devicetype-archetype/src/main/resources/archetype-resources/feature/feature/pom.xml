@@ -86,6 +86,17 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>${groupId}</groupId>
+                                    <artifactId>${project-base-package}.analytics</artifactId>
+                                    <version>${version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>${groupId}</groupId>
                                     <artifactId>${project-base-package}.ui
                                     </artifactId>
                                     <version>${project.version}</version>
@@ -173,7 +184,7 @@
                             <adviceFile>
                                 <properties>
                                     <propertyDef>org.wso2.carbon.p2.category.type:server</propertyDef>
-                                    <propertyDef>org.eclipse.equinox.p2.type.group:false</propertyDef>
+                                    <propertyDef>org.eclipse.equinox.p2.type.group:true</propertyDef>
                                 </properties>
                             </adviceFile>
                             <bundles>
