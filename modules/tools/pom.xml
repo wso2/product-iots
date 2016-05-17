@@ -34,7 +34,6 @@
     <name>WSO2 CDMF Tools</name>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>mdm-android-agent-archetype</module>
         <module>cdmf-devicetype-archetype</module>
     </modules>
 
