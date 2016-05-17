@@ -19,6 +19,7 @@
 <archetype-descriptor name="${deviceType}">
     <requiredProperties>
         <requiredProperty key="deviceType"></requiredProperty>
+        <requiredProperty key="nameOfTheSensor"></requiredProperty>
     </requiredProperties>
     <modules>
         <module id="${rootArtifactId}-component" dir="component" name="${rootArtifactId}-component">
@@ -87,6 +88,8 @@
                                 <include>**/*.sh</include>
                                 <include>**/*.hbs</include>
                                 <include>**/*.py</include>
+                                <include>**/*-view.js</include>
+                                <include>**/*-graph.js</include>
                             </includes>
                         </fileSet>
                         <fileSet filtered="false" encoding="UTF-8">
@@ -95,6 +98,29 @@
                                 <include>**/*.png</include>
                                 <include>**/*.js</include>
                                 <include>**/*.css</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </module>
+                <module id="${groupId}.${rootArtifactId}.analytics" dir="analytics"
+                        name="${groupId}.${rootArtifactId}.analytics">
+                    <fileSets>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/assembly</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/resources/carbonapps</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory></directory>
+                            <includes>
+                                <include>build.xml</include>
                             </includes>
                         </fileSet>
                     </fileSets>

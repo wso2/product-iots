@@ -1,6 +1,8 @@
 package ${groupId}.${rootArtifactId}.api.util;
 
 import ${groupId}.${rootArtifactId}.api.dto.SensorRecord;
+
+import org.wso2.carbon.event.output.adapter.core.OutputEventAdapterService;
 import org.wso2.carbon.analytics.api.AnalyticsDataAPI;
 import org.wso2.carbon.analytics.dataservice.core.AnalyticsDataServiceUtils;
 import org.wso2.carbon.analytics.dataservice.commons.AnalyticsDataResponse;
@@ -172,12 +174,6 @@ public class APIUtil {
         return ids;
     }
 
-    /**
-     * Creates the SensorDatas from records.
-     *
-     * @param records the records
-     * @return the Map of SensorRecord <id, SensorRecord>
-     */
     public static Map<String, SensorRecord> createSensorData(List<Record> records) {
         Map<String, SensorRecord> sensorDatas = new HashMap<>();
         for (Record record : records) {
@@ -187,12 +183,6 @@ public class APIUtil {
         return sensorDatas;
     }
 
-    /**
-     * Create a SensorRecord object out of a Record object
-     *
-     * @param record the record object
-     * @return SensorRecord object
-     */
     public static SensorRecord createSensorData(Record record) {
         SensorRecord recordBean = new SensorRecord();
         recordBean.setId(record.getId());
@@ -210,5 +200,22 @@ public class APIUtil {
             throw new IllegalStateException(msg);
         }
         return analyticsDataAPI;
+    }
+
+    public static String getAuthenticatedUserTenantDomain() {
+        PrivilegedCarbonContext threadLocalCarbonContext = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+        return threadLocalCarbonContext.getTenantDomain();
+    }
+
+    public static OutputEventAdapterService getOutputEventAdapterService() {
+        PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+        OutputEventAdapterService outputEventAdapterService =
+                (OutputEventAdapterService) ctx.getOSGiService(OutputEventAdapterService.class, null);
+        if (outputEventAdapterService == null) {
+            String msg = "Device Authorization service has not initialized.";
+            log.error(msg);
+            throw new IllegalStateException(msg);
+        }
+        return outputEventAdapterService;
     }
 }

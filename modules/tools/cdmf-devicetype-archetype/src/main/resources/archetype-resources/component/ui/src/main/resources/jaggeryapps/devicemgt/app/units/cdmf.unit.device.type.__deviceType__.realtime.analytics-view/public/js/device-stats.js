@@ -63,7 +63,7 @@ $(window).load(function () {
     new Rickshaw.Graph.HoverDetail({
         graph: graph,
         formatter: function (series, x, y) {
-            var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
+            var date = '<span class="date">' + moment.unix(x*1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
             return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
         }

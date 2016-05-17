@@ -25,19 +25,12 @@
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
     <jaxrs:server id="${deviceType}" address="/">
         <jaxrs:serviceBeans>
-            <bean id="ControllerService"
-                  class="${groupId}.${rootArtifactId}.api.ControllerServiceImpl">
-                <property name="MQTTConnector" ref="communicationHandler"/>
-            </bean>
-            <bean id="ManagerService"
-                  class="${groupId}.${rootArtifactId}.api.ManagerServiceImpl">
+            <bean id="DeviceTypeService"
+                  class="${groupId}.${rootArtifactId}.api.DeviceTypeServiceImpl">
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
         </jaxrs:providers>
     </jaxrs:server>
-    <bean id="communicationHandler"
-          class="${groupId}.${rootArtifactId}.api.transport.MQTTConnector" >
-    </bean>
 </beans>

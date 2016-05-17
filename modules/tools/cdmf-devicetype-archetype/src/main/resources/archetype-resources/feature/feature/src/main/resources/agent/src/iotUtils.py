@@ -44,7 +44,7 @@ CONTROLLER_CONTEXT = configParser.get('Device-Configurations', 'controller-conte
 DEVICE_INFO = '{"owner":"' + DEVICE_OWNER + '","deviceId":"' + DEVICE_ID + '",'
 HTTPS_EP = configParser.get('Device-Configurations', 'https-ep')
 DEVICE_DATA = '"sensorValue":"{sensorValue}"'
-SENSOR_STATS = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","type":"'+ DEVICE_TYPE +'","deviceId":"' + DEVICE_ID + '","time":{:.2f}}},"payloadData":{{"temperature":{:.2f}}}}}}}'
+SENSOR_STATS = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","deviceType":"'+ DEVICE_TYPE +'","deviceId":"' + DEVICE_ID + '","time":{}}},"payloadData":{{"${nameOfTheSensor}":{:.2f}}}}}}}'
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

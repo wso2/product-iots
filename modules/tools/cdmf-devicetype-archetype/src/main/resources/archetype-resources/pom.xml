@@ -78,19 +78,16 @@
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-jaxws</artifactId>
                 <version>${cxf.version}</version>
-                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-jaxrs</artifactId>
                 <version>${cxf.version}</version>
-                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-transports-http</artifactId>
                 <version>${cxf.version}</version>
-                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
@@ -118,7 +115,6 @@
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>jsr311-api</artifactId>
                 <version>${javax.ws.rs.version}</version>
-                <!--<scope>provided</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
@@ -131,11 +127,6 @@
                 <artifactId>${project-base-package}.plugin</artifactId>
                 <version>${version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.devicemgt</groupId>
-                <artifactId>org.wso2.carbon.apimgt.webapp.publisher</artifactId>
-                <version>${carbon.device.mgt.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
@@ -300,6 +291,21 @@
                 <artifactId>h2-database-engine</artifactId>
                 <version>1.2.140.wso2v3</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.extensions</artifactId>
+                <version>${carbon.devicemgt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec.wso2</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.wso2.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -409,6 +415,8 @@
         <!--Orbit versions-->
         <orbit.h2.engine.version>1.2.140.wso2v3</orbit.h2.engine.version>
 
+        <commons-json.version.range>(3.0.0, 4.0.0]</commons-json.version.range>
+        <commons-codec.wso2.version>1.4.0.wso2v1</commons-codec.wso2.version>
         <!--XMPP/MQTT Version-->
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
         <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>

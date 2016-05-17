@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package ${groupId}.${rootArtifactId}.api.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -22,12 +23,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *These information are sent by agent in each request to server
+ * These information are sent by agent in each request to server
  */
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeviceJSON {
-    @XmlElement(required = true) public String owner;
-    @XmlElement(required = true) public String deviceId;
-    @XmlElement(required = true) public Float sensorValue;
+    @XmlElement(required = true)
+    public String owner;
+    @XmlElement(required = true)
+    public String deviceId;
+    @XmlElement(required = true)
+    public Float sensorValue;
 }

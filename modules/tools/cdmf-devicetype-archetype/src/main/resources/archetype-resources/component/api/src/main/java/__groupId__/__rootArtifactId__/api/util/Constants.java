@@ -25,8 +25,8 @@ import org.wso2.carbon.user.core.Permission;
  */
 public class Constants {
 
-	public static final String DEFAULT_PERMISSION_RESOURCE = "/permission/admin/device-mgt/${deviceType}/user";
-	public static final String DEFAULT_ROLE_NAME = "${deviceType}_user";
-	public static final Permission DEFAULT_PERMISSION[] = new Permission[]{new Permission(Constants.DEFAULT_PERMISSION_RESOURCE,
-		"ui.execute")};
+    public static final String DEFAULT_PERMISSION_RESOURCE = "/permission/admin/device-mgt/${deviceType}/user";
+    public static final String DEFAULT_ROLE_NAME = "${deviceType}_user";
+    public static final Permission DEFAULT_PERMISSION[]
+            = new Permission[]{new Permission(Constants.DEFAULT_PERMISSION_RESOURCE, "ui.execute")};
 }
