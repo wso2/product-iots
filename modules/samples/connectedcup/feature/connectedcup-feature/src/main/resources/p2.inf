@@ -13,7 +13,6 @@ org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../data
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup_${feature.version}/database/,target:${installFolder}/../../database/,overwrite:true);\
 
 instructions.unconfigure = \
-org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/connectedcup.json);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/connectedcup.xml);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/connectedcup.war);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/connected-cup-agent.war);\

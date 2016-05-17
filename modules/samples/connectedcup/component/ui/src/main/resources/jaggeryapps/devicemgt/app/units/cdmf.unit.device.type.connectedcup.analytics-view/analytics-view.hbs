@@ -1,9 +1,7 @@
-{{#zone "topCss"}}
-    {{css "css/graph.css"}}
-{{/zone}}
-<span id="details" data-devicename="{{device.name}}" data-deviceid="{{device.deviceIdentifier}}"
+<span id="connectedcup-details" data-devices="{{devices}}" data-devicename="{{device.name}}"
+      data-deviceid="{{device.deviceIdentifier}}"
       data-appcontext="{{@app.context}}"></span>
-<div id="device-chart" data-backend-api-url = {{backendApiUri}}>
+<div id="connectedcup-device-chart" data-backend-api-url = {{backendApiUri}}>
     <div class="chartWrapper" id="chartWrapper-temperature">
         <span id="span-title">Temperature</span>
         <div id="y_axis-temperature" class="custom_y_axis"></div>
@@ -30,8 +28,5 @@
 </div>
 
 {{#zone "bottomJs"}}
-    {{js "js/d3.min.js"}}
-    {{js "js/rickshaw.min.js"}}
-    {{js "js/moment.min.js"}}
     {{js "js/devicetype-graph.js"}}
 {{/zone}}
