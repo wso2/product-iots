@@ -159,7 +159,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         String toDate = String.valueOf(to);
         String query = "deviceId:" + deviceId + " AND deviceType:" +
                 DeviceTypeConstants.DEVICE_TYPE + " AND time : [" + fromDate + " TO " + toDate + "]";
-        String sensorTableName = DeviceTypeConstants.TEMPERATURE_EVENT_TABLE;
+        String sensorTableName = DeviceTypeConstants.SENSOR_EVENT_TABLE;
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
                     DeviceTypeConstants.DEVICE_TYPE))) {
