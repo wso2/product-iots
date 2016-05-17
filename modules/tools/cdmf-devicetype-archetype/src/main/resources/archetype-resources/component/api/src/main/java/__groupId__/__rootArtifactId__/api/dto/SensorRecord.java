@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This stores sensor event data for android sense.
+ * This stores sensor event data for ${deviceType}.
  */
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)

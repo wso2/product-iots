@@ -29,7 +29,7 @@ public class DeviceTypeConstants {
     public final static String STATE_OFF = "OFF";
 
     //sensor events summerized table name
-    public static final String TEMPERATURE_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_${nameOfTheSensor}";
+    public static final String SENSOR_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_${nameOfTheSensor}";
     public static final String DATA_SOURCE_NAME = "jdbc/${deviceType}DM_DB";
     public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
 
