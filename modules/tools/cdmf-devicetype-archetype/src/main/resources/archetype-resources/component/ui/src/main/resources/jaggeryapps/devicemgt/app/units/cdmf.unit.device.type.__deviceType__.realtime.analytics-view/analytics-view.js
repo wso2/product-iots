@@ -27,7 +27,7 @@ function onRequest(context) {
     if (tokenPair) {
         token =  tokenPair.accessToken;
     }
-    websocketEndpoint = websocketEndpoint + "/secured-outputui/org.wso2.iot.devices.temperature/1.0.0?" +
+    websocketEndpoint = websocketEndpoint + "/secured-outputui/org.wso2.iot.devices.${nameOfTheSensor}/1.0.0?" +
     "token="+ token +"&deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type;
     return {"device": device, "websocketEndpoint" : websocketEndpoint};
 }
