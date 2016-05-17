@@ -63,28 +63,6 @@
                 </configuration>
             </definition>
         </datasource>
-
-        <datasource>
-            <name>WSO2_SOCIAL_DB</name>
-            <description>The datasource used for Store social database</description>
-            <jndiConfig>
-                <name>jdbc/WSO2_SOCIAL_DB</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:h2:repository/database/WSO2_SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1</validationQuery>
-                    <validationInterval>30000</validationInterval>
-                </configuration>
-            </definition>
-        </datasource>
-
         <datasource>
             <name>WSO2_MB_STORE_DB</name>
             <description>The datasource used for message broker database</description>
@@ -106,21 +84,23 @@
                 </configuration>
             </definition>
         </datasource>
-
         <datasource>
-            <name>JAGH2</name>
-            <description>The datasource used for by the Jaggery Storage Manager</description>
+            <name>DM_DS</name>
+            <description>The datasource used for CDM</description>
             <jndiConfig>
-                <name>jdbc/ES_Storage</name>
+                <name>jdbc/DM_DS</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <url>jdbc:h2:repository/database/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
                 </configuration>
             </definition>
         </datasource>
