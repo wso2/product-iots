@@ -32,71 +32,37 @@ import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 
 import java.util.List;
 
-public class DeviceTypeManagerService implements DeviceManagementService{
-	private DeviceManager deviceManager;
+public class DeviceTypeManagerService implements DeviceManagementService {
+    private DeviceManager deviceManager;
 
-	@Override
-	public String getType() {
-		return DeviceTypeConstants.DEVICE_TYPE;
-	}
+    @Override
+    public String getType() {
+        return DeviceTypeConstants.DEVICE_TYPE;
+    }
 
-	@Override
-	public void init() throws DeviceManagementException {
-		this.deviceManager = new DeviceTypeManager();
-	}
+    @Override
+    public void init() throws DeviceManagementException {
+        this.deviceManager = new DeviceTypeManager();
+    }
 
-	@Override
-	public DeviceManager getDeviceManager() {
-		return deviceManager;
-	}
+    @Override
+    public DeviceManager getDeviceManager() {
+        return deviceManager;
+    }
 
-	@Override
-	public ApplicationManager getApplicationManager() {
-		return null;
-	}
+    @Override
+    public ApplicationManager getApplicationManager() {
+        return null;
+    }
 
-	@Override
-	public ProvisioningConfig getProvisioningConfig() {
-		return new ProvisioningConfig(DeviceTypeConstants.DEVICE_TYPE_PROVIDER_DOMAIN, true);
-	}
+    @Override
+    public ProvisioningConfig getProvisioningConfig() {
+        return new ProvisioningConfig(DeviceTypeConstants.DEVICE_TYPE_PROVIDER_DOMAIN, false);
+    }
 
-	@Override
-	public PushNotificationConfig getPushNotificationConfig() {
-		return null;
-	}
+    @Override
+    public PushNotificationConfig getPushNotificationConfig() {
+        return null;
+    }
 
-	/*@Override
-	public Application[] getApplications(String domain, int pageNumber, int size)
-			throws ApplicationManagementException {
-		return new Application[0];
-	}*/
-
-	/*@Override
-	public void updateApplicationStatus(DeviceIdentifier deviceId, Application application,
-										String status) throws ApplicationManagementException {
-
-	}*/
-
-	/*@Override
-	public String getApplicationStatus(DeviceIdentifier deviceId, Application application)
-			throws ApplicationManagementException {
-		return null;
-	}
-*/
-	/*@Override
-	public void installApplicationForDevices(Operation operation, List<DeviceIdentifier> deviceIdentifiers)
-			throws ApplicationManagementException {
-	}
-
-	@Override
-	public void installApplicationForUsers(Operation operation, List<String> userNameList)
-			throws ApplicationManagementException {
-
-	}
-
-	@Override
-	public void installApplicationForUserRoles(Operation operation, List<String> userRoleList)
-			throws ApplicationManagementException {
-
-	}*/
 }

@@ -20,10 +20,12 @@ package ${groupId}.${rootArtifactId}.plugin.impl.dao.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import ${groupId}.${rootArtifactId}.plugin.constants.DeviceTypeConstants;
 import ${groupId}.${rootArtifactId}.plugin.exception.DeviceMgtPluginException;
 import ${groupId}.${rootArtifactId}.plugin.impl.dao.DeviceTypeDAO;
 import ${groupId}.${rootArtifactId}.plugin.impl.util.DeviceTypeUtils;
+
 import org.wso2.carbon.device.mgt.common.Device;
 
 import java.sql.Connection;

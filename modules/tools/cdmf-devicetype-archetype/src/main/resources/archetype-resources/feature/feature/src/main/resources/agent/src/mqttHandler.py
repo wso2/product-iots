@@ -71,9 +71,9 @@ def main():
     DEV_TYPE =iotUtils.DEVICE_TYPE
     TANENT_DOMAIN = iotUtils.SERVER_NAME
     global TOPIC_TO_SUBSCRIBE
-    TOPIC_TO_SUBSCRIBE = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID
+    TOPIC_TO_SUBSCRIBE = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/command"
     global TOPIC_TO_PUBLISH
-    TOPIC_TO_PUBLISH = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/temperature"
+    TOPIC_TO_PUBLISH = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/publisher"
 
     print ("MQTT_LISTENER: MQTT_ENDPOINT is " + str(MQTT_ENDPOINT))
     print ("MQTT_LISTENER: MQTT_TOPIC is " + TOPIC_TO_SUBSCRIBE)

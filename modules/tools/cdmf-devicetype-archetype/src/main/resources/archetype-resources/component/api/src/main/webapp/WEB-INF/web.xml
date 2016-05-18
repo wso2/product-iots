@@ -26,7 +26,7 @@
     </context-param>
     <context-param>
         <param-name>isSharedWithAllTenants</param-name>
-        <param-value>true</param-value>
+        <param-value>false</param-value>
     </context-param>
     <context-param>
         <param-name>providerTenantDomain</param-name>

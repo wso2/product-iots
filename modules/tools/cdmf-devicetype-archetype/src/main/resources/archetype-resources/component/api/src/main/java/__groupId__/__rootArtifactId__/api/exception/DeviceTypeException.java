@@ -24,14 +24,6 @@ public class DeviceTypeException extends Exception {
 
     private String errorMessage;
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
     public DeviceTypeException(String msg, DeviceTypeException nestedEx) {
         super(msg, nestedEx);
         setErrorMessage(msg);
@@ -53,5 +45,13 @@ public class DeviceTypeException extends Exception {
 
     public DeviceTypeException(Throwable cause) {
         super(cause);
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

@@ -18,27 +18,20 @@
 
 var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
-function drawGraph(from, to) {
-	var backendApiUrl = $("#chart").data("backend-api-url") + "?from=" + from + "&to=" + to;
+function drawGraph_${deviceType}(from, to) {
+    $("#y_axis").html("");
+    $("#smoother").html("");
+    $("#legend").html("");
+    $("#chart").html("");
+    $("#x_axis").html("");
+    $("#slider").html("");
 
-	var successCallback = function (data) {
-		if (data) {
-			drawLineGraph(JSON.parse(data));
-		}
-	};
-	invokerUtil.get(backendApiUrl, successCallback, function (message) {
-		console.log(message);
-	});
-}
+    var devices = $("#details").data("devices");
 
-function drawLineGraph(data) {
-	var chartWrapperElmId = "#div-chart";
-	var graphWidth = $(chartWrapperElmId).width() - 50;
-	if (data.length == 0 || data.length == undefined) {
-		$("#chart").html("<br/>No data available...");
-		return;
-	}
-    $("#chart").empty();
+    var tzOffset = new Date().getTimezoneOffset() * 60;
+
+    var chartWrapperElmId = "#div-chart";
+    var graphWidth = $(chartWrapperElmId).width() - 50;
     var graphConfig = {
         element: document.getElementById("chart"),
         width: graphWidth,
@@ -53,47 +46,28 @@ function drawLineGraph(data) {
         series: []
     };
 
-    var tzOffset = new Date().getTimezoneOffset() * 60;
-
-    var min = Number.MAX_VALUE;
-    var max = Number.MIN_VALUE;
-    var range_min = 99999, range_max = 0;
-    var max_val = parseInt(data[0].values.temperature);
-    var min_val = max_val;
-    var chartData = [];
-    for (var i = 0; i < data.length; i++) {
-        var y_val = parseInt(data[i].values.temperature);
-        if (y_val > max_val) {
-            max_val = y_val;
-        } else if (y_val < min_val) {
-            min_val = y_val;
-        }
-        chartData.push(
+    if (devices) {
+        for (var i = 0; i < devices.length; i++) {
+            graphConfig['series'].push(
                 {
-                    x: parseInt(data[i].values.time) - tzOffset,
-                    y: y_val
-                }
-        );
-    }
-    if (range_max < max_val) {
-        range_max = max_val;
-    }
-    if (range_min > min_val) {
-        range_min = min_val;
-    }
-    graphConfig['series'].push(
+                    'color': palette.color(),
+                    'data': [{
+                        x: parseInt(new Date().getTime() / 1000),
+                        y: 0
+                    }],
+                    'name': devices[i].name
+                });
+        }
+    } else {
+        graphConfig['series'].push(
             {
                 'color': palette.color(),
-                'data': chartData,
-                'name': $("#details").data("devicename"),
-                'scale': d3.scale.linear().domain([Math.min(min, min_val), Math.max(max, max_val)])
-                        .nice()
-            }
-    );
-
-    if (graphConfig['series'].length == 0) {
-        $(chartWrapperElmId).html("No data available...");
-        return;
+                'data': [{
+                    x: parseInt(new Date().getTime() / 1000),
+                    y: 0
+                }],
+                'name': $("#details").data("devicename")
+            });
     }
 
     var graph = new Rickshaw.Graph(graphConfig);
@@ -106,13 +80,12 @@ function drawLineGraph(data) {
 
     xAxis.render();
 
-    var yAxis = new Rickshaw.Graph.Axis.Y.Scaled({
+    var yAxis = new Rickshaw.Graph.Axis.Y({
         graph: graph,
         orientation: 'left',
         element: document.getElementById("y_axis"),
         width: 40,
-        height: 410,
-        'scale': d3.scale.linear().domain([Math.min(min, range_min), Math.max(max, range_max)]).nice()
+        height: 410
     });
 
     yAxis.render();
@@ -131,9 +104,9 @@ function drawLineGraph(data) {
         graph: graph,
         formatter: function (series, x, y) {
             var date = '<span class="date">' +
-                       moment((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
+                moment.unix((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' +
-                         series.color + '"></span>';
+                series.color + '"></span>';
             return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
         }
     });
@@ -152,4 +125,59 @@ function drawLineGraph(data) {
         graph: graph,
         legend: legend
     });
+
+    var deviceIndex = 0;
+
+    if (devices) {
+        getData();
+    } else {
+        var backendApiUrl = $("#chart").data("backend-api-url") + "?from=" + from + "&to=" + to;
+        var successCallback = function (data) {
+            if (data) {
+                drawLineGraph(JSON.parse(data));
+            }
+        };
+        invokerUtil.get(backendApiUrl, successCallback, function (message) {
+            console.log(message);
+        });
+    }
+
+    function getData() {
+        if (deviceIndex >= devices.length) {
+            return;
+        }
+        var backendApiUrl = $("#chart").data("backend-api-url") + devices[deviceIndex].deviceIdentifier
+            + "?from=" + from + "&to=" + to;
+        var successCallback = function (data) {
+            if (data) {
+                drawLineGraph(JSON.parse(data));
+            }
+            deviceIndex++;
+            getData();
+        };
+        invokerUtil.get(backendApiUrl, successCallback, function (message) {
+            console.log(message);
+            deviceIndex++;
+            getData();
+        });
+    }
+
+    function drawLineGraph(data) {
+        if (data.length === 0 || data.length === undefined) {
+            return;
+        }
+
+        var chartData = [];
+        for (var i = 0; i < data.length; i++) {
+            chartData.push(
+                {
+                    x: parseInt(data[i].values.time) - tzOffset,
+                    y: parseInt(data[i].values.${nameOfTheSensor})
+                }
+            );
+        }
+
+        graphConfig.series[deviceIndex].data = chartData;
+        graph.update();
+    }
 }
