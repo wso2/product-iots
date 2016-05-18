@@ -510,6 +510,12 @@
             <directory>src/api-resources/synapse-configs/default/sequences</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
         </fileSet>
+
+        <fileSet>
+            <directory>src/api-resources/synapse-configs/default/sequences</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/default/sequences</outputDirectory>
+        </fileSet>
+
         <fileSet>
             <directory>src/api-resources/api_templates</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/api_templates</outputDirectory>
@@ -1005,6 +1011,15 @@
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/email-sender-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying webapp-publisher-config.xml -->
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-publisher-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
