@@ -17,6 +17,8 @@
  */
 
 function onRequest(context) {
+    var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
+
     var devices = context.unit.params.devices;
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("deviceId");
@@ -24,7 +26,7 @@ function onRequest(context) {
     if (devices) {
         return {
             "devices": stringify(devices),
-            "backendApiUri": devicemgtProps["httpsURL"] + "/android_sense/stats/"
+            "backendApiUri": devicemgtProps["httpsURL"] + "/connectedcup/stats/"
         };
     } else if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
         var deviceModule = require("/app/modules/device.js").deviceModule;
@@ -32,7 +34,7 @@ function onRequest(context) {
         if (device && device.status != "error") {
             return {
                 "device": device,
-                "backendApiUrl": devicemgtProps["httpsURL"] + "/connectedcup/stats/" + deviceId + "/sensors/"
+                "backendApiUri": devicemgtProps["httpsURL"] + "/connectedcup/stats/" + deviceId
             };
         } else {
             response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");

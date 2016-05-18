@@ -1,27 +1,29 @@
 <span id="connectedcup-details" data-devices="{{devices}}" data-devicename="{{device.name}}"
       data-deviceid="{{device.deviceIdentifier}}"
       data-appcontext="{{@app.context}}"></span>
-<div id="connectedcup-device-chart" data-backend-api-url = {{backendApiUri}}>
-    <div class="chartWrapper" id="chartWrapper-temperature">
+    <div id="connectedcup-div-chart" data-backend-api-url= {{backendApiUri}}>
+        <div class="chartWrapper" id="chartWrapper-temperature">
         <span id="span-title">Temperature</span>
+
         <div id="y_axis-temperature" class="custom_y_axis"></div>
         <div class="legend_container">
             <div id="smoother-temperature" title="Smoothing"></div>
             <div id="legend-temperature"></div>
         </div>
-        <div id="chart-temperature" class="custom_rickshaw_graph" ></div>
+        <div id="chart-temperature" class="custom_rickshaw_graph"></div>
         <div id="x_axis-temperature" class="custom_x_axis"></div>
         <div id="slider-temperature" class="custom_slider"></div>
     </div>
 
     <div class="chartWrapper" id="chartWrapper-coffeelevel">
         <span id="span-title">Coffee Level</span>
+
         <div id="y_axis-coffeelevel" class="custom_y_axis"></div>
         <div class="legend_container">
             <div id="smoother-coffeelevel" title="Smoothing"></div>
             <div id="legend-coffeelevel"></div>
         </div>
-        <div id="chart-coffeelevel" class="custom_rickshaw_graph" ></div>
+        <div id="chart-coffeelevel" class="custom_rickshaw_graph"></div>
         <div id="x_axis-coffeelevel" class="custom_x_axis"></div>
         <div id="slider-coffeelevel" class="custom_slider"></div>
     </div>
