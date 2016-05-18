@@ -244,6 +244,7 @@
             </outputDirectory>
             <includes>
                 <include>**/master-datasources.xml</include>
+                <include>**/cdm-datasources.xml</include>
             </includes>
         </fileSet>
         <fileSet>
