@@ -922,7 +922,7 @@
         <!--cdm config file-->
         <file>
             <source>
-                src/repository/conf/cdm-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cdm-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
@@ -1319,6 +1319,16 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/remote-appmanager-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+	
+	<!-- Copying virtual-fire-alarm-config.xml -->
+	<file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/device-mgt-plugins/virtual-fire-alarm/virtual-fire-alarm-config.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/device-mgt-plugins/virtual-fire-alarm</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
