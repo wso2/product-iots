@@ -25,7 +25,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.cdmf.devicetype</groupId>
     <artifactId>cdmf-devicetype-archetype</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>WSO2 CDMF Device Type Archetype</name>
