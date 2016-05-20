@@ -1214,9 +1214,9 @@
     </properties>
 
     <scm>
-        <url>https://github.com/wso2/product-mdm.git</url>
-        <developerConnection>scm:git:https://github.com/wso2/product-mdm.git</developerConnection>
-        <connection>scm:git:https://github.com/wso2/product-mdm.git</connection>
+        <url>https://github.com/wso2/product-iots.git</url>
+        <developerConnection>scm:git:https://github.com/wso2/product-iots.git</developerConnection>
+        <connection>scm:git:https://github.com/wso2/product-iots.git</connection>
         <tag>HEAD</tag>
     </scm>
 
