@@ -23,7 +23,7 @@
     <parent>
         <artifactId>das-extensions-feature</artifactId>
         <groupId>org.wso2.iot</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-alpha</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
