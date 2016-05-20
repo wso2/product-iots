@@ -30,7 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.iot.admin.styles</artifactId>
     <packaging>bundle</packaging>
-    <version>2.0.4-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>WSO2 IoT Server - UI styles</name>
     <url>http://wso2.org</url>
 
