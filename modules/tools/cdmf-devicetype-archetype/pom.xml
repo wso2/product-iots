@@ -20,13 +20,13 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2cdmf-tools</artifactId>
-        <version>1.0.0-alpha</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.cdmf.devicetype</groupId>
     <artifactId>cdmf-devicetype-archetype</artifactId>
-    <version>1.0.0-alpha</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>WSO2 CDMF Device Type Archetype</name>
     <description>WSO2 CDMF Device Type Archetype</description>
     <packaging>maven-archetype</packaging>
