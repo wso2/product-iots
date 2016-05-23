@@ -18,9 +18,7 @@
   ~ under the License.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-parent</artifactId>
@@ -399,12 +397,12 @@
                                 </featureArtifactDef>
                                 <!-- End of Governance Features -->
 
-                                <!--- Notification Support: Mail -->
+                                <!-- Notification Support: Mail -->
                                 <featureArtifactDef>
                                     org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2-transports.wso2.version}
                                 </featureArtifactDef>
 
-                                <!--- IoT Server Features -->
+                                <!-- IoT Server Features -->
                                 <featureArtifactDef>
                                     org.wso2.iot:org.wso2.iot.styles.feature:${carbon.iot.device.mgt.version}
                                 </featureArtifactDef>
@@ -540,7 +538,7 @@
                                 </featureArtifactDef>
                                 <!-- End of API Management Features -->
 
-                                <!--- TCP Transport -->
+                                <!-- TCP Transport -->
                                 <featureArtifactDef>
                                     org.apache.axis2.transport:org.apache.axis2.transport.tcp.feature:${axis2-transports.wso2.version}
                                 </featureArtifactDef>
@@ -1515,9 +1513,8 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true"
-                                         dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components">
-                                    <include name="**/bundles.info"/>
+                                <replace token="false" value="true" dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components">
+                                    <include name="**/bundles.info" />
                                 </replace>
                             </tasks>
                         </configuration>
