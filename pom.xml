@@ -17,9 +17,7 @@
   ~ under the License.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot</groupId>
@@ -1117,14 +1115,14 @@
         <carbon.governance.version>4.5.8</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
-        <carbon.device.mgt.version.range>[0.8.0, 2.0.0)</carbon.device.mgt.version.range>
+        <carbon.device.mgt.version>1.1.1-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version.range>[1.1.1, 2.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>2.1.0-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.1.1-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>5.0.4</carbon.api.mgt.version>
@@ -1214,9 +1212,9 @@
     </properties>
 
     <scm>
-        <url>https://github.com/wso2/product-mdm.git</url>
-        <developerConnection>scm:git:https://github.com/wso2/product-mdm.git</developerConnection>
-        <connection>scm:git:https://github.com/wso2/product-mdm.git</connection>
+        <url>https://github.com/wso2/product-iots.git</url>
+        <developerConnection>scm:git:https://github.com/wso2/product-iots.git</developerConnection>
+        <connection>scm:git:https://github.com/wso2/product-iots.git</connection>
         <tag>HEAD</tag>
     </scm>
 
