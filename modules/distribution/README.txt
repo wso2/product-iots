@@ -1,11 +1,11 @@
-WSO2 Mobile Device Manager (MDM)
+WSO2 IoT Server
 ----------------------
-Welcome to the WSO2 Mobile Device Manager Manager (MDM) 2.0.0-SNAPSHOT release
+Welcome to the WSO2 IoT Server (IoTS) 1.0.0-ALPHA release
 =======
 
 Key Features
 ------------
-1.  Self-service device enrollment and management with end-user MDM console
+1.  Self-service device enrollment and management with end-user IoTS console
 
 
 Installation & Running
@@ -14,68 +14,19 @@ Installation & Running
 2. Run the wso2server.sh or wso2server.bat file in the bin directory
 3. Once the server starts, point your Web browser to
    https://localhost:9443/
-4. An external API manager is necessary to access the APIs MDM exposes for Android agent.
-   Create the following APIs,
-	i. http://<HOST_NAME>:9763/cdm-android-api/enrollment/
-   	   Keeps the context as /enroll and version as 1.0.0
-	ii. http://<HOST_NAME>:9763/cdm-android-ap/devices/license
-           Keeps the context as /license and version as 1.0.0
-	iii. http://<HOST_NAME>:9763/cdm-android-ap/operations/
-   	   Keeps the context as /operation and version as 1.0.0
-
-5. After publishing these APIs, subscribe to these APIs with default app/any app.
+4. After publishing these APIs, subscribe to these APIs with default app/any app.
    In API store, go to my subscriptions and find client ID and secret.
 
-6. Please find the maven-archetype in <PRODUCT_HOME>repository/tools to generate the mdm-android-agent project & follow the README file.
-
-7. Go to MDM admin console.
-    Add a license with following properties.
-    Ex -: Provider -: Any text
-             Name -: android
-             Language -: en-us
-             Valid From -: date in {dd-mm-yyyy} format.
-  	     Valid To -: date in {dd-mm-yyyy} format.
-             License -: License Text
-
-8. Configure email account.
-   Go to Following path and open CARBON_HOME/repository/conf/axis2 and open axis2_client.xml.
-   Un comment following entry and give correct credentials for email account.
-
- <transportSender name="mailto"
-                     class="org.apache.axis2.transport.mail.MailTransportSender">
-        <parameter name="mail.smtp.from">wso2demomail@gmail.com</parameter>
-        <parameter name="mail.smtp.user">wso2demomail</parameter>
-        <parameter name="mail.smtp.password">mailpassword</parameter>
-        <parameter name="mail.smtp.host">smtp.gmail.com</parameter>
-
-        <parameter name="mail.smtp.port">587</parameter>
-        <parameter name="mail.smtp.starttls.enable">true</parameter>
-        <parameter name="mail.smtp.auth">true</parameter>
-    </transportSender>
-
-9. Install following features using carbon admin features.
-   MDM - iOS APNS Server 1.9.2.SNAPSHOT More Info.
-   MDM - iOS Device Management JAX-RS Web Application 1.9.2.SNAPSHOT More Info.
-   MDM - iOS Device Management Server.
-
-10. Change Urls and settings in ios-config.xml found in CARBON_HOME/repository/conf.
-
-11. Follow the instructions in following document to generate keys.
-    https://docs.wso2.com/display/EMM110/iOS+Server+Configurations
-
-
-For more details, see the Installation Guide
+5. Please find the maven-archetype in <PRODUCT_HOME>repository/tools to generate the mdm-android-agent project & follow the README file.
 
 System Requirements
 -------------------
 
-1. Minimum memory - 2GB
+1. Minimum memory - 4GB
 2. Portal app requires full Javascript enablement of the Web browser
 
-For known issues see
-https://wso2.org/jira/issues/?filter=12190
 
-WSO2 Mobile Device Manager (MDM) Binary Distribution Directory Structure
+WSO2 IoT Server (IoTS) Binary Distribution Directory Structure
 -----------------------------------------------------
 
   EMM_HOME
@@ -101,7 +52,7 @@ WSO2 Mobile Device Manager (MDM) Binary Distribution Directory Structure
       various supported databases.
 
     - lib
-      Contains the basic set of libraries required to startup WSO2 Enterprise Mobility Manager
+      Contains the basic set of libraries required to startup WSO2 IoT Server
       in standalone mode
 
     - repository
@@ -154,10 +105,10 @@ WSO2 Mobile Device Manager (MDM) Binary Distribution Directory Structure
       This document.
 
     - INSTALL.txt
-      This document contains information on installing WSO2 Enterprise Mobility Manager.
+      This document contains information on installing WSO2 IoT Server.
 
     - release-notes.html
-      Release information for WSO2 Enterprise Mobility Manager 2.0.0-SNAPSHOT
+      Release information for WSO2 IoT Server 1.0.0-ALPHA
 
 Secure sensitive information in carbon configuration files
 ----------------------------------------------------------
@@ -216,4 +167,4 @@ development methodology and is provided by the very same engineers who build the
 For additional support information please refer to http://wso2.com/support/
 
 ---------------------------------------------------------------------------
-(c) Copyright 2015 WSO2 Inc.
+(c) Copyright 2016 WSO2 Inc.
