@@ -33,9 +33,7 @@
     <url>http://wso2.org</url>
 
     <modules>
-        <module>components/das-extensions</module>
         <module>components/mb-extensions</module>
-        <module>features/das-extensions-feature</module>
         <module>features/mb-extensions-feature</module>
     </modules>
 

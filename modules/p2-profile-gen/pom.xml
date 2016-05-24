@@ -407,9 +407,6 @@
                                     org.wso2.iot:org.wso2.iot.styles.feature:${carbon.iot.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.iot:org.wso2.carbon.event.adapter.extensions.server.feature:${carbon.iot.device.mgt.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.iot:org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature:${carbon.iot.device.mgt.version}
                                 </featureArtifactDef>
 
@@ -739,10 +736,6 @@
                                 <!-- IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.iot.styles.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.event.adapter.extensions.server.feature.group</id>
                                     <version>${carbon.iot.device.mgt.version}</version>
                                 </feature>
                                 <feature>
