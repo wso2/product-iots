@@ -999,45 +999,6 @@
                 <artifactId>json-path</artifactId>
                 <version>${json.path.version}</version>
             </dependency>
-
-            <!--websocket dependency-->
-            <dependency>
-                <groupId>javax.websocket</groupId>
-                <artifactId>javax.websocket-api</artifactId>
-                <version>${javax.websocket.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-websocket-api</artifactId>
-                <version>${tomcat.websocket.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>${javax.version}</version>
-            </dependency>
-            <!--Das extension dependency-->
-            <dependency>
-                <groupId>org.wso2.carbon.analytics-common</groupId>
-                <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
-                <version>${carbon.analytics.common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.analytics-common</groupId>
-                <artifactId>org.wso2.carbon.event.stream.core</artifactId>
-                <version>${carbon.analytics.common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.analytics-common</groupId>
-                <artifactId>org.wso2.carbon.databridge.commons</artifactId>
-                <version>${carbon.analytics.common.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.carbon.event.output.adapter.extensions.ui</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
             <!--mqtt-->
             <dependency>
                 <groupId>org.wso2.iot</groupId>
@@ -1202,10 +1163,6 @@
         <!--json version-->
         <json-simple.version>1.1.wso2v1</json-simple.version>
         <json.path.version>0.9.1</json.path.version>
-        <!--websocket related lib versions-->
-        <tomcat.websocket.version>7.0.54</tomcat.websocket.version>
-        <javax.websocket.version>1.0</javax.websocket.version>
-        <javax.version>2.0</javax.version>
 
         <!--mqtt version-->
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
