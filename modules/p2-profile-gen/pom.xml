@@ -140,10 +140,10 @@
                              	<featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
+				                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
 			        <!-- End of Device Management Features -->
@@ -170,7 +170,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.devicetypes.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
-
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- IoT Device Management Features -->
 
                                 <!-- Carbon Deployment Features -->
@@ -588,10 +590,7 @@
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.core.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.feature:${carbon.analytics.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.hbase.server.feature:${carbon.analytics.version}
+                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.datasource.rdbms.server.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.spark.feature:${carbon.analytics.version}
@@ -621,9 +620,6 @@
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.restapi.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <!-- END - Analytics features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.data:org.wso2.carbon.datasource.reader.hadoop.server.feature:${carbon.data.version}
-                                </featureArtifactDef>
 
                                 <!-- ************** START - Capp Management ********* -->
                                 <featureArtifactDef>
@@ -793,16 +789,20 @@
                                     <id>org.wso2.carbon.device.mgt.analytics.data.publisher.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
@@ -1339,12 +1339,8 @@
                                     <id>org.wso2.carbon.analytics.core.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.analytics.datasource.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
 				                <feature>
-                                    <id>org.wso2.carbon.analytics.datasource.hbase.server.feature.group</id>
+                                    <id>org.wso2.carbon.analytics.datasource.rdbms.server.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
