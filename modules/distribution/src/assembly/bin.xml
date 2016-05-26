@@ -96,7 +96,6 @@
                 <exclude>**/axis2-transport-mail_1.1.0.wso2v13.jar</exclude>
                 <exclude>**/commons-digester_1.8.1.wso2v1.jar</exclude>
                 <exclude>**/org.apache.commons.configuration_1.10.0.jar</exclude>
-                <exclude>**/apache-zookeeper_3.3.4.wso2v1.jar</exclude>
                 <exclude>**/commons-configuration_1.6.0.wso2v1.jar</exclude>
                 <exclude>**/net.minidev.json-smart_1.2.0.jar</exclude>
                 <exclude>**/libthrift_0.7.0.wso2v2.jar</exclude>
