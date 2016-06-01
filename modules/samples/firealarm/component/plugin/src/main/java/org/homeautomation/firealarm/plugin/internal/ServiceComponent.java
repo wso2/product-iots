@@ -18,55 +18,96 @@
 
 package org.homeautomation.firealarm.plugin.internal;
 
+import org.homeautomation.firealarm.plugin.impl.util.DeviceTypeStartupListener;
+import org.homeautomation.firealarm.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.firealarm.plugin.impl.util.DeviceTypeUtils;
+import org.homeautomation.firealarm.plugin.impl.DeviceTypeManagerService;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.firealarm.plugin.impl.DeviceTypeManagerService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
+import org.wso2.carbon.core.ServerStartupObserver;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
+import org.wso2.carbon.event.output.adapter.core.OutputEventAdapterService;
 
 /**
  * @scr.component name="org.homeautomation.firealarm.plugin.internal.ServiceComponent"
  * immediate="true"
+ * @scr.reference name="event.output.adapter.service"
+ * interface="org.wso2.carbon.event.output.adapter.core.OutputEventAdapterService"
+ * cardinality="1..1"
+ * policy="dynamic"
+ * bind="setOutputEventAdapterService"
+ * unbind="unsetOutputEventAdapterService"
  */
 
 public class ServiceComponent {
-
     private static final Log log = LogFactory.getLog(ServiceComponent.class);
     private ServiceRegistration serviceRegistration;
 
     protected void activate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {
-            log.debug("Activating firealarm Management Service Component");
+            log.debug("Activating b Management Service Component");
         }
         try {
+            DeviceTypeManagerService deviceTypeManagerService = new DeviceTypeManagerService();
             BundleContext bundleContext = ctx.getBundleContext();
             serviceRegistration =
-                    bundleContext.registerService(DeviceManagementService.class.getName(), new
-                            DeviceTypeManagerService(), null);
+                    bundleContext.registerService(DeviceManagementService.class.getName(),
+                            deviceTypeManagerService, null);
+            bundleContext.registerService(ServerStartupObserver.class.getName(), new DeviceTypeStartupListener(),
+                    null);
+            String setupOption = System.getProperty("setup");
+            if (setupOption != null) {
+                if (log.isDebugEnabled()) {
+                    log.debug("-Dsetup is enabled. Iot Device management repository schema initialization is about " +
+                            "to begin");
+                }
+                try {
+                    DeviceTypeUtils.setupDeviceManagementSchema();
+                } catch (DeviceMgtPluginException e) {
+                    log.error("Exception occurred while initializing device management database schema", e);
+                }
+            }
             if (log.isDebugEnabled()) {
-                log.debug("firealarm Management Service Component has been successfully activated");
+                log.debug("b Management Service Component has been successfully activated");
             }
         } catch (Throwable e) {
-            log.error("Error occurred while activating Fire Alarm Management Service Component", e);
+            log.error("Error occurred while activating Current Sensor Management Service Component", e);
         }
     }
 
     protected void deactivate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {
-            log.debug("De-activating firealarm Management Service Component");
+            log.debug("De-activating b Management Service Component");
         }
         try {
             if (serviceRegistration != null) {
                 serviceRegistration.unregister();
             }
             if (log.isDebugEnabled()) {
-                log.debug("Fire Alarm Management Service Component has been successfully de-activated");
+                log.debug("Current Sensor Management Service Component has been successfully de-activated");
             }
         } catch (Throwable e) {
             log.error("Error occurred while de-activating Iot Device Management bundle", e);
         }
     }
 
+    /**
+     * Initialize the Output EventAdapter Service dependency
+     *
+     * @param outputEventAdapterService Output EventAdapter Service reference
+     */
+    protected void setOutputEventAdapterService(OutputEventAdapterService outputEventAdapterService) {
+        DeviceTypeManagementDataHolder.getInstance().setOutputEventAdapterService(outputEventAdapterService);
+    }
+
+    /**
+     * De-reference the Output EventAdapter Service dependency.
+     */
+    protected void unsetOutputEventAdapterService(OutputEventAdapterService outputEventAdapterService) {
+        DeviceTypeManagementDataHolder.getInstance().setOutputEventAdapterService(null);
+    }
 }

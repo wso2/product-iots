@@ -1,0 +1,50 @@
+{{!
+  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+  WSO2 Inc. licenses this file to you under the Apache License,
+  Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied. See the License for the
+  specific language governing permissions and limitations
+  under the License.
+}}
+<span id="humidity-details" data-devices="{{devices}}" data-devicename="{{device.name}}"
+      data-deviceid="{{device.deviceIdentifier}}"
+      data-appcontext="{{@app.context}}"></span>
+<div id="humidity-div-chart" data-backend-api-url= {{backendApiUrl}}>
+    <div class="chartWrapper" id="chartWrapper-temperature">
+        <span id="span-title">Temperature</span>
+        <div id="y_axis-temperature" class="custom_y_axis"></div>
+        <div class="legend_container">
+            <div id="smoother-temperature" title="Smoothing"></div>
+            <div id="legend-temperature"></div>
+        </div>
+        <div id="chart-temperature" class="custom_rickshaw_graph" ></div>
+        <div id="x_axis-temperature" class="custom_x_axis"></div>
+        <div id="slider-temperature" class="custom_slider"></div>
+    </div>
+
+    <div class="chartWrapper" id="chartWrapper-humidity">
+        <span id="span-title">Humidity</span>
+        <div id="y_axis-humidity" class="custom_y_axis"></div>
+        <div class="legend_container">
+            <div id="smoother-humidity" title="Smoothing"></div>
+            <div id="legend-humidity"></div>
+        </div>
+        <div id="chart-humidity" class="custom_rickshaw_graph" ></div>
+        <div id="x_axis-humidity" class="custom_x_axis"></div>
+        <div id="slider-humidity" class="custom_slider"></div>
+    </div>
+
+</div>
+
+{{#zone "bottomJs"}}
+    {{js "js/firealarm.js"}}
+{{/zone}}

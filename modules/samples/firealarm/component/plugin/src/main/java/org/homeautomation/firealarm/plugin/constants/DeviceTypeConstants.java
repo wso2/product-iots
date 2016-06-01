@@ -18,16 +18,42 @@
 
 package org.homeautomation.firealarm.plugin.constants;
 
-public class DeviceTypeConstants {
+import org.wso2.carbon.utils.CarbonUtils;
+import java.io.File;
 
+public class DeviceTypeConstants {
     public final static String DEVICE_TYPE = "firealarm";
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "firealarm_DEVICE_ID";
-    public final static String SENSOR_TEMPERATURE = "temperature";
-    public final static String SENSOR_HUMIDITY = "humidity";
+    public final static String STATE_ON = "ON";
+    public final static String STATE_OFF = "OFF";
+
+    //sensor events summerized table name
+    public static final String SENSOR_EVENT_TABLE_PREFIX = "ORG_WSO2_IOT_DEVICES_";
     public static final String DATA_SOURCE_NAME = "jdbc/firealarmDM_DB";
+    public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
 
-    public final static String DEVICE_PLUGIN_PROPERTY_ACCESS_TOKEN = "accessToken";
-    public final static String DEVICE_PLUGIN_PROPERTY_REFRESH_TOKEN = "refreshToken";
+    //mqtt tranport related constants
+    public static final String MQTT_ADAPTER_NAME = "temperature_mqtt";
+    public static final String MQTT_ADAPTER_TYPE = "oauth-mqtt";
+    public static final String ADAPTER_TOPIC_PROPERTY = "topic";
+    public static final String MQTT_PORT = "\\{mqtt.broker.port\\}";
+    public static final String MQTT_BROKER_HOST = "\\{mqtt.broker.host\\}";
+    public static final String CARBON_CONFIG_PORT_OFFSET = "Ports.Offset";
+    public static final String DEFAULT_CARBON_LOCAL_IP_PROPERTY = "carbon.local.ip";
+    public static final int CARBON_DEFAULT_PORT_OFFSET = 0;
+    public static final int DEFAULT_MQTT_PORT = 1883;
+    public static final String RESOURCE = "resource";
 
+    public static final String USERNAME_PROPERTY_KEY = "username";
+    public static final String DCR_PROPERTY_KEY = "dcrUrl";
+    public static final String BROKER_URL_PROPERTY_KEY = "url";
+    public static final String SCOPES_PROPERTY_KEY = "scopes";
+    public static final String QOS_PROPERTY_KEY = "qos";
+    public static final String CLIENT_ID_PROPERTY_KEY = "qos";
+    public static final String CLEAR_SESSION_PROPERTY_KEY = "clearSession";
+
+    public static final String MQTT_CONFIG_LOCATION = CarbonUtils.getEtcCarbonConfigDirPath() + File.separator
+            + "mqtt.properties";
 }
+

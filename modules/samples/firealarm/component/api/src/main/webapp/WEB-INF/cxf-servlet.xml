@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -24,23 +23,14 @@
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
          http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
-    <jaxrs:server id="Controller" address="/">
+    <jaxrs:server id="firealarm" address="/">
         <jaxrs:serviceBeans>
-            <bean id="ControllerService"
-                  class="org.homeautomation.firealarm.api.FireAlarmControllerServiceImpl">
-                <property name="MQTTConnector" ref="communicationHandler"/>
-            </bean>
-            <bean id="ManagerService"
-                  class="org.homeautomation.firealarm.api.FireAlarmManagerServiceImpl">
-                <property name="MQTTConnector" ref="communicationHandler"/>
+            <bean id="DeviceTypeService"
+                  class="org.homeautomation.firealarm.api.DeviceTypeServiceImpl">
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
         </jaxrs:providers>
     </jaxrs:server>
-    <bean id="communicationHandler"
-          class="org.homeautomation.firealarm.api.transport.MQTTConnector">
-    </bean>
 </beans>
-

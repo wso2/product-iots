@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -18,14 +17,14 @@
   ~ under the License.
   -->
 
-<datasources-configuration>
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
     <datasources>
         <datasource>
             <name>firealarmDM_DB</name>
-            <description>The datasource used for the this device type</description>
+            <description>The datasource used for the this device type </description>
             <jndiConfig>
                 <name>jdbc/firealarmDM_DB</name>
             </jndiConfig>

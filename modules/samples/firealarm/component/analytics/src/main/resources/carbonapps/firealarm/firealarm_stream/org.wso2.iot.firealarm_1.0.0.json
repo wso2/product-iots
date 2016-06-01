@@ -1,0 +1,15 @@
+{
+  "name": "org.wso2.iot.firealarm",
+  "version": "1.0.0",
+  "nickName": "firealarm_stream",
+  "description": "This hold the device type stream of firealarm",
+  "metaData": [
+    {"name": "owner", "type": "STRING"},
+    {"name": "deviceId", "type": "STRING"},
+    {"name": "type", "type": "STRING"}
+  ],
+  "payloadData": [
+    {"name": "temperature", "type": "FLOAT"},
+    {"name": "humidity", "type": "FLOAT"}
+  ]
+}
