@@ -5,8 +5,7 @@
   "description": "This hold the device type stream of firealarm",
   "metaData": [
     {"name": "owner", "type": "STRING"},
-    {"name": "deviceId", "type": "STRING"},
-    {"name": "type", "type": "STRING"}
+    {"name": "deviceId", "type": "STRING"}
   ],
   "payloadData": [
     {"name": "temperature", "type": "FLOAT"},

@@ -58,7 +58,7 @@ function lineGraph(type, chartData) {
 		series: [{
 			'color': palette.color(),
 			'data': chartData,
-			'name': type
+			'name': type && type[0].toUpperCase() + type.slice(1)
 		}]
 	});
 
@@ -75,22 +75,17 @@ function lineGraph(type, chartData) {
 		orientation: 'left',
 		height: 300,
 		tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-		element: document.getElementById('y_axis')
+		element: document.getElementById('y_axis-' + type)
 	});
 
-	new Rickshaw.Graph.Legend({
-		graph: graph,
-		element: document.getElementById('legend-' + type)
-	});
-
-	new Rickshaw.Graph.HoverDetail({
-		graph: graph,
-		formatter: function (series, x, y) {
-			var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
-			var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-			return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-		}
-	});
+    new Rickshaw.Graph.HoverDetail({
+        graph: graph,
+        formatter: function (series, x, y) {
+            var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
+            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+        }
+    });
 
 	return graph;
 }
@@ -108,9 +103,9 @@ function connect(target) {
 		ws.onmessage = function (event) {
 			var dataPoint = JSON.parse(event.data);
 			if (dataPoint) {
-				var time = parseInt(dataPoint[4]) / 1000;
-                graphUpdate(temperatureData, time, dataPoint[5], temperature);
-				graphUpdate(humidityData, time, dataPoint[6], humidity);
+				var time = parseInt(dataPoint[0]) / 1000;
+                graphUpdate(temperatureData, time, dataPoint[3], temperature);
+				graphUpdate(humidityData, time, dataPoint[4], humidity);
 			}
 		};
 	}
@@ -124,15 +119,6 @@ function graphUpdate(chartData, xValue, yValue, graph) {
 	chartData.shift();
 	graph.update();
 }
-
-function dataUpdate(chartData, xValue, yValue) {
-	chartData.push({
-		x: parseInt(xValue),
-		y: parseFloat(yValue)
-	});
-	chartData.shift();
-}
-
 
 function disconnect() {
 	if (ws != null) {

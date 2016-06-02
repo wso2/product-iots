@@ -16,7 +16,7 @@ tmr.alarm(0, 10000, 1, function()
         print("Error reading from DHTxx")
     else
         if (client_connected) then
-            local payload = "{event:{metaData:{owner:\"${DEVICE_OWNER}\",type:\"firealarm\",deviceId:\"${DEVICE_ID}\"},payloadData:{temperature:" .. t .. ", humidity:" .. h .. "}}}"
+            local payload = "{event:{metaData:{owner:\"${DEVICE_OWNER}\",deviceId:\"${DEVICE_ID}\"},payloadData:{temperature:" .. t .. ", humidity:" .. h .. "}}}"
             m:publish("carbon.super/firealarm/${DEVICE_ID}/data", payload, 0, 0, function(client)
                 print("Published> Temperature: " .. t .. "C  Humidity: " .. h .. "%")
             end)

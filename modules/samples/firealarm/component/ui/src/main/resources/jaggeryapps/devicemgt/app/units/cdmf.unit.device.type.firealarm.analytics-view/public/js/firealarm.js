@@ -26,6 +26,7 @@ function drawGraph_firealarm(from, to) {
     var streamIndex = 0;
     var streams = ["temperature", "humidity"];
 
+    populateGraph();
 
     function populateGraph() {
         retrieveDataAndDrawLineGraph(streams[streamIndex], from, to);
@@ -167,7 +168,6 @@ function drawGraph_firealarm(from, to) {
             };
             invokerUtil.get(backendApiUrl, successCallback, function (message) {
                 console.log(message);
-                populateGraph();
             });
         }
 

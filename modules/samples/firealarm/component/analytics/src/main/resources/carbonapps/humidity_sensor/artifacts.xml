@@ -22,7 +22,6 @@
 		<dependency artifact="humidity_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
 		<dependency artifact="humidity_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
 		<dependency artifact="humidity_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-        <dependency artifact="humidity_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
 		<dependency artifact="humidity_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
     </artifact>
 </artifacts>

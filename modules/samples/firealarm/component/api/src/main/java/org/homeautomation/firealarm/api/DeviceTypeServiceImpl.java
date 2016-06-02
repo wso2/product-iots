@@ -159,16 +159,27 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
                                    @QueryParam("from") long from, @QueryParam("to") long to) {
         String fromDate = String.valueOf(from);
         String toDate = String.valueOf(to);
-        String query = "meta_deviceId:" + deviceId + " AND meta_deviceType:" +
-                       DeviceTypeConstants.DEVICE_TYPE + " AND meta_time : [" + fromDate + " TO " + toDate + "]";
-        String sensorTableName = DeviceTypeConstants.SENSOR_EVENT_TABLE_PREFIX + sensorName;
+        String query = "deviceId:" + deviceId + " AND deviceType:" +
+                       DeviceTypeConstants.DEVICE_TYPE + " AND time : [" + fromDate + " TO " + toDate + "]";
+        String sensorTableName;
+        switch (sensorName) {
+            case DeviceTypeConstants.STREAM_TEMPERATURE:
+                sensorTableName = DeviceTypeConstants.TEMPERATURE_EVENT_TABLE;
+                break;
+            case DeviceTypeConstants.STREAM_HUMIDITY:
+                sensorTableName = DeviceTypeConstants.HUMIDITY_EVENT_TABLE;
+                break;
+            default:
+                return Response.status(Response.Status.BAD_REQUEST).entity("Invalid event stream").build();
+        }
+
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
                                                                                                      DeviceTypeConstants.DEVICE_TYPE))) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             List<SortByField> sortByFields = new ArrayList<>();
-            SortByField sortByField = new SortByField("meta_time", SORT.ASC, false);
+            SortByField sortByField = new SortByField("time", SORT.ASC, false);
             sortByFields.add(sortByField);
             List<SensorRecord> sensorRecords = APIUtil.getAllEventsForDevice(sensorTableName, query, sortByFields);
             return Response.status(Response.Status.OK.getStatusCode()).entity(sensorRecords).build();

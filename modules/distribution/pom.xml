@@ -218,7 +218,6 @@ d                                        <exclude name="**/shindig.properties" /
 										<exclude name="**/digitaldisplay/**" />
 										<exclude name="**/doormanager/**" />
 										<exclude name="**/droneanalyzer/**" />
-										<exclude name="**/firealarm/**" />
 										<exclude name="**/installer/**" />
 									</fileset>
 								</copy>
