@@ -1109,8 +1109,8 @@
         <!--DAS-->
         <carbon.analytics.version>1.0.6-ALPHA</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
-        <carbon.dashboard.version>1.0.17</carbon.dashboard.version>
-        <shindig.version>2.5.2</shindig.version>
+        <carbon.dashboard.version>1.0.18</carbon.dashboard.version>
+        <shindig.version>1.0.18</shindig.version>
         <carbon.event-processing.version>2.0.13-alpha</carbon.event-processing.version>
         <carbon.data.version>4.3.4</carbon.data.version>
 
@@ -1166,6 +1166,9 @@
 
         <!--mqtt version-->
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
+
+        <!-- CDMF Analytics -->
+        <cdmf.analytics.version>1.0.0-SNAPSHOT</cdmf.analytics.version>
     </properties>
 
     <scm>
