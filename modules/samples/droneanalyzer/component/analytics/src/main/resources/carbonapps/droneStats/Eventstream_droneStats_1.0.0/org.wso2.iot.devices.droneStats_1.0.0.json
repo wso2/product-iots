@@ -1,0 +1,29 @@
+{
+  "name": "org.wso2.iot.devices.droneStats",
+  "version": "1.0.0",
+  "nickName": "droneStats",
+  "description": "droneStats data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {"name": "quatanium_val_q1", "type": "DOUBLE"},
+    {"name": "quatanium_val_q2", "type": "DOUBLE"},
+    {"name": "quatanium_val_q3", "type": "DOUBLE"},
+    {"name": "quatanium_val_q4", "type": "DOUBLE"},
+    {"name": "velocity_x", "type": "DOUBLE"},
+    {"name": "velocity_y", "type": "DOUBLE"},
+    {"name": "velocity_z", "type": "DOUBLE"},
+    {"name": "global_location_lat", "type": "DOUBLE"},
+    {"name": "global_location_alt", "type": "DOUBLE"},
+    {"name": "global_location_lon", "type": "DOUBLE"},
+    {"name": "battery_level", "type": "DOUBLE"},
+    {"name": "battery_voltage", "type": "DOUBLE"},
+    {"name": "pitch", "type": "DOUBLE"},
+    {"name": "roll", "type": "DOUBLE"},
+    {"name": "yaw", "type": "DOUBLE"}
+  ]
+}
