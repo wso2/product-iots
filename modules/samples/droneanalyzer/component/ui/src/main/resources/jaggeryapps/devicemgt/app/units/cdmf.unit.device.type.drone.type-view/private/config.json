@@ -1,0 +1,8 @@
+
+{
+  "deviceType": {
+    "label": "drone",
+    "category": "virtual",
+    "downloadAgentUri": "drone/device/download"
+  }
+}
