@@ -198,6 +198,11 @@
                                 <importFeatureDef>org.wso2.carbon.device.mgt.server:${carbon.device.mgt.version}
                                 </importFeatureDef>
                             </importFeatures>
+                            <!--<includedFeatures>
+                                <includedFeatureDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.analytics.feature:${carbon.devicemgt.plugins.version}
+                                </includedFeatureDef>
+                            </includedFeatures>-->
                         </configuration>
                     </execution>
                 </executions>
