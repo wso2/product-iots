@@ -20,9 +20,10 @@ package org.homeautomation.firealarm.plugin.impl.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.homeautomation.firealarm.plugin.constants.DeviceTypeConstants;
-import org.homeautomation.firealarm.plugin.exception.FirealarmPluginException;
 import org.homeautomation.firealarm.plugin.impl.dao.impl.DeviceTypeDAOImpl;
+import org.homeautomation.firealarm.plugin.exception.DeviceMgtPluginException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -34,67 +35,64 @@ import java.sql.SQLException;
 public class DeviceTypeDAO {
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAO.class);
-    private static DataSource dataSource;
+    static DataSource dataSource;           // package local variable
     private static ThreadLocal<Connection> currentConnection = new ThreadLocal<>();
 
     public DeviceTypeDAO() {
-        initConnectedCupDAO();
+        initDeviceTypeDAO();
     }
 
-    public static void initConnectedCupDAO() {
+    public static void initDeviceTypeDAO() {
         try {
             Context ctx = new InitialContext();
             dataSource = (DataSource) ctx.lookup(DeviceTypeConstants.DATA_SOURCE_NAME);
         } catch (NamingException e) {
             log.error("Error while looking up the data source: " +
-                      DeviceTypeConstants.DATA_SOURCE_NAME);
+                    DeviceTypeConstants.DATA_SOURCE_NAME);
         }
-
     }
 
-    public static void beginTransaction() throws FirealarmPluginException {
+    public static void beginTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = dataSource.getConnection();
             conn.setAutoCommit(false);
             currentConnection.set(conn);
         } catch (SQLException e) {
-            throw new FirealarmPluginException(
-                    "Error occurred while retrieving datasource connection", e);
+            throw new DeviceMgtPluginException("Error occurred while retrieving datasource connection", e);
         }
     }
 
-    public static Connection getConnection() throws FirealarmPluginException {
+    public static Connection getConnection() throws DeviceMgtPluginException {
         if (currentConnection.get() == null) {
             try {
                 currentConnection.set(dataSource.getConnection());
             } catch (SQLException e) {
-                throw new FirealarmPluginException(
-                        "Error occurred while retrieving data source connection", e);
+                throw new DeviceMgtPluginException("Error occurred while retrieving data source connection",
+                        e);
             }
         }
         return currentConnection.get();
     }
 
-    public static void commitTransaction() throws FirealarmPluginException {
+    public static void commitTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
             if (conn != null) {
                 conn.commit();
             } else {
                 if (log.isDebugEnabled()) {
-                    log.debug("Datasource connection associated with the current thread is null, " +
-                              "hence commit has not been attempted");
+                    log.debug("Datasource connection associated with the current thread is null, hence commit " +
+                            "has not been attempted");
                 }
             }
         } catch (SQLException e) {
-            throw new FirealarmPluginException(
-                    "Error occurred while committing the transaction", e);
+            throw new DeviceMgtPluginException("Error occurred while committing the transaction", e);
         } finally {
             closeConnection();
         }
     }
 
-    public static void closeConnection() throws FirealarmPluginException {
+    public static void closeConnection() throws DeviceMgtPluginException {
 
         Connection con = currentConnection.get();
         if (con != null) {
@@ -107,26 +105,25 @@ public class DeviceTypeDAO {
         currentConnection.remove();
     }
 
-    public static void rollbackTransaction() throws FirealarmPluginException {
+    public static void rollbackTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
             if (conn != null) {
                 conn.rollback();
             } else {
                 if (log.isDebugEnabled()) {
-                    log.debug(
-                            "Datasource connection associated with the current thread is null, " +
-                            "hence rollback has not been attempted");
+                    log.debug("Datasource connection associated with the current thread is null, hence rollback " +
+                            "has not been attempted");
                 }
             }
         } catch (SQLException e) {
-            throw new FirealarmPluginException("Error occurred while rollback the transaction", e);
+            throw new DeviceMgtPluginException("Error occurred while rollback the transaction", e);
         } finally {
             closeConnection();
         }
     }
 
-    public DeviceTypeDAOImpl getConnectedCupDeviceDAO() {
+    public DeviceTypeDAOImpl getDeviceTypeDAO() {
         return new DeviceTypeDAOImpl();
     }
 }

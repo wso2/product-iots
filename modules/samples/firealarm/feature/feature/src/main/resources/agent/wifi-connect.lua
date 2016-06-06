@@ -1,2 +1,2 @@
 wifi.setmode(wifi.STATION)
-wifi.sta.config("SSID","Password")
+wifi.sta.config("SSID", "Password")

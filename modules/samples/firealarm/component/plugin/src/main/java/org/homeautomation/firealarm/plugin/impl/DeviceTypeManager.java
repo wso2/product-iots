@@ -20,8 +20,10 @@ package org.homeautomation.firealarm.plugin.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.firealarm.plugin.exception.FirealarmPluginException;
 import org.homeautomation.firealarm.plugin.impl.dao.DeviceTypeDAO;
+import org.homeautomation.firealarm.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.firealarm.plugin.impl.feature.DeviceTypeFeatureManager;
+import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
@@ -32,20 +34,22 @@ import org.wso2.carbon.device.mgt.common.configuration.mgt.TenantConfiguration;
 import org.wso2.carbon.device.mgt.common.license.mgt.License;
 import org.wso2.carbon.device.mgt.common.license.mgt.LicenseManagementException;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- *
+ * This represents the firealarm implementation of DeviceManagerService.
  */
 public class DeviceTypeManager implements DeviceManager {
 
     private static final Log log = LogFactory.getLog(DeviceTypeManager.class);
-
-    private static final DeviceTypeDAO connectedCupDAO = new DeviceTypeDAO();
+    private static final DeviceTypeDAO deviceTypeDAO = new DeviceTypeDAO();
+    private FeatureManager featureManager = new DeviceTypeFeatureManager();
 
     @Override
     public FeatureManager getFeatureManager() {
-        return null;
+        return featureManager;
     }
 
     @Override
@@ -66,19 +70,18 @@ public class DeviceTypeManager implements DeviceManager {
         boolean status;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Enrolling a new Connected Cup device : " + device.getDeviceIdentifier());
+                log.debug("Enrolling a new firealarm device : " + device.getDeviceIdentifier());
             }
             DeviceTypeDAO.beginTransaction();
-            status = connectedCupDAO.getConnectedCupDeviceDAO().addDevice(device);
+            status = deviceTypeDAO.getDeviceTypeDAO().addDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (FirealarmPluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (FirealarmPluginException iotDAOEx) {
-                String msg = "Error occurred while roll back the device enrol transaction :" + device.toString();
-                log.warn(msg, iotDAOEx);
+            } catch (DeviceMgtPluginException iotDAOEx) {
+                log.warn("Error occurred while roll back the device enrol transaction :" + device.toString(), iotDAOEx);
             }
-            String msg = "Error while enrolling the Connected Cup device : " + device.getDeviceIdentifier();
+            String msg = "Error while enrolling the firealarm device : " + device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -90,20 +93,20 @@ public class DeviceTypeManager implements DeviceManager {
         boolean status;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Modifying the Connected Cup device enrollment data");
+                log.debug("Modifying the firealarm device enrollment data");
             }
             DeviceTypeDAO.beginTransaction();
-            status = connectedCupDAO.getConnectedCupDeviceDAO().updateDevice(device);
+            status = deviceTypeDAO.getDeviceTypeDAO().updateDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (FirealarmPluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (FirealarmPluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg = "Error while updating the enrollment of the Connected Cup device : " +
-                         device.getDeviceIdentifier();
+            String msg = "Error while updating the enrollment of the firealarm device : " +
+                    device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -115,19 +118,19 @@ public class DeviceTypeManager implements DeviceManager {
         boolean status;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Dis-enrolling Connected Cup device : " + deviceId);
+                log.debug("Dis-enrolling firealarm device : " + deviceId);
             }
             DeviceTypeDAO.beginTransaction();
-            status = connectedCupDAO.getConnectedCupDeviceDAO().deleteDevice(deviceId.getId());
+            status = deviceTypeDAO.getDeviceTypeDAO().deleteDevice(deviceId.getId());
             DeviceTypeDAO.commitTransaction();
-        } catch (FirealarmPluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (FirealarmPluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the device dis enrol transaction :" + deviceId.toString();
                 log.warn(msg, iotDAOEx);
             }
-            String msg = "Error while removing the Connected Cup device : " + deviceId.getId();
+            String msg = "Error while removing the firealarm device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -139,15 +142,16 @@ public class DeviceTypeManager implements DeviceManager {
         boolean isEnrolled = false;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Checking the enrollment of Connected Cup device : " + deviceId.getId());
+                log.debug("Checking the enrollment of firealarm device : " + deviceId.getId());
             }
-            Device iotDevice = connectedCupDAO.getConnectedCupDeviceDAO().getDevice(deviceId.getId());
+            Device iotDevice =
+                    deviceTypeDAO.getDeviceTypeDAO().getDevice(deviceId.getId());
             if (iotDevice != null) {
                 isEnrolled = true;
             }
-        } catch (FirealarmPluginException e) {
-            String msg = "Error while checking the enrollment status of Connected Cup device : " +
-                         deviceId.getId();
+        } catch (DeviceMgtPluginException e) {
+            String msg = "Error while checking the enrollment status of firealarm device : " +
+                    deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -170,12 +174,11 @@ public class DeviceTypeManager implements DeviceManager {
         Device device;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Getting the details of Connected Cup device : " + deviceId.getId());
+                log.debug("Getting the details of firealarm device : " + deviceId.getId());
             }
-            device = connectedCupDAO.getConnectedCupDeviceDAO().getDevice(deviceId.getId());
-
-        } catch (FirealarmPluginException e) {
-            String msg = "Error while fetching the Connected Cup device : " + deviceId.getId();
+            device = deviceTypeDAO.getDeviceTypeDAO().getDevice(deviceId.getId());
+        } catch (DeviceMgtPluginException e) {
+            String msg = "Error while fetching the firealarm device : " + deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -210,30 +213,28 @@ public class DeviceTypeManager implements DeviceManager {
 
     @Override
     public boolean requireDeviceAuthorization() {
-        return false;
+        return true;
     }
 
     @Override
-    public boolean updateDeviceInfo(DeviceIdentifier deviceIdentifier, Device device)
-            throws DeviceManagementException {
+    public boolean updateDeviceInfo(DeviceIdentifier deviceIdentifier, Device device) throws DeviceManagementException {
         boolean status;
         try {
             if (log.isDebugEnabled()) {
-                log.debug(
-                        "updating the details of Connected Cup device : " + deviceIdentifier);
+                log.debug("updating the details of firealarm device : " + deviceIdentifier);
             }
             DeviceTypeDAO.beginTransaction();
-            status = connectedCupDAO.getConnectedCupDeviceDAO().updateDevice(device);
+            status = deviceTypeDAO.getDeviceTypeDAO().updateDevice(device);
             DeviceTypeDAO.commitTransaction();
-        } catch (FirealarmPluginException e) {
+        } catch (DeviceMgtPluginException e) {
             try {
                 DeviceTypeDAO.rollbackTransaction();
-            } catch (FirealarmPluginException iotDAOEx) {
+            } catch (DeviceMgtPluginException iotDAOEx) {
                 String msg = "Error occurred while roll back the update device info transaction :" + device.toString();
                 log.warn(msg, iotDAOEx);
             }
             String msg =
-                    "Error while updating the Connected Cup device : " + deviceIdentifier;
+                    "Error while updating the firealarm device : " + deviceIdentifier;
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -245,15 +246,14 @@ public class DeviceTypeManager implements DeviceManager {
         List<Device> devices;
         try {
             if (log.isDebugEnabled()) {
-                log.debug("Fetching the details of all Connected Cup devices");
+                log.debug("Fetching the details of all firealarm devices");
             }
-            devices = connectedCupDAO.getConnectedCupDeviceDAO().getAllDevices();
-        } catch (FirealarmPluginException e) {
-            String msg = "Error while fetching all Connected Cup devices.";
+            devices = deviceTypeDAO.getDeviceTypeDAO().getAllDevices();
+        } catch (DeviceMgtPluginException e) {
+            String msg = "Error while fetching all firealarm devices.";
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
         return devices;
     }
-
 }

@@ -688,8 +688,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.event.execution.manager.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
-                                
-				<featureArtifactDef>
+				                <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <!--End of DAS Feature-->
@@ -710,6 +709,13 @@
                                 <!--JWT grant type handler-->
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.oauth2.grant.jwt.feature:${identity.jwt.extension.version}
+                                </featureArtifactDef>
+                                <!-- Analytics related features -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -1487,6 +1493,15 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth2.grant.jwt.feature.group</id>
                                     <version>${identity.jwt.extension.version}</version>
+                                </feature>
+                                <!-- Analytics related features -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.cdmf.feature.group</id>
+                                    <version>${cdmf.analytics.version}</version>
                                 </feature>
                             </features>
                         </configuration>
