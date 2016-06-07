@@ -26,64 +26,62 @@
     it will result 403 error at the runtime.
 -->
 <PermissionConfiguration>
-
-	<APIVersion></APIVersion>
-	<!-- Device related APIs -->
-	<Permission>
-		<name>Get device</name>
-		<path>/device-mgt/user/devices/list</path>
-		<url>/devices/*</url>
-		<method>GET</method>
-		<scope>drone_analyzer_user</scope>
-	</Permission>
-	<Permission>
-		<name>Remove device</name>
-		<path>/device-mgt/user/devices/remove</path>
-		<url>/devices/*</url>
-		<method>DELETE</method>
-		<scope>drone_analyzer_user</scope>
-	</Permission>
-	<Permission>
-		<name>Download device</name>
-		<path>/device-mgt/user/devices/add</path>
-		<url>/devices/*/download</url>
-		<method>GET</method>
-		<scope>drone_analyzer_user</scope>
-	</Permission>
-	<Permission>
-		<name>Update device</name>
-		<path>/device-mgt/user/devices/update</path>
-		<url>/devices/*</url>
-		<method>POST</method>
-		<scope>drone_analyzer_user</scope>
-	</Permission>
+    <APIVersion></APIVersion>
+    <!-- Device related APIs -->
     <Permission>
-        <name>Get Devices</name>
-        <path>/device-mgt/user/devices</path>
-        <url>/devices</url>
+        <name>Get device</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/*</url>
         <method>GET</method>
-        <scope>drone_analyzer_user</scope>
+        <scope>drone_user</scope>
     </Permission>
     <Permission>
-        <name>Generate Link</name>
-        <path>/device-mgt/user/devices/generate_link</path>
-        <url>/devices/*/generate_link</url>
+        <name>Remove device</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/*</url>
+        <method>DELETE</method>
+        <scope>drone_user</scope>
+    </Permission>
+    <Permission>
+        <name>Download device</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/download</url>
         <method>GET</method>
-        <scope>drone_analyzer_user</scope>
+        <scope>drone_user</scope>
+    </Permission>
+    <Permission>
+        <name>Update device</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/*</url>
+        <method>POST</method>
+        <scope>drone_user</scope>
+    </Permission>
+    <Permission>
+        <name>Get Devices</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device</url>
+        <method>GET</method>
+        <scope>drone_user</scope>
     </Permission>
     <Permission>
         <name>Register Device</name>
-        <path>/device-mgt/user/device/register</path>
-        <url>/device/register/*/*/*</url>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/register</url>
         <method>POST</method>
-        <scope>drone_analyzer_device</scope>
+        <scope>drone_device</scope>
     </Permission>
     <Permission>
-        <name>Send Command</name>
-        <path>/device-mgt/user/device/send_command</path>
-        <url>/device/*/send_command</url>
+        <name>Control Sensor</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/*/change-status</url>
         <method>POST</method>
-        <scope>drone_analyzer_user</scope>
+        <scope>drone_user</scope>
     </Permission>
-
+    <Permission>
+        <name>Get Stats</name>
+        <path>/device-mgt/drone/user</path>
+        <url>/device/stats/*</url>
+        <method>GET</method>
+        <scope>drone_device</scope>
+    </Permission>
 </PermissionConfiguration>

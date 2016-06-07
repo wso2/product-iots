@@ -1,23 +1,24 @@
-DHT= require("dht_lib")
+DHT = require("dht_lib")
 
 dht_data = 2
 buzzer = 1
 gpio.mode(buzzer, gpio.OUTPUT)
 client_connected = false
-m = mqtt.Client("ESP8266-"..node.chipid(), 120, "", "")
+m = mqtt.Client("ESP8266-" .. node.chipid(), 120, "${DEVICE_TOKEN}", "")
 
-tmr.alarm(0,10000,1,function()
+tmr.alarm(0, 10000, 1, function()
     DHT.read(dht_data)
 
-    t = DHT.getTemperature()
-    h = DHT.getHumidity()
+    local t = DHT.getTemperature()
+    local h = DHT.getHumidity()
 
     if t == nil then
         print("Error reading from DHTxx")
     else
         if (client_connected) then
-            m:publish("wso2/iot/${DEVICE_OWNER}/firealarm/${DEVICE_ID}/publisher", "Temperature:"..t..":Humidity:"..h, 0, 0, function(client)
-                print("Published> Temperature: "..t.."C  Humidity: "..h.."%")
+            local payload = "{event:{metaData:{owner:\"${DEVICE_OWNER}\",deviceId:\"${DEVICE_ID}\"},payloadData:{temperature:" .. t .. ", humidity:" .. h .. "}}}"
+            m:publish("carbon.super/firealarm/${DEVICE_ID}/data", payload, 0, 0, function(client)
+                print("Published> Temperature: " .. t .. "C  Humidity: " .. h .. "%")
             end)
         else
             connectMQTTClient()
@@ -26,13 +27,13 @@ tmr.alarm(0,10000,1,function()
 end)
 
 function connectMQTTClient()
-    ip = wifi.sta.getip()
+    local ip = wifi.sta.getip()
     if ip == nil then
         print("Waiting for network")
     else
-        print("Client IP: "..ip)
+        print("Client IP: " .. ip)
         print("Trying to connect MQTT client")
-        m:connect("${SERVER_IP}", 1883, 0, function(client)
+        m:connect("${MQTT_EP}", ${MQTT_PORT}, 0, function(client)
             client_connected = true
             print("MQTT client connected")
             subscribeToMQTTQueue()
@@ -41,13 +42,13 @@ function connectMQTTClient()
 end
 
 function subscribeToMQTTQueue()
-    m:subscribe("wso2/iot/${DEVICE_OWNER}/firealarm/${DEVICE_ID}/subscriber", 0, function(client, topic, message)
+    m:subscribe("carbon.super/firealarm/${DEVICE_ID}/command", 0, function(client, topic, message)
         print("Subscribed to MQTT Queue")
     end)
     m:on("message", function(client, topic, message)
         print("MQTT message received")
         print(message)
-        buzz(message == "buzzer:ON")
+        buzz(message == "on")
     end)
     m:on("offline", function(client)
         print("Disconnected")
@@ -56,14 +57,14 @@ function subscribeToMQTTQueue()
 end
 
 function buzz(status)
-    buzzerOn=true
+    local buzzerOn = true
     if (status) then
-        tmr.alarm(1,500,1,function()
+        tmr.alarm(1, 500, 1, function()
             if buzzerOn then
-                buzzerOn=false
+                buzzerOn = false
                 gpio.write(buzzer, gpio.HIGH)
             else
-                buzzerOn=true
+                buzzerOn = true
                 gpio.write(buzzer, gpio.LOW)
             end
         end)

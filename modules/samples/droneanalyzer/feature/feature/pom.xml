@@ -15,45 +15,35 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <groupId>org.homeautomation</groupId>
         <artifactId>droneanalyzer-feature</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <version>2.1.0-SNAPSHOT</version>
-    <artifactId>${groupId}.droneanalyzer.feature</artifactId>
+    <version>1.0.0</version>
+    <artifactId>${project-base-package}.feature</artifactId>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
-    <url>http://wso2.org</url>
-
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>${project-base-package}.feature </name>
+	<url>http://wso2.org</url>
     <dependencies>
         <dependency>
             <groupId>org.homeautomation</groupId>
-            <artifactId>org.homeautomation.droneanalyzer.plugin</artifactId>
-            <version>${carbon.device.mgt.plugin.version}</version>
+            <artifactId>${project-base-package}.plugin</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.homeautomation</groupId>
-            <artifactId>org.homeautomation.droneanalyzer.api</artifactId>
-            <version>${carbon.device.mgt.plugin.version}</version>
+            <artifactId>${project-base-package}.api</artifactId>
+            <version>1.0.0</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>com.h2database.wso2</groupId>
             <artifactId>h2-database-engine</artifactId>
-	    <version>1.2.140.wso2v3</version>
         </dependency>
     </dependencies>
     <build>
@@ -82,7 +72,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -97,7 +86,18 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.homeautomation</groupId>
-                                    <artifactId>org.homeautomation.droneanalyzer.ui
+                                    <artifactId>${project-base-package}.analytics</artifactId>
+                                    <version>1.0.0</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
+                                    </outputDirectory>
+                                    <includes>**/*</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.homeautomation</groupId>
+                                    <artifactId>${project-base-package}.ui
                                     </artifactId>
                                     <version>${project.version}</version>
                                     <type>zip</type>
@@ -120,63 +120,57 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.homeautomation</groupId>
-                                    <artifactId>org.homeautomation.droneanalyzer.api
-                                    </artifactId>
+                                    <artifactId>${project-base-package}.api</artifactId>
                                     <type>war</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
                                         ${project.build.directory}/maven-shared-archive-resources/webapps/
                                     </outputDirectory>
-                                    <destFileName>drone_analyzer.war</destFileName>
+                                    <destFileName>drone.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven-antrun-plugin.version}</version>
                 <executions>
                     <execution>
-                        <!-- Creating Drone Analyser Plugin Management schema -->
-                        <id>create-drone-analyzer-plugin-mgt-schema</id>
+                        <id>create-drone-plugin-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <tasks>
-                                <echo message="########### Create Drone Analyser plugin Management H2 Schema ###########"/>
                                 <property name="db.dir"
                                           value="target/maven-shared-archive-resources/database"/>
                                 <property name="userid" value="wso2carbon"/>
                                 <property name="password" value="wso2carbon"/>
                                 <property name="dbURL"
-                                          value="jdbc:h2:file:${basedir}/${db.dir}/DroneAnalyzerDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
-
+                                  value="jdbc:h2:file:${basedir}/${db.dir}/droneDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
                                 <mkdir dir="${basedir}/${db.dir}"/>
-
                                 <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
                                      password="${password}"
                                      autocommit="true" onerror="continue">
                                     <classpath refid="maven.dependency.classpath"/>
                                     <classpath refid="maven.compile.classpath"/>
                                     <classpath refid="maven.runtime.classpath"/>
-
                                     <fileset file="${basedir}/src/main/resources/dbscripts/h2.sql"/>
                                 </sql>
-                                <echo message="##################### END ####################"/>
                             </tasks>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon-p2-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>
@@ -185,7 +179,7 @@
                             <goal>p2-feature-gen</goal>
                         </goals>
                         <configuration>
-                            <id>org.homeautomation.droneanalyzer</id>
+                            <id>${project-base-package}</id>
                             <propertiesFile>../../../features/etc/feature.properties</propertiesFile>
                             <adviceFile>
                                 <properties>
@@ -195,7 +189,7 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>
-                                    org.homeautomation:org.homeautomation.droneanalyzer.plugin:${carbon.device.mgt.plugin.version}
+                                    org.homeautomation:${project-base-package}.plugin:1.0.0
                                 </bundleDef>
                             </bundles>
                             <importFeatures>

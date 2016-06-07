@@ -19,7 +19,6 @@
 package org.homeautomation.firealarm.api.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 

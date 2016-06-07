@@ -57,9 +57,8 @@
                 <div class="col-md-7 center-container">
                     <h3>Name your device and download the agent from following link.</h3>
                     <br/>
-
                     <form id="downloadForm" method="GET"
-                          action="#">
+                          action="{{@app.context}}/api/devices/sketch/download">
                         <div id="invalid-username-error-msg" class="alert alert-danger hidden"
                              role="alert">
                             <i class="icon fw fw-error"></i><span></span>
@@ -70,7 +69,6 @@
                                        type="text" placeholder="Ex. Lobby_Fire_Alarm"
                                        name="deviceName" size="60" required>
                                 <br/>
-                                <br/>
                                 <input type="hidden" class="deviceType" name="deviceType"
                                        value="firealarm"/>
                                 <input type="hidden" class="sketchType" name="sketchType"
@@ -79,7 +77,6 @@
                         </div>
                         <div class="buttons" style="padding-bottom: 0px">
                             <a class="btn btn-operations" onclick="downloadAgent()">Download Now</a>
-                            &nbsp;&nbsp;
                             &nbsp;&nbsp;
                         </div>
                     </form>
@@ -375,4 +372,3 @@
     {{js "/js/download.js"}}
     {{js "/js/jquery.validate.js"}}
 {{/zone}}
-

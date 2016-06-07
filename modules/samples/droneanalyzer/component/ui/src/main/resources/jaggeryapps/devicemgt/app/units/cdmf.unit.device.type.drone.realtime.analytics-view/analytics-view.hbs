@@ -1,0 +1,210 @@
+{{#zone "topCss"}}
+    {{css "css/graph.css"}}
+    {{css "css/main-app.css" }}
+{{/zone}}
+<div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
+    <div class="chartWrapper" id="chartWrapper">
+        <div class=" row">
+            <div class="box col-md-12">
+                <div>
+                    <div class="col-md-0.5 col-sm-1 col-xs-2">
+                        <p>Battery Level </p>
+                    </div>
+                    <div class="col-md-4 col-sm-2 col-xs-2">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 0%;" id="batteryLevelPlaceholder">
+                                <p id="batteryLevel">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-2">
+                        <p>Battery Voltage </p>
+                    </div>
+                    <div class="col-md-4 col-sm-2 col-xs-2">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 0%;" id="batteryVoltagePlaceholder">
+                                <p id="batteryVoltage">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="box col-md-12">
+                <div class="box col-md-4">
+                    <div class="box-inner">
+                        <div class="box-header well" data-original-title="">
+                            <h2><i class="glyphicon glyphicon-list"></i> Angle of Rotation</h2>
+
+                            <div class="box-icon" id="Rotation">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content" style="position: relative;" id="objectHolder">
+                            <div class="grayscale" border-radius="2" id="virtualDrone">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box col-md-2">
+                    <div class="box-inner" style="max-height: 280px;">
+                        <div class="box-header well" data-original-title="">
+
+                            <div class="box-icon" id="AngleOfRotation">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div style="position: relative;">
+
+                                <img class="grayscale" id="imageTop"
+                                     src="{{@unit.publicUri}}/images/drone_position_controller/direction_drone.png"
+                                     style="width: 100%;"/>
+                                <img class="grayscale" id="imageBack"
+                                     src="{{@unit.publicUri}}/images/drone_position_controller/background_drone.png"
+                                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box col-md-2">
+                    <div class="box-inner" style="max-height: 280px;">
+                        <div class="box-header well" data-original-title="">
+
+                            <div class="box-icon">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div style="position: relative;">
+
+                                <img id="imageBackSecond"
+                                     src="{{@unit.publicUri}}/images/drone_position_controller/pitch_drone.png"
+                                     style="width: 100%;"/>
+                                <img id="imageTopSecond"
+                                     src="{{@unit.publicUri}}/images/drone_position_controller/background_drone.png"
+                                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box col-md-4">
+                    <div class="box-inner">
+                        <div class="box-header well" data-original-title="">
+                            <h2><i class="glyphicon glyphicon-list"></i>Live Video Stream</h2>
+
+                            <div class="box-icon" id="LiveVideoStream">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <img class="grayscale" src="{{@unit.publicUri}}/images/no_video_preview.gif"
+                                 alt="video stream" style="display: block; height:225px; margin: auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box col-md-12">
+                <div class="box col-md-4">
+                    <div class="box-inner">
+                        <div class="box-header well" data-original-title="">
+                            <h2><i class="glyphicon glyphicon-list"></i>Sensor Readings</h2>
+                            <div class="box-icon" id="SensorReadings">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content" id="basicSensoReading">
+                            <div>
+                                <p>Location</br> latitude: <label id="locationLat"></label></br>
+                                    longitude: <label id="locationLog"></label></br>
+                                    altitudes: <label id="locationAlt"></label></p>
+                                <p> Velocity:</br> x :<label id="velocityx"></label></br>
+                                    y : <label id="velocityy"></label></br>
+                                    z : <label id="velocityz"></label></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box col-md-8">
+                    <div class="box-inner">
+                        <div class="box-header well" data-original-title="">
+                            <h2><i class="glyphicon glyphicon-list-alt"></i>Realtime Plotting</h2>
+
+                            <div class="box-icon" id="RealtimePlotting">
+                                <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div class="row">
+                                <div class="box col-md-4" id="plottingMetadata" style="margin-left: 5%">
+                                    <div>
+                                        Window size : <label id="windowSizeCurrentValue">30</label>
+                                        <div id="windowSize" style="width: 100%;"></div>
+                                        <br>
+                                        Update period : <label id="windowUpdateValue">300</label>
+                                    </div>
+                                    <div id="windowUpdate" style="width: 100%;"></div>
+                                    </br>
+                                    <div style="width:100%;">Y-axis: <label>Min: <input id="rangeMin" type="text"
+                                                                                        value="-4" size="3"></label>
+                                        <label>Max: <input id="rangeMax" value="4" type="text" size="3"></label></div>
+                                    <div style="width:100%;"><select ng-model='discussionsSelect' class='form-control'
+                                                                     id="plottingAttribute">
+                                        <option value='heading' selected>Heading</option>
+                                        <option value='bank'>Bank</option>
+                                        <option value='attitude'>Attitude</option>
+                                    </select></div>
+                                    </br>
+                                    <div>
+                                        <button class="btn btn-primary" id="replotting">Replot</button>
+                                    </div>
+                                </div>
+                                <div class="box col-md-8" id="realtimeChart" style="width:20%; height: 250px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="padding-left"
+   href="{{@app.context}}/device/{{device.type}}/analytics?deviceId={{device.deviceIdentifier}}&deviceName={{device.name}}">
+    <span class="fw-stack">
+        <i class="fw fw-ring fw-stack-2x"></i>
+        <i class="fw fw-statistics fw-stack-1x"></i>
+    </span> View Device Analytics
+</a>
+<!-- /statistics -->
+{{#zone "bottomJs"}}
+    {{js "js/libs/d3.min.js"}}
+    {{js "js/libs/rickshaw.min.js"}}
+    {{js "js/libs/moment.min.js"}}
+    {{js "js/libs/socket.io.min.js"}}
+    {{js "/js/libs/three.min.js" }}
+    {{js "/js/libs/Coordinates.js" }}
+    {{js "/js/libs/OrbitAndPanControls.js" }}
+    {{js "/js/3DDroneController/controler.js" }}
+    {{js "/js/libs/jQueryRotate.js" }}
+    {{js "/js/config/config.js" }}
+    {{js "/js/common/ajaxHandler.js" }}
+    {{js "/js/modules/realtimePlotting.js" }}
+    {{js "/js/init.js" }}
+    {{js "/js/modules/controller.js" }}
+    {{js "/js/modules/flightDynamics.js" }}
+    {{js "/js/mainHandler.js" }}
+{{/zone}}

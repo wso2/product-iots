@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -16,23 +17,21 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
         <groupId>org.homeautomation</groupId>
         <artifactId>droneanalyzer-component</artifactId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <version>2.1.0-SNAPSHOT</version>
-    <artifactId>${groupId}.droneanalyzer.plugin</artifactId>
+    <version>1.0.0</version>
+    <artifactId>${project-base-package}.plugin</artifactId>
     <packaging>bundle</packaging>
-    <name>${groupId}.droneanalyzer.plugin for CDMF </name>
+    <name>${project-base-package}.plugin</name>
     <url>http://wso2.org</url>
-
     <build>
         <plugins>
             <plugin>
@@ -42,10 +41,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>${wso2.maven.compiler.source}</source>
-                    <target>${wso2.maven.compiler.target}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -55,11 +55,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>${groupId}.droneanalyzer.plugin</Bundle-SymbolicName>
-                        <Bundle-Name>${groupId}.droneanalyzer.plugin</Bundle-Name>
-                        <Bundle-Version>2.1.0-SNAPSHOT</Bundle-Version>
+                        <Bundle-SymbolicName>${project-base-package}.plugin</Bundle-SymbolicName>
+                        <Bundle-Name>${project-base-package}.plugin</Bundle-Name>
+                        <Bundle-Version>1.0.0</Bundle-Version>
                         <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
-                        <Private-Package>org.homeautomation.droneanalyzer.plugin.internal</Private-Package>
+                        <Private-Package>${project-base-package}.plugin.internal</Private-Package>
                         <Import-Package>
                             org.osgi.framework,
                             org.osgi.service.component,
@@ -70,19 +70,29 @@
                             org.wso2.carbon.device.mgt.common,
                             org.wso2.carbon.device.mgt.iot.*,
                             org.wso2.carbon.device.mgt.extensions.feature.mgt.*,
-                            org.wso2.carbon.utils.*
+                            org.wso2.carbon.utils.*,
+                            org.wso2.carbon.event.output.adapter.core,
+                            org.wso2.carbon.event.output.adapter.core.exception,
+                            org.wso2.carbon.base,
+                            org.wso2.carbon.core.util,
+                            org.wso2.carbon.context,
+                            org.wso2.carbon.core,
+                            org.apache.commons.codec.binary
                         </Import-Package>
                         <Export-Package>
-                            !org.homeautomation.droneanalyzer.plugin.internal,
-                            org.homeautomation.droneanalyzer.plugin.*
+                            !${project-base-package}.plugin.internal,
+                            ${project-base-package}.plugin.*
                         </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
+        <dependency>
+            <groupId>commons-codec.wso2</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.osgi</groupId>
             <artifactId>org.eclipse.osgi</artifactId>
@@ -100,21 +110,24 @@
             <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.iot</artifactId>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.extensions</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.utils</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.devicemgt</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.extensions</artifactId>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
         </dependency>
     </dependencies>
-
 </project>

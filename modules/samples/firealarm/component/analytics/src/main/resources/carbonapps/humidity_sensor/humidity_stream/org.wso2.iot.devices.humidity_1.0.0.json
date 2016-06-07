@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.humidity",
+  "version": "1.0.0",
+  "nickName": "Humidity Data",
+  "description": "Humidity data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},     
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},  
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "humidity","type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		
