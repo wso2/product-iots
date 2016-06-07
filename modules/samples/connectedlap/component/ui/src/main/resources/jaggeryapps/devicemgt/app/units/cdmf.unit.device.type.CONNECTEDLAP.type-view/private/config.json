@@ -1,0 +1,8 @@
+
+{
+  "deviceType": {
+    "label": "Connected Laptop",
+    "category": "iot",
+    "downloadAgentUri": "CONNECTEDLAP/device/download"
+  }
+}
