@@ -80,5 +80,5 @@ public interface DeviceTypeService {
     @GET
     @Produces("application/zip")
     @Permission(scope = "CONNECTEDLAP_user", permissions = {"/permission/admin/device-mgt/download"})
-    Response downloadSketch(@QueryParam("deviceName") String deviceName, @QueryParam("sketchType") String sketchType);
+    Response downloadSketch(@QueryParam("deviceName") String deviceName, @QueryParam("sketchType") String sketchType,@QueryParam("osType") String osType);
 }

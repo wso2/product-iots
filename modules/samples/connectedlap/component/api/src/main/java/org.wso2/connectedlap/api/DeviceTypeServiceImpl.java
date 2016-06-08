@@ -24,7 +24,7 @@ import org.wso2.connectedlap.api.util.APIUtil;
 import org.wso2.connectedlap.api.util.ZipUtil;
 import org.wso2.connectedlap.plugin.constants.DeviceTypeConstants;
 import org.wso2.connectedlap.api.DeviceTypeService;
-import org.wso2.connectedlap.plugin.impl.uti.ConnectedLapResponse;
+import org.wso2.connectedlap.plugin.impl.util.ConnectedLapResponse;
 import org.wso2.connectedlap.plugin.impl.util.ConnectedLapDevice;
 
 import org.apache.commons.io.FileUtils;
@@ -265,9 +265,9 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
      @GET
      @Produces("application/zip")
      public Response downloadSketch(@QueryParam("deviceName") String deviceName,
-                        @QueryParam("sketchType") String sketchType) {
+                        @QueryParam("sketchType") String sketchType, @QueryParam("osType") String osType) {
         try {
-            ZipArchive zipFile = createDownloadFile(APIUtil.getAuthenticatedUser(), deviceName, sketchType);
+            ZipArchive zipFile = createDownloadFile(APIUtil.getAuthenticatedUser(), deviceName, sketchType ,osType);
             Response.ResponseBuilder response = Response.ok(FileUtils.readFileToByteArray(zipFile.getZipFile()));
             response.status(Response.Status.OK);
             response.type("application/zip");
@@ -301,7 +301,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
          return Long.toString(l, Character.MAX_RADIX);
      }
 
-     private ZipArchive createDownloadFile(String owner, String deviceName, String sketchType)
+     private ZipArchive createDownloadFile(String owner, String deviceName, String sketchType , String osType)
             throws DeviceManagementException, JWTClientException, APIManagerException,
             UserStoreException {
 
@@ -329,7 +329,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
 
          ZipUtil ziputil = new ZipUtil();
          ZipArchive zipFile = ziputil.createZipFile(owner, APIUtil.getTenantDomainOftheUser(), sketchType,
-                 deviceId, deviceName, accessToken, refreshToken);
+                 deviceId, deviceName, accessToken, refreshToken,osType);
          return zipFile;
      }
 
