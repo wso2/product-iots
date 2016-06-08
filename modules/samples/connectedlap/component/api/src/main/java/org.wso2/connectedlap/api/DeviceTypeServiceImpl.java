@@ -351,7 +351,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             default:
                return null;
         }
-        summeryTableName= summeryTableName.replaceAll("\\u200B","");
-        return summeryTableName;
+        //summeryTableName= summeryTableName.replaceAll("\\u200B","");
+        //return summeryTableName;
     }
 }
