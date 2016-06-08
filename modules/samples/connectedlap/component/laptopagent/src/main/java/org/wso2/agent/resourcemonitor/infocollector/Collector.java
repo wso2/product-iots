@@ -68,7 +68,7 @@ public class Collector {
 		BashRunner bashRunner = new BashRunner();
 		systemUsage.setMacaddress(bashRunner.runScript(this.OS, 0,suPassword));
 		systemUsage.setProcessor_usage(Float.valueOf(bashRunner.runScript(this.OS, 10,suPassword)));
-		systemUsage.setMemory_usage(Float.valueOf(bashRunner.runScript(this.OS, 11,suPassword)));
+		//systemUsage.setMemory_usage(Float.valueOf(bashRunner.runScript(this.OS, 11,suPassword)));
 		systemUsage.setStorage_usage(Float.valueOf(bashRunner.runScript(this.OS, 12,suPassword)));
 		systemUsage.setBattery_percentage(Float.valueOf(bashRunner.runScript(this.OS, 13,suPassword)));
 		systemUsage.setBattery_pluggedin(Byte.valueOf(bashRunner.runScript(this.OS, 14,suPassword)));

@@ -337,25 +337,19 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         String summeryTableName;
         switch (sensorName) {
             case "battery" :
-                summeryTableName = DeviceTypeConstants.DEVICE_BATTERY_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_BATTERY_STATS;
             case "charger":
-                summeryTableName = DeviceTypeConstants.DEVICE_CHARGER_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_CHARGER_STATS;
             case "cpu":
-                summeryTableName = DeviceTypeConstants.DEVICE_CPU_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_CPU_STATS;
             case "network":
-                summeryTableName = DeviceTypeConstants.DEVICE_NETWORK_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_NETWORK_STATS;
             case "memory":
-                summeryTableName = DeviceTypeConstants.DEVICE_MEMORY_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_MEMORY_STATS;
             case "harddisc":
-                summeryTableName = DeviceTypeConstants.DEVICE_HARD_DISC_STATS;
-                break;
+                return DeviceTypeConstants.DEVICE_HARD_DISC_STATS;
             default:
-               summeryTableName = "";
+               return null;
         }
         summeryTableName= summeryTableName.replaceAll("\\u200B","");
         return summeryTableName;
