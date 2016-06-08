@@ -75,7 +75,7 @@ public class BashRunner {
 				if (scriptid == 2)//cores
 					script = new String[]{"/bin/sh", "-c", "sysctl -n hw.ncpu" + " | tr '\n' ' '"};
 				if (scriptid == 3)//ram size
-					script = new String[]{"/bin/sh", "-c", "sysctl -n hw.memsize | awk '{print $1 / 1048576}'" + " | tr '\n' ' '"};
+					script = new String[]{"/bin/sh", "-c", "sysctl -n hw.memsize | awk '{print $1 / 1073741824}'" + " | tr '\n' ' '"};
 				if (scriptid == 4)//storage
 //				script = new String[]{ "/bin/sh", "-c", "echo Amilapwd1 | sudo -S hdparm -I /dev/sda |grep 'device size with M = 1000\\*1000' | awk '{print substr($0, index($0,$9))}' | awk -F'[\t(]' '{print $2}' | awk '{print substr($1,0)}'"+" | tr '\n' ' '"};
 					script = new String[]{"/bin/sh", "-c", "diskutil list | grep 'GUID_partition_scheme' | awk '{ print $3}' | sed 's/*//g' | awk '{s+=$0} END {print s}'" + " | tr '\n' ' '"};
