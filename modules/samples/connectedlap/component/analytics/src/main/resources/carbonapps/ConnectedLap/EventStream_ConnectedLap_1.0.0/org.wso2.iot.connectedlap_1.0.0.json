@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.connectedlap",
+  "version": "1.0.0",
+  "nickName": "connectedlap stream",
+  "description": "This hold the device type stream of connectedlap",
+  "metaData": [
+    {"name": "owner", "type": "STRING"},
+    {"name": "deviceId", "type": "STRING"},
+    {"name": "type", "type": "STRING"},
+    {"name": "timestamp", "type": "LONG"}
+  ],
+  "payloadData": [
+    {"name": "batteryusage", "type": "FLOAT"},
+    {"name": "chargerpluggedin", "type": "FLOAT"},
+    {"name": "cpuusage", "type": "FLOAT"},
+    {"name": "networktraffic", "type": "FLOAT"},
+    {"name": "memoryusage", "type": "FLOAT"},
+    {"name": "harddiskusage", "type": "FLOAT"}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.battery.usage",
+  "version": "1.0.0",
+  "nickName": "Battery Usage",
+  "description": "Battery usage data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "batteryusage","type": "FLOAT"
+    }
+  ]
+}
+
+
+

@@ -1,0 +1,52 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('connectedlap_execution')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('connectedLap_execution')
+
+/* define streams/tables and write queries here ... */
+
+@Export('org.wso2.iot.devices.battery.usage:1.0.0')
+define stream batteryusage (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, batteryusage float);
+
+@Export('org.wso2.iot.devices.charger.plugged.in:1.0.0')
+define stream chargerpluggedin (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, chargerpluggedin float);
+
+@Export('org.wso2.iot.devices.cpu.usage:1.0.0')
+define stream cpuusage (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, cpuusage float);
+
+@Export('org.wso2.iot.devices.network.traffic:1.0.0')
+define stream networktraffic (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, networktraffic float);
+
+@Export('org.wso2.iot.devices.memory.usage:1.0.0')
+define stream memoryusage (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, memoryusage float);
+
+@Export('org.wso2.iot.devices.hard.disk.usage:1.0.0')
+define stream harddiskusage (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, harddiskusage float);
+
+@Import('org.wso2.iot.connectedlap:1.0.0')
+define stream connectedlap (meta_owner string, meta_deviceId string, meta_type string, meta_timestamp long, batteryusage float, chargerpluggedin float, cpuusage float, networktraffic float ,memoryusage float ,harddiskusage float );
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, batteryusage
+insert into batteryusage;
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, chargerpluggedin
+insert into chargerpluggedin;
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, cpuusage
+insert into cpuusage;
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, networktraffic
+insert into networktraffic;
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, memoryusage
+insert into memoryusage;
+
+from connectedlap
+select meta_owner, 'connectedlap' as meta_deviceType, meta_deviceId, meta_timestamp as meta_time, harddiskusage
+insert into harddiskusage;

@@ -595,9 +595,6 @@
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.messageconsole.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.dashboard.feature:${carbon.analytics.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.activitydashboard.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -682,12 +679,18 @@
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <!--End of DAS Feature-->
+
+                                <!-- Dashboards Features -->
                                 <feaureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboard.version}
                                 </feaureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.deployment.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
+                                <!-- End of Dashboards Features -->
 
                                 <!-- MB Features -->
                                 <featureArtifactDef>
@@ -1410,10 +1413,6 @@
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.analytics.dashboard.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.analytics.activitydashboard.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
@@ -1513,8 +1512,9 @@
                                     <id>org.wso2.carbon.event.execution.manager.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
-
                                 <!-- ************** END - EVENT PROCESSING FEATURES ************ -->
+
+                                <!-- Dashboard Features -->
                                 <feature>
                                     <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
                                     <version>${carbon.dashboard.version}</version>
@@ -1523,6 +1523,12 @@
                                     <id>org.wso2.carbon.dashboards.portal.feature.group</id>
                                     <version>${carbon.dashboard.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboard.deployment.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <!-- End of Dashboard Features -->
+
                                 <feature>
                                     <id>org.wso2.carbon.andes.server.feature.group</id>
                                     <version>${carbon.messaging.version}</version>
