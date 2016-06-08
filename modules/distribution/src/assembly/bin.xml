@@ -99,6 +99,7 @@
                 <exclude>**/commons-configuration_1.6.0.wso2v1.jar</exclude>
                 <exclude>**/net.minidev.json-smart_1.2.0.jar</exclude>
                 <exclude>**/libthrift_0.7.0.wso2v2.jar</exclude>
+                <exclude>**/libthrift_0.8.0.wso2v1.jar</exclude>
                 <exclude>**/com.google.gson_2.3.1.jar</exclude>
                 <exclude>**/com.google.gson_2.2.4.jar</exclude>
                 <exclude>**/com.google.gson_2.1.0.jar</exclude>
@@ -998,15 +999,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying webapp-publisher-config.xml -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-publisher-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <!--cdm plugin config file-->
         <file>
             <source>
@@ -1044,42 +1036,6 @@
             <destName>WSO2DM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying ANDROID SENSE H2 database -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/AndroidSenseDM_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>AndroidSenseDM_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash; Copying ARDUINO H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/ArduinoDM_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>ArduinoDM_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash; Copying RASPBERRY-PI H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/RaspberryPiDM_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>RaspberryPiDM_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash; Copying VIRTUAL-FIREALARM H2 database &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/VirtualFireAlarmDM_DB.h2.db-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>-->
-            <!--<destName>VirtualFireAlarmDM_DB.h2.db</destName>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
         <file>
             <source>src/repository/conf/carbon.xml
             </source>
@@ -1325,6 +1281,19 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <!--Adding sample device type deployer-->
+        <file>
+            <source>src/samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
+        </file>
+        <!-- Copying webapp-publisher-config.xml -->
+        <file>
+            <source>src/repository/conf/etc/webapp-publisher-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+            <destName>webapp-publisher-config.xml</destName>
+            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
     </files>
