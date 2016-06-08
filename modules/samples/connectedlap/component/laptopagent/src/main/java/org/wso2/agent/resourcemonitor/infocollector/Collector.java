@@ -63,7 +63,7 @@ public class Collector {
 		return spec;
 	}
 
-	public SystemUsage getSysUsage(String suPassword) throws NumberFormatException, Exception {
+	public SystemUsage getSysUsage(String suPassword) throws Exception {
 		SystemUsage systemUsage = new SystemUsage();
 		BashRunner bashRunner = new BashRunner();
 		systemUsage.setMacaddress(bashRunner.runScript(this.OS, 0,suPassword));

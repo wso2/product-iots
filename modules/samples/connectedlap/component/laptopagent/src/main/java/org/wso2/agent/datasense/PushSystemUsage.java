@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import org.json.JSONObject;
 import org.wso2.agent.common.Common;
+import org.wso2.agent.config.Configuration;
 import org.wso2.agent.resourcemonitor.pojo.SystemUsage;
 
 import com.sun.jersey.api.client.Client;
@@ -36,7 +37,8 @@ public class PushSystemUsage {
     	try {
 			Client client = Client.create(Common.configureClient());
 			client.setConnectTimeout(50000);
-			WebResource webResource = client.resource("https://localhost:9443/connected-lap-agent/push_data");
+			String URL= String.valueOf(new Configuration().getInitProperty("https-ep"));
+			WebResource webResource = client.resource(URL+"/connected-lap-agent/push_data");
 			Form form = new Form();
 			form.add("deviceId", deviceid);
 			form.add("deviceOwner", owner);
