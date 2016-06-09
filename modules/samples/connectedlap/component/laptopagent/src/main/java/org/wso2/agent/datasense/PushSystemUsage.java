@@ -59,11 +59,11 @@ public class PushSystemUsage {
 			System.out.println(output);
 			JSONObject outputjson= new JSONObject(output);			
 			if (response.getStatus() != 200 || outputjson ==null || !outputjson.getBoolean("success")) {
-				throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			//	throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 			}
     	}
     	catch (Exception e) {
-    		throw e;
+    	//	throw e;
     	}
     }
 }
