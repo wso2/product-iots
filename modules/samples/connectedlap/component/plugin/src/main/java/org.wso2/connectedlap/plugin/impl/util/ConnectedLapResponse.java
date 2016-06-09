@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.connectedlap.plugin.impl.uti;
+package org.wso2.connectedlap.plugin.impl.util;
 
 public class ConnectedLapResponse {
 

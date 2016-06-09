@@ -730,6 +730,13 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+        <file>
+            <source>src/repository/jaggeryapps/portal/configs/designer.json</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/configs
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
         <!-- End of "portal" app specific modifications -->
         <!-- Copying synapse.properties file -->
         <file>
