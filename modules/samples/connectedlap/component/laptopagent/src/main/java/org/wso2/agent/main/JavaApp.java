@@ -100,12 +100,12 @@ public class JavaApp {
                 devicetoken = outputJson.getString("accessToken");
                 devicerefreshtoken = outputJson.getString("refreshToken");
                 if (response.getStatus() != 200) {
-                    throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+                 //   throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
                 }
                 config.SaveRegistration(spec, devicetoken, devicerefreshtoken);
             } catch (Exception e) {
                 //e.printStackTrace();
-                throw e;
+                //throw e;
             }
 
         }
