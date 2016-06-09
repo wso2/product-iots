@@ -44,7 +44,7 @@ public class ZipUtil {
 
     public ZipArchive createZipFile(String owner, String tenantDomain, String deviceType,
                                     String deviceId, String deviceName, String token,
-                                    String refreshToken) throws DeviceManagementException {
+                                    String refreshToken,String osType) throws DeviceManagementException {
 
         String sketchFolder = "repository" + File.separator + "resources" + File.separator + "sketches";
         String archivesPath = CarbonUtils.getCarbonHome() + File.separator + sketchFolder + File.separator + "archives" +
@@ -75,6 +75,7 @@ public class ZipUtil {
             contextParams.put("MQTT_EP", mqttEndpoint);
             contextParams.put("DEVICE_TOKEN", token);
             contextParams.put("DEVICE_REFRESH_TOKEN", refreshToken);
+            contextParams.put("OS_TYPE", osType);
 
             ZipArchive zipFile;
             zipFile = Utils.getSketchArchive(archivesPath, templateSketchPath, contextParams, deviceName);

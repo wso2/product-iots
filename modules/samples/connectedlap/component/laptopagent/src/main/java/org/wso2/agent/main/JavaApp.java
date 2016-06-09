@@ -72,12 +72,12 @@ public class JavaApp {
             Configuration config = new Configuration();
             try {
                 String token = String.valueOf(config.getInitProperty("auth-token"));
-                //token="9c7a1b4d6625cdd936b894cc0e7c7390";
                 String refreshtoken = String.valueOf(config.getInitProperty("refresh-token"));
                 String device_name = String.valueOf(config.getInitProperty("device-name"));
                 Client client = Client.create(Common.configureClient());
                 client.setConnectTimeout(50000);
-                WebResource webResource = client.resource("https://localhost:9443/CONNECTEDLAP/device/register");
+				String URL= String.valueOf(new Configuration().getInitProperty("https-ep"));
+                WebResource webResource = client.resource(URL+"/CONNECTEDLAP/device/register");
                 String mac = spec.getMacaddress().replaceAll("\\:", "");
                 deviceid = mac;
 

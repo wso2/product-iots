@@ -14,12 +14,25 @@
 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 padding-top">
     <h3 class="uppercase">What it Does</h3>
     <hr>
-    <p class="grey margin-top">Connect a CONNECTEDLAP to WSO2 IoT Server and manage it.</p>
-    <p>Add brief description what this device type does</p>
+    <p class="grey margin-top">Connect a computer with this application to WSO2 IoT Server and visualize usage data.</p>
+
     <h3 class="uppercase">What You Need</h3>
-    <p>Add hardware requirement which will be required to make this device type </p>
-    <br>
     <hr>
+    <p class="grey margin-top">You should have an Android Device to get started.</p>
+    <ul class="list-unstyled">
+        <li class="padding-top-double">
+            <span class="circle">STEP 01</span>
+            &nbsp;&nbsp;&nbsp;Go ahead and [Download] the Device.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 02</span>
+            &nbsp;&nbsp;&nbsp;Proceed to [Prepare] section.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 03</span>
+            &nbsp;&nbsp;&nbsp;Read [Try Out] section to further experiment with the device.
+        </li>
+    </ul>
     <br>
     <a href="/api-store/apis/info?name={{@uriParams.deviceType}}&version=1.0.0&provider=admin"
        class="btn-operations"
@@ -42,6 +55,11 @@
                         </div>
                         <div class="control-group">
                             <div class="controls">
+                                <label for="sel1">Select OS Type</label>
+                                <select class="form-control" name="osType" style="width:40%;margin-bottom:0.5%" onchange="this.form.submit()">
+                                    <option name="linux" value="linux">Ubuntu</option>
+                                    <option name="mac" value="mac">MacOS</option>
+                                </select>
                                 <input class="new-device-name" style="color:#3f3f3f;padding:5px"
                                        type="text"
                                        placeholder="Ex. Lobby_DigitalDisplay"
@@ -151,23 +169,19 @@
     <h3 class="uppercase">Prepare</h3>
     <hr>
     <ul class="list-unstyled">
-        <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;Add how you are goining to
-            prepare your device
+        <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;Download your Connectedlap using [Download Agent] button above.
+        </li>
+        <li class="padding-top-double"><span class="circle">02</span>&nbsp;&nbsp;&nbsp;Unzip the downloaded Agent.
+        </li>
+        <li class="padding-top-double"><span class="circle">03</span>&nbsp;&nbsp;&nbsp;Move into the unzipped Agent folder.
+        </li>
+        <li class="padding-top-double"><span class="circle">04</span>&nbsp;&nbsp;&nbsp;On terminal to run this command: [sudo sh startagent.sh].
+        </li>
+        <li class="padding-top-double"><span class="circle">05</span>&nbsp;&nbsp;&nbsp;Give the Super-Admin password.
         </li>
     </ul>
     <br>
     <br>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
-    <h3 class="uppercase">Schematic Diagram</h3>
-    <hr>
-    <p class="grey margin-top">Click on the image to zoom</p>
-    <center>
-        <a href="{{@unit.publicUri}}/images/schematicsGuide.png" target="_blank">
-            <img src="{{@unit.publicUri}}/images/schematicsGuide.png" class="img-responsive">
-        </a>
-    </center>
-    <br/>
 </div>
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
     <h3 class="uppercase">Try Out</h3>
@@ -175,20 +189,30 @@
     <ul class="list-unstyled">
         <li class="padding-top-double">
             <span class="circle">01</span>
-            &nbsp;&nbsp;&nbsp;You can view all your connected devices at
+            &nbsp;&nbsp;&nbsp;You can view all your connected devices at [Device Management] page.
             <a href="{{@app.context}}/devices">[Device Management]</a> page.
         </li>
         <li class="padding-top-double">
             <span class="circle">02</span>
-            &nbsp;&nbsp;&nbsp;Select one of connected devices and check for available control
-            operations and monitor Real-Time data.
+            &nbsp;&nbsp;&nbsp;Select one of connected devices and monitor Real-Time data.
         </li>
         <li class="padding-top-double">
             <span class="circle">03</span>
-            &nbsp;&nbsp;&nbsp;You can also view analytics of the data published to IoT-Server by
-            navigating to Device Analytics page.
+            &nbsp;&nbsp;&nbsp;You can also view analytics of the data published to IoT-Server by navigating to Device Analytics page.
         </li>
     </ul>
+    <br/>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
+    <h3 class="uppercase"></h3>
+    <br>
+    <hr>
+    <p class="grey margin-top">Click on the image to zoom</p>
+    <center>
+        <a href="{{@unit.publicUri}}/images/deviceview.png" target="_blank">
+            <img src="{{@unit.publicUri}}/images/deviceview.png" class="img-responsive">
+        </a>
+    </center>
     <br/>
 </div>
 
