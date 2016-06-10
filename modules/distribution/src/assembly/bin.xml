@@ -99,7 +99,6 @@
                 <exclude>**/commons-configuration_1.6.0.wso2v1.jar</exclude>
                 <exclude>**/net.minidev.json-smart_1.2.0.jar</exclude>
                 <exclude>**/libthrift_0.7.0.wso2v2.jar</exclude>
-                <exclude>**/libthrift_0.8.0.wso2v1.jar</exclude>
                 <exclude>**/com.google.gson_2.3.1.jar</exclude>
                 <exclude>**/com.google.gson_2.2.4.jar</exclude>
                 <exclude>**/com.google.gson_2.1.0.jar</exclude>
