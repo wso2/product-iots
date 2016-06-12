@@ -29,7 +29,7 @@ function drawGraph_drone(from, to) {
     populateGraph();
 
     function populateGraph() {
-        if(streamIndex<4){
+        if (streamIndex < 4) {
             retrieveDataAndDrawLineGraph(streams[streamIndex], from, to);
         }
         streamIndex++;
@@ -48,11 +48,8 @@ function drawGraph_drone(from, to) {
         if (graphMap[type]) {
             return graphMap[type];
         }
-
         var chartWrapperElmId = "#drone-div-chart";
         var graphWidth = $(chartWrapperElmId).width() - 50;
-
-        console.log("document.getElementById("+ document.getElementById("chart-" + type)+ " ---"+ type);
         var graphConfig = {
             element: document.getElementById("chart-" + type),
             width: graphWidth,
@@ -66,7 +63,6 @@ function drawGraph_drone(from, to) {
             padding: {top: 0.2, left: 0.02, right: 0.02, bottom: 0.2},
             series: []
         };
-
         if (devices) {
             for (var i = 0; i < devices.length; i++) {
                 graphConfig['series'].push(
@@ -119,15 +115,12 @@ function drawGraph_drone(from, to) {
                     });
             }
         }
-
         var graph = new Rickshaw.Graph(graphConfig);
         graph.render();
-
         var xAxis = new Rickshaw.Graph.Axis.Time({
             graph: graph
         });
         xAxis.render();
-
         var yAxis = new Rickshaw.Graph.Axis.Y({
             graph: graph,
             orientation: 'left',
@@ -136,17 +129,14 @@ function drawGraph_drone(from, to) {
             height: 410
         });
         yAxis.render();
-
         var slider = new Rickshaw.Graph.RangeSlider.Preview({
             graph: graph,
             element: document.getElementById("slider-" + type)
         });
-
         var legend = new Rickshaw.Graph.Legend({
             graph: graph,
             element: document.getElementById("legend-" + type)
         });
-
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
             graph: graph,
             formatter: function (series, x, y) {
@@ -157,22 +147,18 @@ function drawGraph_drone(from, to) {
                 return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
             }
         });
-
         var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
             graph: graph,
             legend: legend
         });
-
         var order = new Rickshaw.Graph.Behavior.Series.Order({
             graph: graph,
             legend: legend
         });
-
         var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
             graph: graph,
             legend: legend
         });
-
         graphMap[type] = {};
         graphMap[type].graph = graph;
         graphMap[type].config = graphConfig;

@@ -19,21 +19,22 @@
 **/
 """
 
+import argparse
+import calendar
 import httplib
 import logging
 import logging.handlers
+import random
 import signal
 import ssl
 import sys
 import threading
-import time, calendar
+import time
+from dronekit import connect
 from functools import wraps
-import random
-import mqttHandler
+
 import iotUtils
-import argparse
-import math
-from dronekit import connect, VehicleMode
+import mqttHandler
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -144,8 +145,7 @@ def registerAgent():
                                                 , context=ssl._create_unverified_context())
     dcConncection.set_debuglevel(1)
     dcConncection.connect()
-    PUSH_DATA = iotUtils.DEVICE_INFO + iotUtils.DEVICE_DATA.format(sensorValue=0.0)
-    PUSH_DATA += '}'
+    PUSH_DATA = iotUtils.DEVICE_INFO
     print PUSH_DATA
     registerURL = str(REGISTER_ENDPOINT)
     dcConncection.putrequest('POST', registerURL)

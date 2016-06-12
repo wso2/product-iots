@@ -19,7 +19,6 @@
 package org.homeautomation.droneanalyzer.api.util;
 
 import org.homeautomation.droneanalyzer.plugin.mqtt.MqttConfig;
-
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.iot.util.Utils;
 import org.wso2.carbon.device.mgt.iot.util.ZipArchive;
@@ -58,12 +57,10 @@ public class ZipUtil {
             String httpServerPort = System.getProperty(HTTP_PORT_PROPERTY);
             String httpsServerEP = HTTPS_PROTOCOL_APPENDER + iotServerIP + ":" + httpsServerPort;
             String httpServerEP = HTTP_PROTOCOL_APPENDER + iotServerIP + ":" + httpServerPort;
-            String apimEndpoint = httpsServerEP;
             String mqttEndpoint = MqttConfig.getInstance().getBrokerEndpoint();
             if (mqttEndpoint.contains(LOCALHOST)) {
                 mqttEndpoint = mqttEndpoint.replace(LOCALHOST, iotServerIP);
             }
-
             Map<String, String> contextParams = new HashMap<>();
             contextParams.put("SERVER_NAME", APIUtil.getTenantDomainOftheUser());
             contextParams.put("DEVICE_OWNER", owner);
@@ -71,7 +68,7 @@ public class ZipUtil {
             contextParams.put("DEVICE_NAME", deviceName);
             contextParams.put("HTTPS_EP", httpsServerEP);
             contextParams.put("HTTP_EP", httpServerEP);
-            contextParams.put("APIM_EP", apimEndpoint);
+            contextParams.put("APIM_EP", httpsServerEP);
             contextParams.put("MQTT_EP", mqttEndpoint);
             contextParams.put("DEVICE_TOKEN", token);
             contextParams.put("DEVICE_REFRESH_TOKEN", refreshToken);
