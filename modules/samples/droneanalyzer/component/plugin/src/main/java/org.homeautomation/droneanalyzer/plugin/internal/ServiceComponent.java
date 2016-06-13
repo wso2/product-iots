@@ -18,13 +18,12 @@
 
 package org.homeautomation.droneanalyzer.plugin.internal;
 
-import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerStartupListener;
-import org.homeautomation.droneanalyzer.plugin.exception.DeviceMgtPluginException;
-import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerUtils;
-import org.homeautomation.droneanalyzer.plugin.impl.DroneAnalyzerManagerService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.homeautomation.droneanalyzer.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.droneanalyzer.plugin.impl.DroneAnalyzerManagerService;
+import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerStartupListener;
+import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;

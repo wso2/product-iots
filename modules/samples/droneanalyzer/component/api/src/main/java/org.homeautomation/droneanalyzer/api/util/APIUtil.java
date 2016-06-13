@@ -1,13 +1,13 @@
 package org.homeautomation.droneanalyzer.api.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.homeautomation.droneanalyzer.api.dto.SensorRecord;
-
-import org.wso2.carbon.event.output.adapter.core.OutputEventAdapterService;
 import org.wso2.carbon.analytics.api.AnalyticsDataAPI;
-import org.wso2.carbon.analytics.dataservice.core.AnalyticsDataServiceUtils;
 import org.wso2.carbon.analytics.dataservice.commons.AnalyticsDataResponse;
 import org.wso2.carbon.analytics.dataservice.commons.SearchResultEntry;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
+import org.wso2.carbon.analytics.dataservice.core.AnalyticsDataServiceUtils;
 import org.wso2.carbon.analytics.datasource.commons.Record;
 import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
 import org.wso2.carbon.apimgt.application.extension.APIManagementProviderService;
@@ -18,15 +18,13 @@ import org.wso2.carbon.device.mgt.core.service.DeviceManagementProviderService;
 import org.wso2.carbon.identity.jwt.client.extension.service.JWTClientManagerService;
 import org.wso2.carbon.user.api.UserStoreException;
 import org.wso2.carbon.user.api.UserStoreManager;
+import org.wso2.carbon.user.core.Permission;
 import org.wso2.carbon.user.core.service.RealmService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class provides utility functions used by REST-API.
@@ -108,17 +106,15 @@ public class APIUtil {
     }
 
     public static void registerApiAccessRoles(String user) {
-        UserStoreManager userStoreManager = null;
+        UserStoreManager userStoreManager;
         try {
             userStoreManager = getUserStoreManager();
             String[] userList = new String[]{user};
             if (userStoreManager != null) {
                 String rolesOfUser[] = userStoreManager.getRoleListOfUser(user);
                 if (!userStoreManager.isExistingRole(Constants.DEFAULT_ROLE_NAME)) {
-                    userStoreManager.addRole(Constants.DEFAULT_ROLE_NAME, userList, Constants.DEFAULT_PERMISSION);
-                } else if (rolesOfUser != null && Arrays.asList(rolesOfUser).contains(Constants.DEFAULT_ROLE_NAME)) {
-                    return;
-                } else {
+                    userStoreManager.addRole(Constants.DEFAULT_ROLE_NAME, userList, getDefaultPermissions());
+                } else if (rolesOfUser == null) {
                     userStoreManager.updateUserListOfRole(Constants.DEFAULT_ROLE_NAME, new String[0], userList);
                 }
             }
@@ -153,8 +149,7 @@ public class APIUtil {
         AnalyticsDataResponse response = analyticsDataAPI.get(tenantId, tableName, 1, null, recordIds);
         Map<String, SensorRecord> sensorDatas = createSensorData(AnalyticsDataServiceUtils.listRecords(
                 analyticsDataAPI, response));
-        List<SensorRecord> sortedSensorData = getSortedSensorData(sensorDatas, resultEntries);
-        return sortedSensorData;
+        return getSortedSensorData(sensorDatas, resultEntries);
     }
 
     public static List<SensorRecord> getSortedSensorData(Map<String, SensorRecord> sensorDatas,
@@ -207,15 +202,8 @@ public class APIUtil {
         return threadLocalCarbonContext.getTenantDomain();
     }
 
-    public static OutputEventAdapterService getOutputEventAdapterService() {
-        PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        OutputEventAdapterService outputEventAdapterService =
-                (OutputEventAdapterService) ctx.getOSGiService(OutputEventAdapterService.class, null);
-        if (outputEventAdapterService == null) {
-            String msg = "Device Authorization service has not initialized.";
-            log.error(msg);
-            throw new IllegalStateException(msg);
-        }
-        return outputEventAdapterService;
+    public static Permission[] getDefaultPermissions() {
+        return new Permission[]{new org.wso2.carbon.user.core
+                .Permission(Constants.DEFAULT_PERMISSION_RESOURCE, "ui.execute")};
     }
 }

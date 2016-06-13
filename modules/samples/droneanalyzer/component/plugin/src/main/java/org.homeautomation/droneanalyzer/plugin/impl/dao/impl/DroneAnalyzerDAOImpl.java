@@ -20,12 +20,10 @@ package org.homeautomation.droneanalyzer.plugin.impl.dao.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.homeautomation.droneanalyzer.plugin.constants.DroneAnalyzerConstants;
 import org.homeautomation.droneanalyzer.plugin.exception.DeviceMgtPluginException;
 import org.homeautomation.droneanalyzer.plugin.impl.dao.DroneAnalyzerDAO;
 import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerUtils;
-
 import org.wso2.carbon.device.mgt.common.Device;
 
 import java.sql.Connection;
@@ -33,9 +31,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Implements IotDeviceDAO for gg Devices.
@@ -46,7 +42,7 @@ public class DroneAnalyzerDAOImpl {
     private static final Log log = LogFactory.getLog(DroneAnalyzerDAOImpl.class);
 
     public Device getDevice(String deviceId) throws DeviceMgtPluginException {
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         Device iotDevice = null;
         ResultSet resultSet = null;
@@ -111,7 +107,7 @@ public class DroneAnalyzerDAOImpl {
 
     public boolean updateDevice(Device device) throws DeviceMgtPluginException {
         boolean status = false;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         try {
             conn = DroneAnalyzerDAO.getConnection();
@@ -144,7 +140,7 @@ public class DroneAnalyzerDAOImpl {
 
     public boolean deleteDevice(String deviceId) throws DeviceMgtPluginException {
         boolean status = false;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         try {
             conn = DroneAnalyzerDAO.getConnection();
@@ -171,11 +167,11 @@ public class DroneAnalyzerDAOImpl {
     }
 
     public List<Device> getAllDevices() throws DeviceMgtPluginException {
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
         Device device;
-        List<Device> iotDevices = new ArrayList<>();
+        List<Device> devices = new ArrayList<>();
         try {
             conn = DroneAnalyzerDAO.getConnection();
             String selectDBQuery =
@@ -189,11 +185,12 @@ public class DroneAnalyzerDAOImpl {
                 device.setName(resultSet.getString(DroneAnalyzerConstants.DEVICE_PLUGIN_DEVICE_NAME));
                 List<Device.Property> propertyList = new ArrayList<>();
                 device.setProperties(propertyList);
+                devices.add(device);
             }
             if (log.isDebugEnabled()) {
                 log.debug("All drone device details have fetched from drone database.");
             }
-            return iotDevices;
+            return devices;
         } catch (SQLException e) {
             String msg = "Error occurred while fetching all drone device data'";
             log.error(msg, e);

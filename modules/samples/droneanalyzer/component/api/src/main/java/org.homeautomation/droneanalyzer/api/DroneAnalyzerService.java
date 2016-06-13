@@ -19,23 +19,19 @@
 package org.homeautomation.droneanalyzer.api;
 
 import org.homeautomation.droneanalyzer.api.dto.DeviceJSON;
-
 import org.wso2.carbon.apimgt.annotations.api.API;
 import org.wso2.carbon.apimgt.annotations.api.Permission;
 import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.DeviceType;
-import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.Feature;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -95,7 +91,7 @@ public interface DroneAnalyzerService {
     /**
      * To get device information
      * @param deviceId  unique identifier for given device type instance
-     * @return
+     * @return return Device object which carries all information related to a managed device
      */
     @Path("/device/{device_id}")
     @GET
