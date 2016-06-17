@@ -23,3 +23,5 @@ org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../con
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../database/ConnectedCupDM_DB.h2.db);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.device-view);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.type-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.analytics-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.realtime.analytics-view);\
