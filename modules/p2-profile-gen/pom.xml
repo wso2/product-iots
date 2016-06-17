@@ -2036,7 +2036,6 @@
                                     <version>${carbon.identity.version}</version>
                                 </feature>
 
-
                                 <!--required for context.xml-->
                                 <feature>
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>

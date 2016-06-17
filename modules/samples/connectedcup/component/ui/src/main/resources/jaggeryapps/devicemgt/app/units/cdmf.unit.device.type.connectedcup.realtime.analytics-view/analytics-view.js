@@ -21,7 +21,7 @@ function onRequest(context) {
     var device = context.unit.params.device;
     var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
     var constants = require("/app/modules/constants.js");
-    var websocketEndpoint = devicemgtProps["httpsURL"].replace("https", "wss");
+    var websocketEndpoint = devicemgtProps["wssURL"].replace("https", "wss");
     var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
     var token = "";
     if (tokenPair) {

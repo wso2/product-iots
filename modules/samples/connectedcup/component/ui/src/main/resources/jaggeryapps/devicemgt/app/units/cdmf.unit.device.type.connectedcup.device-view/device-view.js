@@ -23,7 +23,7 @@ function onRequest(context) {
     var deviceId = request.getParameter("id");
 
     var property = require("process").getProperty;
-    var serverIp = property("carbon.local.ip");
+    var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
 
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
         var deviceModule = require("/app/modules/device.js").deviceModule;
@@ -38,7 +38,7 @@ function onRequest(context) {
                 token =  tokenPair.accessToken;
             }
             device.accessToken = token;
-            device.ip = serverIp;
+            device.ip = devicemgtProps["httpsWebURL"];
             return {"device": device};
         }
     }
