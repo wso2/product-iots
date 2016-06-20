@@ -1155,7 +1155,7 @@
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
 
         <!--JWT grant type extension feature-->
-        <identity.jwt.extension.version>1.0.0</identity.jwt.extension.version>
+        <identity.jwt.extension.version>1.0.2</identity.jwt.extension.version>
         <!--http client version-->
         <httpclient.version>4.3.1.wso2v2</httpclient.version>
         <httpclient.version.range>[4.3.1, 5.0.0)</httpclient.version.range>

@@ -38,7 +38,11 @@ import java.util.List;
 public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
     private static final Logger logger = Logger.getLogger(DeviceAccessBasedMQTTAuthorizer.class);
     private static final String CONNECTION_PERMISSION = "/permission/admin/device-mgt/user";
+    private static final String ADMIN_PERMISSION = "/permission/admin/device-mgt/admin";
     private static final String SCOPE_IDENTIFIER = "scope";
+    private static final String CDMF_SCOPE_PREFIX = "cdmf";
+    private static final String CDMF_SCOPE_SEPERATOR = "/";
+    private static final String UI_EXECUTE = "ui.execute";
 
     /**
      * {@inheritDoc} Authorize the user against carbon device mgt model.
@@ -46,6 +50,9 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
     @Override
     public boolean isAuthorizedForTopic(MQTTAuthorizationSubject authorizationSubject, String topic,
                                         MQTTAuthoriztionPermissionLevel permissionLevel) {
+        if (isUserAuthorized(authorizationSubject, ADMIN_PERMISSION, UI_EXECUTE)) {
+            return true;
+        }
         String topics[] = topic.split("/");
         if (topics.length < 3) {
             return false;
@@ -59,10 +66,17 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
         List<String> scopes = (List<String>) authorizationSubject.getProperties().get(SCOPE_IDENTIFIER);
         if (scopes != null) {
             for (String scope : scopes) {
-                //TODO : have to validate token with scopes.
+                if (scope.startsWith(CDMF_SCOPE_PREFIX)) {
+                    String deviceId[] = scope.split(CDMF_SCOPE_SEPERATOR);
+                    if (deviceId.length == 3) {
+                        if (deviceIdFromTopic.equals(deviceId[2]) && deviceTypeFromTopic.equals(deviceId[1])) {
+                            return true;
+                        }
+                    }
+                }
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -70,7 +84,7 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
      */
     @Override
     public boolean isAuthorizedToConnect(MQTTAuthorizationSubject authorizationSubject) {
-        return isUserAuthorized(authorizationSubject, CONNECTION_PERMISSION, "ui.execute");
+        return isUserAuthorized(authorizationSubject, CONNECTION_PERMISSION, UI_EXECUTE);
     }
 
     /**
