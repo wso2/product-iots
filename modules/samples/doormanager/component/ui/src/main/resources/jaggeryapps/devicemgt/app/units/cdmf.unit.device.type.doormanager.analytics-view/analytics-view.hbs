@@ -1,0 +1,37 @@
+{{#zone "topCss"}}
+    {{css "css/graph.css"}}
+{{/zone}}
+<span id="details" data-devicename="{{device.name}}" data-deviceid="{{device.deviceIdentifier}}"
+      data-appcontext="{{@app.context}}"></span>
+<div id="chartDivSensorType1">
+    <div class="chartWrapper" id="chartWrapper">
+        <span id="sensorType1Title">smartLock</span>
+        <div id="sensorType1yAxis" class="custom_y_axis"></div>
+        <div class="legend_container">
+            <div id="smoother" title="Smoothing"></div>
+            <div id="sensorType1Legend"></div>
+        </div>
+        <div id="chartSensorType1" class="custom_rickshaw_graph" data-backend-api-url = {{backendApiUri}}></div>
+        <div id="sensorType1xAxis" class="custom_x_axis"></div>
+        <div id="sensorType1Slider" class="custom_slider"></div>
+    </div>
+</div>
+<div id="chartDivSensorType2">
+    <div class="chartWrapper" id="chartWrapper">
+        <span id="sensorType2Title">smartFan</span>
+        <div id="sensorType2yAxis" class="custom_y_axis"></div>
+        <div class="legend_container">
+            <div id="smoother" title="Smoothing"></div>
+            <div id="sensorType2Legend"></div>
+        </div>
+        <div id="chartSensorType2" class="custom_rickshaw_graph" data-backend-api-url = {{backendApiUri}}></div>
+        <div id="sensorType2xAxis" class="custom_x_axis"></div>
+        <div id="sensorType2Slider" class="custom_slider"></div>
+    </div>
+</div>
+{{#zone "bottomJs"}}
+    {{js "js/d3.min.js"}}
+    {{js "js/rickshaw.min.js"}}
+    {{js "js/moment.min.js"}}
+    {{js "js/devicetype-graph.js"}}
+{{/zone}}

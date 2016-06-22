@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * you may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+package org.homeautomation.doormanager.plugin.internal;
+
+import org.wso2.carbon.device.mgt.iot.devicetype.DeviceTypeConfigService;
+import org.wso2.carbon.event.output.adapter.core.OutputEventAdapterService;
+
+/**
+ * DataHolder class of doormanager plugins component.
+ */
+public class DoorManagerManagementDataHolder {
+
+    private DeviceTypeConfigService deviceTypeConfigService;
+    private static DoorManagerManagementDataHolder thisInstance = new DoorManagerManagementDataHolder();
+
+
+    private DoorManagerManagementDataHolder() {
+    }
+
+    public static DoorManagerManagementDataHolder getInstance() {
+        return thisInstance;
+    }
+
+    public DeviceTypeConfigService getDeviceTypeConfigService() {
+        return deviceTypeConfigService;
+    }
+
+    public void setDeviceTypeConfigService(
+            DeviceTypeConfigService deviceTypeConfigService) {
+        this.deviceTypeConfigService = deviceTypeConfigService;
+    }
+}
+
