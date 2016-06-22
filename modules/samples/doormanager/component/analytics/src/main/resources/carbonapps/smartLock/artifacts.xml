@@ -19,9 +19,10 @@
 
 <artifacts>
     <artifact name="smartLock_CAPP" version="1.0.0" type="carbon/application">
-      <dependency artifact="Eventstream_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="Eventstore_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="Eventreceiver_smartLock" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-      <dependency artifact="Sparkscripts" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="smartLock_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="smartLock_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="smartLock_mqtt_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="smartLock_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="smartLock_spark_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
     </artifact>
 </artifacts>

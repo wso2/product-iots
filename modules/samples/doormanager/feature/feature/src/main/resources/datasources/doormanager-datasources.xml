@@ -24,7 +24,7 @@
     <datasources>
         <datasource>
             <name>doormanagerDM_DB</name>
-            <description>The datasource used for the this device type</description>
+            <description>The datasource used for the this device type </description>
             <jndiConfig>
                 <name>jdbc/doormanagerDM_DB</name>
             </jndiConfig>

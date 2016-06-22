@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -16,11 +16,13 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5">
-    <display-name>Sample-Webapp-Controller</display-name>
+         metadata-complete="true">
+	<display-name>WSO2 IoT Server</display-name>
+	<description>WSO2 IoT Server</description>
 
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
@@ -41,7 +43,7 @@
     </context-param>
     <context-param>
         <param-name>isSharedWithAllTenants</param-name>
-        <param-value>true</param-value>
+        <param-value>false</param-value>
     </context-param>
     <context-param>
         <param-name>providerTenantDomain</param-name>

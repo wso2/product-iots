@@ -1,19 +1,19 @@
 /*
- *  Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 var modalPopup = ".wr-modalpopup";
@@ -108,15 +108,15 @@ function attachEvents() {
                         doAction(data);
                     }
                 );
-            } else if (deviceName) {
+            }else if(deviceName){
                 $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
-                    'style="display: inline-block;">Please enter at least 4 ' +
-                    'characters.</label>');
+                                      'style="display: inline-block;">Please enter at least 4 ' +
+                                      'characters.</label>');
                 $('.control-group').removeClass('success').addClass('error');
             } else {
                 $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
-                    'style="display: inline-block;">This field is required.' +
-                    '</label>');
+                                      'style="display: inline-block;">This field is required.' +
+                                      '</label>');
                 $('.control-group').removeClass('success').addClass('error');
             }
         });
@@ -124,96 +124,37 @@ function attachEvents() {
         $("a#download-device-cancel-link").click(function () {
             hidePopup();
         });
-
     });
 }
 
 function downloadAgent() {
-
-    /*var $inputs = $('#downloadForm :input');
-     var values = {};
-     $inputs.each(function() {
-     values[this.name] = $(this).val();
-     });
-     var payload = {};
-     payload.name = $inputs[0].value;
-     //payload.owner = $inputs[3].value;
-     payload.serialNumber = $inputs[1].value;
-
-     var doorManagerRegisterURL = "/doormanager_mgt/manager/device/register?" +
-     "name=" + encodeURI(payload.name)  + "&deviceId=" + payload.serialNumber;
-
-     invokerUtil.post(
-     doorManagerRegisterURL,
-     payload,
-     function (data, textStatus, jqxhr) {
-     hidePopup();
-     },
-     function (data) {
-     hidePopup();
-     }
-     );
-     var deviceName;
-     $('.new-device-name').each(function () {
-     if (this.value != "") {
-     deviceName = this.value;
-     }
-     });
-     if (deviceName && deviceName.length >= 4) {
-     setTimeout(function () {
-     hidePopup();
-     }, 1000);
-     }*/
-    var deviceName = "";
+    var deviceName;
     $('.new-device-name').each(function () {
         if (this.value != "") {
             deviceName = this.value;
         }
     });
-    var deviceType = "";
-    $('.deviceType').each(function () {
-        if (this.value != "") {
-            deviceType = this.value;
-        }
-    });
-    var sketchType = "";
-    $('.sketchType').each(function () {
-        if (this.value != "") {
-            sketchType = this.value;
-        }
-    });
-    /*var serialNumber = "";
-     $('.device-serial-number').each(function () {
-     if (this.value != "") {
-     serialNumber = this.value;
-     }
-     });*/
     var deviceNameFormat = /^[^~?!#$:;%^*`+={}\[\]\\()|<>,'"]{1,30}$/;
     if (deviceName && deviceNameFormat.test(deviceName)) {
+        $('#downloadForm').submit();
+        hidePopup();
         $(modalPopupContent).html($('#device-agent-downloading-content').html());
-        var successCallback = function (data) {
-            data = JSON.parse(data);
+        showPopup();
+        setTimeout(function () {
             hidePopup();
-            window.location = "/devicemgt/api/devices/sketch/download/" + data.responseContent;
-        };
-        var generateLink = "/" + deviceType + "_mgt/manager/device/" + sketchType
-            + "/generate_link?deviceName=" + deviceName;
-        console.log("generated link"+ generateLink);
-        invokerUtil.get(generateLink, successCallback, function (message) {
-            console.log(message.content);
-            hidePopup();
-            doAction(data);
-        });
-    } else {
+        }, 1000);
+    }else {
         $("#invalid-username-error-msg span").text("Invalid device name");
         $("#invalid-username-error-msg").removeClass("hidden");
     }
 }
 
 function doAction(data) {
+    //if it is saml redirection response
     if (data.status == null) {
         document.write(data);
     }
+
     if (data.status == "200") {
         $(modalPopupContent).html($('#download-device-modal-content-links').html());
         $("input#download-device-url").val(data.responseText);

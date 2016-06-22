@@ -16,8 +16,8 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.homeautomation</groupId>
@@ -26,16 +26,16 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.homeautomation.doormanager.ui</artifactId>
-    <name>org.homeautomation.doormanager.ui</name>
+    <artifactId>${project-base-package}.ui</artifactId>
+    <name>${project-base-package}.ui</name>
     <packaging>pom</packaging>
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>${maven-assembly-plugin.version}</version>
                 <configuration>
-                    <finalName>org.homeautomation.doormanager.ui-1.0.0-SNAPSHOT</finalName>
+                    <finalName>${project.artifactId}-1.0.0-SNAPSHOT</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <descriptor>src/assembly/src.xml</descriptor>

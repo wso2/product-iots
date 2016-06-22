@@ -22,7 +22,7 @@
 
 import ConfigParser
 import os
-
+import random
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #       Device specific info when pushing data to server
@@ -34,20 +34,20 @@ configParser.read(configFilePath)
 
 DEVICE_OWNER = configParser.get('Device-Configurations', 'owner')
 DEVICE_ID = configParser.get('Device-Configurations', 'deviceId')
-SERIAL_NUMBER = configParser.get('Device-Configurations', 'deviceId')
+DEVICE_NAME = configParser.get('Device-Configurations', 'device-name')
+DEVICE_TYPE = configParser.get('Device-Configurations', 'device-type')
+SERVER_NAME = configParser.get('Device-Configurations', 'server-name')
 MQTT_EP = configParser.get('Device-Configurations', 'mqtt-ep')
 AUTH_TOKEN = configParser.get('Device-Configurations', 'auth-token')
-USER_NAME = configParser.get('Device-Configurations', 'username')
 CONTROLLER_CONTEXT = configParser.get('Device-Configurations', 'controller-context')
 DEVICE_INFO = '{"owner":"' + DEVICE_OWNER + '","deviceId":"' + DEVICE_ID + '",'
 HTTPS_EP = configParser.get('Device-Configurations', 'https-ep')
-HTTP_EP = configParser.get('Device-Configurations', 'http-ep')
-DEVICE_INFO_WITH_OWNER = '{"serialNumber":"' + SERIAL_NUMBER + '", "userName":"'+ USER_NAME +'","deviceId":"' + SERIAL_NUMBER + '",'
-API_EP = configParser.get('Device-Configurations', 'apim-ep')
-MANAGER_CONTEXT = configParser.get('Device-Configurations', 'manager-context')
-DEVICE_DATA = '"cardNumber":"'
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+DEVICE_DATA = '"sensorValue":"{sensorValue}"'
+SENSOR_STATS_SENSOR1 = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","deviceType":"' + DEVICE_TYPE \
+                       + '","deviceId":"' + DEVICE_ID + '","time":{}}},"payloadData":{{"smartLock":{:.2f}}}}}}}'
+SENSOR_STATS_SENSOR2 = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","deviceType":"' + DEVICE_TYPE \
+                       + '","deviceId":"' + DEVICE_ID + '","time":{}}},"payloadData":{{"smartFan":{:.2f}}}}}}}'
+DEVICE_PAYLOAD = '{"deviceId":"' + DEVICE_ID + '","cardNumber":"'
 
 
 global IS_REGISTERED
@@ -58,12 +58,18 @@ DOOR_LOCKER_2_PORT = 18
 LOCK_STATE_ON_NOTIFY_PORT = 11
 LOCK_STATE_OFF_NOTIFY_PORT = 13
 
-def isEmpty (string):
+def isEmpty(string):
     if string and string.strip():
-        #string is not None AND string is not empty or blank
+        # string is not None AND string is not empty or blank
         return False
-    #string is None OR string is empty or blank
+    # string is None OR string is empty or blank
     return True
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#       This method generate a random sensor value between 15 and 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def generateRandomSensorValues():
+    return random.randint(15, 40)
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

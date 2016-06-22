@@ -17,21 +17,21 @@
  */
 
 function onRequest(context) {
-
     var log = new Log("device-view.js");
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("id");
+    var autoCompleteParams = [
+        {"name" : "deviceId", "value" : deviceId}
+    ];
 
-    var getProperty = require("process").getProperty;
-    var port = getProperty("carbon.https.port");
-    var host = getProperty("carbon.local.ip");
-    var sessionId = session.getId();
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
         var deviceModule = require("/app/modules/device.js").deviceModule;
         var device = deviceModule.viewDevice(deviceType, deviceId);
         if (device && device.status != "error") {
-            log.info(device);
-            return {"device": device, "port": port, "host": host, "sessionId": sessionId};
+            return {"device": device, "backendApiUri" : devicemgtProps["httpsURL"] + "/"+deviceType+"/", "autoCompleteParams" : autoCompleteParams};
+        } else {
+            response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");
+            exit();
         }
     }
 }
