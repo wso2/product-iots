@@ -1,0 +1,74 @@
+{{!
+  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+  WSO2 Inc. licenses this file to you under the Apache License,
+  Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied. See the License for the
+  specific language governing permissions and limitations
+  under the License.
+}}
+<!--Geolocation Tracker-->
+<div class="panel panel-default">
+    <div id="general-config-heading" class="panel-heading" role="tab">
+        <h2 class="sub-title panel-title">
+            Geolocation Tracker Endpoint Configuration
+        </h2>
+    </div>
+    <div id="geolocationTracker-config-body" class="panel-collapse panel-body"
+         role="tabpanel">
+        <div id="geolocationTracker-config-error-msg"
+             class="alert alert-danger hidden" role="alert">
+            <i class="icon fw fw-error"></i><span></span>
+        </div>
+        <div class="wr-input-control">
+            <label class="wr-input-label" for="email-config-host">
+                Http Endpoint
+                                            <span class="helper" title="HTTP Server Host">
+                                                <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
+                                            </span>
+                <br>
+            </label>
+            <input id="http-endpoint" type="text" class="form-control"
+                   placeholder="[ Required Field ]">
+            <br>
+
+            <label class="wr-input-label" for="email-config-host">
+                Https Endpoint
+                                            <span class="helper" title="SMTP Server Host">
+                                                <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
+                                            </span>
+                <br>
+            </label>
+            <input id="https-endpoint" type="text" class="form-control"
+                   placeholder="[ Required Field ]">
+            <br>
+            <label class="wr-input-label" for="email-config-host">
+                Mqtt Endpoint
+                                            <span class="helper" title="SMTP Server Host">
+                                                <span class="wr-help-tip glyphicon glyphicon-question-sign"></span>
+                                            </span>
+                <br>
+            </label>
+            <input id="mqtt-endpoint" type="text" class="form-control"
+                   placeholder="[ Required Field ]">
+            <br>
+        </div>
+        <div class="wr-input-control wr-btn-grp">
+            <button id="save-general-btn-geolocationTracker" class="wr-btn" onclick="addConfiguration();">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+</div>
+<!--Geolocation Tracker-->
+{{#zone "bottomJs"}}
+    {{js "js/platform-configuration.js"}}
+{{/zone}}
