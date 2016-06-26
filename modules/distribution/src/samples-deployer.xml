@@ -150,11 +150,27 @@
                 <version>1.1</version>
                 <executions>
                     <execution>
+                        <id>default-feature-install</id>
                         <phase>package</phase>
                         <configuration>
                             <tasks>
                                 <replace token="false" value="true"
                                          dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>devicetype-feature-install</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <replace token="false" value="true"
+                                         dir="repository/components/devicetype-publisher/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>

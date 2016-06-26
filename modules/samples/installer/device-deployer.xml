@@ -89,12 +89,35 @@
                             <destination>repository/components</destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
-                                <!-- STEP#3. ADD YOUR DEVICE TYPE FEATURE GROUP HERE  "<ARTIFACT_ID>.group" -->
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
                                     <version>1.0.0-SNAPSHOT</version>
                                 </feature>
-				<feature>
+				                <feature>
+                                    <id>org.wso2.connectedlap.feature.group</id>
+                                    <version>1.0.0-SNAPSHOT</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>devicetype-feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>devicetype-publisher</profile>
+                            <metadataRepository>file:${basedir}/samples/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/samples/p2-repo</artifactRepository>
+                            <destination>repository/components</destination>
+                            <deleteOldProfileFiles>true</deleteOldProfileFiles>
+                            <features>
+                                <feature>
+                                    <id>org.coffeeking.connectedcup.feature.group</id>
+                                    <version>1.0.0-SNAPSHOT</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.connectedlap.feature.group</id>
                                     <version>1.0.0-SNAPSHOT</version>
                                 </feature>
@@ -114,6 +137,10 @@
                             <tasks>
                                 <replace token="false" value="true"
                                          dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                                <replace token="false" value="true"
+                                         dir="repository/components/devicetype-publisher/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>

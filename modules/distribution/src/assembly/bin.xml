@@ -500,8 +500,8 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/api-resources/synapse-configs/default/sequences</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/default/sequences</outputDirectory>
+            <directory>src/api-resources/synapse-configs</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/</outputDirectory>
         </fileSet>
 
         <fileSet>
@@ -510,17 +510,6 @@
             <includes>
                 <include>**/**.xml</include>
             </includes>
-        </fileSet>
-
-        <!-- Copying synapse-config directory -->
-        <fileSet>
-            <directory>src/repository/resources</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server
-            </outputDirectory>
-            <excludes>
-                <exclude>**/empty.txt</exclude>
-                <exclude>**/styles/**</exclude>
-            </excludes>
         </fileSet>
 
         <!-- Copying RXTs corresponding API management related components -->

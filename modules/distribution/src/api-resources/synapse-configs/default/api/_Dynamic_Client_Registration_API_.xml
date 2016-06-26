@@ -1,5 +1,5 @@
-<api xmlns="http://ws.apache.org/ns/synapse" name="_WSO2DCRAPI_" context="/dcr">
-    <resource methods="POST DELETE" url-mapping="/register" faultSequence="_dcr_fault_">
+<api xmlns="http://ws.apache.org/ns/synapse" name="_WSO2DCRAPI_" context="/dynamic-client-web/register">
+    <resource methods="POST DELETE" url-mapping="/*" faultSequence="_dcr_fault_">
         <inSequence>
             <property name="uri.var.portnum" expression="get-property('keyManager.port')"/>
             <property name="uri.var.hostname" expression="get-property('keyManager.hostname')"/>
