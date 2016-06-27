@@ -454,9 +454,6 @@
 
                                 <!-- Carbon Commons Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.commons:org.wso2.carbon.databridge.datapublisher.feature:${carbon.commons.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.ndatasource.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -568,13 +565,10 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.system.statistics.feature:${carbon.commons.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.deployment:org.wso2.carbon.bam.service.agent.feature:${carbon.deployment.version}
-                                </featureArtifactDef>
+
                                 <!--End of APIM Feature-->
 
                                 <!--DAS Feature-->
-
                                 <!--START - Analytics Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.core.feature:${carbon.analytics.version}
@@ -675,9 +669,17 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.event.execution.manager.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.event.output.adapter.server.feature:${carbon.analytics.common.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.event.input.adapter.server.feature:${carbon.analytics.common.version}
+                                </featureArtifactDef>
 				                <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
                                 </featureArtifactDef>
+
+
                                 <!--End of DAS Feature-->
 
                                 <!-- Dashboards Features -->
@@ -1797,11 +1799,6 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
-                                </feature>
-
-                                <feature>
                                     <id>org.apache.synapse.wso2.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -2218,10 +2215,6 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.apache.synapse.wso2.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -2431,10 +2424,6 @@
                                 <feature>
                                     <id>org.wso2.carbon.idp.mgt.feature.group</id>
                                     <version>${carbon.identity.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
-                                    <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
@@ -2721,11 +2710,6 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
-                                </feature>
-
-                                <feature>
                                     <id>org.apache.synapse.wso2.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -2733,7 +2717,6 @@
                                     <id>org.apache.synapse.transport.nhttp.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-
                                 <feature>
                                     <id>org.wso2.carbon.task.server.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -2742,7 +2725,6 @@
                                     <id>org.wso2.carbon.mediation.initializer.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-
                                 <feature>
                                     <id>org.wso2.carbon.mediation.admin.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -3013,10 +2995,6 @@
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
-                                    <version>${carbon.deployment.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
                                 </feature>
@@ -3088,6 +3066,18 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.spark.commons.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.output.adapter.server.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.input.adapter.server.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.databridge.commons.thrift.server.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
                             </features>
@@ -3272,10 +3262,6 @@
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.commons.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.apache.synapse.wso2.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
@@ -3557,10 +3543,6 @@
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.bam.service.agent.feature.group</id>
-                                    <version>${carbon.deployment.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
                                 </feature>
@@ -3632,6 +3614,18 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.spark.commons.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.output.adapter.server.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.event.input.adapter.server.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.databridge.commons.thrift.server.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
                             </features>
