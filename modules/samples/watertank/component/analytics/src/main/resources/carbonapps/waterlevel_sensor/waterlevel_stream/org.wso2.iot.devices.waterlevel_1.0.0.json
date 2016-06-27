@@ -1,0 +1,33 @@
+{
+  "name": "org.wso2.iot.devices.waterlevel",
+  "version": "1.0.0",
+  "nickName": "Water Level Data",
+  "description": "Water Level data received from the Device",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "waterlevel",
+      "type": "FLOAT"
+    }
+  ]
+}
+	
+
+				                                    		
