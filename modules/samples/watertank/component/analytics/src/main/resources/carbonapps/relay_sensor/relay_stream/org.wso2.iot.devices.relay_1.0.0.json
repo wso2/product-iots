@@ -1,0 +1,33 @@
+{
+  "name": "org.wso2.iot.devices.relay",
+  "version": "1.0.0",
+  "nickName": "Water Pump / Valve Relay",
+  "description": "Status of the relay which used to control water pump or valve",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "relay",
+      "type": "BOOLEAN"
+    }
+  ]
+}
+	
+
+				                                    		
