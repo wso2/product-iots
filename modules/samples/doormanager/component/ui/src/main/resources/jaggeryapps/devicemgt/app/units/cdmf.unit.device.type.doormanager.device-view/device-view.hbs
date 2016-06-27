@@ -19,6 +19,51 @@
     </div>
 {{/zone}}
 
+<div class="wr-uioperations" style="display: block;">
+    <table>
+        <tr>
+            <td  width="47%"> <div id="light-bulb" class="off ui-draggable" >
+
+                <div id="bulb-intensity"></div>
+                <p class="intensity-val">Bulb intensity = <span>0</span></p>
+                <div id="light-bulb2" style="opacity: 0; "></div>
+            </div>
+            </td>
+            <td  width="20%"><div href="" class="cube-switch">
+        <span class="switch">
+            <span class="switch-state off">Off</span>
+            <span class="switch-state on">On</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label" style="margin-left: 33px;">Fan On/Off</p>
+            </td>
+            <td  width="20%"><div href="" class="door-switch">
+        <span class="switch">
+            <span class="switch-state off">Unlock</span>
+            <span class="switch-state on">Lock</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label">Door Lock/Unlock</p>
+            </td>
+
+            <td  width="20%">
+                <a href="javascript:operationSelect('{{operation}}')">
+                    {{#if icon}}
+                        <img src="{{@app.context}}/{{icon}}" style="width: 48px;"/>
+                    {{else}}
+                        <i class="fw fw-user fw-5x"></i>
+                    {{/if}}
+                    <span>{{name}}</span>
+                </a>
+
+                <br> <p class="operation-label">Assign new user to lock</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
 {{#zone "device-detail-properties"}}
     <div class="media">
         <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -65,4 +110,14 @@
             </div>
         </div>
     </div>
+{{/zone}}
+
+{{#zone "bottomJs"}}
+    {{css "css/custom-style.css"}}
+    {{css "css/jquery-ui.css"}}
+    {{js "js/jquery-1.8.3.js"}}
+    {{js "js/jquery-ui.js"}}
+    {{js "js/ui-operation.js"}}
+
+
 {{/zone}}
