@@ -7,10 +7,10 @@
 /* define streams/tables and write queries here ... */
 
 @Import('org.wso2.iot.watertank:1.0.0')
-define stream watertank (meta_owner string, meta_deviceId string, relay float, waterlevel float);
+define stream watertank (meta_owner string, meta_deviceId string, relay bool, waterlevel float);
 
 @Export('org.wso2.iot.devices.relay:1.0.0')
-define stream relay (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, relay float);
+define stream relay (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, relay bool);
 
 @Export('org.wso2.iot.devices.waterlevel:1.0.0')
 define stream waterlevel (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, waterlevel float);

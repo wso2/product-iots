@@ -24,7 +24,7 @@
   "payloadData": [
     {
       "name": "relay",
-      "type": "BOOLEAN"
+      "type": "BOOL"
     }
   ]
 }
