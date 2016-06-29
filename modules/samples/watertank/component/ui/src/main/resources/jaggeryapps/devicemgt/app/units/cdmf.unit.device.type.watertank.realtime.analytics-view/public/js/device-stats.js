@@ -24,71 +24,68 @@ var temperatureData = [];
 var humidity;
 var humidityData = [];
 
-var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
+//var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
 $(window).load(function () {
-
-    temperature = lineGraph("temperature", temperatureData);
-    humidity = lineGraph("humidity", humidityData);
-
     var websocketUrl = $("#div-chart").data("websocketurl");
-    connect(websocketUrl)
+    connect(websocketUrl);
+    updateCoffee(20);
 });
 
 $(window).unload(function () {
     disconnect();
 });
 
-function lineGraph(type, chartData) {
-    var tNow = new Date().getTime() / 1000;
-    for (var i = 0; i < 30; i++) {
-        chartData.push({
-                           x: tNow - (30 - i) * 15,
-                           y: parseFloat(0)
-                       });
-    }
-
-    var graph = new Rickshaw.Graph({
-        element: document.getElementById("chart-" + type),
-        width: $("#div-chart").width() - 50,
-        height: 300,
-        renderer: "line",
-        padding: {top: 0.2, left: 0.0, right: 0.0, bottom: 0.2},
-        xScale: d3.time.scale(),
-        series: [{
-            'color': palette.color(),
-            'data': chartData,
-            'name': type && type[0].toUpperCase() + type.slice(1)
-        }]
-    });
-
-    graph.render();
-
-    var xAxis = new Rickshaw.Graph.Axis.Time({
-        graph: graph
-    });
-
-    xAxis.render();
-
-    new Rickshaw.Graph.Axis.Y({
-        graph: graph,
-        orientation: 'left',
-        height: 300,
-        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-        element: document.getElementById('y_axis-' + type)
-    });
-
-    new Rickshaw.Graph.HoverDetail({
-        graph: graph,
-        formatter: function (series, x, y) {
-            var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
-            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-        }
-    });
-
-    return graph;
-}
+//function lineGraph(type, chartData) {
+//    var tNow = new Date().getTime() / 1000;
+//    for (var i = 0; i < 30; i++) {
+//        chartData.push({
+//                           x: tNow - (30 - i) * 15,
+//                           y: parseFloat(0)
+//                       });
+//    }
+//
+//    var graph = new Rickshaw.Graph({
+//        element: document.getElementById("chart-" + type),
+//        width: $("#div-chart").width() - 50,
+//        height: 300,
+//        renderer: "line",
+//        padding: {top: 0.2, left: 0.0, right: 0.0, bottom: 0.2},
+//        xScale: d3.time.scale(),
+//        series: [{
+//            'color': palette.color(),
+//            'data': chartData,
+//            'name': type && type[0].toUpperCase() + type.slice(1)
+//        }]
+//    });
+//
+//    graph.render();
+//
+//    var xAxis = new Rickshaw.Graph.Axis.Time({
+//        graph: graph
+//    });
+//
+//    xAxis.render();
+//
+//    new Rickshaw.Graph.Axis.Y({
+//        graph: graph,
+//        orientation: 'left',
+//        height: 300,
+//        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+//        element: document.getElementById('y_axis-' + type)
+//    });
+//
+//    new Rickshaw.Graph.HoverDetail({
+//        graph: graph,
+//        formatter: function (series, x, y) {
+//            var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
+//            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+//            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+//        }
+//    });
+//
+//    return graph;
+//}
 
 //websocket connection
 function connect(target) {
@@ -112,12 +109,7 @@ function connect(target) {
 }
 
 function graphUpdate(chartData, xValue, yValue, graph) {
-    chartData.push({
-                       x: parseInt(xValue),
-                       y: parseFloat(yValue)
-                   });
-    chartData.shift();
-    graph.update();
+    updateCoffee(xValue);
 }
 
 function disconnect() {
