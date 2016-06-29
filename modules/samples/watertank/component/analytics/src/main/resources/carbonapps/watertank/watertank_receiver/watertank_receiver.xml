@@ -17,16 +17,12 @@
   ~ under the License.
   -->
 
-<eventReceiver name="watertank_receiver" statistics="disable" trace="disable"
-               xmlns="http://wso2.org/carbon/eventreceiver">
+<eventReceiver name="watertank_receiver" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
     <from eventAdapterType="oauth-mqtt">
         <property name="topic">carbon.super/watertank/+/data</property>
         <property name="username">admin</property>
-        <property name="contentValidatorParams">
-            device_id_json_path:event.metaData.deviceId,device_id_topic_hierarchy_index:2
-        </property>
-        <property name="contentValidator">org.wso2.carbon.device.mgt.iot.input.adapter.mqtt.util.MQTTContentValidator
-        </property>
+        <property name="contentValidatorParams">device_id_json_path:event.metaData.deviceId,device_id_topic_hierarchy_index:2</property>
+        <property name="contentValidator">org.wso2.carbon.device.mgt.iot.input.adapter.mqtt.util.MQTTContentValidator</property>
         <property name="contentTransformer">default</property>
         <property name="dcrUrl">https://localhost:${carbon.https.port}/dynamic-client-web/register</property>
         <property name="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
@@ -35,4 +31,3 @@
     <mapping customMapping="disable" type="json"/>
     <to streamName="org.wso2.iot.watertank" version="1.0.0"/>
 </eventReceiver>
-
