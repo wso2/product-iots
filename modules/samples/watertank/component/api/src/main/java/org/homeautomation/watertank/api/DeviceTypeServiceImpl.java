@@ -26,7 +26,6 @@ import org.homeautomation.watertank.api.dto.SensorRecord;
 import org.homeautomation.watertank.api.util.APIUtil;
 import org.homeautomation.watertank.api.util.ZipUtil;
 import org.homeautomation.watertank.plugin.constants.DeviceTypeConstants;
-import org.json.JSONObject;
 import org.wso2.carbon.analytics.dataservice.commons.SORT;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
 import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
@@ -109,35 +108,33 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     }
 
     /**
-     /**
-     * @param deviceId unique identifier for given device type
-     * @param onLevel  level to turn on the relay
-     * @param offLevel level to turn off thr relay
+     * @param deviceId     unique identifier for given device type
+     * @param onLevel      level to turn on the relay
+     * @param offLevel     level to turn off the relay
+     * @param sensorHeight height to water level sensor from bottom of the tank
      */
     @Path("device/{deviceId}/change-levels")
     @POST
-    @Feature(code = "change-levels", name = "Change on/off water levels",
-            description = "Change on/off water levels")
-    public Response changeOnOffLevels(@PathParam("deviceId") String deviceId,
-                                      @QueryParam("on") int onLevel,
-                                      @QueryParam("off") int offLevel,
-                                      @Context HttpServletResponse response) {
+    @Feature(code = "change-levels", name = "Update configurations",
+            description = "Change on/off water levels and set sensor height from the bottom of the tank")
+    public Response updateConfigs(@PathParam("deviceId") String deviceId,
+                                  @QueryParam("on") int onLevel,
+                                  @QueryParam("off") int offLevel,
+                                  @QueryParam("height") int sensorHeight,
+                                  @Context HttpServletResponse response) {
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService()
                     .isUserAuthorized(new DeviceIdentifier(deviceId, DeviceTypeConstants.DEVICE_TYPE))) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("on", onLevel);
-            jsonObject.put("off", offLevel);
-
+            String configs = onLevel + "," + offLevel + "," + sensorHeight;
             Map<String, String> dynamicProperties = new HashMap<>();
             String publishTopic = APIUtil.getAuthenticatedUserTenantDomain()
                                   + "/" + DeviceTypeConstants.DEVICE_TYPE + "/" + deviceId + "/command";
             dynamicProperties.put(DeviceTypeConstants.ADAPTER_TOPIC_PROPERTY, publishTopic);
             APIUtil.getOutputEventAdapterService().publish(DeviceTypeConstants.MQTT_ADAPTER_NAME,
-                                                           dynamicProperties, jsonObject.toString());
+                                                           dynamicProperties, configs);
             return Response.ok().build();
         } catch (DeviceAccessAuthorizationException e) {
             log.error(e.getErrorMessage(), e);
