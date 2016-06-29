@@ -23,6 +23,7 @@
     <property name="relay_sensor_dir" value="relay_sensor"/>
     <property name="waterlevel_sensor_dir" value="waterlevel_sensor"/>
     <property name="devicetype_dir" value="watertank"/>
+    <property name="waterlevel_summary_dir" value="waterlevel_summary"/>
     <target name="clean">
         <delete dir="${target-dir}"/>
     </target>
@@ -36,6 +37,9 @@
         </zip>
         <zip destfile="${target-dir}/${devicetype_dir}.car">
             <zipfileset dir="${src-dir}/${devicetype_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${waterlevel_summary_dir}.car">
+            <zipfileset dir="${src-dir}/${waterlevel_summary_dir}"/>
         </zip>
     </target>
 </project>
