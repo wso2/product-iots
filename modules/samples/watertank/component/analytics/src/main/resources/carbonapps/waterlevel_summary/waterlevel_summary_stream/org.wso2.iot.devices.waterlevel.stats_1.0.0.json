@@ -1,0 +1,38 @@
+{
+  "name": "org.wso2.iot.devices.waterlevel.stats",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "waterlevel",
+      "type": "FLOAT"
+    },
+    {
+      "name": "waterLevelMargin",
+      "type": "DOUBLE"
+    },
+    {
+      "name": "averageValue",
+      "type": "DOUBLE"
+    }
+  ]
+}
