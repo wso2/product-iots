@@ -1,26 +1,19 @@
 {{unit "cdmf.unit.lib.handlebars"}}
 {{#zone "topCss"}}
-    {{css "css/coffee.css"}}
+    {{css "css/water-level.css"}}
 {{/zone}}
-<div id="chartWrapper">
-</div>
+
 <div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
-
-    <div class="coffee-wrapper">
-                    <div class="coffee">
-                        <div class="coffee_main">
-                            <div class="coffee_inner">
-                                <div class="water" id="water"></div>
-                            </div>
-                            <div class="highlight"></div>
-                        </div>
-                    </div>
+    <div class="water-level-wrapper">
+        <div class="water-level">
+            <div class="water-level_main">
+                <div class="water-level_inner">
+                    <div class="water" id="water"></div>
+                </div>
+                <div class="highlight"></div>
+            </div>
+        </div>
     </div>
-    
-    <div>
-    
-    </div>
-
 </div>
 <a class="padding-left"
    href="{{@app.context}}/device/{{device.type}}/analytics?deviceId={{device.deviceIdentifier}}&deviceName={{device.name}}">
@@ -34,5 +27,4 @@
     {{js "js/moment.min.js"}}
     {{js "js/socket.io.min.js"}}
     {{js "js/device-stats.js"}}
-    {{js "js/coffee.js"}}
 {{/zone}}

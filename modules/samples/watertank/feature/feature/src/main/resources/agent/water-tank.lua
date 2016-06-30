@@ -5,8 +5,8 @@ is_relay_on = "false"
 pulse_time = 0
 water_level = -1
 relay_on = 10
-relay_off = 100
-tank_height = 120
+relay_off = 80
+tank_height = 100
 client_connected = false
 
 m = mqtt.Client("ESP8266-" .. node.chipid(), 120, "${DEVICE_TOKEN}", "")
@@ -35,6 +35,7 @@ end
 gpio.mode(relay, gpio.OUTPUT)
 gpio.mode(trig, gpio.OUTPUT)
 gpio.mode(echo, gpio.INT)
+gpio.write(relay, gpio.HIGH)
 
 read_config()
 
@@ -44,14 +45,15 @@ gpio.trig(echo, "both", function(level)
         pulse_time = tmr.now()
     else
         -- 1cm ==> 40
-        water_level = tank_height - (du / 40);
-        if (water_level < relay_on) then
-            gpio.write(relay, gpio.HIGH)
-            is_relay_on = "true"
-        elseif (water_level > relay_off) then
+        local level = tank_height - (du / 40);
+        if (level < relay_on) then
             gpio.write(relay, gpio.LOW)
+            is_relay_on = "true"
+        elseif (level > relay_off) then
+            gpio.write(relay, gpio.HIGH)
             is_relay_on = "false"
         end
+        water_level = level * 100 / tank_height
     end
 end)
 
@@ -64,7 +66,7 @@ tmr.alarm(0, 5000, 1, function()
         if (water_level > -1) then
             local payload = "{event:{metaData:{owner:\"${DEVICE_OWNER}\",deviceId:\"${DEVICE_ID}\"},payloadData:{relay:" .. is_relay_on .. ", waterlevel:" .. water_level .. "}}}"
             m:publish("carbon.super/watertank/${DEVICE_ID}/data", payload, 0, 0, function(client)
-                print("Published> Water Level: " .. water_level .. "cm  Relay: " .. is_relay_on)
+                print("Published> Water Level: " .. water_level .. "%  Relay: " .. is_relay_on)
             end)
         end
     else
