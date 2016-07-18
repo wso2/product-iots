@@ -1083,7 +1083,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>2.1.1-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.1.2-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>5.0.4</carbon.api.mgt.version>
