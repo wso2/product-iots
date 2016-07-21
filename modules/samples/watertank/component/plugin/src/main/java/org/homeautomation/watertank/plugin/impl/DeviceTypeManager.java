@@ -18,10 +18,11 @@
 
 package org.homeautomation.watertank.plugin.impl;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.watertank.plugin.impl.dao.DeviceTypeDAO;
 import org.homeautomation.watertank.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.watertank.plugin.impl.dao.DeviceTypeDAO;
 import org.homeautomation.watertank.plugin.impl.feature.DeviceTypeFeatureManager;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
@@ -104,7 +105,7 @@ public class DeviceTypeManager implements DeviceManager {
                 log.warn(msg, iotDAOEx);
             }
             String msg = "Error while updating the enrollment of the watertank device : " +
-                    device.getDeviceIdentifier();
+                         device.getDeviceIdentifier();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -149,7 +150,7 @@ public class DeviceTypeManager implements DeviceManager {
             }
         } catch (DeviceMgtPluginException e) {
             String msg = "Error while checking the enrollment status of watertank device : " +
-                    deviceId.getId();
+                         deviceId.getId();
             log.error(msg, e);
             throw new DeviceManagementException(msg, e);
         }
@@ -164,7 +165,8 @@ public class DeviceTypeManager implements DeviceManager {
     @Override
     public boolean setActive(DeviceIdentifier deviceId, boolean status)
             throws DeviceManagementException {
-        return true;
+        //Status is not implemented for this device type.
+        throw new NotImplementedException();
     }
 
     @Override
@@ -186,7 +188,8 @@ public class DeviceTypeManager implements DeviceManager {
     @Override
     public boolean setOwnership(DeviceIdentifier deviceId, String ownershipType)
             throws DeviceManagementException {
-        return true;
+        //Ownership changing is not implemented for this device type.
+        throw new NotImplementedException();
     }
 
     public boolean isClaimable(DeviceIdentifier deviceIdentifier) throws DeviceManagementException {
@@ -196,17 +199,20 @@ public class DeviceTypeManager implements DeviceManager {
     @Override
     public boolean setStatus(DeviceIdentifier deviceId, String currentOwner,
                              EnrolmentInfo.Status status) throws DeviceManagementException {
-        return false;
+        //Status is not implemented for this device type.
+        throw new NotImplementedException();
     }
 
     @Override
     public License getLicense(String s) throws LicenseManagementException {
-        return null;
+        //License is not implemented for this device type.
+        throw new NotImplementedException();
     }
 
     @Override
     public void addLicense(License license) throws LicenseManagementException {
-
+        //License is not implemented for this device type.
+        throw new NotImplementedException();
     }
 
     @Override

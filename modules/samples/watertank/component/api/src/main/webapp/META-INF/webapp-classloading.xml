@@ -17,7 +17,8 @@
   -->
 
 <!--
-    This file defines class loading policy of the whole container. But this behaviour can be overridden by individual webapps by putting this file into the META-INF/ directory.   
+    This file defines class loading policy of the whole container. But this behaviour can be overridden by individual
+    webapps by putting this file into the META-INF/ directory.
 -->
 <Classloading xmlns="http://wso2.org/projects/as/classloading">
 
@@ -25,9 +26,9 @@
     <ParentFirst>false</ParentFirst>
 
     <!--
-	Default environments that contains provides to all the webapps. This can be overridden by individual webapps by specifing required environments
-	Tomcat environment is the default and every webapps gets it even if they didn't specify it.
-	e.g. If a webapps requires CXF, they will get both Tomcat and CXF.
+	Default environments that contains provides to all the webapps. This can be overridden by individual webapps by
+	specifying required environments Tomcat environment is the default and every webapps gets it even if they didn't
+	specify it. e.g. If a webapps requires CXF, they will get both Tomcat and CXF.
      -->
     <Environments>CXF,Carbon</Environments>
 </Classloading>

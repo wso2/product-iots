@@ -32,6 +32,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Device type data transfer object implementation.
+ */
 public class DeviceTypeDAO {
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAO.class);
@@ -42,6 +45,9 @@ public class DeviceTypeDAO {
         initDeviceTypeDAO();
     }
 
+    /**
+     * Initialize the device type.
+     */
     public static void initDeviceTypeDAO() {
         try {
             Context ctx = new InitialContext();
@@ -52,6 +58,11 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Begin transactions with data sources.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void beginTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = dataSource.getConnection();
@@ -62,6 +73,12 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Get connection to the datasource.
+     *
+     * @return the datasource connection.
+     * @throws DeviceMgtPluginException
+     */
     public static Connection getConnection() throws DeviceMgtPluginException {
         if (currentConnection.get() == null) {
             try {
@@ -74,6 +91,11 @@ public class DeviceTypeDAO {
         return currentConnection.get();
     }
 
+    /**
+     * Commit transaction after editing.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void commitTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
@@ -92,6 +114,11 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Close current connection with the datasource.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void closeConnection() throws DeviceMgtPluginException {
 
         Connection con = currentConnection.get();
@@ -105,6 +132,11 @@ public class DeviceTypeDAO {
         currentConnection.remove();
     }
 
+    /**
+     * Rollback transactions to recover from failure.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void rollbackTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
@@ -123,6 +155,11 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Get device type specific data object.
+     *
+     * @return device type specific data object.
+     */
     public DeviceTypeDAOImpl getDeviceTypeDAO() {
         return new DeviceTypeDAOImpl();
     }

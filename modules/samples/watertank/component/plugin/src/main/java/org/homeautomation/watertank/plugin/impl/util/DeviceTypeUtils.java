@@ -18,11 +18,11 @@
 
 package org.homeautomation.watertank.plugin.impl.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.homeautomation.watertank.plugin.constants.DeviceTypeConstants;
 import org.homeautomation.watertank.plugin.exception.DeviceMgtPluginException;
 import org.homeautomation.watertank.plugin.internal.DeviceTypeManagementDataHolder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.base.ServerConfiguration;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.core.util.Utils;
@@ -52,7 +52,7 @@ public class DeviceTypeUtils {
 
     private static Log log = LogFactory.getLog(DeviceTypeUtils.class);
 
-    public static void cleanupResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
+    private static void cleanupResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
@@ -95,24 +95,26 @@ public class DeviceTypeUtils {
             log.error("Error while looking up the data source: " + DeviceTypeConstants.DATA_SOURCE_NAME);
         } catch (Exception e) {
             throw new DeviceMgtPluginException("Error occurred while initializing Iot Device " +
-                    "Management database schema", e);
+                                               "Management database schema", e);
         }
     }
 
     public static String replaceMqttProperty(String urlWithPlaceholders) {
         String MQTT_BROKER_HOST = null;
         String MQTT_PORT = null;
-        if(!DeviceTypeConstants.MQTT_BROKER_HOST.startsWith("$")){
+        if (!DeviceTypeConstants.MQTT_BROKER_HOST.startsWith("$")) {
             MQTT_BROKER_HOST = "\\$".concat(DeviceTypeConstants.MQTT_BROKER_HOST);
         }
-        if(!DeviceTypeConstants.MQTT_PORT.startsWith("$")){
+        if (!DeviceTypeConstants.MQTT_PORT.startsWith("$")) {
             MQTT_PORT = "\\$".concat(DeviceTypeConstants.MQTT_PORT);
         }
         urlWithPlaceholders = Utils.replaceSystemProperty(urlWithPlaceholders);
         urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_PORT, "" +
-                (DeviceTypeConstants.DEFAULT_MQTT_PORT + getPortOffset()));
+                                                                        (DeviceTypeConstants.DEFAULT_MQTT_PORT
+                                                                         + getPortOffset()));
         urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_BROKER_HOST,
-                System.getProperty(DeviceTypeConstants.DEFAULT_CARBON_LOCAL_IP_PROPERTY, "localhost"));
+                                                             System.getProperty(DeviceTypeConstants.DEFAULT_CARBON_LOCAL_IP_PROPERTY,
+                                                                                "localhost"));
         return urlWithPlaceholders;
     }
 
@@ -131,10 +133,10 @@ public class DeviceTypeUtils {
         }
     }
 
-    public static void setupMqttOutputAdapter() throws IOException {
+    static void setupMqttOutputAdapter() throws IOException {
         OutputEventAdapterConfiguration outputEventAdapterConfiguration =
                 createMqttOutputEventAdapterConfiguration(DeviceTypeConstants.MQTT_ADAPTER_NAME,
-                        DeviceTypeConstants.MQTT_ADAPTER_TYPE, MessageType.TEXT);
+                                                          DeviceTypeConstants.MQTT_ADAPTER_TYPE, MessageType.TEXT);
         try {
             PrivilegedCarbonContext.startTenantFlow();
             PrivilegedCarbonContext.getThreadLocalCarbonContext().setTenantDomain(
@@ -157,7 +159,8 @@ public class DeviceTypeUtils {
      * @return OutputEventAdapterConfiguration instance for given configuration
      */
     private static OutputEventAdapterConfiguration createMqttOutputEventAdapterConfiguration(String name, String type,
-                                                                                             String msgFormat) throws IOException {
+                                                                                             String msgFormat)
+            throws IOException {
         OutputEventAdapterConfiguration outputEventAdapterConfiguration = new OutputEventAdapterConfiguration();
         outputEventAdapterConfiguration.setName(name);
         outputEventAdapterConfiguration.setType(type);

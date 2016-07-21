@@ -28,22 +28,23 @@ import java.io.File;
 /**
  * Provides methods for initializing the database script.
  */
-public class DeviceSchemaInitializer extends DatabaseCreator{
+public class DeviceSchemaInitializer extends DatabaseCreator {
 
-	private static final Log log = LogFactory.getLog(DeviceSchemaInitializer.class);
-	private static final String setupSQLScriptBaseLocation = CarbonUtils.getCarbonHome() + File.separator + "dbscripts"
-			+ File.separator + "cdm" + File.separator + "plugins" + File.separator;
+    private static final Log log = LogFactory.getLog(DeviceSchemaInitializer.class);
+    private static final String setupSQLScriptBaseLocation = CarbonUtils.getCarbonHome() + File.separator + "dbscripts"
+                                                             + File.separator + "cdm" + File.separator + "plugins"
+                                                             + File.separator;
 
-	public DeviceSchemaInitializer(DataSource dataSource) {
-		super(dataSource);
-	}
+    public DeviceSchemaInitializer(DataSource dataSource) {
+        super(dataSource);
+    }
 
-	@Override
-	protected String getDbScriptLocation(String databaseType) {
-		String scriptName = databaseType + ".sql";
-		if (log.isDebugEnabled()) {
-			log.debug("Loading database script from :" + scriptName);
-		}
-		return setupSQLScriptBaseLocation.replaceFirst("DBTYPE", databaseType) + scriptName;
-	}
+    @Override
+    protected String getDbScriptLocation(String databaseType) {
+        String scriptName = databaseType + ".sql";
+        if (log.isDebugEnabled()) {
+            log.debug("Loading database script from :" + scriptName);
+        }
+        return setupSQLScriptBaseLocation.replaceFirst("DBTYPE", databaseType) + scriptName;
+    }
 }

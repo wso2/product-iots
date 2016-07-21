@@ -17,10 +17,9 @@
  */
 
 var ws;
-var coffee_amount = 0;
 
 $(window).load(function () {
-    var websocketUrl = $("#div-chart").data("websocketurl");
+    var websocketUrl = $('#div-chart').data('websocketurl');
     connect(websocketUrl);
 });
 
@@ -55,8 +54,8 @@ function disconnect() {
 }
 
 function updateWaterLevel(newValue) {
-    var waterLevel = document.getElementById("water");
-    waterLevel.innerHTML = (newValue | 0) + "%";
+    var waterLevel = document.getElementById('water');
+    waterLevel.innerHTML = (newValue | 0) + '%';
     if (newValue == 0) {
         waterLevel.style.height = (newValue * 3) + 'px';
         waterLevel.style.paddingTop = 0;

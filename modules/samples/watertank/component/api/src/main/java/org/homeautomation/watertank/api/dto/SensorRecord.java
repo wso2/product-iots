@@ -38,14 +38,14 @@ public class SensorRecord {
     private Map<String, Object> values;
 
     /**
-     * Unique identifier for each recode
+     * Unique identifier for each recode.
      */
     @XmlElement(required = false, name = "id")
     private String id;
 
     /**
      * Gets the values.
-     * @return the values
+     * @return the values.
      */
     public Map<String, Object> getValues() {
         return values;
@@ -53,23 +53,23 @@ public class SensorRecord {
 
     /**
      * Sets the values.
-     * @param values
+     * @param values of the sensor readings.
      */
     public void setValues(Map<String, Object> values) {
         this.values = values;
     }
 
     /**
-     * Gets the id.
-     * @return the id
+     * Gets the sensor id.
+     * @return the sensor id.
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Sets the id.
-     * @param id set unique identifier
+     * Sets sensor unique identifier.
+     * @param id  of the sensor.
      */
     public void setId(String id) {
         this.id = id;
@@ -77,12 +77,11 @@ public class SensorRecord {
 
     @Override
     public String toString() {
-        List<String> valueList = new ArrayList<String>();
+        List<String> valueList = new ArrayList<>();
         for (Map.Entry<String, Object> entry : values.entrySet()) {
             valueList.add(entry.getKey() + ":" + entry.getValue());
         }
         return valueList.toString();
-
     }
 
 }

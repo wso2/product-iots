@@ -18,6 +18,9 @@
 
 package org.homeautomation.watertank.plugin.exception;
 
+/**
+ * Custom exception implementation to wrap device management plugin related errors.
+ */
 public class DeviceMgtPluginException extends Exception {
 
     private String errorMessage;

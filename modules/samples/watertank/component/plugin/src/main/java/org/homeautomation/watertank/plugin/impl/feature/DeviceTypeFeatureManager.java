@@ -15,6 +15,7 @@
  */
 package org.homeautomation.watertank.plugin.impl.feature;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.homeautomation.watertank.plugin.constants.DeviceTypeConstants;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.Feature;
@@ -26,12 +27,14 @@ import java.util.List;
 public class DeviceTypeFeatureManager implements FeatureManager {
 	@Override
 	public boolean addFeature(Feature feature) throws DeviceManagementException {
-		return false;
+        //Features are not used for this device type.
+        throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean addFeatures(List<Feature> features) throws DeviceManagementException {
-		return false;
+        //Features are not used for this device type.
+        throw new NotImplementedException();
 	}
 
 	@Override
@@ -48,7 +51,8 @@ public class DeviceTypeFeatureManager implements FeatureManager {
 
 	@Override
 	public boolean removeFeature(String name) throws DeviceManagementException {
-		return false;
+        //Features are not used for this device type.
+        throw new NotImplementedException();
 	}
 
 	@Override
