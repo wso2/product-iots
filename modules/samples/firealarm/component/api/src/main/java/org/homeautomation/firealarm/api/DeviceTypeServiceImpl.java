@@ -69,11 +69,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 
 /**
- * This is the API which is used to control and manage device type functionality
+ * This is the API which is used to control and manage device type functionality.
  */
 @SuppressWarnings("NonJaxWsWebServices")
 @API(name = "firealarm", version = "1.0.0", context = "/firealarm", tags = "firealarm")
@@ -83,7 +81,6 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     private static final String KEY_TYPE = "PRODUCTION";
     private static Log log = LogFactory.getLog(DeviceTypeService.class);
     private static ApiApplicationKey apiApplicationKey;
-    private ConcurrentHashMap<String, DeviceJSON> deviceToIpMap = new ConcurrentHashMap<>();
 
     private static String shortUUID() {
         UUID uuid = UUID.randomUUID();
@@ -92,8 +89,10 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     }
 
     /**
-     * @param agentInfo device owner,id
-     * @return true if device instance is added to map
+     * Validate registration information.
+     *
+     * @param agentInfo device owner,id.
+     * @return true if device instance is added to map.
      */
     @Path("device/register")
     @POST
@@ -101,15 +100,17 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     public Response registerDevice(final DeviceJSON agentInfo) {
         String deviceId = agentInfo.deviceId;
         if ((agentInfo.deviceId != null) && (agentInfo.owner != null)) {
-            deviceToIpMap.put(deviceId, agentInfo);
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
 
     /**
-     * @param deviceId unique identifier for given device type instance
-     * @param state    change status of sensor: on/off
+     * Change buzzer status.
+     *
+     * @param deviceId unique identifier for given device type.
+     * @param state    change status of buzzer: on/off.
+     * @param response operation is success or not.
      */
     @Path("device/{deviceId}/change-status")
     @POST
@@ -119,15 +120,18 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
                                  @QueryParam("state") String state,
                                  @Context HttpServletResponse response) {
         try {
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                                                                                                     DeviceTypeConstants.DEVICE_TYPE))) {
-                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            if (!APIUtil.getDeviceAccessAuthorizationService()
+                    .isUserAuthorized(new DeviceIdentifier(deviceId, DeviceTypeConstants.DEVICE_TYPE))) {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }
+            if (state == null) {
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
             String sensorState = state.toUpperCase();
-            if (!sensorState.equals(DeviceTypeConstants.STATE_ON) && !sensorState.equals(
-                    DeviceTypeConstants.STATE_OFF)) {
+            if (!DeviceTypeConstants.STATE_ON.equals(sensorState)
+                    && !sensorState.equals(DeviceTypeConstants.STATE_OFF)) {
                 log.error("The requested state change should be either - 'ON' or 'OFF'");
-                return Response.status(Response.Status.BAD_REQUEST.getStatusCode()).build();
+                return Response.status(Response.Status.BAD_REQUEST).build();
             }
             Map<String, String> dynamicProperties = new HashMap<>();
             String publishTopic = APIUtil.getAuthenticatedUserTenantDomain()
@@ -137,19 +141,19 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
                                                            dynamicProperties, state);
             return Response.ok().build();
         } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            log.error("Unable to change buzzer status", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 
     /**
-     * Retrieve Sensor data for the given time period
+     * Retrieve Sensor data for the given time period.
      *
-     * @param deviceId   unique identifier for given device type instance
-     * @param sensorName name of the sensor
-     * @param from       starting time
-     * @param to         ending time
-     * @return response with List<SensorRecord> object which includes sensor data which is requested
+     * @param deviceId   unique identifier for given device type instance.
+     * @param sensorName name of the sensor.
+     * @param from       starting time.
+     * @param to         ending time.
+     * @return response with List<SensorRecord> object which includes sensor data which is requested.
      */
     @Path("device/stats/{deviceId}/sensors/{sensorName}")
     @GET
@@ -174,29 +178,29 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         }
 
         try {
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                                                                                                     DeviceTypeConstants.DEVICE_TYPE))) {
-                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            if (!APIUtil.getDeviceAccessAuthorizationService()
+                    .isUserAuthorized(new DeviceIdentifier(deviceId, DeviceTypeConstants.DEVICE_TYPE))) {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             List<SortByField> sortByFields = new ArrayList<>();
             SortByField sortByField = new SortByField("time", SORT.ASC, false);
             sortByFields.add(sortByField);
             List<SensorRecord> sensorRecords = APIUtil.getAllEventsForDevice(sensorTableName, query, sortByFields);
-            return Response.status(Response.Status.OK.getStatusCode()).entity(sensorRecords).build();
+            return Response.status(Response.Status.OK).entity(sensorRecords).build();
         } catch (AnalyticsException e) {
             String errorMsg = "Error on retrieving stats on table " + sensorTableName + " with query " + query;
             log.error(errorMsg);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(errorMsg).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(errorMsg).build();
         } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            log.error("Unable to get sensor stats", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 
     /**
-     * Remove device type instance using device id
+     * Remove device type instance using device id.
      *
-     * @param deviceId unique identifier for given device type instance
+     * @param deviceId unique identifier for given device type instance.
      */
     @Path("/device/{deviceId}")
     @DELETE
@@ -206,29 +210,26 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
-                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+                return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             boolean removed = APIUtil.getDeviceManagementService().disenrollDevice(
                     deviceIdentifier);
             if (removed) {
                 return Response.ok().build();
             } else {
-                return Response.status(Response.Status.NOT_ACCEPTABLE.getStatusCode()).build();
+                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
             }
-        } catch (DeviceManagementException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (DeviceManagementException | DeviceAccessAuthorizationException e) {
+            log.error("Unable to remove device", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     /**
-     * Update device instance name
+     * Update device instance name.
      *
-     * @param deviceId unique identifier for given device type instance
-     * @param name     new name for the device type instance
+     * @param deviceId unique identifier for given device type instance.
+     * @param name     new name for the device type instance.
      */
     @Path("/device/{deviceId}")
     @PUT
@@ -238,7 +239,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
-                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+                return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             device.setDeviceIdentifier(deviceId);
@@ -249,22 +250,19 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             if (updated) {
                 return Response.ok().build();
             } else {
-                return Response.status(Response.Status.NOT_ACCEPTABLE.getStatusCode()).build();
+                return Response.status(Response.Status.NOT_ACCEPTABLE).build();
             }
-        } catch (DeviceManagementException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (DeviceManagementException | DeviceAccessAuthorizationException e) {
+            log.error("Unable to update device", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 
     /**
-     * To get device information
+     * To get device information.
      *
-     * @param deviceId unique identifier for given device type instance
-     * @return
+     * @param deviceId unique identifier for given device type instance.
+     * @return firealarm device.
      */
     @Path("/device/{deviceId}")
     @GET
@@ -276,23 +274,20 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             deviceIdentifier.setId(deviceId);
             deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(deviceIdentifier)) {
-                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+                return Response.status(Response.Status.UNAUTHORIZED).build();
             }
             Device device = APIUtil.getDeviceManagementService().getDevice(deviceIdentifier);
             return Response.ok().entity(device).build();
-        } catch (DeviceManagementException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
-        } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (DeviceManagementException | DeviceAccessAuthorizationException e) {
+            log.error("Unable to get device", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     /**
-     * Get all device type instance which belongs to user
+     * Get all device type instance which belongs to user.
      *
-     * @return Array of devices which includes device's information
+     * @return Array of devices which includes device's information.
      */
     @Path("/devices")
     @GET
@@ -312,17 +307,17 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             Device[] devices = userDevicesforFirealarm.toArray(new Device[]{});
             return Response.ok().entity(devices).build();
         } catch (DeviceManagementException e) {
-            log.error(e.getErrorMessage(), e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+            log.error("Unable to get all devices", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     /**
-     * To download device type agent source code as zip file
+     * To download device type agent source code as zip file.
      *
-     * @param deviceName name for the device type instance
-     * @param sketchType folder name where device type agent was installed into server
-     * @return Agent source code as zip file
+     * @param deviceName name for the device type instance.
+     * @param sketchType folder name where device type agent was installed into server.
+     * @return Agent source code as zip file.
      */
     @Path("/device/download")
     @GET
@@ -339,62 +334,58 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             zipFile.getZipFile().delete();
             return resp;
         } catch (IllegalArgumentException ex) {
-            return Response.status(400).entity(ex.getMessage()).build();//bad request
-        } catch (DeviceManagementException ex) {
-            log.error(ex.getMessage(), ex);
-            return Response.status(500).entity(ex.getMessage()).build();
-        } catch (JWTClientException ex) {
-            log.error(ex.getMessage(), ex);
-            return Response.status(500).entity(ex.getMessage()).build();
-        } catch (APIManagerException ex) {
-            log.error(ex.getMessage(), ex);
-            return Response.status(500).entity(ex.getMessage()).build();
-        } catch (IOException ex) {
-            log.error(ex.getMessage(), ex);
-            return Response.status(500).entity(ex.getMessage()).build();
-        } catch (UserStoreException ex) {
-            log.error(ex.getMessage(), ex);
-            return Response.status(500).entity(ex.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();//bad request
+        } catch (DeviceManagementException | JWTClientException | APIManagerException | IOException
+                | UserStoreException ex) {
+            log.error("Unable to download sketch", ex);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
         }
     }
 
     /**
-     * Register device into device management service
+     * Register device into device management service.
      *
-     * @param deviceId unique identifier for given device type instance
-     * @param name     name for the device type instance
-     * @return check whether device is installed into cdmf
+     * @param deviceId unique identifier for given device type instance.
+     * @param name     name for the device type instance.
+     * @return whether device is installed into cdmf or not.
      */
-    private boolean register(String deviceId, String name) {
-        try {
-            DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
-            deviceIdentifier.setId(deviceId);
-            deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
-            if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
-                return false;
-            }
-            Device device = new Device();
-            device.setDeviceIdentifier(deviceId);
-            EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
-            enrolmentInfo.setDateOfEnrolment(new Date().getTime());
-            enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
-            enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
-            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
-            device.setName(name);
-            device.setType(DeviceTypeConstants.DEVICE_TYPE);
-            enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
-            device.setEnrolmentInfo(enrolmentInfo);
-            boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
-            if (added) {
-                APIUtil.registerApiAccessRoles(APIUtil.getAuthenticatedUser());
-            }
-            return added;
-        } catch (DeviceManagementException e) {
-            log.error(e.getMessage(), e);
+    private boolean register(String deviceId, String name) throws DeviceManagementException {
+        DeviceIdentifier deviceIdentifier = new DeviceIdentifier();
+        deviceIdentifier.setId(deviceId);
+        deviceIdentifier.setType(DeviceTypeConstants.DEVICE_TYPE);
+        if (APIUtil.getDeviceManagementService().isEnrolled(deviceIdentifier)) {
             return false;
         }
+        Device device = new Device();
+        device.setDeviceIdentifier(deviceId);
+        EnrolmentInfo enrolmentInfo = new EnrolmentInfo();
+        enrolmentInfo.setDateOfEnrolment(new Date().getTime());
+        enrolmentInfo.setDateOfLastUpdate(new Date().getTime());
+        enrolmentInfo.setStatus(EnrolmentInfo.Status.ACTIVE);
+        enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
+        device.setName(name);
+        device.setType(DeviceTypeConstants.DEVICE_TYPE);
+        enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
+        device.setEnrolmentInfo(enrolmentInfo);
+        boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
+        if (added) {
+            APIUtil.registerApiAccessRoles(APIUtil.getAuthenticatedUser());
+        }
+        return added;
     }
 
+    /**
+     * Generates zip archive with the device agent.
+     *
+     * @param owner      of the device.
+     * @param deviceName given to the device.
+     * @param sketchType of the device.
+     * @return zip archive to download.
+     * @throws DeviceManagementException
+     * @throws JWTClientException
+     * @throws APIManagerException
+     * @throws UserStoreException
+     */
     private ZipArchive createDownloadFile(String owner, String deviceName, String sketchType)
             throws DeviceManagementException, JWTClientException, APIManagerException,
                    UserStoreException {
@@ -412,8 +403,9 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         JWTClient jwtClient = APIUtil.getJWTClientManagerService().getJWTClient();
         String scopes = "device_type_" + DeviceTypeConstants.DEVICE_TYPE + " device_" + deviceId;
         AccessTokenInfo accessTokenInfo = jwtClient.getAccessToken(apiApplicationKey.getConsumerKey(),
-                                                                   apiApplicationKey.getConsumerSecret(), owner + "@" + APIUtil.getAuthenticatedUserTenantDomain(), scopes);
-
+                                                                   apiApplicationKey.getConsumerSecret(),
+                                                                   owner + "@" + APIUtil.getAuthenticatedUserTenantDomain(),
+                                                                   scopes);
         //create token
         String accessToken = accessTokenInfo.getAccessToken();
         String refreshToken = accessTokenInfo.getRefreshToken();
@@ -423,9 +415,8 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             throw new DeviceManagementException(msg);
         }
         ZipUtil ziputil = new ZipUtil();
-        ZipArchive zipFile = ziputil.createZipFile(owner, APIUtil.getTenantDomainOftheUser(), sketchType,
-                                                   deviceId, deviceName, accessToken, refreshToken);
-        return zipFile;
+        return ziputil.createZipFile(owner, APIUtil.getTenantDomainOftheUser(), sketchType,
+                                     deviceId, deviceName, accessToken, refreshToken);
     }
-}
 
+}

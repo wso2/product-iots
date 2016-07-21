@@ -4,11 +4,23 @@
   "nickName": "firealarm_stream",
   "description": "This hold the device type stream of firealarm",
   "metaData": [
-    {"name": "owner", "type": "STRING"},
-    {"name": "deviceId", "type": "STRING"}
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    }
   ],
   "payloadData": [
-    {"name": "temperature", "type": "FLOAT"},
-    {"name": "humidity", "type": "FLOAT"}
+    {
+      "name": "temperature",
+      "type": "FLOAT"
+    },
+    {
+      "name": "humidity",
+      "type": "FLOAT"
+    }
   ]
 }

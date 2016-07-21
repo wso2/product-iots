@@ -20,10 +20,9 @@ package org.homeautomation.firealarm.plugin.impl.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.homeautomation.firealarm.plugin.constants.DeviceTypeConstants;
-import org.homeautomation.firealarm.plugin.impl.dao.impl.DeviceTypeDAOImpl;
 import org.homeautomation.firealarm.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.firealarm.plugin.impl.dao.impl.DeviceTypeDAOImpl;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -32,6 +31,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Device type data transfer object implementation.
+ */
 public class DeviceTypeDAO {
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAO.class);
@@ -42,16 +44,24 @@ public class DeviceTypeDAO {
         initDeviceTypeDAO();
     }
 
+    /**
+     * Initialize the device type.
+     */
     public static void initDeviceTypeDAO() {
         try {
             Context ctx = new InitialContext();
             dataSource = (DataSource) ctx.lookup(DeviceTypeConstants.DATA_SOURCE_NAME);
         } catch (NamingException e) {
             log.error("Error while looking up the data source: " +
-                    DeviceTypeConstants.DATA_SOURCE_NAME);
+                      DeviceTypeConstants.DATA_SOURCE_NAME);
         }
     }
 
+    /**
+     * Begin transactions with data sources.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void beginTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = dataSource.getConnection();
@@ -62,18 +72,29 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Get connection to the datasource.
+     *
+     * @return the datasource connection.
+     * @throws DeviceMgtPluginException
+     */
     public static Connection getConnection() throws DeviceMgtPluginException {
         if (currentConnection.get() == null) {
             try {
                 currentConnection.set(dataSource.getConnection());
             } catch (SQLException e) {
                 throw new DeviceMgtPluginException("Error occurred while retrieving data source connection",
-                        e);
+                                                   e);
             }
         }
         return currentConnection.get();
     }
 
+    /**
+     * Commit transaction after editing.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void commitTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
@@ -82,7 +103,7 @@ public class DeviceTypeDAO {
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("Datasource connection associated with the current thread is null, hence commit " +
-                            "has not been attempted");
+                              "has not been attempted");
                 }
             }
         } catch (SQLException e) {
@@ -92,6 +113,11 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Close current connection with the datasource.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void closeConnection() throws DeviceMgtPluginException {
 
         Connection con = currentConnection.get();
@@ -105,6 +131,11 @@ public class DeviceTypeDAO {
         currentConnection.remove();
     }
 
+    /**
+     * Rollback transactions to recover from failure.
+     *
+     * @throws DeviceMgtPluginException
+     */
     public static void rollbackTransaction() throws DeviceMgtPluginException {
         try {
             Connection conn = currentConnection.get();
@@ -113,7 +144,7 @@ public class DeviceTypeDAO {
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("Datasource connection associated with the current thread is null, hence rollback " +
-                            "has not been attempted");
+                              "has not been attempted");
                 }
             }
         } catch (SQLException e) {
@@ -123,7 +154,13 @@ public class DeviceTypeDAO {
         }
     }
 
+    /**
+     * Get device type specific data object.
+     *
+     * @return device type specific data object.
+     */
     public DeviceTypeDAOImpl getDeviceTypeDAO() {
         return new DeviceTypeDAOImpl();
     }
+
 }
