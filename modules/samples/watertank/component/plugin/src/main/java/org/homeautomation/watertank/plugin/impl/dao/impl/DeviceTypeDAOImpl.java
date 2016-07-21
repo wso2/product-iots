@@ -43,16 +43,22 @@ public class DeviceTypeDAOImpl {
 
     private static final Log log = LogFactory.getLog(DeviceTypeDAOImpl.class);
 
+    /**
+     * Get device from the database.
+     *
+     * @param deviceId to retive the device.
+     * @return device object.
+     * @throws DeviceMgtPluginException
+     */
     public Device getDevice(String deviceId) throws DeviceMgtPluginException {
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         Device iotDevice = null;
         ResultSet resultSet = null;
         try {
             conn = DeviceTypeDAO.getConnection();
             String selectDBQuery =
-                    "SELECT watertank_DEVICE_ID, DEVICE_NAME" +
-                            " FROM watertank_DEVICE WHERE watertank_DEVICE_ID = ?";
+                    "SELECT watertank_DEVICE_ID, DEVICE_NAME FROM watertank_DEVICE WHERE watertank_DEVICE_ID = ?";
             stmt = conn.prepareStatement(selectDBQuery);
             stmt.setString(1, deviceId);
             resultSet = stmt.executeQuery();
@@ -77,6 +83,13 @@ public class DeviceTypeDAOImpl {
         return iotDevice;
     }
 
+    /**
+     * Add new device.
+     *
+     * @param device to be added.
+     * @return added or not.
+     * @throws DeviceMgtPluginException
+     */
     public boolean addDevice(Device device) throws DeviceMgtPluginException {
         boolean status = false;
         Connection conn;
@@ -107,9 +120,16 @@ public class DeviceTypeDAOImpl {
         return status;
     }
 
+    /**
+     * Update existing device.
+     *
+     * @param device to be updated.
+     * @return updated or not.
+     * @throws DeviceMgtPluginException
+     */
     public boolean updateDevice(Device device) throws DeviceMgtPluginException {
         boolean status = false;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         try {
             conn = DeviceTypeDAO.getConnection();
@@ -140,14 +160,20 @@ public class DeviceTypeDAOImpl {
         return status;
     }
 
+    /**
+     * Delete device.
+     *
+     * @param deviceId of the device to be deleted.
+     * @return deleted or not.
+     * @throws DeviceMgtPluginException
+     */
     public boolean deleteDevice(String deviceId) throws DeviceMgtPluginException {
         boolean status = false;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         try {
             conn = DeviceTypeDAO.getConnection();
-            String deleteDBQuery =
-                    "DELETE FROM watertank_DEVICE WHERE watertank_DEVICE_ID = ?";
+            String deleteDBQuery = "DELETE FROM watertank_DEVICE WHERE watertank_DEVICE_ID = ?";
             stmt = conn.prepareStatement(deleteDBQuery);
             stmt.setString(1, deviceId);
             int rows = stmt.executeUpdate();
@@ -168,8 +194,14 @@ public class DeviceTypeDAOImpl {
         return status;
     }
 
+    /**
+     * Get all watertank devices.
+     *
+     * @return list of devices.
+     * @throws DeviceMgtPluginException
+     */
     public List<Device> getAllDevices() throws DeviceMgtPluginException {
-        Connection conn = null;
+        Connection conn;
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
         Device device;

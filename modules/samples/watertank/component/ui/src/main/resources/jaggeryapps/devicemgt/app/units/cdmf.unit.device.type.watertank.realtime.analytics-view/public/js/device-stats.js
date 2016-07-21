@@ -18,74 +18,14 @@
 
 var ws;
 
-var temperature;
-var temperatureData = [];
-
-var humidity;
-var humidityData = [];
-
-//var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
-
 $(window).load(function () {
-    var websocketUrl = $("#div-chart").data("websocketurl");
+    var websocketUrl = $('#div-chart').data('websocketurl');
     connect(websocketUrl);
-    updateCoffee(20);
 });
 
 $(window).unload(function () {
     disconnect();
 });
-
-//function lineGraph(type, chartData) {
-//    var tNow = new Date().getTime() / 1000;
-//    for (var i = 0; i < 30; i++) {
-//        chartData.push({
-//                           x: tNow - (30 - i) * 15,
-//                           y: parseFloat(0)
-//                       });
-//    }
-//
-//    var graph = new Rickshaw.Graph({
-//        element: document.getElementById("chart-" + type),
-//        width: $("#div-chart").width() - 50,
-//        height: 300,
-//        renderer: "line",
-//        padding: {top: 0.2, left: 0.0, right: 0.0, bottom: 0.2},
-//        xScale: d3.time.scale(),
-//        series: [{
-//            'color': palette.color(),
-//            'data': chartData,
-//            'name': type && type[0].toUpperCase() + type.slice(1)
-//        }]
-//    });
-//
-//    graph.render();
-//
-//    var xAxis = new Rickshaw.Graph.Axis.Time({
-//        graph: graph
-//    });
-//
-//    xAxis.render();
-//
-//    new Rickshaw.Graph.Axis.Y({
-//        graph: graph,
-//        orientation: 'left',
-//        height: 300,
-//        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-//        element: document.getElementById('y_axis-' + type)
-//    });
-//
-//    new Rickshaw.Graph.HoverDetail({
-//        graph: graph,
-//        formatter: function (series, x, y) {
-//            var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
-//            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-//            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-//        }
-//    });
-//
-//    return graph;
-//}
 
 //websocket connection
 function connect(target) {
@@ -100,21 +40,27 @@ function connect(target) {
         ws.onmessage = function (event) {
             var dataPoint = JSON.parse(event.data);
             if (dataPoint) {
-                var time = parseInt(dataPoint[0]) / 1000;
-                graphUpdate(temperatureData, time, dataPoint[3], temperature);
-                graphUpdate(humidityData, time, dataPoint[4], humidity);
+                updateWaterLevel(dataPoint[4]);
             }
         };
     }
-}
-
-function graphUpdate(chartData, xValue, yValue, graph) {
-    updateCoffee(xValue);
 }
 
 function disconnect() {
     if (ws != null) {
         ws.close();
         ws = null;
+    }
+}
+
+function updateWaterLevel(newValue) {
+    var waterLevel = document.getElementById('water');
+    waterLevel.innerHTML = (newValue | 0) + '%';
+    if (newValue == 0) {
+        waterLevel.style.height = (newValue * 3) + 'px';
+        waterLevel.style.paddingTop = 0;
+    } else {
+        waterLevel.style.height = (newValue * 3) - 3 + 'px';
+        waterLevel.style.paddingTop = (newValue * 3 / 2.4) - 10 + 'px';
     }
 }

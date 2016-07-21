@@ -16,15 +16,15 @@
  * under the License.
  */
 
-var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
+var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
 var graphMap = {};
 
 function drawGraph_watertank(from, to) {
-    var devices = $("#watertank-details").data("devices");
+    var devices = $('#watertank-details').data('devices');
     var tzOffset = new Date().getTimezoneOffset() * 60;
 
     var streamIndex = 0;
-    var streams = ["temperature", "humidity"];
+    var streams = ['temperature', 'humidity'];
 
     populateGraph();
 
@@ -34,12 +34,12 @@ function drawGraph_watertank(from, to) {
     }
 
     function clearContent(type) {
-        $("#y_axis-" + type).html("");
-        $("#smoother-" + type).html("");
-        $("#legend-" + type).html("");
-        $("#chart-" + type).html("");
-        $("#x_axis-" + type).html("");
-        $("#slider-" + type).html("");
+        $('#y_axis-' + type).html('');
+        $('#smoother-' + type).html('');
+        $('#legend-' + type).html('');
+        $('#chart-' + type).html('');
+        $('#x_axis-' + type).html('');
+        $('#slider-' + type).html('');
     }
 
     function initGraph(type) {
@@ -47,16 +47,16 @@ function drawGraph_watertank(from, to) {
             return graphMap[type];
         }
 
-        var chartWrapperElmId = "#watertank-div-chart";
+        var chartWrapperElmId = '#watertank-div-chart';
         var graphWidth = $(chartWrapperElmId).width() - 50;
 
         var graphConfig = {
-            element: document.getElementById("chart-" + type),
+            element: document.getElementById('chart-' + type),
             width: graphWidth,
             height: 400,
             strokeWidth: 2,
             renderer: 'line',
-            interpolation: "linear",
+            interpolation: 'linear',
             unstack: true,
             stack: false,
             xScale: d3.time.scale(),
@@ -84,7 +84,7 @@ function drawGraph_watertank(from, to) {
                             x: parseInt(new Date().getTime() / 1000),
                             y: 0
                         }],
-                        'name': $("#watertank-details").data("devicename")
+                        'name': $('#watertank-details').data('devicename')
                     });
         }
 
@@ -99,7 +99,7 @@ function drawGraph_watertank(from, to) {
         var yAxis = new Rickshaw.Graph.Axis.Y({
             graph: graph,
             orientation: 'left',
-            element: document.getElementById("y_axis-" + type),
+            element: document.getElementById('y_axis-' + type),
             width: 40,
             height: 410
         });
@@ -107,12 +107,12 @@ function drawGraph_watertank(from, to) {
 
         var slider = new Rickshaw.Graph.RangeSlider.Preview({
             graph: graph,
-            element: document.getElementById("slider-" + type)
+            element: document.getElementById('slider-' + type)
         });
 
         var legend = new Rickshaw.Graph.Legend({
             graph: graph,
-            element: document.getElementById("legend-" + type)
+            element: document.getElementById('legend-' + type)
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
@@ -122,7 +122,7 @@ function drawGraph_watertank(from, to) {
                            moment((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
                 var swatch = '<span class="detail_swatch" style="background-color: ' +
                              series.color + '"></span>';
-                return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+                return swatch + series.name + ': ' + parseInt(y) + '<br>' + date;
             }
         });
 
@@ -159,7 +159,7 @@ function drawGraph_watertank(from, to) {
         if (devices) {
             getData();
         } else {
-            var backendApiUrl = $("#watertank-div-chart").data("backend-api-url") + type + "?from=" + from + "&to=" + to;
+            var backendApiUrl = $('#watertank-div-chart').data('backend-api-url') + type + '?from=' + from + '&to=' + to;
             var successCallback = function (data) {
                 if (data) {
                     drawLineGraph(JSON.parse(data));
@@ -175,8 +175,8 @@ function drawGraph_watertank(from, to) {
             if (deviceIndex >= devices.length) {
                 return;
             }
-            var backendApiUrl = $("#watertank-div-chart").data("backend-api-url") + devices[deviceIndex].deviceIdentifier
-                                + "/sensors/" + type + "?from=" + from + "&to=" + to;
+            var backendApiUrl = $('#watertank-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
+                                + '/sensors/' + type + '?from=' + from + '&to=' + to;
             var successCallback = function (data) {
                 if (data) {
                     drawLineGraph(JSON.parse(data));
@@ -214,10 +214,10 @@ function drawGraph_watertank(from, to) {
     function getFieldData(data, type) {
         var columnData;
         switch (type) {
-            case "temperature" :
+            case 'temperature' :
                 columnData = data.values.temperature;
                 break;
-            case "humidity" :
+            case 'humidity' :
                 columnData = data.values.humidity;
                 break;
         }

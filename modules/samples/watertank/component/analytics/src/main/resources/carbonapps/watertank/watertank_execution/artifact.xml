@@ -20,4 +20,3 @@
 <artifact name="watertank_execution" version="1.0.0" type="event/execution-plan" serverRole="DataAnalyticsServer">
     <file>watertank_execution.siddhiql</file>
 </artifact>
-

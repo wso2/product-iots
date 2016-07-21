@@ -20,4 +20,3 @@
 <artifact name="waterlevel_stream" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
     <file>org.wso2.iot.devices.waterlevel_1.0.0.json</file>
 </artifact>
-

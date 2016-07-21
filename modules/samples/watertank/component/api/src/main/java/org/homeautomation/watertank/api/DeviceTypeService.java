@@ -38,7 +38,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 /**
  * This is the controller API which is used to control agent side functionality
  */
@@ -118,4 +117,5 @@ interface DeviceTypeService {
     @Produces("application/zip")
     @Permission(scope = "watertank_user", permissions = {"/permission/admin/device-mgt/download"})
     Response downloadSketch(@QueryParam("deviceName") String deviceName, @QueryParam("sketchType") String sketchType);
+
 }

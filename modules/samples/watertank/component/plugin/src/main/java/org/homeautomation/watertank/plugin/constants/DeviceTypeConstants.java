@@ -21,12 +21,14 @@ package org.homeautomation.watertank.plugin.constants;
 import org.wso2.carbon.utils.CarbonUtils;
 import java.io.File;
 
+/**
+ * Device type specific constants.
+ */
 public class DeviceTypeConstants {
+
     public final static String DEVICE_TYPE = "watertank";
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "watertank_DEVICE_ID";
-    public final static String STATE_ON = "ON";
-    public final static String STATE_OFF = "OFF";
 
     //sensor events summarized table name
     public final static String STREAM_RELAY = "relay";
@@ -60,4 +62,3 @@ public class DeviceTypeConstants {
     public static final String MQTT_CONFIG_LOCATION = CarbonUtils.getEtcCarbonConfigDirPath() + File.separator
             + "mqtt.properties";
 }
-

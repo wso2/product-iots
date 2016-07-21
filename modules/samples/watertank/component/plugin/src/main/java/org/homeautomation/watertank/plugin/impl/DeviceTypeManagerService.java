@@ -19,14 +19,15 @@
 package org.homeautomation.watertank.plugin.impl;
 
 import org.homeautomation.watertank.plugin.constants.DeviceTypeConstants;
-import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
+import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
 import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 
 public class DeviceTypeManagerService implements DeviceManagementService {
+
     private DeviceManager deviceManager;
 
     @Override

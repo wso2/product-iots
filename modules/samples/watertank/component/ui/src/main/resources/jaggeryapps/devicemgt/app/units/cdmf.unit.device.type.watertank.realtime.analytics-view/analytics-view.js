@@ -19,14 +19,14 @@
 function onRequest(context) {
     var device = context.unit.params.device;
     var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
-    var constants = require("/app/modules/constants.js");
-    var websocketEndpoint = devicemgtProps["httpsURL"].replace("https", "wss");
+    var constants = require('/app/modules/constants.js');
+    var websocketEndpoint = devicemgtProps['httpsURL'].replace('https', 'wss');
     var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
-    var token = "";
+    var token = '';
     if (tokenPair) {
         token = tokenPair.accessToken;
     }
-    websocketEndpoint = websocketEndpoint + "/secured-outputui/org.wso2.iot.watertank/1.0.0?" +
-                        "token=" + token + "&deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type;
-    return {"device": device, "websocketEndpoint": websocketEndpoint};
+    websocketEndpoint = websocketEndpoint + '/secured-outputui/org.wso2.iot.watertank/1.0.0?' +
+                        'token=' + token + '&deviceId=' + device.deviceIdentifier + '&deviceType=' + device.type;
+    return {'device': device, 'websocketEndpoint': websocketEndpoint};
 }

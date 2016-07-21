@@ -25,7 +25,6 @@ input[type=range][orient=vertical]
     padding: 0 5px;
 }
 
-
 .left-pane{
     float: left;
     width: 30%;
@@ -37,10 +36,10 @@ input[type=range][orient=vertical]
     background-color: rgba(204, 204, 204, 0.61);
     width: 70%;
 }
-.coffee-wrapper{
+.water-level-wrapper{
     margin: 50px;
 }
-.coffee-top{
+.water-level-top{
     position: absolute;
     bottom: 10px;
     height: 30px;
@@ -48,7 +47,7 @@ input[type=range][orient=vertical]
     z-index: 99;
     background-color: aquamarine;
 }
-.coffee-bottom{
+.water-level-bottom{
     position: absolute;
     bottom: 0px;
     height: 10px;
@@ -85,21 +84,21 @@ input[type=range][orient=vertical]
     background: rgba(204, 204, 204, 0.3);
 }
 
-.coffee-wrapper *:before, .coffee-wrapper *:after {
+.water-level-wrapper *:before, .water-level-wrapper *:after {
     content: '';
     display: block;
     position: absolute;
 }
 
 
-.coffee {
+.water-level {
     display: inline-block;
     position: relative;
     width: 300px;
     margin: 0 20px 50px 0;
 }
 
-.coffee:after {
+.water-level:after {
     height: 14px;
     width: 300px;
     border-radius: 46px/10px;
@@ -108,7 +107,7 @@ input[type=range][orient=vertical]
     z-index: 0;
 }
 
-.coffee:before {
+.water-level:before {
     height: 14px;
     width: 300px;
     border-radius: 46px/10px;
@@ -117,7 +116,7 @@ input[type=range][orient=vertical]
     z-index: 0;
 }
 
-.coffee_main {
+.water-level_main {
     height: 300px;
     position: relative;
     width: 298px;
@@ -127,7 +126,7 @@ input[type=range][orient=vertical]
     border-bottom: none;
 }
 
-.coffee_main:after, .coffee_main:before {
+.water-level_main:after, .water-level_main:before {
     height: 12px;
     width: 296px;
     border-radius: 46px/10px;
@@ -137,17 +136,17 @@ input[type=range][orient=vertical]
     left: -1px;
 }
 
-.coffee_main:after {
+.water-level_main:after {
     top: -7px;
     box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6) inset, 0px 3px 3px -1px rgba(255, 255, 255, 0.4), 0px 0px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 6px rgba(255, 255, 255, 0.7) inset, 0px 0px 3px rgba(0, 0, 0, 0.15) inset;
 }
 
-.coffee_main:before {
+.water-level_main:before {
     top: 294px;
     box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7) inset, 0px 0px 3px rgba(0, 0, 0, 0.15) inset;
 }
 
-.coffee_mouth {
+.water-level_mouth {
     height: 52px;
     width: 44px;
     margin: 0px auto;
@@ -160,7 +159,7 @@ input[type=range][orient=vertical]
     box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.3);
 }
 
-.coffee_mouth:after {
+.water-level_mouth:after {
     height: 6px;
     width: 44px;
     border-radius: 25px/6px;
@@ -171,7 +170,7 @@ input[type=range][orient=vertical]
     box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3);
 }
 
-.coffee_inner {
+.water-level_inner {
     height: 295px;
     width: 92%;
     margin: 0px auto;
@@ -185,7 +184,7 @@ input[type=range][orient=vertical]
     top: 1px;
 }
 
-.coffee_inner:before {
+.water-level_inner:before {
     border-radius: 40px/4px;
     top: 140px;
     width: 90%;
@@ -193,7 +192,7 @@ input[type=range][orient=vertical]
     height: 9px;
 }
 
-.coffee_top .highlight {
+.water-level_top .highlight {
     display: block;
     height: 30px;
     width: 20px;
@@ -204,7 +203,7 @@ input[type=range][orient=vertical]
     background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.6) 4%, rgba(255, 255, 255, 0.2) 98%, rgba(255, 255, 255, 0));
 }
 
-.coffee_top .highlight:after {
+.water-level_top .highlight:after {
     height: 30px;
     width: 2px;
     left: -3px;
@@ -213,7 +212,7 @@ input[type=range][orient=vertical]
     background: rgba(255, 255, 255, 0.3);
 }
 
-.coffee_main .highlight {
+.water-level_main .highlight {
     display: block;
     height: 301px;
     width: 25px;
@@ -225,7 +224,7 @@ input[type=range][orient=vertical]
     z-index: 2;
 }
 
-.coffee_main .highlight:after {
+.water-level_main .highlight:after {
     height: 150px;
     width: 4px;
     left: -6px;
@@ -234,7 +233,7 @@ input[type=range][orient=vertical]
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 80%);
 }
 
-.coffee_neck .highlight {
+.water-level_neck .highlight {
     display: block;
     height: 20px;
     width: 25px;
@@ -288,4 +287,7 @@ input[type=range][orient=vertical]
     transition: all 3s ease-out;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
 }
