@@ -129,7 +129,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             }
             String sensorState = state.toUpperCase();
             if (!DeviceTypeConstants.STATE_ON.equals(sensorState)
-                    && !sensorState.equals(DeviceTypeConstants.STATE_OFF)) {
+                    && !DeviceTypeConstants.STATE_OFF.equals(sensorState)) {
                 log.error("The requested state change should be either - 'ON' or 'OFF'");
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
