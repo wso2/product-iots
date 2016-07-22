@@ -82,7 +82,6 @@ public class SensorRecord {
             valueList.add(entry.getKey() + ":" + entry.getValue());
         }
         return valueList.toString();
-
     }
 
 }

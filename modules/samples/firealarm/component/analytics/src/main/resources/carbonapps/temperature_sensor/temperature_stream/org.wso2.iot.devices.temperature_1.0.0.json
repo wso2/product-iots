@@ -4,17 +4,27 @@
   "nickName": "Temperature Data",
   "description": "Temperature data received from the Device",
   "metaData": [
-    {"name":"owner","type":"STRING"},     
-    {"name":"deviceType","type":"STRING"},
-    {"name":"deviceId","type":"STRING"},  
-    {"name":"time","type":"LONG"}
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
   ],
   "payloadData": [
     {
-      "name": "temperature","type": "FLOAT"
+      "name": "temperature",
+      "type": "FLOAT"
     }
   ]
 }
-	
-
-				                                    		
