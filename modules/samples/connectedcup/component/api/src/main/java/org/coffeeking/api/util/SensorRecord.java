@@ -37,12 +37,12 @@ public class SensorRecord {
     @XmlElementWrapper(required = true, name = "values")
     private Map<String, Object> values;
 
-    /** The id. */
     @XmlElement(required = false, name = "id")
     private String id;
 
     /**
      * Gets the values.
+     *
      * @return the values
      */
     public Map<String, Object> getValues() {
@@ -51,6 +51,7 @@ public class SensorRecord {
 
     /**
      * Sets the values.
+     *
      * @param values the values
      */
     public void setValues(Map<String, Object> values) {
@@ -58,23 +59,25 @@ public class SensorRecord {
     }
 
     /**
-     * Sets the id.
-     * @param id the new id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
      * Gets the id.
+     *
      * @return the id
      */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         List<String> valueList = new ArrayList<String>();
         for (Map.Entry<String, Object> entry : values.entrySet()) {
             valueList.add(entry.getKey() + ":" + entry.getValue());

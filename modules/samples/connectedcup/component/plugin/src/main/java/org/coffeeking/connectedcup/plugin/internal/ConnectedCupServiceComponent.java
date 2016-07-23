@@ -44,7 +44,7 @@ public class ConnectedCupServiceComponent {
             BundleContext bundleContext = ctx.getBundleContext();
             connectedCupServiceRegRef =
                     bundleContext.registerService(DeviceManagementService.class.getName(),
-                            new ConnectedCupManagerService(), null);
+                                                  new ConnectedCupManagerService(), null);
 
             if (log.isDebugEnabled()) {
                 log.debug("Connected Cup Service Component has been successfully activated");
@@ -70,4 +70,5 @@ public class ConnectedCupServiceComponent {
             log.error("Error occurred while de-activating Connected Cup Service Component", e);
         }
     }
+
 }

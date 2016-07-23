@@ -18,6 +18,7 @@
 package org.coffeeking.connectedcup.plugin.constants;
 
 public class ConnectedCupConstants {
+
     public final static String DEVICE_TYPE = "connectedcup";
     public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
     public final static String DEVICE_PLUGIN_DEVICE_ID = "CONNECTED_CUP_DEVICE_ID";
