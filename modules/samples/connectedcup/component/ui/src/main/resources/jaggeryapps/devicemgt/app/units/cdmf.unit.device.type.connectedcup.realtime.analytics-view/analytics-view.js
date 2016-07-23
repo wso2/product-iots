@@ -17,17 +17,16 @@
  */
 
 function onRequest(context) {
-    var log = new Log("stats.js");
     var device = context.unit.params.device;
     var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
-    var constants = require("/app/modules/constants.js");
-    var websocketEndpoint = devicemgtProps["wssURL"].replace("https", "wss");
+    var constants = require('/app/modules/constants.js');
+    var websocketEndpoint = devicemgtProps['wssURL'].replace('https', 'wss');
     var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
-    var token = "";
+    var token = '';
     if (tokenPair) {
-        token =  tokenPair.accessToken;
+        token = tokenPair.accessToken;
     }
-    websocketEndpoint = websocketEndpoint + "/secured-outputui/org.wso2.iot.connectedcup/1.0.0?" +
-    "token="+ token +"&deviceId=" + device.deviceIdentifier;
-    return {"device": device, "websocketEndpoint" : websocketEndpoint};
+    websocketEndpoint = websocketEndpoint + '/secured-outputui/org.wso2.iot.connectedcup/1.0.0?' +
+                        'token=' + token + '&deviceId=' + device.deviceIdentifier;
+    return {'device': device, 'websocketEndpoint': websocketEndpoint};
 }

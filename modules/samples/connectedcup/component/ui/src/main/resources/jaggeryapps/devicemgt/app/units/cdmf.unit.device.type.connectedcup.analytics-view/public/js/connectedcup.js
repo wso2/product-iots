@@ -16,35 +16,35 @@
  * under the License.
  */
 
-var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
+var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
 
 function drawGraph_connectedcup(from, to) {
-    $("#y_axis-temperature").html("");
-    $("#smoother-temperature").html("");
-    $("#legend-temperature").html("");
-    $("#chart-temperature").html("");
-    $("#x_axis-temperature").html("");
-    $("#slider-temperature").html("");
+    $('#y_axis-temperature').html('');
+    $('#smoother-temperature').html('');
+    $('#legend-temperature').html('');
+    $('#chart-temperature').html('');
+    $('#x_axis-temperature').html('');
+    $('#slider-temperature').html('');
 
-    $("#y_axis-coffeelevel").html("");
-    $("#smoother-coffeelevel").html("");
-    $("#legend-coffeelevel").html("");
-    $("#chart-coffeelevel").html("");
-    $("#x_axis-coffeelevel").html("");
-    $("#slider-coffeelevel").html("");
+    $('#y_axis-coffeelevel').html('');
+    $('#smoother-coffeelevel').html('');
+    $('#legend-coffeelevel').html('');
+    $('#chart-coffeelevel').html('');
+    $('#x_axis-coffeelevel').html('');
+    $('#slider-coffeelevel').html('');
 
-    var devices = $("#connectedcup-details").data("devices");
+    var devices = $('#connectedcup-details').data('devices');
     var tzOffset = new Date().getTimezoneOffset() * 60;
 
-    var chartWrapperElmId = "#connectedcup-div-chart";
+    var chartWrapperElmId = '#connectedcup-div-chart';
     var graphWidth = $(chartWrapperElmId).width() - 50;
     var temperatureGraphConfig = {
-        element: document.getElementById("chart-temperature"),
+        element: document.getElementById('chart-temperature'),
         width: graphWidth,
         height: 400,
         strokeWidth: 2,
         renderer: 'line',
-        interpolation: "linear",
+        interpolation: 'linear',
         unstack: true,
         stack: false,
         xScale: d3.time.scale(),
@@ -53,12 +53,12 @@ function drawGraph_connectedcup(from, to) {
     };
 
     var coffeelevelGraphConfig = {
-        element: document.getElementById("chart-coffeelevel"),
+        element: document.getElementById('chart-coffeelevel'),
         width: graphWidth,
         height: 400,
         strokeWidth: 2,
         renderer: 'line',
-        interpolation: "linear",
+        interpolation: 'linear',
         unstack: true,
         stack: false,
         xScale: d3.time.scale(),
@@ -79,14 +79,14 @@ function drawGraph_connectedcup(from, to) {
                     });
 
             coffeelevelGraphConfig['series'].push(
-                {
-                    'color': palette.color(),
-                    'data': [{
-                        x: parseInt(new Date().getTime() / 1000),
-                        y: 0
-                    }],
-                    'name': devices[i].name
-                });
+                    {
+                        'color': palette.color(),
+                        'data': [{
+                            x: parseInt(new Date().getTime() / 1000),
+                            y: 0
+                        }],
+                        'name': devices[i].name
+                    });
         }
     } else {
         temperatureGraphConfig['series'].push(
@@ -96,17 +96,17 @@ function drawGraph_connectedcup(from, to) {
                         x: parseInt(new Date().getTime() / 1000),
                         y: 0
                     }],
-                    'name': $("#connectedcup-details").data("devicename")
+                    'name': $('#connectedcup-details').data('devicename')
                 });
         coffeelevelGraphConfig['series'].push(
-            {
-                'color': palette.color(),
-                'data': [{
-                    x: parseInt(new Date().getTime() / 1000),
-                    y: 0
-                }],
-                'name': $("#connectedcup-details").data("devicename")
-            });
+                {
+                    'color': palette.color(),
+                    'data': [{
+                        x: parseInt(new Date().getTime() / 1000),
+                        y: 0
+                    }],
+                    'name': $('#connectedcup-details').data('devicename')
+                });
     }
 
     var temperatureGraph = new Rickshaw.Graph(temperatureGraphConfig);
@@ -130,7 +130,7 @@ function drawGraph_connectedcup(from, to) {
     var yAxisTemperature = new Rickshaw.Graph.Axis.Y({
         graph: temperatureGraph,
         orientation: 'left',
-        element: document.getElementById("y_axis-temperature"),
+        element: document.getElementById('y_axis-temperature'),
         width: 40,
         height: 410
     });
@@ -140,7 +140,7 @@ function drawGraph_connectedcup(from, to) {
     var yAxisCoffeelevel = new Rickshaw.Graph.Axis.Y({
         graph: coffeelevelGraph,
         orientation: 'left',
-        element: document.getElementById("y_axis-coffeelevel"),
+        element: document.getElementById('y_axis-coffeelevel'),
         width: 40,
         height: 410
     });
@@ -149,7 +149,7 @@ function drawGraph_connectedcup(from, to) {
 
     var slider = new Rickshaw.Graph.RangeSlider.Preview({
         graph: temperatureGraph,
-        element: document.getElementById("slider-temperature")
+        element: document.getElementById('slider-temperature')
     });
 
     var legend = new Rickshaw.Graph.Legend({
@@ -159,7 +159,7 @@ function drawGraph_connectedcup(from, to) {
 
     var sliderCoffee = new Rickshaw.Graph.RangeSlider.Preview({
         graph: coffeelevelGraph,
-        element: document.getElementById("slider-coffeelevel")
+        element: document.getElementById('slider-coffeelevel')
     });
 
     var legendCoffee = new Rickshaw.Graph.Legend({
@@ -174,7 +174,7 @@ function drawGraph_connectedcup(from, to) {
                        moment((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' +
                          series.color + '"></span>';
-            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+            return swatch + series.name + ': ' + parseInt(y) + '<br>' + date;
         }
     });
 
@@ -182,10 +182,10 @@ function drawGraph_connectedcup(from, to) {
         graph: coffeelevelGraph,
         formatter: function (series, x, y) {
             var date = '<span class="date">' +
-                moment((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
+                       moment((x + tzOffset) * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' +
-                series.color + '"></span>';
-            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+                         series.color + '"></span>';
+            return swatch + series.name + ': ' + parseInt(y) + '<br>' + date;
         }
     });
 
@@ -224,7 +224,7 @@ function drawGraph_connectedcup(from, to) {
     if (devices) {
         getData();
     } else {
-        var backendApiUrl = $("#connectedcup-div-chart").data("backend-api-url") + "/sensors/temperature" + "?from=" + from + "&to=" + to;
+        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/temperature' + '?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
                 drawTemperatureLineGraph(JSON.parse(data));
@@ -234,8 +234,8 @@ function drawGraph_connectedcup(from, to) {
             console.log(message);
         });
 
-        var coffeeLevelApiUrl = $("#connectedcup-div-chart").data("backend-api-url") + "/sensors/coffeelevel"
-            + "?from=" + from + "&to=" + to;
+        var coffeeLevelApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/coffeelevel'
+                                + '?from=' + from + '&to=' + to;
         var successCallbackCoffeeLevel = function (data) {
             if (data) {
                 drawCoffeeLevelLineGraph(JSON.parse(data));
@@ -250,9 +250,9 @@ function drawGraph_connectedcup(from, to) {
         if (deviceIndex >= devices.length) {
             return;
         }
-        var backendApiUrl = $("#connectedcup-div-chart").data("backend-api-url") + devices[deviceIndex].deviceIdentifier
-            + "/sensors/temperature"
-                            + "?from=" + from + "&to=" + to;
+        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
+                            + '/sensors/temperature'
+                            + '?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
                 drawTemperatureLineGraph(JSON.parse(data));
@@ -265,8 +265,8 @@ function drawGraph_connectedcup(from, to) {
             deviceIndex++;
             getData();
         });
-        var coffeeLevelApiUrl = $("#connectedcup-div-chart").data("backend-api-url") + devices[deviceIndex].deviceIdentifier
-            +  "/sensors/coffeelevel" + "?from=" + from + "&to=" + to;
+        var coffeeLevelApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
+                                + '/sensors/coffeelevel' + '?from=' + from + '&to=' + to;
 
         var successCallbackCoffeeLevel = function (data) {
             if (data) {
@@ -305,10 +305,10 @@ function drawGraph_connectedcup(from, to) {
         var chartData = [];
         for (var i = 0; i < data.length; i++) {
             chartData.push(
-                {
-                    x: parseInt(data[i].values.time) - tzOffset,
-                    y: parseInt(data[i].values.coffeelevel)
-                }
+                    {
+                        x: parseInt(data[i].values.time) - tzOffset,
+                        y: parseInt(data[i].values.coffeelevel)
+                    }
             );
         }
 
