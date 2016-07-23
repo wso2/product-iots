@@ -19,21 +19,21 @@
 var temperature = 0;
 var coffee_amount = 0;
 
-function updateCoffee(newValue){
-    var coffee_level = document.getElementById("coffee_level");
-    coffee_level.innerHTML = newValue + "%";
-    coffee_amount =newValue;
+function updateCoffee(newValue) {
+    var coffee_level = document.getElementById('coffee_level');
+    coffee_level.innerHTML = newValue + '%';
+    coffee_amount = newValue;
 
-    var coffee = document.getElementById("water");
-    if(newValue == 0){
-        coffee.style.height= (newValue*3) + 'px';
-    }else{
-        coffee.style.height= (newValue*3) - 3 + 'px';
+    var coffee = document.getElementById('water');
+    if (newValue == 0) {
+        coffee.style.height = (newValue * 3) + 'px';
+    } else {
+        coffee.style.height = (newValue * 3) - 3 + 'px';
     }
 }
 
-function updateTemperature(newValue){
+function updateTemperature(newValue) {
     temperature = newValue;
-    var temperature_level = document.getElementById("temperature_level");
-    temperature_level.innerHTML = newValue + " C";
+    var temperature_level = document.getElementById('temperature_level');
+    temperature_level.innerHTML = newValue + ' C';
 }
