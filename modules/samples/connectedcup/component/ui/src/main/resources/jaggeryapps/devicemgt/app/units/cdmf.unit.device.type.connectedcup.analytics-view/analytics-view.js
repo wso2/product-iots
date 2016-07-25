@@ -21,25 +21,25 @@ function onRequest(context) {
 
     var devices = context.unit.params.devices;
     var deviceType = context.uriParams.deviceType;
-    var deviceId = request.getParameter("deviceId");
+    var deviceId = request.getParameter('deviceId');
 
     if (devices) {
         return {
-            "devices": stringify(devices),
-            "backendApiUri": devicemgtProps["httpsURL"] + "/connectedcup/stats/",
-            "dashboardserverURL" : devicemgtProps["dashboardserverURL"]
+            'devices': stringify(devices),
+            'backendApiUri': devicemgtProps['httpsURL'] + '/connectedcup/stats/',
+            'dashboardserverURL': devicemgtProps['dashboardserverURL']
         };
-    } else if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
-        var deviceModule = require("/app/modules/device.js").deviceModule;
+    } else if (deviceType && deviceId) {
+        var deviceModule = require('/app/modules/device.js').deviceModule;
         var device = deviceModule.viewDevice(deviceType, deviceId);
-        if (device && device.status != "error") {
+        if (device && device.status != 'error') {
             return {
-                "device": device,
-                "backendApiUri": devicemgtProps["httpsURL"] + "/connectedcup/stats/" + deviceId,
-                "dashboardserverURL" : devicemgtProps["dashboardserverURL"]
+                'device': device,
+                'backendApiUri': devicemgtProps['httpsURL'] + '/connectedcup/stats/' + deviceId,
+                'dashboardserverURL': devicemgtProps['dashboardserverURL']
             };
         } else {
-            response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");
+            response.sendError(404, 'Device Id ' + deviceId + ' of type ' + deviceType + ' cannot be found!');
             exit();
         }
     }
