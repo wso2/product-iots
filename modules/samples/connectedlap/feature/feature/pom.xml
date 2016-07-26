@@ -132,7 +132,7 @@
                                     <outputDirectory>
                                         ${project.build.directory}/maven-shared-archive-resources/webapps/
                                     </outputDirectory>
-                                    <destFileName>CONNECTEDLAP.war</destFileName>
+                                    <destFileName>connectedlap.war</destFileName>
                                 </artifactItem>
 				<artifactItem>
 				    <groupId>org.wso2</groupId>
