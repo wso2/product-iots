@@ -130,7 +130,7 @@
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>password</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>refresh_token</GrantTypeName>
@@ -150,8 +150,13 @@
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTBearerGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedDeviceMgtJWTBearerGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.ExtendedDeviceJWTGrantValidator</GrantTypeValidatorImplClass>
+            </SupportedGrantType>
+            <SupportedGrantType>
+                <GrantTypeName>device-mgt:password</GrantTypeName>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedDeviceMgtPasswordGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.ExtendedDevicePasswordGrantValidator</GrantTypeValidatorImplClass>
             </SupportedGrantType>
         </SupportedGrantTypes>
         <OAuthCallbackHandlers>

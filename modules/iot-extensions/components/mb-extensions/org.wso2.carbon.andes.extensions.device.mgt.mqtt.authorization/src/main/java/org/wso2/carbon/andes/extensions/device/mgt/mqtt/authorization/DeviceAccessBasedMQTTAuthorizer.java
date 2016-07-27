@@ -40,9 +40,10 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
     private static final String CONNECTION_PERMISSION = "/permission/admin/device-mgt/user";
     private static final String ADMIN_PERMISSION = "/permission/admin/device-mgt/admin";
     private static final String SCOPE_IDENTIFIER = "scope";
-    private static final String CDMF_SCOPE_PREFIX = "cdmf";
-    private static final String CDMF_SCOPE_SEPERATOR = "/";
     private static final String UI_EXECUTE = "ui.execute";
+    private static final String MQTT_PUBLISHER_SCOPE_IDENTIFIER = "mqtt-publisher";
+    private static final String MQTT_SUBSCRIBER_SCOPE_IDENTIFIER = "mqtt-subscriber";
+    private static final String DEVICE_MGT_SCOPE_IDENTIFIER = "device-mgt";
 
     /**
      * {@inheritDoc} Authorize the user against carbon device mgt model.
@@ -61,18 +62,21 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
         if (!tenantIdFromTopic.equals(authorizationSubject.getTenantDomain())) {
             return false;
         }
-        String deviceTypeFromTopic = topics[1];
-        String deviceIdFromTopic = topics[2];
-        List<String> scopes = (List<String>) authorizationSubject.getProperties().get(SCOPE_IDENTIFIER);
-        if (scopes != null) {
+        String deviceType = topics[1];
+        String deviceId = topics[2];
+        Object scopeObject = authorizationSubject.getProperties().get(SCOPE_IDENTIFIER);
+
+        if (!deviceId.isEmpty() && !deviceType.isEmpty() && scopeObject != null) {
+            List<String> scopes = (List<String>) scopeObject;
+            String permissionScope = MQTT_PUBLISHER_SCOPE_IDENTIFIER;
+            if (permissionLevel == MQTTAuthoriztionPermissionLevel.SUBSCRIBE) {
+                permissionScope = MQTT_SUBSCRIBER_SCOPE_IDENTIFIER;
+            }
+            String requiredScope = DEVICE_MGT_SCOPE_IDENTIFIER + ":" + deviceType + ":" + deviceId + ":"
+                    + permissionScope;
             for (String scope : scopes) {
-                if (scope.startsWith(CDMF_SCOPE_PREFIX)) {
-                    String deviceId[] = scope.split(CDMF_SCOPE_SEPERATOR);
-                    if (deviceId.length == 3) {
-                        if (deviceIdFromTopic.equals(deviceId[2]) && deviceTypeFromTopic.equals(deviceId[1])) {
-                            return true;
-                        }
-                    }
+                if (requiredScope.equals(scope)) {
+                    return true;
                 }
             }
         }
