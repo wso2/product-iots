@@ -356,11 +356,6 @@
             <Scope>device_scope</Scope>
         </ScopeWhitelist>
 
-        <!-- This hold the prefix of device scopes. If a device specific token needs to be issues then token
-        needs to be sent with the prefix of Device Scope with the format of
-        DeviceScope/DeviceType/DeviceId -->
-        <DeviceScope>cdmf</DeviceScope>
-
     </APIKeyValidator>
 
     <!--
