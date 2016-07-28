@@ -104,10 +104,10 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
             return Response.ok().entity(sensorDatas).build();
         } catch (AnalyticsException e) {
             String errorMsg = "Error on retrieving stats on table " + sensorTableName + " with query " + query;
-            log.error(errorMsg);
+            log.error(errorMsg, e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(errorMsg).build();
         } catch (DeviceAccessAuthorizationException e) {
-            log.error(e.getErrorMessage());
+            log.error(e.getErrorMessage(), e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
         }
     }
@@ -154,6 +154,7 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
             device.setEnrolmentInfo(enrolmentInfo);
             return APIUtil.getDeviceManagementService().enrollDevice(device);
         } catch (DeviceManagementException e) {
+            log.error("Failed to enroll device with device name :" + name, e);
             return false;
         }
     }

@@ -107,14 +107,14 @@ var jagg = jagg || (function () {
 
             var getThemeFile = function (path) {
                 var p, index, theme = getUserTheme();
-                if(theme.tenant_theme) {
+                if (theme.tenant_theme) {
                     p = getTenantThemePath() + path;
                     index = p.indexOf("?");
-                    if(new File(p.substring(0, index == -1 ? p.length : index)).isExists()) {
+                    if (new File(p.substring(0, index == -1 ? p.length : index)).isExists()) {
                         return p;
                     }
                 }
-                if(theme.subtheme) {
+                if (theme.subtheme) {
                     p = getThemePath() + "subthemes/" + theme.subtheme + "/" + path;
                     index = p.indexOf("?");
                     if(new File(p.substring(0, index == -1 ? p.length : index)).isExists()) {
