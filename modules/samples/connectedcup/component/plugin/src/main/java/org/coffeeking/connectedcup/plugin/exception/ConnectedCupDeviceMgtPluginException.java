@@ -20,29 +20,16 @@ package org.coffeeking.connectedcup.plugin.exception;
 
 public class ConnectedCupDeviceMgtPluginException extends Exception{
 
-    private String errorMessage;
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
     public ConnectedCupDeviceMgtPluginException(String msg, Exception nestedEx) {
         super(msg, nestedEx);
-        setErrorMessage(msg);
     }
 
     public ConnectedCupDeviceMgtPluginException(String message, Throwable cause) {
         super(message, cause);
-        setErrorMessage(message);
     }
 
     public ConnectedCupDeviceMgtPluginException(String msg) {
         super(msg);
-        setErrorMessage(msg);
     }
 
     public ConnectedCupDeviceMgtPluginException() {
