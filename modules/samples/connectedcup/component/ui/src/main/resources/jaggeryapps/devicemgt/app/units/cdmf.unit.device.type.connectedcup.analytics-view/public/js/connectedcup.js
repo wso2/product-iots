@@ -230,9 +230,7 @@ function drawGraph_connectedcup(from, to) {
                 drawTemperatureLineGraph(JSON.parse(data));
             }
         };
-        invokerUtil.get(backendApiUrl, successCallback, function (message) {
-            console.log(message);
-        });
+        invokerUtil.get(backendApiUrl, successCallback, function (message) {});
 
         var coffeeLevelApiUrl = $("#connectedcup-div-chart").data("backend-api-url") + "/sensors/coffeelevel"
             + "?from=" + from + "&to=" + to;
@@ -286,10 +284,10 @@ function drawGraph_connectedcup(from, to) {
         var chartData = [];
         for (var i = 0; i < data.length; i++) {
             chartData.push(
-                    {
-                        x: parseInt(data[i].values.time) - tzOffset,
-                        y: parseInt(data[i].values.temperature)
-                    }
+                {
+                    x: parseInt(data[i].values.time) - tzOffset,
+                    y: parseInt(data[i].values.temperature)
+                }
             );
         }
 
