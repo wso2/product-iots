@@ -147,6 +147,7 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
             device.setEnrolmentInfo(enrolmentInfo);
             return APIUtil.getDeviceManagementService().enrollDevice(device);
         } catch (DeviceManagementException e) {
+            log.error("Failed to enroll device with device name :" + name, e);
             return false;
         }
     }
