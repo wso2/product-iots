@@ -18,7 +18,8 @@
 
 package org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dna.mqtt.moquette.server.IAuthorizer;
 import org.wso2.andes.configuration.enums.MQTTAuthoriztionPermissionLevel;
 import org.wso2.andes.mqtt.MQTTAuthorizationSubject;
@@ -36,7 +37,8 @@ import java.util.List;
  * This is just a simple authorization model. For dynamic topics use an implementation based on IAuthorizer
  */
 public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
-    private static final Logger logger = Logger.getLogger(DeviceAccessBasedMQTTAuthorizer.class);
+
+    private static Log logger = LogFactory.getLog(DeviceAccessBasedMQTTAuthorizer.class);
     private static final String CONNECTION_PERMISSION = "/permission/admin/device-mgt/user";
     private static final String ADMIN_PERMISSION = "/permission/admin/device-mgt/admin";
     private static final String SCOPE_IDENTIFIER = "scope";
