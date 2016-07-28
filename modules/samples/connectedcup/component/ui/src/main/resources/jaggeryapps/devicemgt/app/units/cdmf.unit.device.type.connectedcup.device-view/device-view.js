@@ -18,28 +18,27 @@
 
 
 function onRequest(context) {
-    var log = new Log("detail.js");
+    var log = new Log('detail.js');
     var deviceType = context.uriParams.deviceType;
-    var deviceId = request.getParameter("id");
+    var deviceId = request.getParameter('id');
 
-    var property = require("process").getProperty;
     var devicemgtProps = require('/app/conf/devicemgt-props.js').config();
 
-    if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
-        var deviceModule = require("/app/modules/device.js").deviceModule;
+    if (deviceType && deviceId) {
+        var deviceModule = require('/app/modules/device.js').deviceModule;
         var device = deviceModule.viewDevice(deviceType, deviceId);
 
-        if (device && device.status != "error") {
+        if (device && device.status != 'error') {
             log.info(device);
-            var constants = require("/app/modules/constants.js");
+            var constants = require('/app/modules/constants.js');
             var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
-            var token = "";
+            var token = '';
             if (tokenPair) {
-                token =  tokenPair.accessToken;
+                token = tokenPair.accessToken;
             }
             device.accessToken = token;
-            device.ip = devicemgtProps["httpsWebURL"];
-            return {"device": device};
+            device.ip = devicemgtProps['httpsWebURL'];
+            return {'device': device};
         }
     }
 }

@@ -18,11 +18,11 @@
 
 package org.homeautomation.droneanalyzer.plugin.impl.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.homeautomation.droneanalyzer.plugin.constants.DroneAnalyzerConstants;
 import org.homeautomation.droneanalyzer.plugin.exception.DeviceMgtPluginException;
 import org.homeautomation.droneanalyzer.plugin.internal.DroneAnalyzerManagementDataHolder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.base.ServerConfiguration;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.core.util.Utils;
@@ -42,7 +42,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -110,10 +109,15 @@ public class DroneAnalyzerUtils {
             MQTT_PORT = "\\$".concat(DroneAnalyzerConstants.MQTT_PORT);
         }
         urlWithPlaceholders = Utils.replaceSystemProperty(urlWithPlaceholders);
-        urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_PORT, "" +
-                (DroneAnalyzerConstants.DEFAULT_MQTT_PORT + getPortOffset()));
-        urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_BROKER_HOST,
-                System.getProperty(DroneAnalyzerConstants.DEFAULT_CARBON_LOCAL_IP_PROPERTY, "localhost"));
+        if(MQTT_PORT != null ){
+            urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_PORT, "" +
+                    (DroneAnalyzerConstants.DEFAULT_MQTT_PORT + getPortOffset()));
+        }
+        if(MQTT_BROKER_HOST != null ){
+            urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_BROKER_HOST,
+                    System.getProperty(DroneAnalyzerConstants.DEFAULT_CARBON_LOCAL_IP_PROPERTY, "localhost"));
+        }
+
         return urlWithPlaceholders;
     }
 

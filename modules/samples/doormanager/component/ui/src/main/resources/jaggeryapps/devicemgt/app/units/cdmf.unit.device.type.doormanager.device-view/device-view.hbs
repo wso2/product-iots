@@ -1,21 +1,3 @@
-<!--
-/*
-* Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-* WSO2 Inc. licenses this file to you under the Apache License,
-* Version 2.0 (the "License"); you may not use this file except
-* in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-* KIND, either express or implied.  See the License for the
-* specific language governing permissions and limitations
-* under the License.
-*/-->
 {{#zone "topCss"}}
     <style>
         .thumbnail.icon:before {
@@ -25,12 +7,7 @@
 {{/zone}}
 
 {{#zone "device-thumbnail"}}
-    <img src="{{@unit.publicUri}}/images/doormanager-icon.png"/>
-{{/zone}}
-
-{{#zone "operation-status"}}
-    <div id="div-operation-status" class="hidden" align="center" style="padding: 10px; margin-bottom: 5px">
-    </div>
+    <img src="{{@unit.publicUri}}/images/deviceType.png"/>
 {{/zone}}
 
 {{#zone "device-opetations"}}
@@ -38,18 +15,62 @@
         Operations
     </div>
     <div class="add-margin-top-4x">
-        {{unit "iot.unit.device.operation-bar" device=device}}
+        {{unit "iot.unit.device.operation-bar" device=device backendApiUri=backendApiUri autoCompleteParams=autoCompleteParams}}
     </div>
 {{/zone}}
 
+<div class="wr-uioperations" style="display: block;">
+    <table>
+        <tr>
+            <td  width="47%"> <div id="light-bulb" class="off ui-draggable" >
+
+                <div id="bulb-intensity"></div>
+                <p class="intensity-val">Bulb intensity = <span>0</span></p>
+                <div id="light-bulb2" style="opacity: 0; "></div>
+            </div>
+            </td>
+            <td  width="20%"><div href="" class="cube-switch">
+        <span class="switch">
+            <span class="switch-state off">Off</span>
+            <span class="switch-state on">On</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label" style="margin-left: 33px;">Fan On/Off</p>
+            </td>
+            <td  width="20%"><div href="" class="door-switch">
+        <span class="switch">
+            <span class="switch-state off">Unlock</span>
+            <span class="switch-state on">Lock</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label">Door Lock/Unlock</p>
+            </td>
+
+            <td  width="20%">
+                <a href="javascript:operationSelect('{{operation}}')">
+                    {{#if icon}}
+                        <img src="{{@app.context}}/{{icon}}" style="width: 48px;"/>
+                    {{else}}
+                        <i class="fw fw-user fw-5x"></i>
+                    {{/if}}
+                    <span>{{name}}</span>
+                </a>
+
+                <br> <p class="operation-label">Assign new user to lock</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
 {{#zone "device-detail-properties"}}
     <div class="media">
-
         <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <ul class="list-group" role="tablist">
-                <li class="active">
-                    <a class="list-group-item" href="#device_statistics" role="tab" data-toggle="tab"
-                       aria-controls="device_statistics">Device Statistics</a>
+                <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
+                                      data-toggle="tab" aria-controls="device_statistics">Device
+                    Statistics</a>
                 </li>
                 <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
                        aria-controls="event_log">Operations Log</a></li>
@@ -57,10 +78,11 @@
         </div>
         <div class="media-body add-padding-left-5x remove-padding-xs tab-content">
             <div class="panel-group tab-content">
+
                 <div class="panel panel-default tab-pane active"
                      id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
                     <div class="panel-heading">Device Statistics</div>
-                    {{unit "iot.unit.device.stats" device=device}}
+                    {{unit "cdmf.unit.device.type.doormanager.realtime.analytics-view" device=device}}
                 </div>
                 <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
                      aria-labelledby="event_log">
@@ -90,5 +112,12 @@
     </div>
 {{/zone}}
 
+{{#zone "bottomJs"}}
+    {{css "css/custom-style.css"}}
+    {{css "css/jquery-ui.css"}}
+    {{js "js/jquery-1.8.3.js"}}
+    {{js "js/jquery-ui.js"}}
+    {{js "js/ui-operation.js"}}
 
 
+{{/zone}}

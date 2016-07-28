@@ -20,10 +20,9 @@ package org.homeautomation.droneanalyzer.plugin.impl.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.homeautomation.droneanalyzer.plugin.constants.DroneAnalyzerConstants;
-import org.homeautomation.droneanalyzer.plugin.impl.dao.impl.DroneAnalyzerDAOImpl;
 import org.homeautomation.droneanalyzer.plugin.exception.DeviceMgtPluginException;
+import org.homeautomation.droneanalyzer.plugin.impl.dao.impl.DroneAnalyzerDAOImpl;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

@@ -39,7 +39,7 @@ var plotting = function () {
         $(holder).html();
         var init_window = function () {
             return 0;
-        }
+        };
         api.data = d3.range(parseInt($(window_size_holder).html())).map(init_window);
         var margin = {top: 20, right: 20, bottom: 20, left: 40},
             width = holder_width - margin.left - margin.right,
@@ -124,7 +124,7 @@ var plotting = function () {
         }
 
         function rescale() {
-            y.domain([parseInt($(y_min_hollder).val()), parseInt($(y_max_holder).val())])
+            y.domain([parseInt($(y_min_hollder).val()), parseInt($(y_max_holder).val())]);
 
             svg.select(".title_label")
                 .text($(title).val() + " variation within last " + $(window_size_holder).html() + " frames");
@@ -134,7 +134,7 @@ var plotting = function () {
         }
 
         function rescale_x() {
-            x.domain([1, parseInt($(window_size_holder).html()) - 2]).range([0, width])
+            x.domain([1, parseInt($(window_size_holder).html()) - 2]).range([0, width]);
             svg.select(".x_axis").transition().call(axis_x);
         }
 
@@ -143,5 +143,5 @@ var plotting = function () {
         });
 
     }
-}
+};
 

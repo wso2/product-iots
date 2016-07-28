@@ -45,6 +45,7 @@ public class SensorRecord {
 
     /**
      * Gets the values.
+     *
      * @return the values
      */
     public Map<String, Object> getValues() {
@@ -53,6 +54,7 @@ public class SensorRecord {
 
     /**
      * Sets the values.
+     *
      * @param values the values
      */
     public void setValues(Map<String, Object> values) {
@@ -61,6 +63,7 @@ public class SensorRecord {
 
     /**
      * Gets the id.
+     *
      * @return the id
      */
     public String getId() {
@@ -69,6 +72,7 @@ public class SensorRecord {
 
     /**
      * Sets the id.
+     *
      * @param id the new id
      */
     public void setId(String id) {

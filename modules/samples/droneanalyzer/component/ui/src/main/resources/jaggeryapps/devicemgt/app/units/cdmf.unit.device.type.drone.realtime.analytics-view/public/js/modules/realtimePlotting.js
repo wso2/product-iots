@@ -39,7 +39,7 @@ var plotting = function () {
         $(placeholder).html();
         var initWindow = function () {
             return 0;
-        }
+        };
         api.data = d3.range(parseInt($(placeholderWindowSize).html())).map(initWindow);
         var margin = {top: 20, right: 20, bottom: 20, left: 40},
             width = placeholderWidth - margin.left - margin.right,
@@ -123,7 +123,7 @@ var plotting = function () {
         }
 
         function rescale() {
-            y.domain([parseInt($(placeholderYMin).val()), parseInt($(placeholderYMax).val())])
+            y.domain([parseInt($(placeholderYMin).val()), parseInt($(placeholderYMax).val())]);
             svg.select(".title_label")
                 .text($(title).val() + " variation within last " + $(placeholderWindowSize).html() + " frames");
             svg.select(".yaxis_label")
@@ -134,5 +134,5 @@ var plotting = function () {
             rescale();
         });
     }
-}
+};
 

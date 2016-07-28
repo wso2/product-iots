@@ -31,4 +31,3 @@
     <mapping customMapping="disable" type="json"/>
     <to streamName="org.wso2.iot.firealarm" version="1.0.0"/>
 </eventReceiver>
-

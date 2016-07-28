@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -30,72 +29,58 @@
     <!-- Device related APIs -->
     <Permission>
         <name>Get device</name>
-        <path>/device-mgt/user/devices/list</path>
-        <url>/devices/*</url>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/*</url>
         <method>GET</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Add device</name>
-        <path>/device-mgt/user/devices/add</path>
-        <url>/devices/register</url>
-        <method>PUT</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Download device</name>
-        <path>/device-mgt/user/devices/add</path>
-        <url>/devices/doormanager/download</url>
-        <method>GET</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Generate link to download</name>
-        <path>/device-mgt/user/devices/add</path>
-        <url>/devices/doormanager/generate_link</url>
-        <method>GET</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Update device</name>
-        <path>/device-mgt/user/devices/update</path>
-        <url>/devices/update/*</url>
-        <method>POST</method>
-        <scope>emm_admin,emm_user</scope>
+        <scope>doormanager_user</scope>
     </Permission>
     <Permission>
         <name>Remove device</name>
-        <path>/device-mgt/user/devices/remove</path>
-        <url>/devices/remove/*</url>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/*</url>
         <method>DELETE</method>
-        <scope>emm_admin,emm_user</scope>
+        <scope>doormanager_user</scope>
     </Permission>
     <Permission>
-        <name>Assign user</name>
-        <path>/device-mgt/user/device/assign-user</path>
-        <url>/device/assign-user</url>
-        <method>POST</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Change status</name>
-        <path>/device-mgt/user/device/change-status</path>
-        <url>/device/change-status</url>
-        <method>POST</method>
-        <scope>emm_admin,emm_user</scope>
-    </Permission>
-    <Permission>
-        <name>Get current status</name>
-        <path>/device-mgt/user/device/</path>
-        <url>/device/current-status</url>
+        <name>Download device</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/download</url>
         <method>GET</method>
-        <scope>emm_admin,emm_user</scope>
+        <scope>doormanager_user</scope>
     </Permission>
     <Permission>
-        <name>Get user Info</name>
-        <path>/device-mgt/user/device/</path>
-        <url>/device/get-user-info</url>
+        <name>Update device</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/*</url>
+        <method>POST</method>
+        <scope>doormanager_user</scope>
+    </Permission>
+    <Permission>
+        <name>Get Devices</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device</url>
         <method>GET</method>
-        <scope>emm_admin,emm_user</scope>
+        <scope>doormanager_user</scope>
+    </Permission>
+    <Permission>
+        <name>Register Device</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/register</url>
+        <method>POST</method>
+        <scope>doormanager_device</scope>
+    </Permission>
+    <Permission>
+        <name>Control Sensor</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/*/change-status</url>
+        <method>POST</method>
+        <scope>doormanager_user</scope>
+    </Permission>
+    <Permission>
+        <name>Get Stats</name>
+        <path>/device-mgt/doormanager/user</path>
+        <url>/device/stats/*</url>
+        <method>GET</method>
+        <scope>doormanager_device</scope>
     </Permission>
 </PermissionConfiguration>

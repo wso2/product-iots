@@ -16,10 +16,10 @@
  * under the License.
  */
 
-var modalPopup = ".wr-modalpopup";
-var modalPopupContainer = modalPopup + " .modalpopup-container";
-var modalPopupContent = modalPopup + " .modalpopup-content";
-var body = "body";
+var modalPopup = '.wr-modalpopup';
+var modalPopupContainer = modalPopup + ' .modalpopup-container';
+var modalPopupContent = modalPopup + ' .modalpopup-content';
+var body = 'body';
 
 /*
  * set popup maximum height function.
@@ -50,16 +50,16 @@ function showPopup() {
                                         $('label[for=deviceName]').remove();
                                     }
                                 });
-    var deviceType = "";
+    var deviceType = '';
     $('.deviceType').each(function () {
-        if (this.value != "") {
+        if (this.value != '') {
             deviceType = this.value;
         }
     });
     if (deviceType == 'digitaldisplay') {
         $('.sketchType').remove();
         $('input[name="sketchType"][value="digitaldisplay"]').prop('checked', true);
-        $("label[for='digitaldisplay']").text("Simple Agent");
+        $('label[for="digitaldisplay"]').text('Simple Agent');
     } else {
         $('.sketchTypes').remove();
     }
@@ -88,17 +88,17 @@ function attachEvents() {
      * when a user clicks on "Download" link
      * on Device Management page in WSO2 DC Console.
      */
-    $("a.download-link").click(function () {
-        var sketchType = $(this).data("sketchtype");
-        var deviceType = $(this).data("devicetype");
-        var downloadDeviceAPI = "/devicemgt/api/devices/sketch/generate_link";
-        var payload = {"sketchType": sketchType, "deviceType": deviceType};
+    $('a.download-link').click(function () {
+        var sketchType = $(this).data('sketchtype');
+        var deviceType = $(this).data('devicetype');
+        var downloadDeviceAPI = '/devicemgt/api/devices/sketch/generate_link';
+        var payload = {'sketchType': sketchType, 'deviceType': deviceType};
         $(modalPopupContent).html($('#download-device-modal-content').html());
         showPopup();
         var deviceName;
-        $("a#download-device-download-link").click(function () {
+        $('a#download-device-download-link').click(function () {
             $('.new-device-name').each(function () {
-                if (this.value != "") {
+                if (this.value != '') {
                     deviceName = this.value;
                 }
             });
@@ -124,7 +124,7 @@ function attachEvents() {
             }
         });
 
-        $("a#download-device-cancel-link").click(function () {
+        $('a#download-device-cancel-link').click(function () {
             hidePopup();
         });
 
@@ -145,7 +145,7 @@ function downloadAgent() {
     payload.name = $inputs[0].value;
     payload.owner = $inputs[1].value;
 
-    var connectedCupRegisterURL = "/connectedcup/device/register?name=" + encodeURI(payload.name);
+    var connectedCupRegisterURL = '/connectedcup/device/register?name=' + encodeURI(payload.name);
 
     invokerUtil.post(
             connectedCupRegisterURL,
@@ -160,7 +160,7 @@ function downloadAgent() {
 
     var deviceName;
     $('.new-device-name').each(function () {
-        if (this.value != "") {
+        if (this.value != '') {
             deviceName = this.value;
         }
     });
@@ -177,28 +177,28 @@ function doAction(data) {
         document.write(data);
     }
 
-    if (data.status == "200") {
+    if (data.status == 200) {
         $(modalPopupContent).html($('#download-device-modal-content-links').html());
-        $("input#download-device-url").val(data.responseText);
-        $("input#download-device-url").focus(function () {
+        $('input#download-device-url').val(data.responseText);
+        $('input#download-device-url').focus(function () {
             $(this).select();
         });
         showPopup();
-    } else if (data.status == "401") {
+    } else if (data.status == 401) {
         $(modalPopupContent).html($('#device-401-content').html());
-        $("#device-401-link").click(function () {
-            window.location = "/devicemgt/login";
+        $('#device-401-link').click(function () {
+            window.location = '/devicemgt/login';
         });
         showPopup();
-    } else if (data == "403") {
+    } else if (data == 403) {
         $(modalPopupContent).html($('#device-403-content').html());
-        $("#device-403-link").click(function () {
-            window.location = "/devicemgt/login";
+        $('#device-403-link').click(function () {
+            window.location = '/devicemgt/login';
         });
         showPopup();
     } else {
         $(modalPopupContent).html($('#device-unexpected-error-content').html());
-        $("a#device-unexpected-error-link").click(function () {
+        $('a#device-unexpected-error-link').click(function () {
             hidePopup();
         });
     }

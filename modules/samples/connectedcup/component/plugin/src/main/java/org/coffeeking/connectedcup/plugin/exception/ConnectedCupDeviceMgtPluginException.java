@@ -17,8 +17,7 @@
  */
 package org.coffeeking.connectedcup.plugin.exception;
 
-
-public class ConnectedCupDeviceMgtPluginException extends Exception{
+public class ConnectedCupDeviceMgtPluginException extends Exception {
 
     public ConnectedCupDeviceMgtPluginException(String msg, Exception nestedEx) {
         super(msg, nestedEx);

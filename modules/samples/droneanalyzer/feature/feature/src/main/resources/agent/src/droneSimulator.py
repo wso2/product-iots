@@ -19,21 +19,21 @@
 **/
 """
 
+import argparse
+import calendar
 import httplib
 import logging
 import logging.handlers
+import random
 import signal
 import ssl
 import sys
 import threading
-import time, calendar
+import time
 from functools import wraps
-import random
-import mqttHandler
+
 import iotUtils
-import argparse
-import math
-from dronekit import connect, VehicleMode
+import mqttHandler
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -136,8 +136,7 @@ def registerAgent():
                                                 , context=ssl._create_unverified_context())
     dcConncection.set_debuglevel(1)
     dcConncection.connect()
-    PUSH_DATA = iotUtils.DEVICE_INFO + iotUtils.DEVICE_DATA.format(sensorValue=0.0)
-    PUSH_DATA += '}'
+    PUSH_DATA = iotUtils.DEVICE_INFO
     print PUSH_DATA
     registerURL = str(REGISTER_ENDPOINT)
     dcConncection.putrequest('POST', registerURL)
@@ -151,10 +150,10 @@ def registerAgent():
         iotUtils.IS_REGISTERED = True
         print "Your device has been registered with IoT Server"
     else:
-            iotUtils.IS_REGISTERED = False
-            print "Your device hasn't been registered with IoT Server"
-            print ('agentStats: ' + str(dcResponse.status))
-            print ('agentStats: ' + str(dcResponse.reason))
+        iotUtils.IS_REGISTERED = False
+        print "Your device hasn't been registered with IoT Server"
+        print ('agentStats: ' + str(dcResponse.status))
+        print ('agentStats: ' + str(dcResponse.reason))
     print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     print ('agentStats: ' + str(registerURL))
     print ('agentStats: Response Message')
@@ -214,14 +213,14 @@ def main():
             randomLatitudeLongitudeValue = generateLatitudeLongitudeValue(INIT_LATITUDE, INIT_LONGITUDE, 5)
             print randomLatitudeLongitudeValue[1]
             PUSH_DATA = iotUtils.SENSOR_STATS + '"time":'+str(currentTime)+'},"payloadData":{"quatanium_val_q1":34,' \
-                        '"quatanium_val_q2":'+str(random.randint(15, 40))+',"quatanium_val_q3":'\
-                        +str(random.randint(15, 40))+',"quatanium_val_q4":'+str(random.randint(15, 40))+',"velocity_x":'\
-                        +str(random.randint(15, 40))+',"velocity_y":'+str(random.randint(15, 40))+',"velocity_z":678,' \
-                        '"global_location_lat":'+str(randomLatitudeLongitudeValue[0])+',"global_location_alt":45,' \
-                        '"global_location_lon":'+str(randomLatitudeLongitudeValue[1])+',"battery_level":'\
-                        +str(random.randint(15, 100))+',"battery_voltage":'+str(random.randint(15, 100))+',"pitch":'\
-                        +str(random.randint(15, 40))+',"roll":'+str(random.randint(15, 40))+',"yaw":'\
-                        +str(random.randint(15, 40))+'}}}';
+                                                                           '"quatanium_val_q2":'+str(random.randint(15, 40))+',"quatanium_val_q3":' \
+                        +str(random.randint(15, 40))+',"quatanium_val_q4":'+str(random.randint(5, 40))+',"velocity_x":' \
+                        +str(random.randint(1, 5))+',"velocity_y":'+str(random.randint(1, 5))+',"velocity_z":' \
+                        +str(random.randint(1, 5))+',"global_location_lat":'+str(randomLatitudeLongitudeValue[0]) \
+                        +',"global_location_alt":45,"global_location_lon":'+str(randomLatitudeLongitudeValue[1]) \
+                        +',"battery_level":'+ str(random.randint(15, 100))+',"battery_voltage":' \
+                        +str(random.randint(15, 100))+',"pitch":'+str(random.randint(15, 40))+',"roll":' \
+                        +str(random.randint(15, 40))+',"yaw":'+str(random.randint(15, 40))+'}}}';
             mqttHandler.sendSensorValue(PUSH_DATA)
             print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Publishing Device-Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
             print ('PUBLISHED DATA: ' + PUSH_DATA)

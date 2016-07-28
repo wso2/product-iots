@@ -4,17 +4,27 @@
   "nickName": "Humidity Data",
   "description": "Humidity data received from the Device",
   "metaData": [
-    {"name":"owner","type":"STRING"},     
-    {"name":"deviceType","type":"STRING"},
-    {"name":"deviceId","type":"STRING"},  
-    {"name":"time","type":"LONG"}
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceType",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "time",
+      "type": "LONG"
+    }
   ],
   "payloadData": [
     {
-      "name": "humidity","type": "FLOAT"
+      "name": "humidity",
+      "type": "FLOAT"
     }
   ]
 }
-	
-
-				                                    		

@@ -23,14 +23,14 @@ import org.apache.commons.logging.LogFactory;
 import org.coffeeking.api.util.APIUtil;
 import org.coffeeking.api.util.SensorRecord;
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
+import org.wso2.carbon.analytics.dataservice.commons.SORT;
+import org.wso2.carbon.analytics.dataservice.commons.SortByField;
+import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
 import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
-import org.wso2.carbon.analytics.dataservice.commons.SORT;
-import org.wso2.carbon.analytics.dataservice.commons.SortByField;
-import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
 import org.wso2.carbon.device.mgt.common.group.mgt.DeviceGroupConstants;
 
 import javax.ws.rs.Consumes;
@@ -52,13 +52,19 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
 
     private static Log log = LogFactory.getLog(ConnectedCupServiceImpl.class);
 
+    private static String shortUUID() {
+        UUID uuid = UUID.randomUUID();
+        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
+        return Long.toString(l, Character.MAX_RADIX);
+    }
+
     @Path("device/ordercoffee")
     @POST
     public Response orderCoffee(@QueryParam("deviceId") String deviceId) {
         try {
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                                                 ConnectedCupConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.
-                                                DEFAULT_OPERATOR_PERMISSIONS)) {
+            if (!APIUtil.getDeviceAccessAuthorizationService()
+                    .isUserAuthorized(new DeviceIdentifier(deviceId, ConnectedCupConstants.DEVICE_TYPE),
+                                      DeviceGroupConstants.Permissions.DEFAULT_OPERATOR_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             log.info("Coffee ordered....!");
@@ -77,16 +83,17 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response getDeviceStats(@PathParam("deviceId") String deviceId, @PathParam("sensorName") String sensor,
-                                               @QueryParam("from") long from, @QueryParam("to") long to) {
+                                   @QueryParam("from") long from, @QueryParam("to") long to) {
         String fromDate = String.valueOf(from);
         String toDate = String.valueOf(to);
         String query = " deviceId:" + deviceId + " AND deviceType:" +
-                ConnectedCupConstants.DEVICE_TYPE + " AND time : [" + fromDate + " TO " + toDate + "]";
+                       ConnectedCupConstants.DEVICE_TYPE + " AND time : [" + fromDate + " TO " + toDate + "]";
         String sensorTableName = getSensorEventTableName(sensor);
 
         try {
-            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
-                       ConnectedCupConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.DEFAULT_STATS_MONITOR_PERMISSIONS)) {
+            if (!APIUtil.getDeviceAccessAuthorizationService()
+                    .isUserAuthorized(new DeviceIdentifier(deviceId, ConnectedCupConstants.DEVICE_TYPE),
+                                      DeviceGroupConstants.Permissions.DEFAULT_STATS_MONITOR_PERMISSIONS)) {
                 return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
             }
             List<SensorRecord> sensorDatas;
@@ -150,12 +157,6 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
             log.error("Failed to enroll device with device name :" + name, e);
             return false;
         }
-    }
-
-    private static String shortUUID() {
-        UUID uuid = UUID.randomUUID();
-        long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
-        return Long.toString(l, Character.MAX_RADIX);
     }
 
 }

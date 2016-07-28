@@ -29,8 +29,8 @@ import sys
 import threading
 import time
 from functools import wraps
-
-import RPi.GPIO as GPIO
+import calendar
+#import RPi.GPIO as GPIO
 
 import MQTTHandler
 import RFIDReader
@@ -163,12 +163,19 @@ signal.signal(signal.SIGTERM, sigterm_handler)
 #       This method used to initialize GPIO ports
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def initDoorLock():
+    print "init port numbers"
     # GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(iotUtils.DOOR_LOCKER_1_PORT, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(iotUtils.DOOR_LOCKER_2_PORT, GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.OUT, initial=GPIO.LOW)
-    GPIO.setup(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.OUT, initial=GPIO.LOW)
+    # GPIO.setup(iotUtils.DOOR_LOCKER_1_PORT, GPIO.OUT, initial=GPIO.HIGH)
+    # GPIO.setup(iotUtils.DOOR_LOCKER_2_PORT, GPIO.OUT, initial=GPIO.HIGH)
+    # GPIO.setup(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.OUT, initial=GPIO.LOW)
+    # GPIO.setup(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.OUT, initial=GPIO.LOW)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#       generate random sensor value
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def getSensorValue():
+    return iotUtils.generateRandomSensorValues()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #       The Main method of the Automatic Door Locker Agent
@@ -180,8 +187,19 @@ def main():
     initDoorLock()
     # registerUIDofRFIDCard()  # Call the register endpoint and register Device I
     # ListenMQTTThread()
+
     while True:
         try:
+            currentTime = calendar.timegm(time.gmtime())
+            sensorValue = getSensorValue()
+            PUSH_DATA_TO_STREAM_1 = iotUtils.SENSOR_STATS_SENSOR1.format(currentTime, sensorValue)
+            MQTTHandler.on_publish(MQTTHandler.mqttClient, MQTTHandler.TOPIC_TO_PUBLISH_STREAM1, PUSH_DATA_TO_STREAM_1)
+            sensorValue = getSensorValue()
+            PUSH_DATA_TO_STREAM_2 = iotUtils.SENSOR_STATS_SENSOR2.format(currentTime, sensorValue)
+            MQTTHandler.on_publish(MQTTHandler.mqttClient, MQTTHandler.TOPIC_TO_PUBLISH_STREAM2, PUSH_DATA_TO_STREAM_2)
+            print '~~~~~~~~~~~~~~~~~~~~~~~~ Publishing Device-Data ~~~~~~~~~~~~~~~~~~~~~~~~~'
+            print ('PUBLISHED DATA STREAM 1: ' + PUSH_DATA_TO_STREAM_1)
+            print ('PUBLISHED DATA STREAM 2: ' + PUSH_DATA_TO_STREAM_2)
             time.sleep(PUSH_INTERVAL)
         except (KeyboardInterrupt, Exception) as e:
             print "AutomaticDoorLockerStats: Exception in RaspberryAgentThread (either KeyboardInterrupt or Other)"

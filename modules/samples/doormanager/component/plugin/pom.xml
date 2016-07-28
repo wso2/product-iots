@@ -1,21 +1,24 @@
-<!--/*
-* Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-* WSO2 Inc. licenses this file to you under the Apache License,
-* Version 2.0 (the "License"); you may not use this file except
-* in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing,
-* software distributed under the License is distributed on an
-* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-* KIND, either express or implied.  See the License for the
-* specific language governing permissions and limitations
-* under the License.
-*/-->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.homeautomation</groupId>
@@ -25,9 +28,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.0-SNAPSHOT</version>
-    <artifactId>org.homeautomation.doormanager.plugin</artifactId>
+    <artifactId>${project-base-package}.plugin</artifactId>
     <packaging>bundle</packaging>
-    <name>org.homeautomation.doormanager.plugin</name>
+    <name>${project-base-package}.plugin</name>
     <url>http://wso2.org</url>
     <build>
         <plugins>
@@ -41,8 +44,8 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                    <source>${wso2.maven.compiler.source}</source>
-                    <target>${wso2.maven.compiler.target}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -52,32 +55,32 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>org.homeautomation.doormanager.plugin</Bundle-SymbolicName>
-                        <Bundle-Name>org.homeautomation.doormanager.plugin</Bundle-Name>
+                        <Bundle-SymbolicName>${project-base-package}.plugin</Bundle-SymbolicName>
+                        <Bundle-Name>${project-base-package}.plugin</Bundle-Name>
                         <Bundle-Version>1.0.0-SNAPSHOT</Bundle-Version>
                         <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
-                        <Private-Package>org.homeautomation.doormanager.plugin.internal</Private-Package>
+                        <Private-Package>${project-base-package}.plugin.internal</Private-Package>
                         <Import-Package>
                             org.osgi.framework,
                             org.osgi.service.component,
                             org.apache.commons.logging,
-                            javax.naming,
-                            javax.sql,
-                            javax.xml.parsers,
-                            javax.net,
-                            javax.net.ssl,
-                            org.w3c.dom,
+                            javax.naming;resolution:=optional,
+                            javax.sql;resolution:=optional,
                             org.wso2.carbon.device.mgt.common.*,
                             org.wso2.carbon.device.mgt.common,
-                            org.wso2.carbon.context.*,
-                            org.wso2.carbon.ndatasource.core,
                             org.wso2.carbon.device.mgt.iot.*,
-                            org.wso2.carbon.user.api.*,
-                            org.wso2.carbon.user.core.service.*
+                            org.wso2.carbon.device.mgt.extensions.feature.mgt.*,
+                            org.wso2.carbon.utils.*,
+                            org.wso2.carbon.base,
+                            org.wso2.carbon.context,
+                            org.wso2.carbon.core,
+                            org.wso2.carbon.core.util,
+                            org.wso2.carbon.ndatasource.core,
+                            org.wso2.carbon.device.mgt.iot.devicetype.*
                         </Import-Package>
                         <Export-Package>
-                            !org.homeautomation.doormanager.plugin.internal,
-                            org.homeautomation.doormanager.plugin.*
+                            !${project-base-package}.plugin.internal,
+                            ${project-base-package}.plugin.*
                         </Export-Package>
                     </instructions>
                 </configuration>
@@ -85,6 +88,10 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>commons-codec.wso2</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.osgi</groupId>
             <artifactId>org.eclipse.osgi</artifactId>
@@ -102,12 +109,24 @@
             <artifactId>org.wso2.carbon.device.mgt.common</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.iot</artifactId>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon</groupId>
@@ -118,66 +137,8 @@
             <artifactId>org.wso2.carbon.user.api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon</groupId>
-            <artifactId>org.wso2.carbon.utils</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bouncycastle.wso2</groupId>
-                    <artifactId>bcprov-jdk15on</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
-                    <artifactId>org.wso2.carbon.user.api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
-                    <artifactId>org.wso2.carbon.queuing</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
-                    <artifactId>org.wso2.carbon.base</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.axis2.wso2</groupId>
-                    <artifactId>axis2</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.igniterealtime.smack.wso2</groupId>
-                    <artifactId>smack</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.igniterealtime.smack.wso2</groupId>
-                    <artifactId>smackx</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jaxen</groupId>
-                    <artifactId>jaxen</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-fileupload.wso2</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.ant.wso2</groupId>
-                    <artifactId>ant</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.ant.wso2</groupId>
-                    <artifactId>ant</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-httpclient.wso2</groupId>
-                    <artifactId>commons-httpclient</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.equinox</groupId>
-                    <artifactId>javax.servlet</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.wso2.carbon</groupId>
-                    <artifactId>org.wso2.carbon.registry.api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.iot</artifactId>
         </dependency>
     </dependencies>
 </project>

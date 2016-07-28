@@ -25,13 +25,11 @@ import org.wso2.carbon.device.mgt.extensions.feature.mgt.annotations.Feature;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @API(name = "connectedcup", version = "1.0.0", context = "/connectedcup", tags = {"connectedcup"})
@@ -53,7 +51,7 @@ public interface ConnectedCupService {
     @Produces("application/json")
     @Permission(scope = "connectedcup_user", permissions = {"/permission/admin/device-mgt/user/stats"})
     Response getDeviceStats(@PathParam("deviceId") String deviceId, @PathParam("sensorName") String sensor,
-                                        @QueryParam("from") long from, @QueryParam("to") long to);
+                            @QueryParam("from") long from, @QueryParam("to") long to);
 
     @Path("device/register")
     @POST

@@ -18,7 +18,6 @@
 
 package org.homeautomation.droneanalyzer.plugin.impl.util;
 
-import org.homeautomation.droneanalyzer.plugin.impl.util.DroneAnalyzerUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.core.ServerStartupObserver;

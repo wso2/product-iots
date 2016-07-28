@@ -24,14 +24,14 @@ var temperatureData = [];
 var humidity;
 var humidityData = [];
 
-var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
+var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
 
 $(window).load(function () {
 
-	temperature = lineGraph("temperature", temperatureData);
-	humidity = lineGraph("humidity", humidityData);
+	temperature = lineGraph('temperature', temperatureData);
+	humidity = lineGraph('humidity', humidityData);
 
-	var websocketUrl = $("#div-chart").data("websocketurl");
+	var websocketUrl = $('#div-chart').data('websocketurl');
 	connect(websocketUrl)
 });
 
@@ -49,10 +49,10 @@ function lineGraph(type, chartData) {
 	}
 
 	var graph = new Rickshaw.Graph({
-		element: document.getElementById("chart-" + type),
-		width: $("#div-chart").width() - 50,
+		element: document.getElementById('chart-' + type),
+		width: $('#div-chart').width() - 50,
 		height: 300,
-		renderer: "line",
+		renderer: 'line',
 		padding: {top: 0.2, left: 0.0, right: 0.0, bottom: 0.2},
 		xScale: d3.time.scale(),
 		series: [{
@@ -83,7 +83,7 @@ function lineGraph(type, chartData) {
         formatter: function (series, x, y) {
             var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+            return swatch + series.name + ': ' + parseInt(y) + '<br>' + date;
         }
     });
 

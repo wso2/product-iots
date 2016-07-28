@@ -17,20 +17,24 @@
  */
 
 function onRequest(context) {
-    var log = new Log("device-view.js");
+    
     var deviceType = context.uriParams.deviceType;
-    var deviceId = request.getParameter("id");
+    var deviceId = request.getParameter('id');
     var autoCompleteParams = [
-        {"name" : "deviceId", "value" : deviceId}
+        {'name': 'deviceId', 'value': deviceId}
     ];
 
-    if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
-        var deviceModule = require("/app/modules/device.js").deviceModule;
+    if (deviceType && deviceId) {
+        var deviceModule = require('/app/modules/device.js').deviceModule;
         var device = deviceModule.viewDevice(deviceType, deviceId);
-        if (device && device.status != "error") {
-            return {"device": device, "backendApiUri" : devicemgtProps["httpsURL"] + "/"+deviceType+"/", "autoCompleteParams" : autoCompleteParams};
+        if (device && device.status != 'error') {
+            return {
+                'device': device,
+                'backendApiUri': devicemgtProps['httpsURL'] + '/' + deviceType + '/',
+                'autoCompleteParams': autoCompleteParams
+            };
         } else {
-            response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");
+            response.sendError(404, 'Device Id ' + deviceId + ' of type ' + deviceType + ' cannot be found!');
             exit();
         }
     }

@@ -21,10 +21,10 @@
 """
 
 import ConfigParser
+import calendar
 import os
 import random
-import time, calendar
-
+import time
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #       Device specific info when pushing data to server
@@ -42,7 +42,7 @@ SERVER_NAME = configParser.get('Device-Configurations', 'server-name')
 MQTT_EP = configParser.get('Device-Configurations', 'mqtt-ep')
 AUTH_TOKEN = configParser.get('Device-Configurations', 'auth-token')
 CONTROLLER_CONTEXT = configParser.get('Device-Configurations', 'controller-context')
-DEVICE_INFO = '{"owner":"' + DEVICE_OWNER + '","deviceId":"' + DEVICE_ID + '",'
+DEVICE_INFO = '{"owner":"' + DEVICE_OWNER + '","deviceId":"' + DEVICE_ID + '"}'
 HTTPS_EP = configParser.get('Device-Configurations', 'https-ep')
 DEVICE_DATA = '"sensorValue":"{sensorValue}"'
 

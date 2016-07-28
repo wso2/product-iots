@@ -22,12 +22,15 @@
 
 import time
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 import iotUtils
 
 global mqttClient
 mqttClient = mqtt.Client()
+
+global TOPIC_TO_PUBLISH_STREAM1
+global TOPIC_TO_PUBLISH_STREAM2
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,8 +40,12 @@ def on_connect(mqttClient, userdata, flags, rc):
     print("MQTT_LISTENER: Connected with result code " + str(rc))
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    print ("MQTT_LISTENER: Subscribing with topic " + TOPIC_TO_SUBSCRIBE)
-    mqttClient.subscribe(TOPIC_TO_SUBSCRIBE)
+    print ("MQTT_LISTENER: Subscribing with topic " + SUBSCRIBE_FOR_LOCKER_COMMAND)
+    mqttClient.subscribe(SUBSCRIBE_FOR_LOCKER_COMMAND)
+    print ("MQTT_LISTENER: Subscribing with topic " + SUBSCRIBE_FOR_FAN_COMMAND)
+    mqttClient.subscribe(SUBSCRIBE_FOR_FAN_COMMAND)
+    print ("MQTT_LISTENER: Subscribing with topic " + SUBSCRIBE_FOR_BULB_COMMAND)
+    mqttClient.subscribe(SUBSCRIBE_FOR_BULB_COMMAND)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,38 +53,60 @@ def on_connect(mqttClient, userdata, flags, rc):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def on_message(mqttClient, userdata, msg):
     print("MQTT_LISTENER: " + msg.topic + " " + str(msg.payload))
-    request = str(msg.payload)
-    resource = ""
-    if (len(request.split(":")) == 2):
-        resource = request.split(":")[0].upper()
-        state = request.split(":")[1].upper()
+    if msg.topic == SUBSCRIBE_FOR_LOCKER_COMMAND:
+        request = str(msg.payload)
+        resource = ""
+        state = request.upper()
         if state == "LOCK":
-            GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.HIGH)
-            GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.HIGH)
-            GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.HIGH)
-            GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.LOW)
-            mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:LOCKED")
+            # GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.LOW)
+            #mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:LOCKED")
             print "Door is locked"
         elif state == "UNLOCK":
-            GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.LOW)
-            GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.LOW)
-            GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.LOW)
-            GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.HIGH)
-            mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:UNLOCKED")
+            # GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.HIGH)
+            #mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:UNLOCKED")
             print "Door is unlocked"
         else:
             print "MQTT message in the wrong format"
             print "MQTT_LISTENER: Resource- " + resource
-    else:
-        print "MQTT message in the wrong format"
-        print "MQTT_LISTENER: Resource- " + resource
+    elif  msg.topic == SUBSCRIBE_FOR_FAN_COMMAND:
+        request = str(msg.payload)
+        resource = ""
+        state = request.upper()
+        if state == "ON":
+            # GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.HIGH)
+            # GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.LOW)
+            #mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:LOCKED")
+            print "Fan is locked"
+        elif state == "OFF":
+            # GPIO.output(iotUtils.DOOR_LOCKER_2_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.DOOR_LOCKER_1_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.LOCK_STATE_OFF_NOTIFY_PORT, GPIO.LOW)
+            # GPIO.output(iotUtils.LOCK_STATE_ON_NOTIFY_PORT, GPIO.HIGH)
+            #mqttClient.publish(TOPIC_TO_PUBLISH, "Locker:UNLOCKED")
+            print "Fan is off"
+        else:
+            print "MQTT message in the wrong format"
+            print "MQTT_LISTENER: Resource- " + resource
+    elif  msg.topic == SUBSCRIBE_FOR_BULB_COMMAND:
+        request = str(msg.payload)
+        print "bulb is to blow"
+        resource = ""
+        print request
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #       The callback for when a PUBLISH message to the server when door is open or close
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def on_publish(mqttClient, msg):
-    mqttClient.publish(TOPIC_TO_PUBLISH, msg)
+def on_publish(mqttClient, topic, msg):
+    mqttClient.publish(topic, msg)
 
 
 def sendLockerStatus(msg):
@@ -96,15 +125,24 @@ def main():
 
     DEV_OWNER = iotUtils.DEVICE_OWNER
     DEV_ID = iotUtils.DEVICE_ID
+    DEV_TYPE =iotUtils.DEVICE_TYPE
+    TANENT_DOMAIN = iotUtils.SERVER_NAME
 
-    global TOPIC_TO_SUBSCRIBE
-    TOPIC_TO_SUBSCRIBE = "wso2/iot/" + DEV_OWNER + "/doormanager/" + DEV_ID + "/subscriber"
-    global TOPIC_TO_PUBLISH
-    TOPIC_TO_PUBLISH = "wso2/iot/" + DEV_OWNER + "/doormanager/" + DEV_ID + "/publisher"
+    global SUBSCRIBE_FOR_LOCKER_COMMAND
+    SUBSCRIBE_FOR_LOCKER_COMMAND = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/command"
+    global SUBSCRIBE_FOR_FAN_COMMAND
+    SUBSCRIBE_FOR_FAN_COMMAND = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/fan/command"
+    global SUBSCRIBE_FOR_BULB_COMMAND
+    SUBSCRIBE_FOR_BULB_COMMAND = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/bulb/command"
+    global TOPIC_TO_PUBLISH_STREAM1
+    TOPIC_TO_PUBLISH_STREAM1 = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/smartLock"
+    global TOPIC_TO_PUBLISH_STREAM2
+    TOPIC_TO_PUBLISH_STREAM2 = TANENT_DOMAIN + "/" + DEV_TYPE + "/" + DEV_ID + "/smartFan"
 
     print ("MQTT_LISTENER: MQTT_ENDPOINT is " + str(MQTT_ENDPOINT))
-    print ("MQTT_LISTENER: MQTT_TOPIC is " + TOPIC_TO_SUBSCRIBE)
+    print ("MQTT_LISTENER: MQTT_TOPIC is " + SUBSCRIBE_FOR_LOCKER_COMMAND)
     global mqttClient
+    mqttClient.username_pw_set(iotUtils.AUTH_TOKEN, password = "")
     mqttClient.on_connect = on_connect
     mqttClient.on_message = on_message
 
