@@ -1168,7 +1168,7 @@
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
 
         <!-- CDMF Analytics -->
-        <cdmf.analytics.version>1.0.0-SNAPSHOT</cdmf.analytics.version>
+        <cdmf.analytics.version>1.0.0</cdmf.analytics.version>
     </properties>
 
     <scm>
