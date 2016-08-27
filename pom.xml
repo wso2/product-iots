@@ -687,6 +687,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.orbit.org.apache.pdfbox</groupId>
+                <artifactId>org.apache.pdfbox</artifactId>
+                <version>${orbit.version.pdfbox}</version>
+            </dependency>
 
             <!--CXF dependencies (needed for mobile Jax_RS web apps)-->
             <dependency>
@@ -1086,7 +1091,8 @@
         <carbon.device.mgt.plugin.version>2.1.3-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>5.0.4</carbon.api.mgt.version>
+        <carbon.api.mgt.version>5.0.5</carbon.api.mgt.version>
+        <orbit.version.pdfbox>1.8.10.wso2v2</orbit.version.pdfbox>
 
         <!-- Carbon Mediation -->
         <carbon.mediation.version>4.5.1</carbon.mediation.version>
