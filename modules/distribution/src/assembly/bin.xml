@@ -383,17 +383,12 @@
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-app/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
-            <excludes>
-                <exclude>jaggery.conf</exclude>
-                <exclude>app/conf/app-conf.json</exclude>
-            </excludes>
         </fileSet>
-
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt-cdmf/
@@ -401,14 +396,10 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
             </outputDirectory>
-            <excludes>
-                <exclude>app/conf/app-conf.json</exclude>
-            </excludes>
         </fileSet>
-        
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
