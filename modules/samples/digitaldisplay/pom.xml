@@ -461,8 +461,11 @@
 
     <properties>
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
-        <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
-        <carbon.device.mgt.jar.version>1.1.0.SNAPSHOT</carbon.device.mgt.jar.version>
+
+        <!-- Carbon Device Management -->
+        <carbon.device.mgt.version>1.2.0</carbon.device.mgt.version>
+        <carbon.device.mgt.plugin.version>2.2.0</carbon.device.mgt.plugin.version>
+
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
