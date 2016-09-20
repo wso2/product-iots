@@ -894,10 +894,12 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--cdm config file-->
+        <!-- Copying product specific cdm-config.xml for enabling custom PushNotificationProviders such as
+        XMPP, MQTT which are disabled by default.
+        -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cdm-config.xml
+                src/repository/conf/cdm-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
