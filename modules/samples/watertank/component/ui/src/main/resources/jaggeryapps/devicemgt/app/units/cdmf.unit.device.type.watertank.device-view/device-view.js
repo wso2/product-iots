@@ -29,7 +29,7 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
         if (device && device.status != 'error') {
             return {
-                'device': device,
+                'device': device.content,
                 'backendApiUri': devicemgtProps['httpsURL'] + '/' + deviceType + '/',
                 'autoCompleteParams': autoCompleteParams
             };

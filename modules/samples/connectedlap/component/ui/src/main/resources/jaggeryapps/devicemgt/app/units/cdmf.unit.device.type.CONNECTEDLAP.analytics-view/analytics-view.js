@@ -31,7 +31,7 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
         if (device && device.status != "error") {
             return {
-                "device": device,
+                "device": device.content,
                 "backendApiUrl": devicemgtProps["httpsURL"] + "/CONNECTEDLAP/stats/" + deviceId + "/"
             };
         } else {

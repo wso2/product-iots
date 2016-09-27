@@ -29,7 +29,6 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
 
         if (device && device.status != 'error') {
-            log.info(device);
             var constants = require('/app/modules/constants.js');
             var tokenPair = session.get(constants.ACCESS_TOKEN_PAIR_IDENTIFIER);
             var token = '';
@@ -38,7 +37,7 @@ function onRequest(context) {
             }
             device.accessToken = token;
             device.ip = devicemgtProps['httpsWebURL'];
-            return {'device': device};
+            return {'device': device.content};
         }
     }
 }

@@ -31,7 +31,7 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
 
         if (device && device.status != "error") {
-            return {"device": device};
+            return {"device": device.content};
         } else {
             response.sendError(404, "Device Id " + deviceId + "of type " + deviceType + " cannot be found!");
             exit();
