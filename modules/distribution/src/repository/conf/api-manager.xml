@@ -1,22 +1,4 @@
 <?xml version="1.0"?>
-<!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-  ~
-  ~ WSO2 Inc. licenses this file to you under the Apache License,
-  ~ Version 2.0 (the "License"); you may not use this file except
-  ~ in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing,
-  ~ software distributed under the License is distributed on an
-  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  ~ KIND, either express or implied. See the License for the
-  ~ specific language governing permissions and limitations
-  ~ under the License.
-  -->
-
 <APIManager>
     <!--
         JNDI name of the data source to be used by the API publisher, API store and API
@@ -26,7 +8,7 @@
     <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
 
     <!-- This parameter is used when adding api management capability to other products like GReg, AS, DSS etc.-->
-    <GatewayType>Synapse</GatewayType>
+    <GatewayType>None</GatewayType>
 
     <!-- This parameter is used to enable the securevault support when try to publish endpoint secured APIs. Values should be "true" or "false".
 	By default secure vault is disabled.-->
@@ -94,7 +76,7 @@
 			jwt token, he needs to enable this parameter.
 			The DefaultClaimsRetriever class adds user claims from the default carbon user store.
 		-->
-        <ClaimsRetrieverImplClass>org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
+        <!--ClaimsRetrieverImplClass>org.wso2.carbon.apimgt.impl.token.DefaultClaimsRetriever</ClaimsRetrieverImplClass-->
 
         <!--
 			The dialectURI under which the claimURIs that need to be appended to the
@@ -102,17 +84,17 @@
 			same value is used in the keys for appending the default properties to the
 			JWT.
 		-->
-        <ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI>
+        <!--ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI-->
 
         <!--
 		Signature algorithm. Accepts "SHA256withRSA" or "NONE". To disable signing explicitly specify "NONE".
 	-->
-        <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
+        <!--SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm-->
 
         <!--
 			Enable/Disable JWT generation. Default is false.
 		-->
-        <EnableTokenGeneration>true</EnableTokenGeneration>
+        <!--EnableTokenGeneration>false</EnableTokenGeneration-->
 
         <!--
 			Remove OAuth headers from outgoing message or keep with it.
@@ -310,12 +292,12 @@
         -ThriftServerHost - Allows to configure a hostname for the thrift server. It uses the carbon hostname by default.
         -->
 
-        <KeyValidatorClientType>WSClient</KeyValidatorClientType>
+        <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
         <ThriftClientPort>10397</ThriftClientPort>
         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
         <ThriftServerPort>10397</ThriftServerPort>
         <!--ThriftServerHost>localhost</ThriftServerHost-->
-        <EnableThriftServer>false</EnableThriftServer>
+        <EnableThriftServer>true</EnableThriftServer>
 
         <!--
         Scope used for marking Application Tokens. If a token is generated with this scope, they will be treated as Application Access Tokens
@@ -352,11 +334,18 @@
 		org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->
         <EncryptPersistedTokens>false</EncryptPersistedTokens>
 
-        <ScopeWhitelist>
-            <Scope>device_scope</Scope>
-        </ScopeWhitelist>
-
     </APIKeyValidator>
+
+    <APIKeyManager>
+        <KeyManagerClientImpl>org.wso2.carbon.apimgt.impl.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
+        <Configuration>
+            <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+            <Username>${admin.username}</Username>
+            <Password>${admin.password}</Password>
+            <TokenURL>https://${carbon.local.ip}:${mgt.transport.https.port}/oauth2/token</TokenURL>
+            <RevokeURL>https://${carbon.local.ip}:${mgt.transport.https.port}/oauth2/revoke</RevokeURL>
+        </Configuration>
+    </APIKeyManager>
 
     <!--
         Settings related to managing API access tiers.
@@ -531,8 +520,7 @@
 
         <!--The value of the Access-Control-Allow-Origin header. Default values are
 			API Store addresses, which is needed for swagger to function.-->
-        <Access-Control-Allow-Origin>https://localhost:9443,http://localhost:9763
-        </Access-Control-Allow-Origin>
+        <Access-Control-Allow-Origin>https://localhost:9443,http://localhost:9763</Access-Control-Allow-Origin>
 
         <!--Configure Access-Control-Allow-Headers-->
         <Access-Control-Allow-Headers>authorization,Access-Control-Allow-Origin,Content-Type</Access-Control-Allow-Headers>
