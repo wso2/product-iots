@@ -304,6 +304,7 @@ do
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
     -DworkerNode=false \
+    -Dorg.wso2.ignoreHostnameVerification=true \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
