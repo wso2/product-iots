@@ -195,7 +195,7 @@
                 <version>${carbon.device.mgt.plugin.version}</version>
                 <scope>system</scope>
                 <systemPath>
-                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot_${carbon.iot.device.mgt.jar.version}.jar
+                    ${basedir}/../../../../repository/components/plugins/org.wso2.carbon.device.mgt.iot_${carbon.device.mgt.version}.jar
                 </systemPath>
             </dependency>
             <dependency>
@@ -463,14 +463,12 @@
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>1.2.1-SNAPSHOT</carbon.device.mgt.version>
-        <carbon.device.mgt.plugin.version>2.2.1-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.version>1.2.3-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.plugin.version>2.2.3-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
-        <carbon.device.mgt.plugin.version>2.1.0-SNAPSHOT</carbon.device.mgt.plugin.version>
-        <carbon.iot.device.mgt.jar.version>2.1.0.SNAPSHOT</carbon.iot.device.mgt.jar.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
         <!--XMPP/MQTT Version-->

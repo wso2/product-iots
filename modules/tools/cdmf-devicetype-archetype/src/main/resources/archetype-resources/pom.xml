@@ -381,7 +381,7 @@
         <carbon.devicemgt.version>1.1.0-SNAPSHOT</carbon.devicemgt.version>
         <carbon.analytics.version>1.0.6-ALPHA</carbon.analytics.version>
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
-        <carbon.device.mgt.version>1.1.0-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>1.2.3-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.jar.version>1.1.0.SNAPSHOT</carbon.device.mgt.jar.version>
         <carbon-p2-plugin.version>1.5.3</carbon-p2-plugin.version>
         <carbon.iot.device.mgt.jar.version>2.1.0.SNAPSHOT</carbon.iot.device.mgt.jar.version>
@@ -394,7 +394,7 @@
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
         <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
-        <carbon.device.mgt.plugin.version>2.1.0-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.2.3-SNAPSHOT</carbon.device.mgt.plugin.version>
         <cxf.version>2.6.1</cxf.version>
         <jackson.version>1.9.0</jackson.version>
         <javaee-web-api.version>6.0</javaee-web-api.version>

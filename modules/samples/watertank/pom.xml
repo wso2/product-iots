@@ -371,8 +371,8 @@
         <carbon.analytics.version>1.0.6-ALPHA</carbon.analytics.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>1.2.1-SNAPSHOT</carbon.device.mgt.version>
-        <carbon.device.mgt.plugin.version>2.2.1-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.version>1.2.3-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.plugin.version>2.2.3-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <carbon.commons.version>4.4.8</carbon.commons.version>
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
