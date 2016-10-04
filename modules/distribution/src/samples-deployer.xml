@@ -185,7 +185,7 @@
     </build>
 
     <properties>
-        <carbon.device.mgt.plugin.version>2.2.2-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.2.3-SNAPSHOT</carbon.device.mgt.plugin.version>
     </properties>
 
     <pluginRepositories>
