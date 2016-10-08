@@ -43,7 +43,7 @@
         <MinRetriesToMarkInactive>20</MinRetriesToMarkInactive>
     </PolicyConfiguration>
     <TaskConfiguration>
-        <Enable>true</Enable>
+        <Enable>false</Enable>
         <Frequency>600000</Frequency>
         <TaskClass>org.wso2.carbon.device.mgt.core.task.impl.DeviceDetailsRetrieverTask</TaskClass>
         <Operations>

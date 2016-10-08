@@ -464,8 +464,6 @@
                 <exclude>base-page/**</exclude>
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
-                <exclude>modules/manager/manager.jag</exclude>
-                <exclude>jagg/jagg.jag</exclude>
             </excludes>
         </fileSet>
 
@@ -677,19 +675,7 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
-        <!-- Copying the "api-store" app specific files that uses the edited "apimstore" jaggery module -->
-        <file>
-            <source>src/repository/jaggeryapps/api-store/jagg.jag</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/jagg
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/repository/jaggeryapps/api-store/manager.jag</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/modules/manager
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
+
         <!-- Copying the "portal" app specific modifications to the distribution pack-->
         <file>
             <source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>
