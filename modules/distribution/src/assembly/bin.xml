@@ -218,6 +218,8 @@
                 <include>**/application-authentication.xml</include>
                 <include>**/broker.xml</include>
                 <include>**/log4j.properties</include>
+                <include>**/nhttp.properties</include>
+                <include>**/passthru-http.properties</include>
             </includes>
         </fileSet>
         <fileSet>
