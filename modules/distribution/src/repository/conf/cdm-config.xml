@@ -36,7 +36,7 @@
     </IdentityConfiguration>
     <PolicyConfiguration>
         <MonitoringClass>org.wso2.carbon.policy.mgt</MonitoringClass>
-        <MonitoringEnable>true</MonitoringEnable>
+        <MonitoringEnable>false</MonitoringEnable>
         <MonitoringFrequency>60000</MonitoringFrequency>
         <MaxRetries>5</MaxRetries>
         <MinRetriesToMarkUnreachable>8</MinRetriesToMarkUnreachable>
