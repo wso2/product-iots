@@ -1110,7 +1110,7 @@
         <carbon.mediation.version>4.6.6</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.1.3</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.1.4</carbon.analytics.common.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
