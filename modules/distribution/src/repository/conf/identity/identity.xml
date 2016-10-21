@@ -128,9 +128,10 @@
                 <GrantTypeName>authorization_code</GrantTypeName>
                 <GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.token.handlers.grant.AuthorizationCodeGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
+
             <SupportedGrantType>
                 <GrantTypeName>password</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedPasswordGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
             <SupportedGrantType>
                 <GrantTypeName>refresh_token</GrantTypeName>
