@@ -301,6 +301,7 @@ d                                        <exclude name="**/shindig.properties" /
 							<filters>
 								<filter>${basedir}/src/assembly/filter.properties</filter>
 							</filters>
+							<escapeString>\</escapeString>
 							<descriptors>
 								<descriptor>${basedir}/src/assembly/bin.xml</descriptor>
 							</descriptors>
