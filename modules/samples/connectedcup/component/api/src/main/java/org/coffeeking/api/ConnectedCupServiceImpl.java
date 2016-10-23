@@ -20,11 +20,11 @@ package org.coffeeking.api;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.coffeeking.api.constants.ConnectedCupConstants;
 import org.coffeeking.api.util.APIUtil;
 import org.coffeeking.api.util.SensorRecord;
-import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
-import org.wso2.carbon.analytics.dataservice.commons.SORT;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
+import org.wso2.carbon.analytics.dataservice.commons.SortType;
 import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
@@ -98,7 +98,7 @@ public class ConnectedCupServiceImpl implements ConnectedCupService {
             }
             List<SensorRecord> sensorDatas;
             List<SortByField> sortByFields = new ArrayList<>();
-            SortByField sortByField = new SortByField("time", SORT.ASC, false);
+            SortByField sortByField = new SortByField("time", SortType.ASC);
             sortByFields.add(sortByField);
             sensorDatas = APIUtil.getAllEventsForDevice(sensorTableName, query, sortByFields);
             return Response.ok().entity(sensorDatas).build();

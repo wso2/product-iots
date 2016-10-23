@@ -1272,6 +1272,7 @@
         <file>
             <source>src/samples-deployer.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
+            <filtered>true</filtered>
         </file>
         <!-- Copying webapp-publisher-config.xml -->
         <file>

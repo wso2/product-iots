@@ -136,12 +136,6 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>org.coffeeking</groupId>
-                <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-                <version>${wso2.iot.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.wso2.carbon.devicemgt</groupId>
                 <artifactId>org.wso2.carbon.apimgt.webapp.publisher</artifactId>
                 <version>${carbon.device.mgt.version}</version>
@@ -372,8 +366,8 @@
         <carbon.kernel.version>4.4.3</carbon.kernel.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>1.2.3-SNAPSHOT</carbon.device.mgt.version>
-        <carbon.device.mgt.plugin.version>2.2.3-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.version>1.2.6-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.plugin.version>2.2.5-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
@@ -388,7 +382,7 @@
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
-        <analytics.version>1.0.6-ALPHA</analytics.version>
+        <analytics.version>1.2.8</analytics.version>
         <wso2.iot.version>1.0.0-SNAPSHOT</wso2.iot.version>
     </properties>
 

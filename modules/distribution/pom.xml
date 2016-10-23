@@ -244,28 +244,20 @@ d                                        <exclude name="**/shindig.properties" /
 										<exclude name="**/digitaldisplay/**" />
 										<exclude name="**/doormanager/**" />
 										<exclude name="**/droneanalyzer/**" />
-										<exclude name="**/installer/**" />
+										<exclude name="**/connectedlap/**" />
+										<exclude name="**/firealarm/**" />
+										<exclude name="**/geolocationTracker/**" />
+										<exclude name="**/watertank/**" />
 									</fileset>
 								</copy>
 
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/" overwrite="true">
-									<fileset dir="../samples/installer/">
-										<exclude name="**/*.iml" />
-										<exclude name="**/.DS_Store" />
-										<exclude name="**/target/" />
-									</fileset>
-								</copy>
-
-								<!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/modules" overwrite="true">
-									<fileset dir="src/repository/modules"></fileset>
-								</copy>
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps" overwrite="true">
-									<fileset dir="../apps"></fileset>
-								</copy>
-
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins" overwrite="true">
-									<fileset dir="src/repository/components/patches/apimgt"></fileset>
-								</copy>-->
+								<!--<copy todir="target/wso2carbon-core-${carbon.kernel.version}/" overwrite="true">-->
+									<!--<fileset dir="../samples/installer/">-->
+										<!--<exclude name="**/*.iml" />-->
+										<!--<exclude name="**/.DS_Store" />-->
+										<!--<exclude name="**/target/" />-->
+									<!--</fileset>-->
+								<!--</copy>-->
 
 							</tasks>
 						</configuration>

@@ -71,28 +71,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--MQTT -->
-        <dependency>
-            <groupId>org.eclipse.paho</groupId>
-            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!--IOT -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
             <version>4.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.iot</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.coffeeking</groupId>
-            <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -116,11 +99,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.wso2.carbon.devicemgt</groupId>
-            <artifactId>org.wso2.carbon.device.mgt.analytics.data.publisher</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.wso2.carbon.devicemgt</groupId>
             <artifactId>org.wso2.carbon.apimgt.annotations</artifactId>

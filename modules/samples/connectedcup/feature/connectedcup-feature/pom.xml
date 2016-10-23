@@ -40,11 +40,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.coffeeking</groupId>
-			<artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-			<version>${wso2.iot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.api</artifactId>
 			<version>${wso2.iot.version}</version>
 			<type>war</type>
@@ -54,11 +49,6 @@
 			<artifactId>org.coffeeking.connectedcup.agent</artifactId>
 			<version>${wso2.iot.version}</version>
 			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database.wso2</groupId>
-			<artifactId>h2-database-engine</artifactId>
-			<version>1.2.140.wso2v3</version>
 		</dependency>
 	</dependencies>
 
@@ -159,46 +149,6 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<!-- Creating Connected Cup Plugin Management schema -->
-						<id>create-connected-cup-plugin-mgt-schema</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<echo
-										message="########### Create Connected Cup plugin Management H2 Schema ###########"/>
-								<property name="db.dir"
-										  value="target/maven-shared-archive-resources/database"/>
-								<property name="userid" value="wso2carbon"/>
-								<property name="password" value="wso2carbon"/>
-								<property name="dbURL"
-										  value="jdbc:h2:file:${basedir}/${db.dir}/ConnectedCupDM_DB;DB_CLOSE_ON_EXIT=FALSE"/>
-
-								<mkdir dir="${basedir}/${db.dir}"/>
-
-								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}"
-									 password="${password}"
-									 autocommit="true" onerror="continue">
-									<classpath refid="maven.dependency.classpath"/>
-									<classpath refid="maven.compile.classpath"/>
-									<classpath refid="maven.runtime.classpath"/>
-
-									<fileset file="${basedir}/src/main/resources/dbscripts/h2.sql"/>
-								</sql>
-								<echo message="##################### END ####################"/>
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<groupId>org.wso2.maven</groupId>
 				<artifactId>carbon-p2-plugin</artifactId>
 				<executions>
@@ -217,11 +167,6 @@
 									<propertyDef>org.eclipse.equinox.p2.type.group:true</propertyDef>
 								</properties>
 							</adviceFile>
-							<bundles>
-								<bundleDef>
-									org.coffeeking:org.coffeeking.connectedcup.plugin:${wso2.iot.version}
-								</bundleDef>
-							</bundles>
 							<importFeatures>
 								<importFeatureDef>org.wso2.carbon.core.server:${carbon.kernel.version}
 								</importFeatureDef>

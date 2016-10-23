@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.devicemgt-plugins</groupId>
     <artifactId>iot-devicetype-feature-installation</artifactId>
-    <version>1.0.0</version>
+    <version>${product.version}</version>
     <packaging>pom</packaging>
     <name>Creating custom distribution</name>
     <url>http://wso2.org</url>
@@ -183,10 +183,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <carbon.device.mgt.plugin.version>2.2.4-SNAPSHOT</carbon.device.mgt.plugin.version>
-    </properties>
 
     <pluginRepositories>
         <pluginRepository>

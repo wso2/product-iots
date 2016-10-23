@@ -1100,7 +1100,7 @@
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>2.2.4-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.2.5-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.0.5</carbon.api.mgt.version>
@@ -1185,7 +1185,7 @@
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
 
         <!-- CDMF Analytics -->
-        <cdmf.analytics.version>1.0.1-SNAPSHOT</cdmf.analytics.version>
+        <cdmf.analytics.version>1.0.2-SNAPSHOT</cdmf.analytics.version>
     </properties>
 
     <scm>
