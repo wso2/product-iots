@@ -35,23 +35,5 @@
 		        <exclude>features/**</exclude>
             </excludes>
         </fileSet>
-        <fileSet>
-            <directory>../samples</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/samples</outputDirectory>
-            <excludes>
-                <exclude>**/*.iml</exclude>
-                <exclude>**/.DS_Store</exclude>
-                <exclude>**/target/</exclude>
-                <exclude>**/currentsensor/**</exclude>
-                <exclude>**/digitaldisplay/**</exclude>
-                <exclude>**/doormanager/**</exclude>
-                <exclude>**/droneanalyzer/**</exclude>
-                <exclude>**/connectedlap/**</exclude>
-                <exclude>**/firealarm/**</exclude>
-                <exclude>**/geolocationTracker/**</exclude>
-                <exclude>**/watertank/**</exclude>
-            </excludes>
-            <filtered>true</filtered>
-        </fileSet>
     </fileSets>
 </assembly>
