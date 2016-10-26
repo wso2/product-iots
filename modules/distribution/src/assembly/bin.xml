@@ -624,29 +624,83 @@
             </includes>
         </fileSet>
 
-        <!-- Copying the "portal" app specific modifications to the distribution pack-->
-        <fileSet>
-            <directory>
-                src/repository/jaggeryapps/portal/store/carbon.super/gadget
-            </directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget
-            </outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        <!-- End of "portal" app specific modifications -->
         <!-- Adding analytics theme to extensions -->
         <fileSet>
             <directory>
-                src/repository/jaggeryapps/ues/themes
+                src/repository/jaggeryapps/portal/themes
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/extensions/themes</outputDirectory>
             <includes>
                 <include>**/*</include>
             </includes>
         </fileSet>
+
+        <!-- TODO: Remove below Andriod Analytics -->
+
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/store-->
+            <!--</directory>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/store</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/streams-->
+            <!--</directory>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventstreams-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/event-sink-->
+            <!--</directory>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventsink-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/eventpublishers-->
+            <!--</directory>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventpublishers-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/executionplans-->
+            <!--</directory>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/executionplans-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
+        <!--<fileSet>-->
+            <!--<directory>-->
+                <!--src/repository/analytics/android/simulators-->
+            <!--</directory>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventsimulatorfiles-->
+            <!--</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>**/*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
     </fileSets>
 
     <dependencySets>
@@ -679,24 +733,32 @@
         </file>
 
         <!-- Copying the "portal" app specific modifications to the distribution pack-->
-        <file>
-            <source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/controllers/apis
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/repository/jaggeryapps/portal/js/outputAdapterUiLibrary.js</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/controllers/apis-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
+        <!--<file>-->
+            <!--<source>src/repository/jaggeryapps/portal/js/outputAdapterUiLibrary.js</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
+        <!--<file>-->
+            <!--<source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
+        <!-- TODO: Uncomment below -->
+        <!--<file>-->
+            <!--<source>src/repository/jaggeryapps/portal/uipublisher/websocketSubscriptionEndpoint.jag</source>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/uipublisher/-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
         <file>
             <source>src/repository/jaggeryapps/portal/configs/designer.json</source>
             <outputDirectory>
