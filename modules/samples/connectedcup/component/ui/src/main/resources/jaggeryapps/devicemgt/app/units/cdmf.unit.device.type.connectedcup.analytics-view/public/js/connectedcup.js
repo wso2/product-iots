@@ -20,19 +20,19 @@ var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
 
 function drawGraph_connectedcup(from, to) {
     var connectedCupDetails = $('#connectedcup-details');
-    $('#y_axis-temperature').empty('');
-    $('#smoother-temperature').empty('');
-    $('#legend-temperature').empty('');
-    $('#chart-temperature').empty('');
-    $('#x_axis-temperature').empty('');
-    $('#slider-temperature').empty('');
+    $('#y_axis-temperature').empty();
+    $('#smoother-temperature').empty();
+    $('#legend-temperature').empty();
+    $('#chart-temperature').empty();
+    $('#x_axis-temperature').empty();
+    $('#slider-temperature').empty();
 
-    $('#y_axis-coffeelevel').empty('');
-    $('#smoother-coffeelevel').empty('');
-    $('#legend-coffeelevel').empty('');
-    $('#chart-coffeelevel').empty('');
-    $('#x_axis-coffeelevel').empty('');
-    $('#slider-coffeelevel').empty('');
+    $('#y_axis-coffeelevel').empty();
+    $('#smoother-coffeelevel').empty();
+    $('#legend-coffeelevel').empty();
+    $('#chart-coffeelevel').empty();
+    $('#x_axis-coffeelevel').empty();
+    $('#slider-coffeelevel').empty();
 
     var devices = connectedCupDetails.data('devices');
     var tzOffset = new Date().getTimezoneOffset() * 60;
