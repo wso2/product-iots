@@ -1,0 +1,22 @@
+{
+  "id": "date-picker-widget",
+  "title": "Date Picker Widget",
+  "type": "widget",
+  "category": "Widgets",
+  "thumbnail": "gadget/date-picker-widget/index.png",
+  "data": {
+    "url": "gadget/date-picker-widget/index.xml"
+  },
+  "options": {
+  },
+  "styles": {
+    "borders": false,
+    "title": false
+  },
+  "notify": {
+    "date-selected": {
+      "type": "message",
+      "description": "This notifies selected date"
+    }
+  }
+}

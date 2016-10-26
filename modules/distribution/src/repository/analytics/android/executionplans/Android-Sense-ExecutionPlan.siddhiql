@@ -1,0 +1,63 @@
+@Plan:name('Android-Sense-ExecutionPlan')
+
+@Plan:description('ExecutionPlan')
+
+@Import('org.wso2.iot.android.sense:1.0.0')
+define stream AndroidSense (meta_owner string, meta_deviceId string, meta_type string, meta_timestamp long, battery int, battery_state string, battery_status string, battery_temperature int, gps_lat double, gps_long double, accelerometer_x float, accelerometer_y float, accelerometer_z float, speed_limit float, turn_way string, magnetic_x float, magnetic_y float, magnetic_z float, gyroscope_x float, gyroscope_y float, gyroscope_z float, light float, pressure float, proximity float, gravity_x float, gravity_y float, gravity_z float, rotation_x float, rotation_y float, rotation_z float, word string, word_sessionId string, word_status string, beacon_major int, beacon_minor int, beacon_proximity string, beacon_uuid int, call_number string, call_type string, call_start_time long, call_end_time long, screen_state string, audio_playing bool, headset_on bool, music_volume int, activity_type int, confidence int, sms_number string, application_name string, action string, data_type string, data_sent long, data_received long);
+
+@Export('org.wso2.iot.android.data:1.0.0')
+define stream DataStream (meta_owner string, meta_deviceId string, meta_timestamp long, type string, received long, sent long);
+
+@Export('org.wso2.iot.android.activity:1.0.0')
+define stream ActivityStream (meta_owner string, meta_deviceId string, meta_timestamp long, action string);
+
+@Export('org.wso2.iot.android.call:1.0.0')
+define stream CallStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, startTime long, endTime long);
+
+@Export('org.wso2.iot.android.screen:1.0.0')
+define stream ScreenStream (meta_owner string, meta_deviceId string, meta_timestamp long, state string);
+
+@Export('org.wso2.iot.android.location:1.0.0')
+define stream LocationStream (meta_owner string, meta_deviceId string, meta_timestamp long, latitude double, longitude double);
+
+@Export('org.wso2.iot.android.audio:1.0.0')
+define stream AudioStream (meta_owner string, meta_deviceId string, meta_timestamp long, audio_playing bool, headset_on bool, music_volume int);
+
+@Export('org.wso2.iot.android.battery:1.0.0')
+define stream BatteryStream (meta_owner string, meta_deviceId string, meta_timestamp long, level int, state string, status string, temperature int);
+
+@Export('org.wso2.iot.android.sms:1.0.0')
+define stream SmsStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, body string);
+
+
+from AndroidSense[meta_type == 'sms']
+select meta_owner, meta_deviceId, meta_timestamp, sms_number as number, action as type, "" as body
+insert into SmsStream;
+
+from AndroidSense[meta_type == 'battery']
+select meta_owner, meta_deviceId, meta_timestamp, battery as level, battery_state as state, battery_status as status, battery_temperature as temperature
+insert into BatteryStream;
+
+from AndroidSense[meta_type == 'audio']
+select meta_owner, meta_deviceId, meta_timestamp, audio_playing, headset_on, music_volume
+insert into AudioStream;
+
+from AndroidSense[meta_type == 'location']
+select meta_owner, meta_deviceId, meta_timestamp, gps_lat as latitude, gps_long as longitude
+insert into LocationStream;
+
+from AndroidSense[meta_type == 'screen']
+select meta_owner, meta_deviceId, meta_timestamp, screen_state as state
+insert into ScreenStream;
+
+from AndroidSense[meta_type == 'call']
+select meta_owner, meta_deviceId, meta_timestamp, call_number as number, call_type as type, call_start_time as startTime, call_end_time as endTime
+insert into CallStream;
+
+from AndroidSense[meta_type == 'activity']
+select meta_owner, meta_deviceId, meta_timestamp, action
+insert into ActivityStream;
+
+from AndroidSense[meta_type == 'data']
+select meta_owner, meta_deviceId, meta_timestamp, data_type as type, data_received as received, data_sent as sent
+insert into DataStream;

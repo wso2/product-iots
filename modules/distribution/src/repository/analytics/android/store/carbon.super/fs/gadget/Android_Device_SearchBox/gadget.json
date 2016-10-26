@@ -1,0 +1,20 @@
+{
+  "id": "Android_Device_SearchBox",
+  "title": "Search Box",
+  "type": "gadget",
+  "category": "Gadgets",
+  "thumbnail": "store://gadget/usa-business-revenue/index.png",
+  "data": {
+    "url": "store://gadget/Android_Device_SearchBox/index.xml"
+  },
+  "styles": {
+    "borders": false,
+    "title": false
+  },
+  "toolbarButtons":{
+    "default":{
+        "maximize": false,
+        "configurations": false
+    }
+  }
+}

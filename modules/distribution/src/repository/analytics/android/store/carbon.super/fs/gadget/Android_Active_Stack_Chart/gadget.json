@@ -1,0 +1,14 @@
+{
+    "id": "Android_Active_Stack_Chart",
+    "title": "Android Active Stack Chart",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Active_Stack_Chart/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Active_Stack_Chart/gadget.xml"
+    },
+    "toolbarButtons":{
+    "default":{
+      "maximize": false
+    }
+  }
+}
