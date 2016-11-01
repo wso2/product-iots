@@ -689,6 +689,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.deployment.feature:${carbon.dashboard.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.analytics.gadget.template.feature:${carbon.analytics.common.version}
+                                </featureArtifactDef>
                                 <!-- End of Dashboards Features -->
 
                                 <!-- MB Features -->
@@ -1521,6 +1524,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.dashboard.deployment.feature.group</id>
                                     <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.gadget.template.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <!-- End of Dashboard Features -->
 

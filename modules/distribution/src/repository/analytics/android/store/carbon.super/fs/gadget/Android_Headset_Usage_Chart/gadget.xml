@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Android_Headset_Usage_Chart" description="This is a template gadget">
+        <Require feature="dynamic-height"/>
+        <Require feature="wso2-gadgets-identity"/>
+    </ModulePrefs>
+    
+    <UserPref name="refreshInterval"
+              display_name="Refresh Interval"
+              default_value="1000000"/>
+     
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <!-- shared css -->
+            
+             <link href="/portal/libs/analytics-wso2-2.0.0/common.css" rel="stylesheet" type="text/css" >
+            
+            <!-- chart vendor css -->
+            
+            <!-- chart specific css -->
+            
+
+            <!-- jQuery -->
+            <script src="/portal/libs/jquery_1.11.0/jquery-1.11.3.min.js"></script>
+            <!-- provider libs -->
+            
+            <!-- shared libs -->
+            
+            <script src="/portal/libs/analytics-wso2-2.0.0/d3.min.js"></script>
+            
+            <script src="/portal/libs/analytics-wso2-2.0.0/vega.js"></script>
+            
+            <script src="/portal/libs/analytics-wso2-2.0.0/VizGrammar.min.js"></script>
+            
+            <script src="/portal/libs/analytics-wso2-2.0.0/wso2gadgets.js"></script>
+            
+            <script src="/portal/libs/analytics-wso2-2.0.0/chart-utils.js"></script>
+
+
+            <!-- chart specific vendor libs -->
+            
+            <!-- chart specific js -->
+            
+            <!--scripts copied by framework -->
+            
+            <script src="js/core/gadget-util.js"></script>
+            <script src="js/core/donut-chart-api.js"></script>
+            <script src="js/core/gadget-core.js"></script>
+
+        </head>
+        <body>
+            <div id="canvas"></div>
+        </body>
+        ]]>
+    </Content>
+</Module>

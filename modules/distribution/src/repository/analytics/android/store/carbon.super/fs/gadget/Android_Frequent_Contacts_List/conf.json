@@ -1,0 +1,16 @@
+{
+  "provider-conf": {
+    "tableName": "ANDROID_FREQUENT_CONTACTS_PER_YEAR",
+    "query": "",
+    "limit": "10",
+    "provider-name": "batch"
+  },
+  "chart-conf": {
+    "key": "number",
+    "color": "None",
+    "grid": "on",
+    "maxLength": "30",
+    "gadget-name": "Android Frequent Contacts List",
+    "chart-name": "table-chart"
+  }
+}

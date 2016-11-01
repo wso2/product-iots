@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Analytics>
+    <Editable>true</Editable>
+    <Name>AndroidActivityScript</Name>
+    <Script>            CREATE TEMPORARY TABLE AndroidActivityData USING CarbonAnalytics OPTIONS(tableName "ORG_WSO2_IOT_ANDROID_ACTIVITY_STATS", incrementalParams "ORG_WSO2_IOT_ANDROID_ACTIVITY_STATS, DAY");
+            
+            CREATE TEMPORARY TABLE Android_Activity_Stat_Per_Day USING CarbonAnalytics
+            OPTIONS (tableName "Android_Activity_Stat_Per_Day",
+            schema "owner STRING, deviceId STRING, action STRING, duration LONG -i, year INT -i, month INT -i, day INT -i, _timestamp LONG -i",
+            primaryKeys "year, month, day, deviceId, action, owner",
+            mergeSchema "false");
+
+            CREATE TEMPORARY TABLE Android_Active_Stat_Per_Day USING CarbonAnalytics
+            OPTIONS (tableName "Android_Active_Stat_Per_Day",
+            schema "owner STRING, deviceId STRING, action STRING, duration LONG -i, year INT -i, month INT -i, day INT -i, timestamp LONG -i",
+            primaryKeys "year, month, day, deviceId, owner, action",
+            mergeSchema "false");
+
+            INSERT INTO TABLE Android_Activity_Stat_Per_Day
+            SELECT meta_owner as owner, meta_deviceId as deviceId, action, sum(duration) as duration, year, month, day, getDateStartingTime(year, month, day) as _timestamp
+            FROM AndroidActivityData
+            GROUP BY year, month, day, meta_deviceId, action, meta_owner ORDER BY _timestamp DESC;
+
+            INSERT INTO TABLE Android_Active_Stat_Per_Day
+            SELECT meta_owner as owner, meta_deviceId as deviceId, action, sum(duration) as duration, year, month, day, getDateStartingTime(year, month, day) as timestamp
+            FROM AndroidActivityData WHERE action = 'RUNNING' OR action = 'WALKING' OR action = 'CYCLING'
+            GROUP BY year, month, day, meta_deviceId, action, meta_owner ORDER BY timestamp ASC;             
+
+            INCREMENTAL_TABLE_COMMIT ORG_WSO2_IOT_ANDROID_ACTIVITY_STATS;                            </Script>
+</Analytics>

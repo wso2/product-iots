@@ -1,0 +1,9 @@
+{
+    "id": "Android_Frequent_Contacts_List",
+    "title": "Android Frequent Contacts List",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Frequent_Contacts_List/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Frequent_Contacts_List/gadget.xml"
+    }
+}

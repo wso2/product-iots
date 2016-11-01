@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Date Range Picker" description="g1" height="250">
+        <Require feature="pubsub-2"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <meta charset="utf-8">
+            <title>jQuery UI Datepicker - Default functionality</title>
+            <link rel="stylesheet" href="/portal/libs/bootstrap_3.3.5/css/bootstrap.min.css">
+            <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" type="text/css"/>
+            <style>
+                .datepicker-inline {
+                    margin:0 auto;
+                }
+            </style>
+            <script src="/portal/libs/jquery_1.11.0/jquery-1.11.3.min.js"></script>
+            <script src="/portal/libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
+            <script src="js/bootstrap-datepicker.min.js"></script>
+            <script>
+                $(function() {
+                    var from = 0;
+                    var to = 0;
+
+                    var publish = function() {
+                        gadgets.Hub.publish('range-selected', {
+                            from: from,
+                            to: to
+                        });
+                    };
+
+                    $("#fromDate").datepicker({
+                        orientation: 'top'
+                    }).on('changeDate', function(e) {
+                        var date = e.date;
+                        from = date.getTime();
+                        publish();
+                    });
+
+                    $("#toDate").datepicker({
+                        orientation: 'top'
+                    }).on('changeDate', function(e) {
+                        var date = e.date;
+                        to = date.getTime();
+                        publish();
+                    });
+                });
+            </script>
+        </head>
+        <body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div id="fromDate"></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="toDate"></div>
+                    </div>
+                </div>
+            </div>
+        </body>
+        ]]>
+    </Content>
+</Module>

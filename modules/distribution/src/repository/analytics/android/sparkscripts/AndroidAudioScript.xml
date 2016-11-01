@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Analytics>
+    <Editable>true</Editable>
+    <Name>AndroidAudioScript</Name>
+    <Script>                       CREATE TEMPORARY TABLE AndroidHeadsetData USING CarbonAnalytics OPTIONS(tableName "ORG_WSO2_IOT_ANDROID_HEADSET_STATS", incrementalParams "ORG_WSO2_IOT_ANDROID_HEADSET_STATS, DAY");
+    
+            CREATE TEMPORARY TABLE Android_Headset_Stat_Per_Day USING CarbonAnalytics
+            OPTIONS (tableName "Android_Headset_Stat_Per_Day",
+            schema "owner STRING -i, deviceId STRING -i, duration LONG -i, year INT -i, month INT -i, day INT -i, timestamp STRING -i",
+            primaryKeys "year, month, day, deviceId, owner",
+            mergeSchema "false");
+
+            INSERT INTO TABLE Android_Headset_Stat_Per_Day
+            SELECT meta_owner as owner, meta_deviceId as deviceId, sum(duration) as duration, year, month, day, getDateStartingTime(year, month, day) as timestamp
+            FROM AndroidHeadsetData
+            GROUP BY year, month, day, meta_deviceId, meta_owner ORDER BY timestamp DESC;
+
+            INCREMENTAL_TABLE_COMMIT ORG_WSO2_IOT_ANDROID_HEADSET_STATS;                 </Script>
+</Analytics>

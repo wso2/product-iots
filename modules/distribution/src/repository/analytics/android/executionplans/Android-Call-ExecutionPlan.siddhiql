@@ -1,0 +1,17 @@
+@Plan:name('Android-Call-ExecutionPlan')
+
+@Plan:description('Identify the call durations of incoming and outgoing calls')
+
+
+@Import('org.wso2.iot.android.call:1.0.0')
+define stream CallStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, startTime long, endTime long);
+
+@Export('org.wso2.iot.android.call.stats:1.0.0')
+define stream CallStatsStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, duration long, year int, month int, day int, hour int, minute int);
+
+partition with (meta_deviceId of CallStream)
+begin
+    from CallStream[type == 'INCOMING' OR type == 'OUTGOING']
+    select meta_owner, meta_deviceId, meta_timestamp, number, type, (endTime - startTime) as duration, time:extract(meta_timestamp, 'year') as year, time:extract(meta_timestamp, 'month') as month, time:extract(meta_timestamp, 'day') as day, time:extract(meta_timestamp, 'hour') as hour, time:extract(meta_timestamp, 'minute') as minute
+    insert into CallStatsStream;
+end;
