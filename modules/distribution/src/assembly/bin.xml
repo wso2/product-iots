@@ -550,18 +550,6 @@
         </fileSet>
 
         <!-- Analytics related config -->
-        <fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics</outputDirectory>
-            <includes>
-                <include>**/analytics-config.xml</include>
-                <include>**/rdbms-config.xml</include>
-                <include>**/analytics-data-config.xml</include>
-                <include>**/analytics-eventsink-config.xml</include>
-            </includes>
-        </fileSet>
 
         <fileSet>
             <directory>
@@ -1185,6 +1173,15 @@
             <fileMode>644</fileMode>
         </file>
         <!-- ************* Data bridge related files end ********** -->
+
+        <!-- ************* Analytics API related files Start ********** -->
+        <file>
+            <source>src/repository/conf/analytics/analytics-data-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- ************* Analytics API related files End ********** -->
 
         <file>
             <source>
