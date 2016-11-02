@@ -1015,6 +1015,11 @@
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${eclipse.paho.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.andes.wso2</groupId>
+                <artifactId>andes</artifactId>
+                <version>${carbon.messaging.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

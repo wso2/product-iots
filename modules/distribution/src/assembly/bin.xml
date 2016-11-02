@@ -216,7 +216,7 @@
                 <include>**/api-manager.xml</include>
                 <include>**/sso-idp-config.xml</include>
                 <include>**/application-authentication.xml</include>
-                <!--include>**/broker.xml</include-->
+                <include>**/broker.xml</include>
                 <include>**/log4j.properties</include>
                 <include>**/nhttp.properties</include>
                 <include>**/passthru-http.properties</include>
@@ -574,7 +574,7 @@
             <fileMode>644</fileMode>
         </fileSet>
 
-        <!--fileSet>
+        <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/mb-store
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/mb-store</outputDirectory>
@@ -582,10 +582,10 @@
                 <include>**/*.*</include>
             </includes>
             <fileMode>644</fileMode>
-        </fileSet-->
+        </fileSet>
 
         <!-- messaging related configs -->
-        <!--fileSet>
+        <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/
             </directory>
@@ -595,10 +595,10 @@
                 <include>**/broker.xml</include>
             </includes>
             <fileMode>644</fileMode>
-        </fileSet-->
+        </fileSet>
 
         <!--QPID related configurations-->
-        <!--fileSet>
+        <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/
             </directory>
@@ -609,7 +609,7 @@
                 <include>**/qpid-jmxremote.access</include>
             </includes>
             <fileMode>644</fileMode>
-        </fileSet-->
+        </fileSet>
 
         <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
         <fileSet>
@@ -856,12 +856,12 @@
             <fileMode>644</fileMode>
         </file>
         <!-- Copying event-broker.xml -->
-        <!--file>
+        <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/messaging-event-broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
-        </file-->
+        </file>
         <!-- Copying application-authentication.xml -->
         <file>
             <source>
@@ -937,11 +937,11 @@
             <fileMode>644</fileMode>
         </file>
         <!-- Copying broker.xml -->
-        <!--file>
+        <file>
             <source>src/repository/conf/broker.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
-        </file-->
+        </file>
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading.xml
@@ -994,11 +994,11 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <!--file>
+        <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MB_DB.h2.db</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
-        </file-->
+        </file>
         <!-- nTask Component -->
         <file>
             <source>

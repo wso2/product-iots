@@ -53,19 +53,15 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
     @Override
     public boolean isAuthorizedForTopic(MQTTAuthorizationSubject authorizationSubject, String topic,
                                         MQTTAuthoriztionPermissionLevel permissionLevel) {
-
         if (isUserAuthorized(authorizationSubject, ADMIN_PERMISSION, UI_EXECUTE)) {
-            System.out.println("isAuthorizedForTopic - user is auth success !");
             return true;
         }
         String topics[] = topic.split("/");
         if (topics.length < 3) {
-            System.out.println("isAuthorizedForTopic topic name invalid");
             return false;
         }
         String tenantIdFromTopic = topics[0];
         if (!tenantIdFromTopic.equals(authorizationSubject.getTenantDomain())) {
-            System.out.println("isAuthorizedForTopic tenantID invalid");
             return false;
         }
         String deviceType = topics[1];
@@ -82,12 +78,10 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
                     + permissionScope;
             for (String scope : scopes) {
                 if (requiredScope.equals(scope)) {
-                    System.out.println("isAuthorizedForTopic - Pass");
                     return true;
                 }
             }
         }
-        System.out.println("isAuthorizedForTopic - Failed");
         return false;
     }
 
@@ -119,12 +113,10 @@ public class DeviceAccessBasedMQTTAuthorizer implements IAuthorizer {
             if (userRealm != null && userRealm.getAuthorizationManager() != null) {
                 return userRealm.getAuthorizationManager().isUserAuthorized(username, permission, action);
             }
-            System.out.println("isUserAuthorized failse");
             return false;
         } catch (UserStoreException e) {
             String errorMsg = String.format("Unable to authorize the user : %s", username);
             logger.error(errorMsg, e);
-            System.out.println("isUserAuthorized failed");
             return false;
         } finally {
             PrivilegedCarbonContext.endTenantFlow();
