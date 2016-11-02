@@ -1,0 +1,15 @@
+{
+    "chart-conf": {
+        "chart-name": "donut-chart",
+        "color": "type",
+        "gadget-name": "Android Call Time Chart",
+        "maxLength": "2",
+        "x": "duration"
+    },
+    "provider-conf": {
+        "limit": "2",
+        "provider-name": "batch",
+        "query": "",
+        "tableName": "ANDROID_CALL_STAT_PER_DAY"
+    }
+}

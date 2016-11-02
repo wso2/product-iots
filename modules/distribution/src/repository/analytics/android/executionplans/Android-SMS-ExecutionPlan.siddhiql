@@ -1,0 +1,16 @@
+@Plan:name('Android-SMS-ExecutionPlan')
+
+@Plan:description('Process received and sent SMS details')
+
+@Import('org.wso2.iot.android.sms:1.0.0')
+define stream SmsStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, body string);
+
+@Export('org.wso2.iot.android.sms.stats:1.0.0')
+define stream SmsStatsStream (meta_owner string, meta_deviceId string, meta_timestamp long, number string, type string, year int, month int, day int, hour int, minute int);
+
+partition with (meta_deviceId of SmsStream)
+begin
+    from SmsStream
+    select meta_owner, meta_deviceId, meta_timestamp, number, type, time:extract(meta_timestamp, 'year') as year, time:extract(meta_timestamp, 'month') as month, time:extract(meta_timestamp, 'day') as day, time:extract(meta_timestamp, 'hour') as hour, time:extract(meta_timestamp, 'minute') as minute
+    insert into SmsStatsStream;
+end;

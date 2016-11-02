@@ -1,0 +1,15 @@
+{
+  "id": "Android_Details",
+  "title": "Android Device Details",
+  "type": "gadget",
+  "thumbnail": "gadget/Android_Details/thumbnail.png",
+  "data": {
+    "url": "gadget/Android_Details/gadget.xml"
+  },
+  "toolbarButtons": {
+    "default": {
+      "maximize": false,
+      "configurations": false
+    }
+  }
+}

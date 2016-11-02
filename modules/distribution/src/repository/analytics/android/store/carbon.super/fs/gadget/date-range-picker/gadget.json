@@ -1,0 +1,20 @@
+{
+  "id": "date-range-picker",
+  "title": "Date Range Picker",
+  "type": "gadget",
+  "category": "Widgets",
+  "thumbnail": "gadget/date-range-picker/index.png",
+  "data": {
+    "url": "gadget/date-range-picker/index.xml"
+  },
+  "styles": {
+    "borders": false,
+    "title": false
+  },
+  "notify": {
+    "range-selected": {
+      "type": "date-range",
+      "description": "This notifies selected state"
+    }
+  }
+}
