@@ -574,6 +574,18 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+        <!-- Copying Cert management related dbscripts -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/certMgt
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/certMgt</outputDirectory>
+            <includes>
+                <include>**/*.sql</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/mb-store
             </directory>

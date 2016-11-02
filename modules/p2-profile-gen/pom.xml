@@ -1603,6 +1603,10 @@
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group</id>
+                                    <version>${carbon.identity.framework.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
@@ -1630,9 +1634,14 @@
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
                                     <version>${carbon.identity.framework.version}</version>
                                 </feature>
+
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.ui.feature.group</id>
                                     <version>${carbon.identity.framework.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.oauth.feature.group</id>
+                                    <version>${identity.inbound.auth.oauth.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
@@ -3059,6 +3068,13 @@
                                     <id>org.wso2.carbon.databridge.commons.thrift.server.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
+
+                                <!-- Dashboard Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <!-- End of Dashboard Features -->
                             </features>
                         </configuration>
                     </execution>
@@ -3599,6 +3615,12 @@
                                     <id>org.wso2.carbon.databridge.commons.thrift.server.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
+                                <!-- Dashboard Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <!-- End of Dashboard Features -->
                             </features>
                         </configuration>
                     </execution>
