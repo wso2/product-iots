@@ -596,9 +596,6 @@
 
                                 <!-- MB Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.messaging:org.wso2.carbon.andes.server.feature:${carbon.messaging.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
                                 </featureArtifactDef>
                                 <!--JWT grant type handler-->
@@ -729,10 +726,6 @@
                                 <!-- IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.iot.styles.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
                                     <version>${carbon.iot.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of IoTServer Features -->
@@ -1312,10 +1305,6 @@
                                 <!-- ************** END - EVENT PROCESSING FEATURES ************ -->
 
                                 <feature>
-                                    <id>org.wso2.carbon.andes.server.feature.group</id>
-                                    <version>${carbon.messaging.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
                                 </feature>
@@ -1357,22 +1346,10 @@
                                     <id>org.wso2.iot.styles.feature.group</id>
                                     <version>${carbon.iot.device.mgt.version}</version>
                                 </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                </feature>
                                 <!-- End of IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.carbon.logging.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
-                                    <version>${carbon.iot.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.andes.server.feature.group</id>
-                                    <version>${carbon.messaging.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
