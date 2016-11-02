@@ -1015,11 +1015,6 @@
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${eclipse.paho.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.andes.wso2</groupId>
-                <artifactId>andes</artifactId>
-                <version>${carbon.messaging.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -1110,7 +1105,7 @@
         <carbon.mediation.version>4.6.6</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.1.5-SNAPSHOT</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.1.4</carbon.analytics.common.version>
         <carbon.analytics.version>1.2.9-SNAPSHOT</carbon.analytics.version>
 
         <!-- Tomcat -->
