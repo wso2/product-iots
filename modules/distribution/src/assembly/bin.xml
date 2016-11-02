@@ -216,7 +216,6 @@
                 <include>**/api-manager.xml</include>
                 <include>**/sso-idp-config.xml</include>
                 <include>**/application-authentication.xml</include>
-                <!--include>**/broker.xml</include-->
                 <include>**/log4j.properties</include>
                 <include>**/nhttp.properties</include>
                 <include>**/passthru-http.properties</include>
@@ -572,29 +571,6 @@
             </includes>
             <fileMode>644</fileMode>
         </fileSet>
-
-        <!--fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/mb-store
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/mb-store</outputDirectory>
-            <includes>
-                <include>**/*.*</include>
-            </includes>
-            <fileMode>644</fileMode>
-        </fileSet-->
-
-        <!-- messaging related configs -->
-        <!--fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
-            </outputDirectory>
-            <includes>
-                <include>**/broker.xml</include>
-            </includes>
-            <fileMode>644</fileMode>
-        </fileSet-->
 
         <!--QPID related configurations-->
         <!--fileSet>

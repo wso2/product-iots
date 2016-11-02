@@ -387,9 +387,6 @@
                                 <featureArtifactDef>
                                     org.wso2.iot:org.wso2.iot.styles.feature:${carbon.iot.device.mgt.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.iot:org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature:${carbon.iot.device.mgt.version}
-                                </featureArtifactDef>
 
                                 <!-- Mediation Features -->
                                 <featureArtifactDef>
@@ -597,7 +594,6 @@
                                 </featureArtifactDef>
                                 <!-- *************** End of DAS Client *************** -->
 
-                                <!-- MB Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
                                 </featureArtifactDef>

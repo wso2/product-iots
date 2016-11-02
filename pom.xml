@@ -37,7 +37,7 @@
     <modules>
         <module>modules/tools</module>
         <module>modules/iotserver-ui</module>
-        <module>modules/iot-extensions</module>
+        <!--<module>modules/iot-extensions</module>-->
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
@@ -1004,12 +1004,6 @@
                 <artifactId>json-path</artifactId>
                 <version>${json.path.version}</version>
             </dependency>
-            <!--mqtt-->
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
@@ -1162,14 +1156,13 @@
         <!-- Release plugin ID for github-->
         <project.scm.id>github-scm</project.scm.id>
 
-        <!-- MB Features -->
-        <carbon.messaging.version>3.1.2</carbon.messaging.version>
-        <product.mb.version>3.1.2</product.mb.version>
+        <!-- Carbon Metrics Features -->
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
         <httpcore.version>4.4.1</httpcore.version>
+
         <!--json version-->
         <json-simple.version>1.1.wso2v1</json-simple.version>
         <json.path.version>0.9.1</json.path.version>
