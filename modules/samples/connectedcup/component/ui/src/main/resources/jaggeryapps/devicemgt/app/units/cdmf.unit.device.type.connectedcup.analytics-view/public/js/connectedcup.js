@@ -19,21 +19,22 @@
 var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
 
 function drawGraph_connectedcup(from, to) {
-    $('#y_axis-temperature').html('');
-    $('#smoother-temperature').html('');
-    $('#legend-temperature').html('');
-    $('#chart-temperature').html('');
-    $('#x_axis-temperature').html('');
-    $('#slider-temperature').html('');
+    var connectedCupDetails = $('#connectedcup-details');
+    $('#y_axis-temperature').empty();
+    $('#smoother-temperature').empty();
+    $('#legend-temperature').empty();
+    $('#chart-temperature').empty();
+    $('#x_axis-temperature').empty();
+    $('#slider-temperature').empty();
 
-    $('#y_axis-coffeelevel').html('');
-    $('#smoother-coffeelevel').html('');
-    $('#legend-coffeelevel').html('');
-    $('#chart-coffeelevel').html('');
-    $('#x_axis-coffeelevel').html('');
-    $('#slider-coffeelevel').html('');
+    $('#y_axis-coffeelevel').empty();
+    $('#smoother-coffeelevel').empty();
+    $('#legend-coffeelevel').empty();
+    $('#chart-coffeelevel').empty();
+    $('#x_axis-coffeelevel').empty();
+    $('#slider-coffeelevel').empty();
 
-    var devices = $('#connectedcup-details').data('devices');
+    var devices = connectedCupDetails.data('devices');
     var tzOffset = new Date().getTimezoneOffset() * 60;
 
     var chartWrapperElmId = '#connectedcup-div-chart';
@@ -96,7 +97,7 @@ function drawGraph_connectedcup(from, to) {
                         x: parseInt(new Date().getTime() / 1000),
                         y: 0
                     }],
-                    'name': $('#connectedcup-details').data('devicename')
+                    'name': connectedCupDetails.data('devicename')
                 });
         coffeelevelGraphConfig['series'].push(
                 {
@@ -105,7 +106,7 @@ function drawGraph_connectedcup(from, to) {
                         x: parseInt(new Date().getTime() / 1000),
                         y: 0
                     }],
-                    'name': $('#connectedcup-details').data('devicename')
+                    'name': connectedCupDetails.data('devicename')
                 });
     }
 
@@ -224,7 +225,8 @@ function drawGraph_connectedcup(from, to) {
     if (devices) {
         getData();
     } else {
-        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/temperature' + '?from=' + from + '&to=' + to;
+        var backendApiUrlContext = connectedCupDivChart.data('backend-api-url');
+        var backendApiUrl = connectedCupDivChart.data('backend-api-url') + '/sensors/temperature' + '?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
                 drawTemperatureLineGraph(JSON.parse(data));
@@ -232,8 +234,7 @@ function drawGraph_connectedcup(from, to) {
         };
         invokerUtil.get(backendApiUrl, successCallback, function (message) {});
 
-        var coffeeLevelApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/coffeelevel'
-                                + '?from=' + from + '&to=' + to;
+        var coffeeLevelApiUrl = backendApiUrlContext + '/sensors/coffeelevel' + '?from=' + from + '&to=' + to;
         var successCallbackCoffeeLevel = function (data) {
             if (data) {
                 drawCoffeeLevelLineGraph(JSON.parse(data));
@@ -248,8 +249,7 @@ function drawGraph_connectedcup(from, to) {
         if (deviceIndex >= devices.length) {
             return;
         }
-        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
-                            + '/sensors/temperature'
+        var backendApiUrl = backendApiUrlContext + devices[deviceIndex].deviceIdentifier + '/sensors/temperature'
                             + '?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
@@ -263,7 +263,7 @@ function drawGraph_connectedcup(from, to) {
             deviceIndex++;
             getData();
         });
-        var coffeeLevelApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
+        var coffeeLevelApiUrl = backendApiUrlContext + devices[deviceIndex].deviceIdentifier
                                 + '/sensors/coffeelevel' + '?from=' + from + '&to=' + to;
 
         var successCallbackCoffeeLevel = function (data) {
