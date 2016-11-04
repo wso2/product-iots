@@ -1020,6 +1020,7 @@
                 <artifactId>andes</artifactId>
                 <version>${carbon.messaging.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -1154,11 +1155,10 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.2</appmgt.feature.version>
-        <carbon.appmgt.version>1.2.2</carbon.appmgt.version>
+        <appmgt.feature.version>1.2.5</appmgt.feature.version>
 
         <!-- Carbon Store version-->
-        <carbon.store.version>1.4.2</carbon.store.version>
+        <carbon.store.version>1.4.4</carbon.store.version>
         <!-- Cipher tool version-->
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
 

@@ -198,6 +198,7 @@
                 <include>**/i18n/</include>
                 <include>**/ws/</include>
                 <include>**/appmgtpublisher/</include>
+                <include>**/store/</include>
                 <include>**/lifecycle/</include>
                 <include>**/utils/</include>
                 <include>**/caramel/</include>
@@ -302,13 +303,65 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-
+        <!-- Copying APP management related dbscripts -->
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/storage</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/appmgt</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
         <!-- Copying Social plugin related dbscripts -->
         <fileSet>
-            <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social
-            </directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!-- Copying Social plugin related MSSQL dbscripts from distribution src-->
+        <fileSet>
+            <directory>src/repository/dbscripts/social</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!-- Copying storage related MSSQL dbscripts from distribution src-->
+        <fileSet>
+            <directory>src/repository/dbscripts/storage</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/storage</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!--Copying modules-->
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/modules</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/repository/modules/sso</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/sso</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <!-- This is for APPM -->
+        <!-- This has been done to address a flaw in the APPM publisher feature -->
+        <fileSet>
+            <directory>src/repository/modules/lifecycle</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/lifecycle</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
@@ -483,6 +536,11 @@
             <includes>
                 <include>**/**.xml</include>
             </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/social/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social</outputDirectory>
         </fileSet>
 
         <fileSet>
@@ -963,6 +1021,13 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
+        <!--app management config file-->
+        <file>
+            <source>src/repository/conf/app-manager.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!--License Config file-->
         <file>
             <source>
@@ -1250,6 +1315,14 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
+        <file>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <!-- Copying product specific log4j.properties that has unnecessary logs printed by third parties
         components suppressed -->
         <file>

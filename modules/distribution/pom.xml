@@ -30,8 +30,8 @@
 	<artifactId>wso2iots</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>WSO2 IoT Server - Distribution</name>
-	<description>WSO2 IoT Server Distribution</description>
+	<name>WSO2 IoT - Distribution</name>
+	<description>WSO2 IoT Distribution</description>
 
 	<dependencies>
 		<dependency>
@@ -175,6 +175,64 @@
 							</tasks>
 						</configuration>
 					</execution>
+
+					<execution>
+                        <!-- Creating JAGH2 schema -->
+                        <id>create-JAGH2-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create JAGH2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000" />
+                                <!--<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />-->
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage/h2/h2.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating Social DB schema -->
+                        <id>create-social-db-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create Social Plugin H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2_SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social/h2/resource.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
 					<execution>
 						<id>3-extract-docs-from-components</id>
 						<phase>package</phase>
