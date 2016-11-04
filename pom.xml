@@ -37,7 +37,7 @@
     <modules>
         <module>modules/tools</module>
         <module>modules/iotserver-ui</module>
-        <module>modules/iot-extensions</module>
+        <!--<module>modules/iot-extensions</module>-->
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
@@ -1004,30 +1004,18 @@
                 <artifactId>json-path</artifactId>
                 <version>${json.path.version}</version>
             </dependency>
-            <!--mqtt-->
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization</artifactId>
-                <version>${carbon.iot.device.mgt.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>${eclipse.paho.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.andes.wso2</groupId>
-                <artifactId>andes</artifactId>
-                <version>${carbon.messaging.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.9</carbon.kernel.version>
+        <carbon.kernel.version>4.4.10</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
@@ -1094,14 +1082,14 @@
         <carbon.governance.version>4.6.4</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>1.2.6-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>1.2.7-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[1.1.1, 2.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <carbon.iot.device.mgt.version>1.0.0-SNAPSHOT</carbon.iot.device.mgt.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>2.2.5-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>2.2.6-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.0.5</carbon.api.mgt.version>
@@ -1112,6 +1100,7 @@
 
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.1.4</carbon.analytics.common.version>
+        <carbon.analytics.version>1.2.9-SNAPSHOT</carbon.analytics.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1126,11 +1115,8 @@
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
 
         <!--DAS-->
-        <carbon.analytics.version>1.2.8</carbon.analytics.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
-        <carbon.dashboard.version>2.0.2</carbon.dashboard.version>
         <shindig.version>2.0.2</shindig.version>
-        <carbon.event-processing.version>2.1.4</carbon.event-processing.version>
         <carbon.data.version>4.3.6</carbon.data.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
@@ -1169,14 +1155,13 @@
         <!-- Release plugin ID for github-->
         <project.scm.id>github-scm</project.scm.id>
 
-        <!-- MB Features -->
-        <carbon.messaging.version>3.1.2</carbon.messaging.version>
-        <product.mb.version>3.1.2</product.mb.version>
+        <!-- Carbon Metrics Features -->
         <carbon.metrics.version>1.2.0</carbon.metrics.version>
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
         <httpcore.version>4.4.1</httpcore.version>
+
         <!--json version-->
         <json-simple.version>1.1.wso2v1</json-simple.version>
         <json.path.version>0.9.1</json.path.version>

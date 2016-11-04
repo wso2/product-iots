@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Date Picker Widgete" description="Date picker widget">
+        <Require feature="pubsub-2"/>
+        <Require feature="dynamic-height"/>
+        <Require feature="wso2-gadgets-controls"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <style type="text/css">
+                body {
+                    padding: 12px;
+                    box-sizing: border-box;
+                    background-color: transparent; /* Removes the background color added by Shindig */
+                }
+            </style>
+            <!-- Styles -->
+            <link rel="stylesheet" type="text/css" href="/portal/libs/jquery-ui-1.11.4/jquery-ui.min.css" />
+        </head>
+        <body>
+            <p>Date: <input type="text" id="datepicker"></p>
+
+            <!-- JavaScript libraries scripts -->
+            <script src="/portal/libs/jquery_1.11.0/jquery-1.11.3.min.js"></script>
+            <script src="/portal/libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $(function() {
+                        // Bind the date picker control to the above textbox.
+                        $( "#datepicker" ).datepicker({
+                            // When the datepicker is closed, restore the size of the gadget to its original value.
+                            onClose: function() {
+                                wso2.gadgets.controls.restoreGadget();
+                            },
+                            onSelect: function(date) {
+                                gadgets.Hub.publish('date-selected', date);
+                            }
+                        }).on('focusin', function() {
+                            // When the textbox is focused, the gadget should be resized to cater the content.
+                            wso2.gadgets.controls.resizeGadget({
+                                // In this example only the height should be modified (other fields can be omitted).
+                                height: '300px'
+                            });
+                        });
+
+                        // Hide the date picker when the parent document is clicked.
+                        wso2.gadgets.controls.addLostFocusListener(function() {
+                            $( "#datepicker" ).datepicker('hide');
+                        });
+                    });
+                });
+            </script>
+        </body>
+        ]]>
+    </Content>
+</Module>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventPublisher name="org.wso2.iot.android.battery.ui.publisher"
+  statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+  <from streamName="org.wso2.iot.android.battery" version="1.0.0"/>
+  <mapping customMapping="disable" type="wso2event"/>
+  <to eventAdapterType="ui"/>
+</eventPublisher>

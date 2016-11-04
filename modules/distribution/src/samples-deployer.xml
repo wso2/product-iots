@@ -65,9 +65,6 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.devicetypes.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -103,10 +100,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.devicetypes.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- Mobile Features -->
@@ -149,10 +142,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.devicetypes.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- Mobile Features -->

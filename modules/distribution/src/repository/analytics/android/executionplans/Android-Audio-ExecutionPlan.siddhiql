@@ -1,0 +1,27 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('Android-Audio-ExecutionPlan')
+
+@Plan:description('Find the audio listening through head set')
+
+
+@Import('org.wso2.iot.android.audio:1.0.0')
+define stream AudioStream (meta_owner string, meta_deviceId string, meta_timestamp long, audio_playing bool, headset_on bool, music_volume int);
+
+@Export('org.wso2.iot.android.headset.stats:1.0.0')
+define stream HeadsetStatsStream (meta_owner string, meta_deviceId string, meta_timestamp long, duration long, year int, month int, day int, hour int, minute int);
+
+partition with (meta_deviceId of AudioStream)
+begin
+    from every preEvent = AudioStream[audio_playing AND headset_on], postEvent = AudioStream[(NOT audio_playing OR NOT headset_on) AND preEvent.meta_timestamp <= meta_timestamp]
+    select preEvent.meta_owner as meta_owner, preEvent.meta_deviceId as meta_deviceId, postEvent.meta_timestamp as timestamp, 'ACTIVE' as state
+    insert into #StateChangeEventStream;
+	
+	from every preEvent = AudioStream[NOT audio_playing OR NOT headset_on], postEvent = AudioStream[audio_playing AND headset_on AND preEvent.meta_timestamp <= meta_timestamp]
+    select preEvent.meta_owner as meta_owner, preEvent.meta_deviceId as meta_deviceId, postEvent.meta_timestamp as timestamp, 'INACTIVE' as state
+    insert into #StateChangeEventStream;
+
+    from every preEvent = #StateChangeEventStream[state == 'ACTIVE'], postEvent = #StateChangeEventStream[state == 'INACTIVE']
+    select preEvent.meta_owner as meta_owner, preEvent.meta_deviceId as meta_deviceId, preEvent.timestamp as meta_timestamp, (postEvent.timestamp - preEvent.timestamp) as duration,
+	time:extract(preEvent.timestamp, 'year') as year, time:extract(preEvent.timestamp, 'month') as month, time:extract(preEvent.timestamp, 'day') as day, time:extract(preEvent.timestamp, 'hour') as hour, time:extract(preEvent.timestamp, 'minute') as minute
+    insert into HeadsetStatsStream;
+end;

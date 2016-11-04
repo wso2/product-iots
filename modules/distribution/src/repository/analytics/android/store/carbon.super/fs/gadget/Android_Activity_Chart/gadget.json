@@ -1,0 +1,9 @@
+{
+    "id": "Android_Activity_Chart",
+    "title": "Android Activity Chart",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Activity_Chart/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Activity_Chart/gadget.xml"
+    }
+}

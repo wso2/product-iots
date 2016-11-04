@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Android Location Map" description="This is a template gadget">
+        <Require feature="dynamic-height"/>
+        <Require feature="wso2-gadgets-identity"/>
+    </ModulePrefs>
+    
+    <UserPref name="windowSize"
+              display_name="Window Size"
+              default_value="10"/>
+    
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <meta name="viewport" content="width=device-width,width=device-width , initial-scale=1.0">
+            
+            <link href="css/map-style.css" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+            <link href="http://cdnjs.cloudflare.com/ajax/libs/vis/3.12.0/vis.min.css" rel="stylesheet" type="text/css" />
+            
+            <!-- Scripts -->
+            <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+            <script src="js/android-geo.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+            <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+           
+            <!-- Scripts for timeline -->
+            <script src="js/LeafletPlayback.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/vis/3.12.0/vis.min.js"></script>
+
+            <!-- Script for heatmap -->
+            <script src="js/leaflet-heat.js"></script>
+            
+            <!-- shared libs -->
+            <script src="js/provider-libs/ws-client.js"></script>
+            <script src="/portal/libs/analytics-wso2-2.0.0/d3.min.js"></script>
+            <script src="/portal/libs/analytics-wso2-2.0.0/vega.js"></script>
+            <script src="/portal/libs/analytics-wso2-2.0.0/VizGrammar.min.js"></script>
+            <script src="/portal/libs/analytics-wso2-2.0.0/wso2gadgets.js"></script>
+            <script src="/portal/libs/analytics-wso2-2.0.0/chart-utils.js"></script>
+
+            <script src="js/core/provider-client.js"></script>
+            <script src="js/core/gadget-util.js"></script>
+            <!-- <script src="js/core/number-chart-api.js"></script> -->
+            <script src="js/core/gadget-core.js"></script>
+
+        </head>
+        <body>
+            <div id="tool_box">
+                <select class="form-control" id="select_map" onchange="onMapSelection()">
+                    <option value="current-location">Current Location</option>
+                    <option value="history">History</option>
+                    <option value="heat-map">Heat Map</option>
+                </select>
+            </div>
+            <div id="map"></div>
+            <div id="bottomBox"></div>
+            
+            <script>
+
+            var currentView = "current-location";
+            var latitude = 6.9098623;
+            var longitude = 79.850289;
+            var zoom = 13;
+            var user, deviceId, message;
+
+            var geoMap = new GeoMap('map', latitude, longitude, zoom);
+            // geoMap.showCurrentLocation('abc', latitude, longitude, "Hello");
+            
+            onMapSelection = function() {
+                geoMap.remove();
+                var select = document.getElementById("select_map");
+                currentView = select.value;
+                if (currentView == "current-location") {
+                    geoMap = new GeoMap('map', latitude, longitude, zoom);
+                    if(user) {
+                        geoMap.showCurrentLocation(deviceId, latitude, longitude, message);
+                    }
+                } else if (currentView == "history") {
+                    geoMap = new GeoMap('map', latitude, longitude, zoom);
+                    geoMap.showTimeline(getLocationHistory());
+                } else if (currentView == "heat-map") {
+                    geoMap = new GeoMap('map', latitude, longitude, 10);
+                    geoMap.showHeatMap(getLocationFrequency());
+                }
+            }
+            </script>
+        </body>
+        ]]>
+    </Content>
+</Module>
