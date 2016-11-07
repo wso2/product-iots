@@ -64,55 +64,13 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:${carbon.device.mgt.plugin.version}-->
+                                <!--</featureArtifactDef>-->
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.device.mgt.plugin.version}-->
+                                <!--</featureArtifactDef>-->
                             </featureArtifacts>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>devicetype-feature-install</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>p2-profile-gen</goal>
-                        </goals>
-                        <configuration>
-                            <profile>devicetype-publisher</profile>
-                            <metadataRepository>file:\${basedir}/samples/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/samples/p2-repo</artifactRepository>
-                            <destination>repository/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.arduino.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.raspberrypi.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <!-- Mobile Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <!-- End of Mobile Features -->
-                            </features>
                         </configuration>
                     </execution>
                     <execution>
@@ -145,14 +103,14 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- Mobile Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.plugin.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.plugin.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of Mobile Features -->
                             </features>
                         </configuration>
@@ -171,21 +129,6 @@
                             <tasks>
                                 <replace token="false" value="true"
                                          dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
-                                    <include name="**/bundles.info"/>
-                                </replace>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>devicetype-feature-install</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <replace token="false" value="true"
-                                         dir="repository/components/devicetype-publisher/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>
