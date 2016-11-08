@@ -38,6 +38,7 @@
     <modules>
         <module>modules/core</module>
         <module>modules/analytics</module>
+        <module>modules/distribution</module>
     </modules>
 
     <dependencyManagement>
