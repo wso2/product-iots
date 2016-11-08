@@ -37,10 +37,13 @@ PRGDIR=`dirname "$PRG"`
 sh "$CARBON_HOME/core/bin/wso2server.sh" $* &
 sh "$CARBON_HOME/analytics/bin/wso2server.sh" $* &
 
-trap "sh $CARBON_HOME/bin/stop-all.sh; exit;" SIGINT SIGTERM
+if [ ! -z "$*" ]; then
+    exit;
+else
+    trap "sh $CARBON_HOME/bin/stop-all.sh; exit;" SIGINT SIGTERM
+    while :
+    do
+            sleep 60
+    done
 
-while :
-do
-sleep 60
-done
-
+fi
