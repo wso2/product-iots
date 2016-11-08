@@ -37,7 +37,6 @@
         <module>styles</module>
         <module>org.wso2.iot.analytics.multitenancy.dashboard.ui</module>
         <module>features</module>
-        <module>org.wso2.cep.storm.dependencies</module>
         <module>p2-profile-gen</module>
         <module>distribution</module>
     </modules>

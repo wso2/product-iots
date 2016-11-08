@@ -28,7 +28,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-analytics-features-parent</artifactId>
-    <name>WSO2 Analytics IoT Server - Product Features Parent</name>
+    <name>WSO2 IoT - Analytics - Product Features Parent</name>
     <packaging>pom</packaging>
 
     <modules>

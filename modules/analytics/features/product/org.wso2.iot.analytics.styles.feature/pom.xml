@@ -29,7 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.iot.analytics.styles.feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Analytics IoT Server - Product Style Feature</name>
+    <name>WSO2 IoT - Analytics - Product Style Feature</name>
 
     <dependencies>
         <dependency>

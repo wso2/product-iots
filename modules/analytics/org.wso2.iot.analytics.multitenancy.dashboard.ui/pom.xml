@@ -29,7 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.iot.analytics.multitenancy.dashboard.ui</artifactId>
     <packaging>bundle</packaging>
-    <name>WSO2 Analytics IoT Server - Multi-tenant Dashboard</name>
+    <name>WSO2 IoT - Analytics - Multi-tenant Dashboard</name>
     <build>
 
         <plugins>

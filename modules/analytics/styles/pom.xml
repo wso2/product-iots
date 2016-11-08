@@ -29,7 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-analytics-styles-parent</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Analytics IoT Server - Styles Parent</name>
+    <name>WSO2 IoT - Analytics - Styles Parent</name>
 
     <modules>
         <module>product</module>

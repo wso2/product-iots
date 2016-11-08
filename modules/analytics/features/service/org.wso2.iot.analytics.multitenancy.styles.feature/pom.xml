@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.iot.analytics.multitenancy.style.feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Analytics IoT Server - Multi-tenant Style Feature</name>
+    <name>WSO2 IoT - Analytics - Multi-tenant Style Feature</name>
 
     <dependencies>
         <dependency>
