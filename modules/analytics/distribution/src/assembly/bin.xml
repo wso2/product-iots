@@ -781,14 +781,14 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>repository/resources/geodashboard/events.csv</source>
+            <source>src/repository/resources/geodashboard/events.csv</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/eventsimulatorfiles/
             </outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>repository/resources/geodashboard/events_streamConfiguration.xml</source>
+            <source>src/repository/resources/geodashboard/events_streamConfiguration.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/eventsimulatorfiles/
             </outputDirectory>
             <filtered>true</filtered>
