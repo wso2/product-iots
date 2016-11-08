@@ -1,0 +1,15 @@
+{
+  "id": "floor-view",
+  "title": "Sensor Details",
+  "type": "gadget",
+  "thumbnail": "gadget/floor-view/img/thumbnail.png",
+  "data": {
+    "url": "gadget/floor-view/index.xml"
+  },
+  "listen": {
+    "subscriber": {
+      "type": "filter",
+      "description": "Used to listen to any filters"
+    }
+  }
+}

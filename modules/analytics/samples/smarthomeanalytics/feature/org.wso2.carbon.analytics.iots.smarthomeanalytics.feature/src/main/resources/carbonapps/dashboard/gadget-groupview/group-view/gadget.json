@@ -1,0 +1,15 @@
+{
+  "id": "group-view",
+  "title": "Group Details",
+  "type": "gadget",
+  "thumbnail": "gadget/group-view/img/thumbnail.png",
+  "data": {
+    "url": "gadget/group-view/index.xml"
+  },
+  "listen": {
+    "subscriber": {
+      "type": "filter",
+      "description": "Used to listen to any filters"
+    }
+  }
+}

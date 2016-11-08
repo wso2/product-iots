@@ -1,0 +1,32 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('SmartDoorExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('org.wso2.iot.smarthomeanalytics.sensors.smartdoor:1.0.0')
+define stream sensorSmartDoor (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, openOrClosed int);
+
+@Export('org.wso2.iot.smarthomeanalytics.sensors.currentstatus.smartdoor:1.0.0')
+define stream smartDoorInputMapper (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, openOrClosed int, currentStatus string, message string,  summary string);
+
+@from(eventtable = 'analytics.table' , table.name = 'ORG_WSO2_IOT_SMARTHOMEANALYTICS_SENSORS_CURRENTSTATUS', primary.keys = 'meta_sensorId', indices = 'meta_homeId,meta_sensorId,meta_sensorType,meta_sensorLocation,currentStatus,message,summary', wait.for.indexing = 'true', merge.schema = 'false')
+define table currentStatusOfSmartDoor (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, currentStatus string, message string, summary string);
+
+from sensorSmartDoor[openOrClosed == 1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, openOrClosed, "warning" as currentStatus, str:concat("Please close the door: ", meta_sensorId)  as message, str:concat("Please close the door: ", meta_sensorId)  as summary
+insert into smartDoorInputMapper;
+
+from sensorSmartDoor[openOrClosed == 0]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, openOrClosed, "ok" as currentStatus, str:concat("The door is closed: ", meta_sensorId) as message, str:concat("The door is closed: ", meta_sensorId) as summary
+insert into smartDoorInputMapper;
+
+from sensorSmartDoor[openOrClosed == 1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "warning" as currentStatus, str:concat("Please close the door: ", meta_sensorId)  as message, str:concat("Please close the door: ", meta_sensorId)  as summary
+insert into currentStatusOfSmartDoor;
+
+from sensorSmartDoor[openOrClosed == 0]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "ok" as currentStatus, str:concat("The door is closed: ", meta_sensorId) as message, str:concat("The door is closed: ", meta_sensorId) as summary
+insert into currentStatusOfSmartDoor;

@@ -1,0 +1,8 @@
+
+{
+  "deviceType": {
+    "label": "geolocationTracker",
+    "category": "virtual",
+    "downloadAgentUri": "geolocationTracker/device/download"
+  }
+}

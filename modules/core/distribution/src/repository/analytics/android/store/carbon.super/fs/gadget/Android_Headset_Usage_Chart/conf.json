@@ -1,0 +1,15 @@
+{
+    "chart-conf": {
+        "chart-name": "arc-chart",
+        "color": "owner",
+        "gadget-name": "Android Headset Usage Chart",
+        "maxLength": "2",
+        "x": "duration"
+    },
+    "provider-conf": {
+        "limit": "1",
+        "provider-name": "batch",
+        "query": "",
+        "tableName": "ANDROID_HEADSET_STAT_PER_DAY"
+    }
+}

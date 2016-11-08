@@ -1,0 +1,374 @@
+<div class="col-lg-12  margin-top-double">
+    <h1 class="grey ">Fire Alarm</h1>
+    <hr>
+</div>
+
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 padding-top">
+    <img src="{{@unit.publicUri}}/images/deviceType.png" class="img-responsive">
+</div>
+
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 padding-top">
+
+    <h3 class="uppercase">What it Does</h3>
+    <hr>
+    <p class="grey margin-top">Connect your Fire Alarm to WSO2 IoT Server.</p>
+    <br>
+    <p>An ESP8266 based fire alarm device. Once run, the Fire alarm will connect to WSO2 IoTServer
+       and push Temperature and Humidity readings via MQTT. You can also on/off fire alarm buzzer
+       remotely with IoTServer.
+    </p>
+    <br/>
+    <h3 class="uppercase">What You Need</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double">
+            <span class="circle">STEP 01</span>
+            &nbsp;&nbsp;&nbsp;NodeMCU loaded ESP8266 201 Module.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 02</span>
+            &nbsp;&nbsp;&nbsp;DHT11 Temperature & Humidity Sensor.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 03</span>
+            &nbsp;&nbsp;&nbsp;Buzzer.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 04</span>
+            &nbsp;&nbsp;&nbsp;USB to TTL converter.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">STEP 05</span>
+            &nbsp;&nbsp;&nbsp;ESPlorer software. If you don't have please click
+            <a href="http://esp8266.ru/esplorer-latest/?f=ESPlorer.zip" target="_blank">[here]</a>
+            to download.
+        </li>
+    </ul>
+    <br/>
+    <a href="/api-store/apis/info?name={{@uriParams.deviceType}}&version=1.0.0&provider=admin"
+       class="btn-operations"
+       target="_blank"><i class="fw fw-api"></i> View API</i> &nbsp;</a>
+    <a href="#" class="download-link btn-operations"><i class="fw fw-download"></i>Download
+                                                                                   Agent</a>
+
+    <div id="download-device-modal-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 center-container">
+                    <h3>Name your device and download the agent from following link.</h3>
+                    <br/>
+                    <form id="downloadForm" method="GET"
+                          action="{{@app.context}}/api/devices/sketch/download">
+                        <div id="invalid-username-error-msg" class="alert alert-danger hidden"
+                             role="alert">
+                            <i class="icon fw fw-error"></i><span></span>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input class="new-device-name" style="color:#3f3f3f;padding:5px"
+                                       type="text" placeholder="Ex. Lobby_Fire_Alarm"
+                                       name="deviceName" size="60" required>
+                                <br/>
+                                <input type="hidden" class="deviceType" name="deviceType"
+                                       value="firealarm"/>
+                                <input type="hidden" class="sketchType" name="sketchType"
+                                       value="firealarm"/>
+                            </div>
+                        </div>
+                        <div class="buttons" style="padding-bottom: 0px">
+                            <a class="btn btn-operations" onclick="downloadAgent()">Download Now</a>
+                            &nbsp;&nbsp;
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-agent-downloading-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Device Agent will download shortly.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="download-device-modal-content-links" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Please download the file from following link(Press CTRL+C).</h3>
+                    <br/>
+
+                    <div>
+                        <input id="download-device-url" style="color:#3f3f3f;padding:5px"
+                               type="text" value="" placeholder="Type here" size="60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-400-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Exception at backend. Try Later.</h3>
+
+                    <div class="buttons">
+                        <a href="#" id="device-400-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-401-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>You have to log in first.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-401-link" class="blue-button">
+                            Goto Login Page
+                        </a>&nbsp;&nbsp;
+                        <a href="#" onclick="hidePopup();" class="btn-operations">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-403-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Action not permitted.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-403-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-409-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Device Sketch does not exist.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-409-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="device-unexpected-error-content" class="hide">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-7 col-centered center-container">
+                    <h3>Unexpected error.</h3><br/>
+
+                    <div class="buttons">
+                        <a href="#" id="device-unexpected-error-link" class="btn-operations">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-double grey-bg">
+    <h3 class="uppercase">Prepare</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double">
+            <span class="circle">01</span>
+            &nbsp;&nbsp;&nbsp;Connect USB to TTL converter and other component with ESP8266 201
+            module
+            as schematic in FIRE ALARM SETUP.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">02</span>
+            &nbsp;&nbsp;&nbsp;Download Agent files from [Download Agent] link above.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">03</span>
+            &nbsp;&nbsp;&nbsp;Unzip the downloaded Fire Alarm Agent
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">04</span>
+            &nbsp;&nbsp;&nbsp;Open wifi-connect.lua and provide appropriate values for
+            <i>[SSID]</i> and
+            <i>[Password]</i>
+            variables according to your network.
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">05</span>
+            &nbsp;&nbsp;&nbsp;Upload all .lua files to ESP8266 using ESPlorer in following order.
+            Then restart the ESP8266.
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;dht_lib.lua
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;wifi-connect.lua
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;read-sensor.lua
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;init.lua
+            <br/><br/>
+        </li>
+        <li class="padding-top-double">
+            <span class="circle">06</span>
+            &nbsp;&nbsp;&nbsp;Now you can remove USB to TTL module and fix fire alarm device in any
+            place you want.
+            <br/><br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;ESP8266 will publish temperature and humidity from DHT11 to
+            WSO2-IoT-Server
+            <br/><br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fw-stack fw-lg margin-right">
+                <i class="fw fw-ring fw-stack-2x"></i>
+                <i class="fw fw-right-arrow fw-stack-1x"></i>
+            </span>
+            &nbsp;&nbsp;&nbsp;Buzzer can be controlled from Device Management page.
+        </li>
+    </ul>
+    <br>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
+    <h3 class="uppercase">Fire alarm Setup</h3>
+    <hr>
+    <p class="grey margin-top">Click on the image to zoom</p>
+    <center>
+        <a href="{{@unit.publicUri}}/images/schematicsGuide.png" target="_blank">
+            <img src="{{@unit.publicUri}}/images/schematicsGuide.png" class="img-responsive">
+        </a>
+    </center>
+    <br/>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 padding-double">
+    <h3 class="uppercase">Try Out</h3>
+    <hr>
+    <ul class="list-unstyled">
+        <li class="padding-top-double"><span class="circle">01</span>&nbsp;&nbsp;&nbsp;You can view
+                                                                     all your connected
+                                                                     devices at <a
+                    href="{{@app.context}}/devices">[Device
+                                                    Management]</a>
+                                                                     page.
+        </li>
+        <li class="padding-top-double"><span class="circle">02</span>&nbsp;&nbsp;&nbsp;Select one of
+                                                                     connected devices and check for
+                                                                     available control operations.
+        </li>
+    </ul>
+    <br/>
+
+</div>
+
+<style type="text/css">
+    .circle {
+        background: none repeat scroll 0 0 #191919;
+        border-radius: 50px;
+        height: 50px;
+        padding: 10px;
+        width: 50px;
+        color: #fff;
+    }
+
+    .padding-top-double {
+        padding-top: 20px;
+    }
+
+    .padding-double {
+        padding: 20px;
+    }
+
+    .grey {
+        color: #333;
+    }
+
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #7f7f7f;
+        margin: 1em 0;
+        padding: 0;
+        opacity: 0.2;
+    }
+
+    .light-grey {
+        color: #7c7c7c;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .grey-bg {
+        background-color: #f6f4f4;
+    }
+
+    .doc-link {
+        background: #11375B;
+        padding: 20px;
+        color: white;
+        margin-top: 0;
+    }
+
+    .doc-link a {
+        color: white;
+    }
+</style>
+
+{{#zone "bottomJs"}}
+    {{js "/js/download.js"}}
+    {{js "/js/jquery.validate.js"}}
+{{/zone}}

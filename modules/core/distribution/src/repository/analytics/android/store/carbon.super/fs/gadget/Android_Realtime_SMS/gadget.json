@@ -1,0 +1,9 @@
+{
+    "id": "Android_Realtime_SMS",
+    "title": "Android Realtime SMS",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Realtime_SMS/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Realtime_SMS/gadget.xml"
+    }
+}

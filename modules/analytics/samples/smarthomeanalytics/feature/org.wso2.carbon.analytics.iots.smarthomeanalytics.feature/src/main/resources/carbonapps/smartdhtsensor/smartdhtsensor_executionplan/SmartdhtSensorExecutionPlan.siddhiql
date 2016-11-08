@@ -1,0 +1,41 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('SmartdhtSensorExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('org.wso2.iot.smarthomeanalytics.sensors.smartdhtsensor:1.0.0')
+define stream sensorSmartdhtSensor (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, temperature double, humidity double);
+
+@Export('org.wso2.iot.smarthomeanalytics.sensors.currentstatus.smartdhtsensor:1.0.0')
+define stream smartdhtSensorInputMapper (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, temperature double, humidity double, currentStatus string, message string,  summary string);
+
+@from(eventtable = 'analytics.table' , table.name = 'ORG_WSO2_IOT_SMARTHOMEANALYTICS_SENSORS_CURRENTSTATUS', primary.keys = 'meta_sensorId', indices = 'meta_homeId,meta_sensorId,meta_sensorType,meta_sensorLocation,currentStatus,message,summary', wait.for.indexing = 'true', merge.schema = 'false')
+define table currentStatusOfSmartdhtSensor (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, currentStatus string, message string,  summary string);
+
+from sensorSmartdhtSensor[temperature >= 70]
+select meta_homeId, meta_sensorId,meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, temperature, humidity, "danger" as currentStatus, str:concat("Temperature is too high- ",meta_sensorId, ". Default range between 20 and 45 but now it increased up to ", temperature) as message,str:concat("Temperature is too high- ", meta_sensorId)  as summary
+insert into smartdhtSensorInputMapper;
+
+from sensorSmartdhtSensor[temperature >= 45 and temperature < 70]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, temperature, humidity, "warning" as currentStatus, str:concat("Temperature is getting higher- ", meta_sensorId, ". Default range between 20 and 45 but now it increased up to ", temperature) as message, str:concat("Temperature is getting higher- ", meta_sensorId)  as summary
+insert into smartdhtSensorInputMapper;
+
+from sensorSmartdhtSensor[temperature < 45]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, temperature, humidity, "ok" as currentStatus, str:concat("Temperature at normal conditions- ", meta_sensorId, ". Default range between 20 and 45.") as message, str:concat("Temperature at normal conditions- ", meta_sensorId) as summary
+insert into smartdhtSensorInputMapper;
+
+from sensorSmartdhtSensor[temperature >= 70]
+select meta_homeId, meta_sensorId,meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp,"danger" as currentStatus, str:concat("Temperature is too high- ",meta_sensorId, ". Default range between 20 and 45 but now it increased up to ", temperature) as message, str:concat("Temperature is too high- ",meta_sensorId)  as summary
+insert into currentStatusOfSmartdhtSensor;
+
+from sensorSmartdhtSensor[temperature >= 45 and temperature < 70]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "warning" as currentStatus,str:concat("Temperature is getting higher- ", meta_sensorId, ". Default range between 20 and 45 but now it increased up to ", temperature) as message, str:concat("Temperature is getting higher- ", meta_sensorId)  as summary
+insert into currentStatusOfSmartdhtSensor;
+
+from sensorSmartdhtSensor[temperature < 45]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "ok" as currentStatus, str:concat("Temperature at normal conditions- ", meta_sensorId, ". Default range between 20 and 45.") as message, str:concat("Temperature at normal conditions- ", meta_sensorId) as summary
+insert into currentStatusOfSmartdhtSensor;
+

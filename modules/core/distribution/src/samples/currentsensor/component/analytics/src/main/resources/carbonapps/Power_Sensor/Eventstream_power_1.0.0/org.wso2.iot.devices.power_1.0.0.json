@@ -1,0 +1,17 @@
+{
+  "name": "org.wso2.iot.devices.power",
+  "version": "1.0.0",
+  "nickName": "Coffee Level Data",
+  "description": "Coffee Level data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "power","type": "FLOAT"
+    }
+  ]
+}

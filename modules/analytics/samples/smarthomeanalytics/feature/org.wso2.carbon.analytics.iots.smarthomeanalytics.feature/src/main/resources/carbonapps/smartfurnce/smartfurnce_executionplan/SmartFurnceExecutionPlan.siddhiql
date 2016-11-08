@@ -1,0 +1,32 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('SmartFurnceExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('org.wso2.iot.smarthomeanalytics.sensors.smartfurnce:1.0.0')
+define stream sensorSmartFurnce (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, onOrOff int);
+
+@Export('org.wso2.iot.smarthomeanalytics.sensors.currentstatus.smartfurnce:1.0.0')
+define stream smartFurnceInputMapper (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, onOrOff int, currentStatus string, message string,  summary string);
+
+@from(eventtable = 'analytics.table' , table.name = 'ORG_WSO2_IOT_SMARTHOMEANALYTICS_SENSORS_CURRENTSTATUS', primary.keys = 'meta_sensorId', indices = 'meta_homeId,meta_sensorId,meta_sensorType,meta_sensorLocation,currentStatus,message,summary', wait.for.indexing = 'true', merge.schema = 'false')
+define table currentStatusOfSmartFurnce (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, currentStatus string, message string,summary string);
+
+from sensorSmartFurnce[onOrOff == 1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, onOrOff, "warning" as currentStatus, str:concat("Please turnoff the furnace: ", meta_sensorId)  as message, str:concat("Please turnoff the furnace: ", meta_sensorId)  as summary
+insert into smartFurnceInputMapper;
+
+from sensorSmartFurnce[onOrOff == 0]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, onOrOff, "ok" as currentStatus, str:concat("The furnace is turned off: ", meta_sensorId) as message, str:concat("The furnace is turned off: ", meta_sensorId) as summary
+insert into smartFurnceInputMapper;
+
+from sensorSmartFurnce[onOrOff == 1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "warning" as currentStatus, str:concat("Please close the furnace: ", meta_sensorId)  as message, str:concat("Please close the furnace: ", meta_sensorId)  as summary
+insert into currentStatusOfSmartFurnce;
+
+from sensorSmartFurnce[onOrOff == 0]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp,"ok" as currentStatus, str:concat("The furnace is turned off: ", meta_sensorId) as message, str:concat("The furnace is turned off: ", meta_sensorId) as summary
+insert into currentStatusOfSmartFurnce;

@@ -1,0 +1,447 @@
+<!--
+~   Copyright (c) WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~   Licensed under the Apache License, Version 2.0 (the "License");
+~   you may not use this file except in compliance with the License.
+~   You may obtain a copy of the License at
+~
+~        http://www.apache.org/licenses/LICENSE-2.0
+~
+~   Unless required by applicable law or agreed to in writing, software
+~   distributed under the License is distributed on an "AS IS" BASIS,
+~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~   See the License for the specific language governing permissions and
+~   limitations under the License.
+-->
+<%
+    // i18n
+    var i18n = require("i18n");
+    i18n.init(request, utils.getLocaleResourcePath());
+
+    // If the pageId is null, render the landing page
+    pageId = pageId || dashboard.landing;
+
+    var usr = require('/modules/user.js'),
+        user = usr.current(),
+        isAnonView = request.getParameter('isAnonView');
+
+    // Get the anon view
+    if (!user) {
+        if (isAnonView) {
+            response.sendRedirect(request.getRequestURL());
+        }
+        isAnonView = true;
+    } else {
+        isAnonView = JSON.parse(isAnonView);
+
+        if((user.domain != urlDomain && urlDomain) ||
+            (dashboard.isanon && !utils.allowed(user.roles, dashboard.permissions.editors) && !utils.allowed(user.roles, dashboard.permissions.viewers))) {
+            isAnonView = true;
+        }
+    }
+
+    // Get the current page
+    var pages = dashboard.pages,
+        page;
+    pages.forEach(function(p) {
+        if (p.id == pageId) {
+            page = p;
+        }
+    });
+%>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><%= i18n.localize("dashboard.server.label")%></title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<%=urlPrefix%>libs/theme-wso2_1.0/images/favicon.png" />
+
+    <!-- Bootstrap CSS -->
+    <link href="<%=urlPrefix%>libs/bootstrap_3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font WSO2 CSS -->
+    <link href="<%=urlPrefix%>libs/font-wso2_1.0.0/css/font-wso2.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Jquery Nanoscroller CSS -->
+    <link href="<%=urlPrefix%>libs/nanoscroller_0.8.7/nanoscroller.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme WSO2 CSS -->
+    <link href="<%=urlPrefix%>libs/theme-wso2_1.0/css/theme-wso2.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom CSS -->
+    <link href="<%=urlPrefix%>css/custom.css" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="<%=urlPrefix%>libs/html5shiv_3.7.2/html5shiv.min.js"></script>
+    <script src="<%=urlPrefix%>libs/respond_1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- JQuery UI -->
+    <link rel="stylesheet" type="text/css" href="<%=urlPrefix%>libs/jquery-ui-1.11.4/jquery-ui.min.css" />
+
+    <link rel="stylesheet" href="<%=urlPrefix%>css/dashboard.css" />
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" type="text/css" href="<%=urlPrefix%>css/common.css" />
+
+    <!-- Custom theme overrides -->
+    <link rel="stylesheet" href="<%=urlPrefix%><%=utils.dashboardStyles(dashboard.theme)%>">
+</head>
+
+<body class="dashboard lang_<%=request.getLocale()%>">
+    
+    <!-- .left-sidebar -->
+    <div class="sidebar-wrapper sidebar-nav toggled hidden-xs" id="left-sidebar" data-side="left" data-width="260" style="width:260px">
+        <div class="nano">
+            <div class="nano-content">
+                
+                <div class="user">
+                    <div class="user-image">
+                        <span class="default">
+                            <span class="icon fw fw-stack">   
+                                <i class="fw fw-circle fw-stack-2x"></i>
+                                <i class="fw fw-user fw-stack-1x fw-inverse"></i>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="user-name"><%= user ? user.username : "anon" %></div>
+                </div>
+                
+                <ul class="nav nav-pills nav-stacked pages">
+                    <% if (pages.length > 1) {
+                            // render links
+                            pages.forEach(function (p) {
+                                if (isAnonView || !user) {
+                                    if (p.isanon) {
+                                        // Anonymous viewing. So render only anonymous pages links.
+                                        renderPageLink(p);
+                                    }
+                                } else {
+                                    renderPageLink(p);
+                                }
+                            });
+                        }
+
+                        function renderPageLink(p) {
+                            var queryString = isAnonView ? '?isAnonView=true' : '';
+                        %>
+                        <li class="<%= (p.id === pageId) ? 'active': '' %>"><a href="<%=dbRoot%><%=p.id%><%=queryString%>"><%=encodeHtml(p.title)%></a></li>
+                    <% } %>
+                </ul>
+                
+                <hr>
+                
+                <ul class="nav nav-pills nav-stacked">
+                    <% if (user) { %>
+                        <% if (!isAnonView && (urlDomain == user.domain || (user.domain == superDomain && (!urlDomain || urlDomain == superDomain)))) { %>
+                            <% if (user.isEditor) { %>
+                                <li><a href="<%=dbRoot%>?editor=true"><i class="icon fw fw-settings ues-copy" title="<%= i18n.localize("edit.button")%>"></i>Dashboard Settings</a></li>
+                            <% } else { %>
+                                <li><a href="<%=dbRoot%>?custom=true"><i class="icon fw fw-settings ues-copy" title="<%= i18n.localize("personalize")%>"></i>Customize Dashboard</a></li>
+                            <% } %>
+                        <% } %>
+                            <li><a href="<%=urlPrefix%>logout?destination=<%=dest%>"><i class="icon fw fw-sign-out"></i><%= i18n.localize("logout.label")%></a></li>
+                        <% } else { %>
+                            <li><a href="<%=urlPrefix%>login-controller?destination=<%=dest%>"><i class="icon fw fw-sign-in"></i><%= i18n.localize("login.label")%></a></li>       
+                    <% } %>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- #page-content-wrapper -->
+    <div class="page-content-wrapper remove-padding-xs" style="padding-left:260px;">
+        <div class="nano">
+            <div class="nano-content">
+
+                <div class="page-header">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <a class="sidebar-toggle-button hidden-xs" data-toggle="sidebar" data-target="#left-sidebar" data-container=".page-content-wrapper" data-container-divide="true" aria-expanded="true" rel="sub-nav">
+                                <span class="icon fw-stack">
+                                    <i class="fw fw-menu fw-stack-1x toggle-icon-left"></i>
+                                </span>
+                            </a>
+                            <a class="sidebar-toggle-button visible-xs" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="icon fw-stack">
+                                    <i class="fw fw-menu fw-stack-1x toggle-icon-up"></i>
+                                </span>
+                            </a>
+                            <div class="page-title pull-left text-center-xs">
+                                <h1 class="text-center-xs"><i class="icon fw fw-wso2-logo"></i><%=encodeHtml(dashboard.title)%></h1>
+                            </div>
+                            <div class="pull-right auth visible-xs">
+                                <span class="add-padding-left-3x"><%= user ? user.username : "anon" %></span>
+                                <span class="icon fw-stack fw-lg">
+                                   <i class="fw fw-circle fw-stack-2x"></i>
+                                   <i class="fw fw-user fw-stack-1x fw-inverse"></i>
+                                </span>
+                            </div>
+                            <ul class="nav collapse-nav-sub pull-right hidden">
+                                <li class="visible-inline-block">
+                                    <a data-toggle="dropdown">
+                                        <span class="icon fw-stack">
+                                            <i class="fw fw-notification fw-stack-1x"></i>
+                                        </span>
+                                        <span class="badge">4</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right arrow alerts arrow-top-right dark add-margin-top-2x" role="menu">
+                                        <ul class="sidebar-messages">
+                                            <li class="message message-success">
+                                                <h4><i class="icon fw fw-success"></i>Minor Information Message</h4>
+                                                <p>Alerts don't have default classes, only base and modifier classes.</p>
+                                            </li>
+                                            <li class="message message-info">
+                                                <h4><i class="icon fw fw-info"></i>Minor Information Message</h4>
+                                                <p>Alerts don't have default classes, only base and modifier classes.</p>
+                                            </li>
+                                            <li class="message message-warning">
+                                                <h4><i class="icon fw fw-warning"></i>Major Information Message</h4>
+                                                <p>Alerts don't have default classes, only base and modifier classes.</p>
+                                            </li>
+                                            <li class="message message-danger">
+                                                <h4><i class="icon fw fw-error"></i>Critical Information Message</h4>
+                                                <p>Alerts don't have default classes, only base and modifier classes.</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                            
+                        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
+                            <ul class="nav navbar-nav pages">
+                                <% if (pages.length > 1) {
+                                        // render links
+                                        pages.forEach(function (p) {
+                                            if (isAnonView || !user) {
+                                                if (p.isanon) {
+                                                    // Anonymous viewing. So render only anonymous pages links.
+                                                    renderPageLink(p);
+                                                }
+                                            } else {
+                                                renderPageLink(p);
+                                            }
+                                        });
+                                    }
+
+                                    function renderPageLink(p) {
+                                        var queryString = isAnonView ? '?isAnonView=true' : '';
+                                    %>
+                                    <li class="<%= (p.id === pageId) ? 'active': '' %>"><a href="<%=dbRoot%><%=p.id%><%=queryString%>"><%=encodeHtml(p.title)%></a></li>
+                                <% } %>
+                            </ul>
+                                        
+                            <hr>
+                
+                            <ul class="nav nav-pills nav-stacked">
+                                <% if (user) { %>
+                                    <% if (!isAnonView && (urlDomain == user.domain || (user.domain == superDomain && (!urlDomain || urlDomain == superDomain)))) { %>
+                                        <% if (user.isEditor) { %>
+                                            <li><a href="<%=dbRoot%>?editor=true"><i class="icon fw fw-settings ues-copy" title="<%= i18n.localize("edit.button")%>"></i>Dashboard Settings</a></li>
+                                        <% } else { %>
+                                            <li><a href="<%=dbRoot%>?custom=true"><i class="icon fw fw-settings ues-copy" title="<%= i18n.localize("personalize")%>"></i>Customize Dashboard</a></li>
+                                        <% } %>
+                                    <% } %>
+                                        <li><a href="<%=urlPrefix%>logout?destination=<%=dest%>"><i class="icon fw fw-sign-out"></i><%= i18n.localize("logout.label")%></a></li>
+                                    <% } else { %>
+                                        <li><a href="<%=urlPrefix%>login-controller?destination=<%=dest%>"><i class="icon fw fw-sign-in"></i><%= i18n.localize("login.label")%></a></li>       
+                                <% } %>
+                            </ul>                
+                        </div><!--/.nav-collapse -->
+                            
+                    </div>
+                </div>
+
+                <!-- page content -->
+                <div class="container-fluid body-wrapper">
+
+                    <div class="page-content">
+                        <!-- Components grid -->
+                        <div class="ues-components-grid gadgets-grid">
+                            <%=renderEngine.getDashboardContent(pageId || dashboard.landing, isAnonView)%>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- /#page-content-wrapper -->
+
+    <!--Footer -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <p>WSO2 Dashboard Server 2.0.0 | &copy; <script>document.write(new Date().getFullYear());</script> <a href="http://wso2.com/" target="_blank"><i class="icon fw fw-wso2"></i> Inc</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Jquery/Jquery UI JS -->
+    <script src="<%=urlPrefix%>libs/jquery_1.11.0/jquery-1.11.3.min.js"></script>
+    <script src="<%=urlPrefix%>libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="<%=urlPrefix%>libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- Jquery Nanoscroller JS -->
+    <script src="<%=urlPrefix%>libs/nanoscroller_0.8.7/jquery.nanoscroller.min.js"></script>
+
+    <!-- Theme WSO2 JS -->
+    <script src="<%=urlPrefix%>libs/theme-wso2_1.0/js/theme-wso2.js"></script>
+
+    <!-- Handlebars JS -->
+    <script src="<%=urlPrefix%>libs/handlebars-v4.0.2/handlebars.min.js"></script>
+
+    <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
+    <script src="<%=urlPrefix%>js/ues.js"></script>
+    <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
+    <% include('/controllers/includes/common-scripts.jag'); %>
+    <% include('/controllers/includes/dashboard-scripts.jag'); %>
+    <script src="<%=urlPrefix%>js/ues-gadgets.js"></script>
+    <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
+    <script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>
+    <script src="<%=urlPrefix%>extensions/components/widget/index.js"></script>
+    <script src="<%=urlPrefix%>extensions/uris/local/index.js"></script>
+    <script src="<%=urlPrefix%>extensions/uris/store/index.js"></script>
+    <script src="<%=urlPrefix%>js/gadget-properties.js"></script>
+    <script src="<%=urlPrefix%>js/ds-handlebar-helpers.js"></script>
+    <script src="<%=urlPrefix%>js/ues-saml-at.js"></script>
+    <script src="<%=urlPrefix%>js/dashboard.js"></script>
+    <% include('/controllers/includes/theme-dashboard-scripts.jag'); %>
+
+    <!-- Handlebar templates -->
+    <!-- Component container -->
+    <script id="ues-component-box-content-hbs" type="text/x-handlebars-template">
+        <div class="gadget-wrapper">
+            <div class="ues-component gadget">
+                <div class="ues-component-heading gadget-heading">
+                    <h4 class="ues-component-title gadget-title truncate"></h4>
+
+                    <div class="ues-component-actions gadget-actions">
+
+                    </div>
+                </div>
+
+                <div class="ues-component-body gadget-body"></div>
+            </div>
+        </div>
+    </script>
+
+    <!-- Component toolbar actions -->
+    <script id="ues-component-actions-hbs" type="text/x-handlebars-template">
+        <div class="btn-group">
+            {{#if userPrefsExists}}
+            <button type="button" class="btn btn-default ues-component-settings-handle" title="<%= i18n.localize("properties.label") %>">
+                <i class="icon fw fw fw-configarations"></i>
+            </button>
+            {{/if}}
+            <button type="button" class="btn btn-default ues-component-full-handle" title="<%= i18n.localize("maximize.label") %>"
+                data-maximize-title="<%= i18n.localize("maximize.label") %>" data-minimize-title="<%= i18n.localize("minimize.label") %>">
+                <i class="icon fw fw-expand"></i>
+            </button>
+        </div>
+    </script>
+
+    <!-- Gadget settings -->
+    <script id="ues-gadget-setting-hbs" type="text/x-handlebars-template">
+        <div class="ues-sandbox gadget-setting" data-component="{{id}}">
+            <form>
+                {{#has options}}
+                <div class="ues-options">
+                    <h4><%= i18n.localize("options") %></h4>
+                    {{#each options}}
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            {{#equals type "STRING"}}
+                            <label>{{title}}
+                                <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
+                            </label>
+                            {{/equals}}
+                            {{#equals type "BOOL"}}
+                            <label>
+                                <input type="checkbox" name="{{title}}"{{#equals value true}} checked="checked"{{/equals}}> {{title}}
+                            </label>
+                            {{/equals}}
+                            {{#equals type "ENUM"}}
+                            <label>{{title}}
+                                <select id={{title}} name={{title}} class="form-control ues-title-position">
+                                     {{#each options}}
+                                        <option value={{value}}{{#equals value ../value}} selected="selected"{{/equals}}>{{displayValue}}</option>
+                                     {{/each}}
+                                </select>
+                            </label>
+                            {{/equals}}
+                            {{#equals type "LIST"}}
+                            <label>{{title}}
+                                <textarea name="{{@key}}" class="form-control" rows="4" placeholder='<%= i18n.localize("placeholder.item.list")%>'>{{value}}</textarea>
+                                <label><%= i18n.localize("enter.your.list.entries.label")%></label>
+                            </label>
+                            {{/equals}}
+                            {{#equals type "text"}}
+                            <label>{{title}}
+                                <textarea name="{{@key}}" class="form-control" rows="4">{{value}}</textarea>
+                            </label>
+                            {{/equals}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{else}}
+                <div class="alert alert-info">No properties to configure.</div>
+                {{/has}}
+            </form>
+        </div>
+    </script>
+
+    <!-- Scripts -->
+    <script>
+
+        var nanoScrollerSelector = $(".nano");
+        nanoScrollerSelector.nanoScroller();
+
+        function updateSidebarNav(target) {
+            $(target).show();
+            $(target).siblings().hide();
+            nanoScrollerSelector[0].nanoscroller.reset();
+        }
+
+        if (!ues.global.renderFromExtension) {
+            ues.dashboards.render($('.ues-components-grid'), ues.global.dashboard, ues.global.page);
+        }
+
+        $(document).ready(function() {
+            // Show banner
+            if (ues.global.dashboard.banner.globalBannerExists || ues.global.dashboard.banner.customBannerExists) {
+                $('.ues-banner-placeholder').css("background-image", "url('<%=tenantedUrlPrefix%>banners/<%=dashboard.id%>')");
+            } else {
+                $('.ues-banner-placeholder').hide();
+            }
+
+            // Toggle component box heading
+            $('.ues-component').hover(function() {
+                toggleHeading($(this), true);
+            }, function() {
+                toggleHeading($(this), false);
+            });
+        });
+
+        function toggleHeading(source, show) {
+            if (source.hasClass('ues-no-heading')) {
+                var heading = source.find('.ues-component-heading');
+                if (show) {
+                    heading.slideDown();
+                } else {
+                    heading.slideUp();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

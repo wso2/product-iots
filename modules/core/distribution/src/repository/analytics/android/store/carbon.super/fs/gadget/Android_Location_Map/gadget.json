@@ -1,0 +1,9 @@
+{
+    "id": "Android_Location_Map",
+    "title": "Android Location Map",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Location_Map/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Location_Map/gadget.xml"
+    }
+}

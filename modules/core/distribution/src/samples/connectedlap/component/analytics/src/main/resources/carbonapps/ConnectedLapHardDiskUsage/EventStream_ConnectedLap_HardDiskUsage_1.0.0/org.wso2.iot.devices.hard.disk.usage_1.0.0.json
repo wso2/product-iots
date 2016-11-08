@@ -1,0 +1,20 @@
+{
+  "name": "org.wso2.iot.devices.hard.disk.usage",
+  "version": "1.0.0",
+  "nickName": "Hard disk usage",
+  "description": "Hard disk usage data received from the Device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceType","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "harddiskusage","type": "FLOAT"
+    }
+  ]
+}
+
+
+

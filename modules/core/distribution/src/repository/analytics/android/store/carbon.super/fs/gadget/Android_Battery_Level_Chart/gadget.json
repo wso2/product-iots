@@ -1,0 +1,9 @@
+{
+    "id": "Android_Battery_Level_Chart",
+    "title": "Android Battery Level Chart",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Battery_Level_Chart/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Battery_Level_Chart/gadget.xml"
+    }
+}

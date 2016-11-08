@@ -1,0 +1,98 @@
+{{#zone "topCss"}}
+    <style>
+        .thumbnail.icon:before {
+            padding-top: 0;
+        }
+    </style>
+{{/zone}}
+
+{{#zone "device-thumbnail"}}
+    <img src="{{@unit.publicUri}}/images/display-icon.png"/>
+{{/zone}}
+
+{{#zone "operation-status"}}
+    <div id="div-operation-status" class="hidden" align="center" style="padding: 10px; margin-bottom: 5px">
+    </div>
+{{/zone}}
+
+{{#zone "device-opetations"}}
+    <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
+        Operations
+    </div>
+    <div class="add-margin-top-4x">
+        {{unit "iot.unit.device.operation-bar" device=device}}
+    </div>
+{{/zone}}
+
+{{#zone "device-detail-properties"}}
+
+    <div class="media">
+        <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <ul class="list-group" role="tablist">
+                <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
+                       aria-controls="event_log">Operations Log</a></li>
+            </ul>
+        </div>
+        <div class="media-body add-padding-left-5x remove-padding-xs tab-content">
+
+            <div class="panel panel-default tab-pane active"
+                 id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
+                <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
+                    Display Status
+                </div>
+                <div class="col-md-12">
+                    <div id="screeshot" class="col-md-4">
+                        <div>Display View</div>
+                        <a id="zoom-image" href="{{@unit.publicUri}}/images/default-screen.png" target="_blank">
+                            <img id="img" src="{{@unit.publicUri}}/images/default-screen.png"
+                                 style="width: 40% ; height: 40% ; float: left" class="img-responsive"/>
+                        </a>
+                    </div>
+                    <div id="content-list-pane" class="col-md-4">
+                        <div>Content List</div>
+                        <ul id="content-list"></ul>
+                    </div>
+                    <div id="device-statics-pane" class="col-md-4">
+                        <div>Device Statistics</div>
+                        <ul id="device-statics"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group tab-content">
+                <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
+                     aria-labelledby="event_log">
+                    <div class="panel-heading">Operations Log <span><a href="#"
+                                                                       id="refresh-operations"><i
+                            class="fw fw-refresh"></i></a></span></div>
+                    <div class="panel-body">
+                        <div id="operations-spinner" class="wr-advance-operations-init hidden">
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fw fw-settings fw-spin fw-2x"></i>
+                            &nbsp;&nbsp;&nbsp;
+                            Loading Operations Log . . .
+                            <br>
+                            <br>
+                        </div>
+                        <div id="operations-log-container">
+                            <div class="panel-body">
+                                Not available yet
+                            </div>
+                            <br class="c-both"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/zone}}
+
+{{#zone "bottomJs"}}
+    <script type="text/javascript">
+        var port = "{{port}}";
+        var host = "{{host}}";
+        var sessionId = "{{sessionId}}";
+    </script>
+    {{js "js/websocket.js"}}
+{{/zone}}

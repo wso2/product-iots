@@ -1,0 +1,25 @@
+{{#zone "topCss"}}
+    {{css "css/graph.css"}}
+{{/zone}}
+<span id="details" data-devicename="{{device.name}}" data-deviceid="{{device.deviceIdentifier}}"
+      data-appcontext="{{@app.context}}"></span>
+<div id="div-chart">
+    <div class="chartWrapper" id="chartWrapper">
+        <span id="span-title">speed</span>
+        <div id="y_axis" class="custom_y_axis"></div>
+        <div class="legend_container">
+            <div id="smoother" title="Smoothing"></div>
+            <div id="legend"></div>
+        </div>
+        <div id="chart" class="custom_rickshaw_graph" data-backend-api-url = {{backendApiUri}}></div>
+        <div id="x_axis" class="custom_x_axis"></div>
+        <div id="slider" class="custom_slider"></div>
+    </div>
+</div>
+
+{{#zone "bottomJs"}}
+    {{js "js/d3.min.js"}}
+    {{js "js/rickshaw.min.js"}}
+    {{js "js/moment.min.js"}}
+    {{js "js/devicetype-graph.js"}}
+{{/zone}}

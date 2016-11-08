@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<AppManager>
+
+    <!--
+    JNDI name of the data source to be used by the app management components such as store, publisher, gateway
+    This data source should be defined in the master-datasources.xml file in conf/datasources directory.
+    -->
+    <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
+    <DataSources>
+        <Storage>jdbc/ES_Storage</Storage>
+    </DataSources>
+
+    <APPStoreConfiguration>
+        <!--
+    This parameter specifies whether to display multiple versions of same
+    APP or only showing the latest version of an APP.
+        -->
+        <DisplayMultipleVersions>true</DisplayMultipleVersions>
+    </APPStoreConfiguration>
+
+    <!--subscription configuration is used by gateway,store,publisher-->
+    <SubscriptionConfiguration>
+        <EnableSelfSubscription>false</EnableSelfSubscription>
+        <EnableEnterpriseSubscription>false</EnableEnterpriseSubscription>
+    </SubscriptionConfiguration>
+
+    <!-- The authorization manager configuration to be used by store / publisher components -->
+    <AuthManager>
+
+        <!--
+        Server URL of the Authentication service
+        -->
+        <ServerURL>https://localhost:${mgt.transport.https.port}/services/</ServerURL>
+
+        <!--
+        Admin username for the Authentication manager.
+        -->
+        <Username>admin</Username>
+
+        <!--
+        Admin password for the Authentication manager.
+        -->
+        <Password>admin</Password>
+
+    </AuthManager>
+
+    <!-- The configuration for app discovery service -->
+    <DiscoveryConfiguration>
+
+        <!--
+        Configures the discovery handlers.
+        Discovery handlers are the ones connecting remote servers and discover the applications
+        -->
+        <DiscoveryHandlers>
+            <!-- List of discovery handlers. name is the key being used. Class is the handler class -->
+            <Handler name="WSO2-AS" class="org.wso2.carbon.appmgt.impl.discovery.Wso2AppServerDiscoveryHandler" />
+        </DiscoveryHandlers>
+
+    </DiscoveryConfiguration>
+
+    <!--
+    Configuration parameters for security handlers of the relevant proxy web apps.
+    -->
+    <AppConsumerAuthConfiguration>
+
+        <!-- Timeout (in seconds) for the gateway session cache. -->
+        <SessionTimeout>1800</SessionTimeout>
+
+        <!--
+        Enable/Disable JWT generation. Default is false.
+        -->
+        <EnableTokenGeneration>true</EnableTokenGeneration>
+
+        <!--
+        This parameter specifies which implementation should be used for generating the Token.
+        JWTGenerator is the default implementation provided.
+        -->
+        <TokenGeneratorImpl>org.wso2.carbon.appmgt.impl.token.JWTGenerator</TokenGeneratorImpl>
+
+        <!--
+        Name of the HTTP header which contains the JWT to be sent to the web app, from the gateway.
+        -->
+        <SecurityContextHeader>X-JWT-Assertion</SecurityContextHeader>
+
+        <!--
+        Fully qualified name of the class that will retrieve additional user claims to be appended to the JWT.
+        If not specified no claims will be appended.
+        The DefaultClaimsRetriever class adds user claims from the default carbon user store.
+        -->
+        <ClaimsRetrieverImplClass>org.wso2.carbon.appmgt.impl.token.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
+
+        <!--
+        The dialectURI under which the claimURIs that need to be appended to the JWT are defined.
+        Not used with custom ClaimsRetriever implementations.
+        The same value is used in the keys for appending the default properties to the JWT.
+        -->
+        <ConsumerDialectURI>http://wso2.org/claims</ConsumerDialectURI>
+
+        <!--
+        Signature algorithm for signing the JWT. Accepts "SHA256withRSA" or "NONE".
+        To disable signing explicitly specify "NONE".
+        -->
+        <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
+
+        <!--
+        By default all claim values of default claim dialect uri which mapped to the user profile get added to the JWT token.
+        By setting "AddClaimsSelectively" attribute to true, publisher can select only required claim attributes to each App and include into JWT token.
+        -->
+        <AddClaimsSelectively>false</AddClaimsSelectively>
+
+        <!--
+        Add SAML response as transport header in outgoing message.
+        -->
+        <AddSAMLResponseHeaderToOutMessage>false</AddSAMLResponseHeaderToOutMessage>
+
+    </AppConsumerAuthConfiguration>
+
+    <APIGateway>
+
+        <!-- The environments to which an API will be published -->
+        <Environments>
+
+            <!-- TODO : Get rid of gateway type -->
+            <Environment type="hybrid">
+
+                <Name>Gateway Endpoint</Name>
+
+                <!--
+                Server URL of the API gateway.
+                -->
+                <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}/services/</ServerURL>
+
+                <!--
+                Admin username for the API gateway.
+                -->
+                <Username>admin</Username>
+
+                <!--
+                Admin password for the API gateway.
+                -->
+                <Password>admin</Password>
+
+                <!--
+                Endpoint URLs for the APIs hosted in this API gateway.
+                -->
+                <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
+
+            </Environment>
+
+        </Environments>
+
+    </APIGateway>
+
+    <!--
+    API usage tracker configuration used by the DAS data publisher and
+    Google Analytics publisher in API gateway.
+    -->
+    <Analytics>
+
+
+        <!--
+        This data source is used to write/read UI Activity changes (eg: App Hit count)
+        to seperate database. When using DAS to analyze the changes it needs to configure this data source appropriately.
+        -->
+        <UIActivityPublishDataSourceName>jdbc/WSO2AM_DB</UIActivityPublishDataSourceName>
+
+        <!--
+        Enable UI Activity Data publish to DAS
+        -->
+        <UIActivityDASPublishEnabled>false</UIActivityDASPublishEnabled>
+
+        <!--
+        Enable/Disable the API usage tracker.
+        -->
+        <Enabled>false</Enabled>
+
+        <!--
+        API Usage Data Publisher.
+        -->
+        <PublisherClass>org.wso2.carbon.appmgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher</PublisherClass>
+
+        <!--
+        App usage data retrieval client implementation class.
+        -->
+        <StatisticClientProvider>org.wso2.carbon.appmgt.usage.client.impl.AppUsageStatisticsRdbmsClient</StatisticClientProvider>
+
+        <!--
+        Thrift port of the remote DAS server.
+        -->
+        <ThriftPort>7612</ThriftPort>
+
+        <!--
+        Server URL of the remote DAS/CEP server used to collect statistics.
+        Must be specified in protocol://hostname:port/ format.
+
+        An event can also be published to multiple Receiver Groups each having 1 or more receivers.
+        Receiver Groups are delimited by curly braces whereas receivers are delimited by commas.
+
+        e.g. - Multiple Receivers within a single group
+               tcp://localhost:7612/,tcp://localhost:7613/,tcp://localhost:7614/
+
+        e.g. - Multiple Receiver Groups with two receivers each
+                 {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/}
+        -->
+        <DASServerURL>tcp://localhost:7612</DASServerURL>
+
+        <!--
+        Administrator username to login to the remote DAS server.
+        -->
+        <DASUsername>admin</DASUsername>
+
+        <!--
+        Administrator password to login to the remote DAS server.
+        -->
+        <DASPassword>admin</DASPassword>
+
+        <DASEventStreams>
+
+            <RequestStreamName>org.wso2.appmgt.statistics.request</RequestStreamName>
+            <RequestStreamVersion>1.0.0</RequestStreamVersion>
+
+            <ResponseStreamName>org.wso2.appmgt.statistics.response</ResponseStreamName>
+            <ResponseStreamVersion>1.0.0</ResponseStreamVersion>
+
+            <FaultStreamName>org.wso2.appmgt.statistics.fault</FaultStreamName>
+            <FaultStreamVersion>1.0.0</FaultStreamVersion>
+
+            <CacheStatStreamName>org.wso2.appmgt.statistics.cache</CacheStatStreamName>
+            <CacheStatStreamVersion>1.0.0</CacheStatStreamVersion>
+
+            <!-- Used when publishing AppManager UI activities to DAS   -->
+            <UIActivityStreamName>org.wso2.appmgt.bam.uiactivitypublish</UIActivityStreamName>
+            <UIActivityStreamVersion>1.1.0</UIActivityStreamVersion>
+
+        </DASEventStreams>
+
+
+        <!--
+        JNDI name of the data source to be used for getting DAS statistics.
+        This data source should be defined in the master-datasources.xml file in conf/datasources directory.
+        -->
+        <!--DataSourceName>jdbc/WSO2AM_STATS_DB</DataSourceName-->
+
+        <!--
+        Google Analytics publisher configuration.
+        Create Google Analytics account and obtain a tracking ID.
+        Refer http://support.google.com/analytics/bin/answer.py?hl=en&answer=1009694
+        -->
+        <GoogleAnalyticsTracking>
+
+            <!--
+           Enable/Disable Google Analytics Tracking
+            -->
+            <Enabled>false</Enabled>
+
+            <!--
+            Google Analytics Tracking ID
+            -->
+            <TrackingID>UA-XXXXXXXX-X</TrackingID>
+
+        </GoogleAnalyticsTracking>
+
+    </Analytics>
+
+    <!--
+    Settings related to managing API access tiers.
+    -->
+    <TierManagement>
+
+        <!--
+            Enable the providers to expose their APIs over the special 'Unlimited' tier which
+            basically disables tier based throttling for the specified APIs.
+        -->
+        <EnableUnlimitedTier>true</EnableUnlimitedTier>
+
+    </TierManagement>
+
+    <!--Configuration to enable/disable sending CORS headers in the Gateway response
+        and define the Access-Control-Allow-Origin header value.-->
+    <CORSConfiguration>
+
+        <!--Configuration to enable/disable sending CORS headers from the Gateway-->
+        <Enabled>true</Enabled>
+
+        <!--
+        The value of the Access-Control-Allow-Origin header.
+        Default values are API Store addresses, which is needed for swagger to function.
+        -->
+        <Access-Control-Allow-Origin>https://localhost:9443,http://localhost:9763</Access-Control-Allow-Origin>
+
+        <!--Configure Access-Control-Allow-Headers-->
+        <Access-Control-Allow-Headers>authorization,Access-Control-Allow-Origin,Content-Type</Access-Control-Allow-Headers>
+
+        <!--Configure Access-Control-Allow-Methods-->
+        <Access-Control-Allow-Methods>GET,POST,PUT,DELETE,OPTIONS</Access-Control-Allow-Methods>
+
+    </CORSConfiguration>
+
+    <!--
+    AppManager uses SAML SSO as default authentication mechanism for the web apps.
+    Following configuration defines the configurations of the IDP which is used as the SSO provider.
+    -->
+    <SSOConfiguration>
+
+        <!--Is service providers are created for skip-gateway enabled apps -->
+        <CreateServiceProviderForSkipGatewayApps>false</CreateServiceProviderForSkipGatewayApps>
+
+        <!-- URL of the IDP use for SSO -->
+        <IdentityProviderUrl>https://${carbon.local.ip}:${mgt.transport.https.port}/samlsso</IdentityProviderUrl>
+
+        <!-- Postfix of the ACS URL -->
+        <ACSURLPostfix>appm/acs</ACSURLPostfix>
+
+        <!-- Enable SAML Response Signing when adding Service Provider and validate response signature in gateway.
+             If you are switching from false to true, then already created services providers should be updated manully to have response signing true.
+        -->
+	<EnableResponseSigning>true</EnableResponseSigning>
+
+        <!-- Enable SAML Assertion Signing when adding Service Provider and validate assertion signature in gateway.
+             If you are switching from false to true, then already created services providers should be updated manully to have assertion signing true.
+        -->
+	<EnableAssertionSigning>true</EnableAssertionSigning>
+
+        <!-- Validates Assertion expiry time of SAML Response -->
+        <ValidateAssertionExpiry>true</ValidateAssertionExpiry>
+
+	<!-- Timestamp skew applied to SAML Response Validity period. Default set to 5min --> 
+        <SAMLResponseValidityTimeStampSkew>300</SAMLResponseValidityTimeStampSkew>
+
+        <!-- This alias is used to validate the signature of the responses form the IDP -->
+        <ResponseSigningKeyAlias>wso2carbon</ResponseSigningKeyAlias>
+
+        <Configurators>
+            <Configurator>
+                <name>wso2is</name>
+                <version>5.0.0</version>
+                <providerClass>org.wso2.carbon.appmgt.impl.idp.sso.configurator.IS500SAMLSSOConfigurator</providerClass>
+                <parameters>
+                    <providerURL>https://${carbon.local.ip}:${mgt.transport.https.port}</providerURL>
+                    <username>admin</username>
+                    <password>admin</password>
+                </parameters>
+            </Configurator>
+        </Configurators>
+
+    </SSOConfiguration>
+
+    <!--
+    Entitlement service is used to manage entitlement policies and evaluate them upon accessing apps.
+    -->
+    <EntitlementServiceConfiguration>
+
+        <Parameters>
+            <ServerUrl>https://${carbon.local.ip}:${mgt.transport.https.port}</ServerUrl>
+            <Username>admin</Username>
+            <Password>admin</Password>
+        </Parameters>
+
+    </EntitlementServiceConfiguration>
+
+    <!-- Configuration to handle Mobile apps and MDM. -->
+    <MobileAppsConfiguration>
+
+        <MDMConfig>
+            <!--
+            Enables the catalog mode of the Mobile App Store. If you change the value of this to true,
+            the Mobile App Store acts as a catalog, which allows you to view apps. However, it doesn't
+            allow you to perform any operations on the apps
+            -->
+            <Config name="IsCatalog">false</Config>
+
+            <!-- Enables app to download direcly to the mobile device from the App Manager without MDM -->
+            <Config name="EnableDirectDownload">false</Config>
+
+            <!-- Enables WSO2 AppM to communicate with the active MDM for performing operations on the mobile apps. -->
+            <Config name="EnableMDMOperations">true</Config>
+
+            <!--
+            Name of the MDM, which is currently active. You need to define the MDM within the <MDMProperties> element.
+            For information on defining a MDM to integrate it with WSO2 AppM, see Integrating a Mobile Device Manager
+            -->
+            <Config name="ActiveMDM">WSO2MDM_INTERNAL</Config>
+
+            <!-- Ability for users to self-unsubscribe from mobile apps -->
+            <Config name="EnableSelfUnsubscription">false</Config>
+
+            <!-- Ability for users to subscribe to mobile apps using mobile devices -->
+            <Config name="EnableSubscriptionFromDevices">true</Config>
+
+            <!-- Enables the sample devices for testing purposes -->
+            <Config name="EnableSampleDevices">false</Config>
+
+            <!--
+            Host of the installation URL of the mobile app, which is sent to the MDM:
+            e.g. %http%, %https%, or a custom host URL
+            -->
+            <Config name="AppDownloadURLHost">%http%</Config>
+
+            <!-- Path of the Property List file generated using the PLIST template for iOS apps. -->
+            <Config name="IosPlistPath">publisher/api/mobileapp/getplist</Config>
+
+            <!-- Ability to enable the enterprise-wide operations on mobile apps -->
+            <Config name="EnterpriseOperations_Enabled">true</Config>
+
+            <!-- The user role, which has the privileges to perform enterprise-wide operations on mobile apps. -->
+            <Config name="EnterpriseOperations_AuthorizedRole">Internal/store-admin</Config>
+
+        </MDMConfig>
+
+        <!-- The properties of the MDMs you need to connect with WSO2 AppM. For information on defining a MDM to integrate it with WSO2 AppM -->
+        <MDMProperties>
+            <!--
+                MDM running on separate JVM. Calls MDM methods via secured REST API. Use this when run Store/Publisher/MDM
+                in deployed in separate JVMs. This will be the most suitable active MDM when deployed on production environment.
+            -->
+            <MDM name="WSO2MDM" bundle="org.wso2.carbon.appmgt.mdm.restconnector">
+                <Property name="ImageURL">/store/extensions/assets/mobileapp/resources/models/%s.png</Property>
+                <Property name="ServerURL">https://localhost:9443/mdm-admin</Property>
+                <Property name="TokenApiURL">https://localhost:9443/oauth2/token</Property>
+                <Property name="ClientKey">WjLm24IxBVLF0oz0VJfmtJbjJbka</Property>
+                <Property name="ClientSecret">v3KkIQXkJ1SDp_Bf8uUQxu5p7TQa</Property>
+                <Property name="AuthUser">admin</Property>
+                <Property name="AuthPass">admin</Property>
+            </MDM>
+
+            <!-- Old EMM, Calls EMM using REST API -->
+            <MDM name="WSO2EMM" bundle="org.wso2.carbon.appmgt.mdm.wso2emm">
+                <Property name="ServerURL">https://localhost:9443</Property>
+                <Property name="ImageURL">https://localhost:9443/emm/assets/wso2mobile/img/models/%s.png</Property>
+                <Property name="AuthUser">admin</Property>
+                <Property name="AuthPass">admin</Property>
+            </MDM>
+
+            <!--
+                Internal MDM which dispatches the MDM calls as Java/OSGI calls. Use this when run Store/Publisher/MDM
+                in on single JVM.
+            -->
+            <MDM name="WSO2MDM_INTERNAL" bundle="org.wso2.carbon.appmgt.mdm.osgiconnector">
+                <Property name="ImageURL">/store/extensions/assets/mobileapp/resources/models/%s.png</Property>
+            </MDM>
+
+            <!-- Please uncommnent the following block and define the name in ActiveMDM to activate this MDM -->
+
+            <!--
+            <MDM name="WSO2MDM" bundle="org.wso2.carbon.appmgt.mdm.othermdm">
+              <Property name="serverUrl">https://localhost:9454</Property>
+            </MDM>
+            -->
+        </MDMProperties>
+        <BinaryFileStorage>        
+            <FilePreciseLocation>repository/resources/mobileapps/</FilePreciseLocation>     
+            <FileAPILocation>/api/mobileapp/getfile/</FileAPILocation>      
+        </BinaryFileStorage>
+
+    </MobileAppsConfiguration>
+
+    <BinaryFileStorage>
+        <AbsoluteLocation>${carbon.home}/repository/resources/mobileapps/</AbsoluteLocation>
+    </BinaryFileStorage>
+
+    <!-- Configuration to secure mobile app services.-->
+    <ServicesAPI>
+        <AuthorizedRole>admin</AuthorizedRole>
+    </ServicesAPI>
+
+    <!--These types in the configuration provides a list of enabled types in the APP Manager.
+    If web app is commented, it will be hidden from APP Manager. These type values can be read as artifact types in RXT template -->
+    <EnabledAssetTypeList>
+        <Type>mobileapp</Type>
+    </EnabledAssetTypeList>
+
+    <RESTAPI>
+        <!--Configure publisher and store REST API context path-->
+        <PublisherAPIContextPath>/api/appm/publisher/v1.1</PublisherAPIContextPath>
+        <StoreAPIContextPath>/api/appm/store/v1.1</StoreAPIContextPath>
+
+        <!--Configure white-listed URIs of REST API. Accessing white-listed URIs does not require credentials (does not require Authorization header). -->
+        <WhiteListedURIs>
+            <WhiteListedURI>
+                <URI>/api/appm/store/{version}/apps/mobile/binaries/one-time/{uuid}</URI>
+                <HTTPMethods>GET,HEAD</HTTPMethods>
+            </WhiteListedURI>
+            <WhiteListedURI>
+                <URI>/api/appm/store/{version}/apps/static-contents/{fileName}</URI>
+                <HTTPMethods>GET,HEAD</HTTPMethods>
+            </WhiteListedURI>
+            <WhiteListedURI>
+                <URI>/api/appm/store/{version}/apps/mobile/plist/{appId}/{uuid}</URI>
+                <HTTPMethods>GET,HEAD</HTTPMethods>
+            </WhiteListedURI>
+        </WhiteListedURIs>
+    </RESTAPI>
+
+</AppManager>

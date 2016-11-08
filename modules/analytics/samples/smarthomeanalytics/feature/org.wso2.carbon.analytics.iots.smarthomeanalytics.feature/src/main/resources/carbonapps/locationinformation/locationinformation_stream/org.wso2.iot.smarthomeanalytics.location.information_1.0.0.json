@@ -1,0 +1,32 @@
+{
+  "name": "org.wso2.iot.smarthomeanalytics.location.information",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "homeId",
+      "type": "STRING"
+    },
+    {
+      "name": "locationName",
+      "type": "STRING"
+    },
+    {
+      "name": "locationId",
+      "type": "STRING"
+    },
+    {
+      "name": "alertLevel",
+      "type": "STRING"
+    },
+    {
+      "name": "message",
+      "type": "STRING"
+    },
+    {
+      "name": "summary",
+      "type": "STRING"
+    }
+  ]
+}

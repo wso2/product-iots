@@ -1,0 +1,1 @@
+{"provider-conf" : {"tableName" : "ANDROID_DATA_STAT_PER_DAY", "query" : "", "limit" : "2", "provider-name" : "batch"}, "chart-conf" : {"x" : "total", "color" : "type", "maxLength" : "2", "gadget-name" : "Android Data Usage Chart", "chart-name" : "donut-chart"}}

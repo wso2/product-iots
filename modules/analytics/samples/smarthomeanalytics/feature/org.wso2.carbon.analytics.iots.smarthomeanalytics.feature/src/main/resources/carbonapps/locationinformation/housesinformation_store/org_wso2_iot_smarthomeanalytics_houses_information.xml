@@ -1,0 +1,36 @@
+<EventStoreConfiguration>
+    <Source>
+        <StreamId>org.wso2.iot.smarthomeanalytics.houses.information:1.0.0</StreamId>
+    </Source>
+    <RecordStoreName>EVENT_STORE</RecordStoreName>
+    <TableSchema>
+        <ColumnDefinition>
+            <Name>homeId</Name>
+            <EnableIndexing>true</EnableIndexing>
+            <IsPrimaryKey>true</IsPrimaryKey>
+            <EnableScoreParam>false</EnableScoreParam>
+            <Type>STRING</Type>
+        </ColumnDefinition>
+        <ColumnDefinition>
+            <Name>name</Name>
+            <EnableIndexing>true</EnableIndexing>
+            <IsPrimaryKey>true</IsPrimaryKey>
+            <EnableScoreParam>false</EnableScoreParam>
+            <Type>STRING</Type>
+        </ColumnDefinition>
+        <ColumnDefinition>
+            <Name>alertLevel</Name>
+            <EnableIndexing>true</EnableIndexing>
+            <IsPrimaryKey>true</IsPrimaryKey>
+            <EnableScoreParam>false</EnableScoreParam>
+            <Type>STRING</Type>
+        </ColumnDefinition>
+        <ColumnDefinition>
+            <Name>message</Name>
+            <EnableIndexing>true</EnableIndexing>
+            <IsPrimaryKey>true</IsPrimaryKey>
+            <EnableScoreParam>false</EnableScoreParam>
+            <Type>STRING</Type>
+        </ColumnDefinition>
+    </TableSchema>
+</EventStoreConfiguration>

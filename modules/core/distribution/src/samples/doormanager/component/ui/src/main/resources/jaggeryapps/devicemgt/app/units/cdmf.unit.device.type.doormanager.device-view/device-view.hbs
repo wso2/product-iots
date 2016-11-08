@@ -1,0 +1,123 @@
+{{#zone "topCss"}}
+    <style>
+        .thumbnail.icon:before {
+            padding-top: 0;
+        }
+    </style>
+{{/zone}}
+
+{{#zone "device-thumbnail"}}
+    <img src="{{@unit.publicUri}}/images/deviceType.png"/>
+{{/zone}}
+
+{{#zone "device-opetations"}}
+    <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
+        Operations
+    </div>
+    <div class="add-margin-top-4x">
+        {{unit "iot.unit.device.operation-bar" device=device backendApiUri=backendApiUri autoCompleteParams=autoCompleteParams}}
+    </div>
+{{/zone}}
+
+<div class="wr-uioperations" style="display: block;">
+    <table>
+        <tr>
+            <td  width="47%"> <div id="light-bulb" class="off ui-draggable" >
+
+                <div id="bulb-intensity"></div>
+                <p class="intensity-val">Bulb intensity = <span>0</span></p>
+                <div id="light-bulb2" style="opacity: 0; "></div>
+            </div>
+            </td>
+            <td  width="20%"><div href="" class="cube-switch">
+        <span class="switch">
+            <span class="switch-state off">Off</span>
+            <span class="switch-state on">On</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label" style="margin-left: 33px;">Fan On/Off</p>
+            </td>
+            <td  width="20%"><div href="" class="door-switch">
+        <span class="switch">
+            <span class="switch-state off">Unlock</span>
+            <span class="switch-state on">Lock</span>
+        </span>
+
+            </div>
+                <br> <p class="operation-label">Door Lock/Unlock</p>
+            </td>
+
+            <td  width="20%">
+                <a href="javascript:operationSelect('{{operation}}')">
+                    {{#if icon}}
+                        <img src="{{@app.context}}/{{icon}}" style="width: 48px;"/>
+                    {{else}}
+                        <i class="fw fw-user fw-5x"></i>
+                    {{/if}}
+                    <span>{{name}}</span>
+                </a>
+
+                <br> <p class="operation-label">Assign new user to lock</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{{#zone "device-detail-properties"}}
+    <div class="media">
+        <div class="media-left col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <ul class="list-group" role="tablist">
+                <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
+                                      data-toggle="tab" aria-controls="device_statistics">Device
+                    Statistics</a>
+                </li>
+                <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
+                       aria-controls="event_log">Operations Log</a></li>
+            </ul>
+        </div>
+        <div class="media-body add-padding-left-5x remove-padding-xs tab-content">
+            <div class="panel-group tab-content">
+
+                <div class="panel panel-default tab-pane active"
+                     id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
+                    <div class="panel-heading">Device Statistics</div>
+                    {{unit "cdmf.unit.device.type.doormanager.realtime.analytics-view" device=device}}
+                </div>
+                <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
+                     aria-labelledby="event_log">
+                    <div class="panel-heading">Operations Log <span><a href="#"
+                                                                       id="refresh-operations"><i
+                            class="fw fw-refresh"></i></a></span></div>
+                    <div class="panel-body">
+                        <div id="operations-spinner" class="wr-advance-operations-init hidden">
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fw fw-settings fw-spin fw-2x"></i>
+                            &nbsp;&nbsp;&nbsp;
+                            Loading Operations Log . . .
+                            <br>
+                            <br>
+                        </div>
+                        <div id="operations-log-container">
+                            <div class="panel-body">
+                                Not available yet
+                            </div>
+                            <br class="c-both"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/zone}}
+
+{{#zone "bottomJs"}}
+    {{css "css/custom-style.css"}}
+    {{css "css/jquery-ui.css"}}
+    {{js "js/jquery-1.8.3.js"}}
+    {{js "js/jquery-ui.js"}}
+    {{js "js/ui-operation.js"}}
+
+
+{{/zone}}

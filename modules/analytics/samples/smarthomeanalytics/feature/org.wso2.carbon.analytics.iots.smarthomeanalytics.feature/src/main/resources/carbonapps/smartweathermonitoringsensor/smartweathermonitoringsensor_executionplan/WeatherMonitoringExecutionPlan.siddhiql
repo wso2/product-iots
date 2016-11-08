@@ -1,0 +1,40 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('WeatherMonitoringExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('org.wso2.iot.smarthomeanalytics.sensors.smartweathermonitoringsensor:1.0.0')
+define stream sensorWeatherMonitoring (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, windSpeed double, windDirectionDegrees double, windGust double, windGustDirectionDegrees double, rainRate double, rain double, windChill double, heatindex double);
+
+@Export('org.wso2.iot.smarthomeanalytics.sensors.currentstatus.smartweathermonitoringsensor:1.0.0')
+define stream smartWeatherMonitoringInputMapper (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, windSpeed double, windDirectionDegrees double, windGust double, windGustDirectionDegrees double, rainRate double, rain double, windChill double, heatindex double, currentStatus string, message string,  summary string);
+
+@from(eventtable = 'analytics.table' , table.name = 'ORG_WSO2_IOT_SMARTHOMEANALYTICS_SENSORS_CURRENTSTATUS', primary.keys = 'meta_sensorId', indices = 'meta_homeId,meta_sensorId,meta_sensorType,meta_sensorLocation,currentStatus,message,summary', wait.for.indexing = 'true', merge.schema = 'false')
+define table currentStatusOfWeatherMonitoring (meta_homeId string, meta_sensorId string, meta_sensorType string, meta_sensorLocation string, meta_sensorName string, timestamp long, currentStatus string, message string, summary string);
+
+from sensorWeatherMonitoring[windSpeed >= 2.1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, windSpeed,windDirectionDegrees, windGust, windGustDirectionDegrees, rainRate, rain, windChill, heatindex, "danger" as currentStatus, str:concat("Wind speed getting mush mush higher- ",meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Wind speed getting mush mush higher- ",meta_sensorId)  as summary
+insert into smartWeatherMonitoringInputMapper;
+
+from sensorWeatherMonitoring[windSpeed >= 1.8 and windSpeed < 2.1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, windSpeed,windDirectionDegrees, windGust, windGustDirectionDegrees, rainRate, rain, windChill, heatindex, "warning" as currentStatus, str:concat("Wind speed getting increased- ", meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Wind speed getting increased- ", meta_sensorId)  as summary
+insert into smartWeatherMonitoringInputMapper;
+
+from sensorWeatherMonitoring[windSpeed < 1.8]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, windSpeed,windDirectionDegrees, windGust, windGustDirectionDegrees, rainRate, rain, windChill, heatindex, "ok" as currentStatus, str:concat("Just a little wind out there- ", meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Just a little wind out there- ", meta_sensorId)  as summary
+insert into smartWeatherMonitoringInputMapper;
+
+from sensorWeatherMonitoring[windSpeed >= 2.1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "danger" as currentStatus, str:concat("Wind speed getting mush mush higher- ", meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Wind speed getting mush mush higher- ", meta_sensorId)  as summary
+insert into currentStatusOfWeatherMonitoring;
+
+from sensorWeatherMonitoring[windSpeed >= 1.8 and windSpeed < 2.1]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp, "warning" as currentStatus, str:concat("Wind speed getting increased- ", meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Wind speed getting increased- ", meta_sensorId)  as summary
+insert into currentStatusOfWeatherMonitoring;
+
+from sensorWeatherMonitoring[windSpeed < 1.8]
+select meta_homeId, meta_sensorId, meta_sensorType, meta_sensorLocation, meta_sensorName, timestamp,"ok" as currentStatus, str:concat("Just a little wind out there- ", meta_sensorId, ". Wind speed at ", windSpeed , " km/h")  as message, str:concat("Just a little wind out there- ", meta_sensorId)  as summary
+insert into currentStatusOfWeatherMonitoring;

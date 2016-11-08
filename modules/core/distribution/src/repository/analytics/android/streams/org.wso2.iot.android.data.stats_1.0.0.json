@@ -1,0 +1,50 @@
+{
+  "name": "org.wso2.iot.android.data.stats",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "type",
+      "type": "STRING"
+    },
+    {
+      "name": "total",
+      "type": "LONG"
+    },
+    {
+      "name": "year",
+      "type": "INT"
+    },
+    {
+      "name": "month",
+      "type": "INT"
+    },
+    {
+      "name": "day",
+      "type": "INT"
+    },
+    {
+      "name": "hour",
+      "type": "INT"
+    },
+    {
+      "name": "minute",
+      "type": "INT"
+    }
+  ]
+}

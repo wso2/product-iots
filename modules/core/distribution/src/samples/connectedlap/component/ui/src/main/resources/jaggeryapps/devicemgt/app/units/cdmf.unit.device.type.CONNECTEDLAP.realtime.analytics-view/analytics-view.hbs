@@ -1,0 +1,80 @@
+{{unit "cdmf.unit.lib.rickshaw-graph"}}
+
+<div id="chartWrapper">
+</div>
+<div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
+    <div id="chartWrapper-battery" class="chartWrapper">
+        <div id="y_axis-battery" class="custom_y_axis" style="margin-top: -20px;">Battery Usage</div>
+        <div class="legend_container-battery">
+            <div id="smoother-battery" title="Smoothing"></div>
+            <div id="legend-battery"></div>
+        </div>
+        <div id="chart-battery" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+
+     <div id="chartWrapper-charger" class="chartWrapper">
+        <div id="y_axis-charger" class="custom_y_axis" style="margin-top: -20px;">Charger Plugged In</div>
+        <div class="legend_container-charger">
+            <div id="smoother-charger" title="Smoothing"></div>
+            <div id="legend-charger"></div>
+        </div>
+        <div id="chart-charger" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+
+    <div id="chartWrapper-cpu" class="chartWrapper">
+        <div id="y_axis-cpu" class="custom_y_axis" style="margin-top: -20px;">Cpu Usage</div>
+        <div class="legend_container-harddisk">
+            <div id="smoother-cpu" title="Smoothing"></div>
+            <div id="legend-cpu"></div>
+        </div>
+        <div id="chart-cpu" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+ 
+     <div id="chartWrapper-network" class="chartWrapper">
+        <div id="y_axis-network" class="custom_y_axis" style="margin-top: -20px;">Network Usage</div>
+        <div class="legend_container-network">
+            <div id="smoother-network" title="Smoothing"></div>
+            <div id="legend-network"></div>
+        </div>
+        <div id="chart-network" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+
+     <div id="chartWrapper-memory" class="chartWrapper">
+        <div id="y_axis-memory" class="custom_y_axis" style="margin-top: -20px;">Memory Usage</div>
+        <div class="legend_container-memory">
+            <div id="smoother-memory" title="Smoothing"></div>
+            <div id="legend-memory"></div>
+        </div>
+        <div id="chart-memory" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+
+     <div id="chartWrapper-harddisk" class="chartWrapper">
+        <div id="y_axis-harddisk" class="custom_y_axis" style="margin-top: -20px;">Harddisk Usage</div>
+        <div class="legend_container-harddisk">
+            <div id="smoother-harddisk" title="Smoothing"></div>
+            <div id="legend-harddisk"></div>
+        </div>
+        <div id="chart-harddisk" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+    
+
+</div>
+<a class="padding-left"
+   href="{{@app.context}}/device/{{device.type}}/analytics?deviceId={{device.deviceIdentifier}}&deviceName={{device.name}}">
+    <span class="fw-stack">
+        <i class="fw fw-ring fw-stack-2x"></i>
+        <i class="fw fw-statistics fw-stack-1x"></i>
+    </span> View Device Analytics
+</a>
+<!-- /statistics -->
+{{#zone "bottomJs"}}
+    {{js "js/moment.min.js"}}
+    {{js "js/socket.io.min.js"}}
+    {{js "js/device-stats.js"}}
+{{/zone}}

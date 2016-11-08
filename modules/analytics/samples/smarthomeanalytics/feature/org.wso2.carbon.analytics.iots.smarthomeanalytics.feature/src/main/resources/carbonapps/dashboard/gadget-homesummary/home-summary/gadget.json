@@ -1,0 +1,15 @@
+{
+  "id": "devices-table",
+  "title": "-------Information",
+  "type": "gadget",
+  "thumbnail": "gadget/home-summary/img/thumbnail.png",
+  "data": {
+    "url": "gadget/home-summary/index.xml"
+  },
+  "listen": {
+    "subscriber": {
+      "type": "filter",
+      "description": "Used to listen to any filters"
+    }
+  }
+}

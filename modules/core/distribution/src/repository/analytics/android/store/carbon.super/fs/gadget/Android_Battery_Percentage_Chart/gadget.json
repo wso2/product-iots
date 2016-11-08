@@ -1,0 +1,9 @@
+{
+    "id": "Android_Battery_Percentage_Chart",
+    "title": "Android Battery Percentage Chart",
+    "type": "gadget",
+    "thumbnail": "gadget/Android_Battery_Percentage_Chart/thumbnail.png",
+    "data": {
+        "url": "gadget/Android_Battery_Percentage_Chart/gadget.xml"
+    }
+}

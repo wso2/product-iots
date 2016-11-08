@@ -1,0 +1,26 @@
+{{unit "cdmf.unit.lib.rickshaw-graph"}}
+
+<div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
+    <div class="chartWrapper" id="chartWrapper">
+        <div id="y_axis" class="custom_y_axis">Temperature</div>
+        <div class="legend_container">
+            <div id="smoother" title="Smoothing"></div>
+            <div id="legend"></div>
+        </div>
+        <div id="chart" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+</div>
+<a class="padding-left"
+   href="{{@app.context}}/device/{{device.type}}/analytics?deviceId={{device.deviceIdentifier}}&deviceName={{device.name}}">
+    <span class="fw-stack">
+        <i class="fw fw-ring fw-stack-2x"></i>
+        <i class="fw fw-statistics fw-stack-1x"></i>
+    </span> View Device Analytics
+</a>
+<!-- /statistics -->
+{{#zone "bottomJs"}}
+    {{js "js/moment.min.js"}}
+    {{js "js/socket.io.min.js"}}
+    {{js "js/device-stats.js"}}
+{{/zone}}

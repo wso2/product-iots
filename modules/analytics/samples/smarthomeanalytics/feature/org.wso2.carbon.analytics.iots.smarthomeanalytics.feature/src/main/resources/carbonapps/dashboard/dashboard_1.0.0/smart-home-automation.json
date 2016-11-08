@@ -1,0 +1,752 @@
+{
+  "id": "smart-home-automation",
+  "title": "Smart Home Analytics",
+  "description": "",
+  "permissions": {
+    "viewers": [
+      "Internal/smart-home-automation-viewer"
+    ],
+    "editors": [
+      "Internal/smart-home-automation-editor"
+    ],
+    "owners": [
+      "Internal/smart-home-automation-owner"
+    ]
+  },
+  "pages": [
+    {
+      "id": "landing",
+      "title": "Home",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 7,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "a": [
+            {
+              "id": "houses-information-0",
+              "content": {
+                "id": "houses-information",
+                "title": "Home Information",
+                "type": "gadget",
+                "thumbnail": "fs://gadget/houses-information/img/thumbnail.png",
+                "data": {
+                  "url": "fs://gadget/houses-information/index.xml"
+                },
+                "listen": {
+                  "subscriber": {
+                    "type": "filter",
+                    "description": "Used to listen to any filters"
+                  }
+                },
+                "styles": {
+                  "title": "Home Information",
+                  "borders": true
+                },
+                "options": {
+                  "type": {
+                    "type": "STRING",
+                    "title": "Gadget Type",
+                    "value": "",
+                    "options": [],
+                    "required": true
+                  }
+                },
+                "locale_titles": {}
+              }
+            }
+          ]
+        },
+        "anon": {}
+      }
+    },
+    {
+      "id": "home-summary",
+      "title": "Home View",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 10,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "a": [
+            {
+              "id": "floor-summary-0",
+              "content": {
+                "id": "floor-summary",
+                "title": "Floor Information",
+                "type": "gadget",
+                "thumbnail": "fs://gadget/floor-summary/img/thumbnail.png",
+                "data": {
+                  "url": "fs://gadget/floor-summary/index.xml"
+                },
+                "listen": {
+                  "subscriber": {
+                    "type": "filter",
+                    "description": "Used to listen to any filters"
+                  }
+                },
+                "styles": {
+                  "title": "Floor Information",
+                  "borders": true
+                },
+                "options": {
+                  "type": {
+                    "type": "STRING",
+                    "title": "Gadget Type",
+                    "value": "",
+                    "options": [],
+                    "required": true
+                  }
+                },
+                "locale_titles": {}
+              }
+            }
+          ],
+          "b": []
+        },
+        "anon": {}
+      }
+    },
+    {
+      "id": "group-summary",
+      "title": "Group View",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 9,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "a": []
+        },
+        "anon": {}
+      }
+    },
+    {
+      "id": "floor-summary",
+      "title": "Floor View",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 9,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "a": [
+            {
+              "id": "floor-view-0",
+              "content": {
+                "id": "floor-view",
+                "title": "Floor Sensor Details",
+                "type": "gadget",
+                "thumbnail": "fs://gadget/floor-view/img/thumbnail.png",
+                "data": {
+                  "url": "fs://gadget/floor-view/index.xml"
+                },
+                "listen": {
+                  "subscriber": {
+                    "type": "filter",
+                    "description": "Used to listen to any filters"
+                  }
+                },
+                "styles": {
+                  "title": "Floor Sensor Details",
+                  "borders": true
+                },
+                "options": {
+                  "type": {
+                    "type": "STRING",
+                    "title": "Gadget Type",
+                    "value": "",
+                    "options": [],
+                    "required": true
+                  }
+                },
+                "locale_titles": {}
+              }
+            }
+          ]
+        },
+        "anon": {}
+      }
+    },
+    {
+      "id": "motiondetector",
+      "title": "Motion Detector",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 11,
+                "height": 6,
+                "banner": false
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 6,
+                "width": 4,
+                "height": 3,
+                "banner": false
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 6,
+                "width": 4,
+                "height": 3,
+                "banner": false
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 6,
+                "width": 4,
+                "height": 3,
+                "banner": false
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 9,
+                "width": 4,
+                "height": 3,
+                "banner": false
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 9,
+                "width": 4,
+                "height": 3,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "a": []
+        },
+        "anon": {}
+      }
+    },
+    {
+      "id": "smartswitch",
+      "title": "Smart Switch",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    },
+    {
+      "id": "weathermonitoringsensor",
+      "title": "Weather Monitoring Sensor",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    },
+    {
+      "id": "smartmeter",
+      "title": "Smart Meter",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    },
+    {
+      "id": "smartdoor",
+      "title": "Smart Door",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    },
+    {
+      "id": "dhtsensor",
+      "title": "DHT Sensor",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    },
+    {
+      "id": "furnace",
+      "title": "Furnace",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "b",
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "c",
+                "x": 8,
+                "y": 0,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "d",
+                "x": 0,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "e",
+                "x": 4,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              },
+              {
+                "id": "f",
+                "x": 8,
+                "y": 3,
+                "width": 4,
+                "height": 3
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {},
+        "anon": {}
+      }
+    }
+  ],
+  "menu": [
+    {
+      "id": "landing",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Home",
+      "subordinates": []
+    },
+    {
+      "id": "home-summary",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Home View",
+      "subordinates": []
+    },
+    {
+      "id": "group-summary",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Group View",
+      "subordinates": []
+    },
+    {
+      "id": "floor-summary",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Floor View",
+      "subordinates": []
+    },
+    {
+      "id": "motiondetector",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Motion Detector",
+      "subordinates": []
+    },
+    {
+      "id": "smartswitch",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Smart Switch",
+      "subordinates": []
+    },
+    {
+      "id": "weathermonitoringsensor",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Weather Monitoring Sensor",
+      "subordinates": []
+    },
+    {
+      "id": "smartmeter",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Smart Meter",
+      "subordinates": []
+    },
+    {
+      "id": "smartdoor",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Smart Door",
+      "subordinates": []
+    },
+    {
+      "id": "dhtsensor",
+      "isanon": false,
+      "ishidden": false,
+      "title": "DHT Sensor",
+      "subordinates": []
+    },
+    {
+      "id": "furnace",
+      "isanon": false,
+      "ishidden": false,
+      "title": "Furnace",
+      "subordinates": []
+    }
+  ],
+  "hideAllMenuItems": false,
+  "identityServerUrl": "",
+  "accessTokenUrl": "",
+  "apiKey": "",
+  "apiSecret": "",
+  "theme": "Default Theme",
+  "shareDashboard": false,
+  "isUserCustom": false,
+  "isEditorEnable": false,
+  "banner": {
+    "globalBannerExists": false,
+    "customBannerExists": false
+  },
+  "landing": "landing",
+  "isanon": false
+}

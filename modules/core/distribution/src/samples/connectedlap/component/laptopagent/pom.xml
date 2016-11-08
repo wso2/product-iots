@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.wso2</groupId>
+	<artifactId>connectedlap</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>connectedlap</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<jdk.version>1.7</jdk.version>
+	</properties>
+
+	  <dependencies>
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>3.8.1</version>
+	      <scope>test</scope>
+	    </dependency>
+		<dependency>
+	      <groupId>commons-logging</groupId>
+	      <artifactId>commons-logging</artifactId>
+	      <version>1.1.1</version>
+	      <scope>provided</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.json</groupId>
+	      <artifactId>json</artifactId>
+	      <version>20151123</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.sun.jersey</groupId>
+	    	<artifactId>jersey-client</artifactId>
+	    	<version>1.9</version>
+	    </dependency>
+	  </dependencies>
+
+	<build>
+		<finalName>ConnectedLap</finalName>
+		<plugins>
+
+			<!-- download source code in Eclipse, best practice -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- Set a compiler level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Make this jar executable -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/log4j.properties</exclude>
+					</excludes>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>org.wso2.agent.main.JavaApp</mainClass>
+							<classpathPrefix>dependency-jars/</classpathPrefix>
+						</manifest>
+					</archive>
+					<outputDirectory>${project.build.directory}/../../../feature/feature/src/main/resources/agent/</outputDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- Copy project dependency -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!-- exclude junit, we need runtime dependency only -->
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+		
+		      
+		      
+			<!-- Maven Shade Plugin -->
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-shade-plugin</artifactId>
+			  <version>2.3</version>
+			  <executions>
+			     <!-- Run shade goal on package phase -->
+			    <execution>
+				<phase>package</phase>
+				<goals>
+					<goal>shade</goal>
+				</goals>
+				<configuration>
+				  <transformers>
+					<!-- add Main-Class to manifest file -->
+		                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+						<mainClass>org.wso2.agent.main.JavaApp</mainClass>
+					</transformer>
+				  </transformers>
+				</configuration>
+			      </execution>
+			  </executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

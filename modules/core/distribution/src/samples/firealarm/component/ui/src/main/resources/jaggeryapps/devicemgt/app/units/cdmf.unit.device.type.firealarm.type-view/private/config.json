@@ -1,0 +1,7 @@
+{
+  "deviceType": {
+    "label": "Firealarm",
+    "category": "iot",
+    "downloadAgentUri": "firealarm/device/download"
+  }
+}

@@ -1,0 +1,1 @@
+{"provider-conf" : {"streamName" : "org.wso2.iot.android.data:1.0.0", "provider-name" : "realtime"}, "chart-conf" : {"key" : "TIMESTAMP", "color" : "None", "grid" : "on", "maxLength" : "10", "gadget-name" : "Android Realtime Data", "chart-name" : "table-chart"}}

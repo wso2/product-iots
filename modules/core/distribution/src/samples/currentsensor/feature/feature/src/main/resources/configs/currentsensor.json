@@ -1,0 +1,41 @@
+{
+  "deviceType": {
+    "label": "Smart Meeter",
+    "category": "iot"
+  },
+  "analyticStreams": [
+    {
+      "name": "Current",
+      "table": "DEVICE_CURRENT_SUMMARY",
+      "ui_unit": {
+        "name": "cdmf.unit.analytics.line-chart",
+        "data":[
+          {"column": {"name":"TIME", "label":"time", "ui-mapping":"x-axis"}},
+          {"column": {"name":"CURRENT", "label":"current", "ui-mapping":"y-axis"}}
+        ]
+      }
+    },
+    {
+      "name": "Power",
+      "table": "DEVICE_POWER_SUMMARY",
+      "ui_unit": {
+        "name": "cdmf.unit.analytics.line-chart",
+        "data":[
+          {"column": {"name":"TIME", "label":"time", "ui-mapping":"x-axis"}},
+          {"column": {"name":"POWER", "label":"power", "ui-mapping":"y-axis"}}
+        ]
+      }
+    },
+    {
+      "name": "Flow Rate",
+      "table": "DEVICE_FLOWRATE_SUMMARY",
+      "ui_unit": {
+        "name": "cdmf.unit.analytics.line-chart",
+        "data":[
+          {"column": {"name":"TIME", "label":"time", "ui-mapping":"x-axis"}},
+          {"column": {"name":"Flow Rate", "label":"flowrate", "ui-mapping":"y-axis"}}
+        ]
+      }
+    }
+  ]
+}

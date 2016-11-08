@@ -1,0 +1,16 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('Andriod-Audio-Filter-ExecutionPlan')
+
+/* Enter a unique description for ExecutionPlan */ 
+@Plan:description('This converts the true/false params of the orgininal stream into ON/OFF')
+
+/* define streams/tables and write queries here ... */
+
+@Import('org.wso2.iot.android.audio:1.0.0')
+define stream AudioStream (meta_owner string, meta_deviceId string, meta_timestamp long, audio_playing bool, headset_on bool, music_volume int);
+
+@Export('org.wso2.iot.andriod.filtered.audio:1.0.0')
+define stream FilteredAudioStream (meta_owner string, meta_deviceId string, meta_timestamp long, audio string, headset string, music_volume int);
+
+from AudioStream select meta_owner, meta_deviceId, meta_timestamp, ifThenElse(audio_playing, 'ON', 'OFF') as audio,
+ifThenElse(headset_on, 'ON', 'OFF') as headset, music_volume insert into FilteredAudioStream;

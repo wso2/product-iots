@@ -1,0 +1,14 @@
+{
+  "provider-conf": {
+    "streamName": "org.wso2.iot.android.screen:1.0.0",
+    "provider-name": "realtime"
+  },
+  "chart-conf": {
+    "key": "timestamp",
+    "color": "state",
+    "grid": "on",
+    "maxLength": "15",
+    "gadget-name": "Android Realtime Screen",
+    "chart-name": "table-chart"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "org.wso2.iot.android.screen",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "Intermediate stream to map Android sense stream to screen execution plan",
+  "metaData": [
+    {
+      "name": "owner",
+      "type": "STRING"
+    },
+    {
+      "name": "deviceId",
+      "type": "STRING"
+    },
+    {
+      "name": "timestamp",
+      "type": "LONG"
+    }
+  ],
+  "payloadData": [
+    {
+      "name": "state",
+      "type": "STRING"
+    }
+  ]
+}
