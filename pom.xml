@@ -37,7 +37,6 @@
     <modules>
         <module>modules/tools</module>
         <module>modules/iotserver-ui</module>
-        <!--<module>modules/iot-extensions</module>-->
         <module>modules/features</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
