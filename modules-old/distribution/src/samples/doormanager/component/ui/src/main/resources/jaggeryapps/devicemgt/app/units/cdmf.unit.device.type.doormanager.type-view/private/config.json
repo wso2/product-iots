@@ -1,8 +1,0 @@
-
-{
-  "deviceType": {
-    "label": "doormanager",
-    "category": "virtual",
-    "downloadAgentUri": "doormanager/device/download"
-  }
-}

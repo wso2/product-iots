@@ -1,9 +1,0 @@
-{
-    "id": "Android_Realtime_Data",
-    "title": "Android Realtime Data",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Realtime_Data/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Realtime_Data/gadget.xml"
-    }
-}

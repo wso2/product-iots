@@ -1,9 +1,0 @@
-{
-    "id": "Android_Realtime_Call",
-    "title": "Android Realtime Call",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Realtime_Call/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Realtime_Call/gadget.xml"
-    }
-}

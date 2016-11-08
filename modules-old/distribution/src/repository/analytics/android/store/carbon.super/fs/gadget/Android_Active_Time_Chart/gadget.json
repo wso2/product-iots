@@ -1,9 +1,0 @@
-{
-    "id": "Android_Active_Time_Chart",
-    "title": "Android Active Time Chart",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Active_Time_Chart/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Active_Time_Chart/gadget.xml"
-    }
-}

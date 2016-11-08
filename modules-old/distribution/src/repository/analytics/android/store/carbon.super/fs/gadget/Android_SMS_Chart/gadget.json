@@ -1,9 +1,0 @@
-{
-    "id": "Android_SMS_Chart",
-    "title": "Android SMS Chart",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_SMS_Chart/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_SMS_Chart/gadget.xml"
-    }
-}
