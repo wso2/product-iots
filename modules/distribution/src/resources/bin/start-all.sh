@@ -36,6 +36,7 @@ PRGDIR=`dirname "$PRG"`
 
 sh "$CARBON_HOME/core/bin/wso2server.sh" $* &
 sh "$CARBON_HOME/analytics/bin/wso2server.sh" $* &
+sh "$CARBON_HOME/broker/bin/wso2server.sh" $* &
 
 if [ ! -z "$*" ]; then
     exit;

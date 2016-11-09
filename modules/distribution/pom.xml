@@ -85,6 +85,14 @@
                                     <overWrite>true</overWrite>
                                     <outputDirectory>target</outputDirectory>
                                 </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.wso2.iot</groupId>
+                                    <artifactId>wso2iot-broker</artifactId>
+                                    <version>${product.iot.broker.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>

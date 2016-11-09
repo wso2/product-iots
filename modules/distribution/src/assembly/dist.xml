@@ -39,6 +39,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>target/wso2iot-broker-${product.iot.version}</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/broker</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>src/resources/bin</directory>
             <outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>
             <includes>

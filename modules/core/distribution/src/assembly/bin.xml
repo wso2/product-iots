@@ -1296,8 +1296,7 @@
         <!-- Copying product specific log4j.properties that has unnecessary logs printed by third parties
         components suppressed -->
         <file>
-            <source>
-                src/repository/conf/log4j.properties
+            <source>src/repository/conf/log4j.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
