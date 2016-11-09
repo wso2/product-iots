@@ -53,5 +53,13 @@
             </includes>
             <fileMode>755</fileMode>
         </fileSet>
+        <fileSet>
+            <directory>src/resources/samples</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
     </fileSets>
 </assembly>

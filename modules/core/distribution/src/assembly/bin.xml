@@ -1328,12 +1328,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <!--Adding sample device type deployer-->
-        <file>
-            <source>src/samples-deployer.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
-            <filtered>true</filtered>
-        </file>
         <!-- Copying webapp-publisher-config.xml -->
         <file>
             <source>src/repository/conf/etc/webapp-publisher-config.xml</source>
