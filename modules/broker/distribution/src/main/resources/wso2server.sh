@@ -288,7 +288,7 @@ do
         -Dcarbon.registry.root=/ \
         -Djava.command="$JAVACMD" \
         -Dcarbon.home="$CARBON_HOME" \
-        -Dserver.name="IoT-Broker" \
+        -Dlogger.server.name="IoT-Broker" \
         -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/log4j.properties" \
         -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
         -Dcomponents.repo="$CARBON_HOME/repository/components/plugins" \

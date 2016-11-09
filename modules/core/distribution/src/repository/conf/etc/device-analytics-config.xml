@@ -30,7 +30,7 @@
                  {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/}
     -->
     <Enabled>true</Enabled>
-    <ReceiverServerUrl>tcp://localhost:7611</ReceiverServerUrl>
+    <ReceiverServerUrl>tcp://localhost:7613</ReceiverServerUrl>
     <AdminUsername>admin</AdminUsername>
     <AdminPassword>admin</AdminPassword>
 </AnalyticsConfiguration>
