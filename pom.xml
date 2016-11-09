@@ -36,6 +36,7 @@
     </parent>
 
     <modules>
+        <module>modules/broker</module>
         <module>modules/core</module>
         <module>modules/analytics</module>
         <module>modules/distribution</module>
@@ -1206,6 +1207,164 @@
             </dependency>
             <!-- END - MT Dashboard-->
 
+            <!-- ************************ START - IoT Broker  ************* -->
+            <dependency>
+                <groupId>org.apache.axis2.wso2</groupId>
+                <artifactId>axis2</artifactId>
+                <version>${axis2.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.andes.wso2</groupId>
+                <artifactId>andes-client</artifactId>
+                <version>${andes.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.andes.wso2</groupId>
+                <artifactId>andes</artifactId>
+                <version>${andes.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.messaging</groupId>
+                <artifactId>org.wso2.carbon.andes.event.stub</artifactId>
+                <version>${carbon.messaging.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.messaging</groupId>
+                <artifactId>org.wso2.carbon.andes.stub</artifactId>
+                <version>${carbon.messaging.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs.wso2</groupId>
+                <artifactId>geronimo-jms_1.1_spec</artifactId>
+                <version>${orbit.version.geronimo-jms_1.1_spec}</version>
+            </dependency>
+            <dependency>
+                <groupId>slf4j.wso2</groupId>
+                <artifactId>slf4j</artifactId>
+                <version>${slf4j.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.messagebox.stub</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.commons</groupId>
+                <artifactId>org.wso2.carbon.event.client.stub</artifactId>
+                <version>${carbon.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.commons</groupId>
+                <artifactId>org.wso2.carbon.event.client</artifactId>
+                <version>${carbon.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rampart</groupId>
+                <artifactId>rampart</artifactId>
+                <version>${rampart.mar.version}</version>
+                <type>mar</type>
+            </dependency>
+            <!-- Dependencies for login ui -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.stratos.mb.dashboard.ui</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
+                <version>${carbon.ui.menu.stratos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.stratos.mb.deployment</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.stratos.mb.login.ui</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.iot.broker.styles</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.stratos.mb.styles</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <!--Dependencies for integration tests  -->
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.iot.broker.integration.common.clients</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.iot.broker.integration.common.utils</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.iot.broker.platform.common.utils</artifactId>
+                <version>${product.wso2iot.broker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jline</groupId>
+                <artifactId>jline</artifactId>
+                <version>${jline.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.metrics</groupId>
+                <artifactId>org.wso2.carbon.metrics.data.common</artifactId>
+                <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.metrics</groupId>
+                <artifactId>org.wso2.carbon.metrics.view.ui</artifactId>
+                <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.metrics</groupId>
+                <artifactId>org.wso2.carbon.metrics.data.service.stub</artifactId>
+                <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.metrics</groupId>
+                <artifactId>org.wso2.carbon.metrics.manager</artifactId>
+                <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.metrics</groupId>
+                <artifactId>org.wso2.carbon.metrics.impl</artifactId>
+                <version>${carbon.metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.registry</groupId>
+                <artifactId>org.wso2.carbon.registry.resource.stub</artifactId>
+                <version>${carbon.registry.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity</groupId>
+                <artifactId>org.wso2.carbon.um.ws.api.stub</artifactId>
+                <version>${carbon.um.ws.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
             <!--START - Samples Dependencies-->
             <dependency>
                 <groupId>commons-pool.wso2</groupId>
@@ -1408,6 +1567,18 @@
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
         <orbit.tomcat.jdbc.pooling.version>7.0.34.wso2v2</orbit.tomcat.jdbc.pooling.version>
         <orbit.version.tomcat-servlet-api>7.0.59.wso2v1</orbit.version.tomcat-servlet-api>
+        <servlet-api.version>2.4</servlet-api.version>
+
+        <!-- Rampart -->
+        <rampart.version>1.6.1-wso2v12</rampart.version>
+        <rampart.mar.version>1.6.1-wso2v10</rampart.mar.version>
+        <rampart.osgi.version>1.6.1.wso2v10</rampart.osgi.version>
+        <orbit.version.rampart>1.6.1.wso2v10</orbit.version.rampart>
+
+        <!-- IoT Broker Dependencies -->
+        <product.wso2iot.broker.version>1.0.0-SNAPSHOT</product.wso2iot.broker.version>
+        <andes.version>3.2.0-SNAPSHOT</andes.version>
+        <carbon.messaging.version>3.2.0-SNAPSHOT</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>
@@ -1415,12 +1586,15 @@
         <apache.wss4j.version>2.0.0</apache.wss4j.version>
         <codehaus.plexus.version>3.0.21</codehaus.plexus.version>
         <axis2-transports.wso2.version>1.1.0-wso2v17</axis2-transports.wso2.version>
+        <jline.version>1.0</jline.version>
+        <orbit.version.geronimo-jms_1.1_spec>1.1.0.wso2v1</orbit.version.geronimo-jms_1.1_spec>
 
         <!--IOT Analytics-->
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>2.0.2</shindig.version>
         <carbon.data.version>4.3.6</carbon.data.version>
         <equinox.osgi.version>3.8.1.v20120830-144521</equinox.osgi.version>
+        <analytics.shared.version>1.0.1</analytics.shared.version>
 
         <orbit.version.commons-httpclient>3.1.0.wso2v2</orbit.version.commons-httpclient>
         <wss4j.security.version>1.6.17</wss4j.security.version>
@@ -1447,12 +1621,15 @@
         <jacoco.agent.version>0.7.4.201502262128</jacoco.agent.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
+        <commons.lang.version>2.2</commons.lang.version>
         <commons.io.version>2.4</commons.io.version>
         <axis2.version>1.6.1.wso2v11</axis2.version>
-        <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
+        <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
+        <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
         <gson.version>2.3.1</gson.version>
         <slf4j.log4j12.version>1.6.1</slf4j.log4j12.version>
         <slf4j.api.version>1.6.1</slf4j.api.version>
+        <slf4j.wso2.version>1.5.10.wso2v1</slf4j.wso2.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <geoip.api.version>1.2.15</geoip.api.version>
         <kryo.orbit.version>2.24.0.wso2v1</kryo.orbit.version>
@@ -1480,6 +1657,10 @@
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
+
+        <!-- Carbon Remote User Management version -->
+        <carbon.um.ws.version>5.0.8</carbon.um.ws.version>
+
         <!-- Cipher tool version-->
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
 
@@ -1495,7 +1676,7 @@
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
-        <httpcore.version>4.4.1</httpcore.version>
+        <httpcore.version>4.3.0.wso2v1</httpcore.version>
 
         <!--json version-->
         <json-simple.version>1.1.wso2v1</json-simple.version>
