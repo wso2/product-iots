@@ -697,6 +697,10 @@
             <source>src/repository/conf/security/cipher-tool.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
         </file>
+        <file>
+            <source>src/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
+        </file>
 
         <!-- Copying metrics feature related files -->
         <file>

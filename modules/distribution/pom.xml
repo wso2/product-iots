@@ -120,6 +120,27 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>clean_target</id>
+                        <phase>install</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="target/wso2iot-core-${product.iot.version}"/>
+                                <delete dir="target/wso2iot-analytics-${product.iot.analytics.version}"/>
+                                <delete dir="target/wso2iot-broker-${product.iot.broker.version}"/>
+                                <delete file="target/${project.artifactId}-${project.version}.jar"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
@@ -129,7 +150,6 @@
     </build>
 
     <properties>
-        <identity.jar.version>${carbon.identity.framework.version}</identity.jar.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
