@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<streamConfiguration type="csv">
+    <file>events.csv</file>
+    <streamID>rawInputStream:1.0.0</streamID>
+    <separateChar>,</separateChar>
+    <delayBetweenEventsInMilies>10</delayBetweenEventsInMilies>
+</streamConfiguration>

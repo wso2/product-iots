@@ -6,17 +6,17 @@
   ~ in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~   http://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing,
   ~ software distributed under the License is distributed on an
   ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  ~ KIND, either express or implied. See the License for the
+  ~ KIND, either express or implied.  See the License for the
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
 <assembly>
-    <id>wso2-cdm-dist</id>
+    <id>wso2iot</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -25,15 +25,41 @@
     <fileSets>
         <!-- Copying p2 profile and osgi bundles-->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/components</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/components</outputDirectory>
-            <excludes>
-                <exclude>**/eclipse.ini</exclude>
-                <exclude>**/*.lock</exclude>
-                <exclude>**/.data</exclude>
-                <exclude>**/.settings</exclude>
-		        <exclude>features/**</exclude>
-            </excludes>
+            <directory>target/wso2iot-core-${product.iot.version}/</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/core</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/wso2iot-analytics-${product.iot.version}</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/analytics</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>target/wso2iot-broker-${product.iot.version}</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/broker</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/resources/bin</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/resources/samples</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+            <fileMode>644</fileMode>
         </fileSet>
     </fileSets>
 </assembly>
