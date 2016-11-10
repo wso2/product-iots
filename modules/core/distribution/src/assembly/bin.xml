@@ -685,73 +685,6 @@
             </excludes>
             <filtered>true</filtered>
         </fileSet>
-
-        <!-- TODO: Remove below Andriod Analytics -->
-
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/store-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/store</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/streams-->
-            <!--</directory>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventstreams-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/event-sink-->
-            <!--</directory>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventsink-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/eventpublishers-->
-            <!--</directory>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventpublishers-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/executionplans-->
-            <!--</directory>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/executionplans-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--src/repository/analytics/android/simulators-->
-            <!--</directory>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/eventsimulatorfiles-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
     </fileSets>
 
     <dependencySets>
@@ -782,34 +715,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
-        <!-- Copying the "portal" app specific modifications to the distribution pack-->
-        <!--<file>-->
-            <!--<source>src/repository/jaggeryapps/portal/controllers/apis/analytics.jag</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/controllers/apis-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>src/repository/jaggeryapps/portal/js/outputAdapterUiLibrary.js</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>src/repository/jaggeryapps/portal/templates/gadgets/igviz/js/outputAdapterUiLibrary.js</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/templates/gadgets/igviz/js-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <!-- TODO: Uncomment below -->
-        <!--<file>-->
-            <!--<source>src/repository/jaggeryapps/portal/uipublisher/websocketSubscriptionEndpoint.jag</source>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/uipublisher/-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
         <file>
             <source>src/repository/jaggeryapps/portal/configs/designer.json</source>
             <outputDirectory>
@@ -906,14 +811,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying event-broker.xml -->
-        <!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/messaging-event-broker.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file-->
-        <!-- Copying application-authentication.xml -->
         <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
@@ -1045,11 +942,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <!--file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2MB_DB.h2.db</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file-->
         <!-- nTask Component -->
         <file>
             <source>

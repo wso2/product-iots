@@ -38,7 +38,7 @@
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/release-notes.html</exclude>
-                <exclude>**/repository/conf/axis2/axis2.xml</exclude>
+                <exclude>**/repository/conf/**</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -47,6 +47,17 @@
             <excludes>
                 <exclude>**/wso2server.sh</exclude>
                 <exclude>**/wso2server.bat</exclude>
+                <exclude>**/broker.xml</exclude>
+                <exclude>**/axis2.xml</exclude>
+                <exclude>**/carbon.xml</exclude>
+                <exclude>**/cipher-text.properties</exclude>
+                <exclude>**/cipher-tool.properties</exclude>
+                <exclude>**/hazelcast.properties</exclude>
+                <exclude>**/master-datasources.xml</exclude>
+                <exclude>**/messaging-event-broker.xml</exclude>
+                <exclude>**/metrics.xml</exclude>
+                <exclude>**/launch.ini</exclude>
+                <exclude>**/log4j.properties</exclude>
             </excludes>
             <includes>
                 <include>**/*.sh</include>
@@ -197,36 +208,19 @@
             </directory>
             <outputDirectory>wso2iot-broker-${pom.version}/repository/conf
             </outputDirectory>
-            <includes>
-                <include>**/broker.xml</include>
-            </includes>
-            <fileMode>644</fileMode>
-        </fileSet>
-        <!--QPID related configurations-->
-        <fileSet>
-            <directory>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/
-            </directory>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/advanced</outputDirectory>
-            <includes>
-                <include>**/qpid-config.xml</include>
-                <include>**/qpid-virtualhosts.xml</include>
-                <include>**/qpid-jmxremote.access</include>
-            </includes>
-            <fileMode>644</fileMode>
-        </fileSet>
-        <!--Multitenancy related file -->
-        <fileSet>
-            <directory>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/
-            </directory>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/multitenancy</outputDirectory>
-            <includes>
-                <include>**/stratos.xml</include>
-                <include>**/multitenancy-packages.xml</include>
-                <include>**/usage-throttling-agent-config.xml</include>
-                <include>**/cloud-services-desc.xml</include>
-            </includes>
+            <excludes>
+                <exclude>**/broker.xml</exclude>
+                <exclude>**/axis2.xml</exclude>
+                <exclude>**/carbon.xml</exclude>
+                <exclude>**/cipher-text.properties</exclude>
+                <exclude>**/cipher-tool.properties</exclude>
+                <exclude>**/hazelcast.properties</exclude>
+                <exclude>**/master-datasources.xml</exclude>
+                <exclude>**/messaging-event-broker.xml</exclude>
+                <exclude>**/metrics.xml</exclude>
+                <exclude>**/launch.ini</exclude>
+                <exclude>**/log4j.properties</exclude>
+            </excludes>
             <fileMode>644</fileMode>
         </fileSet>
         <!-- copy the landing page webapp -->
@@ -281,14 +275,6 @@
             <fileMode>644</fileMode>
             <directoryMode>775</directoryMode>
         </fileSet>
-        <fileSet>
-            <directory>src/main/conf</directory>
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf</outputDirectory>
-            <includes>
-                <include>**/broker.xml</include>
-            </includes>
-        </fileSet>
     </fileSets>
 
     <dependencySets>
@@ -333,13 +319,20 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--<file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/carbon.xml</source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-        </file>-->
         <file>
             <source>src/main/conf/carbon.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/conf/metrics.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/conf/broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -417,45 +410,6 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml
-            </source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/etc/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <!--<file>
-            <source>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity.xml
-            </source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-        </file>-->
-
-       <!-- <file>
-            <source>../../modules/samples/product/services/EventSinkService/EventSinkService.aar
-            </source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/deployment/server/axis2services/
-            </outputDirectory>
-            <fileMode>644</fileMode>
-        </file>-->
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties</source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>false</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/main/conf/metrics.xml</source>
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>false</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/metrics-datasources.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2METRICS_DB.h2.db</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
@@ -486,27 +440,6 @@
         <file>
             <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <!--End of Cipher Tool Files-->
-        <file>
-            <source>../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying broker.xml -->
-        <file>
-            <source>src/main/conf/broker.xml</source>
-           <!-- <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <outputDirectory>wso2iot-broker-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
     </files>

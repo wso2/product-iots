@@ -322,6 +322,10 @@ do
     -Dfile.encoding=UTF8 \
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
+    -Dmqtt.broker.host="localhost" \
+    -Dmqtt.broker.port="1886" \
+    -Diot.core.host="localhost" \
+    -Diot.core.https.port="9443" \
     $NODE_PARAMS \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
