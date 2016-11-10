@@ -34,11 +34,17 @@ PRGDIR=`dirname "$PRG"`
 # Only set CARBON_HOME if not already set
 [ -z "$CARBON_HOME" ] && CARBON_HOME=`cd "$PRGDIR/.." ; pwd`
 
+if [ ! -z "$*" ]; then
+    exit;
+else
+    trap "sh $CARBON_HOME/bin/stop-all.sh; exit;" SIGINT SIGTERM
+fi
 sh "$CARBON_HOME/broker/bin/wso2server.sh" $* &
 sleep 10
-sh "$CARBON_HOME/analytics/bin/wso2server.sh" $* &
-sleep 20
 sh "$CARBON_HOME/core/bin/wso2server.sh" $* &
+sleep 20
+sh "$CARBON_HOME/analytics/bin/wso2server.sh" $* &
+
 
 if [ ! -z "$*" ]; then
     exit;
