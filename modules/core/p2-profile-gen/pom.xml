@@ -206,6 +206,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.forum.server.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.apim.integration.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of API Management Features -->
 
                                 <!-- Carbon Commons Features -->
@@ -845,6 +848,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.apimgt.apim.integration.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
@@ -941,6 +948,8 @@
                                     <id>org.wso2.carbon.forum.server.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+                                
+                      
                                 <!-- End of API Management Features -->
 
                                 <!-- Carbon Analytics Common Features -->
@@ -1401,7 +1410,7 @@
                             </features>
                         </configuration>
                     </execution>
-                    <!--MQTT profile-->
+                    <!--MQTT profile>
                     <execution>
                         <id>4-p2-profile-generation</id>
                         <phase>package</phase>
@@ -1417,13 +1426,10 @@
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
-                                <!-- IoTServer Features -->
                                 <feature>
                                     <id>org.wso2.iot.core.styles.feature.group</id>
                                     <version>${product.iot.version}</version>
                                 </feature>
-                                <!-- End of IoTServer Features -->
-                                <!-- App management features-->
                                 <feature>
                                     <id>org.wso2.carbon.appmgt.core.feature.group</id>
                                     <version>${appmgt.feature.version}</version>
@@ -1448,7 +1454,6 @@
                                     <id>org.wso2.carbon.appmgt.mdm.osgiconnector.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-                                <!-- End of app management features-->
                                 <feature>
                                     <id>org.wso2.carbon.logging.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
@@ -1497,7 +1502,6 @@
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
                                     <version>${carbon.registry.version}</version>
                                 </feature>
-                                <!--required for context.xml-->
                                 <feature>
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
@@ -1522,9 +1526,6 @@
                                     <id>org.wso2.carbon.device.mgt.oauth.extensions.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-                                <!--end required for context.xml-->
-
-                                <!-- Features required for axis2.xml-->
                                 <feature>
                                     <id>org.apache.synapse.wso2.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
@@ -1557,7 +1558,6 @@
                                     <id>org.wso2.carbon.mediation.admin.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
-                                <!-- End of Mediation Features -->
                                 <feature>
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
                                     <version>${carbon.multitenancy.version}</version>
@@ -1592,7 +1592,7 @@
                                 </feature>
                             </features>
                         </configuration>
-                    </execution>
+                    </execution-->
                     <!--Http Gateway Profile-->
                     <execution>
                         <id>5-p2-profile-generation</id>
