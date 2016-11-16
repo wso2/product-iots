@@ -1278,7 +1278,7 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.stratos.mb.dashboard.ui</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
@@ -1288,38 +1288,38 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.stratos.mb.deployment</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.stratos.mb.login.ui</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.broker.styles</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.stratos.mb.styles</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <!--Dependencies for integration tests  -->
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.broker.integration.common.clients</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.broker.integration.common.utils</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.broker.platform.common.utils</artifactId>
-                <version>${product.wso2iot.broker.version}</version>
+                <version>${product.iot.broker.version}</version>
             </dependency>
             <dependency>
                 <groupId>jline</groupId>
@@ -1566,7 +1566,6 @@
         <product.iot.analytics.version>${product.iot.version}</product.iot.analytics.version>
         <product.das.version>3.1.0</product.das.version>
         <product.mb.version>3.1.0</product.mb.version>
-        <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
 
         <!-- Tomcat -->
         <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
@@ -1581,7 +1580,7 @@
         <orbit.version.rampart>1.6.1.wso2v10</orbit.version.rampart>
 
         <!-- IoT Broker Dependencies -->
-        <product.wso2iot.broker.version>1.0.0-SNAPSHOT</product.wso2iot.broker.version>
+        <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
         <andes.version>3.2.0-SNAPSHOT</andes.version>
         <carbon.messaging.version>3.2.0-SNAPSHOT</carbon.messaging.version>
 
