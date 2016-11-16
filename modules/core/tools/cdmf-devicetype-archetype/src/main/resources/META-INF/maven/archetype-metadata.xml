@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<archetype-descriptor name="${deviceType}">
+    <requiredProperties>
+        <requiredProperty key="deviceType"></requiredProperty>
+        <requiredProperty key="nameOfTheSensor"></requiredProperty>
+    </requiredProperties>
+    <modules>
+        <module id="${rootArtifactId}-component" dir="component" name="${rootArtifactId}-component">
+            <modules>
+                <module id="${groupId}.${rootArtifactId}.plugin" dir="plugin"
+                        name="${groupId}.${rootArtifactId}.plugin">
+                    <fileSets>
+                        <fileSet filtered="true" packaged="false" encoding="UTF-8">
+                            <directory>src/main/java/</directory>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/main/resources</directory>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/test/resources</directory>
+                        </fileSet>
+                    </fileSets>
+                </module>
+                <module id="${groupId}.${rootArtifactId}.api" dir="api"
+                        name="${groupId}.${rootArtifactId}.api">
+                    <fileSets>
+                        <fileSet filtered="true" packaged="false" encoding="UTF-8">
+                            <directory>src/main/java/</directory>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/main/resources</directory>
+                        </fileSet>
+                        <fileSet filtered="true" packaged="false" encoding="UTF-8">
+                            <directory>src/test/java/__groupId__.__rootArtifactId__.api</directory>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                            <directory>src/test/resources</directory>
+                        </fileSet>
+                    </fileSets>
+                </module>
+                <module id="${groupId}.${rootArtifactId}.ui" dir="ui" name="${groupId}.${rootArtifactId}.ui">
+                    <fileSets>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/assembly</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/resources/</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                                <include>**/*.properties</include>
+                                <include>**/*.car</include>
+                                <include>**/*.db</include>
+                                <include>**/*.sql</include>
+                                <include>**/*.json</include>
+                                <include>**/*.inf</include>
+                                <include>**/*.sh</include>
+                                <include>**/*.hbs</include>
+                                <include>**/*.py</include>
+                                <include>**/*-view.js</include>
+                                <include>**/*-graph.js</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="false" encoding="UTF-8">
+                            <directory>src/main/resources/</directory>
+                            <includes>
+                                <include>**/*.png</include>
+                                <include>**/*.js</include>
+                                <include>**/*.css</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </module>
+                <module id="${groupId}.${rootArtifactId}.analytics" dir="analytics"
+                        name="${groupId}.${rootArtifactId}.analytics">
+                    <fileSets>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/assembly</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/resources/carbonapps</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory></directory>
+                            <includes>
+                                <include>build.xml</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </module>
+            </modules>
+        </module>
+        <module id="${rootArtifactId}-feature" dir="feature" name="${rootArtifactId}-feature">
+            <modules>
+                <module id="${groupId}.${rootArtifactId}.feature" dir="feature"
+                        name="${groupId}.${rootArtifactId}.feature">
+                    <fileSets>
+                        <fileSet filtered="true" encoding="UTF-8">
+                            <directory>src/main/resources</directory>
+                            <includes>
+                                <include>**/*.xml</include>
+                                <include>**/*.properties</include>
+                                <include>**/*.car</include>
+                                <include>**/*.db</include>
+                                <include>**/*.sql</include>
+                                <include>**/*.json</include>
+                                <include>**/*.inf</include>
+                                <include>**/*.hbs</include>
+                                <include>**/*.py</include>
+                            </includes>
+                        </fileSet>
+                        <fileSet filtered="false" encoding="UTF-8">
+                            <directory>src/main/resources/</directory>
+                            <includes>
+                                <include>**/*.png</include>
+                                <include>**/*.js</include>
+                                <include>**/*.sh</include>
+                                <include>**/*.css</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </module>
+            </modules>
+        </module>
+    </modules>
+</archetype-descriptor>

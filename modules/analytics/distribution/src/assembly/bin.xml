@@ -24,7 +24,7 @@
 
     <fileSets>
         <fileSet>
-            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
+            <directory>target/wso2carbon-core-${carbon.kernel.449.version}</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <excludes>
                 <exclude>**/repository/deployment/server/axis2services/*</exclude>
@@ -44,11 +44,12 @@
                 <exclude>**/wso2server.sh</exclude>  <!--adding a custom DAS server.sh file-->
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/repository/conf/security/cipher-text.properties</exclude>
+                <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/repository/conf/security/cipher-tool.properties</exclude>
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
+            <directory>target/wso2carbon-core-${carbon.kernel.449.version}</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <excludes>
                 <exclude>**/wso2server.bat</exclude>
@@ -61,7 +62,7 @@
         </fileSet>
         <!-- copying runtime-->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/lib/runtimes</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/lib/runtimes</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib/runtimes/</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -71,7 +72,7 @@
         <!-- Multitenancy related files -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/multitenancy/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/multitenancy</outputDirectory>
             <includes>
@@ -83,7 +84,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/multitenancy/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <includes>
@@ -116,7 +117,7 @@
         <!-- Analytics related config -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics</outputDirectory>
             <includes>
@@ -175,7 +176,7 @@
         <!-- Some war files related to CEP websockets -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/webapps
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
@@ -192,7 +193,7 @@
         <!-- Jaggery modules, carbon and process. Should be copied to <DAS_HOME> -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/modules
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/modules
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules</outputDirectory>
             <includes>
@@ -203,7 +204,7 @@
         <!-- Shindig webapp. Should be copied to <DAS_HOME> -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/webapps
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
             <includes>
@@ -214,7 +215,7 @@
         <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/portal
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/jaggeryapps/portal
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal
             </outputDirectory>
@@ -238,7 +239,7 @@
         <!-- Copying dbscripts related to metrics feature -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/metrics/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/dbscripts/metrics/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/metrics</outputDirectory>
             <includes>
@@ -252,13 +253,13 @@
 
         <!-- *********** Default files copy that comes with Carbon ************* -->
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/bin/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/bin/version.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -269,55 +270,55 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/axis2/axis2.xml</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/axis2/axis2.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/lib/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/lib/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/components/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/components/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/database/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/database/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/logs/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/logs/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/resources/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.449.version}/repository/resources/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -349,7 +350,7 @@
         <!-- ************* Data bridge related files ********** -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/data-bridge/data-bridge-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
             <filtered>true</filtered>
@@ -357,7 +358,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/data-bridge/data-agent-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge
             </outputDirectory>
@@ -369,7 +370,7 @@
         <!-- ************* tomcat webapp hosting related files start ********** -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/tomcat/webapp-classloading.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
             <filtered>true</filtered>
@@ -377,7 +378,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/tomcat/webapp-classloading-environments.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
             <filtered>true</filtered>
@@ -385,7 +386,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/context.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/tomcat/context.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
             <filtered>true</filtered>
@@ -396,7 +397,7 @@
         <!-- Event broker configuration for deployment sync -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -405,7 +406,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/output-event-adapters.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
             </outputDirectory>
@@ -415,7 +416,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/input-event-adapters.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
             </outputDirectory>
@@ -425,7 +426,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cep/storm/storm.yaml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/cep/storm/storm.yaml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/cep/storm/
             </outputDirectory>
@@ -434,7 +435,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-processor.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/event-processor.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/
             </outputDirectory>
@@ -445,7 +446,7 @@
         <!-- Analytics datasources -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/analytics-datasources.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/datasources/analytics-datasources.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
             <filtered>true</filtered>
@@ -455,7 +456,7 @@
         <!-- Analytics REST APIs WebApp -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/analytics.war
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/webapps/analytics.war
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
             <!--commented since this tag causes issues in maven assembly plugin when copying zip formats-->
@@ -464,7 +465,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/logging-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/
             </outputDirectory>
@@ -472,7 +473,7 @@
 
         <!--loads spark environment variables-->
         <file>
-            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.sh-->
+            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/load-spark-env-vars.sh-->
             <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
             <source>
                 src/bin/load-spark-env-vars.sh
@@ -483,7 +484,7 @@
             <fileMode>755</fileMode>
         </file>
         <file>
-            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.bat-->
+            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/load-spark-env-vars.bat-->
             <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
             <source>
                 src/bin/load-spark-env-vars.bat
@@ -499,7 +500,7 @@
         <!-- Akka config files start -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bundle-config/com.typesafe.config/reference.conf
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/bundle-config/com.typesafe.config/reference.conf
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/bundle-config/com.typesafe.config/
             </outputDirectory>
@@ -509,7 +510,7 @@
         <!--YARN conf files-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bundle-config/hadoop-client/core-site.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/bundle-config/hadoop-client/core-site.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/bundle-config/hadoop-client/
             </outputDirectory>
@@ -518,7 +519,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bundle-config/hadoop-client/hdfs-site.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/bundle-config/hadoop-client/hdfs-site.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/bundle-config/hadoop-client/
             </outputDirectory>
@@ -527,7 +528,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bundle-config/hadoop-client/yarn-site.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/bundle-config/hadoop-client/yarn-site.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/bundle-config/hadoop-client/
             </outputDirectory>
@@ -536,7 +537,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/bundle-config/hadoop-client/mapred-site.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/bundle-config/hadoop-client/mapred-site.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/bundle-config/hadoop-client/
             </outputDirectory>
@@ -556,7 +557,7 @@
             <fileMode>755</fileMode>
         </file>
         <file>
-            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat-->
+            <!--../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/wso2server.bat-->
             <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
             <source>
                 src/bin/wso2server.bat
@@ -570,7 +571,7 @@
         <!--spark defaults file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/spark-defaults.conf
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/spark/spark-defaults.conf
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
@@ -580,7 +581,7 @@
         <!--spark fair scheduler xml file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/fairscheduler.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/spark/fairscheduler.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
@@ -590,7 +591,7 @@
         <!--spark classpath config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/external-spark-classpath.conf
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/spark/external-spark-classpath.conf
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
@@ -598,7 +599,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/carbon-spark-classpath.conf
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/spark/carbon-spark-classpath.conf
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
@@ -608,7 +609,7 @@
         <!--spark udf conf file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/spark/spark-udf-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/analytics/spark/spark-udf-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark/
             </outputDirectory>
@@ -618,7 +619,7 @@
         <!-- analytics backup tool script file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/analytics-backup.sh
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/analytics-backup.sh
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/
             </outputDirectory>
@@ -626,7 +627,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/analytics-backup.bat
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/analytics-backup.bat
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
         </file>
@@ -634,7 +635,7 @@
         <!-- analytics cassandra migration tool script file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/analytics-migrate.sh
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/analytics-migrate.sh
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/
             </outputDirectory>
@@ -642,7 +643,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/analytics-migrate.bat
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/analytics-migrate.bat
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
         </file>
@@ -651,7 +652,7 @@
         <!-- CEP -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cep/storm/storm.yaml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/cep/storm/storm.yaml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/cep/storm/
             </outputDirectory>
@@ -661,7 +662,7 @@
         <!-- Including rdbms configuration file for event simulator -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cep/rdbms-configuration.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/cep/rdbms-configuration.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/cep
             </outputDirectory>
@@ -671,20 +672,20 @@
         <!-- Cipher Tool Files -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/ciphertool.sh
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/bin/ciphertool.bat
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
         </file>
@@ -709,21 +710,21 @@
         <!-- Copying metrics feature related files -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/metrics.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>false</filtered>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/metrics.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>false</filtered>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/metrics-datasources.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/datasources/metrics-datasources.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/
             </outputDirectory>
@@ -731,7 +732,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2METRICS_DB.h2.db
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/database/WSO2METRICS_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
@@ -740,14 +741,14 @@
         <!-- Copying the identity file -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/identity/identity.xml
             </source>
             <outputDirectory>wso2iot-analytics-${pom.version}/repository/conf/identity</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/jwt.properties
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/jwt.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -755,7 +756,7 @@
         </file>
        <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/websocket-validation.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/websocket-validation.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -775,7 +776,7 @@
         <!-- Adding IoT Analytics Dashboard and gadget CApps -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>
@@ -783,7 +784,7 @@
         <!-- Adding Geo Dashboard  configuration files and Capp -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org_wso2_carbon_geo_dashboard-1.0.0.car
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/carbonapps/org_wso2_carbon_geo_dashboard-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>
@@ -804,7 +805,7 @@
         </file>
        <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/geodashboard-datasources.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/datasources/geodashboard-datasources.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
             <filtered>true</filtered>

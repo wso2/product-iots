@@ -1475,6 +1475,7 @@
 
         <!--Carbon kernel versions-->
         <carbon.kernel.version>4.4.10</carbon.kernel.version>
+        <carbon.kernel.449.version>4.4.9</carbon.kernel.449.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
@@ -1561,7 +1562,9 @@
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.1.4</carbon.analytics.common.version>
         <carbon.analytics.version>1.2.9-SNAPSHOT</carbon.analytics.version>
+        <carbon.analytics.das.version>1.2.7</carbon.analytics.das.version>
         <product.iot.analytics.version>${product.iot.version}</product.iot.analytics.version>
+        <product.das.version>3.1.0</product.das.version>
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
 
         <!-- Tomcat -->
