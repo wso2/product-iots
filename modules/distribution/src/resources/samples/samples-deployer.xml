@@ -206,6 +206,6 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>2.2.6-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.0-SNAPSHOT</carbon.device.mgt.plugin.version>
     </properties>
 </project>
