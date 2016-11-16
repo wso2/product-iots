@@ -1008,6 +1008,11 @@
                 <version>${eclipse.paho.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.andes.wso2</groupId>
+                <artifactId>andes</artifactId>
+                <version>${carbon.messaging.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.core.admin.styles</artifactId>
                 <version>${product.iot.version}</version>
@@ -1677,8 +1682,7 @@
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
-        <httpcore.version>4.3.0.wso2v1</httpcore.version>
-
+        <httpcore.version>4.4.1</httpcore.version>
         <!--json version-->
         <json-simple.version>1.1.wso2v1</json-simple.version>
         <json.path.version>0.9.1</json.path.version>
