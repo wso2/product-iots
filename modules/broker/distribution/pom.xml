@@ -29,7 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-broker</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT Broker Distribution</name>
+    <name>WSO2 IoT - Broker - Product Distribution</name>
     <url>http://wso2.com/products/message-broker</url>
     <description>WSO2 IoT Broker Distribution</description>
 
