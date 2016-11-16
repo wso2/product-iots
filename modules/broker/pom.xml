@@ -35,12 +35,7 @@
     <description>WSO2 IoT Broker Module</description>
 
     <modules>
-        <module>styles</module>
-        <module>features</module>
         <module>p2-profile</module>
         <module>distribution</module>
-        <module>org.wso2.stratos.mb.dashboard.ui</module>
-        <module>org.wso2.stratos.mb.login.ui</module>
-        <!--<module>integration</module>-->
     </modules>
 </project>

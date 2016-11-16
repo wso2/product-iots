@@ -1565,6 +1565,7 @@
         <carbon.analytics.das.version>1.2.7</carbon.analytics.das.version>
         <product.iot.analytics.version>${product.iot.version}</product.iot.analytics.version>
         <product.das.version>3.1.0</product.das.version>
+        <product.mb.version>3.1.0</product.mb.version>
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
 
         <!-- Tomcat -->
