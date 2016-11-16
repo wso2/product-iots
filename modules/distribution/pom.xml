@@ -17,13 +17,12 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-ALPHA2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -127,10 +126,10 @@
                         <phase>install</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="target/wso2iot-core-${product.iot.version}"/>
-                                <delete dir="target/wso2iot-analytics-${product.iot.analytics.version}"/>
-                                <delete dir="target/wso2iot-broker-${product.iot.broker.version}"/>
-                                <delete file="target/${project.artifactId}-${project.version}.jar"/>
+                                <delete dir="target/wso2iot-core-${product.iot.version}" />
+                                <delete dir="target/wso2iot-analytics-${product.iot.analytics.version}" />
+                                <delete dir="target/wso2iot-broker-${product.iot.broker.version}" />
+                                <delete file="target/${project.artifactId}-${project.version}.jar" />
                             </tasks>
                         </configuration>
                         <goals>
