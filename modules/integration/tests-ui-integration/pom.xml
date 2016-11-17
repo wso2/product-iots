@@ -21,13 +21,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
-        <artifactId>wso2iot-core-integration</artifactId>
+        <artifactId>wso2iot-integration</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <name>WSO2 IoT - Core - Integration Test UI Module</name>
+    <name>WSO2 IoT - Integration Test UI Module</name>
     <artifactId>org.wso2.carbon.iot.core.integration.test.ui.integration</artifactId>
     <packaging>jar</packaging>
 
