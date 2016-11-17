@@ -1,0 +1,8 @@
+
+{
+  "deviceType": {
+    "label": "${deviceType}",
+    "category": "virtual",
+    "downloadAgentUri": "${deviceType}/device/download"
+  }
+}

@@ -287,9 +287,6 @@ d                                        <exclude name="**/shindig.properties" /
 						<configuration>
 							<tasks>
 								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps" />
-
-								<!--Make samples directory for distribution-->
-								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/samples" />
 							</tasks>
 						</configuration>
 						<goals>

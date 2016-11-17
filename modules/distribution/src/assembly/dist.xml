@@ -54,8 +54,8 @@
             <fileMode>755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>src/resources/samples</directory>
-            <outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
+            <directory>src/resources/plugins</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/plugins</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>

@@ -31,4 +31,8 @@
     <name>WSO2 IoT - Core - Tools</name>
     <url>http://maven.apache.org</url>
 
+    <modules>
+        <module>cdmf-devicetype-archetype</module>
+    </modules>
+
 </project>
