@@ -661,22 +661,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-mqtt-gateway-profile</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>materialize-product</goal>
-                        </goals>
-                        <configuration>
-                            <productConfigurationFile>${basedir}/carbon.product</productConfigurationFile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <targetPath>
-                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
-                            </targetPath>
-                            <profile>mqtt-gateway</profile>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>p2-profile-generation-http-gateway-profile</id>
                         <phase>package</phase>
                         <goals>
