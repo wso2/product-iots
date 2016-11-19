@@ -117,7 +117,8 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 
             <!--All receiving events/messages will be in this ring buffer. Ring buffer size
             of MQTT inbound event disruptor. Default is set to 32768 (1024 * 32)
-            Having a large ring buffer will have a increase memory usage and will improve performance
+            Having a large ring buffer wi
+            ll have a increase memory usage and will improve performance
             and vise versa -->
             <inboundBufferSize>32768</inboundBufferSize>
 
@@ -171,13 +172,23 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
                         inherit from org.dna.mqtt.moquette.server.IAutherizer
                         Note: default implementation authorizes against carbon permission with the topic.
                     -->
-                    <!--connectionPermission is required for a user to connect to broker-->
+                    <!--connectionPermission is required for a user to connect to broker
+                    subscriberPermission is needed to subscribe(subriber permission can be more than one)
+                    publisherPermission is needed to publish(publisher permission can be more than one)
+                    -->
                     <authorizer class="org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.DeviceAccessBasedMQTTAuthorizer">
-                        <property name="connectionPermission">/permission/admin/device-mgt/user</property>
-                        <property name="adminPermission">/permission/admin/device-mgt/admin</property>
-                        <property name="MQTTSubscriberScopeIdentifier">mqtt-subscriber</property>
-                        <property name="MQTTPublisherScopeIdentifier">mqtt-subscriber</property>
-                        <property name="devicemgtScopeIdentifier">device-mgt</property>
+						<!--<property name="connectionPermission">/permission/admin/device-mgt/user</property>-->
+                        <!--topic subscription permissions which are assigned through grouping-->
+                        <property name="subscriberPermission">/permission/device-mgt/user/groups/device_events</property>
+                        <!--topic publisher permissions which are assigned through grouping-->
+                        <property name="publisherPermission">/permission/device-mgt/user/groups/device_operation</property>
+
+                        <property name="username">admin</property>
+                        <property name="password">admin</property>
+                        <property name="tokenEndpoint">https://localhost:9443/oauth2</property>
+                        <!--offset time from expiry time to trigger refresh call - seconds -->
+                        <property name="tokenRefreshTimeOffset">100</property>
+                        <property name="deviceMgtServerUrl">https://localhost:9443</property>
                     </authorizer>
             </security>
         </mqtt>

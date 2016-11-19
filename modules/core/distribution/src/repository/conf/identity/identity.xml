@@ -149,16 +149,11 @@
                 <GrantTypeName>iwa:ntlm</GrantTypeName>
                 <GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.token.handlers.grant.iwa.ntlm.NTLMAuthenticationGrantHandler</GrantTypeHandlerImplClass>
             </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedDeviceMgtJWTBearerGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.ExtendedDeviceJWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>device-mgt:password</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedDeviceMgtPasswordGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.ExtendedDevicePasswordGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
+			<SupportedGrantType>
+				<GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
+				<GrantTypeHandlerImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTBearerGrantHandler</GrantTypeHandlerImplClass>
+				<GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
+			</SupportedGrantType>
         </SupportedGrantTypes>
         <OAuthCallbackHandlers>
             <OAuthCallbackHandler Class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.DeviceMgtOAuthCallbackHandler"/>
