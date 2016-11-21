@@ -388,6 +388,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.event-processing:org.wso2.carbon.geo.dashboard.feature:${carbon.event-processing.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics.shared:org.wso2.carbon.analytics.shared.spark.common.udf.feature:${analytics.shared.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -488,6 +491,10 @@
                                 <feature>
                                     <id>org.wso2.das.styles.feature.group</id>
                                     <version>${product.das.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.shared.spark.common.udf.feature.group</id>
+                                    <version>${analytics.shared.version}</version>
                                 </feature>
 
                                 <!-- ********* START - Registry related  *********** -->

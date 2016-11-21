@@ -247,6 +247,15 @@
             </includes>
         </fileSet>
 
+        <fileSet>
+            <directory>
+                src/repository/resources/portal/libs/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/libs/analytics-wso2-2.0.0</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
 
     </fileSets>
     <files>
@@ -705,6 +714,10 @@
         <file>
             <source>src/repository/conf/etc/jwt.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
+        </file>
+        <file>
+            <source>src/repository/conf/analytics/spark/spark-udf-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark</outputDirectory>
         </file>
 
         <!-- Copying metrics feature related files -->

@@ -126,6 +126,11 @@
                                         <include name="*.car"/>
                                     </fileset>
                                 </copy>
+                                <copy todir="../analytics/repository/deployment/server/">
+                                    <fileset dir="resources/analytics">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                </copy>
                             </tasks>
                         </configuration>
                         <goals>
