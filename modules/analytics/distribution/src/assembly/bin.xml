@@ -184,7 +184,7 @@
                 <include>inputwebsocket.war</include>
                 <include>outputwebsocket.war</include>
                 <include>outputui.war</include>
-                <include>secured-outputui.war</include>
+                <include>secured-websocket.war</include>
             </includes>
         </fileSet>
         <!-- END CEP -->

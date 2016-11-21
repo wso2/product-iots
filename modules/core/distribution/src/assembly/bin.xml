@@ -839,7 +839,7 @@
         </file>
         <file>
             <source>
-                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+                src/repository/conf/identity/identity-providers/iot_default.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>
@@ -1153,7 +1153,7 @@
         </file>
         <file>
             <source>
-                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+                src/repository/conf/identity/identity-providers/iot_default.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>
