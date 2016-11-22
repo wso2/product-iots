@@ -17,10 +17,10 @@
   -->
 
 <IdentityProvider>
-	<IdentityProviderName>CDMF_DEFAULT_IDP</IdentityProviderName>
-	<DisplayName>CDMF_DEFAULT_IDP</DisplayName>
+	<IdentityProviderName>iot_default</IdentityProviderName>
+	<DisplayName>iot_default</DisplayName>
 	<IdentityProviderDescription></IdentityProviderDescription>
-	<Alias>JwtIdentityAudience</Alias>
+	<Alias>wso2.org/products/iot</Alias>
 	<IsPrimary>true</IsPrimary>
 	<IsFederationHub></IsFederationHub>
 	<HomeRealmId></HomeRealmId>

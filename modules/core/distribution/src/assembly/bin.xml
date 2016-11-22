@@ -839,7 +839,7 @@
         </file>
         <file>
             <source>
-                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+                src/repository/conf/identity/identity-providers/iot_default.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>
@@ -1153,7 +1153,7 @@
         </file>
         <file>
             <source>
-                src/repository/conf/identity/identity-providers/CDMF_DEFAULT_IDP.xml
+                src/repository/conf/identity/identity-providers/iot_default.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>
@@ -1173,15 +1173,6 @@
             <source>src/repository/conf/log4j.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Copying remote-appmanager-config.xml -->
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/device-mgt-scopes.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
