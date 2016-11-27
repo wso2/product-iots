@@ -797,7 +797,7 @@
         <!-- Adding Geo Dashboard  configuration files and Capp -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/carbonapps/org_wso2_carbon_geo_dashboard-1.0.0.car
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.449.version}/repository/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>
