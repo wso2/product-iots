@@ -111,6 +111,8 @@
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.4.3.jar</exclude>
                 <exclude>**/org.wso2.carbon.hostobjects.sso_4.3.2.jar</exclude>
                 <exclude>**/conf/log4j.properties</exclude>
+                <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
+                <exclude>**/repository/components/plugins/httpclient_4.3.2.wso2v1.jar</exclude>
             </excludes>
         </fileSet>
 
@@ -529,6 +531,7 @@
                 <exclude>base-page/**</exclude>
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
+                <exclude>**/site/conf/site.json</exclude>
             </excludes>
         </fileSet>
 
@@ -587,13 +590,20 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
             </outputDirectory>
             <includes>
-                <include>**/sso-idp-config.xml</include>
                 <include>**/saml1-assertion-config</include>
                 <include>**/msg-mgt.properties</include>
                 <include>**/entitlement.properties</include>
                 <include>**/EndpointConfig.properties</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>src/repository/conf/identity/service-providers</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/service-providers</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-providers
@@ -655,6 +665,9 @@
             <includes>
                 <include>**/*</include>
             </includes>
+            <excludes>
+                <exclude>**/configs/designer.json</exclude>
+            </excludes>
         </fileSet>
 
         <!-- Adding analytics theme to extensions -->
@@ -705,6 +718,16 @@
             <fileMode>755</fileMode>
         </file>
         <!-- End of "portal" app specific modifications -->
+
+        <!-- Copying config file for enabling sso in api-store-->
+        <file>
+            <source>src/repository/jaggeryapps/api-store/site/conf/site.json</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/site/conf
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <!-- Copying synapse.properties file -->
         <file>
             <source>src/repository/conf/synapse.properties</source>
@@ -733,6 +756,11 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
+        </file>
+        <!-- Copying Owasp property files-->
+        <file>
+            <source>src/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
         </file>
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
@@ -802,15 +830,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/sso-idp-config.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <!-- Copying thrift-authentication.xml -->
         <file>
             <source>src/repository/conf/application-authenticators.xml</source>
@@ -843,6 +862,12 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- Copying sso-idp-config.xml file -->
+        <file>
+            <source>src/repository/conf/identity/sso-idp-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <!-- Copying governance.xml -->
@@ -1019,6 +1044,8 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
         </file>
+
+
         <!-- Copying axis2-client.xml -->
         <file>
             <source>

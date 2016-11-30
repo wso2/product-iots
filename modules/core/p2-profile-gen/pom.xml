@@ -421,6 +421,25 @@
                                 </featureArtifactDef>
                                 <!-- APPM Features END -->
 
+                                <!-- Dashboards Features -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.deployment.feature:${carbon.dashboard.version}
+                                </featureArtifactDef>
+                                <!-- End of Dashboards Features -->
+
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.device.statistics.dashboard.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+
                                 <!-- Mediation Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.apache.synapse.wso2.feature:${carbon.mediation.version}
@@ -910,6 +929,25 @@
                                     <version>${jaggery.extensions.version}</version>
                                 </feature>
                                 <!-- End of Jaggery Features -->
+
+                                <!-- Dashboard Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboard.deployment.feature.group</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.iot.device.statistics.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Dashboard Features -->
 
                                 <!-- API Management Features -->
                                 <feature>
