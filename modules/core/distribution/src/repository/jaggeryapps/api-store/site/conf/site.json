@@ -1,0 +1,56 @@
+{
+    "theme" : {
+        "base" : "wso2"
+    },
+    "context" : "/api-store",
+    "showPublicStoreURL":true,
+    "showThemesMenu":false,
+    "tagWiseMode" :"false",
+    "tagGroupKey" :"-group",
+    "ssoConfiguration" : {
+        "enabled" : "true",
+        "issuer" : "API_STORE",
+        "identityProviderURL" : "https://localhost:9443/samlsso",
+        "keyStorePassword" : "",
+        "identityAlias" : "",
+        "responseSigningEnabled":"true",
+        "assertionSigningEnabled":"true",
+        "keyStoreName" :"",
+        "passive" : "true",
+        "signRequests" : "true",
+        "assertionEncryptionEnabled" : "false"
+    },
+    "oidcConfiguration" : {
+      "enabled" : "false",
+      "issuer" : "API_STORE",
+      "identityProviderURI" : "http://localhost:8080/openid-connect-server-webapp/",
+      "authorizationEndpointURI" : "http://localhost:8080/openid-connect-server-webapp/authorize",
+      "tokenEndpointURI" : "http://localhost:8080/openid-connect-server-webapp/token",
+      "userInfoURI" : "http://localhost:8080/openid-connect-server-webapp/userinfo",
+      "jwksURI" : "http://localhost:8080/openid-connect-server-webapp/jwk",
+      "clientConfiguration" : {
+        "clientId" : "client_am_store",
+        "clientSecret" : "secret",
+        "responseType" : "code",
+        "authorizationType" : "authorization_code",
+        "scope" : "phone email address openid profile",
+        "redirectURI" : "https://localhost:9443/api-store/jagg/jaggery_oidc_acs.jag",
+        "clientAlgorithm" : "RS256"
+      }
+    },
+    "mutualAuthConfiguration" : {
+      "enabled" : "false"
+    },
+    "forum" : {
+        "topicsPerPage" : "5",
+        "repliesPerPage" : "5",
+        "resourceIdentifier" : "common"
+    },
+    "reverseProxy" : {
+        "enabled" : false,
+        "host" : "sample.proxydomain.com",
+        "context":""
+    },
+  "mapExistingAuthApps" : false
+
+}

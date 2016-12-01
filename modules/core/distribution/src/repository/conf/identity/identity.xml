@@ -89,6 +89,7 @@
         <RequestTokenUrl>https://localhost:9443/oauth/request-token</RequestTokenUrl>
         <AccessTokenUrl>https://localhost:9443/oauth/access-token</AccessTokenUrl>
         <AuthorizeUrl>https://localhost:9443/oauth/authorize-url</AuthorizeUrl>
+        <OAuth2TokenEPUrl>https://localhost:${mgt.transport.https.port}/oauth2/token</OAuth2TokenEPUrl>
         <!-- Default validity period for Authorization Code in seconds -->
         <AuthorizationCodeDefaultValidityPeriod>300</AuthorizationCodeDefaultValidityPeriod>
         <!-- Default validity period for user access tokens in seconds -->
@@ -239,7 +240,7 @@
 
         <!-- SAML Token validity period in minutes -->
         <SAMLResponseValidityPeriod>5</SAMLResponseValidityPeriod>
-        <UseAuthenticatedUserDomainCrypto>true</UseAuthenticatedUserDomainCrypto>
+        <UseAuthenticatedUserDomainCrypto>false</UseAuthenticatedUserDomainCrypto>
     </SSOService>
 
     <EntitlementSettings>

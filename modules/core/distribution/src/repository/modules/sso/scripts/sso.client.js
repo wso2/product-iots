@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  *  WSO2 Inc. licenses this file to you under the Apache License,
  *  Version 2.0 (the "License"); you may not use this file except
@@ -16,6 +16,7 @@
  *  under the License.
  *
  */
+
 /**
  * Following module act as a client to create a saml request and also to
  * unwrap and return attributes of a returning saml response
@@ -26,7 +27,7 @@ var client = {};
 
 (function (client) {
 
-	var Util = Packages.org.jaggeryjs.modules.sso.common.util.Util,
+	var Util = Packages.org.wso2.store.sso.common.util.Util,
 		carbon = require('carbon'),
 		log = new Log();
 
@@ -36,8 +37,16 @@ var client = {};
 	 * @return {*}
 	 */
 	client.getSamlObject = function (samlResp) {
-		var decodedResp = Util.decode(samlResp);
-		return Util.unmarshall(decodedResp);
+		var marshalledResponse;
+		try {
+			var decodedResp = Util.decode(samlResp);
+			marshalledResponse = Util.unmarshall(decodedResp);
+		} catch (e) {
+			log.error('Unable to unmarshall SAML response');
+			log.error(e);
+		}
+		return marshalledResponse;
+
 	};
 
 	/**
@@ -72,7 +81,7 @@ var client = {};
 	client.getEncodedSAMLAuthRequest = function (issuerId) {
 		return Util.encode(
 			Util.marshall(
-				new Packages.org.jaggeryjs.modules.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
+				new Packages.org.wso2.store.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
 			));
 	};
 
@@ -82,8 +91,8 @@ var client = {};
 	client.getEncodedSAMLLogoutRequest = function (user, sessionIndex, issuerId) {
 		return Util.encode(
 			Util.marshall(
-				new Packages.org.jaggeryjs.modules.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
-					Packages.org.jaggeryjs.modules.sso.common.constants.SSOConstants.LOGOUT_USER,
+				new Packages.org.wso2.store.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
+					Packages.org.wso2.store.sso.common.constants.SSOConstants.LOGOUT_USER,
 					issuerId)));
 	};
 
@@ -144,5 +153,112 @@ var client = {};
 		return sessionIndex;
 
 	};
+
+	/**
+	 * The method is used to encapsulate all of the validations that
+	 * should be performed on a SAML Response
+	 */
+	client.validateSamlResponse = function(samlObj, props, keyStoreProps) {
+		props = props || {};
+		var Util = Packages.org.wso2.store.sso.common.util.Util;
+		var propList = createProperties(props);
+		var DEFAULT_TO_TRUE = true;
+		var DEFAULT_TO_FALSE = false;
+		var isValid = true; //Assume all validations will be succeed
+		var isAssertionValidityPeriodChecked = props.validateAssertionValidityPeriod ? props.validateAssertionValidityPeriod : DEFAULT_TO_FALSE;
+		var isAudienceRestrictionChecked = props.validateAudienceRestriction ? props.validateAudienceRestriction : DEFAULT_TO_FALSE;
+		var isAssertionSigningEnabled = props.assertionSigningEnabled ? props.assertionSigningEnabled : DEFAULT_TO_FALSE;
+		var isResponseSigningEnabled = props.responseSigningEnabled ? props.responseSigningEnabled : DEFAULT_TO_FALSE;
+
+		//Step #1: Validate the token validity period
+		if (isAssertionValidityPeriodChecked) {
+			isValid = Util.validateAssertionValidityPeriod(samlObj, propList);
+		}
+
+		//Break processing if the assertion validity period has expired
+		if (!isValid) {
+			return isValid;
+		}
+		//Step #2: Validate the assertion audience
+		if (isAudienceRestrictionChecked) {
+			isValid = Util.validateAudienceRestriction(samlObj, propList);
+		}
+		//Break processing if the audience restriction check fails
+		if (!isValid) {
+			return isValid;
+		}
+
+		//Step #3: Validate the response signature
+		if (isResponseSigningEnabled) {
+			isValid = client.validateSignature(samlObj, keyStoreProps);
+		}
+
+		//Break processing if the signature validation fails
+		if (!isValid) {
+			return isValid;
+		}
+
+		//Step #4: Perform assertion signature verification
+		if (isAssertionSigningEnabled) {
+			isValid = callValidateAssertionSignature(samlObj, keyStoreProps);
+		}
+		return isValid;
+	};
+
+	/**
+	 * getting url encoded signed saml authentication request
+	 */
+	client.getEncodedSignedSAMLAuthRequest = function (issuerId, destination, acsUrl, isPassive, tenantId, tenantDomain, nameIdPolicy) {
+		return Util.encode(
+			Util.marshall(
+				new Packages.org.jaggeryjs.modules.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId, destination, acsUrl,
+					isPassive, tenantId, tenantDomain, nameIdPolicy)
+			));
+	};
+
+	/**
+	 * get url encoded signed saml logout request
+	 */
+	client.getEncodedSignedSAMLLogoutRequest = function (user, sessionIndex, issuerId, tenantId, tenantDomain, destination, nameIdFormat) {
+		return Util.encode(
+			Util.marshall(
+				new Packages.org.jaggeryjs.modules.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
+					Packages.org.wso2.store.sso.common.constants.SSOConstants.LOGOUT_USER,
+					issuerId)));
+
+	};
+
+	/**
+	 * A utility method used to convert a JSON object to
+	 * a properties object
+	 */
+	function createProperties(props) {
+		var javaPropertyList = new java.util.Properties();
+		Object.keys(props).forEach(function(key) {
+			if (props.hasOwnProperty(key)) {
+				javaPropertyList.setProperty(key, props[key]);
+			}
+		});
+		return javaPropertyList;
+	}
+	/**
+	 * Invokes the validateAssertionSignature method by first
+	 * resolving tenant details
+	 */
+	function callValidateAssertionSignature(samlObj, config) {
+		var Util = Packages.org.wso2.store.sso.common.util.Util;
+		var tDomain, tId;
+		var carbon = require('carbon');
+		if (config.USE_ST_KEY) {
+			tDomain = carbon.server.superTenant.domain;
+			tId = carbon.server.superTenant.tenantId;
+		} else {
+			tDomain = Util.getDomainName(samlObj);
+			tId = carbon.server.tenantId({
+				domain: tDomain
+			});
+		}
+		return Util.validateAssertionSignature(samlObj, config.KEY_STORE_NAME, config.KEY_STORE_PASSWORD, config.IDP_ALIAS, tId, tDomain);
+	}
 
 }(client));

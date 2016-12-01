@@ -307,7 +307,7 @@
         <CreateServiceProviderForSkipGatewayApps>false</CreateServiceProviderForSkipGatewayApps>
 
         <!-- URL of the IDP use for SSO -->
-        <IdentityProviderUrl>https://${carbon.local.ip}:${mgt.transport.https.port}/samlsso</IdentityProviderUrl>
+        <IdentityProviderUrl>https://localhost:${mgt.transport.https.port}/samlsso</IdentityProviderUrl>
 
         <!-- Postfix of the ACS URL -->
         <ACSURLPostfix>appm/acs</ACSURLPostfix>

@@ -7,16 +7,21 @@
     "ignoreProviders": ["rt"]
   },
   "authentication": {
-    "activeMethod": "basic",
+    "activeMethod": "sso",
     "methods": {
       "sso": {
         "attributes": {
           "issuer": "portal",
-          "identityProviderURL": "https://localhost:9443/samlsso",
-          "responseSigningEnabled": "false",
-          "acs": "https://localhost:9444/portal/acs",
+          "identityProviderURL": "%https.host%/samlsso",
+          "responseSigningEnabled": true,
+          "validateAssertionValidityPeriod": true,
+          "validateAudienceRestriction": true,
+          "assertionSigningEnabled": true,
+          "acs": "%https.host%/portal/acs",
           "identityAlias": "wso2carbon",
-          "useTenantKey": false
+          "defaultNameIDPolicy": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+          "useTenantKey": false,
+          "isPassive": false
         }
       },
       "basic": {
@@ -29,15 +34,15 @@
     "methods": {
       "oauth": {
         "attributes": {
-          "idPServer": "https://localhost:9443/oauth2/token",
+          "idPServer": "%https.host%/oauth2/token",
           "dynamicClientProperties": {
-            "callbackUrl": "https://localhost:9443/portal",
+            "callbackUrl": "%https.host%/portal",
             "clientName": "portal",
             "owner": "admin",
             "applicationType": "JaggeryApp",
             "grantType": "password refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer",
             "saasApp": false,
-            "dynamicClientRegistrationEndPoint": "https://localhost:9443/dynamic-client-web/register/",
+            "dynamicClientRegistrationEndPoint": "%https.host%/dynamic-client-web/register/",
             "tokenScope": "Production"
           }
         }
@@ -54,6 +59,15 @@
   "cacheSizeBytes": "1073741824",
   "defaultDashboardRedirect": false,
   "isCreateGadgetEnable": true,
+  "isSecureVaultEnabled" : false,
+  "assets": {
+    "gadget": {
+      "fileSizeLimit": 5
+    },
+    "layout": {
+      "fileSizeLimit": 1
+    }
+  },
   "oauth": {
     "username": "admin",
     "password": "admin"

@@ -386,7 +386,7 @@
                                 </featureArtifactDef>
                                 <!-- Geo Dashboard feature -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.event-processing:org.wso2.carbon.geo.dashboard.feature:${carbon.event-processing.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.geo.dashboard.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics.shared:org.wso2.carbon.analytics.shared.spark.common.udf.feature:${analytics.shared.version}
@@ -792,8 +792,8 @@
 
                                 <!-- Geo Dashboard Feature -->
                                 <feature>
-                                    <id>org.wso2.carbon.geo.dashboard.feature.group</id>
-                                    <version>${carbon.event-processing.version}</version>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
                             </features>
