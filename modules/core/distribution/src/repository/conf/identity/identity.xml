@@ -240,7 +240,7 @@
 
         <!-- SAML Token validity period in minutes -->
         <SAMLResponseValidityPeriod>5</SAMLResponseValidityPeriod>
-        <UseAuthenticatedUserDomainCrypto>true</UseAuthenticatedUserDomainCrypto>
+        <UseAuthenticatedUserDomainCrypto>false</UseAuthenticatedUserDomainCrypto>
     </SSOService>
 
     <EntitlementSettings>

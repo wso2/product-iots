@@ -79,7 +79,6 @@
 		<Role>${default.server.role}</Role>
 		<Role>${das.server.role}</Role>
 		<Role>${cep.server.role}</Role>
-		<Role>${emm.analytics.role}</Role>
 		<Role>${cdmf.analytics.role}</Role>
 		<Role>IoTServer</Role>
 		<Role>CDMFPlatform</Role>
