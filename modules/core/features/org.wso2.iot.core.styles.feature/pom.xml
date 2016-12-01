@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-core-features</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-ALPHA4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
