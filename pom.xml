@@ -1215,7 +1215,7 @@
             <dependency>
                 <groupId>org.wso2.andes.wso2</groupId>
                 <artifactId>andes-client</artifactId>
-                <version>3.2.0-SNAPSHOT</version>
+                <version>${andes.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.andes.wso2</groupId>
@@ -1521,7 +1521,7 @@
         <identity.local.auth.basicauth.version>5.1.1</identity.local.auth.basicauth.version>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
         <identity.inbound.auth.saml.version>5.1.1</identity.inbound.auth.saml.version>
-        <identity.carbon.auth.saml2.version>5.1.2</identity.carbon.auth.saml2.version>
+        <identity.carbon.auth.saml2.version>5.1.3</identity.carbon.auth.saml2.version>
         <identity.inbound.auth.oauth.version>5.1.2</identity.inbound.auth.oauth.version>
         <identity.carbon.auth.mutual.ssl.version>5.1.1</identity.carbon.auth.mutual.ssl.version>
         <identity.user.ws.version>5.1.2</identity.user.ws.version>
@@ -1542,14 +1542,14 @@
         <carbon.governance.version>4.6.4</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>2.0.2-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.3-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>1.0.0-SNAPSHOT</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>3.0.2-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.3-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.0.5</carbon.api.mgt.version>
@@ -1580,8 +1580,8 @@
 
         <!-- IoT Broker Dependencies -->
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
-        <andes.version>3.2.0-SNAPSHOT</andes.version>
-        <carbon.messaging.version>3.2.0-SNAPSHOT</carbon.messaging.version>
+        <andes.version>3.1.3</andes.version>
+        <carbon.messaging.version>3.1.3</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>
@@ -1656,7 +1656,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.5</appmgt.feature.version>
+        <appmgt.feature.version>1.2.8-SNAPSHOT</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
@@ -1675,7 +1675,7 @@
         <project.scm.id>github-scm</project.scm.id>
 
         <!-- Carbon Metrics Features -->
-        <carbon.metrics.version>1.2.0</carbon.metrics.version>
+        <carbon.metrics.version>1.2.2</carbon.metrics.version>
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
