@@ -200,6 +200,7 @@
                 <include>**/i18n/</include>
                 <include>**/ws/</include>
                 <include>**/appmgtpublisher/</include>
+                <include>**/appstore/</include>
                 <include>**/store/</include>
                 <include>**/lifecycle/</include>
                 <include>**/utils/</include>
