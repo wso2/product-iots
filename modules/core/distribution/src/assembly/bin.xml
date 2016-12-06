@@ -965,6 +965,12 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/repository/resources/appm-tenant-conf.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!--License Config file-->
         <file>
             <source>
