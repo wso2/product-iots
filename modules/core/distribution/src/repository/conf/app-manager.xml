@@ -6,7 +6,7 @@
     JNDI name of the data source to be used by the app management components such as store, publisher, gateway
     This data source should be defined in the master-datasources.xml file in conf/datasources directory.
     -->
-    <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
+    <DataSourceName>jdbc/WSO2APPM_DB</DataSourceName>
     <DataSources>
         <Storage>jdbc/ES_Storage</Storage>
     </DataSources>
@@ -163,7 +163,7 @@
         This data source is used to write/read UI Activity changes (eg: App Hit count)
         to seperate database. When using DAS to analyze the changes it needs to configure this data source appropriately.
         -->
-        <UIActivityPublishDataSourceName>jdbc/WSO2AM_DB</UIActivityPublishDataSourceName>
+        <UIActivityPublishDataSourceName>jdbc/WSO2APPM_DB</UIActivityPublishDataSourceName>
 
         <!--
         Enable UI Activity Data publish to DAS
