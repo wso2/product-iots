@@ -822,15 +822,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <file>
-            <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/application-authentication.xml
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <!-- Copying thrift-authentication.xml -->
         <file>
             <source>src/repository/conf/application-authenticators.xml</source>
