@@ -391,6 +391,10 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics.shared:org.wso2.carbon.analytics.shared.spark.common.udf.feature:${analytics.shared.version}
                                 </featureArtifactDef>
+                                <!-- Siddhi extension feature -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.execution.json.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -796,6 +800,12 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
+
+                                <!-- Siddhi extension Feature -->
+                                <feature>
+                                    <id>org.wso2.extension.siddhi.execution.json.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
