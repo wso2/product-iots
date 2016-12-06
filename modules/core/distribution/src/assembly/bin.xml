@@ -852,6 +852,12 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>src/repository/conf/identity/application-authentication.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>src/repository/conf/identity/thrift-authentication.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
             <filtered>true</filtered>
