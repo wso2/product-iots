@@ -320,7 +320,7 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-        
+
         <!-- Copying Certificate management related dbscripts -->
         <fileSet>
             <directory>
@@ -886,8 +886,8 @@
             <fileMode>644</fileMode>
         </file>
 
-	<!-- Copy APILifeCycle.xml -->
-	<file>
+        <!-- Copy APILifeCycle.xml -->
+        <file>
             <source>src/repository/resources/lifecycles/APILifeCycle.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/lifecycles</outputDirectory>
             <fileMode>644</fileMode>
