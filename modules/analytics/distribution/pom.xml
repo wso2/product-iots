@@ -69,7 +69,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.carbon</groupId>
                                     <artifactId>wso2carbon-core</artifactId>
-                                    <version>${carbon.kernel.449.version}</version>
+                                    <version>${carbon.kernel.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>target</outputDirectory>
@@ -99,7 +99,7 @@
                                         <include name="${project.artifactId}-${project.version}.zip" />
                                     </fileset>
                                 </unzip>
-                                <copy todir="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components" overwrite="true">
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components" overwrite="true">
                                     <fileset dir="${tempdir}/${project.artifactId}-${project.version}/repository/components">
                                     </fileset>
                                 </copy>
@@ -116,20 +116,20 @@
                             <tasks>
                                 <!-- commenting "GetAllRolesOfUserEnabled" property to fix
                               https://wso2.org/jira/browse/IDENTITY-3489 -->
-                                <replace file="target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;" value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;" />
+                                <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;" value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;" />
                                 <!-- Move IS UI to configure menu -->
                                 <property name="tempdir2" value="target/identity-ui" />
                                 <mkdir dir="${tempdir2}" />
-                                <unzip src="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${identity.jar.version}.jar" dest="${tempdir2}" />
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${identity.jar.version}.jar" dest="${tempdir2}" />
                                 <replace file="${tempdir2}/META-INF/component.xml" token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
-                                <zip destfile="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${identity.jar.version}.jar" basedir="${tempdir2}" />
-                                <unzip src="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${identity.jar.version}.jar" dest="${tempdir3}" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.user.mgt.ui_${identity.jar.version}.jar" basedir="${tempdir2}" />
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${identity.jar.version}.jar" dest="${tempdir3}" />
                                 <replace file="${tempdir3}/META-INF/component.xml" token="&lt;parent-menu&gt;identity_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
-                                <zip destfile="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${identity.jar.version}.jar" basedir="${tempdir3}" />
-                                <unzip src="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${identity.jar.version}.jar" dest="${tempdir4}" />
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.identity.user.store.configuration.ui_${identity.jar.version}.jar" basedir="${tempdir3}" />
+                                <unzip src="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${identity.jar.version}.jar" dest="${tempdir4}" />
                                 <replace file="${tempdir4}/META-INF/component.xml" token="&lt;parent-menu&gt;manage_menu&lt;/parent-menu&gt;" value="&lt;parent-menu&gt;configure_menu&lt;/parent-menu&gt;" />
-                                <zip destfile="target/wso2carbon-core-${carbon.kernel.449.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${identity.jar.version}.jar" basedir="${tempdir4}" />
-                                <concat destfile="target/wso2carbon-core-${carbon.kernel.449.version}/repository/conf/etc/logging-bridge.properties" append="true" fixlastline="true">org.restlet.level=SEVERE
+                                <zip destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/components/plugins/org.wso2.carbon.security.mgt.ui_${identity.jar.version}.jar" basedir="${tempdir4}" />
+                                <concat destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-bridge.properties" append="true" fixlastline="true">org.restlet.level=SEVERE
                                 </concat>
                                 <delete dir="${tempdir4}" />
                                 <delete dir="${tempdir3}" />
@@ -149,7 +149,7 @@
                                 <delete dir="target/archive-tmp" />
                                 <delete dir="target/dependency-maven-plugin-markers" />
                                 <delete dir="target/maven-archiver" />
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.449.version}" />
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
                                 <delete file="target/${project.artifactId}-${project.version}.jar" />
                                 <delete dir="target/sources" />
                                 <delete dir="target/site" />
