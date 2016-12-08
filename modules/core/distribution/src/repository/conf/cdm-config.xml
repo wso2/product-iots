@@ -45,23 +45,9 @@
         <MinRetriesToMarkInactive>20</MinRetriesToMarkInactive>
     </PolicyConfiguration>
     <TaskConfiguration>
-        <Enable>false</Enable>
-        <Frequency>600000</Frequency>
+        <Enable>true</Enable>
+        <Frequency>60000</Frequency>
         <TaskClass>org.wso2.carbon.device.mgt.core.task.impl.DeviceDetailsRetrieverTask</TaskClass>
-        <Operations>
-            <Operation>
-                <Name>DEVICE_INFO</Name>
-                <RecurrentTimes>1</RecurrentTimes>
-            </Operation>
-            <Operation>
-                <Name>APPLICATION_LIST</Name>
-                <RecurrentTimes>5</RecurrentTimes>
-            </Operation>
-            <Operation>
-                <Name>DEVICE_LOCATION</Name>
-                <RecurrentTimes>1</RecurrentTimes>
-            </Operation>
-        </Operations>
     </TaskConfiguration>
     <!-- Default Page size configuration for paginated DM APIs-->
     <PaginationConfiguration>
