@@ -46,7 +46,7 @@
     </PolicyConfiguration>
     <TaskConfiguration>
         <Enable>true</Enable>
-        <Frequency>30000</Frequency>
+        <Frequency>60000</Frequency>
         <TaskClass>org.wso2.carbon.device.mgt.core.task.impl.DeviceDetailsRetrieverTask</TaskClass>
     </TaskConfiguration>
     <!-- Default Page size configuration for paginated DM APIs-->
