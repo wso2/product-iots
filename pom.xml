@@ -1474,7 +1474,6 @@
 
         <!--Carbon kernel versions-->
         <carbon.kernel.version>4.4.10</carbon.kernel.version>
-        <carbon.kernel.449.version>4.4.9</carbon.kernel.449.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
@@ -1542,14 +1541,14 @@
         <carbon.governance.version>4.6.5</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>2.0.3</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.4-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>1.0.0-SNAPSHOT</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>3.0.3</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.0.5</carbon.api.mgt.version>
