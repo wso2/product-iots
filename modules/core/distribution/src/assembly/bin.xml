@@ -764,6 +764,10 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
         </file>
         <file>
+            <source>src/repository/conf/security/Owasp.CsrfGuard.dashboard.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
+        </file>
+        <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
