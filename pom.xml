@@ -1275,33 +1275,13 @@
                 <version>${servlet-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.stratos.mb.dashboard.ui</artifactId>
-                <version>${product.iot.broker.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
                 <version>${carbon.ui.menu.stratos.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.stratos.mb.deployment</artifactId>
-                <version>${product.iot.broker.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.stratos.mb.login.ui</artifactId>
-                <version>${product.iot.broker.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.broker.styles</artifactId>
-                <version>${product.iot.broker.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.stratos.mb.styles</artifactId>
                 <version>${product.iot.broker.version}</version>
             </dependency>
             <!--Dependencies for integration tests  -->
