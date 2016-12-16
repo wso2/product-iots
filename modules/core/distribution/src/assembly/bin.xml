@@ -113,6 +113,7 @@
                 <exclude>**/conf/log4j.properties</exclude>
                 <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/repository/components/plugins/httpclient_4.3.2.wso2v1.jar</exclude>
+                <exclude>**/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -701,6 +702,11 @@
     </dependencySets>
 
     <files>
+        <file>
+            <source>src/repository/conf/tomcat/carbon/WEB-INF/web.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat/carbon/WEB-INF</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
         <file>
             <source>src/repository/bin/wso2server.sh</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
