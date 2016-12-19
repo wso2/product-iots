@@ -104,9 +104,6 @@
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.feature:${carbon.registry.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ui.menu.feature:${carbon.registry.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.resource.properties.feature:${carbon.registry.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -117,9 +114,6 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.messaging:org.wso2.carbon.andes.feature:${carbon.messaging.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.tenant.mgt.common.feature:${carbon.commons.version}
@@ -137,16 +131,10 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${identity.carbon.auth.saml2.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${identity.carbon.auth.saml2.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.user.mgt.feature:${carbon.identity.framework.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.feature:${carbon.identity.framework.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.core.ui.feature:${carbon.identity.framework.version}
                                 </featureArtifactDef>
                                 <!--carbon core features -->
                                 <featureArtifactDef>
@@ -160,13 +148,6 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.metrics:org.wso2.carbon.metrics.feature:${carbon.metrics.version}
-                                </featureArtifactDef>
-                                <!-- mb styles -->
-                                <featureArtifactDef>
-                                    org.wso2.mb:org.wso2.mb.styles.feature:${product.mb.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.mb:org.wso2.stratos.mb.dashboard.ui.feature:${product.mb.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.ciphertool:org.wso2.ciphertool.feature:${cipher.tool.version}
@@ -233,10 +214,6 @@
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group
                                     </id>
                                     <version>${carbon.registry.version}</version>
@@ -244,10 +221,6 @@
                                 <feature>
                                     <id>org.wso2.carbon.wsdl.tools.feature.group</id>
                                     <version>${carbon.commons.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.registry.core.ui.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.feature.group</id>
@@ -264,10 +237,6 @@
                                 </feature>
                                 <!-- multitenancy feature groups -->
                                 <feature>
-                                    <id>org.wso2.carbon.tenant.common.feature.group</id>
-                                    <version>${carbon.multitenancy.version}</version>
-                                </feature>
-                                <feature>
                                     <id>
                                         org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group
                                     </id>
@@ -282,21 +251,11 @@
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>
-                                        org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group
-                                    </id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
                                     <version>${carbon.identity.framework.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.identity.core.ui.feature.group</id>
                                     <version>${carbon.identity.framework.version}</version>
                                 </feature>
                                 <feature>
@@ -306,15 +265,6 @@
                                 <feature>
                                     <id>org.wso2.carbon.metrics.feature.group</id>
                                     <version>${carbon.metrics.version}</version>
-                                </feature>
-                                <!-- mb style -->
-                                <feature>
-                                    <id>org.wso2.stratos.mb.dashboard.ui.feature.group</id>
-                                    <version>${product.mb.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.mb.styles.feature.group</id>
-                                    <version>${product.mb.version}</version>
                                 </feature>
                                 <!--cipher tool-->
                                 <feature>
