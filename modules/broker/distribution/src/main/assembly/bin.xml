@@ -210,6 +210,7 @@
             </outputDirectory>
             <excludes>
                 <exclude>**/broker.xml</exclude>
+                <exclude>tomcat/carbon/WEB-INF/web.xml</exclude>
                 <exclude>**/axis2.xml</exclude>
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/cipher-text.properties</exclude>
@@ -350,6 +351,12 @@
             <source>src/main/conf/carbon.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/main/conf/web.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat/carbon/WEB-INF/</outputDirectory>
             <filtered>true</filtered>
         </file>
         <file>
