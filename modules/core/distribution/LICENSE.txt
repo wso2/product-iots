@@ -704,7 +704,7 @@ org.wso2.carbon.server.admin_4.4.3.jar                                          
 org.wso2.carbon.service.mgt_4.6.0.jar                                           bundle         apache2   6318      
 org.wso2.carbon.siddhi.metrics.core_2.0.13.alpha.jar                            bundle         apache2   7889      
 org.wso2.carbon.siddhi.tryit.ui_2.0.13.alpha.jar                                bundle         apache2   7888      
-org.wso2.carbon.simple.policy.decision.point_1.1.0.SNAPSHOT.jar                 bundle         apache2   7887      
+org.wso2.carbon.policy.decision.point_1.1.0.SNAPSHOT.jar                        bundle         apache2   7887
 org.wso2.carbon.social.core_1.4.1.jar                                           bundle         apache2   6316      
 org.wso2.carbon.social.db.adapter_1.4.1.jar                                     bundle         apache2   6315      
 org.wso2.carbon.social.sql_1.4.1.jar                                            bundle         apache2   6314      
