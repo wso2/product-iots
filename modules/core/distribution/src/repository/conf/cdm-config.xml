@@ -43,6 +43,10 @@
         <MaxRetries>5</MaxRetries>
         <MinRetriesToMarkUnreachable>8</MinRetriesToMarkUnreachable>
         <MinRetriesToMarkInactive>20</MinRetriesToMarkInactive>
+        <!--Set the policy evaluation point name (Simple/Merged)-->
+        <!--Simple -  Simple policy evaluation point-->
+        <!--Merged -  Merged policy evaluation point -->
+        <PolicyEvaluationPoint>Simple</PolicyEvaluationPoint>
     </PolicyConfiguration>
     <TaskConfiguration>
         <Enable>true</Enable>
