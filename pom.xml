@@ -1641,7 +1641,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.8-SNAPSHOT</appmgt.feature.version>
+        <appmgt.feature.version>1.2.9</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
