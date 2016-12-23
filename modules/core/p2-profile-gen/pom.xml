@@ -258,69 +258,69 @@
 
                                 <!-- Identity Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.security.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.um.ws.service.feature:${identity.user.ws.version}
+                                    org.wso2.carbon.identity.user.ws:org.wso2.carbon.um.ws.service.feature:${identity.user.ws.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.oauth.feature:${identity.inbound.auth.oauth.version}
+                                    org.wso2.carbon.identity.inbound.auth.oauth2:org.wso2.carbon.identity.oauth.feature:${identity.inbound.auth.oauth.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.provider.server.feature:${identity.inbound.auth.openid.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.thrift.authentication.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.thrift.authentication.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.core.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.core.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.idp.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.idp.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <!-- SSO -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.authenticator.basicauth.server.feature:${identity.local.auth.basicauth.version}
+                                    org.wso2.carbon.identity.application.auth.basic:org.wso2.carbon.identity.application.authenticator.basicauth.server.feature:${identity.local.auth.basicauth.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.authentication.framework.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.application.authentication.framework.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${identity.carbon.auth.saml2.version}
+                                    org.wso2.carbon.identity.carbon.auth.saml2:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${identity.carbon.auth.saml2.version.iotcore}
                                 </featureArtifactDef>
                                 <feaureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${identity.inbound.auth.saml.version}
+                                    org.wso2.carbon.identity.inbound.auth.saml2:org.wso2.carbon.identity.sso.saml.feature:${identity.inbound.auth.saml.version.iotcore}
                                 </feaureArtifactDef>
                                 <!-- SSO Fix-->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.user.profile.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.user.profile.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.application.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.claim.mgt.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.claim.mgt.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.claim.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.claim.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.oauth.ui.feature:${identity.inbound.auth.oauth.version}
+                                    org.wso2.carbon.identity.inbound.auth.oauth2:org.wso2.carbon.identity.oauth.ui.feature:${identity.inbound.auth.oauth.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.notification.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.notification.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.user.mgt.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.user.mgt.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.directory.service.mgr.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.directory.service.mgr.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.user.registration.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.user.registration.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.xacml.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.xacml.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                  <!-- Authenticators -->
                                 <featureArtifactDef>
@@ -330,49 +330,59 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.application.authenticator.requestpath.oauth.server.feature:${identity.outbound.auth.requestpath.oauth.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.authenticator.basicauth.server.feature:${identity.local.auth.basicauth.version}
+                                    org.wso2.carbon.identity.application.auth.basic:org.wso2.carbon.identity.application.authenticator.basicauth.server.feature:${identity.local.auth.basicauth.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.authenticator.samlsso.server.feature:${identity.outbound.auth.samlsso.version}
+                                    org.wso2.carbon.identity.outbound.auth.saml2:org.wso2.carbon.identity.application.authenticator.samlsso.server.feature:${identity.outbound.auth.samlsso.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${identity.carbon.auth.saml2.version}
+                                    org.wso2.carbon.identity.carbon.auth.saml2:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${identity.carbon.auth.saml2.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.thrift.authentication.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.thrift.authentication.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.inbound.metadata.saml2.server.feature:0.1.1
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.sp.metadata.saml2.server.feature:0.1.3
+                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.identity.framework:org.wso2.carbon.identity.base:${carbon.identity.framework.version.iotcore}-->
+                                <!--</featureArtifactDef>-->
+
                                 <!-- End of Identity Features -->
 
                                 <!-- Registry Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.core.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.core.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ui.menu.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ui.menu.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.resource.properties.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.resource.properties.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.associations.dependencies.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.associations.dependencies.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ws.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ws.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ui.menu.governance.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.ui.menu.governance.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.task.server.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.task.server.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
 
                                 <!-- Governance Features -->
@@ -480,6 +490,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.mediation:org.wso2.carbon.mediation.ui.feature:${carbon.mediation.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.mediation:org.wso2.carbon.mediator.cache.feature:${carbon.mediation.version}
+                                </featureArtifactDef>
                                 <!-- End of Mediation Features -->
 
                                 <!-- App Manager features-->
@@ -524,33 +537,33 @@
                                 <!-- Identity Features -->
                                 <!-- SSO -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${identity.carbon.auth.saml2.version}
+                                    org.wso2.carbon.identity.carbon.auth.saml2:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${identity.carbon.auth.saml2.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${identity.carbon.auth.saml2.version}
+                                    org.wso2.carbon.identity.carbon.auth.saml2:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${identity.carbon.auth.saml2.version.iotcore}
                                 </featureArtifactDef>
                                 <!-- SSO Fix-->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.application.mgt.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.application.mgt.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.idp.mgt.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.idp.mgt.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <!-- Directory server related features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.directory.service.mgr.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.directory.service.mgr.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
                                 <!-- End of SSO Fixes -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.user.registration.server.feature:${carbon.identity.framework.version}
+                                    org.wso2.carbon.identity.framework:org.wso2.carbon.identity.user.registration.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
 
                                 <!-- Registry features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.server.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.ui.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.community.features.ui.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
                                 <!-- End of Registry Features -->
 
@@ -584,7 +597,7 @@
 
                                 <!-- Registry task feature and dependencies -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.task.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.task.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
 
                                 <!-- Carbon Deployment Features -->
@@ -598,7 +611,7 @@
                                 <!--+++++++++++++++++++++++++++++++++++++++++++++-->
 
                                 <featureArtifactDef>
-                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version}
+                                    org.wso2.carbon.registry:org.wso2.carbon.registry.contentsearch.server.feature:${carbon.registry.version.iotcore}
                                 </featureArtifactDef>
 
                                 <featureArtifactDef>
@@ -771,6 +784,14 @@
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
                                 <!-- IoTServer Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.inbound.metadata.saml2.server.feature.group</id>
+                                    <version>0.1.1</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.sp.metadata.saml2.server.feature.group</id>
+                                    <version>0.1.3</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.iot.core.styles.feature.group</id>
                                     <version>${product.iot.version}</version>
@@ -1037,7 +1058,7 @@
                                 <!-- Identity Features -->
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.feature.group</id>
@@ -1045,7 +1066,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.server.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
@@ -1053,79 +1074,79 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.thrift.authentication.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.idp.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.server.feature.group
                                     </id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <!-- SSO Features -->
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
-                                    <version>${identity.local.auth.basicauth.version}</version>
+                                    <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
-                                    <version>${identity.inbound.auth.saml.version}</version>
+                                    <version>${identity.inbound.auth.saml.version.iotcore}</version>
                                 </feature>
                                 <!-- SSO Fix-->
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.claim.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.claim.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.ui.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.notification.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
 
                                 <feature>
                                     <id>org.wso2.carbon.identity.xacml.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
-                                    <version>${identity.local.auth.basicauth.version}</version>
+                                    <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.requestpath.basicauth.server.feature.group</id>
@@ -1146,39 +1167,39 @@
                                 <!-- Registry Features -->
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.task.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <!-- End of Registry Features -->
 
@@ -1239,6 +1260,10 @@
                                     <id>org.wso2.carbon.mediation.ui.feature.group</id>
                                     <version>${carbon.mediation.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.mediator.cache.feature.group</id>
+                                    <version>${carbon.mediation.version}</version>
+                                </feature>
                                 <!-- End of Mediation Features -->
 
                                 <!-- Cipher tool feature -->
@@ -1290,43 +1315,43 @@
                                 <!-- Identity Features -->
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <!-- SSO Fix-->
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.idp.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <!-- End of Identity Features -->
 
                                 <!-- Registry Features -->
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.ui.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <!-- End of Registry Features -->
 
@@ -1572,11 +1597,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
@@ -1588,23 +1613,23 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediators.server.feature.group</id>
@@ -1620,7 +1645,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
@@ -1628,15 +1653,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
@@ -1644,11 +1669,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.extensions.feature.group</id>
@@ -1668,11 +1693,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.server.feature.group</id>
@@ -1684,7 +1709,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
 
                                 <feature>
@@ -1705,11 +1730,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.mgt.common.server.feature.group</id>
@@ -1745,7 +1770,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
 
                                 <!--required for context.xml-->
@@ -1875,15 +1900,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.notification.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.xacml.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.thrift.authentication.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
@@ -1904,7 +1929,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.mgt.common.server.feature.group</id>
@@ -1912,7 +1937,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
-                                    <version>${identity.local.auth.basicauth.version}</version>
+                                    <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
@@ -1924,7 +1949,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
@@ -2004,11 +2029,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
@@ -2022,23 +2047,23 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediators.server.feature.group</id>
@@ -2058,19 +2083,19 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
 
                                 <feature>
@@ -2079,11 +2104,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.extensions.feature.group</id>
@@ -2103,11 +2128,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.server.feature.group</id>
@@ -2119,15 +2144,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.core.feature.group</id>
@@ -2147,11 +2172,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.idp.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
@@ -2175,7 +2200,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
@@ -2414,15 +2439,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.notification.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.xacml.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.thrift.authentication.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
@@ -2430,11 +2455,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
@@ -2532,11 +2557,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
@@ -2551,23 +2576,23 @@
 
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediators.server.feature.group</id>
@@ -2583,11 +2608,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
@@ -2595,11 +2620,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
-                                    <version>${identity.local.auth.basicauth.version}</version>
+                                    <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
@@ -2608,7 +2633,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.mgt.common.server.feature.group</id>
@@ -2616,7 +2641,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
@@ -2624,11 +2649,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.feature.group</id>
@@ -2688,11 +2713,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.server.feature.group</id>
@@ -2704,19 +2729,19 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.claim.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
@@ -2724,7 +2749,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.forum.server.feature.group</id>
@@ -2997,15 +3022,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.notification.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.xacml.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.thrift.authentication.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
@@ -3013,11 +3038,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
@@ -3106,11 +3131,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.security.mgt.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
@@ -3122,23 +3147,23 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.governance.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.resource.properties.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.mediators.server.feature.group</id>
@@ -3154,11 +3179,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.associations.dependencies.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
@@ -3166,11 +3191,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${identity.inbound.auth.oauth.version}</version>
+                                    <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
-                                    <version>${identity.local.auth.basicauth.version}</version>
+                                    <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
@@ -3179,7 +3204,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.tenant.mgt.common.server.feature.group</id>
@@ -3187,7 +3212,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.server.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
@@ -3195,11 +3220,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.community.features.server.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ws.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.feature.group</id>
@@ -3259,11 +3284,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.um.ws.service.server.feature.group</id>
@@ -3275,19 +3300,19 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.directory.service.mgr.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.claim.mgt.feature.group</id>
-                                    <version>${carbon.identity.framework.version}</version>
+                                    <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
-                                    <version>${identity.carbon.auth.saml2.version}</version>
+                                    <version>${identity.carbon.auth.saml2.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
@@ -3295,7 +3320,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.contentsearch.feature.group</id>
-                                    <version>${carbon.registry.version}</version>
+                                    <version>${carbon.registry.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.forum.server.feature.group</id>

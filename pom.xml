@@ -825,19 +825,19 @@
                 <version>${joda-time.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity</groupId>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
                 <artifactId>org.wso2.carbon.identity.oauth.stub</artifactId>
-                <version>${carbon.identity.version}</version>
+                <version>${identity.inbound.auth.oauth.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity</groupId>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
                 <artifactId>org.wso2.carbon.identity.oauth.dto</artifactId>
-                <version>${carbon.identity.version}</version>
+                <version>${identity.inbound.auth.oauth.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity</groupId>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
                 <artifactId>org.wso2.carbon.identity.oauth</artifactId>
-                <version>${carbon.identity.version}</version>
+                <version>${identity.inbound.auth.oauth.version}</version>
             </dependency>
             <!-- Tomcat dependencies -->
             <dependency>
@@ -1496,18 +1496,23 @@
 
         <!-- Carbon Identity -->
         <carbon.identity.framework.version>5.2.0</carbon.identity.framework.version>
+        <carbon.identity.framework.version.iotcore>5.6.89</carbon.identity.framework.version.iotcore>
         <carbon.identity.framework.version.range>[5.2.0, 6.0.0)</carbon.identity.framework.version.range>
         <identity.local.auth.basicauth.version>5.1.1</identity.local.auth.basicauth.version>
+        <identity.local.auth.basicauth.version.iotcore>5.2.4</identity.local.auth.basicauth.version.iotcore>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
         <identity.inbound.auth.saml.version>5.1.1</identity.inbound.auth.saml.version>
+        <identity.inbound.auth.saml.version.iotcore>5.2.14</identity.inbound.auth.saml.version.iotcore>
         <identity.carbon.auth.saml2.version>5.1.3</identity.carbon.auth.saml2.version>
+        <identity.carbon.auth.saml2.version.iotcore>5.1.6</identity.carbon.auth.saml2.version.iotcore>
         <identity.inbound.auth.oauth.version>5.1.2</identity.inbound.auth.oauth.version>
+        <identity.inbound.auth.oauth.version.iotcore>5.2.33</identity.inbound.auth.oauth.version.iotcore>
         <identity.carbon.auth.mutual.ssl.version>5.1.1</identity.carbon.auth.mutual.ssl.version>
-        <identity.user.ws.version>5.1.2</identity.user.ws.version>
-        <identity.outbound.auth.requestpath.basicauth.version>5.1.1
-        </identity.outbound.auth.requestpath.basicauth.version>
+        <identity.user.ws.version>5.1.3</identity.user.ws.version>
+        <identity.outbound.auth.requestpath.basicauth.version>5.1.1</identity.outbound.auth.requestpath.basicauth.version>
         <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
-        <identity.outbound.auth.samlsso.version>5.1.2</identity.outbound.auth.samlsso.version>
+        <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
+        <identity.metadata.saml2>0.1.3</identity.metadata.saml2>
 
         <!--JWT grant type extension feature-->
         <identity.jwt.extension.version>1.0.2</identity.jwt.extension.version>
@@ -1517,8 +1522,9 @@
 
         <!-- Carbon Registry -->
         <carbon.registry.version>4.5.8</carbon.registry.version>
+        <carbon.registry.version.iotcore>4.6.0</carbon.registry.version.iotcore>
         <!-- Carbon Governance -->
-        <carbon.governance.version>4.6.5</carbon.governance.version>
+        <carbon.governance.version>4.7.0</carbon.governance.version>
 
         <!-- Carbon Device Management -->
         <carbon.device.mgt.version>2.0.4-SNAPSHOT</carbon.device.mgt.version>
@@ -1531,11 +1537,11 @@
         <carbon.device.mgt.plugin.version>3.0.4-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.0.5</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.2</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(5.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
-        <carbon.mediation.version>4.6.6</carbon.mediation.version>
+        <carbon.mediation.version>4.6.9</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.1.5</carbon.analytics.common.version>
@@ -1635,7 +1641,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.8</appmgt.feature.version>
+        <appmgt.feature.version>1.2.9</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
