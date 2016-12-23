@@ -306,6 +306,7 @@ do
     -Dcom.ibm.cacheLocalHost=true \
     -DworkerNode=false \
     -Dorg.wso2.ignoreHostnameVerification=true \
+    -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
