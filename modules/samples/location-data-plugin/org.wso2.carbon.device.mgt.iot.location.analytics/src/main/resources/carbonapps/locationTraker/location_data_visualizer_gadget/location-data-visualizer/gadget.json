@@ -1,0 +1,23 @@
+{
+    "id": "location-data-visualizer",
+    "title": "Location Data Visuializer",
+    "type": "gadget",
+    "thumbnail": "gadget/location-data-visualizer/index.jpg",
+    "settings": {
+        "personalize": true
+    },
+    "data": {
+        "url": "gadget/location-data-visualizer/index.xml"
+    },
+    "description": "Allows to view and select US states",
+    "notify": {
+        "state": {
+            "type": "address",
+            "description": "This notifies selected state"
+        },
+        "cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of state selection"
+        }
+    }
+}

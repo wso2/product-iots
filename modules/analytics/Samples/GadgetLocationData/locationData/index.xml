@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<Module>
+    <ModulePrefs title="Location Data" description="Location Data">
+        <Require feature="dynamic-height" />
+        <Require feature="dynamic-width" />
+        <Require feature="wso2-gadgets-identity" />
+        <Require feature="wso2-gadgets-state" />
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <html>
+<meta charset="utf-8">
+<head>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="lib/js/jquery.js"></script>
+<body>
+<link rel="stylesheet" href="lib/css/bootstrap.css">
+<script src="lib/js/bootstrap.js"></script>
+<script src="lib/js/d3.js"></script>
+<script src="js/RestCaller.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/traffic.js"></script>
+<script src="lib/js/d3tip.js"></script>
+
+<script>
+    var imageX=-30;
+    var imageY=-5
+    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+            width = 1400 - margin.left - margin.right,
+            height = 744 - margin.top - margin.bottom;
+
+    var x = d3.scale.linear()
+            .range([0, width]);
+
+    var y = d3.scale.linear()
+            .range([0,height]);
+    loadImage(imageX,imageY);
+
+    var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    loadImage(imageX,imageY);
+    getDimension();
+    GetInitStartTime();
+
+    GetEndTime();
+</script>
+<div class="well">
+    <div  class="container">
+            <div class="col-sm-4">
+                <h3 class="text-primary">Select Time</h3>
+                <input class="slider form-control input-sm" type="range" id="valueSlider" value="" step="1000" min="01170000853070" max="01172715042247" oninput="outputUpdate(value)">
+                <output for=value id="output" hidden="true"></output>
+                <output id="calenderDate"></output>
+                <div hidden="true">
+                    <label for="stt">Starting Time</label>
+                    <input id="stt" name="stt" onchange="show()">
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <h3 class="text-primary">Select Duration</h3>
+                <select class="form-control input-sm-4" id="gap" name="gap" onclick="changeStep()">
+                    <option value=1000>1s</option>
+                    <option value=5000>5s</option>
+                    <option value=15000>15s</option>
+                    <option value=30000>30s</option>
+                    <option value=60000>1min</option>
+                    <option value=300000>5min</option>
+                    <option value=600000>10min</option>
+                    <option value=3600000>1hour</option>
+                    <option value=7200000>2hour</option>
+                    <option value=86400000>1day</option>
+                </select>
+
+                </br>
+
+                    <button class="btn btn-default btn-space" onclick="show() "style="align-content: center;width: 110px;height: 40px" >Show</button>
+                    <button class="btn btn-default btn-space" onclick="showPrevious()"style="align-content: center;width: 110px;height: 40px">Previous</button>
+                    <button class="btn btn-default btn-space" onclick="showNext()"style="align-content: center;width: 110px;height: 40px">Next</button>
+                    <button class="btn btn-primary btn-space" onclick="play()"style="align-content: center;width: 110px;height: 40px">Play</button>
+                    <button class="btn btn-default btn-space" onclick="showDensity()"style="align-content: center;width: 110px;height: 40px">Show Density</button>
+                    <button class="btn btn-default btn-space" onclick="display()"style="align-content: center;width: 110px;height: 40px">Reset</button>
+            </div>
+
+    </div>
+</div>
+
+
+<div class="well">
+    <div class="container">
+        <div class="col-sm-4">
+            <div class="container">
+                <h3 class="text-primary">Typical Scenario</h3>
+                <select class="form-control input-sm-4  element-space" id="time" name="time" style="width: 200px" >
+                    <option value=00>0AM</option>
+                    <option value=01>1AM</option>
+                    <option value=02>2AM</option>
+                    <option value=03>3AM</option>
+                    <option value=04>4AM</option>
+                    <option value=05>5AM</option>
+                    <option value=06>6AM</option>
+                    <option value=07>7AM</option>
+                    <option value=08>8AM</option>
+                    <option value=09>9AM</option>
+                    <option value=10>10AM</option>
+                    <option value=11>11AM</option>
+                    <option value=12>12AM</option>
+                    <option value=13>1PM</option>
+                    <option value=14>2PM</option>
+                    <option value=15>3PM</option>
+                    <option value=16>4PM</option>
+                    <option value=17>5PM</option>
+                    <option value=18>6PM</option>
+                    <option value=19>7PM</option>
+                    <option value=20>8PM</option>
+                    <option value=21>9PM</option>
+                    <option value=22>10PM</option>
+                    <option value=23>11PM</option>
+                </select>
+                <select class="form-control input-sm-4  element-space" id="day" name="day" style="width: 200px" >
+                    <option value=mon>Monday</option>
+                    <option value=tue>Tuesday</option>
+                    <option value=wed>Wednesday</option>
+                    <option value=thu>Thursday</option>
+                    <option value=fri>Friday</option>
+                    <option value=sat>Saturday</option>
+                    <option value=sun>Sunday</option>
+                </select>
+                <button class="btn btn-primary element-space" onclick="showScene()"style="align-content: center;width: 110px;height: 40px" >View Scenario</button>
+            </div>
+    </div>
+        <div class="col-sm-4 " >
+            <h3 class="text-primary">Upload Data file</h3>
+            <input class="form-control input-sm-4 element-space" id="fileupload" type="file" />
+            <Button  class="btn btn-primary element-space"  onclick="sendFile()" id="submit" style="align-content: center;width: 110px;height: 40px">Submit</Button>
+        </div>
+        <div class="col-sm-4 " >
+            <h3 class="text-primary">Change Image</h3>
+            <button class="btn btn-default btn-space" onclick="changeImage(0,1)"style="align-content: center;width: 110px;height: 40px" >Up</button>
+            <button class="btn btn-default btn-space" onclick="changeImage(0,-1)"style="align-content: center;width: 110px;height: 40px">Down</button>
+            <button class="btn btn-default btn-space" onclick="changeImage(1,0)"style="align-content: center;width: 110px;height: 40px">Left</button>
+            <button class="btn btn-default btn-space" onclick="changeImage(-1,0)"style="align-content: center;width: 110px;height: 40px">Right</button>
+            <button class="btn btn-default btn-space" onclick="showDensity()"style="align-content: center;width: 110px;height: 40px">Show Density</button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade row-fluid" id="frequency_view" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 1000px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sensor Triggered Frequencies</h4>
+            </div>
+            <div id="modal_body" name="modal_body" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
+        ]]>
+    </Content>
+</Module>
