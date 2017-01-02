@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.wso2.iot</groupId>
 		<artifactId>wso2iot-core-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>3.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -168,7 +168,7 @@
 									<classpath refid="maven.compile.classpath" />
 									<classpath refid="maven.runtime.classpath" />
 
-									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql"/>
+									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql" />
 								</sql>
 								<echo message="##################### END ####################" />
 							</tasks>
@@ -196,7 +196,7 @@
 									<classpath refid="maven.compile.classpath" />
 									<classpath refid="maven.runtime.classpath" />
 
-									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt/h2.sql"/>
+									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt/h2.sql" />
 								</sql>
 								<echo message="##################### END ####################" />
 							</tasks>
@@ -351,8 +351,8 @@ d                                        <exclude name="**/shindig.properties" /
                         <phase>prepare-package</phase>
                         <configuration>
                             <tasks>
-            			<replace token= "PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" value="#PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/">                                 
-              			   <include name="entitlement.properties"/>
+            			<replace token="PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" value="#PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/">                                 
+              			   <include name="entitlement.properties" />
             			</replace>
                             </tasks>
                         </configuration>
