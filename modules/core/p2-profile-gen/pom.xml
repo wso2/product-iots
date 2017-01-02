@@ -345,10 +345,7 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.inbound.metadata.saml2.server.feature:0.1.1
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.sp.metadata.saml2.server.feature:0.1.3
+                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.sp.metadata.saml2.server.feature:${identity.metadata.saml2.version}
                                 </featureArtifactDef>
                                 <!--<featureArtifactDef>-->
                                     <!--org.wso2.carbon.identity.framework:org.wso2.carbon.identity.base:${carbon.identity.framework.version.iotcore}-->
@@ -785,12 +782,8 @@
                             <features>
                                 <!-- IoTServer Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.identity.inbound.metadata.saml2.server.feature.group</id>
-                                    <version>0.1.1</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.identity.sp.metadata.saml2.server.feature.group</id>
-                                    <version>0.1.3</version>
+                                    <version>${identity.metadata.saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.iot.core.styles.feature.group</id>
