@@ -588,6 +588,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.hostobjects.oidc.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.dcr.feature:${carbon.api.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of API Management Features -->
 
                                 <!-- TCP Transport -->
@@ -993,6 +996,10 @@
                                 <!-- API Management Features -->
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.core.feature.group</id>
+                                    <version>${carbon.api.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
                                 <!-- API Manager Publisher and Store Features -->
