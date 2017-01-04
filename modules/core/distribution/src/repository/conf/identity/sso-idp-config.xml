@@ -100,5 +100,21 @@
                 <Recipient>https://localhost:9443/oauth2/token</Recipient>
             </RecipientList>
         </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>analyticsportal</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9445/portal/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9445/portal/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <EnableRecipients>true</EnableRecipients>
+            <AudiencesList>
+                <Audience>https://localhost:9443/oauth2/token</Audience>
+            </AudiencesList>
+            <RecipientList>
+                <Recipient>https://localhost:9443/oauth2/token</Recipient>
+            </RecipientList>
+        </ServiceProvider>
     </ServiceProviders>
 </SSOIdentityProviderConfig>
