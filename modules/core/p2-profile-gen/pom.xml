@@ -49,7 +49,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.carbon</groupId>
                                     <artifactId>wso2carbon-core</artifactId>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>target</outputDirectory>
@@ -514,13 +514,13 @@
 
                                 <!--********************************************-->
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.core.feature:${carbon.kernel.version}
+                                    org.wso2.carbon:org.wso2.carbon.core.feature:${carbon.kernel.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.core.runtime.feature:${carbon.kernel.version}
+                                    org.wso2.carbon:org.wso2.carbon.core.runtime.feature:${carbon.kernel.version.iotcore}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.kernel.version}
+                                    org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.kernel.version.iotcore}
                                 </featureArtifactDef>
 
                                 <!-- Carbon Commons Features -->
@@ -718,7 +718,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <targetPath>
-                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </targetPath>
                             <profile>http-gateway</profile>
                         </configuration>
@@ -734,7 +734,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <targetPath>
-                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </targetPath>
                             <profile>device-key-manager</profile>
                         </configuration>
@@ -750,7 +750,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <targetPath>
-                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </targetPath>
                             <profile>devicetype-publisher</profile>
                         </configuration>
@@ -766,7 +766,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <targetPath>
-                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                file:${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </targetPath>
                             <profile>devicetype-worker</profile>
                         </configuration>
@@ -782,7 +782,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
-                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
@@ -1291,15 +1291,15 @@
                                 <!--********************************************-->
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.ui.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
 
                                 <!-- Carbon Deployment Features -->
@@ -1487,7 +1487,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
-                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
@@ -1527,15 +1527,15 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.ntask.core.feature.group</id>
@@ -1857,7 +1857,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
-                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
@@ -1899,7 +1899,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
@@ -1952,7 +1952,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.server.feature.group</id>
@@ -1960,11 +1960,11 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.ntask.core.feature.group</id>
@@ -2303,7 +2303,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
-                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
@@ -2438,7 +2438,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
@@ -2458,7 +2458,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
@@ -2470,19 +2470,19 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.ui.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
@@ -2895,7 +2895,7 @@
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
-                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
+                                ${basedir}/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
@@ -3021,7 +3021,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.apache.axis2.transport.mail.feature.group</id>
@@ -3041,7 +3041,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.common.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.user.mgt.feature.group</id>
@@ -3053,19 +3053,19 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.ui.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
+                                    <version>${carbon.kernel.version.iotcore}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
@@ -3457,7 +3457,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true" dir="target/wso2carbon-core-${carbon.kernel.version}/repository/components">
+                                <replace token="false" value="true" dir="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components">
                                     <include name="**/bundles.info" />
                                 </replace>
                             </tasks>
