@@ -194,7 +194,7 @@
                                 </bundleDef>
                             </bundles>
                             <importFeatures>
-                                <importFeatureDef>org.wso2.carbon.core.server:${carbon.kernel.version}
+                                <importFeatureDef>org.wso2.carbon.core.server:${carbon.kernel.version.iotcore}
                                 </importFeatureDef>
                                 <importFeatureDef>org.wso2.carbon.device.mgt.server:${carbon.device.mgt.version}
                                 </importFeatureDef>
