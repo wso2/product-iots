@@ -65,7 +65,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.logging</artifactId>
-                <version>${carbon.kernel.version}</version>
+                <version>${carbon.kernel.version.iotcore}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.log4j.wso2</groupId>
@@ -143,7 +143,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.ndatasource.core</artifactId>
-                <version>${carbon.kernel.version}</version>
+                <version>${carbon.kernel.version.iotcore}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
@@ -208,7 +208,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
-                <version>${carbon.kernel.version}</version>
+                <version>${carbon.kernel.version.iotcore}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle.wso2</groupId>
@@ -363,7 +363,7 @@
 
 
     <properties>
-        <carbon.kernel.version>4.4.3</carbon.kernel.version>
+        <carbon.kernel.version.iotcore>4.4.3</carbon.kernel.version.iotcore>
 
         <!-- Carbon Device Management -->
         <carbon.device.mgt.version>1.2.6-SNAPSHOT</carbon.device.mgt.version>
