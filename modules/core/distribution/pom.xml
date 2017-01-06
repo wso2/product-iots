@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.wso2.iot</groupId>
 		<artifactId>wso2iot-core-parent</artifactId>
-		<version>3.0.1-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -288,7 +288,7 @@
 								<!--<unzip src="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" dest="${jardir}/shindig-common-${shindig.version}">
 									<patternset>
 										<exclude name="**/shindig.properties" />
-d                                        <exclude name="**/shindig.properties" />
+                                        <exclude name="**/shindig.properties" />
 									</patternset>
 								</unzip>
 								<copy file="src/repository/conf/shindig.properties" todir="${jardir}/shindig-common-${shindig.version}" />
@@ -298,10 +298,6 @@ d                                        <exclude name="**/shindig.properties" /
 									<fileset dir="target/shindig/WEB-INF/lib" includes="slf4j*" />
 								</delete>
 								<copy file="src/repository/resources/shindig/index.jsp" todir="target/shindig" />-->
-
-								<concat destfile="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/log4j.properties">
-									log4j.logger.net.sf.ehcache=ERROR
-								</concat>
 
 								<delete file="target/${project.artifactId}-${project.version}.zip" />
 								<delete dir="${tempdir}" />

@@ -23,7 +23,7 @@
     <groupId>org.wso2.iot</groupId>
     <artifactId>wso2iot-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>WSO2 IoT - Parent</name>
     <url>http://wso2.org</url>
     <description>WSO2 IoT Server</description>
@@ -1453,8 +1453,8 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version.iotcore>4.4.11</carbon.kernel.version.iotcore>
         <carbon.kernel.version>4.4.10</carbon.kernel.version>
+        <carbon.kernel.version.iotcore>4.4.11</carbon.kernel.version.iotcore>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
@@ -1514,6 +1514,7 @@
         <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
         <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
         <identity.metadata.saml2.version>1.0.0</identity.metadata.saml2.version>
+        <identity.inbound.metadata.saml2.version>0.1.1</identity.inbound.metadata.saml2.version>
 
         <!--JWT grant type extension feature-->
         <identity.jwt.extension.version>1.0.2</identity.jwt.extension.version>
@@ -1532,7 +1533,7 @@
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
-        <product.iot.version>3.0.1-SNAPSHOT</product.iot.version>
+        <product.iot.version>3.0.0-SNAPSHOT</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
         <carbon.device.mgt.plugin.version>3.0.5-SNAPSHOT</carbon.device.mgt.plugin.version>

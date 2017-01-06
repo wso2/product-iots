@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-core-parent</artifactId>
-        <version>3.0.1-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -343,6 +343,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.inbound.metadata.saml2.server.feature:0.1.1
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity.metadata.saml2:org.wso2.carbon.identity.sp.metadata.saml2.server.feature:${identity.metadata.saml2.version}
@@ -784,6 +787,10 @@
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
                                 <!-- IoTServer Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.identity.inbound.metadata.saml2.server.feature.group</id>
+                                    <version>0.1.1</version>
+                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.sp.metadata.saml2.server.feature.group</id>
                                     <version>${identity.metadata.saml2.version}</version>
