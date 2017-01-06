@@ -42,7 +42,7 @@ public class DeviceGroupsPage {
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
 
         if (!webDriverWait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.device.groups.view.header.xpath"))), "GROUPS"))) {
+                uiElementMapper.getElement("iot.device.groups.view.header.xpath"))), "GROUP"))) {
             throw new IllegalStateException("This is not the Groups page");
         }
     }

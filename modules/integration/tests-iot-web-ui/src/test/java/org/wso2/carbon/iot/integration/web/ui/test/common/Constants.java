@@ -69,12 +69,14 @@ public class Constants {
 
             public static final String USER_NAME_ERROR = "Please enter a username";
             public static final String PASSWORD_ERROR = "Please provide a password";
-            public static final String FAILED_ERROR = "Incorrect username or password.!";
+            public static final String FAILED_ERROR = "LOGIN\n"
+                    + "Login failed! Please recheck the username and password and try again.!\n" + "Username *\n"
+                    + "Password *\n" + "LOGIN\n" + "Create an account";
             public static final String SHORT_PASSWORD_ERROR = "Your password must be at least 3 characters long";
             public static final String WRONG_USER_NAME = "admnnn";
             public static final String WRONG_USER_PASSWORD = "admmmm";
             public static final String SHORT_PASSWORD = "ad";
-            public static final String PAGE_TITLE = "Login | IoT Server";
+            public static final String PAGE_TITLE = "Login | CDMF";
 
         }
 
