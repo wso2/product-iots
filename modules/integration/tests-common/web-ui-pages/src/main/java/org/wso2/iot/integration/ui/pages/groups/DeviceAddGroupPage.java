@@ -20,7 +20,10 @@ package org.wso2.iot.integration.ui.pages.groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 
 import java.io.IOException;
 
@@ -37,9 +40,9 @@ public class DeviceAddGroupPage {
     public DeviceAddGroupPage(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
+        WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
 
-        if (!driver.findElement(By.xpath
-                (uiElementMapper.getElement("iot.device.group.addNewGroup.xpath"))).getText().contains("ADD NEW GROUP")) {
+        if (!webDriverWait.until(ExpectedConditions.titleContains(uiElementMapper.getElement("cdmf.groups.page")))) {
             throw new IllegalStateException("This is not the Add Group page");
         }
     }

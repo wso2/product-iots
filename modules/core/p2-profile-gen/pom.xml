@@ -147,6 +147,9 @@
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.application.extension.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.handler.server.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.email.sender.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -901,6 +904,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.webapp.publisher.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.apimgt.handler.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1843,6 +1850,10 @@
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.apimgt.handler.server.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.version}</version>-->
+                                <!--</feature>-->
                                 <feature>
                                     <id>org.wso2.carbon.policy.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
