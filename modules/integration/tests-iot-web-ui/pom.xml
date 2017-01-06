@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-integration</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>3.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -62,7 +62,7 @@
                         <property>
                             <name>carbon.zip</name>
                             <value>
-                                ${basedir}/../../distribution/target/wso2iots-${project.version}.zip
+                                ${basedir}/../../distribution/target/wso2iot-${project.version}.zip
                             </value>
                         </property>
                         <property>
@@ -131,7 +131,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.wso2.iot</groupId>
-                                    <artifactId>wso2iots</artifactId>
+                                    <artifactId>wso2iot</artifactId>
                                     <version>${project.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
@@ -171,7 +171,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2iots-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -192,7 +192,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2iots-${project.version}/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -213,7 +213,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2iots-${project.version}/repository/conf/axis2/
+                                        ${basedir}/target/tobeCopied/wso2iot-${project.version}/repository/conf/axis2/
                                     </directory>
                                     <includes>
                                         <include>**/*.xml</include>
