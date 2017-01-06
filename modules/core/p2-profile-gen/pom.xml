@@ -182,6 +182,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.deployment:org.wso2.carbon.service.mgt.server.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.deployment:org.wso2.carbon.application.deployer.webapp.feature:${carbon.deployment.version}
+								</featureArtifactDef>
                                 <!-- End of Carbon Deployment Features -->
 
                                 <!-- Jaggery Features -->
@@ -501,6 +504,12 @@
                                 </featureArtifactDef>
                                 <!-- End of app manager feature-->
 
+								<!-- ************** START - Capp Management ********* -->
+								<featureArtifactDef>
+									org.wso2.carbon.commons:org.wso2.carbon.application.mgt.feature:${carbon.commons.version}
+								</featureArtifactDef>
+								<!-- ************** END - Capp Management ********* -->
+
                                 <!-- Cipher tools feature -->
 
                                 <featureArtifactDef>
@@ -533,6 +542,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.message.flows.feature:${carbon.commons.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.commons:org.wso2.carbon.ndatasource.capp.deployer.server.feature:${carbon.commons.version}
+								</featureArtifactDef>
 
                                 <!-- Identity Features -->
                                 <!-- SSO -->
@@ -941,6 +953,10 @@
                                     <id>org.wso2.carbon.service.mgt.server.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.application.deployer.webapp.feature.group</id>
+									<version>${carbon.deployment.version}</version>
+								</feature>
                                 <!-- End of Carbon Deployment Features -->
 
                                 <!-- Jaggery Features -->
@@ -1019,6 +1035,11 @@
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
                                 <!-- End of Carbon Analytics Common Features -->
+
+								<feature>
+									<id>org.wso2.carbon.application.mgt.feature.group</id>
+									<version>${carbon.commons.version}</version>
+								</feature>
 
                                 <!-- Carbon Commons Features -->
                                 <feature>
@@ -1314,6 +1335,10 @@
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.ndatasource.capp.deployer.server.feature.group</id>
+									<version>${carbon.commons.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.ntask.core.feature.group</id>
                                     <version>${carbon.commons.version}</version>
@@ -2497,6 +2522,10 @@
                                     <id>org.wso2.carbon.ntask.core.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.application.mgt.feature.group</id>
+									<version>${carbon.commons.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.logging.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
@@ -2778,6 +2807,10 @@
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.ndatasource.capp.deployer.server.feature.group</id>
+									<version>${carbon.commons.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.authenticator.oidc.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
@@ -2795,6 +2828,10 @@
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.application.deployer.webapp.feature.group</id>
+									<version>${carbon.deployment.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.webapp.publisher.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3349,6 +3386,10 @@
                                     <id>org.wso2.carbon.ndatasource.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.ndatasource.capp.deployer.server.feature.group</id>
+									<version>${carbon.commons.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.authenticator.oidc.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
@@ -3366,6 +3407,10 @@
                                     <id>org.wso2.carbon.webapp.mgt.feature.group</id>
                                     <version>${carbon.deployment.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.application.deployer.webapp.feature.group</id>
+									<version>${carbon.deployment.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.webapp.publisher.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
