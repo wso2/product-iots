@@ -24,7 +24,7 @@
         <!--
          Change this to edit wait time for test artifact deployment
         -->
-        <deploymentDelay>60000</deploymentDelay>
+        <deploymentDelay>300000</deploymentDelay>
         <!--
          Change this to standalone|platform|all to execute test on specific environment
         -->
@@ -172,7 +172,9 @@
                 </hosts>
                 <ports>
                     <port type="http">9763</port>
+                    <port type="https">9446</port>
                     <port type="https">9443</port>
+                    <port type="https">9445</port>
                 </ports>
 
                 <properties>
@@ -187,7 +189,9 @@
         <platformExecutionManager>
             <extentionClasses>
                 <class>
-                    <name>org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension</name>
+                    <name>org.wso2.carbon.iot.integration.web.ui.test.extension.BrokerServerExtension</name>
+                    <name>org.wso2.carbon.iot.integration.web.ui.test.extension.IOTServerExtension</name>
+                    <name>org.wso2.carbon.iot.integration.web.ui.test.extension.AnalyticsServerExtension</name>
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
             </extentionClasses>
