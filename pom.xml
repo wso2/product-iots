@@ -1453,7 +1453,7 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.10</carbon.kernel.version>
+        <carbon.kernel.version>4.4.11</carbon.kernel.version>
         <carbon.kernel.version.iotcore>4.4.11</carbon.kernel.version.iotcore>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
@@ -1539,7 +1539,7 @@
         <carbon.device.mgt.plugin.version>3.0.5-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.30-SNAPSHOT</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.35</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
