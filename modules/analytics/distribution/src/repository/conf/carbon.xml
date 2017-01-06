@@ -75,10 +75,8 @@
     Ex : <Role>.*</Role> means this server can act any role
     -->
     <ServerRoles>
-        <Role>${default.server.role}</Role>
         <Role>${cep.server.role}</Role>
         <Role>${das.server.role}</Role>
-        <Role>${cdmf.platform.role}</Role>
         <Role>${geodashboard.role}</Role>
     </ServerRoles>
 

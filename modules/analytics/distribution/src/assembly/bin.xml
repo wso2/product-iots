@@ -40,6 +40,7 @@
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/axis2/axis2.xml</exclude>
+                <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/log4j.properties</exclude>
                 <exclude>**/wso2server.sh</exclude>  <!--adding a custom DAS server.sh file-->
                 <exclude>**/registry.xml</exclude>
@@ -819,6 +820,14 @@
        <file>
             <source>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/geodashboard-datasources.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/master-datasources.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
             <filtered>true</filtered>
