@@ -89,6 +89,6 @@
         "protocol": ""
     },
     "queryParameters" : {
-        "passBetweenPages" : ["shared"]
+        "passBetweenPages" : ["shared", "owner", "deviceId"]
     }
 }
