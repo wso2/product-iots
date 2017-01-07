@@ -48,7 +48,7 @@
 
     <fileSets>
         <fileSet>
-            <directory>target/wso2carbon-core-${carbon.kernel.version.iotcore}</directory>
+            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <excludes>
                 <exclude>**/*.sh</exclude>
@@ -120,7 +120,7 @@
         <!-- Copying Runtimes-->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/lib/runtimes
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/lib/runtimes
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib/runtimes/</outputDirectory>
             <includes>
@@ -128,7 +128,7 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/wso2carbon-core-${carbon.kernel.version.iotcore}</directory>
+            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <includes>
                 <include>**/*.sh</include>
@@ -143,7 +143,7 @@
         <!-- Multi-tenancy related file -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/multitenancy/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/multitenancy
             </outputDirectory>
@@ -157,7 +157,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/multitenancy/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <includes>
@@ -190,7 +190,7 @@
         </fileSet>
 
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/modules
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/modules
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
@@ -228,7 +228,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/security
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/security
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security
             </outputDirectory>
@@ -254,7 +254,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/datasources
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources
             </outputDirectory>
@@ -264,7 +264,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/device-types
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/device-types
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/device-types
             </outputDirectory>
@@ -288,7 +288,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/service-provider
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/service-provider
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/service-provider</outputDirectory>
             <includes>
@@ -298,7 +298,7 @@
 
         <!-- Copying API management related dbscripts -->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/apimgt</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/apimgt</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -306,14 +306,14 @@
         </fileSet>
         <!-- Copying APP management related dbscripts -->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/storage</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/storage</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/appmgt</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/appmgt</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -323,7 +323,7 @@
         <!-- Copying Certificate management related dbscripts -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/certMgt
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/certMgt
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/certMgt</outputDirectory>
             <includes>
@@ -332,7 +332,7 @@
         </fileSet>
         <!-- Copying Social plugin related dbscripts -->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/social</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -356,7 +356,7 @@
         </fileSet>
         <!--Copying modules-->
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/modules</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/modules</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -382,7 +382,7 @@
         <!--Copying modules-->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/modules
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/modules
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
@@ -400,7 +400,7 @@
         <!-- Copying Device Management related dbscripts -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/cdm
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm</outputDirectory>
             <includes>
@@ -408,13 +408,13 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/carbonapps</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
             </outputDirectory>
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/resources
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
             </outputDirectory>
@@ -436,7 +436,7 @@
         <!-- Copying Authentication Endpoint webapp -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/webapps
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
@@ -450,7 +450,7 @@
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/devicemgt/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
@@ -458,7 +458,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/devicemgt-cdmf/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/devicemgt-cdmf/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
@@ -466,7 +466,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/uuf-template-app/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
@@ -475,7 +475,7 @@
 
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/webapps/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps/
             </outputDirectory>
@@ -491,7 +491,7 @@
         <!-- Copying APP Manager Publisher and Store Jaggery apps -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/publisher/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/publisher/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher
             </outputDirectory>
@@ -505,7 +505,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/store/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/store/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/store
             </outputDirectory>
@@ -521,7 +521,7 @@
         <!-- Copying API Manager Store Jaggery app -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/api-store/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store
             </outputDirectory>
@@ -552,7 +552,7 @@
         </fileSet>
 
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/social/</directory>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/social/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social</outputDirectory>
         </fileSet>
 
@@ -577,7 +577,7 @@
         <!-- Copying RXTs corresponding API management related components -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/rxts
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/rxts
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/rxts
             </outputDirectory>
@@ -585,7 +585,7 @@
 
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/identity
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
             </outputDirectory>
@@ -606,7 +606,7 @@
 
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/identity/identity-providers
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/identity-providers
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/conf/identity/identity-providers
@@ -617,7 +617,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/identity/service-providers
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/service-providers
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/conf/identity/service-providers
@@ -631,7 +631,7 @@
 
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/metrics/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/metrics/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/metrics</outputDirectory>
             <includes>
@@ -643,7 +643,7 @@
         <!--QPID related configurations-->
         <!--fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/advanced/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/advanced</outputDirectory>
             <includes>
@@ -657,7 +657,7 @@
         <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/portal
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/portal
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal
@@ -772,14 +772,14 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/event-broker.xml
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/registry-event-broker.xml
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/registry-event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -810,13 +810,13 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version.iotcore}/bin/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version.iotcore}/bin/version.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -824,7 +824,7 @@
         <!-- Copying logging-config.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/logging-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/logging-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -839,13 +839,13 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/README</source>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/identity/oidc-scope-config.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/oidc-scope-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -885,7 +885,7 @@
         <!-- Copying governance.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/governance.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
@@ -911,7 +911,7 @@
         </file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/tomcat/webapp-classloading.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat
             </outputDirectory>
@@ -932,7 +932,7 @@
         <!--certificate config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/certificate-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/certificate-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
@@ -940,31 +940,31 @@
         </file>
         <!--Metrics-->
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/metrics.properties</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/metrics.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/datasources/metrics-datasources.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/metrics-datasources.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database/WSO2METRICS_DB.h2.db</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2METRICS_DB.h2.db</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <!-- nTask Component -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/tasks-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/tasks-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
             <fileMode>644</fileMode>
@@ -994,7 +994,7 @@
         <!--Webapp Authenticator Config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/webapp-authenticator-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1013,7 +1013,7 @@
         <!-- Copying email-sender-config.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/email-sender-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/email-sender-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1022,7 +1022,7 @@
         <!--cdm plugin config file-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/tomcat/webapp-classloading-environments.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat
             </outputDirectory>
@@ -1031,7 +1031,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/claim-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/claim-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/
             </outputDirectory>
@@ -1041,7 +1041,7 @@
         <!-- Copying H2 database related files corresponding to default API management repository schema -->
         <file>
             <source>
-                target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database/WSO2AM_DB.h2.db
+                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2AM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
             <destName>WSO2AM_DB.h2.db</destName>
@@ -1050,7 +1050,7 @@
         <!-- Copying H2 database related files corresponding to default App management repository schema -->
         <file>
             <source>
-                target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database/WSO2APPM_DB.h2.db
+                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2APPM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
             <destName>WSO2APPM_DB.h2.db</destName>
@@ -1059,7 +1059,7 @@
         <!-- Copying H2 database related files corresponding to default Device management repository schema -->
         <file>
             <source>
-                target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database/WSO2DM_DB.h2.db
+                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2DM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
             <destName>WSO2DM_DB.h2.db</destName>
@@ -1076,7 +1076,7 @@
         <!-- Copying axis2-client.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/axis2/axis2_client.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/axis2/axis2_client.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2
             </outputDirectory>
@@ -1111,21 +1111,21 @@
         <!-- Cipher Tool Files -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/bin/ciphertool.sh
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/bin/ciphertool.bat
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
             <fileMode>644</fileMode>
@@ -1134,7 +1134,7 @@
         <!--DAS Files-->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/output-event-adapters.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
             </outputDirectory>
@@ -1143,7 +1143,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/input-event-adapters.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf
             </outputDirectory>
@@ -1152,7 +1152,7 @@
         </file>
         <!-- ************* Data bridge related files ********** -->
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/data-bridge/data-bridge-config.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1163,7 +1163,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/data-bridge/data-agent-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge
             </outputDirectory>
@@ -1183,7 +1183,7 @@
 
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/jwt.properties
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/jwt.properties
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1191,7 +1191,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/websocket-validation.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/websocket-validation.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1199,7 +1199,7 @@
         </file>
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/device-analytics-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/device-analytics-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1215,7 +1215,7 @@
         </file>
 
         <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/social.xml</source>
+            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1233,7 +1233,7 @@
         <!-- Copying devi-appmanager-config.xml -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/etc/remote-appmanager-config.xml
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/remote-appmanager-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
             <filtered>true</filtered>
@@ -1242,7 +1242,7 @@
         <!-- Adding IoT Analytics Dashboard and gadget CApps -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>
