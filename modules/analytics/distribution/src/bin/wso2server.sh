@@ -326,6 +326,10 @@ do
     -Dmqtt.broker.port="1886" \
     -Diot.core.host="localhost" \
     -Diot.core.https.port="9443" \
+    -Diot.keymanager.host="localhost" \
+    -Diot.keymanager.https.port="9443" \
+    -Diot.gateway.host="localhost" \
+    -Diot.gateway.https.port="8243" \
     $NODE_PARAMS \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
