@@ -20,9 +20,9 @@ package org.coffeeking.api;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.coffeeking.api.constants.ConnectedCupConstants;
 import org.coffeeking.api.util.APIUtil;
 import org.coffeeking.api.util.SensorRecord;
+import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
 import org.wso2.carbon.analytics.dataservice.commons.SortType;
 import org.wso2.carbon.analytics.datasource.commons.exception.AnalyticsException;

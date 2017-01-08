@@ -23,13 +23,13 @@
     <parent>
         <artifactId>device-mgt-iot-connectedcup</artifactId>
         <groupId>org.coffeeking</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.coffeeking.connectedcup.api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>war</packaging>
     <name>WSO2 IoTS(Device Types) - Connected Cup API</name>
     <description>WSO2 IoTS(Device Types) - Connected Cup API</description>
@@ -71,11 +71,23 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--MQTT -->
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!--IOT -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
             <version>4.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.coffeeking</groupId>
+            <artifactId>org.coffeeking.connectedcup.plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -99,6 +111,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.wso2.carbon.devicemgt</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.analytics.data.publisher</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.wso2.carbon.devicemgt</groupId>
             <artifactId>org.wso2.carbon.apimgt.annotations</artifactId>

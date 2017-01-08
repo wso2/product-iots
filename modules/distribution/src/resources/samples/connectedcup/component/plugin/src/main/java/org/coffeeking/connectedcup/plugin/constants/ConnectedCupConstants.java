@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.coffeeking.api.constants;
+package org.coffeeking.connectedcup.plugin.constants;
 
 public class ConnectedCupConstants {
 
