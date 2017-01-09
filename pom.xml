@@ -39,6 +39,7 @@
         <module>modules/core</module>
         <module>modules/analytics</module>
         <module>modules/distribution</module>
+        <module>modules/integration</module>
     </modules>
 
     <dependencyManagement>
@@ -1104,7 +1105,7 @@
                         <artifactId>selenium-android-driver</artifactId>
                     </exclusion>
                 </exclusions>
-                <scope>test</scope>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>com.opera</groupId>
