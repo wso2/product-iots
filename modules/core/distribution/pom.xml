@@ -79,12 +79,55 @@
 								<artifactItem>
 									<groupId>org.wso2.carbon</groupId>
 									<artifactId>wso2carbon-core</artifactId>
-									<version>${carbon.kernel.version.iotcore}</version>
+									<version>${carbon.kernel.version}</version>
 									<type>zip</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>target</outputDirectory>
 								</artifactItem>
 							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Add the input and output adapter configs to the file -->
+			<plugin>
+				<groupId>com.google.code.maven-config-processor-plugin</groupId>
+				<artifactId>config-processor-maven-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>init-input-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml</input>
+									<output>../../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml</output>
+									<config>input-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>init-output-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml</input>
+									<output>../../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml</output>
+									<config>output-adapter-change.xml</config>
+								</transformation>
+							</transformations>
 						</configuration>
 					</execution>
 				</executions>
@@ -105,7 +148,7 @@
 							<tasks>
 								<echo message="########### Create Device Management H2 Schema ###########" />
 
-								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
 								<property name="userid" value="wso2carbon" />
 								<property name="password" value="wso2carbon" />
 								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />
@@ -115,7 +158,7 @@
 									<classpath refid="maven.compile.classpath" />
 									<classpath refid="maven.runtime.classpath" />
 
-									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/cdm/h2.sql" />
+									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/h2.sql" />
 								</sql>
 								<echo message="##################### END ####################" />
 							</tasks>
@@ -132,7 +175,7 @@
                             <tasks>
                                 <echo message="########### Create Certificate Management H2 Schema ###########" />
 
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
                                 <property name="userid" value="wso2carbon" />
                                 <property name="password" value="wso2carbon" />
                                 <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />
@@ -141,7 +184,7 @@
                                     <classpath refid="maven.dependency.classpath" />
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/certMgt/h2.sql" />
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/certMgt/h2.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
                             </tasks>
@@ -158,7 +201,7 @@
 							<tasks>
 								<echo message="########### Create API Management H2 Schema ###########" />
 
-								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
 								<property name="userid" value="wso2carbon" />
 								<property name="password" value="wso2carbon" />
 								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE" />
@@ -168,7 +211,7 @@
 									<classpath refid="maven.compile.classpath" />
 									<classpath refid="maven.runtime.classpath" />
 
-									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/apimgt/h2.sql" />
+									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql" />
 								</sql>
 								<echo message="##################### END ####################" />
 							</tasks>
@@ -186,7 +229,7 @@
 							<tasks>
 								<echo message="########### Create App Management H2 Schema ###########" />
 
-								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
 								<property name="userid" value="wso2carbon" />
 								<property name="password" value="wso2carbon" />
 								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2APPM_DB;DB_CLOSE_ON_EXIT=FALSE" />
@@ -196,7 +239,7 @@
 									<classpath refid="maven.compile.classpath" />
 									<classpath refid="maven.runtime.classpath" />
 
-									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/appmgt/h2.sql" />
+									<fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt/h2.sql" />
 								</sql>
 								<echo message="##################### END ####################" />
 							</tasks>
@@ -214,7 +257,7 @@
                             <tasks>
                                 <echo message="########### Create JAGH2 Schema ###########" />
 
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
                                 <property name="userid" value="wso2carbon" />
                                 <property name="password" value="wso2carbon" />
                                 <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000" />
@@ -225,7 +268,7 @@
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
 
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/storage/h2/h2.sql" />
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage/h2/h2.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
                             </tasks>
@@ -243,7 +286,7 @@
                             <tasks>
                                 <echo message="########### Create Social Plugin H2 Schema ###########" />
 
-                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/database" />
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
                                 <property name="userid" value="wso2carbon" />
                                 <property name="password" value="wso2carbon" />
                                 <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2_SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE" />
@@ -253,7 +296,7 @@
                                     <classpath refid="maven.compile.classpath" />
                                     <classpath refid="maven.runtime.classpath" />
 
-                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/dbscripts/social/h2/resource.sql" />
+                                    <fileset file="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social/h2/resource.sql" />
                                 </sql>
                                 <echo message="##################### END ####################" />
                             </tasks>
@@ -281,7 +324,7 @@
 										<include name="${project.artifactId}-${project.version}.zip" />
 									</fileset>
 								</unzip>
-								<copy todir="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/components" overwrite="true">
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components" overwrite="true">
 									<fileset dir="${tempdir}/${project.artifactId}-${project.version}/repository/components" />
 								</copy>
 								<!--testing -->
@@ -310,7 +353,7 @@
 						<phase>package</phase>
 						<configuration>
 							<tasks>
-								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/webapps" />
+								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -327,8 +370,8 @@
 								<delete dir="target/archive-tmp" />
 								<delete dir="target/dependency-maven-plugin-markers" />
 								<delete dir="target/maven-archiver" />
-								<delete dir="target/wso2carbon-core-${carbon.kernel.version.iotcore}" />
-								<delete dir="target/wso2carbon-core-${carbon.kernel.version.iotcore}" />
+								<delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
+								<delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
 								<delete file="target/${project.artifactId}-${project.version}.jar" />
 								<delete dir="target/sources" />
 								<delete dir="target/site" />
@@ -347,7 +390,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <tasks>
-            			<replace token="PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" value="#PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/identity/">
+            			<replace token="PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" value="#PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" dir="${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/">
               			   <include name="entitlement.properties" />
             			</replace>
                             </tasks>
@@ -422,7 +465,7 @@
 						</goals>
 						<configuration>
 							<file>
-								${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/conf/api-manager.xml
+								${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/api-manager.xml
 							</file>
 							<replacements>
 								<replacement>
@@ -441,7 +484,7 @@
 						</goals>
 						<configuration>
 							<file>
-								${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version.iotcore}/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
+								${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
 							</file>
 							<replacements>
 								<replacement>

@@ -49,7 +49,7 @@ public class NewUserRegisterPage {
 
         // Check that we're on the right page.
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
-        if (!webDriverWait.until(ExpectedConditions.titleContains("Register | IoT Server"))) {
+        if (!webDriverWait.until(ExpectedConditions.titleContains(uiElementMapper.getElement("cdmf.register.page")))) {
             throw new IllegalStateException("This is not the Register page");
         }
 

@@ -1453,8 +1453,7 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.10</carbon.kernel.version>
-        <carbon.kernel.version.iotcore>4.4.10</carbon.kernel.version.iotcore>
+        <carbon.kernel.version>4.4.11</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
@@ -1497,23 +1496,24 @@
 
         <!-- Carbon Identity -->
         <carbon.identity.framework.version>5.2.0</carbon.identity.framework.version>
-        <carbon.identity.framework.version.iotcore>5.6.89</carbon.identity.framework.version.iotcore>
+        <carbon.identity.framework.version.iotcore>5.7.5</carbon.identity.framework.version.iotcore>
         <carbon.identity.framework.version.range>[5.2.0, 6.0.0)</carbon.identity.framework.version.range>
         <identity.local.auth.basicauth.version>5.1.1</identity.local.auth.basicauth.version>
         <identity.local.auth.basicauth.version.iotcore>5.2.4</identity.local.auth.basicauth.version.iotcore>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
         <identity.inbound.auth.saml.version>5.1.1</identity.inbound.auth.saml.version>
-        <identity.inbound.auth.saml.version.iotcore>5.2.14</identity.inbound.auth.saml.version.iotcore>
+        <identity.inbound.auth.saml.version.iotcore>5.3.0</identity.inbound.auth.saml.version.iotcore>
         <identity.carbon.auth.saml2.version>5.1.3</identity.carbon.auth.saml2.version>
         <identity.carbon.auth.saml2.version.iotcore>5.1.6</identity.carbon.auth.saml2.version.iotcore>
         <identity.inbound.auth.oauth.version>5.1.2</identity.inbound.auth.oauth.version>
-        <identity.inbound.auth.oauth.version.iotcore>5.2.33</identity.inbound.auth.oauth.version.iotcore>
+        <identity.inbound.auth.oauth.version.iotcore>5.3.1</identity.inbound.auth.oauth.version.iotcore>
         <identity.carbon.auth.mutual.ssl.version>5.1.1</identity.carbon.auth.mutual.ssl.version>
         <identity.user.ws.version>5.1.3</identity.user.ws.version>
         <identity.outbound.auth.requestpath.basicauth.version>5.1.1</identity.outbound.auth.requestpath.basicauth.version>
         <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
         <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
-        <identity.metadata.saml2>0.1.3</identity.metadata.saml2>
+        <identity.metadata.saml2.version>1.0.0</identity.metadata.saml2.version>
+        <identity.inbound.metadata.saml2.version>0.1.1</identity.inbound.metadata.saml2.version>
 
         <!--JWT grant type extension feature-->
         <identity.jwt.extension.version>1.0.2</identity.jwt.extension.version>
@@ -1528,18 +1528,18 @@
         <carbon.governance.version>4.7.0</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>2.0.6-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.7-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>3.0.0-SNAPSHOT</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>3.0.5-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.6-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.2</carbon.api.mgt.version>
-        <carbon.api.mgt.version.range>(5.0.0,7.0.0]</carbon.api.mgt.version.range>
+        <carbon.api.mgt.version>6.1.35</carbon.api.mgt.version>
+        <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
         <carbon.mediation.version>4.6.9</carbon.mediation.version>

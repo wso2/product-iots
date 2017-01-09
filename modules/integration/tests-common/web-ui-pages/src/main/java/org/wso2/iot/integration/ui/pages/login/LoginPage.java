@@ -50,7 +50,7 @@ public class LoginPage {
         this.uiElementMapper = UIElementMapper.getInstance();
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
 
-        if (!webDriverWait.until(ExpectedConditions.titleContains("Login | IoT Server"))) {
+        if (!webDriverWait.until(ExpectedConditions.titleContains(uiElementMapper.getElement("cdmf.login.page")))) {
             throw new IllegalStateException("This is not the Login page");
         }
         userNameField = driver.findElement(By.xpath(
