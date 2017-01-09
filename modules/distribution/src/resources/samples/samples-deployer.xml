@@ -26,8 +26,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.devicemgt-plugins</groupId>
-    <artifactId>iot-devicetype-feature-installation</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <artifactId>iot-devicetype-samples</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Creating custom distribution</name>
     <url>http://wso2.org</url>
@@ -52,22 +52,7 @@
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:/${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:/${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:/${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:/${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.android.feature:/${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:/${carbon.device.mgt.plugin.version}
+									org.coffeeking:org.coffeeking.connectedcup.feature:\${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -86,27 +71,7 @@
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
-                                    <version>\${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.arduino.feature.group</id>
-                                    <version>\${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.raspberrypi.feature.group</id>
-                                    <version>\${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
-                                    <version>\${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
+                                    <id>org.coffeeking.connectedcup.feature.group</id>
                                     <version>\${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                             </features>
@@ -131,11 +96,6 @@
                                 <copy todir="../analytics/repository/deployment/server/carbonapps">
                                     <fileset dir="../core/repository/deployment/server/carbonapps">
                                         <include name="*.car"/>
-                                    </fileset>
-                                </copy>
-                                <copy todir="../analytics/repository/deployment/server/">
-                                    <fileset dir="resources/analytics">
-                                        <include name="**/*"/>
                                     </fileset>
                                 </copy>
                             </tasks>
@@ -225,6 +185,6 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>1.0.0</carbon.device.mgt.plugin.version>
     </properties>
 </project>

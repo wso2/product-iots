@@ -60,6 +60,33 @@
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
+			<filtered>true</filtered>
         </fileSet>
+		<fileSet>
+			<directory>src/resources/samples</directory>
+			<outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
+			<includes>
+				<include>*/**</include>
+			</includes>
+			<fileMode>644</fileMode>
+		</fileSet>
     </fileSets>
+	<files>
+		<file>
+			<source>
+				src/resources/samples/samples-deployer.xml
+			</source>
+			<outputDirectory>wso2iot-${product.iot.version}/samples/</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>644</fileMode>
+		</file>
+		<file>
+			<source>
+				src/resources/samples/connectedcup/pom.xml
+			</source>
+			<outputDirectory>wso2iot-${product.iot.version}/samples/connectedcup</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>644</fileMode>
+		</file>
+	</files>
 </assembly>
