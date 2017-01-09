@@ -41,7 +41,7 @@ public class AddUserPage {
         this.uiElementMapper = UIElementMapper.getInstance();
 
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
-        if (!webDriverWait.until(ExpectedConditions.titleContains("User Management | IoT Server"))) {
+        if (!webDriverWait.until(ExpectedConditions.titleContains(uiElementMapper.getElement("cdmf.user.add.page")))) {
             throw new IllegalStateException("This is not the Add User page");
         }
     }
