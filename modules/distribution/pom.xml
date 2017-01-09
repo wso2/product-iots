@@ -113,6 +113,7 @@
                             <descriptors>
                                 <descriptor>${basedir}/src/assembly/dist.xml</descriptor>
                             </descriptors>
+							<escapeString>\</escapeString>
                         </configuration>
                     </execution>
                 </executions>

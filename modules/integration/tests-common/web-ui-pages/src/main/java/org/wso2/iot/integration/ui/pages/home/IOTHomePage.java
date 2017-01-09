@@ -43,7 +43,7 @@ public class IOTHomePage {
         this.uiElementMapper = UIElementMapper.getInstance();
         // Check that we're on the right page.
         WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
-        if (!wait.until(ExpectedConditions.titleIs("Device Management | IoT Server"))) {
+        if (!wait.until(ExpectedConditions.titleIs(uiElementMapper.getElement("cdmf.user.home.page")))) {
             throw new IllegalStateException("This is not the home page");
         }
     }

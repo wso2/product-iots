@@ -53,25 +53,6 @@ public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
         clearForm();
     }
 
-    @Test(description = "Test for empty login form submission")
-    public void emptyLoginFormTest() throws Exception {
-        userNameField.sendKeys("");
-        passwordField.sendKeys("");
-        loginButton.click();
-
-        WebElement alertUserName = driver.findElement(By.id(
-                uiElementMapper.getElement("iot.user.login.username.error")));
-        WebElement alertPassword = driver.findElement(By.id(
-                uiElementMapper.getElement("iot.user.login.password.error")));
-
-        if (!alertUserName.isDisplayed()) Assert.assertTrue(false, "Alert for user name is not present.");
-        if (!alertPassword.isDisplayed()) Assert.assertTrue(false, "Alert for password is not present.");
-
-            Assert.assertEquals(alertUserName.getText(), Constants.User.Login.USER_NAME_ERROR);
-            Assert.assertEquals(alertPassword.getText(), Constants.User.Login.PASSWORD_ERROR);
-
-    }
-
     @Test(description = "Test for incorrect username")
     public void incorrectUserNameTest() throws Exception {
         clearForm();
@@ -98,22 +79,6 @@ public class LoginFormValidationTest extends IOTIntegrationUIBaseTestCase {
         WebElement alert = driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.login.incorrect.xpath")));
         if (alert.isDisplayed()) {
             Assert.assertEquals(alert.getText(), Constants.User.Login.FAILED_ERROR);
-        } else {
-            Assert.assertTrue(false, Constants.ALERT_NOT_PRESENT);
-        }
-    }
-
-
-    @Test(description = "Test for short password")
-    public void shortPasswordTest() throws Exception {
-        clearForm();
-        userNameField.sendKeys(automationContext.getSuperTenant().getTenantAdmin().getUserName());
-        passwordField.sendKeys(Constants.User.Login.SHORT_PASSWORD);
-        loginButton.click();
-
-        WebElement alert = driver.findElement(By.id(uiElementMapper.getElement("iot.user.login.password.error")));
-        if (alert.isDisplayed()) {
-            Assert.assertEquals(alert.getText(), Constants.User.Login.SHORT_PASSWORD_ERROR);
         } else {
             Assert.assertTrue(false, Constants.ALERT_NOT_PRESENT);
         }

@@ -45,7 +45,7 @@ public class LoginTest extends IOTIntegrationUIBaseTestCase {
         driver.get(getWebAppURL() + Constants.IOT_LOGIN_PATH);
     }
 
-    @Test(description = "Verify login to IOT server dashboard")
+    @Test(description = "Verify logins to IOT server dashboard")
     public void testAdminLogin() throws IOException, XPathExpressionException {
         LoginPage loginPage = new LoginPage(driver);
         IOTAdminDashboard dashboard = loginPage.loginAsAdmin(

@@ -22,7 +22,10 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.iot.integration.ui.pages.UIElementMapper;
+import org.wso2.iot.integration.ui.pages.UIUtils;
 import org.wso2.iot.integration.ui.pages.devices.DevicesPage;
 import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
@@ -51,18 +54,16 @@ import java.io.IOException;
  */
 public class IOTAdminDashboard {
 
-    private static final Log log = LogFactory.getLog(IOTHomePage.class);
+    private static final Log log = LogFactory.getLog(IOTAdminDashboard.class);
     private WebDriver driver;
     private UIElementMapper uiElementMapper;
 
     public IOTAdminDashboard(WebDriver driver) throws IOException {
         this.driver = driver;
         this.uiElementMapper = UIElementMapper.getInstance();
-        log.info(driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.dashboard.title.xpath"))).
-                getText());
-        // Check that we're on the right page.
-        if (!driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.dashboard.title.xpath"))).
-                getText().contains("DASHBOARD")) {
+        WebDriverWait wait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
+
+        if (!wait.until(ExpectedConditions.titleIs(uiElementMapper.getElement("cdmf.home.page")))) {
             throw new IllegalStateException("This is not the home page");
         }
     }
