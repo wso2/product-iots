@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-integration</artifactId>
-        <version>3.0.1-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -48,9 +48,9 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
+                    <skipTests>${skipTests}</skipTests>
 
                     <systemProperties>
-                        <skipTests>true</skipTests>
                         <property>
                             <name>maven.test.haltafterfailure</name>
                             <value>false</value>
@@ -267,5 +267,8 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
 
 </project>
