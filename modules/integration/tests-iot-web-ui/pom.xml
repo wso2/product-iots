@@ -48,9 +48,9 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
+                    <skipTests>${skipTests}</skipTests>
 
                     <systemProperties>
-                        <skipTests>true</skipTests>
                         <property>
                             <name>maven.test.haltafterfailure</name>
                             <value>false</value>
@@ -267,5 +267,8 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
 
 </project>
