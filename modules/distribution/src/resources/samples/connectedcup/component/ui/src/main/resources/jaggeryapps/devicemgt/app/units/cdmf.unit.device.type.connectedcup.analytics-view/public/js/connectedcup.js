@@ -224,7 +224,8 @@ function drawGraph_connectedcup(from, to) {
     if (devices) {
         getData();
     } else {
-        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/temperature' + '?from=' + from + '&to=' + to;
+        var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + '/sensors/temperature'
+                            + '?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
                 drawTemperatureLineGraph(JSON.parse(data));
@@ -249,8 +250,7 @@ function drawGraph_connectedcup(from, to) {
             return;
         }
         var backendApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
-                            + '/sensors/temperature'
-                            + '?from=' + from + '&to=' + to;
+                            + '/sensors/temperature?from=' + from + '&to=' + to;
         var successCallback = function (data) {
             if (data) {
                 drawTemperatureLineGraph(JSON.parse(data));
@@ -264,7 +264,7 @@ function drawGraph_connectedcup(from, to) {
             getData();
         });
         var coffeeLevelApiUrl = $('#connectedcup-div-chart').data('backend-api-url') + devices[deviceIndex].deviceIdentifier
-                                + '/sensors/coffeelevel' + '?from=' + from + '&to=' + to;
+                                + '/sensors/coffeelevel?from=' + from + '&to=' + to;
 
         var successCallbackCoffeeLevel = function (data) {
             if (data) {
