@@ -1,0 +1,17 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('$executionPlanName')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('rawGeoStream:1.0.0')
+define stream dataIn (id string, timeStamp long, geometry string, state string, information string);
+
+@Export('AlertsNotifications:1.0.0')
+define stream dataOut (id string, state string, information string, timeStamp long, latitude double, longitude double);
+
+from dataIn[geo:intersects(geometry, "$geoFenceGeoJSON")==true and geodashboard:needToNotify(id, str:concat(information, state), "sendFirst") == true and id == $deviceId]
+select id, state, str:concat("Traffic alert in $areaName. State: ", state, " ", information) as information, timeStamp, 0.0 as latitude, 0.0 as longitude
+insert into dataOut
