@@ -221,6 +221,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.gateway.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.keymanager.feature:${carbon.api.mgt.version}
+								</featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.forum.server.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
@@ -1017,6 +1020,11 @@
                                 <!-- End of Dashboard Features -->
 
                                 <!-- API Management Features -->
+
+								<feature>
+									<id>org.wso2.carbon.apimgt.keymanager.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.core.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
@@ -2003,6 +2011,11 @@
                                     <id>org.wso2.carbon.core.common.feature.group</id>
                                     <version>${carbon.kernel.version}</version>
                                 </feature>
+
+								<feature>
+									<id>org.wso2.carbon.um.ws.service.server.feature.group</id>
+									<version>${identity.user.ws.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.server.feature.group</id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
