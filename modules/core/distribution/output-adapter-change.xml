@@ -27,10 +27,10 @@
         <property key="maximumTotalHttpConnection">100</property>
         <property key="authorizer">org.wso2.carbon.device.mgt.output.adapter.websocket.authorization.DeviceAuthorizer</property>
        	<property key="tokenUrl">https://${iot.gateway.host}:${iot.gateway.https.port}/token</property>
-        <property key="deviceMgtServerUrl">https://${iot.core.host}:${iot.core.https.port}</property>
+        <property key="deviceMgtServerUrl">https://${iot.gateway.host}:${iot.gateway.https.port}</property>
         <property key="username">admin</property>
         <property key="password">admin</property>
-   		<property key="scopes"></property>
+   		<property key="scopes">perm:authorization:verify</property>
         <!--websocket connection permissions which are validated for grouping (can have multiple permission.)-->
         <property key="statsPermission">/permission/device-mgt/realtime_analytics</property>
         <!--offset time from expiry time to trigger refresh call (in seconds)-->

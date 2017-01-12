@@ -188,7 +188,7 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
                         <property name="tokenEndpoint">https://localhost:9443/oauth2</property>
                         <!--offset time from expiry time to trigger refresh call - seconds -->
                         <property name="tokenRefreshTimeOffset">100</property>
-                        <property name="deviceMgtServerUrl">https://localhost:9443</property>
+                        <property name="deviceMgtServerUrl">https://localhost:8243</property>
                     </authorizer>
             </security>
         </mqtt>

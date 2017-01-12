@@ -176,7 +176,6 @@
                                 <!-- commenting "GetAllRolesOfUserEnabled" property to fix
                               https://wso2.org/jira/browse/IDENTITY-3489 -->
                                 <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property&gt;" value="&lt;!--Property name=&quot;GetAllRolesOfUserEnabled&quot;&gt;true&lt;/Property--&gt;" />
-                                <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/user-mgt.xml" token="&lt;Property name=&quot;dataSource&quot;&gt;jdbc/WSO2CarbonDB&lt;/Property&gt;" value="&lt;Property name=&quot;dataSource&quot;&gt;jdbc/WSO2UMDB&lt;/Property&gt;" />
                                 <!-- Move IS UI to configure menu -->
                                 <property name="tempdir2" value="target/identity-ui" />
                                 <mkdir dir="${tempdir2}" />
