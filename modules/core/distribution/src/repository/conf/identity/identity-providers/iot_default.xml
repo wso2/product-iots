@@ -17,10 +17,10 @@
   -->
 
 <IdentityProvider>
-	<IdentityProviderName>iot_default</IdentityProviderName>
-	<DisplayName>iot_default</DisplayName>
+	<IdentityProviderName>wso2.org/products/iot</IdentityProviderName>
+	<DisplayName>wso2.org/products/iot</DisplayName>
 	<IdentityProviderDescription></IdentityProviderDescription>
-	<Alias>wso2.org/products/iot</Alias>
+	<Alias>devicemgt</Alias>
 	<IsPrimary>true</IsPrimary>
 	<IsFederationHub></IsFederationHub>
 	<HomeRealmId></HomeRealmId>
