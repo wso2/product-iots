@@ -1,0 +1,19 @@
+<project name="create-data-analytics-capps" default="zip" basedir=".">
+
+    <property name="project-name" value="${ant.project.name}"/>
+    <property name="target-dir" value="target/carbonapps"/>
+    <property name="src-dir" value="src/main/resources/carbonapps"/>
+
+    <property name="location_dir" value="locationTraker"/>
+
+    <target name="clean">
+        <delete dir="${target-dir}" />
+    </target>
+
+    <target name="zip" depends="clean">
+        <mkdir dir="${target-dir}"/>
+        <zip destfile="${target-dir}/${location_dir}.car">
+            <zipfileset dir="${src-dir}/${location_dir}"/>
+        </zip>
+    </target>
+</project>
