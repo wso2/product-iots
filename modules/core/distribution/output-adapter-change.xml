@@ -30,7 +30,6 @@
         <property key="deviceMgtServerUrl">https://${iot.gateway.host}:${iot.gateway.https.port}</property>
         <property key="username">admin</property>
         <property key="password">admin</property>
-   		<property key="scopes">perm:authorization:verify</property>
         <!--websocket connection permissions which are validated for grouping (can have multiple permission.)-->
         <property key="statsPermission">/permission/device-mgt/realtime_analytics</property>
         <!--offset time from expiry time to trigger refresh call (in seconds)-->

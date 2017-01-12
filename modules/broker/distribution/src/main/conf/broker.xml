@@ -185,7 +185,7 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 
                         <property name="username">admin</property>
                         <property name="password">admin</property>
-                        <property name="tokenEndpoint">https://localhost:9443/oauth2</property>
+                        <property name="tokenEndpoint">https://localhost:8243</property>
                         <!--offset time from expiry time to trigger refresh call - seconds -->
                         <property name="tokenRefreshTimeOffset">100</property>
                         <property name="deviceMgtServerUrl">https://localhost:8243</property>
