@@ -110,10 +110,6 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true"
-                                         dir="../core/repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
-                                    <include name="**/bundles.info"/>
-                                </replace>
                                 <copy todir="../analytics/repository/deployment/server/carbonapps">
                                     <fileset dir="../core/repository/deployment/server/carbonapps">
                                         <include name="*.car"/>
