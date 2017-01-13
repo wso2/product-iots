@@ -324,8 +324,6 @@ do
     -Dcom.ibm.cacheLocalHost=true \
     -Dmqtt.broker.host="localhost" \
     -Dmqtt.broker.port="1886" \
-    -Diot.core.host="localhost" \
-    -Diot.core.https.port="9443" \
     -Diot.keymanager.host="localhost" \
     -Diot.keymanager.https.port="9443" \
     -Diot.gateway.host="localhost" \

@@ -315,6 +315,7 @@ do
     -Diot.keymanager.https.port="9443" \
     -Diot.gateway.host="localhost" \
     -Diot.gateway.https.port="8243" \
+    -Diot.gateway.http.port="8280" \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done

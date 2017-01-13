@@ -45,14 +45,14 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-        <fileSet>
-            <directory>src/resources/bin</directory>
-            <outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-            <fileMode>755</fileMode>
-        </fileSet>
+        <!--<fileSet>-->
+            <!--<directory>src/resources/bin</directory>-->
+            <!--<outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>*/**</include>-->
+            <!--</includes>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</fileSet>-->
         <fileSet>
             <directory>src/resources/plugins</directory>
             <outputDirectory>wso2iot-${product.iot.version}/plugins</outputDirectory>
