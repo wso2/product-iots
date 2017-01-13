@@ -484,6 +484,42 @@
             </outputDirectory>
         </fileSet>
 
+        <!-- Copying windows-web-agent-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/windows-web-agent/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
+            </outputDirectory>
+        </fileSet>
+
+        <!-- Copying android-web-agent-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/android-web-agent/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
+            </outputDirectory>
+        </fileSet>
+
         <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps/
