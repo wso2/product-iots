@@ -1,0 +1,26 @@
+{
+  "id": "geo-dashboard",
+  "title": "Geo Dashboard",
+  "type": "widget",
+  "thumbnail": "gadget/geo-dashboard/img/thumbnail.png",
+  "settings": {
+    "personalize": true
+  },
+  "data": {
+    "url": "gadget/geo-dashboard/index.xml"
+  },
+  "styles": {
+    "borders": false,
+    "title": false
+  },
+  "notify": {
+    "select": {
+      "type": "address",
+      "description": "This notifies selected state"
+    },
+    "cancel": {
+      "type": "boolean",
+      "description": "This notifies cancellation of state selection"
+    }
+  }
+}

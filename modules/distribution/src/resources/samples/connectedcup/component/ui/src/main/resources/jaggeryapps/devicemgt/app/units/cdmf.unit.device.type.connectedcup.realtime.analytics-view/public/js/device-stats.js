@@ -18,41 +18,30 @@
 
 var ws;
 var graph;
-var temperatureData = [];
-var coffeeData = [];
-var temperature = 0;
-var coffeelevel = 0;
-var lastTime = 0;
-var palette = new Rickshaw.Color.Palette({scheme: 'classic9'});
+var chartData = [];
+var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
 $(window).load(function () {
     var tNow = new Date().getTime() / 1000;
     for (var i = 0; i < 30; i++) {
-        temperatureData.push({
-            x: tNow - (30 - i) * 15,
-            y: parseFloat(0)
-        });
-        coffeeData.push({
-            x: tNow - (30 - i) * 15,
-            y: parseFloat(0)
-        });
+        chartData.push({
+                           x: tNow - (30 - i) * 15,
+                           y: parseFloat(0)
+                       });
     }
 
     graph = new Rickshaw.Graph({
-        element: document.getElementById('chart'),
-        width: $('#div-chart').width() - 50,
+        element: document.getElementById("chart"),
+        width: $("#div-chart").width() - 50,
         height: 300,
-        renderer: 'line',
+        renderer: "line",
+        interpolation: "linear",
         padding: {top: 0.2, left: 0.0, right: 0.0, bottom: 0.2},
         xScale: d3.time.scale(),
         series: [{
             'color': palette.color(),
-            'data': coffeeData,
-            'name': 'Coffee Level'
-        }, {
-            'color': palette.color(),
-            'data': temperatureData,
-            'name': 'Temperature'
+            'data': chartData,
+            'name': "Temperature"
         }]
     });
 
@@ -77,11 +66,11 @@ $(window).load(function () {
         formatter: function (series, x, y) {
             var date = '<span class="date">' + moment(x * 1000).format('Do MMM YYYY h:mm:ss a') + '</span>';
             var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-            return swatch + series.name + ': ' + parseInt(y) + '<br>' + date;
+            return swatch + series.name + ": " + parseInt(y) + '<br>' + date;
         }
     });
 
-    var websocketUrl = $('#div-chart').data('websocketurl');
+    var websocketUrl = $("#div-chart").data("websocketurl");
     connect(websocketUrl)
 });
 
@@ -101,25 +90,12 @@ function connect(target) {
     if (ws) {
         ws.onmessage = function (event) {
             var dataPoint = JSON.parse(event.data);
-            if (lastTime < parseInt(dataPoint[4]) / 1000) {
-                lastTime = parseInt(dataPoint[4]) / 1000;
-                if (dataPoint[3] == 'temperature') {
-                    temperature = parseFloat(dataPoint[5]);
-                } else if (dataPoint[3] == 'coffeelevel') {
-                    coffeelevel = parseFloat(dataPoint[6]);
-                }
-                temperatureData.push({
-                    x: lastTime,
-                    y: temperature
-                });
-                temperatureData.shift();
-                coffeeData.push({
-                    x: lastTime,
-                    y: coffeelevel
-                });
-                coffeeData.shift();
-                graph.update();
-            }
+            chartData.push({
+                               x: parseInt(dataPoint[4]) / 1000,
+                               y: parseFloat(dataPoint[5])
+                           });
+            chartData.shift();
+            graph.update();
         };
     }
 }

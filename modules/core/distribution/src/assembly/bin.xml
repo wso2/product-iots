@@ -74,6 +74,7 @@
                 <exclude>**/lib/encoder*</exclude>
                 <exclude>**/plugins/jaxb*</exclude>
                 <exclude>**/security/authenticators.xml</exclude>
+				<exclude>**/user-mgt.xml</exclude>
 
                 <exclude>**/plugins/org.wso2.carbon.localentry.ui*</exclude>
                 <exclude>**/plugins/org.wso2.carbon.mediation.security.ui*</exclude>
@@ -224,6 +225,7 @@
                 <include>**/log4j.properties</include>
                 <include>**/nhttp.properties</include>
                 <include>**/passthru-http.properties</include>
+				<include>**/user-mgt.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -447,6 +449,15 @@
             </includes>
         </fileSet>
 
+		<!-- Copying Authentication Endpoint webapp -->
+		<fileSet>
+			<directory>
+				../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/devicetypes
+			</directory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/devicetypes
+			</outputDirectory>
+		</fileSet>
+
         <!-- Copying mdm app from devicemgt app-->
         <fileSet>
             <directory>
@@ -470,6 +481,42 @@
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt
+            </outputDirectory>
+        </fileSet>
+
+        <!-- Copying windows-web-agent-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/windows-web-agent/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
+            </outputDirectory>
+        </fileSet>
+
+        <!-- Copying android-web-agent-->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/android-web-agent/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/uuf-template-app/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
             </outputDirectory>
         </fileSet>
 
@@ -534,6 +581,16 @@
                 <exclude>**/site/conf/site.json</exclude>
             </excludes>
         </fileSet>
+
+        <!-- Copying Windows Synapse files -->
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/synapse-configs/default/api/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/default/api/
+            </outputDirectory>
+        </fileSet>
+
 
         <!--============ Added with API Features ===============-->
         <fileSet>
@@ -611,6 +668,8 @@
                 <include>**/msg-mgt.properties</include>
                 <include>**/entitlement.properties</include>
                 <include>**/EndpointConfig.properties</include>
+				<include>**/identity.xml</include>
+				<include>**/thrift-authentication.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -868,21 +927,9 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/repository/conf/identity/identity.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
-            </outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>src/repository/conf/identity/application-authentication.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity
             </outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/repository/conf/identity/thrift-authentication.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/identity</outputDirectory>
-            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>

@@ -1,0 +1,165 @@
+<%
+/*
+ ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~
+ ~ WSO2 Inc. licenses this file to you under the Apache License,
+ ~ Version 2.0 (the "License"); you may not use this file except
+ ~ in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~ http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing,
+ ~ software distributed under the License is distributed on an
+ ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~ KIND, either express or implied.  See the License for the
+ ~ specific language governing permissions and limitations
+ ~ under the License.
+ */
+
+// TODO: change the name of this jaggery file even thoe it says 'store_alerts' it is actually removing the alerts from the data store as well o.O wired
+var log = new Log();
+var constants = require("../controllers/constants.jag");
+
+var getRegistry = function() {
+    var carbon = require("carbon");
+    var server = new carbon.server.Server();
+    return new carbon.registry.Registry(server, {
+        system: true
+    });
+};
+
+/**
+ * Get the registry path to save the alert
+ * @param {String} alert_type               Type of the alert
+ * @param {String} id                       Id of the device
+ * @param {String} optional                 /optional identity
+ * @return {String}                         Registry Path to save teh alert
+ * */
+var registryPath = function (alert_type, id, optional) {
+    if (alert_type  && id ) {
+        if (alert_type === constants.EXECUTION_PLAN_TYPE_SPEED || alert_type === constants
+                        .EXECUTION_PLAN_TYPE_PROXIMITY) {
+            return constants.REGISTRY_PATH_FOR_ALERTS + alert_type + "/" + id;
+        } else {
+            return constants.REGISTRY_PATH_FOR_ALERTS + alert_type + "/" + id + "/" + optional;
+        }
+    } else {
+        throw "Alert type and ID are mandatory field to generate the relevant registry path";
+    }
+};
+
+
+/**
+ * To store the alerts for visualizing purposes
+ * @param resourceContents Value that need to saved
+ * @param executionPlan Type of the execution plan
+ * @param optional Optional parameters that are only specific to particular device types
+ * @param deviceId Id of the device
+ */
+function store(resourceContents, executionPlan, optional, deviceId) {
+    var registry = getRegistry();
+    var pathToAddAlert = "";
+    if (log.isDebugEnabled()) {
+        log.debug("DEBUG:*** resourceContents:" + resourceContents);
+    }
+    if (executionPlan === constants.EXECUTION_PLAN_TYPE_SPEED) {
+        pathToAddAlert = registryPath(constants.EXECUTION_PLAN_TYPE_SPEED, deviceId);
+        registry.put(pathToAddAlert, {
+            content: '{"speedLimit": ' + resourceContents + '}',
+            mediaType: 'application/json'
+        });
+        if (log.isDebugEnabled()) {
+            log.debug("DEBUG:*** Current speed limit set to:" + currentLimit.content);
+        }
+    }
+    else if (executionPlan === constants.EXECUTION_PLAN_TYPE_WITHIN) {
+        pathToAddAlert = registryPath(constants.EXECUTION_PLAN_TYPE_WITHIN, deviceId, optional.queryName);
+        if (log.isDebugEnabled()) {
+            log.debug("DEBUG:****** resourceContents = " + String('{"geoJson": ' + resourceContents + '}'));
+        }
+        registry.put(pathToAddAlert, {
+            content: JSON.stringify(resourceContents),
+            mediaType: 'application/json',
+            properties : {
+                "queryName" : optional.queryName,
+                "areaName" : optional.customName
+            }
+        });
+    } else if (executionPlan === constants.EXECUTION_PLAN_TYPE_PROXIMITY) {
+        pathToAddAlert = registryPath(constants.EXECUTION_PLAN_TYPE_PROXIMITY, deviceId);
+        if (log.isDebugEnabled()) {
+            log.debug("DEBUG:****** resourceContents = " + resourceContents);
+        }
+        registry.put(pathToAddAlert, {
+            content: "",
+            mediaType: 'application/json'
+        });
+        registry.addProperty(pathToAddAlert, "proximityDistance", resourceContents.proximityDistance);
+        registry.addProperty(pathToAddAlert, "proximityTime", resourceContents.proximityTime);
+    } else if (executionPlan === constants.EXECUTION_PLAN_TYPE_STATIONARY) {
+        pathToAddAlert = registryPath(constants.EXECUTION_PLAN_TYPE_STATIONARY, deviceId, optional.queryName);
+        if (log.isDebugEnabled()) {
+            log.debug("DEBUG:****** resourceContents = " + resourceContents);
+        }
+        var registryResource = {
+            content: JSON.stringify(resourceContents.geoFenceGeoJSON),
+            mediaType: 'application/json',
+            properties: {
+                "queryName" :  optional.queryName,
+                "stationeryName" : optional.customName,
+                "stationeryTime" : resourceContents.stationeryTime,
+                "fluctuationRadius" : resourceContents.fluctuationRadius
+            }
+        };
+        registry.put(pathToAddAlert, registryResource);
+    } else if (executionPlan === constants.EXECUTION_PLAN_TYPE_TRAFFIC) {
+        pathToAddAlert = registryPath(constants.EXECUTION_PLAN_TYPE_TRAFFIC, deviceId, optional.queryName);
+        if (log.isDebugEnabled()) {
+            log.debug("DEBUG:****** resourceContents = " + resourceContents.geoFenceGeoJSON);
+        }
+        var registryResource = {
+            content: JSON.stringify(resourceContents),
+            mediaType: 'application/json',
+            properties: {
+                "queryName" :  optional.queryName,
+                "stationeryName" : optional.customName,
+                "stationeryTime" : resourceContents.stationeryTime,
+                "fluctuationRadius" : resourceContents.fluctuationRadius
+            }
+        };
+        registry.put(pathToAddAlert, {
+            content: JSON.stringify(resourceContents),
+            mediaType: 'application/json',
+            properties: {
+                "queryName" :  optional.queryName,
+                "areaName" : optional.customName
+            }
+        });
+    }
+}
+
+/**
+ * To remove the registry resource
+ * @param queryName Name of the query that need to be removed
+ * @param executionPlanType type of the execution plan that need to be removed
+ * @param deviceId Id of the device
+ */
+function remove(queryName, executionPlanType, deviceId) {
+    var path = "";
+    try {
+        if (executionPlanType === constants.EXECUTION_PLAN_TYPE_SPEED || executionPlanType === constants.EXECUTION_PLAN_TYPE_PROXIMITY) {
+            path = registryPath(executionPlanType, deviceId);
+        } else {
+            path = registryPath(executionPlanType, deviceId, queryName);
+        }
+        getRegistry().remove(path);
+        if (log.isDebugEnabled()) {
+            log.debug("Resource is removed from the path" + path);
+        }
+    }
+    catch (e) {
+        log.error("The requested resource " + path + " was not found on this server.");
+    }
+}
+%>

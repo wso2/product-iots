@@ -24,6 +24,10 @@
         <version>1</version>
     </parent>
 
+    <modules>
+        <module>connectedcup</module>
+    </modules>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.devicemgt-plugins</groupId>
     <artifactId>iot-devicetype-samples</artifactId>
@@ -46,13 +50,13 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
+                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-									org.coffeeking:org.coffeeking.connectedcup.feature:\${carbon.device.mgt.plugin.version}
+                                    org.coffeeking:org.coffeeking.connectedcup.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -65,14 +69,14 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
-                            <destination>\${basedir}/../core/repository/components</destination>
+                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
+                            <destination>${basedir}/../core/repository/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
-                                    <version>\${carbon.device.mgt.plugin.version}</version>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                             </features>
                         </configuration>

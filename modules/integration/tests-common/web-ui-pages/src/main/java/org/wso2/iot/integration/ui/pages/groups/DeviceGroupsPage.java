@@ -41,8 +41,7 @@ public class DeviceGroupsPage {
         this.uiElementMapper = UIElementMapper.getInstance();
         WebDriverWait webDriverWait = new WebDriverWait(driver, UIUtils.webDriverTimeOut);
 
-        if (!webDriverWait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath(
-                uiElementMapper.getElement("iot.device.groups.view.header.xpath"))), "GROUP"))) {
+        if (!webDriverWait.until(ExpectedConditions.titleContains(uiElementMapper.getElement("cdmf.groups.page")))) {
             throw new IllegalStateException("This is not the Groups page");
         }
     }
@@ -64,8 +63,8 @@ public class DeviceGroupsPage {
      * @return : True if the group is visible. False otherwise.
      */
     public boolean isGroupCreated(String groupName) {
-        WebElement table = driver.findElement(By.id(uiElementMapper.getElement("iot.device.table.id")));
-        List<WebElement> allGroupNames = table.findElements(By.tagName("h4"));
+        WebElement table = driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.table.id")));
+        List<WebElement> allGroupNames = table.findElements(By.tagName("td"));
 
         for (WebElement name : allGroupNames) {
             if (name.getText().contains(groupName)){
