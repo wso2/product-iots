@@ -41,7 +41,7 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
-                <version>1.5.3</version>
+                <version>1.5.4</version>
                 <executions>
                     <execution>
                         <id>2-p2-repo-generation</id>
@@ -56,7 +56,7 @@
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.coffeeking:org.coffeeking.connectedcup.feature:${carbon.device.mgt.plugin.version}
+                                    org.coffeeking:org.coffeeking.connectedcup.feature:\${org.coffeeking.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -76,7 +76,7 @@
                             <features>
                                 <feature>
                                     <id>org.coffeeking.connectedcup.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                    <version>\${org.coffeeking.version}</version>
                                 </feature>
                             </features>
                         </configuration>
@@ -189,6 +189,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>1.0.0</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
+        <org.coffeeking.version>1.0.0</org.coffeeking.version>
     </properties>
 </project>
