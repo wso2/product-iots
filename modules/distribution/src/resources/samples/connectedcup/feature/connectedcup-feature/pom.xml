@@ -41,18 +41,18 @@
 		<dependency>
 			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-			<version>${wso2.iot.version}</version>
+			<version>${org.coffeeking.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.api</artifactId>
-			<version>${wso2.iot.version}</version>
+			<version>${org.coffeeking.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>org.coffeeking</groupId>
 			<artifactId>org.coffeeking.connectedcup.agent</artifactId>
-			<version>${wso2.iot.version}</version>
+			<version>${org.coffeeking.version}</version>
 			<type>war</type>
 		</dependency>
 		<dependency>
@@ -105,7 +105,7 @@
                                     <groupId>org.coffeeking</groupId>
                                     <artifactId>org.coffeeking.connectedcup.analytics
                                     </artifactId>
-                                    <version>${project.version}</version>
+                                    <version>${org.coffeeking.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
@@ -117,7 +117,7 @@
                                     <groupId>org.coffeeking</groupId>
                                     <artifactId>org.coffeeking.connectedcup.ui
                                     </artifactId>
-                                    <version>${project.version}</version>
+                                    <version>${org.coffeeking.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>
