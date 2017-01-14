@@ -25,21 +25,21 @@
     <fileSets>
         <!-- Copying p2 profile and osgi bundles-->
         <fileSet>
-            <directory>target/wso2iot-core-${product.iot.version}/</directory>
+            <directory>${basedir}/target/wso2iot-core-${product.iot.version}/</directory>
             <outputDirectory>wso2iot-${product.iot.version}/core</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/wso2iot-analytics-${product.iot.version}</directory>
+            <directory>${basedir}/target/wso2iot-analytics-${product.iot.version}</directory>
             <outputDirectory>wso2iot-${product.iot.version}/analytics</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/wso2iot-broker-${product.iot.version}</directory>
+            <directory>${basedir}/target/wso2iot-broker-${product.iot.version}</directory>
             <outputDirectory>wso2iot-${product.iot.version}/broker</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -54,7 +54,7 @@
             <!--<fileMode>755</fileMode>-->
         <!--</fileSet>-->
         <fileSet>
-            <directory>src/resources/plugins</directory>
+            <directory>${basedir}/src/resources/plugins</directory>
             <outputDirectory>wso2iot-${product.iot.version}/plugins</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -63,18 +63,22 @@
 			<filtered>true</filtered>
         </fileSet>
 		<fileSet>
-			<directory>src/resources/samples</directory>
+			<directory>${basedir}/src/resources/samples</directory>
 			<outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
 			<includes>
 				<include>*/**</include>
 			</includes>
+            <excludes>
+                <exclude>**/*samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup/pom.xml</exclude>
+            </excludes>
 			<fileMode>644</fileMode>
 		</fileSet>
     </fileSets>
 	<files>
 		<file>
 			<source>
-				src/resources/samples/samples-deployer.xml
+                ${basedir}/src/resources/samples/samples-deployer.xml
 			</source>
 			<outputDirectory>wso2iot-${product.iot.version}/samples/</outputDirectory>
 			<filtered>true</filtered>
@@ -82,7 +86,7 @@
 		</file>
 		<file>
 			<source>
-				src/resources/samples/connectedcup/pom.xml
+                ${basedir}/src/resources/samples/connectedcup/pom.xml
 			</source>
 			<outputDirectory>wso2iot-${product.iot.version}/samples/connectedcup</outputDirectory>
 			<filtered>true</filtered>
