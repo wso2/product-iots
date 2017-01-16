@@ -609,23 +609,6 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/repository/resources/web-apps</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
-            <includes>
-                <include>api-application-registration.war</include>
-                <include>api#device-mgt#v1.0.war</include>
-                <include>api#scep-mgt#v1.0.war</include>
-                <include>client-registration#v0.11.war</include>
-                <include>secured-websocket.war</include>
-                <include>api#certificate-mgt#v1.0.war</include>
-                <include>api#identity#entitlement.war</include>
-                <include>authenticationendpoint.war</include>
-                <include>oauth2.war</include>
-                <include>shindig.war</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/social/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social</outputDirectory>
         </fileSet>
@@ -1368,6 +1351,77 @@
             <source>src/repository/jaggeryapps/store/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/store/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
+            <source>src/repository/resources/web-apps/api-application-registration.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/api#device-mgt#v1.0.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/api#scep-mgt#v1.0.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/client-registration#v0.11.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/secured-websocket.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/api#certificate-mgt#v1.0.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/api#identity#entitlement.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/authenticationendpoint.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/oauth2.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/resources/web-apps/shindig.war</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
