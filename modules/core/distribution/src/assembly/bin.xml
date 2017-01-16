@@ -1348,7 +1348,7 @@
             <fileMode>755</fileMode>
         </file>
 
-        <file>
+<!--        <file>
             <source>src/repository/resources/web-apps/api-application-registration.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
@@ -1417,6 +1417,6 @@
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
-        </file>
+        </file>-->
     </files>
 </assembly>
