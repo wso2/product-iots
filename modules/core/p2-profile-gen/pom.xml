@@ -783,7 +783,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-devicetype-worker-profile</id>
+                        <id>p2-profile-generation-devicetype-backend-profile</id>
                         <phase>package</phase>
                         <goals>
                             <goal>materialize-product</goal>
@@ -795,7 +795,7 @@
                             <targetPath>
                                 file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
                             </targetPath>
-                            <profile>devicetype-worker</profile>
+                            <profile>devicetype-backend</profile>
                         </configuration>
                     </execution>
                     <execution>
@@ -3080,7 +3080,7 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>devicetype-worker</profile>
+                            <profile>devicetype-backend</profile>
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
