@@ -1,9 +1,0 @@
-{
-    "id": "Android_Realtime_Battery",
-    "title": "Android Realtime Battery",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Realtime_Battery/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Realtime_Battery/gadget.xml"
-    }
-}

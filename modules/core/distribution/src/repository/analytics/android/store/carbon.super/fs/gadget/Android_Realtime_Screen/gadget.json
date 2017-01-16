@@ -1,9 +1,0 @@
-{
-    "id": "Android_Realtime_Screen",
-    "title": "Android Realtime Screen",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Realtime_Screen/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Realtime_Screen/gadget.xml"
-    }
-}

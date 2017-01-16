@@ -1,9 +1,0 @@
-{
-    "id": "Android_Headset_Usage_Chart",
-    "title": "Android Headset Usage Chart",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Headset_Usage_Chart/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Headset_Usage_Chart/gadget.xml"
-    }
-}
