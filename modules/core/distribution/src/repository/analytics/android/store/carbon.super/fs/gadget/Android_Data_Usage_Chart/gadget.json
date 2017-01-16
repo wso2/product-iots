@@ -1,9 +1,0 @@
-{
-    "id": "Android_Data_Usage_Chart",
-    "title": "Android Data Usage Chart",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Data_Usage_Chart/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Data_Usage_Chart/gadget.xml"
-    }
-}

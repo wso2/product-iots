@@ -1,9 +1,0 @@
-{
-    "id": "Android_Realtime_Audio",
-    "title": "Android Realtime Audio",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Realtime_Audio/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Realtime_Audio/gadget.xml"
-    }
-}

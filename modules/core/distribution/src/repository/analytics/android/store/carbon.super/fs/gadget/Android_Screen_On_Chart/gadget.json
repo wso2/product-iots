@@ -1,9 +1,0 @@
-{
-    "id": "Android_Screen_On_Chart",
-    "title": "Android Screen On Chart",
-    "type": "gadget",
-    "thumbnail": "gadget/Android_Screen_On_Chart/thumbnail.png",
-    "data": {
-        "url": "gadget/Android_Screen_On_Chart/gadget.xml"
-    }
-}
