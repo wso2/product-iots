@@ -41,7 +41,7 @@
               "clientName": "portal",
               "owner": "admin",
               "password":"admin",
-              "dynamicClientAppRegistrationServiceURL": "https://localhost:9443/client-registration/v0.10/register",
+              "dynamicClientAppRegistrationServiceURL": "https://localhost:9443/dynamic-client-web/register",
               "apiManagerClientAppRegistrationServiceURL": "%https.host%/api-application-registration/register/tenants",
               "grantType": "password refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer urn:ietf:params:oauth:grant-type:jwt-bearer",
               "tokenScope": "admin",
