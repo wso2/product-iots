@@ -1320,13 +1320,6 @@
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/jaggeryapps/devicemgt/jaggery.conf</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/devicemgt/
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
             <source>src/repository/jaggeryapps/portal/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/
