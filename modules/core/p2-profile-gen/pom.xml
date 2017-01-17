@@ -3204,6 +3204,7 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
+
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.adapter.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -3671,6 +3672,25 @@
 									<version>${identity.inbound.auth.saml.version.iotcore}</version>
 								</feature>
 								<!-- SSO Fix-->
+
+								<!-- Dashboard Features -->
+								<feature>
+									<id>org.wso2.carbon.dashboards.shindig.feature.group</id>
+									<version>${carbon.dashboard.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.dashboards.portal.feature.group</id>
+									<version>${carbon.dashboard.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.dashboard.deployment.feature.group</id>
+									<version>${carbon.dashboard.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.iot.device.statistics.dashboard.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
+								<!-- End of Dashboard Features -->
                             </features>
                         </configuration>
                     </execution>
