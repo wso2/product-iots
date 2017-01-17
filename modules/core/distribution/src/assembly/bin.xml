@@ -1348,75 +1348,68 @@
             <fileMode>755</fileMode>
         </file>
 
-<!--        <file>
-            <source>src/repository/resources/web-apps/api-application-registration.war</source>
+        <file>
+            <source>target/webapp-temp/api-application-registration.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/api#device-mgt#v1.0.war</source>
+            <source>target/webapp-temp/api#scep-mgt#v1.0.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/api#scep-mgt#v1.0.war</source>
+            <source>target/webapp-temp/client-registration#v0.11.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/client-registration#v0.11.war</source>
+            <source>target/webapp-temp/secured-websocket.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/secured-websocket.war</source>
+            <source>target/webapp-temp/api#certificate-mgt#v1.0.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/api#certificate-mgt#v1.0.war</source>
+            <source>target/webapp-temp/api#identity#entitlement.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/api#identity#entitlement.war</source>
+            <source>target/webapp-temp/authenticationendpoint.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/authenticationendpoint.war</source>
+            <source>target/webapp-temp/oauth2.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/repository/resources/web-apps/oauth2.war</source>
+            <source>target/webapp-temp/shindig.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-        <file>
-            <source>src/repository/resources/web-apps/shindig.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>-->
     </files>
 </assembly>
