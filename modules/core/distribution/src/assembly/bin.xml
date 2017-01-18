@@ -1313,6 +1313,13 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>src/repository/jaggeryapps/android-web-agent/jaggery.conf</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
             <source>src/repository/jaggeryapps/api-store/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/api-store/
@@ -1344,6 +1351,13 @@
             <source>src/repository/jaggeryapps/store/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/store/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/jaggeryapps/windows-web-agent/jaggery.conf</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent/
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>

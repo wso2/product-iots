@@ -833,5 +833,12 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/repository/jaggeryapps/portal/jaggery.conf</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
     </files>
 </assembly>
