@@ -50,8 +50,8 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
@@ -69,9 +69,9 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
-                            <destination>${basedir}/../core/repository/components</destination>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../core/repository/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
