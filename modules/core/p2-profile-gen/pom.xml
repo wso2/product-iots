@@ -699,6 +699,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.api.client.feature:${carbon.analytics.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics:org.wso2.carbon.analytics.jsservice.feature:${carbon.analytics.version}
+                                </featureArtifactDef>
                                 <!-- *************** End of DAS Client *************** -->
 
                                 <featureArtifactDef>
@@ -1495,6 +1498,10 @@
                                 <!-- *************** START - DAS Client *************** -->
                                 <feature>
                                     <id>org.wso2.carbon.analytics.api.client.feature.group</id>
+                                    <version>${carbon.analytics.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.jsservice.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <!-- *************** END - DAS Client *************** -->
