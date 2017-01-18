@@ -87,7 +87,7 @@
         <filter-class>org.wso2.carbon.ui.filters.cache.ContentTypeBasedCachePreventionFilter</filter-class>
         <init-param>
             <param-name>patterns</param-name>
-            <param-value>"text/html*","application/json*","text/plain*"</param-value>
+            <param-value>text/html" ,application/json" ,text/plain</param-value>
         </init-param>
         <init-param>
             <param-name>filterAction</param-name>
