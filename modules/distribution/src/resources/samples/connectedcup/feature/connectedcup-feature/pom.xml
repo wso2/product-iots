@@ -219,7 +219,7 @@
 							</adviceFile>
 							<bundles>
 								<bundleDef>
-									org.coffeeking:org.coffeeking.connectedcup.plugin:${wso2.iot.version}
+									org.coffeeking:org.coffeeking.connectedcup.plugin:${org.coffeeking.version}
 								</bundleDef>
 							</bundles>
 							<importFeatures>
