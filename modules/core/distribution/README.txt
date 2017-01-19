@@ -1,6 +1,6 @@
 WSO2 IoT Server
 ----------------------
-Welcome to the WSO2 IoT Server (IoTS) 1.0.0-ALPHA release
+Welcome to the WSO2 IoT Server (IoTS) 3.0.0 release
 =======
 
 Key Features
@@ -11,13 +11,10 @@ Key Features
 Installation & Running
 ----------------------
 1. Extract the downloaded zip file
-2. Run the wso2server.sh or wso2server.bat file in the bin directory
-3. Once the server starts, point your Web browser to
-   https://localhost:9443/
-4. After publishing these APIs, subscribe to these APIs with default app/any app.
-   In API store, go to my subscriptions and find client ID and secret.
-
-5. Please find the maven-archetype in <PRODUCT_HOME>repository/tools to generate the mdm-android-agent project & follow the README file.
+2. Follow the INSTALL.txt file for install instructions
+3. Once the server starts, point your Web browser to https://localhost:9443/devicemgt to see available device types and operations
+4. Navigate to https://localhost:9443/api-store to see the available device APIs, You can subscribe to these APIs with default application (or by creating new application).
+   In API store, go to my subscriptions and find client ID and secret. Which can be used to invoke these apis.
 
 System Requirements
 -------------------
@@ -28,8 +25,16 @@ System Requirements
 
 WSO2 IoT Server (IoTS) Binary Distribution Directory Structure
 -----------------------------------------------------
+  IoT_HOME
+    .
+    ├── core              //core component
+	├── analytics         //analytics component
+	├── broker            //message broker component
+	├── samples           //sample device types eg. connectedcup
+	├── plugins           //pre-built device types
 
-  EMM_HOME
+IoT core, analytics and broker has similar directory sctructure. As for example core has following structure
+  IoT_HOME/core
         .
         ├── bin              //executables
         ├── dbscripts        //DBScripts
@@ -167,4 +172,4 @@ development methodology and is provided by the very same engineers who build the
 For additional support information please refer to http://wso2.com/support/
 
 ---------------------------------------------------------------------------
-(c) Copyright 2016 WSO2 Inc.
+(c) Copyright 2017 WSO2 Inc.
