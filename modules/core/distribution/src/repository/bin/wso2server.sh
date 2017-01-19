@@ -308,7 +308,7 @@ do
     -Dorg.wso2.ignoreHostnameVerification=true \
     -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
     -Diot.analytics.host="localhost" \
-    -Diot.analytics.https.host="9445" \
+    -Diot.analytics.https.port="9445" \
     -Dmqtt.broker.host="localhost" \
     -Dmqtt.broker.port="1886" \
     -Diot.core.host="localhost" \
