@@ -1,18 +1,20 @@
-(1) Installing  WSO2 Mobile Device Manager 2.0.0-SNAPSHOT
+(1) Installing  WSO2 IoT Server 3.0.0
 
 Running the server
 ---------------
-1. The directory containing this INSTALL file will the root and it will be
-   treated as Carbon home directory and let it be CARBON_HOME.
+1. The directory containing this INSTALL file will be the root and it will be treated as IoT home directory and let it be IoT_HOME.
 
-2. All the shell scripts and .bat files are available in CARBON_HOME/bin folder.
+2. WSO2 IoT Server comes as a composition of three components namely broker, core and analytics.
 
-3. To start WSO2 Enterprise Mobility Management Solution one can use either wso2server.sh or daemon.sh in all *nix
-   system & wso2server.bat file on Windows operating systems.
+3. Starting order of IoT components shuld be broker, core, analytics.
+To start/stop/restart the IoT components one can use wso2server.sh for *nix systems & wso2server.bat for Windows systems which can be found in following locations.
+ IoT_HOME/broker/bin
+ IoT_HOME/core/bin
+ IoT_HOME/analytics/bin
 
-4. Either of the following commands can be used to start WSO2 UES
+4. The wso2server.sh and wso2server.bat has following commands
+
       i)  ./wso2server.sh {console|start|stop|restart|status|dump|version}
-     ii)  ./daemon.sh {console|start|stop|restart|status|dump}
     iii)  wso2server.bat {start|stop|version}
 
     Usage: wso2server.sh [command]
@@ -20,9 +22,9 @@ Running the server
     	--debug <port> 	Start the server in remote debugging mode.
     			port: The remote debugging port.
     	--run		Run the server
-    	--start		Start Carbon as a Unix daemon in the background
-    	--console	Start Carbon as a Unix daemon in the foreground
-    	--stop		Stop the Carbon Unix daemon
+    	--start		Start the server as a Unix daemon in the background
+    	--console	Start the server as a Unix daemon in the foreground
+    	--stop		Stop the server Unix daemon
     	--status	Get the status of the Carbon Unix daemon
     	--dump		Print a thread dump of the Carbon Unix daemon
     	--restart	Restart the Carbon Unix daemon
@@ -33,7 +35,7 @@ Running the server
 
 System Requirements
 -------------------
-1. Minimum memory - 2GB
+1. Minimum memory - 4GB
 2. The Management Console requires full Javascript enablement of the Web browser
    NOTE:
      On Windows Server 2003, it is not allowed to go below the medium security
