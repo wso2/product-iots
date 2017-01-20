@@ -492,6 +492,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
             </outputDirectory>
+			<excludes>
+				<exclude>**/jaggery.conf</exclude>
+			</excludes>
         </fileSet>
         <fileSet>
             <directory>
@@ -510,6 +513,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
             </outputDirectory>
+			<excludes>
+				<exclude>**/jaggery.conf</exclude>
+			</excludes>
         </fileSet>
         <fileSet>
             <directory>
@@ -518,6 +524,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
             </outputDirectory>
+			<excludes>
+				<exclude>**/jaggery.conf</exclude>
+			</excludes>
         </fileSet>
 
         <fileSet>
@@ -548,6 +557,7 @@
                 <exclude>publisherSite/**</exclude>
                 <exclude>footer/**</exclude>
                 <exclude>localstyles.css</exclude>
+				<exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -562,6 +572,7 @@
                 <exclude>base-page/**</exclude>
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
+				<exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
 
@@ -579,6 +590,7 @@
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
                 <exclude>**/site/conf/site.json</exclude>
+				<exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
 
@@ -611,6 +623,9 @@
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/jaggeryapps/social/</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social</outputDirectory>
+			<excludes>
+				<exclude>**/jaggery.conf</exclude>
+			</excludes>
         </fileSet>
 
         <fileSet>
@@ -726,6 +741,7 @@
             </includes>
             <excludes>
                 <exclude>**/configs/designer.json</exclude>
+				<exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
 
