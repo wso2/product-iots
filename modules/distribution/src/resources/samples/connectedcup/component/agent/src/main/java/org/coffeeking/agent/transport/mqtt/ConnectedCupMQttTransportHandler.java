@@ -41,7 +41,7 @@ public class ConnectedCupMQttTransportHandler extends MQTTTransportHandler {
     private static String publishTopic = "%s/" + DEVICE_TYPE + "/%s";
 
     protected ConnectedCupMQttTransportHandler() {
-        super(iotServerSubscriber, DEVICE_TYPE, "tcp://localhost:1883", "");
+        super(iotServerSubscriber, DEVICE_TYPE, "tcp://localhost:1886", "");
     }
 
     private ScheduledFuture<?> dataPushServiceHandler;
