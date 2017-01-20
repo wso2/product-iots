@@ -578,6 +578,17 @@
             <fileMode>644</fileMode>
         </file>
 
+        <file>
+            <!-- copying LICENSE.txt -->
+            <source>
+                src/main/resources/LICENSE.txt
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <!--spark defaults file-->
         <file>
             <source>
