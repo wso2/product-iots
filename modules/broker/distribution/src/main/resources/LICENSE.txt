@@ -171,7 +171,7 @@ org.wso2.carbon.andes.event.admin_3.1.3.jar                                     
 org.wso2.carbon.andes.event.core_3.1.3.jar                                      bundle         apache2   11065
 org.wso2.carbon.andes.event.stub_3.1.3.jar                                      bundle         apache2   11064
 org.wso2.carbon.andes.event.ui_3.1.3.jar                                        bundle         apache2   11063
-org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization_3.0.7.jar        bundle         apache2   11062
+org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization_3.0.8.jar        bundle         apache2   11062
 org.wso2.carbon.andes.mgt.stub_3.1.3.jar                                        bundle         apache2   11061
 org.wso2.carbon.andes.stub_3.1.3.jar                                            bundle         apache2   11060
 org.wso2.carbon.andes.ui_3.1.3.jar                                              bundle         apache2   11059

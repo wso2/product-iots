@@ -1,26 +1,26 @@
 WSO2 IoT Server
 ----------------------
-Welcome to the WSO2 IoT Server (IoTS) 3.0.0 release
+Welcome to the WSO2 IoT Server (IoTS) 3.0.0 release.
 =======
 
 Key Features
 ------------
-1.  Self-service device enrollment and management with end-user IoTS console
+Self-service device enrollment and management with an end-user IoTS console.
 
 
 Installation & Running
 ----------------------
-1. Extract the downloaded zip file
-2. Follow the INSTALL.txt file for install instructions
-3. Once the server starts, point your Web browser to https://localhost:9443/devicemgt to see available device types and operations
-4. Navigate to https://localhost:9443/api-store to see the available device APIs, You can subscribe to these APIs with default application (or by creating new application).
-   In API store, go to my subscriptions and find client ID and secret. Which can be used to invoke these apis.
+1. Extract the downloaded ZIP file.
+2. Follow the INSTALL.txt file for install instructions.
+3. After the server starts, point your Web browser to https://localhost:9443/devicemgt in order to see the available device types and operations
+4. Navigate to https://localhost:9443/api-store to see the available device APIs. You can subscribe to these APIs with the default application (or by creating a new application).
+   In the API Store, go to my subscriptions and locate the client ID and secret, which can be used to invoke these APIs.
 
 System Requirements
 -------------------
 
 1. Minimum memory - 4GB
-2. Portal app requires full Javascript enablement of the Web browser
+2. The portal app requires full Javascript enablement on the Web browser
 
 
 WSO2 IoT Server (IoTS) Binary Distribution Directory Structure
@@ -28,12 +28,12 @@ WSO2 IoT Server (IoTS) Binary Distribution Directory Structure
   IoT_HOME
     .
     ├── core              //core component
-	├── analytics         //analytics component
-	├── broker            //message broker component
-	├── samples           //sample device types eg. connectedcup
+	├── analytics         //Analytics component
+	├── broker            //Message Broker component
+	├── samples           //sample device types e.g., connectedcup
 	├── plugins           //pre-built device types
 
-IoT core, analytics and broker has similar directory sctructure. As for example core has following structure
+The IoTS Core, Analytics, and Broker have similar directory structures. For example Core has the following structure:
   IoT_HOME/core
         .
         ├── bin              //executables
@@ -50,7 +50,7 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
 
 
     - bin
-      Contains various scripts .sh & .bat scripts.
+      Contains various scripts (i.e., .sh & .bat scripts).
 
     - dbscripts
       Contains the database creation & seed data population SQL scripts for
@@ -62,9 +62,8 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
 
     - repository
       The repository where Carbon artifacts & Axis2 services and
-      modules deployed in WSO2 Carbon are stored.
-      In addition to this other custom deployers such as
-      dataservices and axis1services are also stored.
+      modules deployed in WSO2 Carbon, and other custom deployers such as
+      dataservices and axis1services are stored.
 
         - carbonapps
           Carbon Application hot deployment directory.
@@ -73,7 +72,7 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
           Contains all OSGi related libraries and configurations.
 
         - conf
-          Contains server configuration files. Ex: axis2.xml, carbon.xml
+          Contains server configuration files. e.g., axis2.xml, carbon.xml
 
         - data
           Contains internal LDAP related data.
@@ -83,7 +82,7 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
 
         - deployment
           Contains server side and client side Axis2 repositories.
-        All deployment artifacts should go into this directory.
+          All deployment artifacts should go into this directory.
 
         - logs
           Contains all log files created during execution.
@@ -92,16 +91,15 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
           Contains additional resources that may be required.
 
   - tenants
-    Directory will contain relevant tenant artifacts
-    in the case of a multitenant deployment.
+    This directory will contain relevant tenant artifacts
+    in the case of a multi-tenant deployment.
 
     - tmp
       Used for storing temporary files, and is pointed to by the
-      java.io.tmpdir System property.
+      java.io.tmpdir system property.
 
     - webapp-mode
-      The user has the option of running WSO2 Carbon in webapp mode (hosted as a web-app in an application server).
-      This directory contains files required to run Carbon in webapp mode.
+      You have the option of running WSO2 Carbon in the webapp mode (hosted as a web-app in an application server). This directory contains files required to run Carbon in the webapp mode.
 
     - LICENSE.txt
       Apache License 2.0 under which WSO2 Carbon is distributed.
@@ -113,61 +111,55 @@ IoT core, analytics and broker has similar directory sctructure. As for example 
       This document contains information on installing WSO2 IoT Server.
 
     - release-notes.html
-      Release information for WSO2 IoT Server 1.0.0-ALPHA
+      Release information for WSO2 IoT Server 3.0.0
 
-Secure sensitive information in carbon configuration files
+Secure sensitive information in Carbon configuration files
 ----------------------------------------------------------
 
-There are sensitive information such as passwords in the carbon configuration.
-You can secure them by using secure vault. Please go through following steps to
-secure them with default mode.
+There is sensitive information such as passwords in the Carbon configuration.
+You can secure them by using secure vault. Please go through the following steps to
+secure them with the default mode.
 
-1. Configure secure vault with default configurations by running ciphertool
-  script from bin directory.
+1. Configure secure vault with the default configurations by running the ciphertool
+  script from the bin directory.
 
 > ciphertool.sh -Dconfigure   (in UNIX)
 
-This script would do following configurations that you need to do by manually
+This script automates the following configurations that you would normally need to do manually.
 
-(i) Replaces sensitive elements in configuration files,  that have been defined in
+(i) Replaces sensitive elements in configuration files that have been defined in
      cipher-tool.properties, with alias token values.
-(ii) Encrypts plain text password which is defined in cipher-text.properties file.
-(iii) Updates secret-conf.properties file with default keystore and callback class.
+(ii) Encrypts the plain text password which is defined in the cipher-text.properties file.
+(iii) Updates the secret-conf.properties file with the default keystore and callback class.
 
 cipher-tool.properties, cipher-text.properties and secret-conf.properties files
-      can be found at repository/conf/security directory.
+      can be found in the <IoT_HOME>/repository/conf/security directory.
 
-2. Start server by running wso2server script from bin directory
+2. Start the server by running the wso2server script, which is in the <IoT_HOME>/bin directory.
 
 > wso2server.sh   (in UNIX)
 
-By default mode, it would ask you to enter the master password
-(By default, master password is the password of carbon keystore and private key)
+When running the default mode, it asks you to enter the master password
+(By default, the master password is the password of the Carbon keystore and private key)
 
-3. Change any password by running ciphertool script from bin directory.
+3. Change any password by running the ciphertool script, which is in the <IoT_HOME>/bin directory.
 
 > ciphertool -Dchange  (in UNIX)
 
-For more details see
-http://docs.wso2.org/wiki/display/Carbon410/WSO2+Carbon+Secure+Vault
+For more information, see
+https://docs.wso2.com/display/ADMIN44x/Carbon+Secure+Vault+Implementation
 
 Training
 --------
 
-WSO2 Inc. offers a variety of professional Training Programs, including
-training on general Web services as well as WSO2 Enterprise Store, Apache Axis2,
-Data Services and a number of other products.
-
-For additional support information please refer to
-http://wso2.com/training/
+WSO2 Inc. offers a variety of professional Training Programs for WSO2 products.
+For additional support on training information please goto http://wso2.com/training/
 
 
 Support
 -------
 
-We are committed to ensuring that your enterprise middleware deployment is completely supported
-from evaluation to production. Our unique approach ensures that all support leverages our open
-development methodology and is provided by the very same engineers who build the technology.
+We are committed to ensuring that your enterprise middleware deployment is completely supported from evaluation to production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology.
 
 For additional support information please refer to http://wso2.com/support/
 
