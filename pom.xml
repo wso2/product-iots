@@ -1634,7 +1634,7 @@
         <orbit.version.h2>1.2.140.wso2v3</orbit.version.h2>
         <orbit.version.joda-time>2.8.2.wso2v1</orbit.version.joda-time>
         <orbit.version.json>2.0.0.wso2v1</orbit.version.json>
-        <carbon.dashboard.version>2.0.6-SNAPSHOT</carbon.dashboard.version>
+        <carbon.dashboard.version>2.0.6</carbon.dashboard.version>
         <carbon.event-processing.version>2.1.4</carbon.event-processing.version>
         <imp.pkg.version.javax.servlet>[2.6.0,3.0.0)</imp.pkg.version.javax.servlet>
         <akka.version>2.3.4-spark</akka.version>
