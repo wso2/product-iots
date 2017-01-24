@@ -146,6 +146,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.application.extension.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.integration.client.feature:${carbon.device.mgt.version}
+								</featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.handler.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
@@ -618,6 +621,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.dcr.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.publisher.feature:${carbon.api.mgt.version}
+								</featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.store.feature:${carbon.api.mgt.version}
+								</featureArtifactDef>
                                 <!-- End of API Management Features -->
 
                                 <!-- TCP Transport -->
@@ -890,6 +899,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -1050,6 +1063,14 @@
                                     <id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
                                 <!-- API Manager Publisher and Store Features -->
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
@@ -1904,6 +1925,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2320,6 +2345,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.dynamic.client.registration.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2383,6 +2412,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2505,6 +2538,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2856,6 +2893,18 @@
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.core.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
@@ -3014,6 +3063,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3139,6 +3192,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3471,6 +3528,18 @@
                                     <id>org.wso2.carbon.apimgt.store.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
+									<version>${carbon.api.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                     <version>${carbon.governance.version}</version>
@@ -3621,6 +3690,10 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
