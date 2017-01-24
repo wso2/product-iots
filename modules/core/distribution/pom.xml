@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.wso2.iot</groupId>
 		<artifactId>wso2iot-core-parent</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -650,34 +650,25 @@
 								<delete file="${tempdir}/secured-websocket/WEB-INF/web.xml" />
 								<delete file="${tempdir}/shindig/WEB-INF/web.xml" />
 
-								<copy file="src/repository/resources/web-apps/web-xml/api-application-registration/web.xml"
-									  tofile="${tempdir}/api-application-registration/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/api#certificate-mgt#v1.0/web.xml"
-									  tofile="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/api#identity#entitlement/web.xml"
-									  tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/api#scep-mgt#v1.0/web.xml"
-									  tofile="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/authenticationendpoint/web.xml"
-									  tofile="${tempdir}/authenticationendpoint/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/client-registration#v0.11/web.xml"
-									  tofile="${tempdir}/client-registration#v0.11/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/oauth2/web.xml"
-									  tofile="${tempdir}/oauth2/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/secured-websocket/web.xml"
-									  tofile="${tempdir}/secured-websocket/WEB-INF/web.xml"/>
-								<copy file="src/repository/resources/web-apps/web-xml/shindig/web.xml"
-									  tofile="${tempdir}/shindig/WEB-INF/web.xml"/>
+								<copy file="src/repository/resources/web-apps/web-xml/api-application-registration/web.xml" tofile="${tempdir}/api-application-registration/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/api#certificate-mgt#v1.0/web.xml" tofile="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/api#identity#entitlement/web.xml" tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/api#scep-mgt#v1.0/web.xml" tofile="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/authenticationendpoint/web.xml" tofile="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/client-registration#v0.11/web.xml" tofile="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/oauth2/web.xml" tofile="${tempdir}/oauth2/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/secured-websocket/web.xml" tofile="${tempdir}/secured-websocket/WEB-INF/web.xml" />
+								<copy file="src/repository/resources/web-apps/web-xml/shindig/web.xml" tofile="${tempdir}/shindig/WEB-INF/web.xml" />
 
-								<zip destfile="${tempdir}/api-application-registration.war" basedir="${tempdir}/api-application-registration"/>
-								<zip destfile="${tempdir}/api#certificate-mgt#v1.0.war" basedir="${tempdir}/api#certificate-mgt#v1.0"/>
-								<zip destfile="${tempdir}/api#identity#entitlement.war" basedir="${tempdir}/api#identity#entitlement"/>
-								<zip destfile="${tempdir}/api#scep-mgt#v1.0.war" basedir="${tempdir}/api#scep-mgt#v1.0"/>
-								<zip destfile="${tempdir}/authenticationendpoint.war" basedir="${tempdir}/authenticationendpoint"/>
-								<zip destfile="${tempdir}/client-registration#v0.11.war" basedir="${tempdir}/client-registration#v0.11"/>
-								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2"/>
-								<zip destfile="${tempdir}/secured-websocket.war" basedir="${tempdir}/secured-websocket"/>
-								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig"/>
+								<zip destfile="${tempdir}/api-application-registration.war" basedir="${tempdir}/api-application-registration" />
+								<zip destfile="${tempdir}/api#certificate-mgt#v1.0.war" basedir="${tempdir}/api#certificate-mgt#v1.0" />
+								<zip destfile="${tempdir}/api#identity#entitlement.war" basedir="${tempdir}/api#identity#entitlement" />
+								<zip destfile="${tempdir}/api#scep-mgt#v1.0.war" basedir="${tempdir}/api#scep-mgt#v1.0" />
+								<zip destfile="${tempdir}/authenticationendpoint.war" basedir="${tempdir}/authenticationendpoint" />
+								<zip destfile="${tempdir}/client-registration#v0.11.war" basedir="${tempdir}/client-registration#v0.11" />
+								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2" />
+								<zip destfile="${tempdir}/secured-websocket.war" basedir="${tempdir}/secured-websocket" />
+								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig" />
 
 							</tasks>
 						</configuration>
