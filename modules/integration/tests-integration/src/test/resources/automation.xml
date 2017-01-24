@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -16,8 +16,7 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
-<automation xmlns="automationSchema.xsd">
+<automation xmlns="automationXMLSchema.xsd">
     <!--  =================================================  -->
     <!--                   Parameters                        -->
     <!--  =================================================  -->
@@ -25,15 +24,11 @@
         <!--
          Change this to edit wait time for test artifact deployment
         -->
-        <deploymentDelay>60000</deploymentDelay>
+        <deploymentDelay>300000</deploymentDelay>
         <!--
-         Change this to product|platform/cloud to execute test on specific environment
+         Change this to standalone|platform|all to execute test on specific environment
         -->
         <executionEnvironment>standalone</executionEnvironment>
-        <!--
-         Change this to user/tenant to execute test with user mode or tenant mode
-        -->
-        <multiTenantMode>false</multiTenantMode>
         <!--
          Change this to true if you want to generate coverage statistics
         -->
@@ -50,7 +45,7 @@
         <selenium>
             <!-- Change to enable remote webDriver -->
             <!-- URL of remote webDriver server  -->
-            <remoteDriverUrl enable="true">http://10.100.2.51:4444/wd/hub/</remoteDriverUrl>
+            <remoteDriverUrl enable="false">http://10.100.2.51:4444/wd/hub/</remoteDriverUrl>
 
             <!-- Type of the browser selenium tests are running" -->
             <browser>
@@ -169,39 +164,35 @@
         <!--
         cluster instance details to be used to platform test execution
         -->
-        <productGroup name="MDM" clusteringEnabled="false" default="true">
+        <productGroup name="IOT" clusteringEnabled="false" default="true">
 
-            <instance name="mdm" type="standalone" nonBlockingTransportEnabled="false">
+            <instance name="iot001" type="standalone" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
                 <ports>
-                    <port type="http">10863</port>
-                    <port type="https">10543</port>
+                    <port type="http">9763</port>
+                    <port type="https">9446</port>
+                    <port type="https">9443</port>
+                    <port type="https">9445</port>
                 </ports>
-                <properties>
 
+                <properties>
+                    <!--<property name="webContext">admin</property>-->
                 </properties>
             </instance>
+
         </productGroup>
     </platform>
 
     <listenerExtensions>
-
-        <!--<className>org.wso2.carbon.automation.extentions.servers.wso2server.Wso2ServerExtention</className>-->
         <platformExecutionManager>
             <extentionClasses>
                 <class>
-                    <name>
-                        org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension
-                    </name>
-                    <parameter name="-DportOffset" value="1100"/>
-                    <!--<parameter name="cmdArg" value="debug 5005" />-->
-                </class>
-                <class>
-                    <name>
-                        org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension
-                    </name>
+                    <name>org.wso2.iot.integration.extensions.BrokerServerExtension</name>
+                    <name>org.wso2.iot.integration.extensions.IOTServerExtension</name>
+                    <name>org.wso2.iot.integration.extensions.AnalyticsServerExtension</name>
+                    <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
             </extentionClasses>
         </platformExecutionManager>
@@ -209,13 +200,13 @@
 
         <PlatformSuiteManager>
             <extentionClasses>
-                <!--<className>org.wso2.carbon.automation.extentions.servers.wso2server.Wso2ServerExtention</className>-->
+                <!--<className>org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension</className>-->
             </extentionClasses>
         </PlatformSuiteManager>
 
         <PlatformAnnotationTransferManager>
             <extentionClasses>
-                <!--<className>org.wso2.carbon.automation.extentions.servers.wso2server.Wso2ServerExtention</className>-->
+                <!--<className>org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension</className>-->
             </extentionClasses>
         </PlatformAnnotationTransferManager>
 
