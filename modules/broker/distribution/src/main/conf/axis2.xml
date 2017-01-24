@@ -75,10 +75,10 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <parameter name="userAgent" locked="true">
-        WSO2 Message Broker-3.0.0-SNAPSHOT
+        WSO2 Message Broker-3.0.0
     </parameter>
     <parameter name="server" locked="true">
-        WSO2 Message Broker-3.0.0-SNAPSHOT
+        WSO2 Message Broker-3.0.0
     </parameter>
 
     <!-- ========================================================================-->
