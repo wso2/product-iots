@@ -779,7 +779,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-devicetype-publisher-profile</id>
+                        <id>p2-profile-generation-device-manager-profile</id>
                         <phase>package</phase>
                         <goals>
                             <goal>materialize-product</goal>
@@ -791,11 +791,11 @@
                             <targetPath>
                                 file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
                             </targetPath>
-                            <profile>devicetype-publisher</profile>
+                            <profile>device-manager</profile>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-devicetype-backend-profile</id>
+                        <id>p2-profile-generation-device-backend-profile</id>
                         <phase>package</phase>
                         <goals>
                             <goal>materialize-product</goal>
@@ -807,7 +807,7 @@
                             <targetPath>
                                 file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
                             </targetPath>
-                            <profile>devicetype-backend</profile>
+                            <profile>device-backend</profile>
                         </configuration>
                     </execution>
                     <execution>
@@ -2466,7 +2466,7 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>devicetype-publisher</profile>
+                            <profile>device-manager</profile>
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
@@ -3144,7 +3144,7 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>devicetype-backend</profile>
+                            <profile>device-backend</profile>
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
