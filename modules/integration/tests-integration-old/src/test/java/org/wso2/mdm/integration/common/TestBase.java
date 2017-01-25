@@ -19,6 +19,7 @@ package org.wso2.mdm.integration.common;
 
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.frameworkutils.CodeCoverageUtils;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 
@@ -35,8 +36,10 @@ public class TestBase {
 
     protected void init(TestUserMode userMode) throws Exception {
         automationContext = new AutomationContext(Constants.AUTOMATION_CONTEXT, userMode);
-        backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps();
-        backendHTTPURL = automationContext.getContextUrls().getWebAppURL();
+        backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps().replace("9443", String.valueOf(Constants
+                .HTTPS_GATEWAY_PORT));
+        backendHTTPURL = automationContext.getContextUrls().getWebAppURL().replace("9763", String.valueOf(Constants
+                .HTTP_GATEWAY_PORT));
     }
 
     protected void initPublisher(String productGroupName, String instanceName,
@@ -55,7 +58,7 @@ public class TestBase {
     }
 
     protected String getBackendHTTPSURL() throws XPathExpressionException {
-        return automationContext.getContextUrls().getBackEndUrl();
+        return backendHTTPSURL;
     }
 
     protected String getSessionCookie() throws Exception {

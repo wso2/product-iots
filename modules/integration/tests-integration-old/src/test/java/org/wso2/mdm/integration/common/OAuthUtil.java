@@ -30,8 +30,9 @@ public class OAuthUtil {
     public static String getOAuthToken(String backendHTTPURL, String backendHTTPSURL)
             throws Exception {
         RestClient client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON);
-        HttpResponse oAuthData = client.post(Constants.DynamicClientAuthentication.REGISTRATION_ENDPOINT,
-                                             Constants.DynamicClientAuthentication.DYNAMIC_CLIENT_REGISTRATION_PAYLOAD);
+        client.setHttpHeader("Authorization", "Basic YWRtaW46YWRtaW4=");
+        HttpResponse oAuthData = client.post(Constants.APIApplicationRegistration.API_APP_REGISTRATION_ENDPOINT,
+                                             Constants.APIApplicationRegistration.API_APP_REGISTRATION_PAYLOAD);
         JSONObject jsonObj = new JSONObject(oAuthData.getData());
         String clientId = jsonObj.get(Constants.OAUTH_CLIENT_ID).toString();
         String clientSecret = jsonObj.get(Constants.OAUTH_CLIENT_SECRET).toString();
@@ -39,8 +40,9 @@ public class OAuthUtil {
         String basicAuthString = "Basic " + new String(bytesEncoded);
         //Initiate a RestClient to get OAuth token
         client = new RestClient(backendHTTPSURL, Constants.APPLICATION_URL_ENCODED, basicAuthString);
-        oAuthData = client.post(Constants.DynamicClientAuthentication.TOKEN_ENDPOINT,
-                                Constants.DynamicClientAuthentication.OAUTH_TOKEN_PAYLOAD);
+        oAuthData = client.post(Constants.APIApplicationRegistration.TOKEN_ENDPOINT,
+                                Constants.APIApplicationRegistration.OAUTH_TOKEN_PAYLOAD);
+        System.out.println(oAuthData.getData());
         jsonObj = new JSONObject(oAuthData.getData());
         return jsonObj.get(Constants.OAUTH_ACCESS_TOKEN).toString();
     }

@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.mdm.integration.common;
+package org.wso2.iot.integration.common;
 
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
@@ -27,42 +27,39 @@ import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
-import org.wso2.carbon.automation.engine.context.TestUserMode;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
  * This class creates a customised Http Client Class
  */
-public class MDMHttpClient {
+public class IOTHttpClient {
 
     private static final String AUTHORIZATION = "Authorization";
-    private static Log log = LogFactory.getLog(MDMHttpClient.class);
+    private static Log log = LogFactory.getLog(IOTHttpClient.class);
     private String backEndUrl;
-    private String authrizationString;
+    private String authorizationString;
     private Map<String, String> requestHeaders = new HashMap<String, String>();
 
-    public MDMHttpClient(String backEndUrl, String contentType, String authorization) {
+    public IOTHttpClient(String backEndUrl, String contentType, String authorization) {
 
         this.backEndUrl = backEndUrl;
         this.requestHeaders.put(Constants.CONTENT_TYPE, contentType);
         if (authorization != null || !authorization.isEmpty()) {
-            this.authrizationString = authorization;
+            this.authorizationString = authorization;
             this.requestHeaders.put(AUTHORIZATION, authorization);
         }
     }
 
-    public String getAuthrizationString() {
-        return authrizationString;
+    public String getAuthorizationString() {
+        return authorizationString;
     }
 
-    public void setAuthrizationString(String authrizationString) {
-        this.authrizationString = authrizationString;
+    public void setAuthorizationString(String authorizationString) {
+        this.authorizationString = authorizationString;
     }
 
     public void setHttpHeader(String headerName, String value) {
@@ -77,108 +74,108 @@ public class MDMHttpClient {
         this.requestHeaders.remove(headerName);
     }
 
-    public MDMResponse post(String endpoint, String body) {
+    public IOTResponse post(String endpoint, String body) {
         HttpClient client = new HttpClient();
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             PostMethod method = new PostMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             StringRequestEntity requestEntity = new StringRequestEntity(body,
                                                                         requestHeaders.get(Constants.CONTENT_TYPE), Constants.UTF8);
             method.setRequestEntity(requestEntity);
-            MDMResponse mdmResponse = new MDMResponse();
-            mdmResponse.setStatus(client.executeMethod(method));
-            mdmResponse.setBody(method.getResponseBodyAsString());
-            return mdmResponse;
+            IOTResponse iotResponse = new IOTResponse();
+            iotResponse.setStatus(client.executeMethod(method));
+            iotResponse.setBody(method.getResponseBodyAsString());
+            return iotResponse;
 
         } catch (GeneralSecurityException e) {
-            log.error("Failure occurred at MDMResponse post for GeneralSecurityException", e);
+            log.error("Failure occurred at IOTResponse post for GeneralSecurityException", e);
         } catch (IOException e) {
-            log.error("Failure occured at MDMResponse post for IOException", e);
+            log.error("Failure occurred at IOTResponse post for IOException", e);
         }
         return null;
     }
 
-    public MDMResponse put(String endpoint, String body) {
+    public IOTResponse put(String endpoint, String body) {
         HttpClient client = new HttpClient();
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             PutMethod method = new PutMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             StringRequestEntity requestEntity = new StringRequestEntity(
                     body, requestHeaders.get(Constants.CONTENT_TYPE), Constants.UTF8);
             method.setRequestEntity(requestEntity);
-            MDMResponse mdmResponse = new MDMResponse();
-            mdmResponse.setStatus(client.executeMethod(method));
-            mdmResponse.setBody(method.getResponseBodyAsString());
-            return mdmResponse;
+            IOTResponse iotResponse = new IOTResponse();
+            iotResponse.setStatus(client.executeMethod(method));
+            iotResponse.setBody(method.getResponseBodyAsString());
+            return iotResponse;
 
         } catch (GeneralSecurityException e) {
-            log.error("Failure occurred at MDMResponse put for GeneralSecurityException", e);
+            log.error("Failure occurred at IOTResponse put for GeneralSecurityException", e);
         } catch (IOException e) {
-            log.error("Failure occurred at MDMResponse put for IO Exception", e);
+            log.error("Failure occurred at IOTResponse put for IO Exception", e);
         }
         return null;
     }
 
-    public MDMResponse get(String endpoint) {
+    public IOTResponse get(String endpoint) {
         HttpClient client = new HttpClient();
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
 
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             GetMethod method = new GetMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                                             new DefaultHttpMethodRetryHandler(3, false));
-            MDMResponse mdmResponse = new MDMResponse();
-            mdmResponse.setStatus(client.executeMethod(method));
-            mdmResponse.setBody(new String(method.getResponseBody()));
-            return mdmResponse;
+            IOTResponse iotResponse = new IOTResponse();
+            iotResponse.setStatus(client.executeMethod(method));
+            iotResponse.setBody(new String(method.getResponseBody()));
+            return iotResponse;
 
         } catch (GeneralSecurityException e) {
-            log.error("Failure occurred at MDMResponse get for GeneralSecurityException", e);
+            log.error("Failure occurred at IOTResponse get for GeneralSecurityException", e);
         } catch (IOException e) {
-            log.error("Failure occurred at MDMResponse get for IOException", e);
+            log.error("Failure occurred at IOTResponse get for IOException", e);
         }
 
         return null;
     }
 
-    public MDMResponse delete(String endpoint) {
+    public IOTResponse delete(String endpoint) {
 
         HttpClient client = new HttpClient();
 
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
 
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
 
             String url = backEndUrl + endpoint;
 
             DeleteMethod method = new DeleteMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                                             new DefaultHttpMethodRetryHandler(3, false));
 
-            MDMResponse mdmResponse = new MDMResponse();
-            mdmResponse.setStatus(client.executeMethod(method));
-            mdmResponse.setBody(method.getResponseBodyAsString());
-            return mdmResponse;
+            IOTResponse iotResponse = new IOTResponse();
+            iotResponse.setStatus(client.executeMethod(method));
+            iotResponse.setBody(method.getResponseBodyAsString());
+            return iotResponse;
 
         } catch (GeneralSecurityException e) {
-            log.error("Failure occurred at MDMResponse delete for GeneralSecurityException", e);
+            log.error("Failure occurred at IOTResponse delete for GeneralSecurityException", e);
         } catch (IOException e) {
-            log.error("Failure occurred at MDMResponse delete for IOException", e);
+            log.error("Failure occurred at IOTResponse delete for IOException", e);
         }
         return null;
     }

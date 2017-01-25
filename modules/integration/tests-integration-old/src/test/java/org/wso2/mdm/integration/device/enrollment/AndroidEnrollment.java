@@ -42,15 +42,12 @@ public class AndroidEnrollment extends TestBase {
 
     @Test(description = "Test an Android device enrollment.")
     public void testEnrollment() throws Exception {
-        JsonObject enrollmentData = PayloadGenerator.getJsonPayload(
-                Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_POST);
-        enrollmentData.addProperty(Constants.DEVICE_IDENTIFIER_KEY, Constants.DEVICE_ID);
-        HttpResponse response = client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData.toString());
+        String enrollmentData = PayloadGenerator.getJsonPayloadToString(Constants.AndroidEnrollment
+                .ENROLLMENT_PAYLOAD_FILE_NAME);
+        HttpResponse response = client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
-                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_POST).toString(), response.getData().toString(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayloadToString(
+                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME), response.getData(), true);
     }
 
     @Test(description = "Test an Android device is enrolled.", dependsOnMethods = {"testEnrollment"})
@@ -59,7 +56,7 @@ public class AndroidEnrollment extends TestBase {
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
                 Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_GET).toString(), response.getData().toString(), true);
+                Constants.HTTP_METHOD_GET).toString(), response.getData(), true);
     }
 
     @Test(description = "Test modify enrollment.", dependsOnMethods = {"testIsEnrolled"})
@@ -72,7 +69,7 @@ public class AndroidEnrollment extends TestBase {
                                            enrollmentData.toString());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
                 Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_PUT).toString(), response.getData().toString(), true);
+                Constants.HTTP_METHOD_PUT).toString(), response.getData(), true);
     }
 
     @Test(description = "Test disenrollment.", dependsOnMethods = {"testModifyEnrollment"})
@@ -82,6 +79,6 @@ public class AndroidEnrollment extends TestBase {
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
                                               Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
                                               Constants.HTTP_METHOD_DELETE).toString(),
-                                      response.getData().toString(), true);
+                                      response.getData(), true);
     }
 }
