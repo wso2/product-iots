@@ -47,7 +47,7 @@
               "tokenScope": "admin",
               "callbackUrl": "%https.host%/portal",
               "saasApp":true,
-              "samlGrantTypeName": "urn:ietf:carbon:signed:grant-type:saml2-bearer"
+              "samlGrantTypeName":"urn:ietf:carbon:signed:grant-type:saml2-bearer"
             },
             "tokenServiceURL": "https://localhost:9443/oauth2/token"
           },

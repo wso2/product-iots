@@ -34,7 +34,7 @@
         "methods": {
             "oauth": {
                 "attributes": {
-                    "apimgt-gateway": true,
+                    "apimgt-gateway": false,
                     "oauthProvider": {
                         "appRegistration": {
                             "appType": "webapp",
@@ -47,7 +47,8 @@
                             "tokenScope": "admin",
                             "callbackUrl": "https://localhost:9445/portal",
                             "saasApp":true,
-                            "samlGrantTypeName": "urn:ietf:carbon:signed:grant-type:saml2-bearer"
+                            "samlGrantTypeName":"urn:ietf:carbon:signed:grant-type:saml2-bearer"
+
                         },
                         "tokenServiceURL": "https://localhost:9443/oauth2/token"
                     },
