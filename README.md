@@ -13,7 +13,7 @@ It also offers a complete and secure enterprise mobility management (EMM/MDM) so
 WSO2 IoT Server comes with advanced analytics, enabling users to analyze speed, proximity and geo-fencing information of devices including details of those in motion and stationary state.
 
 Find the online documentation at : 
-https://docs.wso2.com/display/IoTS300/WSO2+IoT+Server+Documentation.
+http://docs.wso2.com/iot-server.
 
 ### Key Features of WSO2 IoT Server
 
