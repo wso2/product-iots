@@ -27,7 +27,7 @@ public final class Constants {
     public static final String DEVICE_ID = "1234";
     public static final String NUMBER_NOT_EQUAL_TO_DEVICE_ID = "1111";
     public static final String DEVICE_IMEI = "123123123";
-    public static final String AUTOMATION_CONTEXT = "MDM";
+    public static final String AUTOMATION_CONTEXT = "IOT";
     public static final String APPLICATION_JSON = "application/json";
     public static final String APPLICATION_URL_ENCODED = "application/x-www-form-urlencoded";
     public static final String OAUTH_CLIENT_ID = "client_id";
@@ -46,16 +46,23 @@ public final class Constants {
     public static final String ZERO = "0";
     public static final String NULL = "[]";
 
-    public static final class DynamicClientAuthentication {
-        public static final String REGISTRATION_ENDPOINT = "/dynamic-client-web/register";
-        public static final String TOKEN_ENDPOINT = "/oauth2/token";
-        public static final String OAUTH_TOKEN_PAYLOAD = "grant_type=password&username=admin&password=admin&scope=prod";
-        private static StringBuffer dynamicClientPayloadBuffer = new StringBuffer();
-        public static final String DYNAMIC_CLIENT_REGISTRATION_PAYLOAD = dynamicClientPayloadBuffer.append("{\"clientName\":").
-                append(" \"device\",\"owner\": \"admin\",\"grantType\": \"password\",\"callbackUrl\": \"www.google.lk\"," +
-                       "\"saasApp\": \"" + true + "\"}").toString();
+    public static final String HTTPS = "https";
+    public static final String HTTP = "http";
 
-        private DynamicClientAuthentication() {
+    public static final int HTTPS_GATEWAY_PORT = 8243;
+    public static final int HTTP_GATEWAY_PORT = 8280;
+
+    public static final class APIApplicationRegistration {
+        public static final String API_APP_REGISTRATION_ENDPOINT = "/api-application-registration/register";
+        public static final String TOKEN_ENDPOINT = "/token";
+        public static final String OAUTH_TOKEN_PAYLOAD = "username=admin&password=admin&grant_type=password&scope=perm:android:enroll perm:android:wipe perm:android:ring perm:android:lock-devices perm:android:configure-vpn perm:android:configure-wifi perm:android:enroll perm:android:uninstall-application perm:android:manage-configuration perm:android:location perm:android:install-application perm:android:mute perm:android:change-lock-code perm:android:blacklist-applications perm:android:set-password-policy perm:android:encrypt-storage perm:android:clear-password perm:android:enterprise-wipe perm:android:info perm:android:view-configuration perm:android:upgrade-firmware perm:android:set-webclip perm:android:send-notification perm:android:disenroll perm:android:update-application perm:android:unlock-devices perm:android:control-camera perm:android:reboot perm:android:logcat appm:subscribe perm:sign-csr perm:admin:devices:view perm:roles:add perm:roles:add-users perm:roles:update perm:roles:permissions perm:roles:details perm:roles:view perm:roles:create-combined-role perm:roles:delete perm:dashboard:vulnerabilities perm:dashboard:non-compliant-count perm:dashboard:non-compliant perm:dashboard:by-groups perm:dashboard:device-counts perm:dashboard:feature-non-compliant perm:dashboard:count-overview perm:dashboard:filtered-count perm:dashboard:details perm:get-activity perm:devices:delete perm:devices:applications perm:devices:effective-policy perm:devices:compliance-data perm:devices:features perm:devices:operations perm:devices:search perm:devices:details perm:devices:update perm:devices:view perm:view-configuration perm:manage-configuration perm:policies:remove perm:policies:priorities perm:policies:deactivate perm:policies:get-policy-details perm:policies:manage perm:policies:activate perm:policies:update perm:policies:changes perm:policies:get-details perm:users:add perm:users:details perm:users:count perm:users:delete perm:users:roles perm:users:user-details perm:users:credentials perm:users:search perm:users:is-exist perm:users:update perm:users:send-invitation perm:admin-users:view perm:groups:devices perm:groups:update perm:groups:add perm:groups:device perm:groups:devices-count perm:groups:remove perm:groups:groups perm:groups:groups-view perm:groups:share perm:groups:count perm:groups:roles perm:groups:devices-remove perm:groups:devices-add perm:groups:assign perm:device-types:features perm:device-types:types perm:applications:install perm:applications:uninstall perm:admin-groups:count perm:admin-groups:view perm:notifications:mark-checked perm:notifications:view perm:admin:certificates:delete perm:admin:certificates:details perm:admin:certificates:view perm:admin:certificates:add perm:admin:certificates:verify perm:ios:enroll perm:ios:view-device perm:ios:apn perm:ios:ldap perm:ios:enterprise-app perm:ios:store-application perm:ios:remove-application perm:ios:app-list perm:ios:profile-list perm:ios:lock perm:ios:enterprise-wipe perm:ios:device-info perm:ios:restriction perm:ios:email perm:ios:cellular perm:ios:applications perm:ios:wifi perm:ios:ring perm:ios:location perm:ios:notification perm:ios:airplay perm:ios:caldav perm:ios:cal-subscription perm:ios:passcode-policy perm:ios:webclip perm:ios:vpn perm:ios:per-app-vpn perm:ios:app-to-per-app-vpn perm:ios:app-lock perm:ios:clear-passcode perm:ios:remove-profile perm:ios:get-restrictions perm:ios:wipe-data perm:admin";
+        private static StringBuffer dynamicClientPayloadBuffer = new StringBuffer();
+        public static final String API_APP_REGISTRATION_PAYLOAD = dynamicClientPayloadBuffer.append("{  \n"
+                + "   \"applicationName\":\"app_12345\",\n" + "   \"isAllowedToAllDomains\":false,\n"
+                + "   \"tags\":[\"android\", \"device_management\"],\n" + "   \"isMappingAnExistingOAuthApp\":false\n"
+                + "}").toString();
+
+        private APIApplicationRegistration() {
             throw new AssertionError();
         }
     }
@@ -63,7 +70,7 @@ public final class Constants {
     public static final class AndroidEnrollment {
         public static final String ENROLLMENT_PAYLOAD_FILE_NAME = "android-enrollment-payloads.json";
         public static final String ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME = "android-enrollment-response-payloads.json";
-        public static final String ENROLLMENT_ENDPOINT = "/mdm-android-agent/enrollment/";
+        public static final String ENROLLMENT_ENDPOINT = "/api/device-mgt/android/v1.0/devices";
         public static final String ENROLLMENT_GROUP = "android-enrollment";
 
         private AndroidEnrollment() {
@@ -189,7 +196,7 @@ public final class Constants {
 
     public static final class MobileDeviceManagement {
         public static final String MOBILE_DEVICE_MANAGEMENT_GROUP = "mobile-device-mgt";
-        public static final String GET_DEVICE_COUNT_ENDPOINT = "/mdm-admin/devices/count";
+        public static final String GET_DEVICE_COUNT_ENDPOINT = "/api/device-mgt/v1.0/devices";
         public static final String NO_OF_DEVICES = "1";
         public static final String GET_ALL_DEVICES_ENDPOINT = "/mdm-admin/devices";
         public static final String VIEW_DEVICE_TYPES_ENDPOINT = "/mdm-admin/devices/types";

@@ -172,9 +172,9 @@
                 </hosts>
                 <ports>
                     <port type="http">9763</port>
-                    <port type="https">9446</port>
+                    <!--<port type="https">9446</port>-->
                     <port type="https">9443</port>
-                    <port type="https">9445</port>
+                    <!--<port type="https">9445</port>-->
                 </ports>
 
                 <properties>
@@ -189,9 +189,9 @@
         <platformExecutionManager>
             <extentionClasses>
                 <class>
-                    <name>org.wso2.iot.integration.extensions.BrokerServerExtension</name>
+                    <!--<name>org.wso2.iot.integration.extensions.BrokerServerExtension</name>-->
                     <name>org.wso2.iot.integration.extensions.IOTServerExtension</name>
-                    <name>org.wso2.iot.integration.extensions.AnalyticsServerExtension</name>
+                    <!--<name>org.wso2.iot.integration.extensions.AnalyticsServerExtension</name>-->
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
             </extentionClasses>

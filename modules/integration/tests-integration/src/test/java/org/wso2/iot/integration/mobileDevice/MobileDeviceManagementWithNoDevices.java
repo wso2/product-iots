@@ -45,11 +45,11 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
         Assert.assertEquals(Constants.ZERO, response.getBody());
     }
 
-    @Test(description = "Test view devices with no added devices")
-    public void testViewDevicesWithNoDevices() throws Exception {
-        IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        Assert.assertEquals(response.getBody(), Constants.NULL);
-    }
+//    @Test(description = "Test view devices with no added devices")
+//    public void testViewDevicesWithNoDevices() throws Exception {
+//        IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
+//        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
+//        Assert.assertEquals(response.getBody(), Constants.NULL);
+//    }
 
 }

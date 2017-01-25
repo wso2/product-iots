@@ -41,7 +41,7 @@ public class IOTHttpClient {
     private static final String AUTHORIZATION = "Authorization";
     private static Log log = LogFactory.getLog(IOTHttpClient.class);
     private String backEndUrl;
-    private String authrizationString;
+    private String authorizationString;
     private Map<String, String> requestHeaders = new HashMap<String, String>();
 
     public IOTHttpClient(String backEndUrl, String contentType, String authorization) {
@@ -49,17 +49,17 @@ public class IOTHttpClient {
         this.backEndUrl = backEndUrl;
         this.requestHeaders.put(Constants.CONTENT_TYPE, contentType);
         if (authorization != null || !authorization.isEmpty()) {
-            this.authrizationString = authorization;
+            this.authorizationString = authorization;
             this.requestHeaders.put(AUTHORIZATION, authorization);
         }
     }
 
-    public String getAuthrizationString() {
-        return authrizationString;
+    public String getAuthorizationString() {
+        return authorizationString;
     }
 
-    public void setAuthrizationString(String authrizationString) {
-        this.authrizationString = authrizationString;
+    public void setAuthorizationString(String authorizationString) {
+        this.authorizationString = authorizationString;
     }
 
     public void setHttpHeader(String headerName, String value) {
@@ -78,11 +78,11 @@ public class IOTHttpClient {
         HttpClient client = new HttpClient();
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             PostMethod method = new PostMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             StringRequestEntity requestEntity = new StringRequestEntity(body,
                                                                         requestHeaders.get(Constants.CONTENT_TYPE), Constants.UTF8);
             method.setRequestEntity(requestEntity);
@@ -94,7 +94,7 @@ public class IOTHttpClient {
         } catch (GeneralSecurityException e) {
             log.error("Failure occurred at IOTResponse post for GeneralSecurityException", e);
         } catch (IOException e) {
-            log.error("Failure occured at IOTResponse post for IOException", e);
+            log.error("Failure occurred at IOTResponse post for IOException", e);
         }
         return null;
     }
@@ -103,11 +103,11 @@ public class IOTHttpClient {
         HttpClient client = new HttpClient();
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             PutMethod method = new PutMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             StringRequestEntity requestEntity = new StringRequestEntity(
                     body, requestHeaders.get(Constants.CONTENT_TYPE), Constants.UTF8);
             method.setRequestEntity(requestEntity);
@@ -129,11 +129,11 @@ public class IOTHttpClient {
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
 
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
             String url = backEndUrl + endpoint;
             GetMethod method = new GetMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                                             new DefaultHttpMethodRetryHandler(3, false));
             IOTResponse iotResponse = new IOTResponse();
@@ -157,13 +157,13 @@ public class IOTHttpClient {
         try {
             ProtocolSocketFactory socketFactory = new EasySSLProtocolSocketFactory();
 
-            Protocol https = new Protocol("https", socketFactory, 9443);
-            Protocol.registerProtocol("https", https);
+            Protocol https = new Protocol(Constants.HTTPS, socketFactory, Constants.HTTPS_GATEWAY_PORT);
+            Protocol.registerProtocol(Constants.HTTPS, https);
 
             String url = backEndUrl + endpoint;
 
             DeleteMethod method = new DeleteMethod(url);
-            method.setRequestHeader(AUTHORIZATION, authrizationString);
+            method.setRequestHeader(AUTHORIZATION, authorizationString);
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                                             new DefaultHttpMethodRetryHandler(3, false));
 
