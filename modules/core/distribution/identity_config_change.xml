@@ -33,7 +33,7 @@
 		<after>//s:Server/s:OAuth/s:SupportedGrantTypes/s:SupportedGrantType[s:GrantTypeName='iwa:ntlm']</after>
 		<value>
 			<![CDATA[<SupportedGrantType>
-		<GrantTypeName>urn:ietf:params:oauth:grant-type:saml2-carbon</GrantTypeName>
+		<GrantTypeName>urn:ietf:carbon:signed:grant-type:saml2-bearer</GrantTypeName>
 		<GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedSAML2BearerGrantHandler</GrantTypeHandlerImplClass>
 		<GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth.common.SAML2GrantValidator</GrantTypeValidatorImplClass>
 	</SupportedGrantType>]]></value>

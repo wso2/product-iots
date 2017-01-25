@@ -43,10 +43,11 @@
               "password":"admin",
               "dynamicClientAppRegistrationServiceURL": "https://localhost:9443/dynamic-client-web/register",
               "apiManagerClientAppRegistrationServiceURL": "%https.host%/api-application-registration/register/tenants",
-              "grantType": "password refresh_token urn:ietf:params:oauth:grant-type:saml2-carbon urn:ietf:params:oauth:grant-type:jwt-bearer",
+              "grantType": "password refresh_token urn:ietf:carbon:signed:grant-type:saml2-bearer urn:ietf:params:oauth:grant-type:jwt-bearer",
               "tokenScope": "admin",
               "callbackUrl": "%https.host%/portal",
-              "saasApp":true
+              "saasApp":true,
+              "samlGrantTypeName": "urn:ietf:carbon:signed:grant-type:saml2-bearer"
             },
             "tokenServiceURL": "https://localhost:9443/oauth2/token"
           },
