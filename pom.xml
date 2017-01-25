@@ -1012,6 +1012,17 @@
                 <artifactId>org.wso2.iot.core.admin.styles</artifactId>
                 <version>${product.iot.version}</version>
             </dependency>
+            <!--mobile-qsg dependencies-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${apache.httpmime.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache.httpclient.version}</version>
+            </dependency>
 
             <!-- *********************************  Analytics Distribution Features START ********************************* -->
 
@@ -1677,6 +1688,9 @@
 
         <!-- CDMF Analytics -->
         <cdmf.analytics.version>1.0.4-SNAPSHOT</cdmf.analytics.version>
+
+        <apache.httpmime.version>4.2.5</apache.httpmime.version>
+        <apache.httpclient.version>4.5.2</apache.httpclient.version>
     </properties>
 
     <scm>
