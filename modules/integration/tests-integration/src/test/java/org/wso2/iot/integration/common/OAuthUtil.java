@@ -27,9 +27,15 @@ import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
  */
 public class OAuthUtil {
 
-    public static String getOAuthToken(String backendHTTPURL, String backendHTTPSURL)
-            throws Exception {
-        Thread.sleep(10000);
+    public static String getScopes(String backendHTTPURL, String backendHTTPSURL) throws Exception {
+        return getOAuthTokenPair(backendHTTPURL, backendHTTPSURL).get(Constants.SCOPE).toString();
+    }
+
+    public static String getOAuthToken(String backendHTTPURL, String backendHTTPSURL) throws Exception {
+        return getOAuthTokenPair(backendHTTPURL, backendHTTPSURL).get(Constants.OAUTH_ACCESS_TOKEN).toString();
+    }
+
+    public static JSONObject getOAuthTokenPair(String backendHTTPURL, String backendHTTPSURL) throws Exception {
         String AuthString = "Basic YWRtaW46YWRtaW4=";
         RestClient client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON, AuthString);
         HttpResponse oAuthData = client.post(Constants.APIApplicationRegistration.API_APP_REGISTRATION_ENDPOINT,
@@ -45,6 +51,6 @@ public class OAuthUtil {
                                 Constants.APIApplicationRegistration.OAUTH_TOKEN_PAYLOAD);
         System.out.println(oAuthData.getData());
         jsonObj = new JSONObject(oAuthData.getData());
-        return jsonObj.get(Constants.OAUTH_ACCESS_TOKEN).toString();
+        return jsonObj;
     }
 }
