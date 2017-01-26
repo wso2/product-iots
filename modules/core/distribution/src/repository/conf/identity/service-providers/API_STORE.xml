@@ -44,7 +44,7 @@
       </AuthenticationStep>
     </AuthenticationSteps>
     <UseUserstoreDomainInUsername>true</UseUserstoreDomainInUsername>
-    <UseTenantDomainInUsername>false</UseTenantDomainInUsername>
+    <UseTenantDomainInUsername>true</UseTenantDomainInUsername>
   </LocalAndOutBoundAuthenticationConfig>
   <RequestPathAuthenticatorConfigs>
   </RequestPathAuthenticatorConfigs>

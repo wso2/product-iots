@@ -318,6 +318,10 @@ do
     -Diot.gateway.host="localhost" \
     -Diot.gateway.https.port="8243" \
     -Diot.gateway.http.port="8280" \
+    -Diot.apimpublisher.host="localhost" \
+    -Diot.apimpublisher.https.port="9443" \
+    -Diot.apimstore.host="localhost" \
+    -Diot.apimstore.https.port="9443" \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
