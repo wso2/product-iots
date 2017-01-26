@@ -277,6 +277,7 @@ public class HTTPInvoker {
             for (String key : headers.keySet()) {
                 post.setHeader(key, headers.get(key));
             }
+
             post.setHeader(Constants.Header.AUTH, OAUTH_BEARER + oAuthToken);
             response = httpclient.execute(post);
         } catch (UnsupportedEncodingException e) {

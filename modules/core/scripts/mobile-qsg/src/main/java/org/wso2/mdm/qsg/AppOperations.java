@@ -37,13 +37,16 @@ import java.util.HashMap;
  */
 public class AppOperations {
 
-    public static MobileApplication uploadApplication(String platform, String appName, String appContentType) {
-        String appUploadEndpoint =
-                EMMQSGConfig.getInstance().getEmmHost() + "/api/appm/publisher/v1.1/apps/mobile/binaries";
-        String filePath = "apps" + File.separator + platform + File.separator + appName;
-        HTTPResponse
-                httpResponse = HTTPInvoker.uploadFile(appUploadEndpoint, filePath, appContentType);
+    private static String appmPublisherMobileBinariesUrl = "/api/appm/publisher/v1.1/apps/mobile/binaries";
+    private static String appmPublisherResourcesUrl = "/api/appm/publisher/v1.1/apps/static-contents?appType=mobileapp";
+    private static String appmPublisherAppsUrl = "/api/appm/publisher/v1.1/apps/mobileapp";
 
+
+    public static MobileApplication uploadApplication(String platform, String appName, String appContentType) {
+
+        String appUploadEndpoint = EMMQSGConfig.getInstance().getEmmHost() + appmPublisherMobileBinariesUrl;
+        String filePath = "apps" + File.separator + platform + File.separator + appName;
+        HTTPResponse httpResponse = HTTPInvoker.uploadFile(appUploadEndpoint, filePath, appContentType);
         if (Constants.HTTPStatus.OK == httpResponse.getResponseCode()) {
             JSONObject appMeta = null;
             MobileApplication application = new MobileApplication();
@@ -70,8 +73,8 @@ public class AppOperations {
     }
 
     private static String uploadAsset(String path) {
-        String resUploadEndpoint =
-                EMMQSGConfig.getInstance().getEmmHost() + "/api/appm/publisher/v1.1/apps/static-contents?appType=mobileapp";
+
+        String resUploadEndpoint = EMMQSGConfig.getInstance().getEmmHost() + appmPublisherResourcesUrl;
         HTTPResponse httpResponse = HTTPInvoker.uploadFile(resUploadEndpoint, path, "image/jpeg");
         if (Constants.HTTPStatus.OK == httpResponse.getResponseCode()) {
             JSONObject resp = null;
@@ -86,6 +89,7 @@ public class AppOperations {
     }
 
     public static MobileApplication uploadAssets(String platform, MobileApplication application) {
+
         String assetDir = "apps" + File.separator + platform + File.separator + "images";
         //Upload the icon file
         String imgFile = assetDir + File.separator + "icon.jpg";
@@ -141,7 +145,8 @@ public class AppOperations {
 
     public static boolean addApplication(String name, MobileApplication mblApp, boolean isEnterpriseApp) {
         HashMap<String, String> headers = new HashMap<String, String>();
-        String appEndpoint = EMMQSGConfig.getInstance().getEmmHost() + "/api/appm/publisher/v1.1/apps/mobileapp";
+
+        String appEndpoint = EMMQSGConfig.getInstance().getEmmHost() + appmPublisherAppsUrl;
         //Set the application payload
         JSONObject application = new JSONObject();
         application.put("name", name);
@@ -160,7 +165,7 @@ public class AppOperations {
         application.put("provider", "admin");
         application.put("displayName", name);
         application.put("category", "Business");
-        application.put("icon", mblApp.getIcon());
+        application.put("iconFile", mblApp.getIcon());
         application.put("version", mblApp.getVersion());
         application.put("banner", mblApp.getBanner());
         application.put("platform", mblApp.getPlatform());
