@@ -20,10 +20,13 @@ package org.wso2.iot.integration.mobileDevice;
 
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.junit.experimental.theories.Theories;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.iot.integration.common.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class contains integration tests for API  Mobile Device Management with No Devices Enrolled.
@@ -34,6 +37,7 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
     @BeforeClass(alwaysRun = true, groups = { Constants.MobileDeviceManagement.MOBILE_DEVICE_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
+        Thread.sleep(10000);
         String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPSURL, backendHTTPSURL);
         this.client = new IOTHttpClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
@@ -42,14 +46,8 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
     public void testCountDevicesWithNoDevices() throws Exception {
         IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_DEVICE_COUNT_ENDPOINT);
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        Assert.assertEquals(Constants.ZERO, response.getBody());
+        Assert.assertEquals(Constants.MobileDeviceManagement.NO_DEVICE, response.getBody());
     }
 
-//    @Test(description = "Test view devices with no added devices")
-//    public void testViewDevicesWithNoDevices() throws Exception {
-//        IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
-//        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-//        Assert.assertEquals(response.getBody(), Constants.NULL);
-//    }
 
 }

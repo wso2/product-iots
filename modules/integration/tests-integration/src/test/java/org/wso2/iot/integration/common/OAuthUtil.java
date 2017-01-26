@@ -29,8 +29,9 @@ public class OAuthUtil {
 
     public static String getOAuthToken(String backendHTTPURL, String backendHTTPSURL)
             throws Exception {
-        RestClient client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON);
-        client.setHttpHeader("Authorization", "Basic YWRtaW46YWRtaW4=");
+        Thread.sleep(10000);
+        String AuthString = "Basic YWRtaW46YWRtaW4=";
+        RestClient client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON, AuthString);
         HttpResponse oAuthData = client.post(Constants.APIApplicationRegistration.API_APP_REGISTRATION_ENDPOINT,
                                              Constants.APIApplicationRegistration.API_APP_REGISTRATION_PAYLOAD);
         JSONObject jsonObj = new JSONObject(oAuthData.getData());
