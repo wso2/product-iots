@@ -54,6 +54,8 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
     @BeforeClass(alwaysRun = true, groups = { Constants.MobileDeviceManagement.MOBILE_DEVICE_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
 
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
+        Thread.sleep(10000);
         String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPSURL, backendHTTPSURL);
         this.client = new IOTHttpClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
@@ -65,9 +67,5 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
         Assert.assertEquals(Constants.MobileDeviceManagement.NO_DEVICE, response.getBody());
     }
 
-    private boolean checkScopes(String permissionsList) throws Exception {
-        String tokenString = OAuthUtil.getScopes(backendHTTPSURL, backendHTTPSURL);
-        return tokenString.contains(permissionsList);
-    }
 
 }
