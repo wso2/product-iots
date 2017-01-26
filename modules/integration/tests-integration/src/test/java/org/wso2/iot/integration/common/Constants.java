@@ -24,7 +24,7 @@ import java.io.File;
  */
 public final class Constants {
 
-    public static final String DEVICE_ID = "1234";
+    public static final String DEVICE_ID = "24f870f390352a41234";
     public static final String NUMBER_NOT_EQUAL_TO_DEVICE_ID = "1111";
     public static final String DEVICE_IMEI = "123123123";
     public static final String AUTOMATION_CONTEXT = "IOT";
@@ -202,6 +202,7 @@ public final class Constants {
         public static final String VIEW_DEVICE_TYPES_ENDPOINT = "/mdm-admin/devices/types";
         public static final String VIEW_DEVICE_RESPONSE_PAYLOAD_FILE_NAME =
                 "mobile-device-mgt-view-device-types-response-payloads.json";
+        public static final String NO_DEVICE = "{\"devices\":[],\"count\":0}";
 
         private MobileDeviceManagement() {
             throw new AssertionError();
