@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -27,14 +27,13 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-integration</artifactId>
-    <name>&gt;WSO2 IoT - Integration Tests</name>
+    <name>WSO2 IoT - Integration Tests</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>tests-artifacts</module>
         <module>tests-common</module>
-        <!--<module>tests-integration</module>-->
-        <!--<module>tests-ui-integration</module>-->
+        <module>tests-integration</module>
         <module>tests-iot-web-ui</module>
     </modules>
 
