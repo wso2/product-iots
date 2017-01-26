@@ -22,6 +22,7 @@ import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
 import org.junit.experimental.theories.Theories;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.iot.integration.common.*;
@@ -34,10 +35,25 @@ import java.util.concurrent.TimeUnit;
 public class MobileDeviceManagementWithNoDevices extends TestBase {
     private IOTHttpClient client;
 
+    /**
+     * @BeforeSuite annotation is added to run this verification before the test suite starts.
+     * As in IoT server, apis are published after the server startup. Due to that the generated token doesn't get
+     * required scope.
+     * This method delays test suit startup until the tokens get required scopes.
+     * @throws Exception
+     */
+    @BeforeSuite
+    public void verifyApiPublishing() throws Exception {
+        super.init(TestUserMode.SUPER_TENANT_ADMIN);
+
+        while (!checkScopes(Constants.APIApplicationRegistration.PERMISSION_LIST)) {
+            TimeUnit.SECONDS.sleep(5);
+        }
+    }
+
     @BeforeClass(alwaysRun = true, groups = { Constants.MobileDeviceManagement.MOBILE_DEVICE_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
-        Thread.sleep(10000);
+
         String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPSURL, backendHTTPSURL);
         this.client = new IOTHttpClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
@@ -49,5 +65,9 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
         Assert.assertEquals(Constants.MobileDeviceManagement.NO_DEVICE, response.getBody());
     }
 
+    private boolean checkScopes(String permissionsList) throws Exception {
+        String tokenString = OAuthUtil.getScopes(backendHTTPSURL, backendHTTPSURL);
+        return tokenString.contains(permissionsList);
+    }
 
 }

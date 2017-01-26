@@ -18,16 +18,14 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="mdm-suite-initializer">
+<suite name="iot-suite-initializer">
     <parameter name="useDefaultListeners" value="false"/>
     <listeners>
-        <listener
-                class-name="org.wso2.carbon.automation.engine.testlisteners.TestExecutionListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestExecutionListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestManagerListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
-        <listener
-                class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
     <test name="mobile-device-mgt-no-devices" preserve-order="true" parallel="false">
