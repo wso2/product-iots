@@ -30,12 +30,12 @@ import java.util.*;
  */
 public class QSGExecutor {
 
-    private static String iotAdminUser= "milan";
-    private static String iotAdminPassword = "milan@IoTS";
-    private static String iotAdminEmail = "milan@mobx.com";
+    private static String iotAdminUser= "chris";
+    private static String iotAdminPassword = "chris@IoTS";
+    private static String iotAdminEmail = "chris@mobx.com";
 
-    private static String iotMobileUser = "ryan";
-    private static String iotMobileUserPassword = "ryan@IoTS";
+    private static String iotMobileUser = "alex";
+    private static String iotMobileUserPassword = "alex@IoTS";
     private static String roleName = "iotMobileUser";
 
     public static void main(String[] args) {
@@ -53,7 +53,7 @@ public class QSGExecutor {
             } while (!QSGUtils.isValidEmailAddress(email));
         }
         */
-        String email = "ryan@example.com";
+        String email = "alex@example.com";
 
                 //Setup the OAuth token
         String token = QSGUtils.getOAuthToken();
@@ -64,6 +64,7 @@ public class QSGExecutor {
         HTTPInvoker.oAuthToken = token;
         //Creates the admin user
 
+        System.out.println("Creating users ");
         status = UserOperations.createUser(iotAdminUser, iotAdminEmail, true);
         if (!status) {
             System.out.println("Unable to create the admin user. Please check the config.properties file.");
@@ -91,11 +92,14 @@ public class QSGExecutor {
         }
 
         //Creates the emm-user role
+        System.out.println("Creating iotMobileUser role");
         status = UserOperations.createRole(roleName, new String[] {iotMobileUser});
         if (!status) {
             System.out.println("Unable to create the emm user role. Terminating the IoTs QSG now.");
             System.exit(0);
         }
+
+        System.out.println("Adding sample policies ");
         //Add the android policy
         status = PolicyOperations.createPasscodePolicy("android-passcode-policy1", Constants.DeviceType.ANDROID);
         if (!status) {
@@ -114,6 +118,8 @@ public class QSGExecutor {
             System.out.println("Unable to create the ios passcode policy. Terminating the IoTS QSG now.");
             System.exit(0);
         }
+
+        System.out.println("Upload the android application ");
         //Upload the android application
         MobileApplication application = AppOperations.uploadApplication(Constants.DeviceType.ANDROID, "catalog.apk",
                                                                         "application/vnd.android.package-archive");
@@ -128,6 +134,8 @@ public class QSGExecutor {
                     "Unable to upload the assets for sample android application. Terminating the IoTS QSG now.");
             System.exit(0);
         }
+
+        System.out.println("Create the android application ");
         //Create application entry in publisher
         status = AppOperations.addApplication("Catalog", application, true);
         if (!status) {
@@ -135,6 +143,7 @@ public class QSGExecutor {
             System.exit(0);
         }
 
+        System.out.println("Upload the iOS application ");
         //Upload the ios application
         MobileApplication iOSApplication = AppOperations.uploadApplication(Constants.DeviceType.IOS, "PNDemo.ipa","application/octet-stream");
         iOSApplication.setVersion("1.0.0");
@@ -145,11 +154,15 @@ public class QSGExecutor {
                     "Unable to upload the assets for sample iOS application. Terminating the IoTS QSG now.");
             System.exit(0);
         }
+
+        System.out.println("Create the iOS application ");
         //Create application entry in publisher
         status = AppOperations.addApplication("WSO2Con", iOSApplication, true);
         if (!status) {
             System.out.println("Unable to create the iOS mobile application. Terminating the IoTS QSG now.");
             System.exit(0);
         }
+
+        System.out.println("Exit");
     }
 }
