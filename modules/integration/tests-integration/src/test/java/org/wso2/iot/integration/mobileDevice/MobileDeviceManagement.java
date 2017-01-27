@@ -41,8 +41,7 @@ public class MobileDeviceManagement extends TestBase {
     @Test(description = "Add an Android device.")
     public void addEnrollment() throws Exception {
         JsonObject enrollmentData = PayloadGenerator.getJsonPayload(
-                Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_POST);
+                Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST);
         enrollmentData.addProperty(Constants.DEVICE_IDENTIFIER_KEY, Constants.DEVICE_ID);
         IOTResponse response = client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData.toString());
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
@@ -55,7 +54,7 @@ public class MobileDeviceManagement extends TestBase {
     public void testCountDevices() throws Exception {
         IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_DEVICE_COUNT_ENDPOINT);
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        Assert.assertTrue(response.getBody().toString().equals(Constants.MobileDeviceManagement.NO_OF_DEVICES));
+        Assert.assertTrue(response.getBody().equals(Constants.MobileDeviceManagement.NO_OF_DEVICES));
 
     }
 

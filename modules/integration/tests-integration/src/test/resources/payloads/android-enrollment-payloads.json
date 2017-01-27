@@ -1,92 +1,186 @@
 {
-  "id": 101234,
-  "name": "androiddevice1234",
-  "type": "android",
-  "description": "this is an android device",
-  "deviceIdentifier": "d24f870f390352a41234",
-  "enrolmentInfo": {
+  "POST": {
     "id": 101234,
-    "device": {
+    "name": "androiddevice1234",
+    "type": "android",
+    "description": "this is an android device",
+    "deviceIdentifier": "d24f870f390352a41234",
+    "enrolmentInfo": {
+      "id": 101234,
+      "device": {
+      },
+      "dateOfEnrolment": 0,
+      "dateOfLastUpdate": 0,
+      "ownership": "BYOD",
+      "status": "CREATED",
+      "owner": "admin"
     },
-    "dateOfEnrolment": 0,
-    "dateOfLastUpdate": 0,
-    "ownership": "BYOD",
-    "status": "CREATED",
-    "owner": "admin"
-  },
-  "features": [
-    {
-      "id": 10,
-      "code": "aaaa1111",
-      "name": "newfeature1",
-      "description": "this is the new feature 1",
-      "deviceType": "android",
-      "metadataEntries": [
-        {
-          "id": 10,
-          "value": {
+    "features": [
+      {
+        "id": 10,
+        "code": "aaaa1111",
+        "name": "newfeature1",
+        "description": "this is the new feature 1",
+        "deviceType": "android",
+        "metadataEntries": [
+          {
+            "id": 10,
+            "value": {
+            }
           }
-        }
-      ]
-    }
-  ],
-  "properties": [
-    {
-      "name": "property1",
-      "value": "value1"
-    }
-  ],
-  "deviceInfo": {
-    "deviceModel": "S8",
-    "vendor": "SAMSUNG",
-    "osVersion": "5.1",
-    "batteryLevel": 1,
-    "internalTotalMemory": 32,
-    "internalAvailableMemory": 24,
-    "externalTotalMemory": 64,
-    "externalAvailableMemory": 60,
-    "operator": "dialog",
-    "connectionType": "GSM",
-    "mobileSignalStrength": 1,
-    "ssid": "picassowifi",
-    "cpuUsage": 0,
-    "totalRAMMemory": 2,
-    "availableRAMMemory": 1,
-    "pluggedIn": false,
-    "location": {
-      "deviceId": 0,
-      "deviceIdentifier": {
-        "id": "string",
-        "type": "string"
+        ]
+      }
+    ],
+    "properties": [
+      {
+        "name": "property1",
+        "value": "value1"
+      }
+    ],
+    "deviceInfo": {
+      "deviceModel": "S8",
+      "vendor": "SAMSUNG",
+      "osVersion": "5.1",
+      "batteryLevel": 1,
+      "internalTotalMemory": 32,
+      "internalAvailableMemory": 24,
+      "externalTotalMemory": 64,
+      "externalAvailableMemory": 60,
+      "operator": "dialog",
+      "connectionType": "GSM",
+      "mobileSignalStrength": 1,
+      "ssid": "picassowifi",
+      "cpuUsage": 0,
+      "totalRAMMemory": 2,
+      "availableRAMMemory": 1,
+      "pluggedIn": false,
+      "location": {
+        "deviceId": 0,
+        "deviceIdentifier": {
+          "id": "string",
+          "type": "string"
+        },
+        "latitude": 0,
+        "longitude": 0,
+        "street1": "string",
+        "street2": "string",
+        "city": "string",
+        "state": "string",
+        "zip": "string",
+        "country": "string"
       },
-      "latitude": 0,
-      "longitude": 0,
-      "street1": "string",
-      "street2": "string",
-      "city": "string",
-      "state": "string",
-      "zip": "string",
-      "country": "string"
+      "deviceDetailsMap": {
+      },
+      "imei": "string",
+      "imsi": "string"
     },
-    "deviceDetailsMap": {
-    },
-    "imei": "string",
-    "imsi": "string"
+    "applications": [
+      {
+        "id": 0,
+        "platform": "string",
+        "category": "string",
+        "name": "string",
+        "locationUrl": "string",
+        "imageUrl": "string",
+        "version": "string",
+        "type": "string",
+        "appProperties": {
+        },
+        "applicationIdentifier": "string",
+        "memoryUsage": 0
+      }
+    ]
   },
-  "applications": [
-    {
-      "id": 0,
-      "platform": "string",
-      "category": "string",
-      "name": "string",
-      "locationUrl": "string",
-      "imageUrl": "string",
-      "version": "string",
-      "type": "string",
-      "appProperties": {
+  "PUT": {
+    "id": 101234,
+    "name": "androiddevice1234",
+    "type": "android",
+    "description": "this is an android device",
+    "deviceIdentifier": "d24f870f390352a41234",
+    "enrolmentInfo": {
+      "id": 101234,
+      "device": {
       },
-      "applicationIdentifier": "string",
-      "memoryUsage": 0
-    }
-  ]
+      "dateOfEnrolment": 0,
+      "dateOfLastUpdate": 0,
+      "ownership": "BYOD",
+      "status": "CREATED",
+      "owner": "admin"
+    },
+    "features": [
+      {
+        "id": 10,
+        "code": "aaaa1111",
+        "name": "newfeature2",
+        "description": "this is the new feature 2",
+        "deviceType": "android",
+        "metadataEntries": [
+          {
+            "id": 10,
+            "value": {
+            }
+          }
+        ]
+      }
+    ],
+    "properties": [
+      {
+        "name": "property2",
+        "value": "value2"
+      }
+    ],
+    "deviceInfo": {
+      "deviceModel": "S8",
+      "vendor": "SAMSUNG",
+      "osVersion": "5.1",
+      "batteryLevel": 1,
+      "internalTotalMemory": 32,
+      "internalAvailableMemory": 24,
+      "externalTotalMemory": 64,
+      "externalAvailableMemory": 60,
+      "operator": "dialog",
+      "connectionType": "GSM",
+      "mobileSignalStrength": 1,
+      "ssid": "picassowifi",
+      "cpuUsage": 0,
+      "totalRAMMemory": 2,
+      "availableRAMMemory": 1,
+      "pluggedIn": false,
+      "location": {
+        "deviceId": 0,
+        "deviceIdentifier": {
+          "id": "string",
+          "type": "string"
+        },
+        "latitude": 0,
+        "longitude": 0,
+        "street1": "string",
+        "street2": "string",
+        "city": "string",
+        "state": "string",
+        "zip": "string",
+        "country": "string"
+      },
+      "deviceDetailsMap": {
+      },
+      "imei": "string",
+      "imsi": "string"
+    },
+    "applications": [
+      {
+        "id": 0,
+        "platform": "string",
+        "category": "string",
+        "name": "string",
+        "locationUrl": "string",
+        "imageUrl": "string",
+        "version": "string",
+        "type": "string",
+        "appProperties": {
+        },
+        "applicationIdentifier": "string",
+        "memoryUsage": 0
+      }
+    ]
+  }
 }

@@ -24,7 +24,7 @@
         <!--
          Change this to edit wait time for test artifact deployment
         -->
-        <deploymentDelay>300000</deploymentDelay>
+        <deploymentDelay>100000</deploymentDelay>
         <!--
          Change this to standalone|platform|all to execute test on specific environment
         -->
