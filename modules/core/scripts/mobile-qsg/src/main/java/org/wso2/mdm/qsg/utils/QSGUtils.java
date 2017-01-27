@@ -111,7 +111,7 @@ public class QSGUtils {
         urlParameters.add(new BasicNameValuePair("grant_type", "password"));
         urlParameters.add(new BasicNameValuePair("scope",
                                                  "user:view user:manage user:admin:reset-password role:view role:manage policy:view policy:manage " +
-                                                 "application:manage appm:create appm:publish appm:update appm:read"));
+                                                 "application:manage appm:administration appm:create appm:publish appm:update appm:read"));
         //Set the headers
         headers.put(Constants.Header.CONTENT_TYPE, Constants.ContentType.APPLICATION_URL_ENCODED);
         headers.put(Constants.Header.AUTH, authHeader);

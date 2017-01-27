@@ -165,7 +165,7 @@ public class AppOperations {
         application.put("provider", "admin");
         application.put("displayName", name);
         application.put("category", "Business");
-        application.put("iconFile", mblApp.getIcon());
+        application.put("thumbnailUrl", mblApp.getIcon());
         application.put("version", mblApp.getVersion());
         application.put("banner", mblApp.getBanner());
         application.put("platform", mblApp.getPlatform());

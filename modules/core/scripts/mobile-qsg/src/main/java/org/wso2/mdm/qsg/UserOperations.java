@@ -42,11 +42,11 @@ public class UserOperations {
         JSONArray roles = new JSONArray();
         if (isAdmin) {
             roles.add("admin");
-            userData.put("firstname", "Milan");
+            userData.put("firstname", "Chris");
             userData.put("lastname", "Admin");
         } else {
             userData.put("password", "kimemmtrial");
-            userData.put("firstname", "Ryan");
+            userData.put("firstname", "Alex");
             userData.put("lastname", "User");
         }
         userData.put("roles", roles);
@@ -84,6 +84,7 @@ public class UserOperations {
                              "/permission/admin/device-mgt/configurations/view," +
                              "/permission/admin/device-mgt/api," +
                              "/permission/admin/device-mgt/devices/enroll," +
+                             "/permission/admin/device-mgt/devices/any-device," +
                              "/permission/admin/device-mgt/devices/enroll/android," +
                              "/permission/admin/device-mgt/devices/enroll/ios," +
                              "/permission/admin/device-mgt/devices/owning-device/view," +
