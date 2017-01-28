@@ -24,7 +24,7 @@ import java.io.File;
  */
 public final class Constants {
 
-    public static final String DEVICE_ID = "24f870f390352a41234";
+    public static final String DEVICE_ID = "d24f870f390352a41234";
     public static final String NUMBER_NOT_EQUAL_TO_DEVICE_ID = "1111";
     public static final String DEVICE_IMEI = "123123123";
     public static final String AUTOMATION_CONTEXT = "IOT";
@@ -144,38 +144,104 @@ public final class Constants {
     }
 
     public static final class AndroidOperations {
+        private final String PAYLOAD_COMMON = "["+DEVICE_ID+"]";
+
         public static final String OPERATION_PAYLOAD_FILE_NAME = "android-operation-payloads.json";
         public static final String OPERATIONS_GROUP = "operations";
-        public static final String COMMAND_OPERATION_PAYLOAD = "[\"" + DEVICE_ID + "\"]";
-        public static final String CAMERA_OPERATION = "camera";
+
+        public static final String CAMERA_OPERATION = "control-camera";
+        public static final String CAMERA_OPERATION_PAYLOAD = "{\n" + "  \"operation\": {\n"
+                + "    \"enabled\": false\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\" \n"
+                + "  ]\n" + "}";
+
         public static final String WIPE_DATA_OPERATION = "wipe_data";
+        public static final String WIPE_DATA_OPERATION_PAYLOAD = "wipe_data";
+
         public static final String INSTALL_APPS_OPERATION = "install_apps";
         public static final String NOTIFICATION_OPERATION = "notification";
         public static final String WIFI_OPERATION = "wifi";
         public static final String ENCRYPT_OPERATION = "encrypt";
-        public static final String CHANGE_LOCK_OPERATION = "change_lock";
+        public static final String CHANGE_LOCK_OPERATION = "unlock-devices";
         public static final String PASSWORD_POLICY_OPERATION = "password_policy";
         public static final String WEB_CLIP_OPERATION = "web_clip";
-        public static final String OPERATION_ENDPOINT = "/mdm-android-agent/operation/";
-        public static final String LOCK_ENDPOINT = "/mdm-android-agent/operation/lock";
-        public static final String LOCATION_ENDPOINT = "/mdm-android-agent/operation/location";
-        public static final String CLEAR_PASSWORD_ENDPOINT = "/mdm-android-agent/operation/clear-password";
-        public static final String CAMERA_ENDPOINT = "/mdm-android-agent/operation/camera";
-        public static final String DEVICE_INFO_ENDPOINT = "/mdm-android-agent/operation/device-info";
-        public static final String ENTERPRISE_WIPE_ENDPOINT = "/mdm-android-agent/operation/enterprise-wipe";
-        public static final String WIPE_DATA_ENDPOINT = "/mdm-android-agent/operation/wipe-data";
-        public static final String APPLICATION_LIST_ENDPOINT = "/mdm-android-agent/operation/application-list";
-        public static final String RING_ENDPOINT = "/mdm-android-agent/operation/ring-device";
-        public static final String MUTE_ENDPOINT = "/mdm-android-agent/operation/mute";
-        public static final String INSTALL_APPS_ENDPOINT = "/mdm-android-agent/operation/install-application";
-        public static final String UNINSTALL_APPS_ENDPOINT = "/mdm-android-agent/operation/uninstall-application";
-        public static final String BLACKLIST_APPS_ENDPOINT = "/mdm-android-agent/operation/blacklist-applications";
-        public static final String NOTIFICATION_ENDPOINT = "/mdm-android-agent/operation/notification";
-        public static final String WIFI_ENDPOINT = "/mdm-android-agent/operation/wifi";
-        public static final String ENCRYPT_ENDPOINT = "/mdm-android-agent/operation/encrypt";
-        public static final String CHANGE_LOCK_ENDPOINT = "/mdm-android-agent/operation/change-lock-code";
-        public static final String PASSWORD_POLICY_ENDPOINT = "/mdm-android-agent/operation/password-policy";
-        public static final String WEB_CLIP_ENDPOINT = "/mdm-android-agent/operation/webclip";
+        public static final String OPERATION_ENDPOINT = "/api/device-mgt/android/v1.0/admin/devices/";
+        public static final String UNLOCK_ENDPOINT = "unlock-devices";
+        public static final String UNLOCK_OPERATION_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String LOCK_ENDPOINT = "lock-devices";
+        public static final String LOCK_OPERATION_PAYLOAD = "{ \"deviceIDs\": [\""+DEVICE_ID+"\"],"
+                + "\"operation\": { \"message\": \"string\", \"hardLockEnabled\": false }}";
+
+        public static final String LOCATION_ENDPOINT = "location";
+        public static final String LOCATION_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String CLEAR_PASSWORD_ENDPOINT = "clear-password";
+        public static final String CLEAR_PASSWORD_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String DEVICE_INFO_ENDPOINT = "/info";
+        public static final String DEVICE_INFO_PAYLOAD = "[\""+DEVICE_ID+"\"]";
+
+        public static final String ENTERPRISE_WIPE_ENDPOINT = "enterprise-wipe";
+        public static final String ENTERPRISE_WIPE_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String WIPE_DATA_ENDPOINT = "wipe";
+        public static final String WIPE_DATA_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"pin\": \"string\"\n"
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+
+        public static final String APPLICATION_LIST_ENDPOINT = "applications";
+        public static final String APPLICATION_LIST_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String RING_ENDPOINT = "ring";
+        public static final String RING_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String MUTE_ENDPOINT = "mute";
+        public static final String MUTE_PAYLOAD = PAYLOAD_COMMON;
+
+        public static final String INSTALL_APPS_ENDPOINT = "install-application";
+        public static final String INSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+                + "  ],\n" + "  \"operation\": {\n" + "    \"appIdentifier\": \"string\",\n"
+                + "    \"type\": \"string\",\n" + "    \"url\": \"string\"\n" + "  }\n" + "}";
+
+        public static final String UNINSTALL_APPS_ENDPOINT = "uninstall-application";
+        public static final String UNINSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n"
+                + "    \""+DEVICE_ID+"\"\n" + "  ],\n" + "  \"operation\": {\n"
+                + "    \"appIdentifier\": \"string\",\n" + "    \"type\": \"string\",\n" + "    \"url\": \"string\",\n"
+                + "    \"name\": \"string\"\n" + "  }\n" + "}";
+
+        public static final String BLACKLIST_APPS_ENDPOINT = "blacklist-applications";
+
+        public static final String NOTIFICATION_ENDPOINT = "send-notification";
+        public static final String NOTIFICATION_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+                + "  ],\n" + "  \"operation\": {\n" + "    \"messageText\": \"string\",\n"
+                + "    \"messageTitle\": \"string\"\n" + "  }\n" + "}";
+
+        public static final String WIFI_ENDPOINT = "configure-wifi";
+        public static final String WIFI_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"ssid\": \"string\",\n"
+                + "    \"password\": \"string\"\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+                + "  ]\n" + "}";
+
+        public static final String ENCRYPT_ENDPOINT = "encrypt-storage";
+        public static final String ENCRYPT_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"encrypted\": false\n"
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+
+        public static final String REBOOT_ENDPOINT = "reboot";
+        public static final String REBOOT_PAYLOAD = PAYLOAD_COMMON;;
+
+        public static final String CHANGE_LOCK_ENDPOINT = "change-lock-code";
+        public static final String CHANGE_LOCK_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"lockCode\": \"0000\"\n"
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}\n";
+
+        public static final String PASSWORD_POLICY_ENDPOINT = "set-password-policy";
+        public static final String PASSWORD_POLICY_PAYLOAD = "{\n" + "  \"operation\": {\n"
+                + "    \"maxFailedAttempts\": 0,\n" + "    \"minLength\": 0,\n" + "    \"pinHistory\": 0,\n"
+                + "    \"minComplexChars\": 0,\n" + "    \"maxPINAgeInDays\": 0,\n"
+                + "    \"requireAlphanumeric\": false,\n" + "    \"allowSimple\": false\n" + "  },\n"
+                + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+
+        public static final String WEB_CLIP_ENDPOINT = "set-webclip";
+        public static final String WEB_CLIP_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"identity\": \"string\",\n"
+                + "    \"title\": \"string\",\n" + "    \"type\": \"string\"\n" + "  },\n" + "  \"deviceIDs\": [\n"
+                + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
 
         private AndroidOperations() {
             throw new AssertionError();
