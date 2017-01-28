@@ -50,7 +50,6 @@ public class OAuthUtil {
         client = new RestClient(backendHTTPSURL, Constants.APPLICATION_URL_ENCODED, basicAuthString);
         oAuthData = client.post(Constants.APIApplicationRegistration.TOKEN_ENDPOINT,
                                 Constants.APIApplicationRegistration.OAUTH_TOKEN_PAYLOAD);
-        System.out.println(oAuthData.getData());
         jsonObj = new JSONObject(oAuthData.getData());
         return jsonObj;
     }
