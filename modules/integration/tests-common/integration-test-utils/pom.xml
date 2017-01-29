@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>tests-common</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -36,6 +36,6 @@
             <name>Apache License Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
-    </licenses>    
+    </licenses>
 
 </project>
