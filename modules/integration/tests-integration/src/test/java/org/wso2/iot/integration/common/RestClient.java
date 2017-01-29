@@ -17,11 +17,13 @@
  */
 package org.wso2.iot.integration.common;
 
+import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.test.utils.http.client.HttpRequestUtil;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -73,7 +75,7 @@ public class RestClient {
         this.requestHeaders.remove(headerName);
     }
 
-    public HttpResponse post(String endpoint, String body) throws Exception {
+    public HttpResponse post(String endpoint, String body) throws MalformedURLException, AutomationFrameworkException {
         return HttpRequestUtil.doPost(new URL(backEndUrl + endpoint), body, requestHeaders);
     }
 
