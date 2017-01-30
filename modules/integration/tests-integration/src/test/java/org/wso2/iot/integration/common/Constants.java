@@ -245,12 +245,11 @@ public final class Constants {
         public static final String USER_MANAGEMENT_GROUP = "user-mgt";
         public static final String USER_NAME = "username123";
         public static final String USER_ENDPOINT = "/api/device-mgt/v1.0/users";
-        public static final String USER_ADD_ENDPOINT = "/api/device-mgt/v1.0/users";
         public static final String USER_EDIT_ENDPOINT = "/api/device-mgt/v1.0/users/admin";
         public static final String USER_PAYLOAD_FILE_NAME = "user-payloads.json";
         public static final String USER_REMOVE_ENDPOINT = "/api/device-mgt/v1.0/users/username123";
         public static final String USER_RESPONSE_PAYLOAD_FILE_NAME = "user-response-payloads.json";
-        public static final String VIEW_USER_ENDPOINT = "/api/device-mgt/v1.0/users?limit=2";
+        public static final String VIEW_USER_ENDPOINT = "/api/device-mgt/v1.0/users?limit=1";
 
         private UserManagement() {
             throw new AssertionError();
