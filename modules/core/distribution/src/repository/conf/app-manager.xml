@@ -414,14 +414,13 @@
                 MDM running on separate JVM. Calls MDM methods via secured REST API. Use this when run Store/Publisher/MDM
                 in deployed in separate JVMs. This will be the most suitable active MDM when deployed on production environment.
             -->
-            <MDM name="WSO2MDM" bundle="org.wso2.carbon.appmgt.mdm.restconnector">
+            <MDM name="WSO2MDM_EXTERNAL_REST" bundle="org.wso2.carbon.appmgt.mdm.restconnector">
                 <Property name="ImageURL">/store/extensions/assets/mobileapp/resources/models/%s.png</Property>
-                <Property name="ServerURL">https://localhost:9443/mdm-admin</Property>
-                <Property name="TokenApiURL">https://localhost:9443/oauth2/token</Property>
-                <Property name="ClientKey">WjLm24IxBVLF0oz0VJfmtJbjJbka</Property>
-                <Property name="ClientSecret">v3KkIQXkJ1SDp_Bf8uUQxu5p7TQa</Property>
-                <Property name="AuthUser">admin</Property>
-                <Property name="AuthPass">admin</Property>
+                <Property name="ServerURL">https://localhost:9443</Property>
+                <Property name="TokenApiURL">https://localhost:9443/oauth2</Property>
+                <property name="Username">admin</property>
+                <property name="Password">admin</property>
+                <property name="TokenRefreshTimeOffset">100</property>
             </MDM>
 
             <!-- Old EMM, Calls EMM using REST API -->
