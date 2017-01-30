@@ -31,11 +31,11 @@ import java.util.*;
 public class QSGExecutor {
 
     private static String iotAdminUser= "chris";
-    private static String iotAdminPassword = "chris@IoTS";
+    private static String iotAdminPassword = "chrisadmin";
     private static String iotAdminEmail = "chris@mobx.com";
 
     private static String iotMobileUser = "alex";
-    private static String iotMobileUserPassword = "alex@IoTS";
+    private static String iotMobileUserPassword = "alexuser";
     private static String roleName = "iotMobileUser";
 
     public static void main(String[] args) {
@@ -112,12 +112,7 @@ public class QSGExecutor {
             System.out.println("Unable to create the windows passcode policy. Terminating the IoTS QSG now.");
             System.exit(0);
         }
-        //Add the iOS policy
-        status = PolicyOperations.createPasscodePolicy("ios-passcode-policy1", Constants.DeviceType.IOS);
-        if (!status) {
-            System.out.println("Unable to create the ios passcode policy. Terminating the IoTS QSG now.");
-            System.exit(0);
-        }
+
 
         System.out.println("Upload the android application ");
         //Upload the android application
@@ -143,7 +138,15 @@ public class QSGExecutor {
             System.exit(0);
         }
 
+
         System.out.println("Upload the iOS application ");
+        //Add the iOS policy
+        status = PolicyOperations.createPasscodePolicy("ios-passcode-policy1", Constants.DeviceType.IOS);
+        if (!status) {
+            System.out.println("Unable to create the ios passcode policy. Terminating the IoTS QSG now.");
+            System.exit(0);
+        }
+
         //Upload the ios application
         MobileApplication iOSApplication = AppOperations.uploadApplication(Constants.DeviceType.IOS, "PNDemo.ipa","application/octet-stream");
         iOSApplication.setVersion("1.0.0");
