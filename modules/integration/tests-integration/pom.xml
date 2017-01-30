@@ -31,8 +31,6 @@
     <description>Backend Integration Tests for WSO2 IOT Server.</description>
     <packaging>jar</packaging>
 
-
-
     <build>
         <plugins>
             <plugin>
@@ -46,7 +44,7 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
-                    <skipTests>${skipTests}</skipTests>
+                    <!--<skipTests>${skipTests}</skipTests>-->
 
                     <systemProperties>
                         <property>
@@ -269,8 +267,8 @@
         </dependency>
     </dependencies>
 
-    <properties>
-        <skipTests>true</skipTests>
-    </properties>
+    <!--<properties>-->
+        <!--<skipTests>true</skipTests>-->
+    <!--</properties>-->
 
 </project>
