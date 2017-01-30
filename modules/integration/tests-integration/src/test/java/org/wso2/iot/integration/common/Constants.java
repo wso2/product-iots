@@ -144,7 +144,7 @@ public final class Constants {
     }
 
     public static final class AndroidOperations {
-        private final String PAYLOAD_COMMON = "["+DEVICE_ID+"]";
+        private static final String PAYLOAD_COMMON = "["+DEVICE_ID+"]";
 
         public static final String OPERATION_PAYLOAD_FILE_NAME = "android-operation-payloads.json";
         public static final String OPERATIONS_GROUP = "operations";
