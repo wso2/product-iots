@@ -1539,7 +1539,7 @@
         <carbon.device.mgt.plugin.version>3.0.9-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.57</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.64</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
