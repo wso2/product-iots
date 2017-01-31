@@ -115,6 +115,7 @@
                 <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/repository/components/plugins/httpclient_4.3.2.wso2v1.jar</exclude>
                 <exclude>**/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
+				<exclude>**/repository/components/plugins/org.wso2.carbon.hostobjects.sso_4.5.4.jar</exclude>
             </excludes>
         </fileSet>
 
@@ -741,7 +742,6 @@
             </includes>
             <excludes>
                 <exclude>**/configs/designer.json</exclude>
-				<exclude>**/modules/oauth/token-handler-utils.js</exclude>
 				<exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
@@ -798,15 +798,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
-		<!--Adding it temporarly until the component release -->
-		<file>
-			<source>src/repository/jaggeryapps/portal/modules/oauth/token-handler-utils.js</source>
-			<outputDirectory>
-				${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/modules/oauth
-			</outputDirectory>
-			<fileMode>755</fileMode>
-		</file>
         <!-- End of "portal" app specific modifications -->
 
         <!-- Copying config file for enabling sso in api-store-->
