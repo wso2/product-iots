@@ -1543,7 +1543,7 @@
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
-        <carbon.mediation.version>4.6.9</carbon.mediation.version>
+        <carbon.mediation.version>4.6.10</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.1.5</carbon.analytics.common.version>
