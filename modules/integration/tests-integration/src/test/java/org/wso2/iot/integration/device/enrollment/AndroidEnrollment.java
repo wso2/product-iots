@@ -17,7 +17,9 @@
  */
 package org.wso2.iot.integration.device.enrollment;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
 import org.testng.annotations.BeforeClass;
@@ -32,8 +34,10 @@ import org.wso2.iot.integration.common.*;
  */
 public class AndroidEnrollment extends TestBase {
     private RestClient client;
+    private String deviceId;
 
-    @BeforeClass(alwaysRun = true, groups = { Constants.AndroidEnrollment.ENROLLMENT_GROUP})
+    @BeforeClass(alwaysRun = true, groups = { Constants.AndroidEnrollment.ENROLLMENT_GROUP}, dependsOnGroups =
+            Constants.MobileDeviceManagement.MOBILE_DEVICE_MANAGEMENT_GROUP)
     public void initTest() throws Exception {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
         String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPURL, backendHTTPSURL);
@@ -42,17 +46,23 @@ public class AndroidEnrollment extends TestBase {
 
     @Test(description = "Test an Android device enrollment.")
     public void testEnrollment() throws Exception {
-        String enrollmentData = PayloadGenerator.getJsonPayloadToString(Constants.AndroidEnrollment
-                .ENROLLMENT_PAYLOAD_FILE_NAME);
+        String enrollmentData = PayloadGenerator.getJsonPayload(Constants.AndroidEnrollment
+                .ENROLLMENT_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST).toString();
         HttpResponse response = client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData);
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(response.getData());
+        JsonObject jsonObject = element.getAsJsonObject();
+        JsonElement msg = jsonObject.get("responseMessage");
+        deviceId = msg.getAsString().split("\'")[1].split("\'")[0];
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayloadToString(
-                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME), response.getData(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
+                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
+                Constants.HTTP_METHOD_POST).toString(), response.getData(), true);
     }
 
     @Test(description = "Test an Android device is enrolled.", dependsOnMethods = {"testEnrollment"})
     public void testIsEnrolled() throws Exception {
-        HttpResponse response = client.get(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + Constants.DEVICE_ID);
+        HttpResponse response = client.get(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + "/" + deviceId + "/status");
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
                 Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
@@ -64,21 +74,19 @@ public class AndroidEnrollment extends TestBase {
         JsonObject enrollmentData = PayloadGenerator.getJsonPayload(
                 Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME,
                 Constants.HTTP_METHOD_PUT);
-        enrollmentData.addProperty(Constants.DEVICE_IDENTIFIER_KEY, Constants.DEVICE_ID);
-        HttpResponse response = client.put(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + Constants.DEVICE_ID,
+        HttpResponse response = client.put(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + "/" + deviceId,
                                            enrollmentData.toString());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
                 Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
                 Constants.HTTP_METHOD_PUT).toString(), response.getData(), true);
     }
 
-    @Test(description = "Test disenrollment.", dependsOnMethods = {"testModifyEnrollment"})
+    @Test(description = "Test disEnrollment.", dependsOnMethods = {"testModifyEnrollment"})
     public void testDisEnrollDevice() throws Exception {
-        HttpResponse response = client.delete(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + Constants.DEVICE_ID);
+        HttpResponse response = client.delete(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + "/" + deviceId);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
-                                              Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
-                                              Constants.HTTP_METHOD_DELETE).toString(),
-                                      response.getData(), true);
+                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
+                Constants.HTTP_METHOD_DELETE).toString(), response.getData(), true);
     }
 }

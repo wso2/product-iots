@@ -19,7 +19,6 @@ package org.wso2.iot.integration.common;
 
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.frameworkutils.CodeCoverageUtils;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 
@@ -29,7 +28,6 @@ import javax.xml.xpath.XPathExpressionException;
  * This is the base test class that provides common details necessary for other test cases.
  */
 public class TestBase {
-    static String accessToken;
     protected AutomationContext automationContext;
     protected String backendHTTPSURL;
     protected String backendHTTPURL;

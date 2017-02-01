@@ -18,24 +18,16 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="mdm-suite-initializer">
+<suite name="iot-suite-initializer">
     <parameter name="useDefaultListeners" value="false"/>
     <listeners>
-        <listener
-                class-name="org.wso2.carbon.automation.engine.testlisteners.TestExecutionListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestExecutionListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestManagerListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestReportListener"/>
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestSuiteListener"/>
-        <listener
-                class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
+        <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <test name="Server restart test" preserve-order="true">
-        <classes>
-            <class name="org.wso2.iot.integration.util.RestartTest"/>
-        </classes>
-
-    </test>
     <test name="mobile-device-mgt-no-devices" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagementWithNoDevices"/>
@@ -46,11 +38,11 @@
             <class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>
         </classes>
     </test>
-    <!--<test name="android-operation" preserve-order="false" parallel="true">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="android-operation" preserve-order="false" parallel="true">
+        <classes>
+            <class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>
+        </classes>
+    </test>
     <!--<test name="windows-enrollment" preserve-order="true" parallel="false">-->
         <!--<classes>-->
             <!--<class name="org.wso2.iot.integration.device.enrollment.WindowsEnrollment"/>-->

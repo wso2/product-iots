@@ -1,4 +1,19 @@
 {
-  "responseCode": "OK",
-  "responseMessage": "Android device, which carries the id \u0027d24f870f390352a41\u0027 has successfully been enrolled"
+  "POST": {
+    "responseCode": "OK",
+    "responseMessage": "Android device, which carries the id \u0027d24f870f390352a41234\u0027 has successfully been enrolled"
+  },
+  "GET": {
+    "responseCode": "OK",
+    "responseMessage": "Android device that carries the id \u0027d24f870f390352a41234\u0027 is enrolled"
+  },
+  "PUT": {
+    "responseCode": "Accepted",
+    "responseMessage": "Enrollment of Android device that carries the id \u0027d24f870f390352a41234\u0027 has successfully updated"
+  },
+  "DELETE" : {
+    "responseCode":"OK",
+    "responseMessage":"Android device that carries id \u0027d24f870f390352a41234\u0027 has successfully dis-enrolled"
+  }
+
 }

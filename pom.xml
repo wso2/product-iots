@@ -297,12 +297,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>org.wso2.iot</groupId>
-                <artifactId>org.wso2.carbon.iot.core.integration.ui.pages</artifactId>
-                <version>${product.iot.version}</version>
-                <scope>test</scope>
-            </dependency>
 
             <!--Carbon Kernel Dependencies-->
             <dependency>
@@ -1012,6 +1006,17 @@
                 <artifactId>org.wso2.iot.core.admin.styles</artifactId>
                 <version>${product.iot.version}</version>
             </dependency>
+            <!--mobile-qsg dependencies-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${apache.httpmime.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache.httpclient.version}</version>
+            </dependency>
 
             <!-- *********************************  Analytics Distribution Features START ********************************* -->
 
@@ -1529,14 +1534,14 @@
         <carbon.governance.version>4.7.0</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>2.0.12-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.13</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>3.1.0-SNAPSHOT</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>3.0.9-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.10</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.64</carbon.api.mgt.version>
@@ -1643,7 +1648,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.14</appmgt.feature.version>
+        <appmgt.feature.version>1.2.15</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
@@ -1677,6 +1682,9 @@
 
         <!-- CDMF Analytics -->
         <cdmf.analytics.version>1.0.3</cdmf.analytics.version>
+
+        <apache.httpmime.version>4.2.5</apache.httpmime.version>
+        <apache.httpclient.version>4.5.2</apache.httpclient.version>
     </properties>
 
     <scm>
