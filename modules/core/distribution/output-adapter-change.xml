@@ -22,7 +22,7 @@
         <property key="jobQueueSize">10000</property>
         <!--Authorizer holds the information of the authorizer that is used authorize a connection.-->
         <property key="authenticator">org.wso2.carbon.device.mgt.output.adapter.websocket.authentication.OAuthAuthenticator</property>
-        <property key="keymanagerUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}</property>
+        <property key="tokenValidationUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}</property>
         <property key="maximumHttpConnectionPerHost">2</property>
         <property key="maximumTotalHttpConnection">100</property>
         <property key="authorizer">org.wso2.carbon.device.mgt.output.adapter.websocket.authorization.DeviceAuthorizer</property>
