@@ -34,7 +34,7 @@
         "methods": {
             "oauth": {
                 "attributes": {
-                    "apimgt-gateway": false,
+                    "apimgt-gateway": true,
                     "oauthProvider": {
                         "appRegistration": {
                             "appType": "webapp",
@@ -43,12 +43,10 @@
                             "password":"admin",
                             "dynamicClientAppRegistrationServiceURL": "https://localhost:9443/dynamic-client-web/register",
                             "apiManagerClientAppRegistrationServiceURL": "https://localhost:9443/api-application-registration/register/tenants",
-                            "grantType": "password refresh_token urn:ietf:urn:ietf:params:oauth:grant-type:saml2-bearer urn:ietf:params:oauth:grant-type:jwt-bearer",
+                            "grantType": "password refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer urn:ietf:params:oauth:grant-type:jwt-bearer",
                             "tokenScope": "admin",
                             "callbackUrl": "https://localhost:9445/portal",
-                            "saasApp":true,
-                            "samlGrantTypeName":"urn:ietf:params:oauth:grant-type:saml2-bearer"
-
+                            "saasApp":true
                         },
                         "tokenServiceURL": "https://localhost:9443/oauth2/token"
                     },

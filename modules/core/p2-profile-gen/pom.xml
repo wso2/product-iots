@@ -146,9 +146,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.application.extension.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.integration.client.feature:${carbon.device.mgt.version}
-								</featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.apimgt.handler.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
@@ -621,12 +618,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.dcr.feature:${carbon.api.mgt.version}
                                 </featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.publisher.feature:${carbon.api.mgt.version}
-								</featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.apimgt:org.wso2.carbon.apimgt.rest.api.store.feature:${carbon.api.mgt.version}
-								</featureArtifactDef>
                                 <!-- End of API Management Features -->
 
                                 <!-- TCP Transport -->
@@ -779,7 +770,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-device-manager-profile</id>
+                        <id>p2-profile-generation-devicetype-publisher-profile</id>
                         <phase>package</phase>
                         <goals>
                             <goal>materialize-product</goal>
@@ -791,11 +782,11 @@
                             <targetPath>
                                 file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
                             </targetPath>
-                            <profile>device-manager</profile>
+                            <profile>devicetype-publisher</profile>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>p2-profile-generation-device-backend-profile</id>
+                        <id>p2-profile-generation-devicetype-worker-profile</id>
                         <phase>package</phase>
                         <goals>
                             <goal>materialize-product</goal>
@@ -807,7 +798,7 @@
                             <targetPath>
                                 file:${basedir}/target/wso2carbon-core-${carbon.kernel.version}/repository/components
                             </targetPath>
-                            <profile>device-backend</profile>
+                            <profile>devicetype-worker</profile>
                         </configuration>
                     </execution>
                     <execution>
@@ -902,10 +893,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -1066,14 +1053,6 @@
                                     <id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
                                 <!-- API Manager Publisher and Store Features -->
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
@@ -1932,10 +1911,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2352,10 +2327,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.dynamic.client.registration.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2419,10 +2390,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2466,7 +2433,7 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>device-manager</profile>
+                            <profile>devicetype-publisher</profile>
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
@@ -2545,10 +2512,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2900,18 +2863,6 @@
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.core.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
@@ -3070,10 +3021,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3144,7 +3091,7 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>device-backend</profile>
+                            <profile>devicetype-worker</profile>
                             <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <destination>
@@ -3203,10 +3150,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.email.sender.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3272,7 +3215,6 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
-
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.adapter.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -3539,18 +3481,6 @@
                                     <id>org.wso2.carbon.apimgt.store.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.dcr.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.publisher.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.rest.api.store.feature.group</id>
-									<version>${carbon.api.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.extensions.feature.group</id>
                                     <version>${carbon.governance.version}</version>
@@ -3701,10 +3631,6 @@
                                     <id>org.wso2.carbon.apimgt.application.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.apimgt.integration.client.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3760,25 +3686,6 @@
 									<version>${identity.inbound.auth.saml.version.iotcore}</version>
 								</feature>
 								<!-- SSO Fix-->
-
-								<!-- Dashboard Features -->
-								<feature>
-									<id>org.wso2.carbon.dashboards.shindig.feature.group</id>
-									<version>${carbon.dashboard.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.dashboards.portal.feature.group</id>
-									<version>${carbon.dashboard.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.dashboard.deployment.feature.group</id>
-									<version>${carbon.dashboard.version}</version>
-								</feature>
-								<feature>
-									<id>org.wso2.carbon.iot.device.statistics.dashboard.feature.group</id>
-									<version>${carbon.device.mgt.plugin.version}</version>
-								</feature>
-								<!-- End of Dashboard Features -->
                             </features>
                         </configuration>
                     </execution>

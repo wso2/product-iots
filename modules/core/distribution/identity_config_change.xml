@@ -7,7 +7,7 @@
 	<!-- Add the scope validator config element -->
 	<add>
 		<after>//s:Server/s:OAuth/s:OAuthCallbackHandlers</after>
-		<value><![CDATA[<OAuthScopeValidator class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.ScopeValidationHandler"/>]]></value>
+		<value><![CDATA[<OAuthScopeValidator class="org.wso2.carbon.device.mgt.oauth.extensions.validators.ExtendedJDBCScopeValidator"/>]]></value>
 	</add>
 	<!-- Add the ntlm grant type validator config element -->
 	<add>
