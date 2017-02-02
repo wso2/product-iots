@@ -16,8 +16,7 @@
 ~ specific language governing permissions and limitations
 ~ under the License.
 -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-integration</artifactId>
@@ -30,8 +29,6 @@
     <name>WSO2 IOT - Integration Test Module</name>
     <description>Backend Integration Tests for WSO2 IOT Server.</description>
     <packaging>jar</packaging>
-
-
 
     <build>
         <plugins>
@@ -46,7 +43,7 @@
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
 
-                    <skipTests>${skipTests}</skipTests>
+                    <!--<skipTests>${skipTests}</skipTests>-->
 
                     <systemProperties>
                         <property>
@@ -248,10 +245,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.wso2.iot</groupId>
-            <artifactId>org.wso2.carbon.iot.core.integration.ui.pages</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon.automation</groupId>
             <artifactId>org.wso2.carbon.automation.engine</artifactId>
         </dependency>
@@ -269,8 +262,8 @@
         </dependency>
     </dependencies>
 
-    <properties>
-        <skipTests>true</skipTests>
-    </properties>
+    <!--<properties>-->
+        <!--<skipTests>true</skipTests>-->
+    <!--</properties>-->
 
 </project>
