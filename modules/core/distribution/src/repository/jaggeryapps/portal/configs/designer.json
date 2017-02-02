@@ -20,7 +20,7 @@
           "acs": "%https.host%/portal/acs",
           "identityAlias": "wso2carbon",
           "defaultNameIDPolicy": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-          "useTenantKey": true,
+          "useTenantKey": false,
           "isPassive": false
         }
       },
@@ -34,7 +34,7 @@
     "methods": {
       "oauth": {
         "attributes": {
-          "apimgt-gateway": true,
+          "apimgt-gateway": false,
           "oauthProvider": {
             "appRegistration": {
               "appType": "webapp",
@@ -46,8 +46,7 @@
               "grantType": "password refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer urn:ietf:params:oauth:grant-type:jwt-bearer",
               "tokenScope": "admin",
               "callbackUrl": "%https.host%/portal",
-              "saasApp":true,
-              "samlGrantTypeName":"urn:ietf:params:oauth:grant-type:saml2-bearer"
+              "saasApp":true
             },
             "tokenServiceURL": "https://localhost:9443/oauth2/token"
           },

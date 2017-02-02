@@ -115,7 +115,6 @@
                 <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/repository/components/plugins/httpclient_4.3.2.wso2v1.jar</exclude>
                 <exclude>**/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
-				<exclude>**/repository/components/plugins/org.wso2.carbon.hostobjects.sso_4.5.4.jar</exclude>
             </excludes>
         </fileSet>
 
@@ -954,14 +953,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-		<!-- Copying apim-integration.xml -->
-		<file>
-			<source>
-				../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/apim-integration.xml
-			</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-			<fileMode>644</fileMode>
-		</file>
         <!-- Copying api-manager.xml -->
         <file>
             <source>src/repository/conf/api-manager.xml</source>
