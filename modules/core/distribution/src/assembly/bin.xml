@@ -116,6 +116,10 @@
                 <exclude>**/repository/components/plugins/httpclient_4.3.2.wso2v1.jar</exclude>
                 <exclude>**/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
 				<exclude>**/repository/components/plugins/org.wso2.carbon.hostobjects.sso_4.5.4.jar</exclude>
+				<exclude>**/bin/wso2server.sh</exclude>
+				<exclude>**/bin/wso2server.bat</exclude>
+				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js</exclude>
+				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js</exclude>
             </excludes>
         </fileSet>
 
@@ -128,18 +132,6 @@
             <includes>
                 <include>*/**</include>
             </includes>
-        </fileSet>
-        <fileSet>
-            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
-            <includes>
-                <include>**/*.sh</include>
-            </includes>
-            <excludes>
-                <exclude>bin/wso2server.sh</exclude>
-                <exclude>bin/wso2server.bat</exclude>
-            </excludes>
-            <fileMode>755</fileMode>
         </fileSet>
 
         <!-- Multi-tenancy related file -->
@@ -798,6 +790,20 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+		<file>
+			<source>src/repository/jaggeryapps/portal/modules/oauth/token-handler-utils.js</source>
+			<outputDirectory>
+				${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/modules/oauth
+			</outputDirectory>
+			<fileMode>755</fileMode>
+		</file>
+		<file>
+			<source>src/repository/jaggeryapps/portal/modules/oauth/token-handlers.js</source>
+			<outputDirectory>
+				${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/modules/oauth
+			</outputDirectory>
+			<fileMode>755</fileMode>
+		</file>
         <!-- End of "portal" app specific modifications -->
 
         <!-- Copying config file for enabling sso in api-store-->
@@ -995,7 +1001,7 @@
         -->
         <file>
             <source>
-                src/repository/conf/cdm-config.xml
+				../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cdm-config.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
             <filtered>true</filtered>

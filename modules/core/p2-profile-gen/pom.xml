@@ -161,6 +161,9 @@
 				                <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature:${carbon.device.mgt.version}
+								</featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
@@ -958,6 +961,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
 				                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -1904,6 +1911,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2395,6 +2406,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2605,6 +2620,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3046,6 +3065,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3255,6 +3278,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -3677,6 +3704,10 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.gcm.feature.group</id>
+									<version>${carbon.device.mgt.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>

@@ -47,6 +47,8 @@
                 <exclude>**/repository/conf/security/cipher-text.properties</exclude>
                 <exclude>**/repository/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/repository/conf/security/cipher-tool.properties</exclude>
+				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js</exclude>
+				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -724,10 +726,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security</outputDirectory>
         </file>
         <file>
-            <source>src/repository/conf/etc/jwt.properties</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>
-        </file>
-        <file>
             <source>src/repository/conf/analytics/spark/spark-udf-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/analytics/spark</outputDirectory>
         </file>
@@ -798,6 +796,21 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+		<file>
+			<source>src/repository/jaggeryapps/portal/modules/oauth/token-handler-utils.js</source>
+			<outputDirectory>
+				${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/modules/oauth
+			</outputDirectory>
+			<fileMode>755</fileMode>
+		</file>
+		<file>
+			<source>src/repository/jaggeryapps/portal/modules/oauth/token-handlers.js</source>
+			<outputDirectory>
+				${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/modules/oauth
+			</outputDirectory>
+			<fileMode>755</fileMode>
+		</file>
+
         <!-- Adding IoT Analytics Dashboard and gadget CApps -->
         <file>
             <source>
