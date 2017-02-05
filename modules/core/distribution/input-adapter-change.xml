@@ -9,7 +9,7 @@
 	<property key="jobQueueSize">10000</property>
 	<property key="maximumHttpConnectionPerHost">2</property>
 	<property key="maximumTotalHttpConnection">100</property>
-	<property key="tokenUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}</property>
+	<property key="tokenValidationUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}</property>
 	<property key="username">admin</property>
 	<property key="password">admin</property>
 	<property key="tokenUrl">https://${iot.gateway.host}:${iot.gateway.https.port}/token</property>
