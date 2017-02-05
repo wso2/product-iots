@@ -49,6 +49,8 @@
                 <exclude>**/repository/conf/security/cipher-tool.properties</exclude>
 				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js</exclude>
 				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js</exclude>
+				<exclude>**/repository/conf/security/authenticators.xml</exclude>
+				<exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -404,6 +406,21 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+		<file>
+			<source>
+				src/repository/conf/security/authenticators.xml
+			</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/
+			</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>644</fileMode>
+		</file>
+		<file>
+			<source>src/repository/conf/tomcat/catalina-server.xml</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>644</fileMode>
+		</file>
         <!-- ************* tomcat webapp hosting related files end ********** -->
 
         <!-- Event broker configuration for deployment sync -->
@@ -814,7 +831,7 @@
         <!-- Adding IoT Analytics Dashboard and gadget CApps -->
         <file>
             <source>
-                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/carbonapps/org_wso2_carbon_analytics_cdmf-1.0.0.car
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources/devicetypes/device_management/org_wso2_carbon_analytics_cdmf-1.0.0.car
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/</outputDirectory>
             <fileMode>644</fileMode>

@@ -730,6 +730,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
+								</featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -1564,6 +1567,10 @@
                                     <id>org.wso2.carbon.analytics.cdmf.feature.group</id>
                                     <version>${cdmf.analytics.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.identity.authenticator.mutualssl.feature.group</id>
+									<version>${identity.carbon.auth.mutual.ssl.version}</version>
+								</feature>
                             </features>
                         </configuration>
                     </execution>
@@ -3810,6 +3817,10 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
 								<!-- End of Dashboard Features -->
+								<feature>
+									<id>org.wso2.carbon.identity.authenticator.mutualssl.feature.group</id>
+									<version>${identity.carbon.auth.mutual.ssl.version}</version>
+								</feature>
                             </features>
                         </configuration>
                     </execution>

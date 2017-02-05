@@ -309,6 +309,8 @@ do
     -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
     -Diot.analytics.host="localhost" \
     -Diot.analytics.https.port="9445" \
+    -Diot.manager.host="localhost" \
+    -Diot.manager.https.port="9443" \
     -Dmqtt.broker.host="localhost" \
     -Dmqtt.broker.port="1886" \
     -Diot.core.host="localhost" \

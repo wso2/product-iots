@@ -40,7 +40,17 @@
         <Priority>5</Priority>
     </Authenticator>
 
-    <!-- authenticator Configurations for SAML2SSOAuthenticator -->
+	<!-- Authenticator Configurations for MutualSSLAuthenticator -->
+	<Authenticator name="MutualSSLAuthenticator" disabled="false">
+		<Priority>5</Priority>
+		<Config>
+			<Parameter name="UsernameHeader">UserName</Parameter>
+			<Parameter name="WhiteListEnabled">false</Parameter>
+			<Parameter name="WhiteList"/>
+		</Config>
+	</Authenticator>
+
+	<!-- authenticator Configurations for SAML2SSOAuthenticator -->
     <Authenticator name="SAML2SSOAuthenticator" disabled="true">
         <Priority>10</Priority>
         <Config>
