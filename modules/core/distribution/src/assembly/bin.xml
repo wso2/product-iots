@@ -1463,5 +1463,31 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+        <file>
+            <source>
+                src/repository/cloud/portal/common.css
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/css
+            </outputDirectory>
+
+        </file>
+        <file>
+            <source>
+                src/repository/cloud/portal/portal.js
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/js
+            </outputDirectory>
+
+        </file>
+        <file>
+            <source>
+                src/repository/cloud/portal/global-navigation.jag
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/theme/templates
+            </outputDirectory>
+
+        </file>
+
+
     </files>
 </assembly>

@@ -46,12 +46,12 @@
             </includes>
         </fileSet>
         <!--<fileSet>-->
-            <!--<directory>src/resources/bin</directory>-->
-            <!--<outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-            <!--<fileMode>755</fileMode>-->
+        <!--<directory>src/resources/bin</directory>-->
+        <!--<outputDirectory>wso2iot-${product.iot.version}/bin</outputDirectory>-->
+        <!--<includes>-->
+        <!--<include>*/**</include>-->
+        <!--</includes>-->
+        <!--<fileMode>755</fileMode>-->
         <!--</fileSet>-->
         <fileSet>
             <directory>${basedir}/src/resources/plugins</directory>
@@ -60,37 +60,38 @@
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
-			<filtered>true</filtered>
+            <filtered>true</filtered>
         </fileSet>
-		<fileSet>
-			<directory>${basedir}/src/resources/samples</directory>
-			<outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
-			<includes>
-				<include>*/**</include>
-			</includes>
+        <fileSet>
+            <directory>${basedir}/src/resources/samples</directory>
+            <outputDirectory>wso2iot-${product.iot.version}/samples</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
             <excludes>
                 <exclude>**/*samples-deployer.xml</exclude>
                 <exclude>**/*connectedcup/pom.xml</exclude>
             </excludes>
-			<fileMode>644</fileMode>
-		</fileSet>
+            <fileMode>644</fileMode>
+        </fileSet>
     </fileSets>
-	<files>
-		<file>
-			<source>
+    <files>
+        <file>
+            <source>
                 ${basedir}/src/resources/samples/samples-deployer.xml
-			</source>
-			<outputDirectory>wso2iot-${product.iot.version}/samples/</outputDirectory>
-			<filtered>true</filtered>
-			<fileMode>644</fileMode>
-		</file>
-		<file>
-			<source>
+            </source>
+            <outputDirectory>wso2iot-${product.iot.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
                 ${basedir}/src/resources/samples/connectedcup/pom.xml
-			</source>
-			<outputDirectory>wso2iot-${product.iot.version}/samples/connectedcup</outputDirectory>
-			<filtered>true</filtered>
-			<fileMode>644</fileMode>
-		</file>
-	</files>
+            </source>
+            <outputDirectory>wso2iot-${product.iot.version}/samples/connectedcup</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+    </files>
 </assembly>
