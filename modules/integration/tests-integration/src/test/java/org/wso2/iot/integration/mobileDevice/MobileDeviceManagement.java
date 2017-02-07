@@ -73,4 +73,11 @@ public class MobileDeviceManagement extends TestBase {
         //Response has two device types, because in windows enrollment a windows device is previously enrolled.
     }
 
+    @Test(description = "Change device status")
+    public void testRemoveDevices() throws Exception {
+        String endpointUrl = Constants.MobileDeviceManagement.CHANGE_DEVICE_STATUS_ENDPOINT + Constants.ANDROID_DEVICE_TYPE
+                + "/" + Constants.DEVICE_ID +  "/changestatus?newStatus=" + Constants.INACTIVE;
+        IOTResponse response = client.put(endpointUrl, "");
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
+    }
 }
