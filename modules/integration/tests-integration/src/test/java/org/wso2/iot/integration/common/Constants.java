@@ -46,6 +46,7 @@ public final class Constants {
     public static final String UTF8 = "UTF-8";
     public static final String ZERO = "0";
     public static final String NULL = "[]";
+    public static final String INACTIVE = "INACTIVE";
 
     public static final String HTTPS = "https";
     public static final String HTTP = "http";
@@ -91,7 +92,8 @@ public final class Constants {
                 + "perm:roles:create-combined-role perm:roles:delete perm:roles:details perm:roles:permissions "
                 + "perm:roles:update perm:roles:view perm:users:add perm:users:count perm:users:credentials "
                 + "perm:users:delete perm:users:details perm:users:is-exist perm:users:roles perm:users:search "
-                + "perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration";
+                + "perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration "
+                + "perm:devices:change-status";
 
         private APIApplicationRegistration() {
             throw new AssertionError();
@@ -294,6 +296,7 @@ public final class Constants {
     public static final class MobileDeviceManagement {
         public static final String MOBILE_DEVICE_MANAGEMENT_GROUP = "mobile-device-mgt";
         public static final String GET_DEVICE_COUNT_ENDPOINT = "/api/device-mgt/v1.0/devices";
+        public static final String CHANGE_DEVICE_STATUS_ENDPOINT = "/api/device-mgt/v1.0/devices/";
         public static final String NO_OF_DEVICES = "1";
         public static final String GET_ALL_DEVICES_ENDPOINT = "/mdm-admin/devices";
         public static final String VIEW_DEVICE_TYPES_ENDPOINT = "/mdm-admin/devices/types";
