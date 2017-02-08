@@ -74,7 +74,6 @@
                 <exclude>**/lib/encoder*</exclude>
                 <exclude>**/plugins/jaxb*</exclude>
                 <exclude>**/repository/conf/security/authenticators.xml</exclude>
-				<exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
 				<exclude>**/user-mgt.xml</exclude>
 
                 <exclude>**/plugins/org.wso2.carbon.localentry.ui*</exclude>
@@ -1187,12 +1186,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-		<file>
-			<source>src/repository/conf/tomcat/catalina-server.xml</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
-			<filtered>true</filtered>
-			<fileMode>644</fileMode>
-		</file>
         <!-- Cipher Tool Files -->
         <file>
             <source>

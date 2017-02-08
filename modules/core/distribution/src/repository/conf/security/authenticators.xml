@@ -25,15 +25,18 @@
 <Authenticators xmlns="http://wso2.org/projects/carbon/authenticators.xml">
 
     <!-- authenticator Configurations for OAuthAuthenticator -->
-    <Authenticator name="OAuthAuthenticator" disabled="false">
-        <Priority>10</Priority>
-        <Config>
-            <Parameter name="isRemote">false</Parameter>
-            <Parameter name="hostURL">https://localhost:9443</Parameter>
-            <Parameter name="adminUsername">admin</Parameter>
-            <Parameter name="adminPassword">admin</Parameter>
-        </Config>
-    </Authenticator>
+	<Authenticator name="SignedJWTAuthenticator" disabled="false">
+		<Priority>5</Priority>
+	</Authenticator>
+	<Authenticator name="OAuthAuthenticator" disabled="true">
+		<Priority>10</Priority>
+		<Config>
+			<Parameter name="isRemote">false</Parameter>
+			<Parameter name="hostURL">https://localhost:9443</Parameter>
+			<Parameter name="adminUsername">admin</Parameter>
+			<Parameter name="adminPassword">admin</Parameter>
+		</Config>
+	</Authenticator>
 
     <!-- authenticator Configurations for TokenUIAuthenticator -->
     <Authenticator name="TokenUIAuthenticator" disabled="false">
@@ -41,14 +44,14 @@
     </Authenticator>
 
 	<!-- Authenticator Configurations for MutualSSLAuthenticator -->
-	<Authenticator name="MutualSSLAuthenticator" disabled="false">
+	<!--Authenticator name="MutualSSLAuthenticator" disabled="false">
 		<Priority>5</Priority>
 		<Config>
 			<Parameter name="UsernameHeader">UserName</Parameter>
 			<Parameter name="WhiteListEnabled">false</Parameter>
 			<Parameter name="WhiteList"/>
 		</Config>
-	</Authenticator>
+	</Authenticator-->
 
 	<!-- authenticator Configurations for SAML2SSOAuthenticator -->
     <Authenticator name="SAML2SSOAuthenticator" disabled="true">

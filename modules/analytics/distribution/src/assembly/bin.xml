@@ -50,7 +50,6 @@
 				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js</exclude>
 				<exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js</exclude>
 				<exclude>**/repository/conf/security/authenticators.xml</exclude>
-				<exclude>**/repository/conf/tomcat/catalina-server.xml</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -412,12 +411,6 @@
 			</source>
 			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security/
 			</outputDirectory>
-			<filtered>true</filtered>
-			<fileMode>644</fileMode>
-		</file>
-		<file>
-			<source>src/repository/conf/tomcat/catalina-server.xml</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat</outputDirectory>
 			<filtered>true</filtered>
 			<fileMode>644</fileMode>
 		</file>

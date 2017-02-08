@@ -809,10 +809,6 @@
                                     <id>org.wso2.extension.siddhi.execution.json.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.identity.authenticator.mutualssl.feature.group</id>
-									<version>${identity.carbon.auth.mutual.ssl.version}</version>
-								</feature>
                             </features>
                         </configuration>
                     </execution>

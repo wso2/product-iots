@@ -61,14 +61,18 @@
 			</SkipSessionValidation> -->
 	</Authenticator>
 
+	<Authenticator name="SignedJWTAuthenticator" disabled="false">
+		<Priority>5</Priority>
+	</Authenticator>
+
 	<!-- Authenticator Configurations for MutualSSLAuthenticator -->
-	<Authenticator name="MutualSSLAuthenticator" disabled="false">
+	<!--Authenticator name="MutualSSLAuthenticator" disabled="false">
 	  <Priority>5</Priority>
 	  <Config>
 		  <Parameter name="UsernameHeader">UserName</Parameter>
 		  <Parameter name="WhiteListEnabled">false</Parameter>
 		  <Parameter name="WhiteList"/>
 	  </Config>
-	</Authenticator>
+	</Authenticator-->
 
 </Authenticators>
