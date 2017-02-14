@@ -3188,10 +3188,6 @@
 									<version>${appmgt.feature.version}</version>
 								</feature>
 								<feature>
-									<id>org.wso2.carbon.appmgt.mdm.restconnector.feature.group</id>
-									<version>${appmgt.feature.version}</version>
-								</feature>
-								<feature>
 									<id>org.wso2.carbon.appmgt.mobile.feature.group</id>
 									<version>${appmgt.feature.version}</version>
 								</feature>
@@ -3215,25 +3211,6 @@
 									<id>org.wso2.carbon.social.feature.group</id>
 									<version>${carbon.store.version}</version>
 								</feature>
-								<!-- End of app management features-->
-=======
-                                <!-- App management features-->
-                                <feature>
-                                    <id>org.wso2.carbon.appmgt.core.feature.group</id>
-                                    <version>${appmgt.feature.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.appmgt.mdm.wso2emm.feature.group</id>
-                                    <version>${appmgt.feature.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.appmgt.mobile.feature.group</id>
-                                    <version>${appmgt.feature.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.appmgt.services.api.feature.group</id>
-                                    <version>${appmgt.feature.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.appmgt.mdm.osgiconnector.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -3242,8 +3219,7 @@
                                     <id>org.wso2.carbon.appmgt.mdm.restconnector.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-                                <!-- End of app management features-->
->>>>>>> 6cd3950... Updated pom xmls accordding to rest connector
+								<!-- End of app management features-->
 
                                 <!-- Device Management Features -->
                                 <feature>
