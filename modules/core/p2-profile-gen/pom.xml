@@ -3178,7 +3178,6 @@
                                 </feature>
                                 <!-- End of IoTServer Features -->
 
-<<<<<<< HEAD
 								<!-- App management features-->
 								<feature>
 									<id>org.wso2.carbon.appmgt.core.feature.group</id>
