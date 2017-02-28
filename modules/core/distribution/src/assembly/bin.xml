@@ -1480,13 +1480,7 @@
             </outputDirectory>
 
         </file>
-        <file>
-            <source>src/repository/resources/web-apps/api#am#store#v0.11.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
+
 
     </files>
 </assembly>
