@@ -21,9 +21,9 @@
         <ServiceProvider>
             <Issuer>devicemgt</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/devicemgt/uuf/sso/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/devicemgt/uuf/sso/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/devicemgt/uuf/sso/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/devicemgt/uuf/sso/acs</DefaultAssertionConsumerServiceURL>
             <SignAssertion>true</SignAssertion>
             <SignResponse>true</SignResponse>
             <EnableAttributeProfile>false</EnableAttributeProfile>
@@ -44,27 +44,27 @@
         <ServiceProvider>
             <Issuer>store</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/store/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/store/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/store/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/store/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/store/login.jag</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>social</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/social/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/social/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/social/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/social/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/social/login</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>publisher</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/publisher/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/publisher/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/publisher/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/publisher/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
@@ -75,9 +75,9 @@
         <ServiceProvider>
             <Issuer>API_STORE</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/api-store/jagg/jaggery_acs.jag</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/api-store/jagg/jaggery_acs.jag</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/api-store/jagg/jaggery_acs.jag</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/api-store/jagg/jaggery_acs.jag</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
@@ -87,9 +87,9 @@
         <ServiceProvider>
             <Issuer>portal</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9443/portal/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/portal/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9443/portal/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:${carbon.management.port}/portal/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <EnableRecipients>true</EnableRecipients>
@@ -103,9 +103,9 @@
         <ServiceProvider>
             <Issuer>analyticsportal</Issuer>
             <AssertionConsumerServiceURLs>
-                <AssertionConsumerServiceURL>https://localhost:9445/portal/acs</AssertionConsumerServiceURL>
+                <AssertionConsumerServiceURL>https://${carbon.host}:9445/portal/acs</AssertionConsumerServiceURL>
             </AssertionConsumerServiceURLs>
-            <DefaultAssertionConsumerServiceURL>https://localhost:9445/portal/acs</DefaultAssertionConsumerServiceURL>
+            <DefaultAssertionConsumerServiceURL>https://${carbon.host}:9445/portal/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <EnableRecipients>true</EnableRecipients>
