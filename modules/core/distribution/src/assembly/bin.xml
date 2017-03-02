@@ -748,6 +748,29 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
+
+        <!-- Files required to mobile-qsg -->
+        <fileSet>
+            <directory>../scripts/mobile-qsg/resources</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
+            </outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>../scripts/mobile-qsg/target</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <!-- Files required to mobile-qsg -->
+
     </fileSets>
 
     <dependencySets>
@@ -1478,9 +1501,21 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/theme/templates
             </outputDirectory>
-
         </file>
 
+        <!-- Copying mobile-qsg jar  -->
+        <file>
+            <source>../scripts/mobile-qsg/target/mobile-qsg.jar</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
+            </outputDirectory>
+        </file>
+        <file>
+            <source>../scripts/mobile-qsg/target/org.wso2.carbon.appmgt.oauth.core-1.2.5.jar</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/components/dropins
+            </outputDirectory>
+        </file>
 
     </files>
 </assembly>
