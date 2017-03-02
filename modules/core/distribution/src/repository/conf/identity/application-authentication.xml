@@ -29,8 +29,8 @@
         AuthenticationEndpointURL is location of the web app containing
         the authentication related pages
     -->
-    <AuthenticationEndpointURL>/devicemgt/login</AuthenticationEndpointURL>
-    <AuthenticationEndpointRetryURL>/authenticationendpoint/retry.do</AuthenticationEndpointRetryURL>
+    <AuthenticationEndpointURL>https://${carbon.host}:${carbon.management.port}/devicemgt/login</AuthenticationEndpointURL>
+    <AuthenticationEndpointRetryURL>https://${carbon.host}:${carbon.management.port}/authenticationendpoint/retry.do</AuthenticationEndpointRetryURL>
 
     <!--
         Extensions allow extending the default behaviour of the authentication
