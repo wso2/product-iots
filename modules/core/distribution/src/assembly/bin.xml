@@ -755,34 +755,6 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
-
-        <!-- Files required to mobile-qsg -->
-        <fileSet>
-            <directory>../scripts/mobile-qsg/resources/webapps</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-        </fileSet>
-
-        <fileSet>
-            <directory>../scripts/mobile-qsg/resources/dropins</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/components/dropins
-            </outputDirectory>
-        </fileSet>
-        <!-- Above two fileset blocks can be removed when appm integration is implemented -->
-
-        <fileSet>
-            <directory>../scripts/mobile-qsg/resources/script</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
-            </outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        <!-- Files required to mobile-qsg -->
-
     </fileSets>
 
     <dependencySets>
@@ -1468,13 +1440,6 @@
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
-        </file>
-        <!-- Copying mobile-qsg jar  -->
-        <file>
-            <source>../scripts/mobile-qsg/target/mobile-qsg.jar</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
-            </outputDirectory>
         </file>
     </files>
 </assembly>
