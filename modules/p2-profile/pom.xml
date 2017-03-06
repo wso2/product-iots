@@ -35,6 +35,8 @@
 
     <modules>
         <module>iot-core-profile</module>
+        <module>analytics-profile</module>
+        <module>broker-profile</module>
     </modules>
 
 </project>
