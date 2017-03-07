@@ -268,66 +268,6 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-
-        <!-- Copying API management related dbscripts -->
-        <!--<fileSet>-->
-            <!--<directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/apimgt</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--&lt;!&ndash; Copying APP management related dbscripts &ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/storage</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--<fileSet>-->
-            <!--<directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/appmgt</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-
-        <!--&lt;!&ndash; Copying Certificate management related dbscripts &ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/certMgt-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/certMgt</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--&lt;!&ndash; Copying Social plugin related dbscripts &ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--&lt;!&ndash; Copying Social plugin related MSSQL dbscripts from distribution src&ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>src/repository/dbscripts/social</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/social</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--&lt;!&ndash; Copying storage related MSSQL dbscripts from distribution src&ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>src/repository/dbscripts/storage</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/storage</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--Copying modules-->
         <fileSet>
             <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/modules</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/modules/</outputDirectory>
@@ -335,24 +275,6 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-        <!--<fileSet>-->
-            <!--<directory>src/repository/modules/sso</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/modules/sso</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-        <!--&lt;!&ndash; This is for APPM &ndash;&gt;-->
-        <!--&lt;!&ndash; This has been done to address a flaw in the APPM publisher feature &ndash;&gt;-->
-        <!--<fileSet>-->
-            <!--<directory>src/repository/modules/lifecycle</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/modules/lifecycle</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-
-
         <fileSet>
             <directory>src/core/modules</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/modules</outputDirectory>
@@ -360,17 +282,6 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-
-        <!-- Copying Device Management related dbscripts -->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
         <fileSet>
             <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
@@ -383,28 +294,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
             </outputDirectory>
         </fileSet>
-
-
-        <!-- Copying Mobile plugin management related dbscripts -->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.device.mgt.plugin.version}/dbscripts/cdm/plugins-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/cdm/plugins-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>*/**</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
-
-        <!-- Copying Authentication Endpoint webapp -->
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
-            <!--</outputDirectory>-->
-        <!--</fileSet>-->
 
         <!-- Copying Authentication Endpoint webapp -->
         <fileSet>
@@ -658,33 +547,6 @@
             </includes>
         </fileSet>
 
-        <!-- Analytics related config -->
-
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/metrics/-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/metrics</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/*.sql</include>-->
-            <!--</includes>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</fileSet>-->
-
-        <!--QPID related configurations-->
-        <!--fileSet>
-            <directory>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/advanced/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/advanced</outputDirectory>
-            <includes>
-                <include>**/qpid-config.xml</include>
-                <include>**/qpid-virtualhosts.xml</include>
-                <include>**/qpid-jmxremote.access</include>
-            </includes>
-            <fileMode>644</fileMode>
-        </fileSet-->
-
         <!-- Dashboard portal Jaggery app. Should be copied to <DAS_HOME>/repository/deployment/server/jaggeryapps -->
         <fileSet>
             <directory>
@@ -770,23 +632,22 @@
 
     </fileSets>
 
-    <!--TODO: fix this-->
-    <!--<dependencySets>-->
-        <!--<dependencySet>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/endorsed</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>javax.el:el-api:jar</include>-->
-            <!--</includes>-->
-        <!--</dependencySet>-->
-        <!--<dependencySet>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/client/modules-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>org.hibernate.wso2:hibernate:jar</include>-->
-                <!--<include>org.apache.rampart:rampart:mar</include>-->
-            <!--</includes>-->
-        <!--</dependencySet>-->
-    <!--</dependencySets>-->
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/endorsed</outputDirectory>
+            <includes>
+                <include>javax.el:el-api:jar</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/client/modules
+            </outputDirectory>
+            <includes>
+                <include>org.hibernate.wso2:hibernate:jar</include>
+                <include>org.apache.rampart:rampart:mar</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
 
     <files>
         <file>
