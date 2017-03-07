@@ -132,15 +132,6 @@
             </includes>
             <filtered>true</filtered>
         </fileSet>
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/tenant-mgt.xml</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
         <fileSet>
             <directory>src/core/resources/styles/css</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/resources/allthemes/Default/admin
@@ -204,23 +195,6 @@
                 <include>**/user-mgt.xml</include>
             </includes>
         </fileSet>
-        <!--<fileSet>-->
-            <!--<directory>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/security-->
-            <!--</directory>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/security-->
-            <!--</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>**/sso-sp-config.properties</include>-->
-                <!--<include>**/entitlement.properties</include>-->
-                <!--<include>**/trusted-idp-config.xml</include>-->
-                <!--<include>**/cipher-text.properties</include>-->
-                <!--<include>**/cipher-tool.properties</include>-->
-            <!--</includes>-->
-            <!--<excludes>-->
-                <!--<exclude>authenticators.xml</exclude>-->
-            <!--</excludes>-->
-        <!--</fileSet>-->
         <fileSet>
             <directory>src/core/conf/datasources</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/datasources
@@ -864,66 +838,11 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/lifecycles</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
-        <!-- Copying broker.xml -->
-        <!--file>
-            <source>src/repository/conf/broker.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>
-            <fileMode>644</fileMode>
-        </file-->
-
-        <!-- Copying product specific cdm-config.xml for enabling custom PushNotificationProviders such as
-        XMPP, MQTT which are disabled by default.
-        -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/cdm-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash;certificate config file&ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/certificate-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash;Metrics&ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.properties</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>-->
-            <!--<filtered>false</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/metrics.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/</outputDirectory>-->
-            <!--<filtered>false</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/metrics-datasources.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources/</outputDirectory>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
         <file>
             <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/database/WSO2METRICS_DB.h2.db</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <!-- nTask Component -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/tasks-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--app management config file-->
         <file>
             <source>src/core/conf/app-manager.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
@@ -945,17 +864,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--Webapp Authenticator Config file-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/webapp-authenticator-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!-- Copying the modified registry.xml file-->
         <file>
             <source>
                 src/core/conf/registry.xml
@@ -964,35 +872,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying email-sender-config.xml -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/email-sender-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--cdm plugin config file-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/webapp-classloading-environments.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/tomcat-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/claim-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!-- Copying H2 database related files corresponding to default API management repository schema -->
         <file>
             <source>
                 target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2AM_DB.h2.db
@@ -1025,19 +904,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
         </file>
-
-
-        <!-- Copying axis2-client.xml -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/axis2/axis2_client.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/axis2-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!-- Copying axis2.xml -->
         <file>
             <source>src/core/conf/axis2/axis2.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/axis2
@@ -1077,54 +943,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/lib/org.wso2.ciphertool-${cipher.tool.version}.jar-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
-        <!--DAS Files-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/output-event-adapters.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/input-event-adapters.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--&lt;!&ndash; ************* Data bridge related files ********** &ndash;&gt;-->
-        <!--<file>-->
-            <!--<source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-bridge-config.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>src/repository/conf/data-bridge/stream-definitions.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge</outputDirectory>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/data-bridge/data-agent-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/data-bridge-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!-- ************* Data bridge related files end ********** -->
 
         <!-- ************* Analytics API related files Start ********** -->
         <file>
@@ -1133,32 +951,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- ************* Analytics API related files End ********** -->
-
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/jwt.properties-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/websocket-validation.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/device-analytics-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
         <file>
             <source>
                 src/core/conf/identity/identity-providers/iot_default.xml
@@ -1167,14 +959,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-        <!--<file>-->
-            <!--<source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
-
         <!-- Copying product specific log4j.properties that has unnecessary logs printed by third parties
         components suppressed -->
         <file>
@@ -1184,15 +968,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Copying devi-appmanager-config.xml -->
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/etc/remote-appmanager-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/etc</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
         <!-- Adding IoT Analytics Dashboard and gadget CApps -->
         <file>
             <source>
@@ -1209,16 +984,7 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--<file>-->
-            <!--<source>-->
-                <!--../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/iot-api-config.xml-->
-            <!--</source>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/conf/-->
-            <!--</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
+
         <file>
             <source>src/core/jaggeryapps/android-web-agent/jaggery.conf</source>
             <outputDirectory>
