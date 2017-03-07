@@ -1,0 +1,120 @@
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http:www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<SSOIdentityProviderConfig>
+    <TenantRegistrationPage>https://stratos-local.wso2.com/carbon/tenant-register/select_domain.jsp</TenantRegistrationPage>
+    <ServiceProviders>
+        <ServiceProvider>
+            <Issuer>devicemgt</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/devicemgt/uuf/sso/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/devicemgt/uuf/sso/acs</DefaultAssertionConsumerServiceURL>
+            <SignAssertion>true</SignAssertion>
+            <SignResponse>true</SignResponse>
+            <EnableAttributeProfile>false</EnableAttributeProfile>
+            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
+            <Claims>
+                <Claim>http://wso2.org/claims/role</Claim>
+                <Claim>http://wso2.org/claims/emailaddress</Claim>
+            </Claims>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <EnableRecipients>true</EnableRecipients>
+            <AudiencesList>
+                <Audience>https://localhost:9443/oauth2/token</Audience>
+            </AudiencesList>
+            <RecipientList>
+                <Recipient>https://localhost:9443/oauth2/token</Recipient>
+            </RecipientList>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>store</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/store/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/store/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/store/login.jag</CustomLoginPage>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>social</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/social/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/social/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/social/login</CustomLoginPage>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>publisher</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/publisher/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/publisher/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <AudiencesList>
+                <Audience>carbonServer</Audience>
+            </AudiencesList>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>API_STORE</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/api-store/jagg/jaggery_acs.jag</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/api-store/jagg/jaggery_acs.jag</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <AudiencesList>
+                <Audience>carbonServer</Audience>
+            </AudiencesList>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>portal</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9443/portal/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/portal/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <EnableRecipients>true</EnableRecipients>
+            <AudiencesList>
+                <Audience>https://localhost:9443/oauth2/token</Audience>
+            </AudiencesList>
+            <RecipientList>
+                <Recipient>https://localhost:9443/oauth2/token</Recipient>
+            </RecipientList>
+        </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>analyticsportal</Issuer>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9445/portal/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9445/portal/acs</DefaultAssertionConsumerServiceURL>
+            <SignResponse>true</SignResponse>
+            <EnableAudienceRestriction>true</EnableAudienceRestriction>
+            <EnableRecipients>true</EnableRecipients>
+            <AudiencesList>
+                <Audience>https://localhost:9443/oauth2/token</Audience>
+            </AudiencesList>
+            <RecipientList>
+                <Recipient>https://localhost:9443/oauth2/token</Recipient>
+            </RecipientList>
+        </ServiceProvider>
+    </ServiceProviders>
+</SSOIdentityProviderConfig>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<!--
+     This is the configuration file for Carbon authenticators. All the authenticator related configurations
+     should go here.
+-->
+<Authenticators xmlns="http://wso2.org/projects/carbon/authenticators.xml">
+
+    <!-- authenticator Configurations for OAuthAuthenticator -->
+	<Authenticator name="SignedJWTAuthenticator" disabled="false">
+		<Priority>5</Priority>
+	</Authenticator>
+	<Authenticator name="OAuthAuthenticator" disabled="true">
+		<Priority>10</Priority>
+		<Config>
+			<Parameter name="isRemote">false</Parameter>
+			<Parameter name="hostURL">https://localhost:9443</Parameter>
+			<Parameter name="adminUsername">admin</Parameter>
+			<Parameter name="adminPassword">admin</Parameter>
+		</Config>
+	</Authenticator>
+
+    <!-- authenticator Configurations for TokenUIAuthenticator -->
+    <Authenticator name="TokenUIAuthenticator" disabled="false">
+        <Priority>5</Priority>
+    </Authenticator>
+
+	<!-- Authenticator Configurations for MutualSSLAuthenticator -->
+	<!--Authenticator name="MutualSSLAuthenticator" disabled="false">
+		<Priority>5</Priority>
+		<Config>
+			<Parameter name="UsernameHeader">UserName</Parameter>
+			<Parameter name="WhiteListEnabled">false</Parameter>
+			<Parameter name="WhiteList"/>
+		</Config>
+	</Authenticator-->
+
+	<!-- authenticator Configurations for SAML2SSOAuthenticator -->
+    <Authenticator name="SAML2SSOAuthenticator" disabled="true">
+        <Priority>10</Priority>
+        <Config>
+            <Parameter name="LoginPage">/carbon/admin/login.jsp</Parameter>
+            <Parameter name="ServiceProviderID">carbonServer</Parameter>
+            <Parameter name="IdentityProviderSSOServiceURL">https://localhost:9443/samlsso</Parameter>
+            <Parameter name="NameIDPolicyFormat">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</Parameter>
+        </Config>
+
+        <!-- If this authenticator should skip any URI from authentication, specify it under "SkipAuthentication"
+        <SkipAuthentication>
+                <UrlContains></UrlContains>
+            </SkipAuthentication> -->
+
+        <!-- If this authenticator should skip any URI from session validation, specify it under "SkipAuthentication
+            <SkipSessionValidation>
+                <UrlContains></UrlContains>
+            </SkipSessionValidation> -->
+    </Authenticator>
+
+</Authenticators>

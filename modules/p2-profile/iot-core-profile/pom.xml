@@ -57,6 +57,25 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>2-unpack-wso2carbon</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.wso2.carbon</groupId>
+                                    <artifactId>wso2carbon-core</artifactId>
+                                    <version>${carbon.kernel.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -3836,6 +3855,12 @@
                         <configuration>
                             <tasks>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf">
+                                        <include name="*"/>
+                                    </fileset>
+                                </copy>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true"/>
                             </tasks>
                         </configuration>
                     </execution>

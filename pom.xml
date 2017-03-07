@@ -35,6 +35,10 @@
     </parent>
 
     <modules>
+        <module>modules/components</module>
+        <module>modules/features</module>
+        <module>modules/scripts</module>
+        <module>modules/tools</module>
         <module>modules/p2-profile</module>
     </modules>
 

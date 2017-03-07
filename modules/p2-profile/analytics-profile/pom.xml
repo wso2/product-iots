@@ -56,6 +56,25 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>2-unpack-wso2carbon</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.wso2.carbon</groupId>
+                                    <artifactId>wso2carbon-core</artifactId>
+                                    <version>${carbon.kernel.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -827,9 +846,16 @@
                 <executions>
                     <execution>
                         <id>creating-required-resources</id>
-                        <phase>generate-resources</phase>
+                        <phase>test</phase>
                         <configuration>
                             <tasks>
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf">
+                                        <include name="*"/>
+                                    </fileset>
+                                </copy>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true"/>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/etc/bundle-config/hadoop-client" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/analytics/spark" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server" />
