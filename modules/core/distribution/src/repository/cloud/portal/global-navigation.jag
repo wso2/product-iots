@@ -18,16 +18,23 @@
 <%
 var query = request.getQueryString();
 var dest = encodeURIComponent(originalURI + (query ? '?' + query : ''));
+var configs = require('/configs/portal.js').config();
+var isCloud = configs.isCloud;
 %>
 <header class="header header-default">
     <div class="container-fluid">
         <div class="pull-left brand float-remove-xs text-center-xs">
             <a href="<%=tenantedUrlPrefix%>./dashboards">
                 <img src="<%=urlPrefix%>libs/theme-wso2_1.0/images/logo-inverse.svg" alt="WSO2" title="WSO2" class="logo">
+                <% if (isCloud) { %>
                 <h1>Cloud</h1>
+                <% } else { %>
+                <h1><%=i18n.localize("dashboard.server.label")%></h1>
+                <% } %>
             </a>
         </div>
-        <div class="pull-right auth float-remove-xs text-center-xs">
+        <% if (isCloud) { %>
+            <div class="pull-right auth float-remove-xs text-center-xs">
             <% if (user) { %>
 
                 <ul class="nav navbar-right float-remove-xs text-center-xs">
@@ -283,7 +290,40 @@ var dest = encodeURIComponent(originalURI + (query ? '?' + query : ''));
     </div>
 </div>
 
-
-
+        <% } else { %>
+            <div class="pull-right auth float-remove-xs text-center-xs">
+                <% if (user) { %>
+                <span class="hidden-xs">
+                    <a href="#" class="dropdown" data-toggle="dropdown">
+                        <span class="add-margin-left-2x add-margin-right-1x"><%=user.username%></span>
+                        <span class="fw fw-user add-margin-right-1x"></span>
+                        <span class="caret add-margin-right-2x"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li class="dropdown-header visible-xs"><%=user.username%> <span class="caret"></span></li>
+                        <li><a href="<%=urlPrefix%>logout?destination=<%=dest%>"><%= i18n.localize("logout.label")%></a></li>
+                    </ul>
+                </span>
+                <div class="visible-xs auth-xs">
+                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#auth-menu-items" aria-expanded="false">
+                        <span class="icon fw-stack fw">
+                            <i class="fw fw-user fw-stack-1x"></i>
+                        </span>
+                        <span class="caret"></span>
+                    </a>
+                    <div id="auth-menu-items" class="collapse">
+                        <ul >
+                            <li><%=user.username%></li>
+                            <li><a href="<%=urlPrefix%>logout?destination=<%=dest%>"><%= i18n.localize("logout.label")%></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <% } else { %>
+                <a href="<%=urlPrefix%>login?destination=<%=dest%>" class="dropdown" data-toggle="dropdown">
+                    <%= i18n.localize("login.label")%>
+                </a>
+                <% } %>
+            </div>
+        <% } %>
     </div>
 </header>
