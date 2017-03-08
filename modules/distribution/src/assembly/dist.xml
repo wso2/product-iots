@@ -25,14 +25,28 @@
     <fileSets>
         <!-- Copying p2 profile and osgi bundles-->
         <fileSet>
-            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components</directory>
+            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
+            </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
             <excludes>
                 <exclude>**/eclipse.ini</exclude>
                 <exclude>**/*.lock</exclude>
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
-                <exclude>features/**</exclude>
+                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
+            <excludes>
+                <exclude>**/eclipse.ini</exclude>
+                <exclude>**/*.lock</exclude>
+                <exclude>**/.data</exclude>
+                <exclude>**/.settings</exclude>
+                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
             </excludes>
         </fileSet>
     </fileSets>

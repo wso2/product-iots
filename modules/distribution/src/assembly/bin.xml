@@ -47,6 +47,7 @@
     <includeBaseDirectory>false</includeBaseDirectory>
 
     <fileSets>
+        <!-- ********************************* Start of IoT Core Profile ********************************* -->
         <fileSet>
             <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
@@ -104,8 +105,11 @@
                 <exclude>**/conf/tomcat/carbon/WEB-INF/web.xml</exclude>
                 <exclude>**/bin/wso2server.sh</exclude>
                 <exclude>**/bin/wso2server.bat</exclude>
-                <exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js</exclude>
-                <exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js</exclude>
+                <exclude>
+                    **/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handler-utils.js
+                </exclude>
+                <exclude>**/repository/deployment/server/jaggeryapps/portal/modules/oauth/plugins/token-handlers.js
+                </exclude>
             </excludes>
         </fileSet>
 
@@ -243,7 +247,8 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/modules</directory>
+            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/modules
+            </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/modules/</outputDirectory>
             <includes>
                 <include>*/**</include>
@@ -257,7 +262,9 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps</directory>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps
+            </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps
             </outputDirectory>
         </fileSet>
@@ -441,8 +448,11 @@
         </fileSet>
 
         <fileSet>
-            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/social/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social</outputDirectory>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/social/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social
+            </outputDirectory>
             <excludes>
                 <exclude>**/jaggery.conf</exclude>
             </excludes>
@@ -450,12 +460,14 @@
 
         <fileSet>
             <directory>src/core/api-resources/synapse-configs/default/sequences</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/apim-synapse-config/
+            </outputDirectory>
         </fileSet>
 
         <fileSet>
             <directory>src/core/api-resources/synapse-configs</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/
+            </outputDirectory>
         </fileSet>
 
         <fileSet>
@@ -543,7 +555,9 @@
             <directory>
                 src/core/jaggeryapps/portal/themes
             </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/extensions/themes</outputDirectory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/extensions/themes
+            </outputDirectory>
             <includes>
                 <include>**/*</include>
             </includes>
@@ -581,7 +595,8 @@
         </fileSet>
 
         <fileSet>
-            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components/lib
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components/lib
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/lib</outputDirectory>
             <excludes>
@@ -603,7 +618,203 @@
             <excludes>
             </excludes>
         </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <excludes>
+                <exclude>**/wso2server.sh</exclude>
+                <exclude>**/wso2server.bat</exclude>
+            </excludes>
+        </fileSet>
+        <!-- ********************************* End of IoT Core Profile ********************************* -->
 
+        <!-- ********************************* Start of Analytics Profile ********************************* -->
+        <fileSet>
+            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/repository/conf/**</exclude>
+                <exclude>**/repository/components/**</exclude>
+                <exclude>**/repository/database/**</exclude>
+                <exclude>**/wso2/components/**</exclude>
+                <exclude>**/wso2</exclude>
+                <exclude>**/lib/**</exclude>
+                <exclude>**/bin/**</exclude>
+                <exclude>**/services/sample01.aar</exclude>
+                <exclude>**/repository/services/version/**</exclude>
+                <exclude>**/version.txt</exclude>
+                <exclude>**/wso2carbon-version.txt</exclude>
+                <exclude>**/wso2server.bat</exclude>
+                <exclude>**/README.txt</exclude>
+                <exclude>**/LICENSE.txt</exclude>
+                <exclude>**/release-notes.html</exclude>
+                <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                src/analytics/conf/analytics/spark
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/analytics/spark</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                src/analytics/conf/security
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/security</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/database
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/database
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin</outputDirectory>
+        </fileSet>
+
+        <!--creating an empty output event receivers directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventreceivers
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <!--creating an empty output event adaptors directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventpublishers
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <!--creating an empty event builders directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventstreams
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <!--creating an empty execution plans directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/executionplans
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <!--creating an empty event sink directory-->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventsink
+            </outputDirectory>
+            <excludes>
+                <exclude>**/*</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            </outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/modules
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/modules</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/portal
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal
+            </outputDirectory>
+            <excludes>
+                <exclude>**/configs/designer.json</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                src/analytics/jaggeryapps/portal/libs/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal/analytics-wso2-2.0.0
+            </outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/carbonapps/</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/resources</outputDirectory>
+        </fileSet>
+        <!--TODO: Check on using styles-->
+
+        <!-- ********************************* End of Analytics Profile ********************************* -->
     </fileSets>
 
     <dependencySets>
@@ -624,6 +835,7 @@
     </dependencySets>
 
     <files>
+        <!-- ********************************* Start of IoT Core Profile ********************************* -->
         <file>
             <source>src/core/conf/tomcat/carbon/WEB-INF/web.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/tomcat/carbon/WEB-INF</outputDirectory>
@@ -711,14 +923,16 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
         </file>
         <file>
-            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/event-broker.xml
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/registry-event-broker.xml
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/registry-event-broker.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -784,7 +998,9 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/oidc-scope-config.xml</source>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/oidc-scope-config.xml
+            </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/identity/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -839,7 +1055,9 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/database/WSO2METRICS_DB.h2.db</source>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/database/WSO2METRICS_DB.h2.db
+            </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
@@ -928,21 +1146,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!-- Cipher Tool Files -->
-        <file>
-            <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.sh
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/ciphertool.bat
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
 
         <!-- ************* Analytics API related files Start ********** -->
         <file>
@@ -973,7 +1176,8 @@
             <source>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources/devicetypes/device_management/org_wso2_carbon_analytics_cdmf-1.0.0.car
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/device_management/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/device_management/
+            </outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <!-- Copying webapp-publisher-config.xml -->
@@ -1118,7 +1322,8 @@
             <source>
                 src/core/cloud/portal/global-navigation.jag
             </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/theme/templates
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/theme/templates
             </outputDirectory>
         </file>
 
@@ -1135,6 +1340,178 @@
                 ${pom.artifactId}-${pom.version}/dropins
             </outputDirectory>
         </file>
+        <!-- ********************************* End of IoT Core Profile ********************************* -->
 
+        <!-- ********************************* Start of Analytics Profile ********************************* -->
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/analytics/conf/carbon.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/database/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/logs/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/logs/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/resources/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- *********** Log4j file copy **************** -->
+        <file>
+            <source>src/analytics/conf/log4j.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- *********** Log4j file copy end **************** -->
+
+        <!-- Copying jndi.properties -->
+        <file>
+            <source>src/analytics/conf/jndi.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- Copying registry.xml -->
+        <file>
+            <source>src/analytics/conf/registry.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!--loads spark environment variables-->
+        <file>
+            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.sh-->
+            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
+            <source>src/analytics/bin/load-spark-env-vars.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.bat-->
+            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
+            <source>src/analytics/bin/load-spark-env-vars.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- custom wso2server.sh file for DAS-->
+
+        <file>
+            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
+            <source>src/analytics/bin/wso2server.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat-->
+            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
+            <source>src/analytics/bin/wso2server.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <!-- portal-->
+        <file>
+            <source>
+                src/analytics/jaggeryapps/portal/designer.json
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/analytics/jaggeryapps/portal/modules/oauth/token-handler-utils.js</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal/modules/oauth
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/analytics/jaggeryapps/portal/modules/oauth/token-handlers.js</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal/modules/oauth
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+
+        <file>
+            <source>src/analytics/resources/geodashboard/events.csv</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventsimulatorfiles/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/analytics/resources/geodashboard/events_streamConfiguration.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventsimulatorfiles/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/analytics/jaggeryapps/portal/jaggery.conf</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/jaggeryapps/portal/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
+            <source>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources/devicetypes/device_management/org_wso2_carbon_analytics_cdmf-1.0.0.car
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/carbonapps/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- ********************************* End of Analytics Profile ********************************* -->
     </files>
 </assembly>

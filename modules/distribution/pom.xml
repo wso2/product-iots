@@ -248,6 +248,58 @@
 							</transformations>
 						</configuration>
 					</execution>
+					<!--Analytics Configs-->
+					<execution>
+						<id>analytics-change-datasource-config</id>
+						<phase>package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/datasources/master-datasources.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/datasources/master-datasources.xml</output>
+									<config>src/analytics/conf/datasource_config_change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>analytics-init-input-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</output>
+									<config>src/analytics/conf/input-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>analytics-init-output-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</output>
+									<config>src/analytics/conf/output-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
