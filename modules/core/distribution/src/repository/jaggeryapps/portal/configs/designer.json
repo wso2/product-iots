@@ -1,4 +1,5 @@
 {
+  "isCloud" : false,
   "store": {
     "types": ["fs"]
   },
