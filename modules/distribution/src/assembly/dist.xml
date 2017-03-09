@@ -33,6 +33,7 @@
                 <exclude>**/*.lock</exclude>
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
+                <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
             </excludes>
         </fileSet>
@@ -46,8 +47,13 @@
                 <exclude>**/*.lock</exclude>
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
+                <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
             </excludes>
+            <includes>
+                <include>plugins/**</include>
+            </includes>
         </fileSet>
+
     </fileSets>
 </assembly>

@@ -292,7 +292,6 @@ do
     -Dcarbon.config.dir.path="$CARBON_HOME/conf" \
     -Dcarbon.components.dir.path="$CARBON_HOME/wso2/components" \
     -Dcarbon.dropins.dir.path="$CARBON_HOME/dropins" \
-    -Dtomcat.random.port.enable=true \
     -Dcarbon.external.lib.dir.path="$CARBON_HOME/lib" \
     -Dcarbon.patches.dir.path="$CARBON_HOME/patches" \
     -Dcarbon.servicepacks.dir.path="$CARBON_HOME/servicepacks" \

@@ -586,6 +586,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity.framework:org.wso2.carbon.identity.user.registration.server.feature:${carbon.identity.framework.version.iotcore}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.identity.application.authz.xacml:org.wso2.carbon.identity.application.authz.xacml.server.feature:${identity.application.authz.xacml}
+                                </featureArtifactDef>
 
                                 <!-- Registry features -->
                                 <featureArtifactDef>
@@ -1195,6 +1198,10 @@
                                     <id>org.wso2.carbon.directory.service.mgr.server.feature.group
                                     </id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authz.xacml.server.feature.group</id>
+                                    <version>${identity.application.authz.xacml}</version>
                                 </feature>
                                 <!-- SSO Features -->
                                 <feature>
@@ -1857,6 +1864,10 @@
                                     <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.identity.application.authz.xacml.server.feature.group</id>
+                                    <version>${identity.application.authz.xacml}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.tenant.mgt.common.server.feature.group</id>
                                     <version>${carbon.commons.version}</version>
                                 </feature>
@@ -2057,6 +2068,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.xacml.server.feature.group</id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authz.xacml.server.feature.group</id>
+                                    <version>${identity.application.authz.xacml}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.thrift.authentication.feature.group</id>
@@ -2695,6 +2710,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authz.xacml.server.feature.group</id>
+                                    <version>${identity.application.authz.xacml}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>
@@ -3370,6 +3389,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.profile.feature.group</id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.application.authz.xacml.server.feature.group</id>
+                                    <version>${identity.application.authz.xacml}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.server.feature.group</id>

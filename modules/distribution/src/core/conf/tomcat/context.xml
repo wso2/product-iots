@@ -17,7 +17,7 @@
   ~ under the License.
   -->
 <!-- The contents of this file will be loaded for each web application -->
-<Context crossContext="true">
+<Context crossContext="true" useRelativeRedirects="false">
 
 
     <!-- Default set of monitored resources -->
