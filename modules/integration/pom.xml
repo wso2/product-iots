@@ -33,8 +33,8 @@
     <modules>
         <module>tests-artifacts</module>
         <module>tests-common</module>
-        <module>tests-integration</module>
-        <!--module>tests-iot-web-ui</module-->
+        <!--<module>tests-integration</module>-->
+        <module>tests-iot-web-ui</module>
     </modules>
 
 </project>

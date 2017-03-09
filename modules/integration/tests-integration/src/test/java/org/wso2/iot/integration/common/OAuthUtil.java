@@ -27,6 +27,7 @@ import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
  */
 public class OAuthUtil {
 
+
     public static String getScopes(String backendHTTPURL, String backendHTTPSURL) throws Exception {
         return getOAuthTokenPair(backendHTTPURL, backendHTTPSURL).get(Constants.SCOPE).toString();
     }

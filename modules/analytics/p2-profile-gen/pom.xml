@@ -395,6 +395,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.execution.json.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
+								</featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
