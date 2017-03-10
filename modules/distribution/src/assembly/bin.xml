@@ -670,13 +670,6 @@
         </fileSet>
 
         <fileSet>
-            <directory>
-                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/database
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database</outputDirectory>
-        </fileSet>
-
-        <fileSet>
             <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib</outputDirectory>
         </fileSet>
@@ -817,7 +810,7 @@
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
-                <!--<exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>-->
+                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
             </excludes>
         </fileSet>
 

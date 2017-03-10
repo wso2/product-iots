@@ -8,7 +8,7 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:../core/repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9095</url>
+                    <url>jdbc:h2:../../repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9095</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>
