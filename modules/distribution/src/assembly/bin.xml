@@ -595,6 +595,19 @@
                 <exclude>**/wso2server.bat</exclude>
             </excludes>
         </fileSet>
+        <fileSet>
+            <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
+            <excludes>
+                <exclude>**/eclipse.ini</exclude>
+                <exclude>**/*.lock</exclude>
+                <exclude>**/.data</exclude>
+                <exclude>**/.settings</exclude>
+                <exclude>features/**</exclude>
+                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+            </excludes>
+        </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
@@ -627,6 +640,12 @@
                 ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf</outputDirectory>
+            <excludes>
+                <exclude>**/carbon.xml</exclude>
+                <exclude>**/log4j.properties</exclude>
+                <exclude>**/jndi.properties</exclude>
+                <exclude>**/registry.xml</exclude>
+            </excludes>
         </fileSet>
 
         <fileSet>
@@ -787,6 +806,20 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/resources</outputDirectory>
         </fileSet>
         <!--TODO: Check on using styles-->
+
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
+            <excludes>
+                <exclude>**/eclipse.ini</exclude>
+                <exclude>**/*.lock</exclude>
+                <exclude>**/.data</exclude>
+                <exclude>**/.settings</exclude>
+                <exclude>features/**</exclude>
+                <!--<exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>-->
+            </excludes>
+        </fileSet>
 
         <!-- ********************************* End of Analytics Profile ********************************* -->
     </fileSets>
