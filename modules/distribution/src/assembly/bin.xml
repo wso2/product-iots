@@ -648,6 +648,9 @@
                 <exclude>**/log4j.properties</exclude>
                 <exclude>**/jndi.properties</exclude>
                 <exclude>**/registry.xml</exclude>
+                <exclude>**/webapp-classloading-environments.xml</exclude>
+                <exclude>**/tomcat/carbon/WEB-INF/web.xml</exclude>
+                <exclude>**/spark-udf-config.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -749,7 +752,7 @@
             <directory>
                 ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps
             </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/webapps
             </outputDirectory>
         </fileSet>
 
@@ -821,6 +824,136 @@
         </fileSet>
 
         <!-- ********************************* End of Analytics Profile ********************************* -->
+
+        <!-- ********************************* Start of Broker Profile ********************************* -->
+        <fileSet>
+            <directory>target/wso2carbon-core-${carbon.kernel.version}</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/repository/conf/**</exclude>
+                <exclude>**/repository/components/**</exclude>
+                <exclude>**/repository/database/**</exclude>
+                <exclude>**/wso2/components/**</exclude>
+                <exclude>**/wso2</exclude>
+                <exclude>**/lib/**</exclude>
+                <exclude>**/bin/**</exclude>
+                <exclude>**/services/sample01.aar</exclude>
+                <exclude>**/repository/services/version/**</exclude>
+                <exclude>**/version.txt</exclude>
+                <exclude>**/wso2carbon-version.txt</exclude>
+                <exclude>**/wso2server.bat</exclude>
+                <exclude>**/README.txt</exclude>
+                <exclude>**/LICENSE.txt</exclude>
+                <exclude>**/release-notes.html</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <excludes>
+                <exclude>**/axis2.xml</exclude>
+                <exclude>**/broker.xml</exclude>
+                <exclude>**/carbon.xml</exclude>
+                <exclude>**/cipher-text.properties</exclude>
+                <exclude>**/cipher-tool.properties</exclude>
+                <exclude>**/hazelcast.properties</exclude>
+                <exclude>**/master-datasources.xml</exclude>
+                <exclude>**/messaging-event-broker.xml</exclude>
+                <exclude>**/metrics.xml</exclude>
+                <exclude>**/web.xml</exclude>
+                <exclude>**/launch.ini</exclude>
+                <exclude>**/log4j.properties</exclude>
+                <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+                <exclude>**/webapp-classloading-environments.xml</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                src/broker/conf/security
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/security</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/database
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/bin
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin</outputDirectory>
+            <excludes>
+                <exclude>**/wso2server.sh</exclude>
+                <exclude>**/wso2server.bat</exclude>
+            </excludes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/borker/repository/deployment/server/webapps
+            </outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/modules
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/modules</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/resources</outputDirectory>
+        </fileSet>
+        <!--TODO: Check on using styles-->
+
+        <fileSet>
+            <directory>src/broker/resources/STRATOS_ROOT</directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/server/webapps/STRATOS_ROOT
+            </outputDirectory>
+            <fileMode>644</fileMode>
+            <directoryMode>775</directoryMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
+            <excludes>
+                <exclude>**/eclipse.ini</exclude>
+                <exclude>**/*.lock</exclude>
+                <exclude>**/.data</exclude>
+                <exclude>**/.settings</exclude>
+                <exclude>features/**</exclude>
+                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+                <exclude>**/lib</exclude>
+                <exclude>**/json_2.0.0.wso2v1.jar</exclude>
+                <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
+            </excludes>
+        </fileSet>
+        <!-- ********************************* End of Broker Profile ********************************* -->
     </fileSets>
 
     <dependencySets>
@@ -836,6 +969,32 @@
             <includes>
                 <include>org.hibernate.wso2:hibernate:jar</include>
                 <include>org.apache.rampart:rampart:mar</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/client/modules
+            </outputDirectory>
+            <includes>
+                <include>org.apache.rampart:rampart:mar</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/client-lib</outputDirectory>
+            <includes>
+                <include>org.wso2.andes.wso2:andes-client:jar</include>
+                <include>org.apache.geronimo.specs.wso2:geronimo-jms_1.1_spec:jar</include>
+                <include>org.wso2.carbon:org.wso2.carbon.event.client.stub:jar</include>
+                <include>org.wso2.carbon:org.wso2.carbon.event.client:jar</include>
+                <include>slf4j.wso2:slf4j:jar</include>
+                <include>log4j:log4j:jar</include>
+                <include>org.wso2.securevault:org.wso2.securevault:jar</include>
+                <include>org.wso2.carbon:org.wso2.carbon.logging:jar</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>wso2iot-broker-${pom.version}/repository/lib</outputDirectory>
+            <includes>
+                <include>jline:jline:jar</include>
             </includes>
         </dependencySet>
     </dependencySets>
@@ -1402,6 +1561,16 @@
             <fileMode>644</fileMode>
         </file>
 
+        <file>
+            <source>src/analytics/conf/tomcat/webapp-classloading-environments.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat</outputDirectory>
+        </file>
+
+        <file>
+            <source>src/analytics/conf/tomcat/carbon/WEB-INF/web.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat/carbon/WEB-INF</outputDirectory>
+        </file>
+
         <!--loads spark environment variables-->
         <file>
             <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.sh-->
@@ -1500,5 +1669,138 @@
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Analytics Profile ********************************* -->
+
+        <!-- ********************************* Start of Broker Profile ********************************* -->
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/broker/conf/carbon.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/database/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/logs/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/logs/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/resources/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/log4j.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/etc/launch.ini</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/etc</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/axis2/axis2.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/axis2</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/tomcat/carbon/WEB-INF/web.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/tomcat/carbon/WEB-INF
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/tomcat/webapp-classloading-environments.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/tomcat/webapp-classloading-environments.xml
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/broker.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/hazelcast.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/datasources/master-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/datasources</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/messaging-event-broker.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/conf/metrics.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/bin/wso2server.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
+            <source>src/broker/bin/wso2server.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/
+            </outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- ********************************* End of Broker Profile ********************************* -->
     </files>
 </assembly>
