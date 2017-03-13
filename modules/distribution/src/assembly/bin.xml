@@ -606,6 +606,9 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+                <exclude>**/lib</exclude>
+                <exclude>**/json_2.0.0.wso2v1.jar</exclude>
+                <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
             </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
@@ -811,6 +814,9 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+                <exclude>**/lib</exclude>
+                <exclude>**/json_2.0.0.wso2v1.jar</exclude>
+                <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
             </excludes>
         </fileSet>
 

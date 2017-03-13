@@ -357,6 +357,12 @@ do
     -Dfile.encoding=UTF8 \
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
+    -Dmqtt.broker.host="localhost" \
+    -Dmqtt.broker.port="1886" \
+    -Diot.keymanager.host="localhost" \
+    -Diot.keymanager.https.port="9443" \
+    -Diot.gateway.host="localhost" \
+    -Diot.gateway.https.port="8243" \
     -DworkerNode=false \
     -Dorg.apache.cxf.io.CachedOutputStream.Threshold=104857600 \
     -Dcarbon.das.c5.enabled="true" \
