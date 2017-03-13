@@ -494,6 +494,14 @@
         </fileSet>
 
         <fileSet>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/rxts
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/rxts
+            </outputDirectory>
+        </fileSet>
+
+        <fileSet>
             <directory>src/core/conf/identity/service-providers</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/identity/service-providers</outputDirectory>
             <includes>
@@ -1158,6 +1166,14 @@
                 src/core/conf/identity/identity-providers/iot_default.xml
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/identity/identity-providers</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>
+                src/core/conf/identity/identity.xml
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/identity</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
