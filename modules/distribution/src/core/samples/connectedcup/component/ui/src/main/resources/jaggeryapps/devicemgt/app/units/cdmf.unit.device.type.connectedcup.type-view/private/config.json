@@ -1,0 +1,9 @@
+{
+  "deviceType": {
+    "label": "Connected Cup",
+    "category": "virtual",
+    "scopes" : [
+      "perm:connectedcup:enroll"
+    ]
+  }
+}

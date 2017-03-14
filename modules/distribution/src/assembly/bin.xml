@@ -619,6 +619,23 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
             </excludes>
         </fileSet>
+
+        <fileSet>
+            <directory>src/core/plugins</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/plugins</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/core/samples</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
