@@ -701,6 +701,13 @@
         </fileSet>
 
         <fileSet>
+            <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/database
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database</outputDirectory>
+        </fileSet>
+
+        <fileSet>
             <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib</outputDirectory>
         </fileSet>
@@ -910,6 +917,14 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database</outputDirectory>
         </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/database
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database</outputDirectory>
+        </fileSet>
+
 
         <fileSet>
             <directory>../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/lib</directory>
