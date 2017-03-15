@@ -1056,12 +1056,47 @@
         </file>
         <!--TODO: change the wso2 server sh file name-->
         <file>
-            <source>src/core/bin/wso2server.sh</source>
+            <source>src/core/bin/analytics.bat</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/core/bin/wso2server.bat</source>
+            <source>src/core/bin/analytics.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/broker.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/broker.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/iot-server.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/iot-server.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/start-all.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/start-all.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/core/bin/stop-all.sh</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
@@ -1620,7 +1655,8 @@
 
         <file>
             <source>src/analytics/conf/tomcat/carbon/WEB-INF/web.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat/carbon/WEB-INF</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat/carbon/WEB-INF
+            </outputDirectory>
         </file>
 
         <!--loads spark environment variables-->
@@ -1804,7 +1840,8 @@
 
         <file>
             <source>src/broker/conf/tomcat/webapp-classloading-environments.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/tomcat/webapp-classloading-environments.xml
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/wso2/broker/conf/tomcat/webapp-classloading-environments.xml
             </outputDirectory>
             <fileMode>644</fileMode>
         </file>
