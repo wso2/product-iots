@@ -1576,8 +1576,8 @@
 
         <!-- IoT Broker Dependencies -->
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
-        <andes.version>3.1.3</andes.version>
-        <carbon.messaging.version>3.1.16</carbon.messaging.version>
+        <andes.version>3.1.12</andes.version>
+        <carbon.messaging.version>3.1.17-SNAPSHOT</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>

@@ -19,16 +19,6 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app id="WebApp">
-
-    <security-constraint>
-        <display-name>Restrict access to carbon console</display-name>
-        <web-resource-collection>
-            <web-resource-name>Restricted Console UI</web-resource-name>
-            <url-pattern>/carbon/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint/>
-    </security-constraint>
-
     <!-- OWASP CSRFGuard per-application configuration property file location-->
     <context-param>
         <param-name>Owasp.CsrfGuard.Config</param-name>

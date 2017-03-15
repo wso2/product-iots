@@ -676,6 +676,10 @@
                 <exclude>**/webapp-classloading-environments.xml</exclude>
                 <exclude>**/tomcat/carbon/WEB-INF/web.xml</exclude>
                 <exclude>**/spark-udf-config.xml</exclude>
+                <exclude>**/security/cipher-text.properties</exclude>
+                <exclude>**/security/authenticators.xml</exclude>
+                <exclude>**/security/cipher-tool.properties</exclude>
+                <exclude>**/security/Owasp.CsrfGuard.Carbon.properties</exclude>
             </excludes>
         </fileSet>
 
