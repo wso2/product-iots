@@ -496,6 +496,9 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent
             </outputDirectory>
+            <excludes>
+                <exclude>**/jaggery.conf</exclude>
+            </excludes>
         </fileSet>
 
         <!-- Copying android-web-agent-->
