@@ -1537,7 +1537,7 @@
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.23-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.31-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1545,7 +1545,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.13-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.15-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.73-SNAPSHOT</carbon.api.mgt.version>
@@ -1555,7 +1555,7 @@
         <carbon.mediation.version>4.6.10</carbon.mediation.version>
 
         <!-- Carbon Analytics Common (DAS) -->
-        <carbon.analytics.common.version>5.1.5</carbon.analytics.common.version>
+        <carbon.analytics.common.version>5.1.14</carbon.analytics.common.version>
         <carbon.analytics.version>1.3.3</carbon.analytics.version>
         <carbon.analytics.das.version>1.3.5</carbon.analytics.das.version>
         <product.iot.analytics.version>${product.iot.version}</product.iot.analytics.version>
