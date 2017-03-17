@@ -18,7 +18,8 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-p2-profile</artifactId>
@@ -159,6 +160,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature:${carbon.device.mgt.version}
@@ -971,6 +975,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1928,6 +1936,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
@@ -2087,7 +2099,8 @@
                                     <version>${carbon.multitenancy.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
+                                    <id>
+                                        org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
@@ -2096,11 +2109,15 @@
                                     <version>${carbon.commons.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group
+                                    </id>
                                     <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group
+                                    </id>
                                     <version>${identity.outbound.auth.samlsso.version}</version>
                                 </feature>
                                 <feature>
@@ -2423,6 +2440,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
@@ -2629,6 +2650,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2866,15 +2891,20 @@
                                     <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group
+                                    </id>
                                     <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group
+                                    </id>
                                     <version>${identity.outbound.auth.samlsso.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
+                                    <id>
+                                        org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
@@ -3074,6 +3104,10 @@
                                 <!--end required for context.xml-->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -3302,6 +3336,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
@@ -3517,15 +3555,20 @@
                                     <version>${identity.inbound.auth.oauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group
+                                    </id>
                                     <version>${identity.local.auth.basicauth.version.iotcore}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group</id>
+                                    <id>
+                                        org.wso2.carbon.identity.application.authenticator.samlsso.server.feature.group
+                                    </id>
                                     <version>${identity.outbound.auth.samlsso.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.identity.application.authentication.framework.server.feature.group
+                                    <id>
+                                        org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
                                     <version>${carbon.identity.framework.version.iotcore}</version>
                                 </feature>
@@ -3728,6 +3771,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
@@ -3846,11 +3893,12 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf"/>
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
                                     <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"/>
                                 </copy>
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true"/>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"
+                                        includeemptydirs="true"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -3859,7 +3907,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server" />
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server"/>
                             </tasks>
                         </configuration>
                         <goals>
@@ -3870,8 +3918,9 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true" dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/components">
-                                    <include name="**/bundles.info" />
+                                <replace token="false" value="true"
+                                         dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/components">
+                                    <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>
                         </configuration>
