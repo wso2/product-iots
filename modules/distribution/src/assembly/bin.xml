@@ -370,8 +370,8 @@
             </outputDirectory>
             <excludes>
                 <exclude>appmoauth2.war</exclude>
-                <exclude>am#sample#calculator#v1.war</exclude>
                 <exclude>api.war</exclude>
+                <exclude>**/am#sample**.war</exclude>
             </excludes>
             <filtered>false</filtered>
             <fileMode>644</fileMode>
@@ -555,7 +555,7 @@
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <includes>
-                <include>**/**</include>
+                <include>**/**.war</include>
             </includes>
         </fileSet>
         <!-- Files required to mobile-qsg -->
@@ -612,8 +612,10 @@
                 <exclude>**/*.lock</exclude>
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
-                <exclude>features/**</exclude>
+                <exclude>**/features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
+                <exclude>**/artifacts.xml</exclude>
+                <exclude>**/p2</exclude>
                 <exclude>**/lib</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
@@ -856,6 +858,8 @@
                 <exclude>**/lib</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
+                <exclude>**/artifacts.xml</exclude>
+                <exclude>**/p2</exclude>
             </excludes>
         </fileSet>
 
@@ -995,6 +999,8 @@
                 <exclude>**/lib</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
+                <exclude>**/artifacts.xml</exclude>
+                <exclude>**/p2</exclude>
             </excludes>
         </fileSet>
         <!-- ********************************* End of Broker Profile ********************************* -->
