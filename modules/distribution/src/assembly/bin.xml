@@ -612,11 +612,11 @@
                 <exclude>**/*.lock</exclude>
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
-                <exclude>**/features/**</exclude>
+                <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>**/p2</exclude>
-                <exclude>**/lib</exclude>
+                <exclude>p2/**</exclude>
+                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
             </excludes>
@@ -855,11 +855,11 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
-                <exclude>**/lib</exclude>
+                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>**/p2</exclude>
+                <exclude>p2/**</exclude>
             </excludes>
         </fileSet>
 
@@ -996,11 +996,11 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
-                <exclude>**/lib</exclude>
+                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>**/p2</exclude>
+                <exclude>p2/**</exclude>
             </excludes>
         </fileSet>
         <!-- ********************************* End of Broker Profile ********************************* -->
@@ -1183,12 +1183,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
         </file>
         <file>
-            <source>src/core/INSTALL.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <filtered>true</filtered>
@@ -1207,7 +1201,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1227,7 +1221,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1579,7 +1573,7 @@
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1596,37 +1590,37 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/database/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/logs/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/resources/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1766,7 +1760,7 @@
 
         <!-- ********************************* Start of Broker Profile ********************************* -->
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1783,37 +1777,37 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/database/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/logs/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/repository/resources/README.txt</source>
+            <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
