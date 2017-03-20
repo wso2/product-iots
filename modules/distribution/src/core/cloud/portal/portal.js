@@ -149,7 +149,7 @@ $(function () {
             var dashboard = findDashboard(id);
             dashboardEl.html(dashboardThumbnailHbs(dashboard));
         });
-        
+
         portal.on('click', '.ues-view:not(.disable)', function(e) {
             e.preventDefault();
             window.open($(this).attr('href'), '_blank');
@@ -185,20 +185,20 @@ $(function () {
         });
     };
 
-
     $(document).ready(function () {
-        $('#cloud-menu-popover i.fw-tiles').popover({
-            html: true,
-            trigger:'click',
-            title: function() {
-                return $("#popover-head").html();
-            },
-            content: function() {
-                return $("#popover-content").html();
-            }
-        });
+        if($('#cloud-menu-popover').length)  {
+            $('#cloud-menu-popover i.fw-tiles').popover({
+                html: true,
+                trigger:'click',
+                title: function() {
+                    return $("#popover-head").html();
+                },
+                content: function() {
+                    return $("#popover-content").html();
+                }
+            });
+        }
     });
-
     initUI();
     loadDashboards();
 });

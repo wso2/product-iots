@@ -1,0 +1,20 @@
+{
+  "POST": {
+    "description": "test notification",
+    "operationId": 1,
+    "deviceIdentifier": {
+      "id": "1234",
+      "type": "android"
+    },
+    "status": "NEW"
+  },
+  "PUT": {
+    "description": "test notification changed",
+    "operationId": 1,
+    "deviceIdentifier": {
+      "id": "1234",
+      "type": "android"
+    },
+    "status": "NEW"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "GET": {
+    "statusCode": 200,
+    "messageFromServer": "License for \u0027android\u0027 was retrieved successfully",
+    "responseContent": "This End User License Agreement is Eula."
+  }
+}

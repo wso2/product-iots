@@ -1,0 +1,6 @@
+{
+  "getEffectivePolicy": {
+    "responseCode": "No Content",
+    "responseMessage": "No effective policy found"
+  }
+}
