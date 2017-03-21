@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-broker-p2-profile</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT - Broker - P2 Profile Gen</name>
+    <name>WSO2 IoT - Broker P2 Profile Gen</name>
     <url>http://wso2.com/products/message-broker/</url>
 
     <build>

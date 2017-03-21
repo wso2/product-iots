@@ -1196,22 +1196,6 @@
                 <artifactId>org.wso2.carbon.statistics.ui</artifactId>
                 <version>${carbon.commons.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.axis2.wso2</groupId>
-                <artifactId>axis2</artifactId>
-                <version>${axis2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon</groupId>
-                <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.wso2.carbon</groupId>
-                        <artifactId>org.wso2.carbon.statistics.ui</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>2.2.0</version>
-            </dependency>
             <!-- END - MT Dashboard-->
 
             <!-- ************************ START - IoT Broker  ************* -->
@@ -1281,11 +1265,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon</groupId>
-                <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
-                <version>${carbon.ui.menu.stratos.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
@@ -1463,6 +1442,7 @@
         <!--Carbon kernel versions-->
         <carbon.kernel.version>4.4.14</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
+        <carbon.ui.menu.stratos.version>2.2.0</carbon.ui.menu.stratos.version>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
 
@@ -1618,7 +1598,6 @@
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.lang.version>2.2</commons.lang.version>
         <commons.io.version>2.4</commons.io.version>
-        <axis2.version>1.6.1.wso2v11</axis2.version>
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
         <gson.version>2.3.1</gson.version>

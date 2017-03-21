@@ -29,7 +29,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-core-p2-profile</artifactId>
-    <name>WSO2 IoT - Core - P2 Profile Gen</name>
+    <name>WSO2 IoT - Core P2 Profile Gen</name>
     <packaging>pom</packaging>
 
     <build>

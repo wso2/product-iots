@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-tools</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT - Core - Tools</name>
+    <name>WSO2 IoT - Tools</name>
     <url>http://maven.apache.org</url>
 
     <modules>

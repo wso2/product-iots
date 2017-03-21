@@ -30,7 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-components</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT Server - Components Module</name>
+    <name>WSO2 IoT - Components Module</name>
     <url>http://wso2.org</url>
 
     <modules>

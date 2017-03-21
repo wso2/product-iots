@@ -31,7 +31,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-features</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT Server - Features Module</name>
+    <name>WSO2 IoT - Features Module</name>
     <url>http://wso2.org</url>
 
     <modules>

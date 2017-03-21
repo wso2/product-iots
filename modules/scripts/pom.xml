@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2iot-scripts</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT - Core - Scripts</name>
+    <name>WSO2 IoT - Scripts</name>
     <url>http://maven.apache.org</url>
 
     <modules>
