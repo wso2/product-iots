@@ -615,8 +615,6 @@
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>p2/**</exclude>
-                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
             </excludes>
@@ -840,9 +838,15 @@
             <directory>
                 ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
             </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/resources</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources</outputDirectory>
         </fileSet>
-        <!--TODO: Check on using styles-->
+
+        <fileSet>
+            <directory>
+                src/analytics/resources/allthemes
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/resources/allthemes</outputDirectory>
+        </fileSet>
 
         <fileSet>
             <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
@@ -855,11 +859,9 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
-                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>p2/**</exclude>
             </excludes>
         </fileSet>
 
@@ -996,11 +998,9 @@
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
                 <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
-                <exclude>lib/**</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
-                <exclude>p2/**</exclude>
             </excludes>
         </fileSet>
         <!-- ********************************* End of Broker Profile ********************************* -->
