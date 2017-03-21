@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<streamConfiguration type="csv">
-    <file>location_data.csv</file>
-    <streamID>org.wso2.iot.android.location:1.0.0</streamID>
-    <separateChar>,</separateChar>
-    <delayBetweenEventsInMilies>1000</delayBetweenEventsInMilies>
-</streamConfiguration>
