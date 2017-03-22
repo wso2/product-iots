@@ -19,138 +19,787 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <parent>
-        <groupId>org.wso2.iot</groupId>
-        <artifactId>wso2iot-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
+	<parent>
+		<groupId>org.wso2.iot</groupId>
+		<artifactId>wso2iot-parent</artifactId>
+		<version>3.1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2iot</artifactId>
-    <packaging>pom</packaging>
-    <name>WSO2 IoT - Distribution Parent</name>
-    <description>WSO2 IoT Distribution Module</description>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>wso2iot</artifactId>
+	<packaging>pom</packaging>
+	<name>WSO2 IoT - Distribution</name>
+	<description>WSO2 IoT Distribution</description>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>maven-buildnumber-plugin</artifactId>
-                <version>0.9.4</version>
-                <configuration>
-                    <format>{0,date,dd MMM yyyy}</format>
-                    <items>
-                        <item>timestamp</item>
-                    </items>
-                    <doCheck>false</doCheck>
-                    <doUpdate>false</doUpdate>
-                </configuration>
-                <executions>
+	<dependencies>
+		<dependency>
+			<groupId>com.h2database.wso2</groupId>
+			<artifactId>h2-database-engine</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>${maven-buildnumber-plugin.version}</version>
+				<configuration>
+					<format>{0,date,dd MMM yyyy}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>2-unpack-wso2carbon</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.wso2.carbon</groupId>
+									<artifactId>wso2carbon-core</artifactId>
+									<version>${carbon.kernel.version}</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<!-- Replace Datasource, Scope mpl classes and OAuth callback class in identity.xml -->
+					<execution>
+						<id>replace-for-identity</id>
+						<phase>package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/identity.xml</file>
+							<replacements>
+								<replacement>
+									<xpath>/Server/JDBCPersistenceManager/DataSource/Name</xpath>
+									<token>(jdbc/WSO2CarbonDB)</token>
+									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.AuthorizationCodeGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedAuthorizationCodeGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.PasswordGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedPasswordGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.ClientCredentialsGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedClientCredentialsGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.saml.SAML2BearerGrantHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.handlers.ExtendedSAML2BearerGrantHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/SupportedGrantTypes/SupportedGrantType</xpath>
+									<token>(org.wso2.carbon.identity.oauth2.token.handlers.grant.iwa.ntlm.NTLMAuthenticationGrantHandler)</token>
+									<value>org.wso2.carbon.identity.oauth2.token.handlers.grant.iwa.ntlm.NTLMAuthenticationGrantHandlerWithHandshake</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/OAuth/OAuthCallbackHandlers</xpath>
+									<token>(org.wso2.carbon.identity.oauth.callback.DefaultCallbackHandler)</token>
+									<value>org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler</value>
+								</replacement>
+								<replacement>
+									<xpath>/Server/SSOService/UseAuthenticatedUserDomainCrypto</xpath>
+									<token>(false)</token>
+									<value>true</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+					<!-- Replace Datasource, Scope mpl classes and OAuth callback class in identity.xml -->
+
+					<!-- Replace the Datasource in the thrift-authentication.xml file -->
+					<execution>
+						<id>replace-for-thrift</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/thrift-authentication.xml</file>
+							<replacements>
+								<replacement>
+									<xpath>/Server/JDBCPersistenceManager/DataSource/Name</xpath>
+									<token>(jdbc/WSO2CarbonDB)</token>
+									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Add the input and output adapter configs to the file -->
+			<plugin>
+				<groupId>com.google.code.maven-config-processor-plugin</groupId>
+				<artifactId>config-processor-maven-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>init-input-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</input>
+									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xm</output>
+									<config>src/core/conf/input-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>init-output-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</input>
+									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</output>
+									<config>src/core/conf/output-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-scope-validator</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/identity.xml</input>
+									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/identity.xml</output>
+									<config>src/core/conf/identity_config_change.xml</config>
+								</transformation>
+							</transformations>
+							<namespaceContexts>
+								<s>http://wso2.org/projects/carbon/carbon.xml</s>
+							</namespaceContexts>
+						</configuration>
+					</execution>
+					<execution>
+						<id>init-claim-manager</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>false</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/user-mgt.xml</input>
+									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/user-mgt.xml</output>
+									<config>src/core/conf/user_mgt_config_change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<!--Analytics Configs-->
+					<execution>
+						<id>analytics-change-datasource-config</id>
+						<phase>package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/datasources/master-datasources.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/datasources/master-datasources.xml</output>
+									<config>src/analytics/conf/datasource_config_change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>analytics-init-input-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</output>
+									<config>src/analytics/conf/input-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+					<execution>
+						<id>analytics-init-output-adapter-config</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<failOnMissingXpath>true</failOnMissingXpath>
+							<transformations>
+								<transformation>
+									<input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</input>
+									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/output-event-adapters.xml</output>
+									<config>src/analytics/conf/output-adapter-change.xml</config>
+								</transformation>
+							</transformations>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+
+					<execution>
+						<!-- Creating Device Management schema -->
+						<id>copy-con</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create Device Management H2 Schema ###########" />
+
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
+
+					<execution>
+						<!-- Creating Device Management schema -->
+						<id>create-device-mgt-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create Device Management H2 Schema ###########" />
+
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
                     <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <id>2-unpack-wso2carbon</id>
+                        <!-- Creating Certificate Management schema -->
+                        <id>create-certificate-mgt-schema</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>unpack</goal>
+                            <goal>run</goal>
                         </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.wso2.iot</groupId>
-                                    <artifactId>wso2iot-core</artifactId>
-                                    <version>${product.iot.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.wso2.iot</groupId>
-                                    <artifactId>wso2iot-analytics</artifactId>
-                                    <version>${product.iot.analytics.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.wso2.iot</groupId>
-                                    <artifactId>wso2iot-broker</artifactId>
-                                    <version>${product.iot.broker.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>1-pre-dist</id>
-                        <phase>package</phase>
-                        <!--we are creating a temporary carbon distribution for document extracting purposes during the test phase-->
-                        <goals>
-                            <goal>attached</goal>
-                        </goals>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>${basedir}/src/assembly/dist.xml</descriptor>
-                            </descriptors>
-							<escapeString>\</escapeString>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>clean_target</id>
-                        <phase>install</phase>
                         <configuration>
                             <tasks>
-                                <delete dir="target/wso2iot-core-${product.iot.version}" />
-                                <delete dir="target/wso2iot-analytics-${product.iot.analytics.version}" />
-                                <delete dir="target/wso2iot-broker-${product.iot.broker.version}" />
-                                <delete file="target/${project.artifactId}-${project.version}.jar" />
+                                <echo message="########### Create Certificate Management H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+                                    <fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/certMgt/h2.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+					<execution>
+						<!-- Creating API Management schema -->
+						<id>create-api-mgt-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create API Management H2 Schema ###########" />
+
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/apimgt/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
+
+					<execution>
+						<!-- Creating App Management schema -->
+						<id>create-app-mgt-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create App Management H2 Schema ###########" />
+
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2APPM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/appmgt/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
+
+					<execution>
+                        <!-- Creating JAGH2 schema -->
+                        <id>create-JAGH2-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create JAGH2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000" />
+                                <!--<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2DM_DB;DB_CLOSE_ON_EXIT=FALSE" />-->
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+
+                                    <fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/storage/h2/h2.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Creating Social DB schema -->
+                        <id>create-social-db-schema</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="########### Create Social Plugin H2 Schema ###########" />
+
+                                <property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+                                <property name="userid" value="wso2carbon" />
+                                <property name="password" value="wso2carbon" />
+                                <property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2_SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+                                <sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+                                    <classpath refid="maven.dependency.classpath" />
+                                    <classpath refid="maven.compile.classpath" />
+                                    <classpath refid="maven.runtime.classpath" />
+
+                                    <fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/social/h2/resource.sql" />
+                                </sql>
+                                <echo message="##################### END ####################" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+					<execution>
+						<!-- Creating Android Mobile Plugin Management schema -->
+						<id>create-mobile-android-plugin-mgt-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create ANDROID Mobile plugin Management H2 Schema ###########" />
+
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2MobileAndroid_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/android/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- Creating Windows Mobile Plugin Management schema -->
+						<id>create-mobile-windows-plugin-mgt-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create WINDOWS Mobile plugin Management H2 Schema ###########" />
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2MobileWindows_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/cdm/plugins/windows/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>3-extract-docs-from-components</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<property name="tempdir" value="target/docs-temp" />
+								<property name="jardir" value="target/jars" />
+								<!--<property name="shindig.version" value="2.5.0-beta5" />-->
+
+								<mkdir dir="${tempdir}" />
+								<mkdir dir="${tempdir}/${project.artifactId}-${project.version}/wso2/components" />
+								<mkdir dir="${tempdir}/${project.artifactId}-${project.version}/repository/deployment/server" />
+								<mkdir dir="${tempdir}/${project.artifactId}-${project.version}/repository/deployment/server/webapps" />
+								<unzip dest="${tempdir}">
+									<fileset dir="target">
+										<include name="${project.artifactId}-${project.version}.zip" />
+									</fileset>
+								</unzip>
+								<copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/components" overwrite="true">
+									<fileset dir="${tempdir}/${project.artifactId}-${project.version}/wso2/components" />
+								</copy>
+								<!--testing -->
+								<!--<unzip src="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" dest="${jardir}/shindig-common-${shindig.version}">
+									<patternset>
+										<exclude name="**/shindig.properties" />
+                                        <exclude name="**/shindig.properties" />
+									</patternset>
+								</unzip>
+								<copy file="src/repository/conf/shindig.properties" todir="${jardir}/shindig-common-${shindig.version}" />
+								<delete file="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" />
+								<zip destfile="target/shindig/WEB-INF/lib/shindig-common-${shindig.version}.jar" basedir="${jardir}/shindig-common-${shindig.version}" />
+								<delete>
+									<fileset dir="target/shindig/WEB-INF/lib" includes="slf4j*" />
+								</delete>
+								<copy file="src/repository/resources/shindig/index.jsp" todir="target/shindig" />-->
+
+								<delete file="target/${project.artifactId}-${project.version}.zip" />
+								<delete dir="${tempdir}" />
+							</tasks>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy_modules_apps</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+
+
+
+					<execution>
+						<id>clean_target</id>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<delete dir="target/jars" />
+								<delete dir="target/*.xml" />
+								<delete dir="target/archive-tmp" />
+								<delete dir="target/dependency-maven-plugin-markers" />
+								<delete dir="target/maven-archiver" />
+								<delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
+								<delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
+								<delete file="target/${project.artifactId}-${project.version}.jar" />
+								<delete dir="target/sources" />
+								<delete dir="target/site" />
+								<delete dir="target/antrun" />
+								<delete dir="src/site" />
+								<!--<delete dir="target/shindig" />-->
+								<delete dir="target/jaxwebapps" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+                        <id>modify_entitlement_properties</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+            			<replace token="PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" value="#PIP.AttributeDesignators.Designator.2=org.wso2.carbon.identity.application.authz.xacml.pip.AuthenticationContextAttributePIP" dir="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/identity/">
+              			   <include name="entitlement.properties" />
+            			</replace>
                             </tasks>
                         </configuration>
                         <goals>
                             <goal>run</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
+					<execution>
+						<id>replace-web-xmls-in-war-files</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<property name="tempdir" value="target/webapp-temp" />
+								<property name="xmldir" value="src/core/resources/web-apps/web-xml" />
+								<property name="srcdir" value="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps" />
+
+								<mkdir dir="${tempdir}" />
+								<mkdir dir="${tempdir}/api-application-registration" />
+								<mkdir dir="${tempdir}/api#certificate-mgt#v1.0" />
+								<mkdir dir="${tempdir}/api#identity#entitlement" />
+								<mkdir dir="${tempdir}/api#scep-mgt#v1.0" />
+								<mkdir dir="${tempdir}/authenticationendpoint" />
+								<mkdir dir="${tempdir}/client-registration#v0.11" />
+								<mkdir dir="${tempdir}/oauth2" />
+								<mkdir dir="${tempdir}/secured-websocket" />
+								<mkdir dir="${tempdir}/shindig" />
+
+								<unzip dest="${tempdir}/api-application-registration">
+									<fileset dir="${srcdir}">
+										<include name="api-application-registration.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/api#certificate-mgt#v1.0">
+									<fileset dir="${srcdir}">
+										<include name="api#certificate-mgt#v1.0.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/api#identity#entitlement">
+									<fileset dir="${srcdir}">
+										<include name="api#identity#entitlement.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/api#scep-mgt#v1.0">
+									<fileset dir="${srcdir}">
+										<include name="api#scep-mgt#v1.0.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/authenticationendpoint">
+									<fileset dir="${srcdir}">
+										<include name="authenticationendpoint.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/client-registration#v0.11">
+									<fileset dir="${srcdir}">
+										<include name="client-registration#v0.11.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/oauth2">
+									<fileset dir="${srcdir}">
+										<include name="oauth2.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/secured-websocket">
+									<fileset dir="${srcdir}">
+										<include name="secured-websocket.war" />
+									</fileset>
+								</unzip>
+								<unzip dest="${tempdir}/shindig">
+									<fileset dir="${srcdir}">
+										<include name="shindig.war" />
+									</fileset>
+								</unzip>
+
+								<delete file="${tempdir}/api-application-registration/WEB-INF/web.xml" />
+								<delete file="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
+								<delete file="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
+								<delete file="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml" />
+								<delete file="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
+								<delete file="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
+								<delete file="${tempdir}/oauth2/WEB-INF/web.xml" />
+								<delete file="${tempdir}/secured-websocket/WEB-INF/web.xml" />
+								<delete file="${tempdir}/shindig/WEB-INF/web.xml" />
+
+								<copy file="src/core/resources/web-apps/web-xml/api-application-registration/web.xml" tofile="${tempdir}/api-application-registration/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/api#certificate-mgt#v1.0/web.xml" tofile="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/api#identity#entitlement/web.xml" tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/api#scep-mgt#v1.0/web.xml" tofile="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/authenticationendpoint/web.xml" tofile="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/client-registration#v0.11/web.xml" tofile="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/oauth2/web.xml" tofile="${tempdir}/oauth2/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/secured-websocket/web.xml" tofile="${tempdir}/secured-websocket/WEB-INF/web.xml" />
+								<copy file="src/core/resources/web-apps/web-xml/shindig/web.xml" tofile="${tempdir}/shindig/WEB-INF/web.xml" />
+
+								<zip destfile="${tempdir}/api-application-registration.war" basedir="${tempdir}/api-application-registration" />
+								<zip destfile="${tempdir}/api#certificate-mgt#v1.0.war" basedir="${tempdir}/api#certificate-mgt#v1.0" />
+								<zip destfile="${tempdir}/api#identity#entitlement.war" basedir="${tempdir}/api#identity#entitlement" />
+								<zip destfile="${tempdir}/api#scep-mgt#v1.0.war" basedir="${tempdir}/api#scep-mgt#v1.0" />
+								<zip destfile="${tempdir}/authenticationendpoint.war" basedir="${tempdir}/authenticationendpoint" />
+								<zip destfile="${tempdir}/client-registration#v0.11.war" basedir="${tempdir}/client-registration#v0.11" />
+								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2" />
+								<zip destfile="${tempdir}/secured-websocket.war" basedir="${tempdir}/secured-websocket" />
+								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig" />
+
+							</tasks>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>2-dist</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<encoding>UTF-8</encoding>
+							<filters>
+								<filter>${basedir}/src/assembly/filter.properties</filter>
+							</filters>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/bin.xml</descriptor>
+							</descriptors>
+							<archiverConfig>
+								<defaultDirectoryMode>0775</defaultDirectoryMode>
+								<directoryMode>0775</directoryMode>
+								<defaultFileMode>0644</defaultFileMode>
+								<fileMode>0644</fileMode>
+							</archiverConfig>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

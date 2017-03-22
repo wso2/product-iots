@@ -1,7 +1,0 @@
-{
-  "deviceType": {
-    "label": "Smart Water Tank",
-    "category": "iot",
-    "downloadAgentUri": "watertank/device/download"
-  }
-}

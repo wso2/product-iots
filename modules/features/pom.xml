@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!--
-  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -17,7 +18,9 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-parent</artifactId>
@@ -26,16 +29,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2iot-integration</artifactId>
+    <artifactId>wso2iot-features</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT - Integration Module</name>
+    <name>WSO2 IoT - Features Module</name>
     <url>http://wso2.org</url>
 
     <modules>
-        <module>tests-artifacts</module>
-        <module>tests-common</module>
-        <!--<module>tests-integration</module>-->
-        <module>tests-iot-web-ui</module>
+        <module>org.wso2.iot.core.styles.feature</module>
     </modules>
 
 </project>
