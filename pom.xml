@@ -1521,7 +1521,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.15</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.17-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
@@ -1658,9 +1658,6 @@
 
         <!--mqtt version-->
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
-
-        <!-- CDMF Analytics -->
-        <cdmf.analytics.version>1.0.4-SNAPSHOT</cdmf.analytics.version>
 
         <apache.httpmime.version>4.2.5</apache.httpmime.version>
         <apache.httpclient.version>4.5.2</apache.httpclient.version>

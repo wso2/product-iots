@@ -116,7 +116,7 @@
                                 <!-- END - Analytics features -->
 
                                 <featureArtifactDef>
-                                    org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.cdmf.analytics.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.analytics.gadget.template.feature:${carbon.analytics.common.version}
@@ -490,10 +490,6 @@
                                     <version>${carbon.dashboard.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.analytics.cdmf.feature.group</id>
-                                    <version>${cdmf.analytics.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.analytics.messageconsole.feature.group</id>
                                     <version>${carbon.analytics.das.version}</version>
                                 </feature>
@@ -813,8 +809,8 @@
 
                                 <!-- IoT Analytics Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.analytics.cdmf.feature.group</id>
-                                    <version>${cdmf.analytics.version}</version>
+                                    <id>org.wso2.carbon.device.mgt.cdmf.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.analytics.gadget.template.feature.group</id>
