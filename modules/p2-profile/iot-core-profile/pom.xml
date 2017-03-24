@@ -480,7 +480,7 @@
                                 <!-- End of Dashboards Features -->
 
                                 <featureArtifactDef>
-                                    org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.cdmf.analytics.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.device.statistics.dashboard.feature:${carbon.device.mgt.plugin.version}
@@ -729,9 +729,6 @@
                                 <!-- Analytics related features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -1588,8 +1585,8 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.analytics.cdmf.feature.group</id>
-                                    <version>${cdmf.analytics.version}</version>
+                                    <id>org.wso2.carbon.device.mgt.cdmf.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                             </features>
                         </configuration>
