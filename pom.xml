@@ -35,9 +35,11 @@
     </parent>
 
     <modules>
-        <module>modules/broker</module>
-        <module>modules/core</module>
-        <module>modules/analytics</module>
+        <module>modules/components</module>
+        <module>modules/features</module>
+        <module>modules/scripts</module>
+        <module>modules/tools</module>
+        <module>modules/p2-profile</module>
         <module>modules/distribution</module>
         <module>modules/integration</module>
     </modules>
@@ -1194,22 +1196,6 @@
                 <artifactId>org.wso2.carbon.statistics.ui</artifactId>
                 <version>${carbon.commons.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.axis2.wso2</groupId>
-                <artifactId>axis2</artifactId>
-                <version>${axis2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon</groupId>
-                <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.wso2.carbon</groupId>
-                        <artifactId>org.wso2.carbon.statistics.ui</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>2.2.0</version>
-            </dependency>
             <!-- END - MT Dashboard-->
 
             <!-- ************************ START - IoT Broker  ************* -->
@@ -1279,11 +1265,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon</groupId>
-                <artifactId>org.wso2.carbon.ui.menu.stratos</artifactId>
-                <version>${carbon.ui.menu.stratos.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.iot</groupId>
@@ -1459,8 +1440,9 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.11</carbon.kernel.version>
+        <carbon.kernel.version>4.4.14</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
+        <carbon.ui.menu.stratos.version>2.2.0</carbon.ui.menu.stratos.version>
 
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
 
@@ -1495,31 +1477,27 @@
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
         <!-- Carbon Commons -->
-        <carbon.commons.version>4.5.4</carbon.commons.version>
+        <carbon.commons.version>4.5.8</carbon.commons.version>
 
         <!-- Carbon Deployment -->
-        <carbon.deployment.version>4.7.2</carbon.deployment.version>
+        <carbon.deployment.version>4.7.3</carbon.deployment.version>
 
         <!-- Carbon Identity -->
-        <carbon.identity.framework.version>5.2.0</carbon.identity.framework.version>
-        <carbon.identity.framework.version.iotcore>5.7.5</carbon.identity.framework.version.iotcore>
+        <carbon.identity.framework.version>5.7.5</carbon.identity.framework.version>
         <carbon.identity.framework.version.range>[5.2.0, 6.0.0)</carbon.identity.framework.version.range>
-        <identity.local.auth.basicauth.version>5.1.1</identity.local.auth.basicauth.version>
-        <identity.local.auth.basicauth.version.iotcore>5.2.4</identity.local.auth.basicauth.version.iotcore>
+        <identity.local.auth.basicauth.version>5.2.4</identity.local.auth.basicauth.version>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
-        <identity.inbound.auth.saml.version>5.1.1</identity.inbound.auth.saml.version>
-        <identity.inbound.auth.saml.version.iotcore>5.3.0</identity.inbound.auth.saml.version.iotcore>
-        <identity.carbon.auth.saml2.version>5.1.3</identity.carbon.auth.saml2.version>
-        <identity.carbon.auth.saml2.version.iotcore>5.1.6</identity.carbon.auth.saml2.version.iotcore>
-        <identity.inbound.auth.oauth.version>5.1.2</identity.inbound.auth.oauth.version>
-        <identity.inbound.auth.oauth.version.iotcore>5.3.4</identity.inbound.auth.oauth.version.iotcore>
-        <identity.carbon.auth.mutual.ssl.version>5.1.1</identity.carbon.auth.mutual.ssl.version>
+        <identity.inbound.auth.saml.version>5.3.1</identity.inbound.auth.saml.version>
+        <identity.carbon.auth.saml2.version>5.2.1</identity.carbon.auth.saml2.version>
+        <identity.inbound.auth.oauth.version>5.3.11</identity.inbound.auth.oauth.version>
+        <identity.carbon.auth.mutual.ssl.version>5.1.2</identity.carbon.auth.mutual.ssl.version>
         <identity.user.ws.version>5.1.4</identity.user.ws.version>
         <identity.outbound.auth.requestpath.basicauth.version>5.1.1</identity.outbound.auth.requestpath.basicauth.version>
         <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
         <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
         <identity.metadata.saml2.version>1.0.0</identity.metadata.saml2.version>
         <identity.inbound.metadata.saml2.version>0.1.1</identity.inbound.metadata.saml2.version>
+        <identity.application.authz.xacml>1.0.0</identity.application.authz.xacml>
 
         <!--JWT grant type extension feature-->
         <identity.jwt.extension.version>1.0.2</identity.jwt.extension.version>
@@ -1528,14 +1506,14 @@
         <carbon.multitenancy.version>4.6.1</carbon.multitenancy.version>
 
         <!-- Carbon Registry -->
-        <carbon.registry.version>4.5.8</carbon.registry.version>
-        <carbon.registry.version.iotcore>4.6.0</carbon.registry.version.iotcore>
+        <carbon.registry.version>4.6.5</carbon.registry.version>
+        <carbon.registry.version.iotcore>4.6.5</carbon.registry.version.iotcore>
         <!-- Carbon Governance -->
         <carbon.governance.version>4.7.0</carbon.governance.version>
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.25</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.36</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1543,10 +1521,10 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.15-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.18</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.72</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
@@ -1555,7 +1533,7 @@
         <!-- Carbon Analytics Common (DAS) -->
         <carbon.analytics.common.version>5.1.14</carbon.analytics.common.version>
         <carbon.analytics.version>1.3.3</carbon.analytics.version>
-        <carbon.analytics.das.version>1.3.0</carbon.analytics.das.version>
+        <carbon.analytics.das.version>1.3.5</carbon.analytics.das.version>
         <product.iot.analytics.version>${product.iot.version}</product.iot.analytics.version>
         <product.das.version>3.1.0</product.das.version>
         <product.mb.version>3.1.0</product.mb.version>
@@ -1574,8 +1552,8 @@
 
         <!-- IoT Broker Dependencies -->
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
-        <andes.version>3.1.3</andes.version>
-        <carbon.messaging.version>3.1.3</carbon.messaging.version>
+        <andes.version>3.1.15</andes.version>
+        <carbon.messaging.version>3.1.17</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>
@@ -1620,7 +1598,6 @@
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.lang.version>2.2</commons.lang.version>
         <commons.io.version>2.4</commons.io.version>
-        <axis2.version>1.6.1.wso2v11</axis2.version>
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
         <carbon.p2.plugin.version>1.5.4</carbon.p2.plugin.version>
         <gson.version>2.3.1</gson.version>
@@ -1650,13 +1627,13 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.15</appmgt.feature.version>
+        <appmgt.feature.version>1.2.19</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
 
         <!-- Carbon Remote User Management version -->
-        <carbon.um.ws.version>5.0.8</carbon.um.ws.version>
+        <carbon.um.ws.version>5.1.4</carbon.um.ws.version>
 
         <!-- Cipher tool version-->
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
@@ -1681,9 +1658,6 @@
 
         <!--mqtt version-->
         <eclipse.paho.version>1.0.2</eclipse.paho.version>
-
-        <!-- CDMF Analytics -->
-        <cdmf.analytics.version>1.0.4-SNAPSHOT</cdmf.analytics.version>
 
         <apache.httpmime.version>4.2.5</apache.httpmime.version>
         <apache.httpclient.version>4.5.2</apache.httpclient.version>
@@ -1784,7 +1758,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
@@ -17,7 +17,7 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-parent</artifactId>
@@ -26,16 +26,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2iot-integration</artifactId>
+    <artifactId>wso2iot-scripts</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 IoT - Integration Module</name>
-    <url>http://wso2.org</url>
+    <name>WSO2 IoT - Scripts</name>
+    <url>http://maven.apache.org</url>
 
     <modules>
-        <module>tests-artifacts</module>
-        <module>tests-common</module>
-        <!--<module>tests-integration</module>-->
-        <module>tests-iot-web-ui</module>
+        <module>mobile-qsg</module>
     </modules>
 
 </project>

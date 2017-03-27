@@ -1,0 +1,12 @@
+<processor>
+   <!-- Remove current datsources config -->
+   <remove>
+        <name>//datasources-configuration/datasources</name>
+   </remove>
+
+   <!-- Add modified Carbon db and UM db config -->
+   <add>
+      <inside>//datasources-configuration</inside>
+      <file>src/analytics/conf/ds_config.xml</file>
+   </add>
+</processor>

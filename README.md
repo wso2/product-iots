@@ -4,7 +4,7 @@
      alt="WSO2 IoT Server" />
 </a>
 
-# Welcome to WSO2 IoT Server 
+# Welcome to WSO2 IoT Server
 
 <a href='https://wso2.org/jenkins/job/products/job/product-iots/'><img src='https://wso2.org/jenkins/job/products/job/product-iots/badge/icon'></a>
 <a href='https://opensource.org/licenses/Apache-2.0'><img src='https://img.shields.io/badge/License-Apache%202.0-blue.svg'></a>
