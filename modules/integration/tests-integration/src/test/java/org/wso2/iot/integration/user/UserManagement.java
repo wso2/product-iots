@@ -20,6 +20,7 @@ package org.wso2.iot.integration.user;
 
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.json.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -48,6 +49,15 @@ public class UserManagement extends TestBase {
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
                                                                       Constants.HTTP_METHOD_POST).toString(), response.getData().toString(), true);
+    }
+
+    @Test(description = "Test user count.", dependsOnMethods = {"testAddUser"})
+    public void testUserCount() throws Exception {
+        String url = GetURL(Constants.UserManagement.VIEW_USER_COUNT_ENDPOINT);
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        JSONObject jsonObject = new JSONObject(response.getResponseMessage());
+        Assert.assertTrue("Invalid user count", jsonObject.getLong("count") > 0);
     }
 
     @Test(description = "Test update user.", dependsOnMethods = {"testAddUser"})
