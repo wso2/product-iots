@@ -43,46 +43,29 @@ public class UserManagement extends TestBase {
     @Test(description = "Test add user.")
     public void testAddUser() throws Exception {
         HttpResponse response = client.post(Constants.UserManagement.USER_ENDPOINT,
-                                            PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
-                                                                            Constants.HTTP_METHOD_POST).toString());
+                                            PayloadGenerator.getJsonPayload(
+                                                    Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
+                                                    Constants.HTTP_METHOD_POST).toString());
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_POST).toString(), response.getData().toString(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
+                Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST).toString(),
+                response.getData().toString(), true);
     }
 
-    @Test(description = "Test update user.", dependsOnMethods = {"testAddUser"})
-    public void testUpdateUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
-        HttpResponse response = client.put(url,
-                                           PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
-                                                                           Constants.HTTP_METHOD_PUT).toString());
-        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_PUT).toString(), response.getData().toString(), true);
-
-    }
-
-    @Test(description = "Test view user.", dependsOnMethods = {"testUpdateUser"})
+    @Test(description = "Test view user.", dependsOnMethods = {"testAddUser"})
     public void testViewUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.VIEW_USER_ENDPOINT);
+        String url = Constants.UserManagement.VIEW_USER_ENDPOINT;
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_GET).toString(), response.getData().toString(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
+                Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_GET).toString(),
+                response.getData().toString(), true);
     }
 
     @Test(description = "Test remove user.", dependsOnMethods = {"testViewUser"})
     public void testRemoveUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
+        String url = Constants.UserManagement.USER_REMOVE_ENDPOINT;
         HttpResponse response = client.delete(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_DELETE).toString(), response.getData().toString(), true);
-
     }
-
-    private String GetURL(String endPoint) {
-        return endPoint + "?username=" + Constants.UserManagement.USER_NAME;
-    }
-
 }
