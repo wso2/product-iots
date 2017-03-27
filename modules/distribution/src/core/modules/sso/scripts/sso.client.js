@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *  Copyright (c) 2005-2014, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  *  WSO2 Inc. licenses this file to you under the Apache License,
  *  Version 2.0 (the "License"); you may not use this file except
@@ -16,7 +16,6 @@
  *  under the License.
  *
  */
-
 /**
  * Following module act as a client to create a saml request and also to
  * unwrap and return attributes of a returning saml response
@@ -27,9 +26,10 @@ var client = {};
 
 (function (client) {
 
-	var Util = Packages.org.wso2.store.sso.common.util.Util,
+	var Util = Packages.org.jaggeryjs.modules.sso.common.util.Util,
 		carbon = require('carbon'),
 		log = new Log();
+	var SSOSessionManager = Packages.org.jaggeryjs.modules.sso.common.managers.SSOSessionManager;
 
 	/**
 	 * obtains an encoded saml response and return a decoded/unmarshalled saml obj
@@ -42,27 +42,28 @@ var client = {};
 			var decodedResp = Util.decode(samlResp);
 			marshalledResponse = Util.unmarshall(decodedResp);
 		} catch (e) {
-			log.error('Unable to unmarshall SAML response');
-			log.error(e);
+			log.error('Unable to unmarshall SAML response',e);
 		}
 		return marshalledResponse;
-
 	};
 
 	/**
 	 * validating the signature of the response saml object
 	 */
 	client.validateSignature = function (samlObj, config) {
-		var tDomain = Util.getDomainName(samlObj);
-		var tId = carbon.server.tenantId({domain: tDomain});
-		if (tId != carbon.server.superTenant.tenantId) {
+		var tDomain, tId;
+		if(config.USE_ST_KEY){
+			tDomain = carbon.server.superTenant.domain;
+			tId = carbon.server.superTenant.tenantId;
+		}else{
+			tDomain = Util.getDomainName(samlObj);
+			tId = carbon.server.tenantId({domain: tDomain});
 			var identityTenantUtil = Packages.org.wso2.carbon.identity.core.util.IdentityTenantUtil;
 			identityTenantUtil.initializeRegistry(tId,tDomain);
 		}
 		return Util.validateSignature(samlObj,
 			config.KEY_STORE_NAME, config.KEY_STORE_PASSWORD, config.IDP_ALIAS, tId, tDomain);
 	};
-
 	/**
 	 * Checking if the request is a logout call
 	 */
@@ -84,7 +85,18 @@ var client = {};
 	client.getEncodedSAMLAuthRequest = function (issuerId) {
 		return Util.encode(
 			Util.marshall(
-				new Packages.org.wso2.store.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
+				new Packages.org.jaggeryjs.modules.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
+			));
+	};
+
+	/**
+	 * getting url encoded signed saml authentication request
+	 */
+	client.getEncodedSignedSAMLAuthRequest = function (issuerId, destination, acsUrl, isPassive, tenantId, tenantDomain, nameIdPolicy) {
+		return Util.encode(
+			Util.marshall(
+				new Packages.org.jaggeryjs.modules.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId, destination, acsUrl,
+					isPassive, tenantId, tenantDomain, nameIdPolicy)
 			));
 	};
 
@@ -94,9 +106,21 @@ var client = {};
 	client.getEncodedSAMLLogoutRequest = function (user, sessionIndex, issuerId) {
 		return Util.encode(
 			Util.marshall(
-				new Packages.org.wso2.store.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
-					Packages.org.wso2.store.sso.common.constants.SSOConstants.LOGOUT_USER,
+				new Packages.org.jaggeryjs.modules.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
+					Packages.org.jaggeryjs.modules.sso.common.constants.SSOConstants.LOGOUT_USER,
 					issuerId)));
+	};
+
+	/**
+	 * get url encoded signed saml logout request
+	 */
+	client.getEncodedSignedSAMLLogoutRequest = function (user, sessionIndex, issuerId, tenantId, tenantDomain, destination, nameIdFormat) {
+		return Util.encode(
+			Util.marshall(
+				new Packages.org.jaggeryjs.modules.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
+					Packages.org.jaggeryjs.modules.sso.common.constants.SSOConstants.LOGOUT_USER,
+					issuerId, tenantId, tenantDomain, destination, nameIdFormat)));
+
 	};
 
 	/**
@@ -157,13 +181,46 @@ var client = {};
 
 	};
 
+
+	/**
+	 * Registers the provided Session HostObject against the IDP session index.This
+	 * mapping is used to Single Logout all sessions when the logout method is called
+	 * @param  {String} idpSessionIndex The IDP session index provided in the SAML login response
+	 * @param  {String} serviceProvider
+	 * @param  {Object} session
+	 */
+	client.login = function(idpSessionIndex,serviceProvider,session){
+		SSOSessionManager.getInstance().login(idpSessionIndex,serviceProvider,session);
+	};
+
+	/**
+	 * Handles the Single Logout operation by invalidating the sessions mapped
+	 * to the provided IDP session index.
+	 * @param  {Object} indicator       Either a String representing the IDP session index or a session  object
+	 * @param  {String} serviceProvider
+	 */
+	client.logout = function(indicator,serviceProvider) {
+		SSOSessionManager.getInstance().logout(indicator,serviceProvider);
+	};
+
+	/**
+	 * Removes issuer, session and IDP index details.This method should be called from a session destroy
+	 * listener.Please note that this method will not attempt to invalidate the session and will assume that
+	 * the session invalidate method has been already called
+	 * @param  {Object} indicator       Either a String representing the IDP session index or a session  object
+	 * @param  {String} serviceProvider
+	 */
+	client.cleanUp = function(indicator,serviceProvider){
+		SSOSessionManager.getInstance().cleanUp(indicator,serviceProvider);
+	}
+
 	/**
 	 * The method is used to encapsulate all of the validations that
 	 * should be performed on a SAML Response
 	 */
 	client.validateSamlResponse = function(samlObj, props, keyStoreProps) {
 		props = props || {};
-		var Util = Packages.org.wso2.store.sso.common.util.Util;
+		var Util = Packages.org.jaggeryjs.modules.sso.common.util.Util;
 		var propList = createProperties(props);
 		var DEFAULT_TO_TRUE = true;
 		var DEFAULT_TO_FALSE = false;
@@ -206,31 +263,7 @@ var client = {};
 			isValid = callValidateAssertionSignature(samlObj, keyStoreProps);
 		}
 		return isValid;
-	};
-
-	/**
-	 * getting url encoded signed saml authentication request
-	 */
-	client.getEncodedSignedSAMLAuthRequest = function (issuerId, destination, acsUrl, isPassive, tenantId, tenantDomain, nameIdPolicy) {
-		return Util.encode(
-			Util.marshall(
-				new Packages.org.jaggeryjs.modules.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId, destination, acsUrl,
-					isPassive, tenantId, tenantDomain, nameIdPolicy)
-			));
-	};
-
-	/**
-	 * get url encoded signed saml logout request
-	 */
-	client.getEncodedSignedSAMLLogoutRequest = function (user, sessionIndex, issuerId, tenantId, tenantDomain, destination, nameIdFormat) {
-		return Util.encode(
-			Util.marshall(
-				new Packages.org.jaggeryjs.modules.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
-					Packages.org.wso2.store.sso.common.constants.SSOConstants.LOGOUT_USER,
-					issuerId)));
-
-	};
-
+	}
 	/**
 	 * A utility method used to convert a JSON object to
 	 * a properties object
@@ -249,7 +282,7 @@ var client = {};
 	 * resolving tenant details
 	 */
 	function callValidateAssertionSignature(samlObj, config) {
-		var Util = Packages.org.wso2.store.sso.common.util.Util;
+		var Util = Packages.org.jaggeryjs.modules.sso.common.util.Util;
 		var tDomain, tId;
 		var carbon = require('carbon');
 		if (config.USE_ST_KEY) {
