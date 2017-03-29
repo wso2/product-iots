@@ -63,37 +63,32 @@ public final class Constants {
                 + "   \"applicationName\":\"app_123456\",\n" + "   \"isAllowedToAllDomains\":false,\n"
                 + "   \"tags\":[\"android\", \"device_management\"],\n" + "   \"isMappingAnExistingOAuthApp\":false\n"
                 + "}").toString();
-        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view "
-                + "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete "
-                + "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view "
-                + "perm:admin:devices:view perm:android:blacklist-applications perm:android:change-lock-code "
-                + "perm:android:clear-password perm:android:configure-vpn perm:android:configure-wifi "
-                + "perm:android:control-camera perm:android:disenroll perm:android:encrypt-storage "
-                + "perm:android:enroll perm:android:enterprise-wipe perm:android:info "
-                + "perm:android:install-application perm:android:location perm:android:lock-devices "
-                + "perm:android:logcat perm:android:manage-configuration perm:android:mute perm:android:reboot "
-                + "perm:android:ring perm:android:send-notification perm:android:set-password-policy "
-                + "perm:android:set-webclip perm:android:uninstall-application perm:android:unlock-devices "
-                + "perm:android:update-application perm:android:upgrade-firmware perm:android:view-configuration "
-                + "perm:android:wipe perm:applications:install perm:applications:uninstall perm:dashboard:by-groups "
-                + "perm:dashboard:count-overview perm:dashboard:details perm:dashboard:device-counts "
-                + "perm:dashboard:feature-non-compliant perm:dashboard:filtered-count perm:dashboard:non-compliant "
-                + "perm:dashboard:non-compliant-count perm:dashboard:vulnerabilities perm:device-types:features "
-                + "perm:device-types:types perm:devices:applications perm:devices:compliance-data perm:devices:delete"
-                + " perm:devices:details perm:devices:effective-policy perm:devices:features perm:devices:operations "
-                + "perm:devices:search perm:devices:update perm:devices:view perm:get-activity perm:groups:add "
-                + "perm:groups:assign perm:groups:count perm:groups:device perm:groups:devices "
-                + "perm:groups:devices-add perm:groups:devices-count perm:groups:devices-remove perm:groups:groups "
-                + "perm:groups:groups-view perm:groups:remove perm:groups:roles perm:groups:share perm:groups:update "
-                + "perm:manage-configuration perm:notifications:mark-checked perm:notifications:view "
-                + "perm:policies:activate perm:policies:changes perm:policies:deactivate perm:policies:get-details "
-                + "perm:policies:get-policy-details perm:policies:manage perm:policies:priorities "
-                + "perm:policies:remove perm:policies:update perm:roles:add perm:roles:add-users "
-                + "perm:roles:create-combined-role perm:roles:delete perm:roles:details perm:roles:permissions "
-                + "perm:roles:update perm:roles:view perm:users:add perm:users:count perm:users:credentials "
-                + "perm:users:delete perm:users:details perm:users:is-exist perm:users:roles perm:users:search "
-                + "perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration "
-                + "perm:devices:change-status";
+        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view " +
+                "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete " +
+                "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view " +
+                "perm:admin:devices:view perm:android:blacklist-applications perm:android:change-lock-code " +
+                "perm:android:clear-password perm:android:configure-vpn perm:android:configure-wifi " +
+                "perm:android:control-camera perm:android:disenroll perm:android:encrypt-storage " +
+                "perm:android:enroll perm:android:enterprise-wipe perm:android:info perm:android:install-application " +
+                "perm:android:location perm:android:lock-devices perm:android:logcat perm:android:manage-configuration " +
+                "perm:android:mute perm:android:reboot perm:android:ring perm:android:send-notification " +
+                "perm:android:set-password-policy perm:android:set-webclip perm:android:uninstall-application " +
+                "perm:android:unlock-devices perm:android:update-application perm:android:upgrade-firmware " +
+                "perm:android:view-configuration perm:android:wipe perm:applications:install perm:applications:uninstall " +
+                "perm:device-types:features perm:device-types:types perm:devices:applications " +
+                "perm:devices:compliance-data perm:devices:delete perm:devices:details perm:devices:effective-policy " +
+                "perm:devices:features perm:devices:operations perm:devices:search perm:devices:update " +
+                "perm:devices:view perm:get-activity perm:groups:add perm:groups:assign perm:groups:count " +
+                "perm:groups:device perm:groups:devices perm:groups:devices-add perm:groups:devices-count " +
+                "perm:groups:devices-remove perm:groups:groups perm:groups:groups-view perm:groups:remove " +
+                "perm:groups:roles perm:groups:share perm:groups:update perm:manage-configuration " +
+                "perm:notifications:mark-checked perm:notifications:view perm:policies:activate " +
+                "perm:policies:changes perm:policies:deactivate perm:policies:get-details perm:policies:get-policy-details " +
+                "perm:policies:manage perm:policies:priorities perm:policies:remove perm:policies:update perm:roles:add" +
+                " perm:roles:add-users perm:roles:create-combined-role perm:roles:delete perm:roles:details " +
+                "perm:roles:permissions perm:roles:update perm:roles:view perm:users:add perm:users:count " +
+                "perm:users:credentials perm:users:delete perm:users:details perm:users:is-exist perm:users:roles " +
+                "perm:users:search perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration";
 
         private APIApplicationRegistration() {
             throw new AssertionError();
@@ -137,8 +132,8 @@ public final class Constants {
         public static final String WS_STEP_FILE =
                 "windows" + File.separator + "enrollment" + File.separator + "wstep.xml";
         public static final String BSD_PAYLOAD = "{\"credentials\" : {\"username\" : \"admin\", \"email\" : \"admin@wso2.com\", " +
-                                                 "\"password\" : \"admin\", \"ownership\" : \"BYOD\", " +
-                                                 "\"token\" : \"cbe53efd46ec612c456540f8dfef5428\"}}";
+                "\"password\" : \"admin\", \"ownership\" : \"BYOD\", " +
+                "\"token\" : \"cbe53efd46ec612c456540f8dfef5428\"}}";
 
         private WindowsEnrollment() {
             throw new AssertionError();
@@ -146,14 +141,14 @@ public final class Constants {
     }
 
     public static final class AndroidOperations {
-        private static final String PAYLOAD_COMMON = "["+DEVICE_ID+"]";
+        private static final String PAYLOAD_COMMON = "[" + DEVICE_ID + "]";
 
         public static final String OPERATION_PAYLOAD_FILE_NAME = "android-operation-payloads.json";
         public static final String OPERATIONS_GROUP = "operations";
 
         public static final String CAMERA_OPERATION = "control-camera";
         public static final String CAMERA_OPERATION_PAYLOAD = "{\n" + "  \"operation\": {\n"
-                + "    \"enabled\": false\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\" \n"
+                + "    \"enabled\": false\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\" \n"
                 + "  ]\n" + "}";
 
         public static final String WIPE_DATA_OPERATION = "wipe_data";
@@ -171,7 +166,7 @@ public final class Constants {
         public static final String UNLOCK_OPERATION_PAYLOAD = PAYLOAD_COMMON;
 
         public static final String LOCK_ENDPOINT = "lock-devices";
-        public static final String LOCK_OPERATION_PAYLOAD = "{ \"deviceIDs\": [\""+DEVICE_ID+"\"],"
+        public static final String LOCK_OPERATION_PAYLOAD = "{ \"deviceIDs\": [\"" + DEVICE_ID + "\"],"
                 + "\"operation\": { \"message\": \"string\", \"hardLockEnabled\": false }}";
 
         public static final String LOCATION_ENDPOINT = "location";
@@ -181,14 +176,14 @@ public final class Constants {
         public static final String CLEAR_PASSWORD_PAYLOAD = PAYLOAD_COMMON;
 
         public static final String DEVICE_INFO_ENDPOINT = "/info";
-        public static final String DEVICE_INFO_PAYLOAD = "[\""+DEVICE_ID+"\"]";
+        public static final String DEVICE_INFO_PAYLOAD = "[\"" + DEVICE_ID + "\"]";
 
         public static final String ENTERPRISE_WIPE_ENDPOINT = "enterprise-wipe";
         public static final String ENTERPRISE_WIPE_PAYLOAD = PAYLOAD_COMMON;
 
         public static final String WIPE_DATA_ENDPOINT = "wipe";
         public static final String WIPE_DATA_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"pin\": \"string\"\n"
-                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n" + "  ]\n" + "}";
 
         public static final String APPLICATION_LIST_ENDPOINT = "applications";
         public static final String APPLICATION_LIST_PAYLOAD = PAYLOAD_COMMON;
@@ -200,50 +195,51 @@ public final class Constants {
         public static final String MUTE_PAYLOAD = PAYLOAD_COMMON;
 
         public static final String INSTALL_APPS_ENDPOINT = "install-application";
-        public static final String INSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+        public static final String INSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n"
                 + "  ],\n" + "  \"operation\": {\n" + "    \"appIdentifier\": \"string\",\n"
                 + "    \"type\": \"string\",\n" + "    \"url\": \"string\"\n" + "  }\n" + "}";
 
         public static final String UNINSTALL_APPS_ENDPOINT = "uninstall-application";
         public static final String UNINSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n"
-                + "    \""+DEVICE_ID+"\"\n" + "  ],\n" + "  \"operation\": {\n"
+                + "    \"" + DEVICE_ID + "\"\n" + "  ],\n" + "  \"operation\": {\n"
                 + "    \"appIdentifier\": \"string\",\n" + "    \"type\": \"string\",\n" + "    \"url\": \"string\",\n"
                 + "    \"name\": \"string\"\n" + "  }\n" + "}";
 
         public static final String BLACKLIST_APPS_ENDPOINT = "blacklist-applications";
 
         public static final String NOTIFICATION_ENDPOINT = "send-notification";
-        public static final String NOTIFICATION_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+        public static final String NOTIFICATION_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n"
                 + "  ],\n" + "  \"operation\": {\n" + "    \"messageText\": \"string\",\n"
                 + "    \"messageTitle\": \"string\"\n" + "  }\n" + "}";
 
         public static final String WIFI_ENDPOINT = "configure-wifi";
         public static final String WIFI_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"ssid\": \"string\",\n"
-                + "    \"password\": \"string\"\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n"
+                + "    \"password\": \"string\"\n" + "  },\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n"
                 + "  ]\n" + "}";
 
         public static final String ENCRYPT_ENDPOINT = "encrypt-storage";
         public static final String ENCRYPT_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"encrypted\": false\n"
-                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n" + "  ]\n" + "}";
 
         public static final String REBOOT_ENDPOINT = "reboot";
-        public static final String REBOOT_PAYLOAD = PAYLOAD_COMMON;;
+        public static final String REBOOT_PAYLOAD = PAYLOAD_COMMON;
+        ;
 
         public static final String CHANGE_LOCK_ENDPOINT = "change-lock-code";
         public static final String CHANGE_LOCK_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"lockCode\": \"0000\"\n"
-                + "  },\n" + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}\n";
+                + "  },\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n" + "  ]\n" + "}\n";
 
         public static final String PASSWORD_POLICY_ENDPOINT = "set-password-policy";
         public static final String PASSWORD_POLICY_PAYLOAD = "{\n" + "  \"operation\": {\n"
                 + "    \"maxFailedAttempts\": 0,\n" + "    \"minLength\": 0,\n" + "    \"pinHistory\": 0,\n"
                 + "    \"minComplexChars\": 0,\n" + "    \"maxPINAgeInDays\": 0,\n"
                 + "    \"requireAlphanumeric\": false,\n" + "    \"allowSimple\": false\n" + "  },\n"
-                + "  \"deviceIDs\": [\n" + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+                + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n" + "  ]\n" + "}";
 
         public static final String WEB_CLIP_ENDPOINT = "set-webclip";
         public static final String WEB_CLIP_PAYLOAD = "{\n" + "  \"operation\": {\n" + "    \"identity\": \"string\",\n"
                 + "    \"title\": \"string\",\n" + "    \"type\": \"string\"\n" + "  },\n" + "  \"deviceIDs\": [\n"
-                + "    \""+DEVICE_ID+"\"\n" + "  ]\n" + "}";
+                + "    \"" + DEVICE_ID + "\"\n" + "  ]\n" + "}";
 
         private AndroidOperations() {
             throw new AssertionError();
@@ -258,12 +254,12 @@ public final class Constants {
         public static final String LICENSE_SECTION = "This";
         public static final String LICENSE_ENDPOINT = DEVICE_MGT_ENDPOINT + "license";
         public static final String APP_LIST_ENDPOINT = DEVICE_MGT_ENDPOINT + "appList/" +
-                                                       Constants.DEVICE_ID;
+                Constants.DEVICE_ID;
         public static final String REQUEST_MODIFY_DEVICE_EXPECTED = "{\"responseMessage\":\"Device information " +
-                                                                    "has modified successfully.\"}";
+                "has modified successfully.\"}";
         public static final String APPLIST_PAYLOAD = "{\"id\":\"1\"," +
-                                                     "\"applicationIdentifier\": \"appid\",\"\"platform\": \"android\"," +
-                                                     "\"name\": \"testapp\"}";
+                "\"applicationIdentifier\": \"appid\",\"\"platform\": \"android\"," +
+                "\"name\": \"testapp\"}";
         public static final String RESPONSE_PAYLOAD_FILE_NAME = "android-device-mgt-response-payloads.json";
 
         private AndroidDeviceManagement() {
