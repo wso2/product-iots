@@ -15,7 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
-package org.wso2.iot.integration.extensions;
+package org.wso2.iot.integration.common.extensions;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,6 +26,7 @@ import org.wso2.carbon.automation.extensions.ExtensionConstants;
 import org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerManager;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class CustomTestServerManager {
     }
 
     public CustomTestServerManager(AutomationContext context, String carbonZip,
-            Map<String, String> commandMap) {
+                                   Map<String, String> commandMap) {
         carbonServer = new CarbonServerManager(context);
         this.carbonZip = carbonZip;
         if (commandMap.get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) != null) {
@@ -91,24 +92,40 @@ public class CustomTestServerManager {
      * TestSuite
      * <p/>
      * Add the @BeforeSuite TestNG annotation in the method overriding this method
+     *
      * @param server : The server which needs to be start.
      * @return The CARBON_HOME
      * @throws IOException If an error occurs while copying the deployment artifacts into the
-     *                             Carbon server
+     *                     Carbon server
      */
-    public String startServer(String server)
+    public synchronized String startServer(String server)
             throws AutomationFrameworkException, IOException, XPathExpressionException {
-        if(carbonHome == null) {
+        if (carbonHome == null) {
             if (carbonZip == null) {
                 carbonZip = System.getProperty(FrameworkConstants.SYSTEM_PROPERTY_CARBON_ZIP_LOCATION);
             }
             if (carbonZip == null) {
                 throw new IllegalArgumentException("carbon zip file cannot find in the given location");
             }
-            carbonHome = carbonServer.setUpCarbonHome(carbonZip) + "/" + server;
+            String extractedDir = getExistingExtractedDir();
+            if (server.equalsIgnoreCase("core")) {
+                if (extractedDir == null) {
+                    carbonHome = carbonServer.setUpCarbonHome(carbonZip);
+                } else {
+                    carbonHome = extractedDir;
+                }
+            } else if (server.equalsIgnoreCase("analytics") || server.equalsIgnoreCase("broker")) {
+                if (extractedDir == null) {
+                    carbonHome = carbonServer.setUpCarbonHome(carbonZip) + File.separator + "wso2" + File.separator + server;
+                } else {
+                    carbonHome = extractedDir + File.separator + "wso2" + File.separator + server;
+                }
+            } else {
+                throw new IllegalArgumentException("Unsupported server type provided - " + server);
+            }
             configureServer();
         }
-        log.info("Carbon Home - " + carbonHome );
+        log.info("Carbon Home - " + carbonHome);
         if (commandMap.get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) != null) {
             this.portOffset = Integer.parseInt(commandMap.get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND));
         } else {
@@ -118,12 +135,33 @@ public class CustomTestServerManager {
         return carbonHome;
     }
 
+    private String getExistingExtractedDir() {
+        File zipDir = new File(System.getProperty("basedir", ".") + File.separator + "target");
+        File[] subFiles = zipDir.listFiles();
+        if (subFiles != null) {
+            for (File subFile : subFiles) {
+                if (subFile.getName().startsWith("carbontmp")) {
+                    File[] carbonServerFiles = subFile.listFiles();
+                    if (carbonServerFiles != null) {
+                        for (File file : carbonServerFiles) {
+                            if (file.getName().startsWith("wso2iot")) {
+                                return file.getAbsolutePath();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * Restarting server already started by the method startServer
+     *
      * @throws AutomationFrameworkException
      */
     public void restartGracefully() throws AutomationFrameworkException {
-        if(carbonHome == null) {
+        if (carbonHome == null) {
             throw new AutomationFrameworkException("No Running Server found to restart. " +
                     "Please make sure whether server is started");
         }
@@ -140,8 +178,6 @@ public class CustomTestServerManager {
     public void stopServer() throws AutomationFrameworkException {
         carbonServer.serverShutdown(portOffset);
     }
-
-
 
 
 }

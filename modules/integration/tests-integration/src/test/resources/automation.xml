@@ -189,9 +189,9 @@
         <platformExecutionManager>
             <extentionClasses>
                 <class>
-                    <!--<name>org.wso2.iot.integration.extensions.BrokerServerExtension</name>-->
-                    <name>org.wso2.iot.integration.extensions.IOTServerExtension</name>
-                    <!--<name>org.wso2.iot.integration.extensions.AnalyticsServerExtension</name>-->
+                    <!--<name>org.wso2.iot.integration.common.extensions.BrokerServerExtension</name>-->
+                    <name>org.wso2.iot.integration.common.extensions.IOTServerExtension</name>
+                    <!--<name>org.wso2.iot.integration.common.extensions.AnalyticsServerExtension</name>-->
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
             </extentionClasses>

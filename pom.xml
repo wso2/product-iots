@@ -880,6 +880,11 @@
                 <version>${google.gson.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.carbon.iot.integration.common</artifactId>
+                <version>${product.iot.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <scope>test</scope>
