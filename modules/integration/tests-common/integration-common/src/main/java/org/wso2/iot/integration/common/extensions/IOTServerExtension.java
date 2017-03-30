@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.iot.integration.extensions;
+package org.wso2.iot.integration.common.extensions;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
