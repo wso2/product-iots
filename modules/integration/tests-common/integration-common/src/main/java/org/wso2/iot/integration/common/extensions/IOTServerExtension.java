@@ -65,6 +65,9 @@ public class IOTServerExtension extends ExecutionListenerExtension {
                 String carbonHome = serverManager.startServer("core");
                 log.info(carbonHome);
                 System.setProperty(ExtensionConstants.CARBON_HOME, carbonHome);
+
+                // Need to give time for the apis to be added to the synapse configurations.
+                Thread.sleep(30000);
             }
         } catch (Exception e) {
             handleException("Fail to start carbon server ", e);

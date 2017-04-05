@@ -309,10 +309,10 @@ public final class Constants {
     public static final class UserManagement {
         public static final String USER_MANAGEMENT_GROUP = "user-mgt";
         public static final String USER_NAME = "username123";
-        public static final String USER_ENDPOINT = "/mdm-admin/users";
+        public static final String USER_ENDPOINT = "/api/device-mgt/v1.0/users";
         public static final String USER_PAYLOAD_FILE_NAME = "user-payloads.json";
         public static final String USER_RESPONSE_PAYLOAD_FILE_NAME = "user-response-payloads.json";
-        public static final String VIEW_USER_ENDPOINT = "/mdm-admin/users/view";
+        public static final String GET_ROLES_METHOD = "GET_ROLES";
 
         private UserManagement() {
             throw new AssertionError();

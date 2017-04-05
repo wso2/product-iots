@@ -24,13 +24,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
-import org.wso2.iot.integration.common.*;
+import org.wso2.iot.integration.common.AssertUtil;
+import org.wso2.iot.integration.common.Constants;
+import org.wso2.iot.integration.common.OAuthUtil;
+import org.wso2.iot.integration.common.PayloadGenerator;
+import org.wso2.iot.integration.common.RestClient;
+import org.wso2.iot.integration.common.TestBase;
 
 /**
  * This class contains integration tests for user management backend services.
  */
 public class UserManagement extends TestBase {
-
+    private String NON_EXISTING_USERNAME = "non_exiting";
     private RestClient client;
 
     @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
@@ -52,11 +57,11 @@ public class UserManagement extends TestBase {
 
     @Test(description = "Test update user.", dependsOnMethods = {"testAddUser"})
     public void testUpdateUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
         HttpResponse response = client.put(url,
                                            PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
                                                                            Constants.HTTP_METHOD_PUT).toString());
-        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
                                                                       Constants.HTTP_METHOD_PUT).toString(), response.getData().toString(), true);
 
@@ -64,25 +69,26 @@ public class UserManagement extends TestBase {
 
     @Test(description = "Test view user.", dependsOnMethods = {"testUpdateUser"})
     public void testViewUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.VIEW_USER_ENDPOINT);
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
                                                                       Constants.HTTP_METHOD_GET).toString(), response.getData().toString(), true);
     }
 
-    @Test(description = "Test remove user.", dependsOnMethods = {"testViewUser"})
-    public void testRemoveUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
-        HttpResponse response = client.delete(url);
+    @Test(description = "Test getting user roles.", dependsOnMethods = {"testViewUser"})
+    public void testGetUserRoles() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME + "/roles";
+        HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_DELETE).toString(), response.getData().toString(), true);
-
+                Constants.UserManagement.GET_ROLES_METHOD).toString(), response.getData().toString(), true);
     }
 
-    private String GetURL(String endPoint) {
-        return endPoint + "?username=" + Constants.UserManagement.USER_NAME;
+    @Test(description = "Test remove user.", dependsOnMethods = {"testGetUserRoles"})
+    public void testRemoveUser() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
+        HttpResponse response = client.delete(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
     }
-
 }
