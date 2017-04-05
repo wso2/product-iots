@@ -602,6 +602,21 @@
                 <exclude>**/wso2server.sh</exclude>
                 <exclude>**/wso2server.bat</exclude>
             </excludes>
+            <includes>
+                <include>**/*.sh</include>
+                <include>**/*.bat</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
