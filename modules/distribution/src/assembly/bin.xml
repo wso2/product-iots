@@ -1107,6 +1107,18 @@
             <fileMode>755</fileMode>
         </file>
         <file>
+            <source>src/core/bin/profile-creator.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/core/bin/profile-creator.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>true</filtered>
+        </file>
+        <file>
             <source>src/core/jaggeryapps/portal/configs/designer.json</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/portal/configs
@@ -1572,6 +1584,12 @@
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
+        <file>
+            <source>src/analytics/resources/profile/master-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/profile</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
         <file>
             <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
