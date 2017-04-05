@@ -1106,12 +1106,12 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <fileMode>755</fileMode>
         </file>
-        <file>
-            <source>src/core/bin/profile-creator.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-            <filtered>true</filtered>
-        </file>
+        <!--<file>-->
+            <!--<source>src/core/bin/profile-creator.bat</source>-->
+            <!--<outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+            <!--<filtered>true</filtered>-->
+        <!--</file>-->
         <file>
             <source>src/core/bin/profile-creator.sh</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>

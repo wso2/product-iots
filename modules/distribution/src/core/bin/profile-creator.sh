@@ -67,6 +67,7 @@ then
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	rm -rf ${DIR}/../repository/deployment/server/carbonapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
+	rm -rf ${DIR}/../repository/deployment/server/devicetypes/*
 
     PROFILE="_gateway"
 
@@ -99,13 +100,17 @@ then
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/* ${DIR}/../bin/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
+	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
 	rm -rf ${DIR}/../repository/deployment/server/tempwebapp
 	rm -rf ${DIR}/../repository/deployment/server/carbonapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
+	rm -rf ${DIR}/../repository/deployment/server/devicetypes/*
 
     PROFILE="_keymanager"
 
@@ -136,8 +141,10 @@ then
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
+	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
 	cp -rf ${DIR}/../repository/resources/profiles/backend/* ${DIR}/../bin/
-	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war
+	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war
+	rm -rf ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
 
@@ -170,10 +177,19 @@ then
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
 	cp -rf ${DIR}/../repository/resources/profiles/manager/* ${DIR}/../bin/
+	mkdir ${DIR}/../repository/deployment/server/tempwebapp
+	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
+	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
+	rm -rf ${DIR}/../repository/deployment/server/tempwebapp
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
-	rm -rf ${DIR}/../repository/deployment/server/carbonapps/*
+	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
 
     PROFILE="_device-manager"
 
