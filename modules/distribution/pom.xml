@@ -735,6 +735,31 @@
 								<delete file="${tempdir}/secured-websocket/WEB-INF/web.xml" />
 								<delete file="${tempdir}/shindig/WEB-INF/web.xml" />
 
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/api-application-registration/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/api#identity#entitlement/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/api#scep-mgt#v1.0/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/authenticationendpoint/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/client-registration#v0.11/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/oauth2/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+								<!--<delete>-->
+									<!--<fileset dir="${tempdir}/shindig/WEB-INF/lib" includes="*" />-->
+								<!--</delete>-->
+
 								<copy file="src/core/resources/web-apps/web-xml/api-application-registration/web.xml" tofile="${tempdir}/api-application-registration/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/api#certificate-mgt#v1.0/web.xml" tofile="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/api#identity#entitlement/web.xml" tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
