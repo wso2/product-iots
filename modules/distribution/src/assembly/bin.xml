@@ -260,7 +260,28 @@
             <includes>
                 <include>*/**</include>
             </includes>
+            <filtered>true</filtered>
         </fileSet>
+
+        <fileSet>
+            <directory>src/core/bin/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+                <include>**/*.bat</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/core/bin/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
+        </fileSet>
+
 
         <fileSet>
             <directory>
@@ -737,10 +758,12 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin</outputDirectory>
             <excludes>
-                <exclude>**/wso2server.sh</exclude>
-                <exclude>**/wso2server.bat</exclude>
-                <exclude>**/load-spark-env-vars.sh</exclude>
-                <exclude>**/load-spark-env-vars.bat</exclude>
+                <exclude>**/wso2server*</exclude>
+                <exclude>**/load-spark-env-vars*</exclude>
+                <exclude>**/java2wsdl*</exclude>
+                <exclude>**/tcpmon*</exclude>
+                <exclude>**/wsdl2java*</exclude>
+                <exclude>**/build.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -864,6 +887,27 @@
         </fileSet>
 
         <fileSet>
+            <directory>src/analytics/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+                <include>**/*.bat</include>
+            </includes>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/analytics/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
+            <filtered>true</filtered>
+        </fileSet>
+
+        <fileSet>
             <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
@@ -962,8 +1006,10 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin</outputDirectory>
             <excludes>
-                <exclude>**/wso2server.sh</exclude>
-                <exclude>**/wso2server.bat</exclude>
+                <exclude>**/wso2server*</exclude>
+                <exclude>**/java2wsdl*</exclude>
+                <exclude>**/tcpmon*</exclude>
+                <exclude>**/wsdl2java*</exclude>
             </excludes>
         </fileSet>
 
@@ -991,7 +1037,27 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/resources</outputDirectory>
         </fileSet>
-        <!--TODO: Check on using styles-->
+
+        <fileSet>
+            <directory>src/broker/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+                <include>**/*.bat</include>
+            </includes>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/broker/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
+            <filtered>true</filtered>
+        </fileSet>
 
         <fileSet>
             <directory>src/broker/resources/STRATOS_ROOT</directory>
@@ -1074,64 +1140,6 @@
         <file>
             <source>src/core/conf/tomcat/webapp-classloading-environments.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/tomcat</outputDirectory>
-        </file>
-        <!--TODO: change the wso2 server sh file name-->
-        <file>
-            <source>src/core/bin/analytics.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/analytics.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/broker.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/broker.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/iot-server.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/iot-server.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/start-all.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/start-all.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/bin/stop-all.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <!--<file>-->
-            <!--<source>src/core/bin/profile-creator.bat</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-            <!--<filtered>true</filtered>-->
-        <!--</file>-->
-        <file>
-            <source>src/core/bin/profile-creator.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
-            <fileMode>755</fileMode>
-            <filtered>true</filtered>
         </file>
         <file>
             <source>src/core/jaggeryapps/portal/configs/designer.json</source>
@@ -1692,43 +1700,6 @@
             </outputDirectory>
         </file>
 
-        <!--loads spark environment variables-->
-        <file>
-            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.sh-->
-            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
-            <source>src/analytics/bin/load-spark-env-vars.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/load-spark-env-vars.bat-->
-            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
-            <source>src/analytics/bin/load-spark-env-vars.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-
-        <!-- custom wso2server.sh file for DAS-->
-
-        <file>
-            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
-            <source>src/analytics/bin/wso2server.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <!--../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat-->
-            <!-- this file is moved to product-das from carbon-analytics DAS-110 -->
-            <source>src/analytics/bin/wso2server.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/
-            </outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-
         <!-- portal-->
         <file>
             <source>
@@ -1897,21 +1868,6 @@
         <file>
             <source>src/broker/conf/metrics.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-
-        <file>
-            <source>src/broker/bin/wso2server.sh</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>755</fileMode>
-        </file>
-
-        <file>
-            <source>src/broker/bin/wso2server.bat</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/
-            </outputDirectory>
-            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
