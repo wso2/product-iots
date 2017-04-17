@@ -73,16 +73,11 @@
             <!--<class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>-->
         <!--</classes>-->
     <!--</test>-->
-    <!--<test name="user-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.user.UserManagement"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="role-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.role.RoleManagement"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="role-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.role.RoleManagement"/>
+        </classes>
+    </test>
     <!--<test name="policy-mgt" preserve-order="true" parallel="false">-->
         <!--<classes>-->
             <!--<class name="org.wso2.iot.integration.policy.PolicyManagement"/>-->
@@ -108,4 +103,9 @@
             <!--<class name="org.wso2.iot.integration.notification.NotificationManagement"/>-->
         <!--</classes>-->
     <!--</test>-->
+    <test name="user-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.user.UserManagement"/>
+        </classes>
+    </test>
 </suite>

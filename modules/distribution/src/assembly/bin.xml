@@ -1605,6 +1605,14 @@
                 ${pom.artifactId}-${pom.version}/conf/identity
             </outputDirectory>
         </file>
+        <file>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources/lifecycles/MobileAppLifeCycle.xml
+            </source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
+            </outputDirectory>
+        </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->

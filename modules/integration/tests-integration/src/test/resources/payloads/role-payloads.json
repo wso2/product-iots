@@ -6,10 +6,12 @@
     ]
   },
   "PUT": {
+    "roleName": "administration",
+    "users": [
+      "admin"
+    ],
     "permissions": [
-      "permission/admin/device-mgt/android/operations/disenroll",
-      "permission/admin/device-mgt/android/operations/notification",
-      "/permission/admin/device-mgt/windows/operation/lock"
+      "/permission/admin/device-mgt/admin/groups"
     ]
   }
 }

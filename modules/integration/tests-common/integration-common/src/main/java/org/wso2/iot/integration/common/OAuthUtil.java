@@ -20,6 +20,7 @@ package org.wso2.iot.integration.common;
 
 import org.apache.commons.net.util.Base64;
 import org.json.JSONObject;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 
 /**
@@ -52,5 +53,32 @@ public class OAuthUtil {
                                 Constants.APIApplicationRegistration.OAUTH_TOKEN_PAYLOAD);
         jsonObj = new JSONObject(oAuthData.getData());
         return jsonObj;
+    }
+
+    /**
+     * To get the oauth token pair for the given auth string which is encoded in base64 format.
+     * @param authString encoded auth string
+     * @param backendHTTPURL backend http URL
+     * @param backendHTTPSURL backend https URL
+     * @return a JSON object which consist of oauth token pair
+     * @throws Exception Exception
+     */
+    public static String getOAuthTokenPair(String authString, String backendHTTPURL, String backendHTTPSURL,
+            String username, String password) throws Exception {
+        RestClient client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON, "Basic " + authString);
+        HttpResponse oAuthData = client.post(Constants.APIApplicationRegistration.API_APP_REGISTRATION_ENDPOINT,
+                Constants.APIApplicationRegistration.API_APP_REGISTRATION_PAYLOAD);
+        JSONObject jsonObj = new JSONObject(oAuthData.getData());
+        String clientId = jsonObj.get(Constants.OAUTH_CLIENT_ID).toString();
+        String clientSecret = jsonObj.get(Constants.OAUTH_CLIENT_SECRET).toString();
+        byte[] bytesEncoded = Base64.encodeBase64((clientId + ":" + clientSecret).getBytes());
+        String basicAuthString = "Basic " + new String(bytesEncoded);
+        //Initiate a RestClient to get OAuth token
+        client = new RestClient(backendHTTPSURL, Constants.APPLICATION_URL_ENCODED, basicAuthString);
+        oAuthData = client.post(Constants.APIApplicationRegistration.TOKEN_ENDPOINT,
+                "username=" + username + "&password=" + password + Constants.APIApplicationRegistration.MULTI_TENANT_OAUTH_TOKEN_PAYLOAD);
+        jsonObj = new JSONObject(oAuthData.getData());
+        return jsonObj.get(Constants.OAUTH_ACCESS_TOKEN).toString();
+
     }
 }

@@ -18,71 +18,180 @@
 
 package org.wso2.iot.integration.user;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.net.util.Base64;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
-import org.wso2.iot.integration.common.*;
+import org.wso2.iot.integration.common.AssertUtil;
+import org.wso2.iot.integration.common.Constants;
+import org.wso2.iot.integration.common.OAuthUtil;
+import org.wso2.iot.integration.common.PayloadGenerator;
+import org.wso2.iot.integration.common.RestClient;
+import org.wso2.iot.integration.common.TestBase;
 
 /**
  * This class contains integration tests for user management backend services.
  */
 public class UserManagement extends TestBase {
-
+    private String NON_EXISTING_USERNAME = "non_exiting";
     private RestClient client;
+    private TestUserMode userMode;
+
+    @Factory(dataProvider = "userModeProvider")
+    public UserManagement(TestUserMode userMode) {
+        this.userMode = userMode;
+    }
 
     @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
-        String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPSURL, backendHTTPSURL);
+        super.init(userMode);
+        User currentUser = getAutomationContext().getContextTenant().getContextUser();
+        byte[] bytesEncoded = Base64
+                .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
+        String encoded = new String(bytesEncoded);
+        String accessTokenString = "Bearer " + OAuthUtil
+                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
+                        currentUser.getPassword());
         this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
     @Test(description = "Test add user.")
     public void testAddUser() throws Exception {
-        HttpResponse response = client.post(Constants.UserManagement.USER_ENDPOINT,
-                                            PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
-                                                                            Constants.HTTP_METHOD_POST).toString());
+        // Add a user with the details and check whether that user is added correctly.
+        HttpResponse response = client.post(Constants.UserManagement.USER_ENDPOINT, PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST)
+                .toString());
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_POST).toString(), response.getData().toString(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST)
+                .toString(), response.getData(), true);
     }
 
     @Test(description = "Test update user.", dependsOnMethods = {"testAddUser"})
     public void testUpdateUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
-        HttpResponse response = client.put(url,
-                                           PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
-                                                                           Constants.HTTP_METHOD_PUT).toString());
-        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_PUT).toString(), response.getData().toString(), true);
-
+        // Update a existing user
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
+        HttpResponse response = client.put(url, PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_PUT).toString());
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        AssertUtil.jsonPayloadCompare(PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_PUT)
+                .toString(), response.getData(), true);
     }
 
     @Test(description = "Test view user.", dependsOnMethods = {"testUpdateUser"})
     public void testViewUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.VIEW_USER_ENDPOINT);
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_GET).toString(), response.getData().toString(), true);
+        AssertUtil.jsonPayloadCompare(PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_GET)
+                .toString(), response.getData(), true);
     }
 
-    @Test(description = "Test remove user.", dependsOnMethods = {"testViewUser"})
+    @Test(description = "Test getting user roles.", dependsOnMethods = {"testViewUser"})
+    public void testGetUserRoles() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME + "/roles";
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        AssertUtil.jsonPayloadCompare(PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
+                        Constants.UserManagement.GET_ROLES_METHOD).toString(), response.getData(), true);
+        url = Constants.UserManagement.USER_ENDPOINT + "/" + NON_EXISTING_USERNAME + "/roles";
+        response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_NOT_FOUND, response.getResponseCode());
+    }
+
+    @Test(description = "Test the API that checks whether user exist.", dependsOnMethods = {"testGetUserRoles"})
+    public void testIsUserExist() throws Exception {
+        String url =  Constants.UserManagement.USER_ENDPOINT + "/checkUser?username=" + Constants.UserManagement
+                .USER_NAME;
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals(
+                "CheckUser API return false even the user with the username " + Constants.UserManagement.USER_NAME
+                        + "exists", true, Boolean.parseBoolean(response.getData()));
+        url = Constants.UserManagement.USER_ENDPOINT + "/checkUser?username=" + NON_EXISTING_USERNAME;
+        response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals("CheckUser API return true but user with " + NON_EXISTING_USERNAME + "exists", false,
+                Boolean.parseBoolean(response.getData()));
+    }
+
+
+    @Test(description = "Test whether correct user count is returned.", dependsOnMethods = {"testIsUserExist"})
+    public void testUserCount() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/count";
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+
+        JsonObject jsonElement = new JsonParser().parse(response.getData()).getAsJsonObject();
+        Assert.assertEquals("Actual user count does not match with the returned user count", 4,
+                jsonElement.get("count").getAsInt());
+    }
+
+    @Test(description = "Test whether the API that is used to get the users returns all the user details.",
+            dependsOnMethods = {"testUserCount"})
+    public void testGetUsers() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/?offset=0&limit=100";
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        JsonObject jsonElement = new JsonParser().parse(response.getData()).getAsJsonObject();
+        Assert.assertEquals("All the users list is not returned", 4, jsonElement.get("users").getAsJsonArray().size());
+    }
+
+    @Test(description = "Test whether the API that is used to get the users with particular filter returns all the "
+            + "user details that satisfy particular filter.", dependsOnMethods = {"testGetUsers"})
+    public void testSearchUserNames() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/search/usernames?filter="
+                + Constants.UserManagement.USER_NAME;
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        JsonArray jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+        Assert.assertEquals("Relevant filtered user list in not returned correctly.", 1,
+                jsonArray.size());
+
+        url = Constants.UserManagement.USER_ENDPOINT + "/search/usernames?filter=" + NON_EXISTING_USERNAME;
+        response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+        Assert.assertEquals("Relevant filtered user list in not returned correctly. Return a list of users for "
+                        + "non-existing username", 0, jsonArray.size());
+    }
+
+    @Test(description = "Test remove user.", dependsOnMethods = {"testSearchUserNames"})
     public void testRemoveUser() throws Exception {
-        String url = GetURL(Constants.UserManagement.USER_ENDPOINT);
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME ;
         HttpResponse response = client.delete(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(Constants.UserManagement.USER_RESPONSE_PAYLOAD_FILE_NAME,
-                                                                      Constants.HTTP_METHOD_DELETE).toString(), response.getData().toString(), true);
-
     }
 
-    private String GetURL(String endPoint) {
-        return endPoint + "?username=" + Constants.UserManagement.USER_NAME;
+    @Test(description = "Test whether the API that is used to change the password works as expected.",
+            dependsOnMethods = {"testRemoveUser"})
+    public void testChangePassword() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/credentials";
+        HttpResponse response = client.put(url, PayloadGenerator
+                .getJsonPayload(Constants.UserManagement.USER_PAYLOAD_FILE_NAME,
+                        Constants.UserManagement.RESET_PASSWORD_PAYLOAD).toString());
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals("Password of the user cannot be changed",
+                "\"UserImpl password by " + "username: admin was successfully changed.\"", response.getData());
     }
 
+    @DataProvider
+    private static Object[][] userModeProvider() {
+        return new TestUserMode[][]{
+                new TestUserMode[]{TestUserMode.SUPER_TENANT_ADMIN},
+                new TestUserMode[]{TestUserMode.TENANT_ADMIN}
+        };
+    }
 }

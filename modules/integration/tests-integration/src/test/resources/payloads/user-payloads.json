@@ -18,5 +18,9 @@
       "admin",
       "Internal/everyone"
     ]
+  },
+  "RESET_PASSWORD" : {
+    "oldPassword" : "admin",
+    "newPassword" : "admin"
   }
 }
