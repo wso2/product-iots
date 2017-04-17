@@ -36,6 +36,20 @@ echo "	5.Analytics Profile"
 echo "	6.Broker profile"
 echo "Please enter the desired profile number to create the profile specific distribution."
 read profileNumber
+
+if [ "$profileNumber" -lt 7 ] && [ "$profileNumber" -gt 0 ] ; then
+    TEMPDIR=${DIR}/../../tmp
+
+    if [ ! -d "$TEMPDIR" ]; then
+        echo "Creating temporary directory"
+        mkdir ${TEMPDIR}
+    fi
+
+    echo "Copying the distribution to the temporary directory"
+    cp -rf ${DIR}/../../${DISTRIBUTION} ${TEMPDIR}/
+    DIR=${TEMPDIR}/${DISTRIBUTION}/bin
+fi
+
 #gateway profile
 if [ ${profileNumber} -eq 1 ]
 then
@@ -283,7 +297,8 @@ mv ${DIR}/../wso2/components/tmp_plugins ${DIR}/../wso2/components/plugins
 
 echo "Preparing a profile distribution archive."
 cd ${DIR}/../../
-zip -r ${DISTRIBUTION}${PROFILE}.zip ${DISTRIBUTION}/
+mv ${DISTRIBUTION} ${DISTRIBUTION}${PROFILE}
+zip -r ${DISTRIBUTION}${PROFILE}.zip ${DISTRIBUTION}${PROFILE}/
 
-echo "Profile creation completed successfully."
+echo "Profile created successfully in "$(pwd)"/"${DISTRIBUTION}${PROFILE}
 exit 0
