@@ -2105,9 +2105,7 @@
                                     <version>${carbon.commons.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>
-                                        org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
                                     <version>${identity.local.auth.basicauth.version}</version>
                                 </feature>
                                 <feature>
@@ -2474,6 +2472,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.analytics.api.client.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
+                                    <version>${identity.inbound.auth.saml.version}</version>
                                 </feature>
                             </features>
                         </configuration>
