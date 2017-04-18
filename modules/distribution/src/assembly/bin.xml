@@ -650,7 +650,6 @@
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
-                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
                 <exclude>**/artifacts.xml</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
@@ -918,7 +917,6 @@
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
-                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
@@ -1079,7 +1077,6 @@
                 <exclude>**/.data</exclude>
                 <exclude>**/.settings</exclude>
                 <exclude>features/**</exclude>
-                <exclude>**/org.wso2.carbon.feature.mgt.ui*</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
