@@ -28,7 +28,6 @@ BINDIR=$(pwd)
 #get the desired profile
 echo "This tool will erase all the files which are not required for the selected profile "
 echo "and also creates a distribution of this profile in the same folder <IOT_HOME> resides."
-echo "WARNING:This may cause loss of any changes to the other profiles."
 echo "WSO2 IoT Server Supports following profiles."
 echo "	1.IoT Gateway Profile"
 echo "	2.IoT Key Manager Profile"
