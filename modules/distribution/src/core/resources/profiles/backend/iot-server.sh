@@ -323,12 +323,12 @@ do
     -Dmqtt.broker.host="localhost" \
     -Dmqtt.broker.port="1886" \
     -Diot.core.host="localhost" \
-    -Diot.core.https.port="9443" \
+    -Diot.core.https.port="9444" \
     -Diot.keymanager.host="localhost" \
-    -Diot.keymanager.https.port="9443" \
+    -Diot.keymanager.https.port="9447" \
     -Diot.gateway.host="localhost" \
-    -Diot.gateway.https.port="8243" \
-    -Diot.gateway.http.port="8280" \
+    -Diot.gateway.https.port="8248" \
+    -Diot.gateway.http.port="8285" \
     -Diot.apimpublisher.host="localhost" \
     -Diot.apimpublisher.https.port="9443" \
     -Diot.apimstore.host="localhost" \
