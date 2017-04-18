@@ -81,15 +81,5 @@ public class AndroidDeviceManagement extends TestBase {
         Assert.assertTrue(response.getData().contains(sequence));
     }
 
-    /*
-    @Test(description = "Test update android device applist.", groups = Constants.DeviceManagement.DEVICE_MANAGEMENT_GROUP,
-            dependsOnMethods = {"testGetDevice"} )
-    public void testUpdateAppList() throws Exception {
-        HttpResponse response = client.post(Constants.DeviceManagement.APP_LIST_ENDPOINT,
-                                           Constants.DeviceManagement.APPLIST_PAYLOAD);
-        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(Constants.DeviceManagement.REQUEST_MODIFY_DEVICE_EXPECTED,
-                                      response.getData().toString(), true);
-    }*/
 
 }

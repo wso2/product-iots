@@ -14,7 +14,7 @@
   "install_apps": {
     "operation": {
       "appIdentifier": "package_name",
-      "type": "enterprise/public/webapp",
+      "type": "enterprise",
       "url": "https://www.youtube.com",
       "name": "youtube"
     },

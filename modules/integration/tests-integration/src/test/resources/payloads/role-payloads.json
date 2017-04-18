@@ -1,17 +1,13 @@
 {
   "POST": {
     "roleName": "administration",
-    "users": [
-      "admin"
-    ]
+    "users": []
   },
   "PUT": {
     "roleName": "administration",
-    "users": [
-      "admin"
-    ],
     "permissions": [
       "/permission/admin/device-mgt/admin/groups"
     ]
-  }
+  },
+  "UPDATE_USERS": ["admin", "testuser11"]
 }

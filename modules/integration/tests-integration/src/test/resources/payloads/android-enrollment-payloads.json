@@ -182,5 +182,51 @@
         "memoryUsage": 0
       }
     ]
+  },
+"UPDATE_APPLICATIONS": [
+  {
+    "id": 1,
+    "platform": "string",
+    "category": "string",
+    "name": "string",
+    "locationUrl": "string",
+    "imageUrl": "string",
+    "version": "string",
+    "type": "string",
+    "appProperties": {
+    },
+    "applicationIdentifier": "string",
+    "memoryUsage": 0
+  },
+  {
+    "id": 2,
+    "platform": "string",
+    "category": "string",
+    "name": "string",
+    "locationUrl": "string",
+    "imageUrl": "string",
+    "version": "string",
+    "type": "string",
+    "appProperties": {
+    },
+    "applicationIdentifier": "string",
+    "memoryUsage": 0
+  },
+  {
+    "id": 3,
+    "platform": "string",
+    "category": "string",
+    "name": "string",
+    "locationUrl": "string",
+    "imageUrl": "string",
+    "version": "string",
+    "type": "string",
+    "appProperties": {
+    },
+    "applicationIdentifier": "string",
+    "memoryUsage": 0
   }
+],
+  "GET_PENDING_OPERATIONS" : []
 }
+
