@@ -23,6 +23,8 @@
 
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 DISTRIBUTION="wso2iot-@product.version@"
+ALLPROF=0
+BINDIR=$(pwd)
 #get the desired profile
 echo "This tool will erase all the files which are not required for the selected profile "
 echo "and also creates a distribution of this profile in the same folder <IOT_HOME> resides."
@@ -34,12 +36,29 @@ echo "	3.IoT Device Backend Profile"
 echo "	4.IoT Device Manager Profile"
 echo "	5.Analytics Profile"
 echo "	6.Broker profile"
+echo "	7.For All Profiles"
 echo "Please enter the desired profile number to create the profile specific distribution."
 read profileNumber
+
+create_profile(){
+echo "Creating profile - "${profileNumber}
+if [ "$profileNumber" -lt 7 ] && [ "$profileNumber" -gt 0 ] ; then
+    TEMPDIR=${DIR}/../../tmp
+
+    if [ ! -d "$TEMPDIR" ]; then
+        echo "Creating temporary directory"
+        mkdir ${TEMPDIR}
+    fi
+
+    echo "Copying the distribution to the temporary directory"
+    cp -rf ${DIR}/../../${DISTRIBUTION} ${TEMPDIR}/
+    DIR=${TEMPDIR}/${DISTRIBUTION}/bin
+fi
+
 #gateway profile
 if [ ${profileNumber} -eq 1 ]
 then
-	echo "Preparing the Integrator profile distribution"
+	echo "Preparing the IoT Gateway profile distribution"
 	DEFAULT_BUNDLES="$(< ${DIR}/../wso2/components/http-gateway/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info)"
 	#remove broker
 	echo "Removing Broker profile"
@@ -55,26 +74,28 @@ then
 	rm -rf ${DIR}/analytics.bat
 	rm -rf ${DIR}/analytics.sh
 
-    #remove integrator
+    #remove iot
 	echo "Removing IoT Other profiles"
 	rm -rf ${DIR}/../wso2/components/default ${DIR}/../wso2/components/device-backend ${DIR}/../wso2/components/device-key-manager ${DIR}/../wso2/components/device-manager
 	rm -rf ${DIR}/../samples/
 	rm -rf ${DIR}/../plugins
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
-	cp -rf ${DIR}/../repository/resources/profiles/gateway/* ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/gateway/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/gateway/carbon.xml ${DIR}/../conf/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	rm -rf ${DIR}/../repository/deployment/server/carbonapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
 	rm -rf ${DIR}/../repository/deployment/server/devicetypes/*
+	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
 
     PROFILE="_gateway"
 
 #key-manager profile
 elif [ ${profileNumber} -eq 2 ]
 then
-	echo "Preparing the Integrator profile distribution"
+	echo "Preparing the IoT Keymanager profile distribution"
 	DEFAULT_BUNDLES="$(< ${DIR}/../wso2/components/device-key-manager/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info)"
 	#remove broker
 	echo "Removing Broker profile"
@@ -90,14 +111,16 @@ then
 	rm -rf ${DIR}/analytics.bat
 	rm -rf ${DIR}/analytics.sh
 
-    #remove integrator
+    #remove iot
 	echo "Removing IoT Other profiles"
 	rm -rf ${DIR}/../wso2/components/default ${DIR}/../wso2/components/device-backend ${DIR}/../wso2/components/http-gateway ${DIR}/../wso2/components/device-manager
 	rm -rf ${DIR}/../samples/
 	rm -rf ${DIR}/../plugins
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
-	cp -rf ${DIR}/../repository/resources/profiles/keymanager/* ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/carbon.xml ${DIR}/../conf/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/identity/application-authentication.xml ${DIR}/../conf/identity/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
@@ -105,6 +128,7 @@ then
 	cp ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/authenticationendpoint.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
 	rm -rf ${DIR}/../repository/deployment/server/tempwebapp
@@ -117,7 +141,7 @@ then
 #device backend profile
 elif [ ${profileNumber} -eq 3 ]
 then
-	echo "Preparing the Integrator profile distribution"
+	echo "Preparing the IoT Device Backend profile distribution"
 	DEFAULT_BUNDLES="$(< ${DIR}/../wso2/components/device-backend/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info)"
 	#remove broker
 	echo "Removing Broker profile"
@@ -133,7 +157,7 @@ then
 	rm -rf ${DIR}/analytics.bat
 	rm -rf ${DIR}/analytics.sh
 
-    #remove integrator
+    #remove iot
 	echo "Removing IoT Other profiles"
 	rm -rf ${DIR}/../wso2/components/default ${DIR}/../wso2/components/device-key-manager ${DIR}/../wso2/components/http-gateway ${DIR}/../wso2/components/device-manager
 	rm -rf ${DIR}/../samples/
@@ -142,18 +166,20 @@ then
 	rm -rf ${DIR}/profile-creator.bat
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
-	cp -rf ${DIR}/../repository/resources/profiles/backend/* ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/backend/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/backend/carbon.xml ${DIR}/../conf/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war
 	rm -rf ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
+	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
 
     PROFILE="_device-backend"
 
 #device manager profile
 elif [ ${profileNumber} -eq 4 ]
 then
-	echo "Preparing the Integrator profile distribution"
+	echo "Preparing the IoT Device Manager profile distribution"
 	DEFAULT_BUNDLES="$(< ${DIR}/../wso2/components/device-manager/configuration/org.eclipse.equinox.simpleconfigurator/bundles.info)"
 	#remove broker
 	echo "Removing Broker profile"
@@ -169,14 +195,15 @@ then
 	rm -rf ${DIR}/analytics.bat
 	rm -rf ${DIR}/analytics.sh
 
-    #remove integrator
+    #remove iot
 	echo "Removing IoT Other profiles"
 	rm -rf ${DIR}/../wso2/components/default ${DIR}/../wso2/components/device-key-manager ${DIR}/../wso2/components/http-gateway ${DIR}/../wso2/components/device-backend
 	rm -rf ${DIR}/../samples/
 	rm -rf ${DIR}/../plugins
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
-	cp -rf ${DIR}/../repository/resources/profiles/manager/* ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/manager/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/manager/carbon.xml ${DIR}/../conf/
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
@@ -190,6 +217,7 @@ then
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
+	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
 
     PROFILE="_device-manager"
 
@@ -237,7 +265,7 @@ then
 	rm -rf ${DIR}/analytics.bat
 	rm -rf ${DIR}/analytics.sh
 
-	#remove integrator
+	#remove iot
 	echo "Removing IoT profiles"
     rm -rf ${DIR}/../conf
 	rm -rf ${DIR}/../wso2/components/default ${DIR}/../wso2/components/device-backend ${DIR}/../wso2/components/device-key-manager ${DIR}/../wso2/components/device-manager ${DIR}/../wso2/components/http-gateway
@@ -276,7 +304,23 @@ mv ${DIR}/../wso2/components/tmp_plugins ${DIR}/../wso2/components/plugins
 
 echo "Preparing a profile distribution archive."
 cd ${DIR}/../../
-zip -r ${DISTRIBUTION}${PROFILE}.zip ${DISTRIBUTION}/
+mv ${DISTRIBUTION} ${DISTRIBUTION}${PROFILE}
+zip -r ${DISTRIBUTION}${PROFILE}.zip ${DISTRIBUTION}${PROFILE}/
+cd ${BINDIR}
+DIR=${BINDIR}
+echo "Profile created successfully in "$(pwd)"/"${DISTRIBUTION}${PROFILE}
+}
 
-echo "Profile creation completed successfully."
+if [ ${profileNumber} -eq 7 ]; then
+    profileNumber=1
+    while [  "$profileNumber" -lt 7 ]
+        do
+            create_profile
+            ((profileNumber++))
+    done
+    echo "All profiles are created successfully!"
+else
+    create_profile
+fi
+
 exit 0
