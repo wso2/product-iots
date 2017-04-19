@@ -28,7 +28,6 @@ BINDIR=$(pwd)
 #get the desired profile
 echo "This tool will erase all the files which are not required for the selected profile "
 echo "and also creates a distribution of this profile in the same folder <IOT_HOME> resides."
-echo "WARNING:This may cause loss of any changes to the other profiles."
 echo "WSO2 IoT Server Supports following profiles."
 echo "	1.IoT Gateway Profile"
 echo "	2.IoT Key Manager Profile"
@@ -43,13 +42,14 @@ read profileNumber
 create_profile(){
 echo "Creating profile - "${profileNumber}
 if [ "$profileNumber" -lt 7 ] && [ "$profileNumber" -gt 0 ] ; then
-    TEMPDIR=${DIR}/../../tmp
+    TEMPDIR=${DIR}/../../target
 
     if [ ! -d "$TEMPDIR" ]; then
         echo "Creating temporary directory"
         mkdir ${TEMPDIR}
     fi
 
+    rm -rf ${TEMPDIR}/${DISTRIBUTION}
     echo "Copying the distribution to the temporary directory"
     cp -rf ${DIR}/../../${DISTRIBUTION} ${TEMPDIR}/
     DIR=${TEMPDIR}/${DISTRIBUTION}/bin
@@ -82,6 +82,7 @@ then
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
 	cp -rf ${DIR}/../repository/resources/profiles/gateway/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/gateway/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/gateway/carbon.xml ${DIR}/../conf/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
@@ -119,6 +120,7 @@ then
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/carbon.xml ${DIR}/../conf/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/identity/application-authentication.xml ${DIR}/../conf/identity/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
@@ -167,6 +169,7 @@ then
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
 	cp -rf ${DIR}/../repository/resources/profiles/backend/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/backend/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/backend/carbon.xml ${DIR}/../conf/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war
 	rm -rf ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war
@@ -203,6 +206,7 @@ then
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
 	cp -rf ${DIR}/../repository/resources/profiles/manager/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/manager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/manager/carbon.xml ${DIR}/../conf/
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
@@ -296,7 +300,7 @@ mkdir -p ${DIR}/../wso2/components/tmp_plugins
 for BUNDLE in $DEFAULT_BUNDLES; do
     IFS=',' read -a bundleArray <<< "$BUNDLE"
     JAR=${bundleArray[0]}_${bundleArray[1]}.jar
-    cp ${DIR}/../wso2/components/plugins/${JAR} ${DIR}/../wso2/components/tmp_plugins
+    cp ${DIR}/../wso2/components/plugins/${JAR} ${DIR}/../wso2/components/tmp_plugins 2> /dev/null
 done
 
 rm -r ${DIR}/../wso2/components/plugins
@@ -304,6 +308,7 @@ mv ${DIR}/../wso2/components/tmp_plugins ${DIR}/../wso2/components/plugins
 
 echo "Preparing a profile distribution archive."
 cd ${DIR}/../../
+rm -rf ${DISTRIBUTION}${PROFILE}
 mv ${DISTRIBUTION} ${DISTRIBUTION}${PROFILE}
 zip -r ${DISTRIBUTION}${PROFILE}.zip ${DISTRIBUTION}${PROFILE}/
 cd ${BINDIR}
