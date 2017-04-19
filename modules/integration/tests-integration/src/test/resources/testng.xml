@@ -43,20 +43,15 @@
             <class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>
         </classes>
     </test>
+    <test name="android-configuration" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>
+        </classes>
+    </test>
     <!--<test name="windows-enrollment" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.device.enrollment.WindowsEnrollment"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="android-device-mgt" preserve-order="false" parallel="true">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.device.mgt.AndroidDeviceManagement"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="android-configuration" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.device.enrollment.WindowsEnrollment"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="android-policy" preserve-order="true" parallel="false">-->
         <!--<classes>-->

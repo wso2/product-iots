@@ -18,6 +18,7 @@
 
 package org.wso2.iot.integration.common;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
@@ -45,5 +46,19 @@ public class PayloadGenerator {
         FileInputStream fisTargetFile = new FileInputStream(new File(url.getPath()));
         String returnString = IOUtils.toString(fisTargetFile, Constants.UTF8);
         return returnString;
+    }
+
+    /**
+     * Create a Json Array from a specific method in the file
+     * @param fileName Name of the file
+     * @param method Method name
+     * @return Json Arry created from the specific method in the file
+     * @throws FileNotFoundException File Not found exception
+     */
+    public static JsonArray getJsonArray(String fileName, String method)
+            throws FileNotFoundException {
+        URL url = PayloadGenerator.class.getClassLoader().getResource(PAYLOAD_LOCATION + fileName);
+        JsonObject jsonObject = parser.parse(new FileReader(url.getPath())).getAsJsonObject();
+        return jsonObject.get(method).getAsJsonArray();
     }
 }

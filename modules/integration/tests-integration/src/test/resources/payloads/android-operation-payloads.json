@@ -14,11 +14,11 @@
   "install_apps": {
     "operation": {
       "appIdentifier": "package_name",
-      "type": "enterprise/public/webapp",
+      "type": "enterprise",
       "url": "https://www.youtube.com",
       "name": "youtube"
     },
-    "deviceIDs": []
+    "deviceIDs": ["d24f870f390352a41234"]
   },
   "notification": {
     "operation": {
@@ -64,5 +64,34 @@
       "type": "install"
     },
     "deviceIDs": []
+  },
+  "black_list_application": {
+    "operation": {
+      "appIdentifiers": ["com.google", "android.studio"]
+    },
+    "deviceIDs": [
+      "d24f870f390352a41234"
+    ]
+  },
+  "upgrade-firmware" : {
+    "operation": {
+      "schedule": "",
+      "server" : "http://www.google.lk"
+    },
+    "deviceIDs": [
+      "d24f870f390352a41234"
+    ]
+  },
+  "vpn" : {
+    "operation": {
+      "serverAddress": "localhost",
+      "serverPort" : "9763",
+      "sharedSecret" : "helloWorld",
+      "dnsServer" : "testserver.com"
+    },
+    "deviceIDs": [
+      "d24f870f390352a41234"
+    ]
+
   }
 }
