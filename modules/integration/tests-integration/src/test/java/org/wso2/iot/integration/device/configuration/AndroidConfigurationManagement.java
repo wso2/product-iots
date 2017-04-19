@@ -20,9 +20,13 @@ package org.wso2.iot.integration.device.configuration;
 
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.net.util.Base64;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.iot.integration.common.*;
 
@@ -30,55 +34,45 @@ import org.wso2.iot.integration.common.*;
  * This class contains integration tests for Android configuration management backend services.
  */
 public class AndroidConfigurationManagement extends TestBase {
-
     private RestClient client;
 
-    @BeforeClass(alwaysRun = true, groups = { Constants.AndroidConfigurationManagement.DEVICE_CONFIGURATION_GROUP})
+    @Factory(dataProvider = "userModeProvider")
+    public AndroidConfigurationManagement(TestUserMode testUserMode) {
+        this.userMode = testUserMode;
+    }
+
+    @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
-        String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPURL, backendHTTPSURL);
-        this.client = new RestClient(backendHTTPURL, Constants.APPLICATION_JSON, accessTokenString);
+        super.init(userMode);
+        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
-    @Test(description = "Test add android platform configuration.")
-    public void testAddConfiguration() throws Exception {
-        HttpResponse response = client.post(Constants.AndroidConfigurationManagement.CONFIG_MGT_ENDPOINT,
-                                            PayloadGenerator.getJsonPayload(
-                                                    Constants.AndroidConfigurationManagement.PAYLOAD_FILE_NAME,
-                                                    Constants.HTTP_METHOD_POST).toString()
-        );
-        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
-                                              Constants.AndroidConfigurationManagement.RESPONSE_PAYLOAD_FILE_NAME,
-                                              Constants.HTTP_METHOD_POST).toString(),
-                                      response.getData().toString(), true
-        );
-    }
-
-    @Test(description = "Test update android configuration.", dependsOnMethods = {"testAddConfiguration"})
+    @Test(description = "Test update android configuration.")
     public void testModifyConfiguration() throws Exception {
         HttpResponse response = client.put(Constants.AndroidConfigurationManagement.CONFIG_MGT_ENDPOINT,
-                                           PayloadGenerator.getJsonPayload(
-                                                   Constants.AndroidConfigurationManagement.PAYLOAD_FILE_NAME,
-                                                   Constants.HTTP_METHOD_PUT).toString()
-        );
+                PayloadGenerator.getJsonPayload(Constants.AndroidConfigurationManagement.PAYLOAD_FILE_NAME,
+                        Constants.HTTP_METHOD_PUT).toString());
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
-                                              Constants.AndroidConfigurationManagement.RESPONSE_PAYLOAD_FILE_NAME,
-                                              Constants.HTTP_METHOD_PUT).toString(),
-                                      response.getData().toString(), true
-        );
+        Assert.assertEquals("Android configuration update message is not received properly",
+                "Android platform " + "configuration has been updated successfully.",
+                response.getData().replaceAll("\"", ""));
     }
 
-//    @Test(description = "Test get android configuration.",
-//          dependsOnMethods = { "testAddConfiguration", "testModifyConfiguration" })
-//    public void testGetConfiguration() throws Exception {
-//        HttpResponse response = client.get(Constants.AndroidConfigurationManagement.CONFIG_MGT_ENDPOINT);
-//        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-//        AssertUtil.jsonPayloadCompare(
-//                PayloadGenerator.getJsonPayload(Constants.AndroidConfigurationManagement.PAYLOAD_FILE_NAME,
-//                                                Constants.HTTP_METHOD_PUT).toString(),
-//                response.getData().toString(), true
-//        );
-//    }
+    @Test(description = "Test get android configuration.", dependsOnMethods = { "testModifyConfiguration" })
+    public void testGetConfiguration() throws Exception {
+        HttpResponse response = client.get(Constants.AndroidConfigurationManagement.CONFIG_MGT_ENDPOINT);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        AssertUtil.jsonPayloadCompare(PayloadGenerator
+                .getJsonPayload(Constants.AndroidConfigurationManagement.PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_PUT)
+                .toString(), response.getData(), true);
+    }
+
+    @Test(description = "Test get android license.", dependsOnMethods = { "testModifyConfiguration" })
+    public void testGetLicense() throws Exception {
+        HttpResponse response = client.get(Constants.AndroidConfigurationManagement.CONFIG_MGT_ENDPOINT
+                + Constants.AndroidConfigurationManagement.LICENSE_ENDPOINT);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals("Expected android license agreement is not received",
+                "This End User License Agreement is " + "Eula.", response.getData());
+    }
 }

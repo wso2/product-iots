@@ -21,18 +21,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.net.util.Base64;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.iot.integration.common.AssertUtil;
 import org.wso2.iot.integration.common.Constants;
 import org.wso2.iot.integration.common.IOTHttpClient;
 import org.wso2.iot.integration.common.IOTResponse;
-import org.wso2.iot.integration.common.OAuthUtil;
 import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.TestBase;
 
@@ -44,7 +40,6 @@ import java.io.FileNotFoundException;
  */
 public class RoleManagement extends TestBase {
     private IOTHttpClient client;
-    private TestUserMode userMode;
     private static final String ROLE_NAME = "administration";
 
     @Factory(dataProvider = "userModeProvider")
@@ -55,13 +50,6 @@ public class RoleManagement extends TestBase {
     @BeforeClass(alwaysRun = true, groups = { Constants.RoleManagement.ROLE_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
         super.init(userMode);
-        User currentUser = getAutomationContext().getContextTenant().getContextUser();
-        byte[] bytesEncoded = Base64
-                .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
-        String encoded = new String(bytesEncoded);
-        String accessTokenString = "Bearer " + OAuthUtil
-                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
-                        currentUser.getPassword());
         this.client = new IOTHttpClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
@@ -137,13 +125,5 @@ public class RoleManagement extends TestBase {
     public void testRemoveRole() throws Exception {
         IOTResponse response = client.delete(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT +"/" + ROLE_NAME);
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-    }
-
-    @DataProvider
-    private static Object[][] userModeProvider() {
-        return new TestUserMode[][]{
-                new TestUserMode[]{TestUserMode.SUPER_TENANT_ADMIN},
-                new TestUserMode[]{TestUserMode.TENANT_ADMIN}
-        };
     }
 }

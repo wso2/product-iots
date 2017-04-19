@@ -20,29 +20,25 @@ package org.wso2.iot.integration.device.operation;
 import com.google.gson.JsonObject;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.net.util.Base64;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.iot.integration.common.Constants;
-import org.wso2.iot.integration.common.OAuthUtil;
 import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * This contain tests to check operations supported by Android. Test are executed against a previously enrolled device
  */
 public class AndroidOperation extends TestBase {
     private RestClient client;
-    private TestUserMode userMode;
 
     @Factory(dataProvider = "userModeProvider")
     public AndroidOperation(TestUserMode userMode) {
@@ -52,13 +48,6 @@ public class AndroidOperation extends TestBase {
     @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
         super.init(userMode);
-        User currentUser = getAutomationContext().getContextTenant().getContextUser();
-        byte[] bytesEncoded = Base64
-                .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
-        String encoded = new String(bytesEncoded);
-        String accessTokenString = "Bearer " + OAuthUtil
-                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
-                        currentUser.getPassword());
         this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
         //Enroll a device
         JsonObject enrollmentData = PayloadGenerator.getJsonPayload(
@@ -69,9 +58,9 @@ public class AndroidOperation extends TestBase {
 
     @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test Android device lock operation.")
     public void testLock() throws MalformedURLException, AutomationFrameworkException {
-        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT +
-                                            Constants.AndroidOperations.LOCK_ENDPOINT,
-                                            Constants.AndroidOperations.LOCK_OPERATION_PAYLOAD);
+        HttpResponse response = client
+                .post(Constants.AndroidOperations.OPERATION_ENDPOINT + Constants.AndroidOperations.LOCK_ENDPOINT,
+                        Constants.AndroidOperations.LOCK_OPERATION_PAYLOAD);
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
     }
 
@@ -160,6 +149,58 @@ public class AndroidOperation extends TestBase {
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
     }
 
+    @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test Android app update operation")
+    public void testUpdateApplication()
+            throws FileNotFoundException, MalformedURLException, AutomationFrameworkException {
+        JsonObject installApplicationPayload = PayloadGenerator.getJsonPayload(Constants.AndroidOperations
+                .OPERATION_PAYLOAD_FILE_NAME, Constants.AndroidOperations.INSTALL_APPS_OPERATION);
+        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT +
+                Constants.AndroidOperations.UPDATE_APPS_ENDPOINT, installApplicationPayload.toString());
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+    }
+
+    @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test Android app un-install "
+            + "operation")
+    public void testUninstallApplication() throws MalformedURLException, AutomationFrameworkException {
+        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT
+                        + Constants.AndroidOperations.UNINSTALL_APPS_ENDPOINT,
+                Constants.AndroidOperations.UNINSTALL_APPS_PAYLOAD);
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+    }
+
+    @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test black list application "
+            + "operation")
+    public void testBlackListApplication()
+            throws FileNotFoundException, MalformedURLException, AutomationFrameworkException {
+        JsonObject blackListApplicationPayload = PayloadGenerator.getJsonPayload(Constants.AndroidOperations
+                .OPERATION_PAYLOAD_FILE_NAME, Constants.AndroidOperations.BLACKLIST_OPERATION);
+        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT +
+                Constants.AndroidOperations.BLACKLIST_APPS_ENDPOINT, blackListApplicationPayload.toString());
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+    }
+
+    @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test upgrade firmware operation")
+    public void testUpgradeFirmware()
+            throws FileNotFoundException, MalformedURLException, AutomationFrameworkException {
+        JsonObject upgradeFirmWarePayload = PayloadGenerator
+                .getJsonPayload(Constants.AndroidOperations.OPERATION_PAYLOAD_FILE_NAME,
+                        Constants.AndroidOperations.UPGRADE_FIRMWARE_OPERATION);
+        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT
+                + Constants.AndroidOperations.UPGRADE_FIRMWARE_ENDPOINT, upgradeFirmWarePayload.toString());
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+    }
+
+    @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test configure VPN operation")
+    public void testConfigureVPN()
+            throws FileNotFoundException, MalformedURLException, AutomationFrameworkException {
+        JsonObject configureVPNPayload = PayloadGenerator
+                .getJsonPayload(Constants.AndroidOperations.OPERATION_PAYLOAD_FILE_NAME,
+                        Constants.AndroidOperations.VPN_OPERATION);
+        HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT
+                + Constants.AndroidOperations.VPN_ENDPOINT, configureVPNPayload.toString());
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
+    }
+
     @Test(groups = {Constants.AndroidOperations.OPERATIONS_GROUP}, description = "Test Android reboot operation")
     public void testReboot() throws Exception {
         HttpResponse response = client.post(Constants.AndroidOperations.OPERATION_ENDPOINT +
@@ -229,13 +270,5 @@ public class AndroidOperation extends TestBase {
                                             Constants.AndroidOperations.WEB_CLIP_ENDPOINT,
                                             Constants.AndroidOperations.WEB_CLIP_PAYLOAD);
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-    }
-
-    @DataProvider
-    private static Object[][] userModeProvider() {
-        return new TestUserMode[][]{
-                new TestUserMode[]{TestUserMode.SUPER_TENANT_ADMIN},
-                new TestUserMode[]{TestUserMode.TENANT_ADMIN}
-        };
     }
 }

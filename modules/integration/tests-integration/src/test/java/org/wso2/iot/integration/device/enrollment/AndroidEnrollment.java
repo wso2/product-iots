@@ -23,17 +23,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.net.util.Base64;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.iot.integration.common.AssertUtil;
 import org.wso2.iot.integration.common.Constants;
-import org.wso2.iot.integration.common.OAuthUtil;
 import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
@@ -45,7 +41,6 @@ import org.wso2.iot.integration.common.TestBase;
 public class AndroidEnrollment extends TestBase {
     private RestClient client;
     private String deviceId;
-    private TestUserMode userMode;
 
     @Factory(dataProvider = "userModeProvider")
     public AndroidEnrollment(TestUserMode userMode) {
@@ -55,13 +50,6 @@ public class AndroidEnrollment extends TestBase {
     @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
         super.init(userMode);
-        User currentUser = getAutomationContext().getContextTenant().getContextUser();
-        byte[] bytesEncoded = Base64
-                .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
-        String encoded = new String(bytesEncoded);
-        String accessTokenString = "Bearer " + OAuthUtil
-                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
-                        currentUser.getPassword());
         this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
@@ -144,11 +132,4 @@ public class AndroidEnrollment extends TestBase {
                 Constants.HTTP_METHOD_DELETE).toString(), response.getData(), true);
     }
 
-    @DataProvider
-    private static Object[][] userModeProvider() {
-        return new TestUserMode[][]{
-                new TestUserMode[]{TestUserMode.SUPER_TENANT_ADMIN},
-                new TestUserMode[]{TestUserMode.TENANT_ADMIN}
-        };
-    }
 }

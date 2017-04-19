@@ -68,32 +68,32 @@ public final class Constants {
                 + "   \"applicationName\":\"app_123456\",\n" + "   \"isAllowedToAllDomains\":false,\n"
                 + "   \"tags\":[\"android\", \"device_management\"],\n" + "   \"isMappingAnExistingOAuthApp\":false\n"
                 + "}").toString();
-        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view " +
-                "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete " +
-                "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view " +
-                "perm:admin:devices:view perm:android:blacklist-applications perm:android:change-lock-code " +
-                "perm:android:clear-password perm:android:configure-vpn perm:android:configure-wifi " +
-                "perm:android:control-camera perm:android:disenroll perm:android:encrypt-storage " +
-                "perm:android:enroll perm:android:enterprise-wipe perm:android:info perm:android:install-application " +
-                "perm:android:location perm:android:lock-devices perm:android:logcat perm:android:manage-configuration " +
-                "perm:android:mute perm:android:reboot perm:android:ring perm:android:send-notification " +
-                "perm:android:set-password-policy perm:android:set-webclip perm:android:uninstall-application " +
-                "perm:android:unlock-devices perm:android:update-application perm:android:upgrade-firmware " +
-                "perm:android:view-configuration perm:android:wipe perm:applications:install perm:applications:uninstall " +
-                "perm:device-types:features perm:device-types:types perm:devices:applications " +
-                "perm:devices:compliance-data perm:devices:delete perm:devices:details perm:devices:effective-policy " +
-                "perm:devices:features perm:devices:operations perm:devices:search perm:devices:update " +
-                "perm:devices:view perm:get-activity perm:groups:add perm:groups:assign perm:groups:count " +
-                "perm:groups:device perm:groups:devices perm:groups:devices-add perm:groups:devices-count " +
-                "perm:groups:devices-remove perm:groups:groups perm:groups:groups-view perm:groups:remove " +
-                "perm:groups:roles perm:groups:share perm:groups:update perm:manage-configuration " +
-                "perm:notifications:mark-checked perm:notifications:view perm:policies:activate " +
-                "perm:policies:changes perm:policies:deactivate perm:policies:get-details perm:policies:get-policy-details " +
-                "perm:policies:manage perm:policies:priorities perm:policies:remove perm:policies:update perm:roles:add" +
-                " perm:roles:add-users perm:roles:create-combined-role perm:roles:delete perm:roles:details " +
-                "perm:roles:permissions perm:roles:update perm:roles:view perm:users:add perm:users:count " +
-                "perm:users:credentials perm:users:delete perm:users:details perm:users:is-exist perm:users:roles " +
-                "perm:users:search perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration";
+        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view "
+                + "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete "
+                + "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view "
+                + "perm:admin:devices:view perm:android:applications perm:android:blacklist-applications "
+                + "perm:android:change-lock-code perm:android:clear-password perm:android:configure-vpn perm:android:configure-wifi "
+                + "perm:android:control-camera perm:android:disenroll perm:android:encrypt-storage "
+                + "perm:android:enroll perm:android:enterprise-wipe perm:android:info perm:android:install-application "
+                + "perm:android:location perm:android:lock-devices perm:android:logcat perm:android:manage-configuration "
+                + "perm:android:mute perm:android:reboot perm:android:ring perm:android:send-notification "
+                + "perm:android:set-password-policy perm:android:set-webclip perm:android:uninstall-application "
+                + "perm:android:unlock-devices perm:android:update-application perm:android:upgrade-firmware "
+                + "perm:android:view-configuration perm:android:wipe perm:applications:install perm:applications:uninstall "
+                + "perm:device-types:features perm:device-types:types perm:devices:applications "
+                + "perm:devices:compliance-data perm:devices:delete perm:devices:details perm:devices:effective-policy "
+                + "perm:devices:features perm:devices:operations perm:devices:search perm:devices:update "
+                + "perm:devices:view perm:get-activity perm:groups:add perm:groups:assign perm:groups:count "
+                + "perm:groups:device perm:groups:devices perm:groups:devices-add perm:groups:devices-count "
+                + "perm:groups:devices-remove perm:groups:groups perm:groups:groups-view perm:groups:remove "
+                + "perm:groups:roles perm:groups:share perm:groups:update perm:manage-configuration "
+                + "perm:notifications:mark-checked perm:notifications:view perm:policies:activate "
+                + "perm:policies:changes perm:policies:deactivate perm:policies:get-details perm:policies:get-policy-details "
+                + "perm:policies:manage perm:policies:priorities perm:policies:remove perm:policies:update perm:roles:add"
+                + " perm:roles:add-users perm:roles:create-combined-role perm:roles:delete perm:roles:details "
+                + "perm:roles:permissions perm:roles:update perm:roles:view perm:users:add perm:users:count "
+                + "perm:users:credentials perm:users:delete perm:users:details perm:users:is-exist perm:users:roles "
+                + "perm:users:search perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration";
 
         private APIApplicationRegistration() {
             throw new AssertionError();
@@ -204,6 +204,7 @@ public final class Constants {
         public static final String MUTE_PAYLOAD = PAYLOAD_COMMON;
 
         public static final String INSTALL_APPS_ENDPOINT = "install-application";
+        public static final String UPDATE_APPS_ENDPOINT = "update-application";
         public static final String INSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n"
                 + "  ],\n" + "  \"operation\": {\n" + "    \"appIdentifier\": \"string\",\n"
                 + "    \"type\": \"string\",\n" + "    \"url\": \"string\"\n" + "  }\n" + "}";
@@ -211,10 +212,16 @@ public final class Constants {
         public static final String UNINSTALL_APPS_ENDPOINT = "uninstall-application";
         public static final String UNINSTALL_APPS_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n"
                 + "    \"" + DEVICE_ID + "\"\n" + "  ],\n" + "  \"operation\": {\n"
-                + "    \"appIdentifier\": \"string\",\n" + "    \"type\": \"string\",\n" + "    \"url\": \"string\",\n"
-                + "    \"name\": \"string\"\n" + "  }\n" + "}";
+                + "    \"appIdentifier\": \"string\",\n" + "    \"type\": \"enterprise\"} }";
 
         public static final String BLACKLIST_APPS_ENDPOINT = "blacklist-applications";
+        public static final String BLACKLIST_OPERATION = "black_list_application";
+
+        public static final String UPGRADE_FIRMWARE_ENDPOINT = "upgrade-firmware";
+        public static final String UPGRADE_FIRMWARE_OPERATION = "upgrade-firmware";
+
+        public static final String VPN_ENDPOINT = "configure-vpn";
+        public static final String VPN_OPERATION = "vpn";
 
         public static final String NOTIFICATION_ENDPOINT = "send-notification";
         public static final String NOTIFICATION_PAYLOAD = "{\n" + "  \"deviceIDs\": [\n" + "    \"" + DEVICE_ID + "\"\n"
@@ -278,7 +285,8 @@ public final class Constants {
 
     public static final class AndroidConfigurationManagement {
         public static final String DEVICE_CONFIGURATION_GROUP = "android-config-mgt";
-        public static final String CONFIG_MGT_ENDPOINT = "/mdm-android-agent/configuration/";
+        public static final String CONFIG_MGT_ENDPOINT = "/api/device-mgt/android/v1.0/configuration/";
+        public static final String LICENSE_ENDPOINT = "license";
         public static final String PAYLOAD_FILE_NAME = "android-configuration-payloads.json";
         public static final String RESPONSE_PAYLOAD_FILE_NAME = "android-config-response-payloads.json";
 
