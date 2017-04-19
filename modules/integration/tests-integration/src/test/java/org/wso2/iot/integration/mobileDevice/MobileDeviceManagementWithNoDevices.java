@@ -82,7 +82,4 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
         String tokenString = OAuthUtil.getScopes(backendHTTPSURL, backendHTTPSURL);
         return tokenString.contains(permissionsList);
     }
-
-
-
 }

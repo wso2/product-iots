@@ -48,6 +48,13 @@ public class PayloadGenerator {
         return returnString;
     }
 
+    /**
+     * Create a Json Array from a specific method in the file
+     * @param fileName Name of the file
+     * @param method Method name
+     * @return Json Arry created from the specific method in the file
+     * @throws FileNotFoundException File Not found exception
+     */
     public static JsonArray getJsonArray(String fileName, String method)
             throws FileNotFoundException {
         URL url = PayloadGenerator.class.getClassLoader().getResource(PAYLOAD_LOCATION + fileName);

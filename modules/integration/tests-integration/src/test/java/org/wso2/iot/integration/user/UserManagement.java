@@ -101,8 +101,8 @@ public class UserManagement extends TestBase {
 
     @Test(description = "Test the API that checks whether user exist.", dependsOnMethods = {"testGetUserRoles"})
     public void testIsUserExist() throws Exception {
-        String url =  Constants.UserManagement.USER_ENDPOINT + "/checkUser?username=" + Constants.UserManagement
-                .USER_NAME;
+        String url =
+                Constants.UserManagement.USER_ENDPOINT + "/checkUser?username=" + Constants.UserManagement.USER_NAME;
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         Assert.assertEquals(
@@ -145,20 +145,19 @@ public class UserManagement extends TestBase {
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         JsonArray jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
-        Assert.assertEquals("Relevant filtered user list in not returned correctly.", 1,
-                jsonArray.size());
+        Assert.assertEquals("Relevant filtered user list in not returned correctly.", 1, jsonArray.size());
 
         url = Constants.UserManagement.USER_ENDPOINT + "/search/usernames?filter=" + NON_EXISTING_USERNAME;
         response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
         Assert.assertEquals("Relevant filtered user list in not returned correctly. Return a list of users for "
-                        + "non-existing username", 0, jsonArray.size());
+                + "non-existing username", 0, jsonArray.size());
     }
 
     @Test(description = "Test remove user.", dependsOnMethods = {"testSearchUserNames"})
     public void testRemoveUser() throws Exception {
-        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME ;
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + Constants.UserManagement.USER_NAME;
         HttpResponse response = client.delete(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
     }

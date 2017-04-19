@@ -262,26 +262,6 @@ public final class Constants {
         }
     }
 
-    public static final class AndroidDeviceManagement {
-        public static final String DEVICE_MANAGEMENT_GROUP = "device-mgt";
-        public static final String KEY_DEVICE_ID = "deviceIdentifier";
-        public static final String KEY_DEVICE_NAME = "name";
-        public static final String DEVICE_MGT_ENDPOINT = "/api/device-mgt/android/v1.0/devices";
-        public static final String LICENSE_SECTION = "This";
-        public static final String LICENSE_ENDPOINT = DEVICE_MGT_ENDPOINT + "license";
-        public static final String APP_LIST_ENDPOINT = DEVICE_MGT_ENDPOINT + "appList/" +
-                Constants.DEVICE_ID;
-        public static final String REQUEST_MODIFY_DEVICE_EXPECTED = "{\"responseMessage\":\"Device information " +
-                "has modified successfully.\"}";
-        public static final String APPLIST_PAYLOAD = "{\"id\":\"1\"," +
-                "\"applicationIdentifier\": \"appid\",\"\"platform\": \"android\"," +
-                "\"name\": \"testapp\"}";
-        public static final String RESPONSE_PAYLOAD_FILE_NAME = "android-device-mgt-response-payloads.json";
-
-        private AndroidDeviceManagement() {
-            throw new AssertionError();
-        }
-    }
 
     public static final class AndroidConfigurationManagement {
         public static final String DEVICE_CONFIGURATION_GROUP = "android-config-mgt";

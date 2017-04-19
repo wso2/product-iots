@@ -55,17 +55,18 @@ public class RoleManagement extends TestBase {
 
     @Test(description = "Test add role.")
     public void testAddRole() throws FileNotFoundException {
-        IOTResponse response = client.post(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT,
-                                           PayloadGenerator.getJsonPayload(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME,
-                                                                           Constants.HTTP_METHOD_POST).toString());
+        IOTResponse response = client.post(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT, PayloadGenerator
+                .getJsonPayload(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST)
+                .toString());
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatus());
     }
 
     @Test(description = "Test update permission role.", dependsOnMethods = {"testAddRole"})
     public void testUpdateRolePermission() throws FileNotFoundException {
         IOTResponse response = client.put(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/" + ROLE_NAME,
-                                          PayloadGenerator.getJsonPayload(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME,
-                                                                          Constants.HTTP_METHOD_PUT).toString());
+                PayloadGenerator
+                        .getJsonPayload(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_PUT)
+                        .toString());
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 
@@ -80,8 +81,8 @@ public class RoleManagement extends TestBase {
 
     @Test(description = "Test getting roles that has particular prefix.", dependsOnMethods = {"testGetRoles"})
     public void testGetFilteredRoles() throws FileNotFoundException {
-        IOTResponse response = client.get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT +
-                "/filter/administ?offset=0&limit=2");
+        IOTResponse response = client
+                .get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/filter/administ?offset=0&limit=2");
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
         AssertUtil.jsonPayloadCompare(PayloadGenerator
                 .getJsonPayload(Constants.RoleManagement.ROLE_RESPONSE_PAYLOAD_FILE_NAME,
@@ -97,25 +98,25 @@ public class RoleManagement extends TestBase {
 
     @Test(description = "Test getting role details.", dependsOnMethods = {"testGetRolePermissions"})
     public void testGetRole() throws FileNotFoundException {
-        IOTResponse response = client.get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT +
-                "/" + ROLE_NAME);
+        IOTResponse response = client.get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/" + ROLE_NAME);
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 
     @Test(description = "Test updating users with a given role.", dependsOnMethods = {"testGetRole"})
     public void testUpdateRolesOfUser() throws FileNotFoundException, XPathExpressionException {
-        IOTResponse response = client
-                .put(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/administration/users", PayloadGenerator.getJsonArray(
-                        Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME,
+        IOTResponse response = client.put(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/administration/users",
+                PayloadGenerator.getJsonArray(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME,
                         Constants.RoleManagement.UPDATE_ROLES_METHOD).toString());
 
         Assert.assertEquals("Error while updating the user list for the role administration", HttpStatus.SC_OK,
                 response.getStatus());
-        String url = Constants.UserManagement.USER_ENDPOINT + "/" + automationContext.getContextTenant()
-                .getContextUser().getUserNameWithoutDomain() + "/roles";
+        String url =
+                Constants.UserManagement.USER_ENDPOINT + "/" + automationContext.getContextTenant().getContextUser()
+                        .getUserNameWithoutDomain() + "/roles";
         response = client.get(url);
 
-        JsonArray jsonArray = new JsonParser().parse(response.getBody()).getAsJsonObject().get("roles").getAsJsonArray();
+        JsonArray jsonArray = new JsonParser().parse(response.getBody()).getAsJsonObject().get("roles")
+                .getAsJsonArray();
         Assert.assertEquals("Error while retrieving the role details", HttpStatus.SC_OK, response.getStatus());
         Assert.assertEquals("The user is not updated with the roles list", "\"" + ROLE_NAME + "\"",
                 jsonArray.get(0).toString());
@@ -123,7 +124,7 @@ public class RoleManagement extends TestBase {
 
     @Test(description = "Test remove user.", dependsOnMethods = {"testUpdateRolesOfUser"})
     public void testRemoveRole() throws Exception {
-        IOTResponse response = client.delete(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT +"/" + ROLE_NAME);
+        IOTResponse response = client.delete(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/" + ROLE_NAME);
         Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 }
