@@ -18,6 +18,7 @@
 package org.wso2.iot.integration.role;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
@@ -104,6 +105,7 @@ public class RoleManagement extends TestBase {
 
     @Test(description = "Test updating users with a given role.", dependsOnMethods = {"testGetRole"})
     public void testUpdateRolesOfUser() throws FileNotFoundException, XPathExpressionException {
+        boolean isRoleNameExist = false;
         IOTResponse response = client.put(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/administration/users",
                 PayloadGenerator.getJsonArray(Constants.RoleManagement.ROLE_PAYLOAD_FILE_NAME,
                         Constants.RoleManagement.UPDATE_ROLES_METHOD).toString());
@@ -118,8 +120,16 @@ public class RoleManagement extends TestBase {
         JsonArray jsonArray = new JsonParser().parse(response.getBody()).getAsJsonObject().get("roles")
                 .getAsJsonArray();
         Assert.assertEquals("Error while retrieving the role details", HttpStatus.SC_OK, response.getStatus());
-        Assert.assertEquals("The user is not updated with the roles list", "\"" + ROLE_NAME + "\"",
-                jsonArray.get(0).toString());
+
+        for (JsonElement jsonElement:jsonArray) {
+            if (jsonElement.getAsString().equals(ROLE_NAME)) {
+                isRoleNameExist = true;
+                break;
+            }
+        }
+        if (!isRoleNameExist) {
+            Assert.fail("The user is not assigned with the new role " + ROLE_NAME);
+        }
     }
 
     @Test(description = "Test remove user.", dependsOnMethods = {"testUpdateRolesOfUser"})
