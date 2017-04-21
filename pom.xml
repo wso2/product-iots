@@ -226,6 +226,10 @@
                         <artifactId>selenium-java</artifactId>
                     </exclusion>
                     <exclusion>
+                        <groupId>com.opera</groupId>
+                        <artifactId>operadriver</artifactId>
+                    </exclusion>
+                    <exclusion>
                         <groupId>org.apache.jmeter</groupId>
                         <artifactId>ApacheJMeter_core</artifactId>
                     </exclusion>
