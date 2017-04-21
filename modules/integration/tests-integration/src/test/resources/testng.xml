@@ -33,6 +33,16 @@
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagementWithNoDevices"/>
         </classes>
     </test>
+    <test name="android-jmeter" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>
+        </classes>
+    </test>
+    <test name="mobile-device-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>
+        </classes>
+    </test>
     <test name="android-enrollment" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>
@@ -61,11 +71,6 @@
     <!--<test name="operation-mgt" preserve-order="true" parallel="false">-->
         <!--<classes>-->
             <!--<class name="org.wso2.iot.integration.operation.OperationManagement"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="mobile-device-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>-->
         <!--</classes>-->
     <!--</test>-->
     <test name="role-mgt" preserve-order="true" parallel="false">
