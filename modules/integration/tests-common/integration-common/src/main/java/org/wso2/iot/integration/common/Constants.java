@@ -291,7 +291,12 @@ public final class Constants {
         public static final String GET_DEVICE_COUNT_ENDPOINT = "/api/device-mgt/v1.0/devices";
         public static final String CHANGE_DEVICE_STATUS_ENDPOINT = "/api/device-mgt/v1.0/devices/";
         public static final String NO_OF_DEVICES = "1";
-        public static final String GET_ALL_DEVICES_ENDPOINT = "/mdm-admin/devices";
+        public static final String GET_ALL_DEVICES_ENDPOINT = "/api/device-mgt/v1.0/devices/";
+        public static final String USER_DEVICE_ENDPOINT = "user-devices";
+        public static final String ADVANCE_SEARCH_ENDPOINT = "search-devices";
+        public static final String ADVANCE_SEARCH_OPERATION = "ADVANCE_SEARCH";
+        public static final String REQUEST_PAYLOAD_FILE_NAME = "mobile-device-mgt-payloads.json";
+        public static final String UPDATE_PAYLOAD_OPERATION = "UPDATE_DEVICE_INFO";
         public static final String VIEW_DEVICE_TYPES_ENDPOINT = "/mdm-admin/devices/types";
         public static final String VIEW_DEVICE_RESPONSE_PAYLOAD_FILE_NAME =
                 "mobile-device-mgt-view-device-types-response-payloads.json";
