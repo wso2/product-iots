@@ -1525,9 +1525,6 @@
         <!--MQTT Dashboard-->
         <carbon.andes.extensions.device.mgt.api.version>3.0.25-SNAPSHOT</carbon.andes.extensions.device.mgt.api.version>
 
-        <!--MQTT Dashboard-->
-        <carbon.andes.extensions.device.mgt.api.version>3.0.25-SNAPSHOT</carbon.andes.extensions.device.mgt.api.version>
-
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
