@@ -745,6 +745,10 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+                                <!--MQTT Dashboard-->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.andes.extensions.device.mgt.api.feature:${carbon.andes.extensions.device.mgt.api.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
