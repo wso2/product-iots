@@ -1521,7 +1521,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.26</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.27</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
