@@ -36,5 +36,6 @@
 	<Profiles>
 		<Profile>default</Profile>
 		<Profile>device-manager</Profile>
+		<Profile>device-backend</Profile>
 	</Profiles>
 </WebappPublisherConfigs>
