@@ -35,7 +35,6 @@
 	<!--Webapp will be published only when running below profiles-->
 	<Profiles>
 		<Profile>default</Profile>
-		<Profile>device-manager</Profile>
 		<Profile>device-backend</Profile>
 	</Profiles>
 </WebappPublisherConfigs>
