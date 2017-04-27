@@ -17,67 +17,89 @@
  */
 package org.wso2.iot.integration.mobileDevice;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.iot.integration.common.*;
 
 /**
  * This class contains integration tests for API Device management backend services.
  */
 public class MobileDeviceManagement extends TestBase {
-    private IOTHttpClient client;
+    private RestClient client;
+
+    @Factory(dataProvider = "userModeProvider")
+    public MobileDeviceManagement(TestUserMode userMode) {
+        this.userMode = userMode;
+    }
 
     @BeforeClass(alwaysRun = true, groups = { Constants.MobileDeviceManagement.MOBILE_DEVICE_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
-        super.init(TestUserMode.SUPER_TENANT_ADMIN);
-        String accessTokenString = "Bearer " + OAuthUtil.getOAuthToken(backendHTTPSURL, backendHTTPSURL);
-        this.client = new IOTHttpClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
-    }
-
-    @Test(description = "Add an Android device.")
-    public void addEnrollment() throws Exception {
-        JsonObject enrollmentData = PayloadGenerator.getJsonPayload(
-                Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST);
+        super.init(userMode);
+        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
+        JsonObject enrollmentData = PayloadGenerator
+                .getJsonPayload(Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME, Constants.HTTP_METHOD_POST);
         enrollmentData.addProperty(Constants.DEVICE_IDENTIFIER_KEY, Constants.DEVICE_ID);
-        IOTResponse response = client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData.toString());
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        AssertUtil.jsonPayloadCompare(PayloadGenerator.getJsonPayload(
-                Constants.AndroidEnrollment.ENROLLMENT_RESPONSE_PAYLOAD_FILE_NAME,
-                Constants.HTTP_METHOD_POST).toString(), response.getBody(), true);
+        client.post(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT, enrollmentData.toString());
     }
 
-    @Test(dependsOnMethods = {"addEnrollment"}, description = "Test count devices")
-    public void testCountDevices() throws Exception {
-        IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_DEVICE_COUNT_ENDPOINT);
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        Assert.assertTrue(response.getBody().equals(Constants.MobileDeviceManagement.NO_OF_DEVICES));
-
-    }
-
-    @Test(dependsOnMethods = {"addEnrollment"}, description = "Test view devices")
+    @Test(description = "Test getting devices")
     public void testViewDevices() throws Exception {
-        IOTResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 1 : 23;
+        HttpResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        JsonObject devices = new JsonParser().parse(response.getData()).getAsJsonObject();
+        Assert.assertEquals("Expected device count is not received", expectedCount, devices.get("count").getAsInt());
     }
 
-    @Test(dependsOnMethods = {"addEnrollment"}, description = "Test view device types")
-    public void testViewDeviceTypes() throws Exception {
-        IOTResponse response = client.get(Constants.MobileDeviceManagement.VIEW_DEVICE_TYPES_ENDPOINT);
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
-        Assert.assertEquals(PayloadGenerator.getJsonPayloadToString
-                (Constants.MobileDeviceManagement.VIEW_DEVICE_RESPONSE_PAYLOAD_FILE_NAME), response.getBody());
-        //Response has two device types, because in windows enrollment a windows device is previously enrolled.
+    @Test(description = "Test getting devices")
+    public void testGetUserDevices() throws Exception {
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 1 : 13;
+        HttpResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT
+                + Constants.MobileDeviceManagement.USER_DEVICE_ENDPOINT);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        JsonObject devices = new JsonParser().parse(response.getData()).getAsJsonObject();
+        Assert.assertEquals("Expected device count is not received", expectedCount, devices.get("count").getAsInt());
     }
 
-    @Test(description = "Change device status")
-    public void testRemoveDevices() throws Exception {
-        String endpointUrl = Constants.MobileDeviceManagement.CHANGE_DEVICE_STATUS_ENDPOINT + Constants.ANDROID_DEVICE_TYPE
-                + "/" + Constants.DEVICE_ID +  "/changestatus?newStatus=" + Constants.INACTIVE;
-        IOTResponse response = client.put(endpointUrl, "");
-        Assert.assertEquals(HttpStatus.SC_OK, response.getStatus());
+    @Test(description = "Test Advance search")
+    public void testAdvancedSearch() throws Exception {
+        JsonArray pendingOperationsData = PayloadGenerator
+                .getJsonArray(Constants.AndroidEnrollment.ENROLLMENT_PAYLOAD_FILE_NAME,
+                        Constants.AndroidEnrollment.GET_PENDING_OPERATIONS_METHOD);
+        JsonArray newPayload = new JsonArray();
+        HttpResponse response = client.put(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + "/" + Constants.DEVICE_ID
+                + "/pending-operations", pendingOperationsData.toString());
+        JsonArray pendingOperations = new JsonParser().parse(response.getData()).getAsJsonArray();
+
+        for (JsonElement pendingOperation : pendingOperations) {
+            JsonObject jsonObject = pendingOperation.getAsJsonObject();
+
+            if (jsonObject.get("code").getAsString().equals("DEVICE_INFO")) {
+                jsonObject.addProperty("operationResponse", PayloadGenerator
+                        .getJsonPayload(Constants.MobileDeviceManagement.REQUEST_PAYLOAD_FILE_NAME,
+                                Constants.MobileDeviceManagement.UPDATE_PAYLOAD_OPERATION).toString());
+                jsonObject.addProperty("status", "COMPLETED");
+                newPayload.add(jsonObject);
+                break;
+            }
+        }
+        client.put(Constants.AndroidEnrollment.ENROLLMENT_ENDPOINT + "/" + Constants.DEVICE_ID + "/pending-operations",
+                newPayload.toString());
+        response = client.post(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT
+                + Constants.MobileDeviceManagement.ADVANCE_SEARCH_ENDPOINT, PayloadGenerator
+                .getJsonPayload(Constants.MobileDeviceManagement.REQUEST_PAYLOAD_FILE_NAME,
+                        Constants.MobileDeviceManagement.ADVANCE_SEARCH_OPERATION).toString());
+        JsonObject devices = new JsonParser().parse(response.getData()).getAsJsonObject();
+        Assert.assertEquals("Expected device count is not received", 1, devices.get("devices").getAsJsonArray().size());
     }
+
 }

@@ -118,23 +118,25 @@ public class UserManagement extends TestBase {
 
     @Test(description = "Test whether correct user count is returned.", dependsOnMethods = {"testIsUserExist"})
     public void testUserCount() throws Exception {
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 4 : 15;
         String url = Constants.UserManagement.USER_ENDPOINT + "/count";
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-
         JsonObject jsonElement = new JsonParser().parse(response.getData()).getAsJsonObject();
-        Assert.assertEquals("Actual user count does not match with the returned user count", 4,
+        Assert.assertEquals("Actual user count does not match with the returned user count", expectedCount,
                 jsonElement.get("count").getAsInt());
     }
 
     @Test(description = "Test whether the API that is used to get the users returns all the user details.",
             dependsOnMethods = {"testUserCount"})
     public void testGetUsers() throws Exception {
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 4 : 15;
         String url = Constants.UserManagement.USER_ENDPOINT + "/?offset=0&limit=100";
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         JsonObject jsonElement = new JsonParser().parse(response.getData()).getAsJsonObject();
-        Assert.assertEquals("All the users list is not returned", 4, jsonElement.get("users").getAsJsonArray().size());
+        Assert.assertEquals("All the users list is not returned", expectedCount,
+                jsonElement.get("users").getAsJsonArray().size());
     }
 
     @Test(description = "Test whether the API that is used to get the users with particular filter returns all the "
