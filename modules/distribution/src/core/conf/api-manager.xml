@@ -16,7 +16,7 @@
          logic relies on this. -->
     <AuthManager>
         <!-- Server URL of the Authentication service -->
-        <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+        <ServerURL>https://${iot.keymanager.host}:${iot.keymanager.https.port}${carbon.context}services/</ServerURL>
         <!-- Admin username for the Authentication manager. -->
         <Username>${admin.username}</Username>
         <!-- Admin password for the Authentication manager. -->
@@ -87,13 +87,13 @@
                 <Name>Production and Sandbox</Name>
                 <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
                 <!-- Server URL of the API gateway -->
-                <ServerURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+                <ServerURL>https://${iot.gateway.host}:${iot.gateway.carbon.https.port}{carbon.context}services/</ServerURL>
                 <!-- Admin username for the API gateway. -->
                 <Username>${admin.username}</Username>
                 <!-- Admin password for the API gateway.-->
                 <Password>${admin.password}</Password>
                 <!-- Endpoint URLs for the APIs hosted in this API gateway.-->
-                <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
+                <GatewayEndpoint>http://${iot.gateway.host}:${iot.gateway.http.port},https://${iot.gateway.host}:${iot.gateway.https.port}</GatewayEndpoint>
             </Environment>
         </Environments>
     </APIGateway>
@@ -202,7 +202,7 @@
     -->
     <APIKeyValidator>
         <!-- Server URL of the API key manager -->
-        <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}services/</ServerURL>
+        <ServerURL>https://${iot.keymanager.host}:${iot.keymanager.https.port}${carbon.context}services/</ServerURL>
 
         <!-- Admin username for API key manager. -->
         <Username>${admin.username}</Username>
@@ -228,7 +228,7 @@
             <MaxIdle>100</MaxIdle>
             <InitIdleCapacity>50</InitIdleCapacity>
         </ConnectionPool-->
-        <!-- Specifies the implementation to be used for KeyValidationHandler. Steps for validating a token can be controlled by plugging in a 
+        <!-- Specifies the implementation to be used for KeyValidationHandler. Steps for validating a token can be controlled by plugging in a
              custom KeyValidation Handler -->
         <KeyValidationHandlerClassName>org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler</KeyValidationHandlerClassName>
     </APIKeyValidator>
@@ -264,7 +264,7 @@
              In distributed deployment we should configure this property in key manager node by pointing
              gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
              Also please note that we should point gateway revoke service to key manager -->
-        <RevokeAPIURL>https://localhost:${https.nio.port}/revoke</RevokeAPIURL>
+        <RevokeAPIURL>https://${iot.gateway.host}:${iot.gateway.https.port}/revoke</RevokeAPIURL>
         <!-- Whether to encrypt tokens when storing in the Database
         Note: If changing this value to true, change the value of <TokenPersistenceProcessor> to
         org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->

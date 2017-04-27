@@ -946,6 +946,7 @@
                 <exclude>**/README.txt</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
+                <exclude>**/dbscripts</exclude>
             </excludes>
         </fileSet>
 
@@ -1035,6 +1036,13 @@
                 ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/resources</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/dbscripts</outputDirectory>
         </fileSet>
 
         <fileSet>
