@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+<jmeterTestPlan version="1.2" properties="2.2">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Android Device Management API" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -45,12 +45,12 @@
           </elementProp>
           <elementProp name="https_port" elementType="Argument">
             <stringProp name="Argument.name">https_port</stringProp>
-            <stringProp name="Argument.value">9443</stringProp>
+            <stringProp name="Argument.value">8243</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="http_port" elementType="Argument">
             <stringProp name="Argument.name">http_port</stringProp>
-            <stringProp name="Argument.value">9763</stringProp>
+            <stringProp name="Argument.value">8280</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="token_ep_host" elementType="Argument">
@@ -60,7 +60,12 @@
           </elementProp>
           <elementProp name="token_ep_port" elementType="Argument">
             <stringProp name="Argument.name">token_ep_port</stringProp>
-            <stringProp name="Argument.value">9763</stringProp>
+            <stringProp name="Argument.value">8280</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="https_management_port" elementType="Argument">
+            <stringProp name="Argument.name">https_management_port</stringProp>
+            <stringProp name="Argument.value">9443</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -108,7 +113,7 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
             <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -136,7 +141,7 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/UserAdmin.UserAdminHttpsSoap11Endpoint/</stringProp>
+            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/UserAdmin.UserAdminHttpsSoap11Endpoint/</stringProp>
             <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://org.apache.axis2/xsd&quot; xmlns:xsd1=&quot;http://common.mgt.user.carbon.wso2.org/xsd&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -162,7 +167,7 @@
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
-            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+            <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
             <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -189,7 +194,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
           <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -217,7 +222,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/UserAdmin.UserAdminHttpsSoap11Endpoint/</stringProp>
+          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/UserAdmin.UserAdminHttpsSoap11Endpoint/</stringProp>
           <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:xsd=&quot;http://org.apache.axis2/xsd&quot; xmlns:xsd1=&quot;http://common.mgt.user.carbon.wso2.org/xsd&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -243,7 +248,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
           <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -264,7 +269,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
           <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -292,7 +297,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
+          <stringProp name="SoapSampler.URL_DATA">https://${host}:${https_management_port}/services/AuthenticationAdmin.AuthenticationAdminHttpsSoap11Endpoint/</stringProp>
           <stringProp name="HTTPSamper.xml_data">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:aut=&quot;http://authentication.services.core.carbon.wso2.org&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -12420,9 +12425,9 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="false">
+      <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
         <stringProp name="FileSaver.filename">Results</stringProp>
-        <boolProp name="FileSaver.errorsonly">false</boolProp>
+        <boolProp name="FileSaver.errorsonly">true</boolProp>
         <boolProp name="FileSaver.skipautonumber">false</boolProp>
         <boolProp name="FileSaver.skipsuffix">false</boolProp>
         <boolProp name="FileSaver.successonly">false</boolProp>
