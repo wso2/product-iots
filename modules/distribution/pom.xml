@@ -673,34 +673,15 @@
 
 
 								<mkdir dir="${tempdir}" />
-								<mkdir dir="${tempdir}/api-application-registration" />
-								<mkdir dir="${tempdir}/api#certificate-mgt#v1.0" />
 								<mkdir dir="${tempdir}/api#identity#entitlement" />
-								<mkdir dir="${tempdir}/api#scep-mgt#v1.0" />
 								<mkdir dir="${tempdir}/authenticationendpoint" />
 								<mkdir dir="${tempdir}/client-registration#v0.11" />
 								<mkdir dir="${tempdir}/oauth2" />
-								<mkdir dir="${tempdir}/secured-websocket" />
 								<mkdir dir="${tempdir}/shindig" />
 
-								<unzip dest="${tempdir}/api-application-registration">
-									<fileset dir="${srcdir}">
-										<include name="api-application-registration.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/api#certificate-mgt#v1.0">
-									<fileset dir="${srcdir}">
-										<include name="api#certificate-mgt#v1.0.war" />
-									</fileset>
-								</unzip>
 								<unzip dest="${tempdir}/api#identity#entitlement">
 									<fileset dir="${srcdir}">
 										<include name="api#identity#entitlement.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/api#scep-mgt#v1.0">
-									<fileset dir="${srcdir}">
-										<include name="api#scep-mgt#v1.0.war" />
 									</fileset>
 								</unzip>
 								<unzip dest="${tempdir}/authenticationendpoint">
@@ -718,25 +699,16 @@
 										<include name="oauth2.war" />
 									</fileset>
 								</unzip>
-								<unzip dest="${tempdir}/secured-websocket">
-									<fileset dir="${srcdir}">
-										<include name="secured-websocket.war" />
-									</fileset>
-								</unzip>
 								<unzip dest="${tempdir}/shindig">
 									<fileset dir="${srcdir}">
 										<include name="shindig.war" />
 									</fileset>
 								</unzip>
 
-								<delete file="${tempdir}/api-application-registration/WEB-INF/web.xml" />
-								<delete file="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
 								<delete file="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
-								<delete file="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml" />
 								<delete file="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
 								<delete file="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
 								<delete file="${tempdir}/oauth2/WEB-INF/web.xml" />
-								<delete file="${tempdir}/secured-websocket/WEB-INF/web.xml" />
 								<delete file="${tempdir}/shindig/WEB-INF/web.xml" />
 
 								<!--<delete>-->
@@ -764,24 +736,16 @@
 									<!--<fileset dir="${tempdir}/shindig/WEB-INF/lib" includes="*" />-->
 								<!--</delete>-->
 
-								<copy file="src/core/resources/web-apps/web-xml/api-application-registration/web.xml" tofile="${tempdir}/api-application-registration/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/api#certificate-mgt#v1.0/web.xml" tofile="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/api#identity#entitlement/web.xml" tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/api#scep-mgt#v1.0/web.xml" tofile="${tempdir}/api#scep-mgt#v1.0/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/authenticationendpoint/web.xml" tofile="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/client-registration#v0.11/web.xml" tofile="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/oauth2/web.xml" tofile="${tempdir}/oauth2/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/secured-websocket/web.xml" tofile="${tempdir}/secured-websocket/WEB-INF/web.xml" />
 								<copy file="src/core/resources/web-apps/web-xml/shindig/web.xml" tofile="${tempdir}/shindig/WEB-INF/web.xml" />
 
-								<zip destfile="${tempdir}/api-application-registration.war" basedir="${tempdir}/api-application-registration" />
-								<zip destfile="${tempdir}/api#certificate-mgt#v1.0.war" basedir="${tempdir}/api#certificate-mgt#v1.0" />
 								<zip destfile="${tempdir}/api#identity#entitlement.war" basedir="${tempdir}/api#identity#entitlement" />
-								<zip destfile="${tempdir}/api#scep-mgt#v1.0.war" basedir="${tempdir}/api#scep-mgt#v1.0" />
 								<zip destfile="${tempdir}/authenticationendpoint.war" basedir="${tempdir}/authenticationendpoint" />
 								<zip destfile="${tempdir}/client-registration#v0.11.war" basedir="${tempdir}/client-registration#v0.11" />
 								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2" />
-								<zip destfile="${tempdir}/secured-websocket.war" basedir="${tempdir}/secured-websocket" />
 								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig" />
 
 								<mkdir dir="${tempdir}/registry"/>

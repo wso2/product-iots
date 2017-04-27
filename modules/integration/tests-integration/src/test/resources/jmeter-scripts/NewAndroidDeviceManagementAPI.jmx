@@ -4801,7 +4801,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="offset" elementType="HTTPArgument">
@@ -4851,7 +4851,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - POST" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - POST" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -4868,12 +4868,12 @@ FDASBgNVBAMTC1dTTzIgUmFkaXVzMB4XDTEzMDYyNzAzMzA0NFoXDTIzMDYyNTAz&#xd;
 MzA0NFowfDELMAkGA1UEBhMCU0wxEDAOBgNVBAgTB0NvbG9tYm8xEDAOBgNVBAcT&#xd;
 B0NvbG9tYm8xEjAQBgNVBAoTCVdTTzIgSW5jLjEfMB0GCSqGSIb3DQEJARYQdGVj&#xd;
 aG9wc0B3c28yLmNvbTEUMBIGA1UEAxMLV1NPMiBSYWRpdXMwggEiMA0GCSqGSIb3&#xd;
-DQEBAQUAA4IBDwAwggEKAoIBAQDNmhw12cF0H2UGE/XtWVt238oGxn19 n/HkM2B&#xd;
-cDNQgnStqI g/K2HBtjmvVPBh17Mt dU2BIathn06amza LI hHgeLUSv30jutv4&#xd;
-L5zD2laAU9A/I0Wtrxu5FlsevRPSiY7buLjTbjP7IMn9vdwb 9nBQCGxVpO6AK2A&#xd;
-gsFJ5udnp7L jNsHmHFt36AYZouihgD /RGVLBAhtPoU6XFB1JoGFM 4qxklJLPh&#xd;
+DQEBAQUAA4IBDwAwggEKAoIBAQDNmhw12cF0H2UGE/XtWVt238oGxn19+n/HkM2B&#xd;
+cDNQgnStqI+g/K2HBtjmvVPBh17Mt+dU2BIathn06amza+LI+hHgeLUSv30jutv4&#xd;
+L5zD2laAU9A/I0Wtrxu5FlsevRPSiY7buLjTbjP7IMn9vdwb+9nBQCGxVpO6AK2A&#xd;
+gsFJ5udnp7L+jNsHmHFt36AYZouihgD+/RGVLBAhtPoU6XFB1JoGFM+4qxklJLPh&#xd;
 k86WollG4cFvHXSbO1P95n6Jb/V3hfM0PvwFZswRPVnW8ngqm889C/JEk5rK4FHy&#xd;
-xk9MgeFRW6zA 3rVnyPdhy6/q4EerBLMfBEWpzFHyHDKMGanAgMBAAGjgeIwgd8w&#xd;
+xk9MgeFRW6zA+3rVnyPdhy6/q4EerBLMfBEWpzFHyHDKMGanAgMBAAGjgeIwgd8w&#xd;
 HQYDVR0OBBYEFKRxtF0CWPwL7jRvA4NSIzploUgrMIGvBgNVHSMEgacwgaSAFKRx&#xd;
 tF0CWPwL7jRvA4NSIzploUgroYGApH4wfDELMAkGA1UEBhMCU0wxEDAOBgNVBAgT&#xd;
 B0NvbG9tYm8xEDAOBgNVBAcTB0NvbG9tYm8xEjAQBgNVBAoTCVdTTzIgSW5jLjEf&#xd;
@@ -4881,10 +4881,10 @@ MB0GCSqGSIb3DQEJARYQdGVjaG9wc0B3c28yLmNvbTEUMBIGA1UEAxMLV1NPMiBS&#xd;
 YWRpdXOCCQD6HErXgvO11DAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4IB&#xd;
 AQCDQV9wy8rfuFp4uByqYhnrQjzBN75VbNcgpdYocOxQPLnjWRM5qdJHELrt4FEl&#xd;
 rDMGd1BpP7QMAEYJUIcpDHPbs9HVCeEV6hdOrLgGxNDB0YVa2Fr5k2U8gsNIgKZo&#xd;
-fKxscx0w5OM71IQbuppAgIHK29DBVBVppO zduIbVtSoBo/gcVIqVGXQXf8TFtoV&#xd;
+fKxscx0w5OM71IQbuppAgIHK29DBVBVppO+zduIbVtSoBo/gcVIqVGXQXf8TFtoV&#xd;
 xyfGUTYdBDP4fT4p8uLASXmdaFyegQOhkjSuchVPGSJOZD6TvOjE6ZvBu9eC7sqh&#xd;
-oTPY56Ld0GscWJmAuj 8vmWGu0md8MnM2DE0SIYE3bo/sPp3yEIbCAnHmcveG8hn&#xd;
-GEL4ZNjZ jnwSkzwBU5vh/QS&quot;,&#xd;
+oTPY56Ld0GscWJmAuj+8vmWGu0md8MnM2DE0SIYE3bo/sPp3yEIbCAnHmcveG8hn&#xd;
+GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
     &quot;tenantId&quot;: 0&#xd;
   }&#xd;
 ]</stringProp>
@@ -4923,7 +4923,7 @@ GEL4ZNjZ jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="offset" elementType="HTTPArgument">
@@ -4973,7 +4973,7 @@ GEL4ZNjZ jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET with serial" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET with serial" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -5008,7 +5008,7 @@ GEL4ZNjZ jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - DELETE" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - DELETE" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -5043,7 +5043,7 @@ GEL4ZNjZ jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET all" enabled="false">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Certificate Management - GET all" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
