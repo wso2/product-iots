@@ -173,7 +173,7 @@ goto :eof
 	goto Exit
 
 :Manager
-	echo Preparing the Device Manager profile distribution.
+	echo Preparing the Gateway profile distribution.
 	SET PROFILE=_device-manager
 	call :COPY_DIST
 	set DEFAULT_BUNDLES=%DIR%..\wso2\components\device-manager\configuration\org.eclipse.equinox.simpleconfigurator\bundles.info
@@ -192,8 +192,6 @@ goto :eof
     IF EXIST %DIR%..\repository\deployment\server\synapse-configs\default\api @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs\default\api
 	del /s /q /f %DIR%..\repository\deployment\server\synapse-configs\default\sequences\_*.xml
     mkdir %DIR%..\repository\deployment\server\tempwebapp
-    copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
-    copy /y %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war %DIR%..\repository\deployment\server\tempwebapp\

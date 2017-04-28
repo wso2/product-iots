@@ -128,6 +128,9 @@ then
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/throttle#data#v1.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/authenticationendpoint.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
@@ -213,8 +216,6 @@ then
 	cp ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/tempwebapp/
-	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
-	cp ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
 	rm -rf ${DIR}/../repository/deployment/server/tempwebapp

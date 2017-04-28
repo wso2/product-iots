@@ -329,6 +329,8 @@ do
     -Diot.gateway.host="localhost" \
     -Diot.gateway.https.port="8248" \
     -Diot.gateway.http.port="8285" \
+    -Diot.gateway.carbon.https.port="9448" \
+    -Diot.gateway.carbon.http.port="9768" \
     -Diot.apimpublisher.host="localhost" \
     -Diot.apimpublisher.https.port="9443" \
     -Diot.apimstore.host="localhost" \
