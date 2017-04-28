@@ -87,7 +87,7 @@
                 <Name>Production and Sandbox</Name>
                 <Description>This is a hybrid gateway that handles both production and sandbox token traffic.</Description>
                 <!-- Server URL of the API gateway -->
-                <ServerURL>https://${iot.gateway.host}:${iot.gateway.carbon.https.port}{carbon.context}services/</ServerURL>
+                <ServerURL>https://${iot.gateway.host}:${iot.gateway.carbon.https.port}${carbon.context}services/</ServerURL>
                 <!-- Admin username for the API gateway. -->
                 <Username>${admin.username}</Username>
                 <!-- Admin password for the API gateway.-->
