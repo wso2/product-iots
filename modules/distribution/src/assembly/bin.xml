@@ -1486,35 +1486,7 @@
         </file>
 
         <file>
-            <source>target/webapp-temp/api-application-registration.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/api#scep-mgt#v1.0.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
             <source>target/webapp-temp/client-registration#v0.11.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/secured-websocket.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/api#certificate-mgt#v1.0.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
