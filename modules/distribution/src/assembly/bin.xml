@@ -460,7 +460,7 @@
             </excludes>
         </fileSet>
 
-        <!-- Copying Windows Synapse files -->
+        <!-- Copying Android Mutual SSL and Windows Synapse files -->
         <fileSet>
             <directory>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/synapse-configs/default/api/
