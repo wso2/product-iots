@@ -64,14 +64,14 @@
     <!--</classes>-->
     <!--</test>-->
     <!--<test name="android-policy" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.device.policy.AndroidPolicy"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.device.policy.AndroidPolicy"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="operation-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.operation.OperationManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.operation.OperationManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <test name="role-mgt" preserve-order="true" parallel="false">
         <classes>
@@ -79,30 +79,50 @@
         </classes>
     </test>
     <!--<test name="policy-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.policy.PolicyManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.policy.PolicyManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="feature-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.feature.FeatureManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.feature.FeatureManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="license-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.license.LicenseManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.license.LicenseManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="configuration-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.configuration.ConfigurationManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.configuration.ConfigurationManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
     <!--<test name="notification-mgt" preserve-order="true" parallel="false">-->
-        <!--<classes>-->
-            <!--<class name="org.wso2.iot.integration.notification.NotificationManagement"/>-->
-        <!--</classes>-->
+    <!--<classes>-->
+    <!--<class name="org.wso2.iot.integration.notification.NotificationManagement"/>-->
+    <!--</classes>-->
     <!--</test>-->
+    <test name="group-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>
+        </classes>
+    </test>
+    <test name="negative-test" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.DeviceManagementAPINegativeTestCase"/>
+        </classes>
+    </test>
+    <test name="notification-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>
+        </classes>
+    </test>
+    <test name="policy-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>
+        </classes>
+    </test>
     <test name="user-mgt" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.user.UserManagement"/>

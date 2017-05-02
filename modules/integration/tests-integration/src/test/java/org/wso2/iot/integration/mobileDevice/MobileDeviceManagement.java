@@ -53,7 +53,7 @@ public class MobileDeviceManagement extends TestBase {
 
     @Test(description = "Test getting devices")
     public void testViewDevices() throws Exception {
-        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 1 : 23;
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 3 : 23;
         HttpResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
         JsonObject devices = new JsonParser().parse(response.getData()).getAsJsonObject();
@@ -62,7 +62,7 @@ public class MobileDeviceManagement extends TestBase {
 
     @Test(description = "Test getting devices")
     public void testGetUserDevices() throws Exception {
-        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 1 : 13;
+        int expectedCount = this.userMode == TestUserMode.TENANT_ADMIN ? 3 : 13;
         HttpResponse response = client.get(Constants.MobileDeviceManagement.GET_ALL_DEVICES_ENDPOINT
                 + Constants.MobileDeviceManagement.USER_DEVICE_ENDPOINT);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
