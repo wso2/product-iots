@@ -107,7 +107,6 @@
         <classes>
             <class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>
         </classes>
-
     </test>
     <test name="negative-test" preserve-order="true" parallel="false">
         <classes>
@@ -117,6 +116,11 @@
     <test name="notification-mgt" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>
+        </classes>
+    </test>
+    <test name="policy-mgt" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>
         </classes>
     </test>
     <test name="user-mgt" preserve-order="true" parallel="false">

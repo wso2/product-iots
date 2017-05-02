@@ -29,18 +29,18 @@ import java.io.File;
 import java.net.URL;
 
 /**
- * This class tests the Notification Management APIs
+ * This test case is used to run the jmeter test cases related with Policy Management APIs.
  */
-public class NotificationManagementAPIJMeterTestCase {
-    private static Log log = LogFactory.getLog(NotificationManagementAPIJMeterTestCase.class);
+public class PolicyManagementJMeterTestCase {
+    private static Log log = LogFactory.getLog(PolicyManagementJMeterTestCase.class);
 
-    @Test(description = "This test case tests the Notification Management APIs")
-    public void NotificationManagementTest() throws AutomationFrameworkException {
+    @Test(description = "This test case tests the Policy Management APIs")
+    public void PolicyManagementTest() throws AutomationFrameworkException {
         URL url = Thread.currentThread().getContextClassLoader()
-                .getResource("jmeter-scripts" + File.separator + "NotificationManagementAPI.jmx");
+                .getResource("jmeter-scripts" + File.separator + "PolicyManagementAPI.jmx");
         JMeterTest script = new JMeterTest(new File(url.getPath()));
         JMeterTestManager manager = new JMeterTestManager();
-        log.info("Running notification management api test cases using jmeter scripts");
+        log.info("Running policy management api test cases using jmeter scripts");
         manager.runTest(script);
     }
 }
