@@ -36,9 +36,8 @@ public class AndroidDeviceManagementAPIJmeterTestCase {
     @Test()
     public void permutationTest() throws AutomationFrameworkException {
         URL url = Thread.currentThread().getContextClassLoader().getResource(
-                "jmeter-scripts/AndroidDeviceManagementAPIAdditionalPermutations.jmx");
-        JMeterTest script = new JMeterTest(
-                new File(url.getPath()));
+                "jmeter-scripts" + File.separator + "AndroidDeviceManagementAPIAdditionalPermutations.jmx");
+        JMeterTest script = new JMeterTest(new File(url.getPath()));
         JMeterTestManager manager = new JMeterTestManager();
         log.info("Running permutation test using jmeter scripts");
         manager.runTest(script);
@@ -46,13 +45,11 @@ public class AndroidDeviceManagementAPIJmeterTestCase {
 
     @Test(dependsOnMethods = {"permutationTest"})
     public void listServices() throws AutomationFrameworkException {
-        URL url = Thread.currentThread().getContextClassLoader().getResource(
-                "jmeter-scripts/NewAndroidDeviceManagementAPI.jmx");
-        JMeterTest script = new JMeterTest(
-                new File(url.getPath()));
+        URL url = Thread.currentThread().getContextClassLoader()
+                .getResource("jmeter-scripts" + File.separator + "NewAndroidDeviceManagementAPI.jmx");
+        JMeterTest script = new JMeterTest(new File(url.getPath()));
         JMeterTestManager manager = new JMeterTestManager();
         log.info("Running API service test using jmeter scripts");
         manager.runTest(script);
     }
-
 }

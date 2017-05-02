@@ -460,7 +460,7 @@
             </excludes>
         </fileSet>
 
-        <!-- Copying Windows Synapse files -->
+        <!-- Copying Android Mutual SSL and Windows Synapse files -->
         <fileSet>
             <directory>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/synapse-configs/default/api/
@@ -1494,35 +1494,7 @@
         </file>
 
         <file>
-            <source>target/webapp-temp/api-application-registration.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/api#scep-mgt#v1.0.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
             <source>target/webapp-temp/client-registration#v0.11.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/secured-websocket.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/api#certificate-mgt#v1.0.war</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
@@ -1597,6 +1569,14 @@
         <file>
             <source>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml
+            </source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/conf/
+            </outputDirectory>
+        </file>
+        <file>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml
             </source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/conf/
