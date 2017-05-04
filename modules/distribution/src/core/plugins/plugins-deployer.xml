@@ -46,22 +46,19 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:\${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:\${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature:\${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -74,26 +71,22 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                    <version>\${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                    <version>\${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                    <version>\${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                             </features>
                         </configuration>
@@ -110,11 +103,23 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
+								<!--This is to have analytics artifacts in the super tenant space, In multi tenant environemnt,-->
+								<!--deploy it through the UI-->
                                 <copy todir="../wso2/analytics/repository/deployment/server/carbonapps">
-                                    <fileset dir="../repository/resources/devicetypes">
+                                    <fileset dir="../repository/resources/devicetypes/arduino">
                                         <include name="*.car"/>
                                     </fileset>
                                 </copy>
+								<copy todir="../wso2/analytics/repository/deployment/server/carbonapps">
+									<fileset dir="../repository/resources/devicetypes/raspberrypi">
+										<include name="*.car"/>
+									</fileset>
+								</copy>
+								<copy todir="../wso2/analytics/repository/deployment/server/carbonapps">
+									<fileset dir="../repository/resources/devicetypes/virtual_firealarm">
+										<include name="*.car"/>
+									</fileset>
+								</copy>
                                 <copy todir="../wso2/analytics/repository/deployment/server/">
                                     <fileset dir="resources/analytics">
                                         <include name="**/*"/>
@@ -207,6 +212,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>3.0.31</carbon.device.mgt.plugin.version>
+		<!--This gets picked from the build properties, Do not change it-->
+        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
     </properties>
 </project>
