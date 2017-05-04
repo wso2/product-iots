@@ -323,7 +323,7 @@
             </outputDirectory>
         </fileSet>
 
-        <!-- Copying Authentication Endpoint webapp -->
+        <!-- Copying device type deployer files -->
         <fileSet>
             <directory>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/devicetypes
@@ -571,15 +571,6 @@
             </includes>
         </fileSet>
 
-        <fileSet>
-            <directory>../scripts/mobile-qsg/target</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <includes>
-                <include>**/**.war</include>
-            </includes>
-        </fileSet>
         <!-- Files required to mobile-qsg -->
 
         <fileSet>
@@ -662,6 +653,7 @@
             <includes>
                 <include>*/**</include>
             </includes>
+			<filtered>true</filtered>
         </fileSet>
 
         <fileSet>
@@ -1327,6 +1319,12 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+		<file>
+			<source>src/core/resources/tenant/tenant-conf.json</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/tenant</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>644</fileMode>
+		</file>
         <!--License Config file-->
         <file>
             <source>
@@ -1423,15 +1421,6 @@
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
             <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <!-- Adding IoT Analytics Dashboard and gadget CApps -->
-        <file>
-            <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources/devicetypes/org_wso2_carbon_device_mgt_cdmf_analytics-1.0.0.car
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/carbonapps/
-            </outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <!-- Copying webapp-publisher-config.xml -->
@@ -1558,12 +1547,6 @@
             <source>../scripts/mobile-qsg/target/mobile-qsg.jar</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/samples/mobile-qsg
-            </outputDirectory>
-        </file>
-        <file>
-            <source>../scripts/mobile-qsg/target/org.wso2.carbon.appmgt.oauth.core-1.2.5.jar</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/dropins
             </outputDirectory>
         </file>
         <file>
