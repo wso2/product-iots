@@ -25,16 +25,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot.devicemgt-plugins</groupId>
-    <artifactId>iot-devicetype-feature-installation</artifactId>
+    <groupId>org.wso2.iot.analytics.devicemgt-plugins</groupId>
+    <artifactId>analytics-devicetype-feature-installation</artifactId>
     <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Device Type Plugins - IoT Core</name>
+    <name>Device Type Plugins - Analytics</name>
     <url>http://wso2.org</url>
 
-    <modules>
-        <module>../wso2/analytics/plugins</module>
-    </modules>
 
     <build>
         <plugins>
@@ -50,83 +47,59 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${project.basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.ui.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.backend.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
                     <execution>
+                        <id>analytics-feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>analytics-default</profile>
+                            <metadataRepository>file:${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${project.basedir}/target/p2-repo</artifactRepository>
+                            <destination>${project.basedir}/../../components</destination>
+                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
+                            <features>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
                         <id>default-feature-install</id>
                         <phase>package</phase>
-                        <goals>
-                            <goal>p2-profile-gen</goal>
-                        </goals>
                         <configuration>
-                            <profile>default</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                            </features>
+                            <tasks>
+                                <copy todir="../repository/deployment/server/">
+                                    <fileset dir="resources/">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
                         </configuration>
-                    </execution>
-                    <execution>
-                        <id>manager-feature-install</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>p2-profile-gen</goal>
+                            <goal>run</goal>
                         </goals>
-                        <configuration>
-                            <profile>device-manager</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                            </features>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>backend-feature-install</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>p2-profile-gen</goal>
-                        </goals>
-                        <configuration>
-                            <profile>device-backend</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                            </features>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
