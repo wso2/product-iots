@@ -79,6 +79,13 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.backend.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
 
+                                <!-- Virtual Fire Alarm Device Type Features -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.ui.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.backend.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -124,6 +131,16 @@
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+
+                                <!-- Virtual Fire Alarm Device Type Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.backend.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -157,6 +174,12 @@
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.ui.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+
+                                <!-- Virtual Fire Alarm Device Type UI Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -188,6 +211,12 @@
                                 <!-- Raspberry Device Type BE Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.raspberrypi.backend.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+
+                                <!-- Virtual Fire Alarm Device Type BE Features -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                             </features>
