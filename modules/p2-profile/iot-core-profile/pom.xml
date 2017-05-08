@@ -3417,6 +3417,10 @@
                                     <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
                                     <version>${identity.inbound.auth.saml.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.apimgt.handler.server.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
                                 <!-- SSO Fix-->
                             </features>
                         </configuration>
