@@ -50,8 +50,8 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
@@ -97,9 +97,9 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <!-- Android Sense Device Type Features -->
@@ -152,9 +152,9 @@
                         </goals>
                         <configuration>
                             <profile>device-manager</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <!-- Android Sense Device Type UI Feature -->
@@ -191,9 +191,9 @@
                         </goals>
                         <configuration>
                             <profile>device-backend</profile>
-                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
+                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <!-- Android Sense Device Type BE Features -->
@@ -304,6 +304,7 @@
     </repositories>
 
     <properties>
-        <carbon.device.mgt.plugin.version>3.0.33</carbon.device.mgt.plugin.version>
+		<!--This gets picked from the build properties, Do not change it-->
+        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
     </properties>
 </project>
