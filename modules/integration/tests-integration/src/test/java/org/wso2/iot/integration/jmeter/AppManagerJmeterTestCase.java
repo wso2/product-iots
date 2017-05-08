@@ -29,28 +29,18 @@ import java.io.File;
 import java.net.URL;
 
 /**
- * JMeter Test cases for AndroidDeviceManagement API.
+ * This test case tests the functionality of the app publisher-store functionality.
  */
-public class AndroidDeviceManagementAPIJmeterTestCase {
-    private static Log log = LogFactory.getLog(AndroidDeviceManagementAPIJmeterTestCase.class);
+public class AppManagerJmeterTestCase {
+    private static Log log = LogFactory.getLog(AppManagerJmeterTestCase.class);
 
-    @Test(description = "Testing the response when sending different input parameters with different values")
-    public void permutationTest() throws AutomationFrameworkException {
-        URL url = Thread.currentThread().getContextClassLoader().getResource(
-                "jmeter-scripts" + File.separator + "AndroidDeviceManagementAPIAdditionalPermutations.jmx");
-        JMeterTest script = new JMeterTest(new File(url.getPath()));
-        JMeterTestManager manager = new JMeterTestManager();
-        log.info("Running permutation test using jmeter scripts");
-        manager.runTest(script);
-    }
-
-    @Test(description = "Testing the basic android device management API calls", dependsOnMethods = {"permutationTest"})
-    public void listServices() throws AutomationFrameworkException {
+    @Test(description = "This test case tests the flow of App Manager mobile-app creation and lifecycle")
+    public void GroupManagementTest() throws AutomationFrameworkException {
         URL url = Thread.currentThread().getContextClassLoader()
-                .getResource("jmeter-scripts" + File.separator + "NewAndroidDeviceManagementAPI.jmx");
+                .getResource("jmeter-scripts" + File.separator + "AppManagerTest.jmx");
         JMeterTest script = new JMeterTest(new File(url.getPath()));
         JMeterTestManager manager = new JMeterTestManager();
-        log.info("Running API service test using jmeter scripts");
+        log.info("Running app manager mobile creation related test cases using jmeter scripts");
         manager.runTest(script);
     }
 }
