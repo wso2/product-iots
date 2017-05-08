@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.devicemgt-plugins</groupId>
     <artifactId>iot-devicetype-feature-installation</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Creating custom distribution</name>
     <url>http://wso2.org</url>
@@ -207,6 +207,7 @@
         </repository>
     </repositories>
     <properties>
+        <!-- DO NOT CHANGE; this variable will be replaced with the parent pom value -->
         <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
     </properties>
 </project>
