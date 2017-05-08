@@ -2041,10 +2041,6 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
-									<version>${carbon.device.mgt.plugin.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.apimgt.gateway.feature.group</id>
                                     <version>${carbon.api.mgt.version}</version>
