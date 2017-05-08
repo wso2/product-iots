@@ -900,6 +900,11 @@
         </fileSet>
 
         <fileSet>
+            <directory>src/analytics/plugins</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/plugins</outputDirectory>
+        </fileSet>
+
+        <fileSet>
             <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>

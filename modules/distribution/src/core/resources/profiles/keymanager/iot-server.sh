@@ -327,10 +327,10 @@ do
     -Diot.keymanager.host="localhost" \
     -Diot.keymanager.https.port="9447" \
     -Diot.gateway.host="localhost" \
-    -Diot.gateway.https.port="8248" \
-    -Diot.gateway.http.port="8285" \
-    -Diot.gateway.carbon.https.port="9448" \
-    -Diot.gateway.carbon.http.port="9768" \
+    -Diot.gateway.https.port="8244" \
+    -Diot.gateway.http.port="8281" \
+    -Diot.gateway.carbon.https.port="9444" \
+    -Diot.gateway.carbon.http.port="9764" \
     -Diot.apimpublisher.host="localhost" \
     -Diot.apimpublisher.https.port="9443" \
     -Diot.apimstore.host="localhost" \
