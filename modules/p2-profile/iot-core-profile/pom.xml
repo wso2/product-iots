@@ -2263,6 +2263,10 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -2952,6 +2956,10 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
