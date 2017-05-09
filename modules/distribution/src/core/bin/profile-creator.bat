@@ -24,23 +24,21 @@ REM get the desired profile
 echo This tool will erase all the files which are not required for the selected profile
 echo and provide you a light weight package for the target profile.
 echo WSO2 IoT Server Supports following profiles.
-echo 	1.IoT Gateway Profile
-echo 	2.IoT Key Manager Profile
-echo 	3.IoT Device Backend Profile
-echo 	4.IoT Device Manager Profile
-echo 	5.Analytics Profile
-echo 	6.Broker profile
-echo 	7.For All Profiles
+echo 	1.IoT Device Backend Profile
+echo 	2.IoT Device Manager Profile
+echo 	3.IoT Key Manager Profile
+echo 	4.Analytics Profile
+echo 	5.Broker profile
+echo 	6.All Profiles
 
 set /p profileNumber= [Please enter the desired profile number to create the profile specific distribution]
 
-IF /I "%profileNumber%" EQU "1" goto Gateway
-IF /I "%profileNumber%" EQU "2" goto KeyManager
-IF /I "%profileNumber%" EQU "3" goto Backend
-IF /I "%profileNumber%" EQU "4" goto Manager
-IF /I "%profileNumber%" EQU "5" goto Analytics
-IF /I "%profileNumber%" EQU "6" goto Broker
-IF /I "%profileNumber%" EQU "7" goto All
+IF /I "%profileNumber%" EQU "1" goto Backend
+IF /I "%profileNumber%" EQU "2" goto Manager
+IF /I "%profileNumber%" EQU "3" goto KeyManager
+IF /I "%profileNumber%" EQU "4" goto Analytics
+IF /I "%profileNumber%" EQU "5" goto Broker
+IF /I "%profileNumber%" EQU "6" goto All
 
 echo Invalid profile identifier.
 
@@ -53,37 +51,6 @@ xcopy %DIR%..\..\%DISTRIBUTION% %TEMPDIR%\%DISTRIBUTION%\ /s /e /h
 set DIR=%TEMPDIR%\%DISTRIBUTION%\bin\
 goto :eof
 
-:Gateway
-	echo Preparing the Gateway profile distribution.
-	SET PROFILE=_gateway
-	call :COPY_DIST
-	set DEFAULT_BUNDLES=%DIR%..\wso2\components\http-gateway\configuration\org.eclipse.equinox.simpleconfigurator\bundles.info
-    call :Remove_BROKER
-    call :Remove_ANALYTICS
-    call :Remove_JARS
-    IF EXIST %DIR%..\wso2\components\default @RD /S /Q  %DIR%..\wso2\components\default
-    IF EXIST %DIR%..\wso2\components\device-backend @RD /S /Q %DIR%..\wso2\components\device-backend
-    IF EXIST %DIR%..\wso2\components\device-key-manager @RD /S /Q %DIR%..\wso2\components\device-key-manager
-    IF EXIST %DIR%..\wso2\components\device-manager @RD /S /Q %DIR%..\wso2\components\device-manager
-    IF EXIST %DIR%..\samples @RD /S /Q %DIR%..\samples
-    IF EXIST %DIR%..\plugins @RD /S /Q %DIR%..\plugins
-    for /R %DIR%..\repository\resources\profiles\gateway %%f in (*.sh) do copy %%f %DIR%..\bin\
-    for /R %DIR%..\repository\resources\profiles\gateway %%f in (*.bat) do copy %%f %DIR%..\bin\
-    copy /y %DIR%..\repository\resources\profiles\gateway\carbon.xml %DIR%..\conf\
-    IF EXIST %DIR%..\repository\deployment\server\jaggeryapps @RD /S /Q %DIR%..\repository\deployment\server\jaggeryapps
-    IF EXIST %DIR%..\repository\deployment\server\webapps @RD /S /Q %DIR%..\repository\deployment\server\webapps
-    IF EXIST %DIR%..\repository\deployment\server\carbonapps @RD /S /Q %DIR%..\repository\deployment\server\carbonapps
-    IF EXIST %DIR%..\repository\deployment\server\axis2services @RD /S /Q %DIR%..\repository\deployment\server\axis2services
-    IF EXIST %DIR%..\repository\deployment\server\devicetypes @RD /S /Q %DIR%..\repository\deployment\server\devicetypes
-	mkdir %DIR%..\repository\deployment\server\jaggeryapps
-	mkdir %DIR%..\repository\deployment\server\webapps
-	mkdir %DIR%..\repository\deployment\server\carbonapps
-	mkdir %DIR%..\repository\deployment\server\axis2services
-	mkdir %DIR%..\repository\deployment\server\devicetypes
-    IF EXIST %DIR%..\conf\identity\sso-idp-config.xml del %DIR%..\conf\identity\sso-idp-config.xml
-	call :RENAME_DIST
-    echo Gateway profile created successfully in %TEMPDIR%\%DISTRIBUTION%%PROFILE%.
-	goto Exit
 
 :KeyManager
 	echo Preparing the KeyManager profile distribution.
@@ -94,7 +61,6 @@ goto :eof
     call :Remove_ANALYTICS
     call :Remove_JARS
     IF EXIST %DIR%..\wso2\components\default @RD /S /Q  %DIR%..\wso2\components\default
-    IF EXIST %DIR%..\wso2\components\http-gateway @RD /S /Q %DIR%..\wso2\components\http-gateway
     IF EXIST %DIR%..\wso2\components\device-backend @RD /S /Q %DIR%..\wso2\components\device-backend
     IF EXIST %DIR%..\wso2\components\device-manager @RD /S /Q %DIR%..\wso2\components\device-manager
     IF EXIST %DIR%..\samples @RD /S /Q %DIR%..\samples
@@ -140,7 +106,6 @@ goto :eof
     call :Remove_ANALYTICS
     call :Remove_JARS
     IF EXIST %DIR%..\wso2\components\default @RD /S /Q  %DIR%..\wso2\components\default
-    IF EXIST %DIR%..\wso2\components\http-gateway @RD /S /Q %DIR%..\wso2\components\http-gateway
     IF EXIST %DIR%..\wso2\components\device-key-manager @RD /S /Q %DIR%..\wso2\components\device-key-manager
     IF EXIST %DIR%..\wso2\components\device-manager @RD /S /Q %DIR%..\wso2\components\device-manager
     IF EXIST %DIR%..\samples @RD /S /Q %DIR%..\samples
@@ -148,8 +113,6 @@ goto :eof
 	for /R %DIR%..\repository\resources\profiles\backend %%f in (*.sh) do copy %%f %DIR%..\bin\
     for /R %DIR%..\repository\resources\profiles\backend %%f in (*.bat) do copy %%f %DIR%..\bin\
 	copy /y %DIR%..\repository\resources\profiles\backend\carbon.xml %DIR%..\conf\
-    IF EXIST %DIR%..\repository\deployment\server\synapse-configs\default\api @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs\default\api
-	del /s /q /f %DIR%..\repository\deployment\server\synapse-configs\default\sequences\_*.xml
     IF EXIST %DIR%..\repository\deployment\server\jaggeryapps @RD /S /Q %DIR%..\repository\deployment\server\jaggeryapps
 	IF EXIST %DIR%..\repository\deployment\server\axis2services @RD /S /Q %DIR%..\repository\deployment\server\axis2services
 	IF EXIST %DIR%..\repository\deployment\server\webapps\shindig.war del %DIR%..\repository\deployment\server\webapps\shindig.war
@@ -181,7 +144,6 @@ goto :eof
     call :Remove_ANALYTICS
     call :Remove_JARS
     IF EXIST %DIR%..\wso2\components\default @RD /S /Q  %DIR%..\wso2\components\default
-    IF EXIST %DIR%..\wso2\components\http-gateway @RD /S /Q %DIR%..\wso2\components\http-gateway
     IF EXIST %DIR%..\wso2\components\device-key-manager @RD /S /Q %DIR%..\wso2\components\device-key-manager
     IF EXIST %DIR%..\wso2\components\device-backend @RD /S /Q %DIR%..\wso2\components\device-backend
     IF EXIST %DIR%..\samples @RD /S /Q %DIR%..\samples
@@ -274,7 +236,6 @@ goto :eof
     IF EXIST %DIR%..\wso2\components\device-manager @RD /S /Q %DIR%..\wso2\components\device-manager
     IF EXIST %DIR%..\wso2\components\device-key-manager @RD /S /Q %DIR%..\wso2\components\device-key-manager
     IF EXIST %DIR%..\wso2\components\device-backend @RD /S /Q %DIR%..\wso2\components\device-backend
-    IF EXIST %DIR%..\wso2\components\http-gateway @RD /S /Q %DIR%..\wso2\components\http-gateway
     IF EXIST %DIR%..\samples @RD /S /Q %DIR%..\samples
     IF EXIST %DIR%..\modules @RD /S /Q %DIR%..\modules
     IF EXIST %DIR%..\dbscripts @RD /S /Q %DIR%..\dbscripts
