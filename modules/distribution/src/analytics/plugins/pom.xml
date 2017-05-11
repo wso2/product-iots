@@ -47,16 +47,11 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${project.basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${project.basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
-                                <!-- Android Sense Device Type Features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-
                                 <!-- Ardino Device Type Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.analytics.feature:${carbon.device.mgt.plugin.version}
@@ -82,15 +77,11 @@
                         </goals>
                         <configuration>
                             <profile>analytics-default</profile>
-                            <metadataRepository>file:${project.basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:${project.basedir}/target/p2-repo</artifactRepository>
-                            <destination>${project.basedir}/../../components</destination>
+                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${project.basedir}/../../components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.analytics.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -211,6 +202,6 @@
     </repositories>
 
     <properties>
-        <carbon.device.mgt.plugin.version>3.0.33</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
     </properties>
 </project>

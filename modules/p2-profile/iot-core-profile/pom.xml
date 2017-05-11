@@ -1610,6 +1610,7 @@
                             </features>
                         </configuration>
                     </execution>
+					
                     <!--Key Manager Profile-->
                     <execution>
                         <id>6-p2-profile-generation</id>

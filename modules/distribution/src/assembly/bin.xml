@@ -864,6 +864,22 @@
             </outputDirectory>
         </fileSet>
 
+		<fileSet>
+			<directory>
+				../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/eventstreams/
+			</directory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventstreams/
+			</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>
+				../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/eventreceivers/
+			</directory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventreceivers/
+			</outputDirectory>
+		</fileSet>
+
         <fileSet>
             <directory>
                 ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
@@ -902,6 +918,7 @@
         <fileSet>
             <directory>src/analytics/plugins</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/plugins</outputDirectory>
+			<filtered>true</filtered>
         </fileSet>
 
         <fileSet>

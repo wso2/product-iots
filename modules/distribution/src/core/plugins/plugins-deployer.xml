@@ -55,14 +55,6 @@
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
-                                <!-- Android Sense Device Type Features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.ui.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.backend.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-
                                 <!-- Ardino Device Type Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.ui.feature:${carbon.device.mgt.plugin.version}
@@ -102,16 +94,6 @@
                             <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
-                                <!-- Android Sense Device Type Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-
                                 <!-- Ardino Device Type Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.ui.feature.group</id>
@@ -157,12 +139,6 @@
                             <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
-                                <!-- Android Sense Device Type UI Feature -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-
                                 <!-- Ardino Device Type UI Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.ui.feature.group</id>
@@ -196,12 +172,6 @@
                             <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
-                                <!-- Android Sense Device Type BE Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-
                                 <!-- Ardino Device Type BE Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.iot.arduino.backend.feature.group</id>
