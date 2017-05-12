@@ -152,7 +152,6 @@
                 <exclude>**/identity/identity-providers/iot_default.xml</exclude>
                 <exclude>**/identity/sso-idp-config.xml</exclude>
                 <exclude>**/api-manager.xml</exclude>
-                <exclude>**/app-manager.xml</exclude>
                 <exclude>**/etc/license-config.xml</exclude>
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/carbon.xml</exclude>
@@ -204,8 +203,6 @@
                 <include>**/uuid/</include>
                 <include>**/i18n/</include>
                 <include>**/ws/</include>
-                <include>**/appmgtpublisher/</include>
-                <include>**/appstore/</include>
                 <include>**/store/</include>
                 <include>**/lifecycle/</include>
                 <include>**/utils/</include>
@@ -250,7 +247,6 @@
                 <exclude>**/styles/**</exclude>
                 <exclude>**/synapse-configs/**</exclude>
                 <exclude>**/web-apps/**</exclude>
-                <exclude>**/appm-tenant-conf.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -399,38 +395,6 @@
             <fileMode>644</fileMode>
         </fileSet>
 
-        <!-- Copying APP Manager Publisher and Store Jaggery apps -->
-        <fileSet>
-            <directory>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/publisher/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher
-            </outputDirectory>
-            <excludes>
-                <exclude>publisherLogo/**</exclude>
-                <exclude>publisherTheme/**</exclude>
-                <exclude>publisherSite/**</exclude>
-                <exclude>footer/**</exclude>
-                <exclude>localstyles.css</exclude>
-                <exclude>**/jaggery.conf</exclude>
-            </excludes>
-        </fileSet>
-        <fileSet>
-            <directory>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/store/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/store
-            </outputDirectory>
-            <excludes>
-                <exclude>storeLogo/**</exclude>
-                <exclude>storeSite/**</exclude>
-                <exclude>base-page/**</exclude>
-                <exclude>login/**</exclude>
-                <exclude>styles-layout.css</exclude>
-                <exclude>**/jaggery.conf</exclude>
-            </excludes>
-        </fileSet>
-
         <!-- Copying API Manager Store Jaggery app -->
         <fileSet>
             <directory>
@@ -445,17 +409,6 @@
                 <exclude>login/**</exclude>
                 <exclude>styles-layout.css</exclude>
                 <exclude>**/site/conf/site.json</exclude>
-                <exclude>**/jaggery.conf</exclude>
-            </excludes>
-        </fileSet>
-
-        <fileSet>
-            <directory>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/social/
-            </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social
-            </outputDirectory>
-            <excludes>
                 <exclude>**/jaggery.conf</exclude>
             </excludes>
         </fileSet>
@@ -1014,7 +967,7 @@
             <directory>
                 ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps
             </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/borker/repository/deployment/server/webapps
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/server/webapps
             </outputDirectory>
         </fileSet>
 
@@ -1312,18 +1265,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-        <file>
-            <source>src/core/conf/app-manager.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/resources/appm-tenant-conf.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
 		<file>
 			<source>src/core/resources/tenant/tenant-conf.json</source>
 			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/tenant</outputDirectory>
@@ -1358,10 +1299,10 @@
         <!-- Copying H2 database related files corresponding to default App management repository schema -->
         <file>
             <source>
-                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2APPM_DB.h2.db
+                target/wso2carbon-core-${carbon.kernel.version}/repository/database/WSO2DM_APPM_DB.h2.db
             </source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/database</outputDirectory>
-            <destName>WSO2APPM_DB.h2.db</destName>
+            <destName>WSO2DM_APPM_DB.h2.db</destName>
             <fileMode>644</fileMode>
         </file>
         <!-- Copying H2 database related files corresponding to default Device management repository schema -->
@@ -1459,27 +1400,6 @@
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>src/core/jaggeryapps/publisher/jaggery.conf</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/publisher/
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/jaggeryapps/social/jaggery.conf</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/social/
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>src/core/jaggeryapps/store/jaggery.conf</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/store/
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
             <source>src/core/jaggeryapps/windows-web-agent/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent/
@@ -1564,26 +1484,10 @@
         </file>
         <file>
             <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/conf/
-            </outputDirectory>
-        </file>
-        <file>
-            <source>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/identity/entitlement.properties
             </source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/conf/identity
-            </outputDirectory>
-        </file>
-        <file>
-            <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources/lifecycles/MobileAppLifeCycle.xml
-            </source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
             </outputDirectory>
         </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
@@ -1756,36 +1660,6 @@
         <file>
             <source>src/core/README.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/logs/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

@@ -41,7 +41,7 @@
         <module>modules/tools</module>
         <module>modules/p2-profile</module>
         <module>modules/distribution</module>
-        <module>modules/integration</module>
+        <!--module>modules/integration</module-->
     </modules>
 
     <dependencyManagement>
@@ -492,7 +492,11 @@
                 <artifactId>org.wso2.carbon.identity.jwt.client.extension</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt</groupId>
+                <artifactId>org.wso2.carbon.device.application.mgt.core</artifactId>
+                <version>${carbon.device.mgt.version}</version>
+            </dependency>
             <!--MDM dependencies-->
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
@@ -1513,7 +1517,7 @@
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.61</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.63-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1521,7 +1525,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.33</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.34-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
