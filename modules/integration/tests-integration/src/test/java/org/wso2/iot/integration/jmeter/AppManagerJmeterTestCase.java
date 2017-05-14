@@ -35,7 +35,7 @@ public class AppManagerJmeterTestCase {
     private static Log log = LogFactory.getLog(AppManagerJmeterTestCase.class);
 
     @Test(description = "This test case tests the flow of App Manager mobile-app creation and lifecycle")
-    public void GroupManagementTest() throws AutomationFrameworkException {
+    public void AppManagementTest() throws AutomationFrameworkException {
         URL url = Thread.currentThread().getContextClassLoader()
                 .getResource("jmeter-scripts" + File.separator + "AppManagerTest.jmx");
         JMeterTest script = new JMeterTest(new File(url.getPath()));

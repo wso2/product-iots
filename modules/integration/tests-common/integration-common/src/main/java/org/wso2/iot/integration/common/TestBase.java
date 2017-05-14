@@ -35,6 +35,7 @@ public class TestBase {
     protected String backendHTTPSURL;
     protected String backendHTTPURL;
     protected String accessTokenString;
+    protected String accessToken;
     protected TestUserMode userMode;
 
     protected void init(TestUserMode userMode) throws Exception {
@@ -48,9 +49,9 @@ public class TestBase {
         byte[] bytesEncoded = Base64
                 .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
         String encoded = new String(bytesEncoded);
-        accessTokenString = "Bearer " + OAuthUtil
-                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
-                        currentUser.getPassword());
+        accessToken = OAuthUtil.getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
+                currentUser.getPassword());
+        accessTokenString = "Bearer " + accessToken;
     }
 
     protected void initPublisher(String productGroupName, String instanceName,
