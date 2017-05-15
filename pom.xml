@@ -1485,7 +1485,7 @@
         <!-- Carbon Identity -->
         <carbon.identity.framework.version>5.7.5</carbon.identity.framework.version>
         <carbon.identity.framework.version.range>[5.2.0, 6.0.0)</carbon.identity.framework.version.range>
-        <identity.local.auth.basicauth.version>5.2.4</identity.local.auth.basicauth.version>
+        <identity.local.auth.basicauth.version>5.3.1</identity.local.auth.basicauth.version>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
         <identity.inbound.auth.saml.version>5.3.1</identity.inbound.auth.saml.version>
         <identity.carbon.auth.saml2.version>5.2.1</identity.carbon.auth.saml2.version>
@@ -1628,7 +1628,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.24</appmgt.feature.version>
+        <appmgt.feature.version>1.2.25</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.4</carbon.store.version>
