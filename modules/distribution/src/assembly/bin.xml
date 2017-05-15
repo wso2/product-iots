@@ -354,6 +354,25 @@
             </outputDirectory>
         </fileSet>
 
+
+        <!-- Copying Application-Mgt app from application-mgt app-->
+        <fileSet>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/application-mgt/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/application-mgt
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/appmgt-uuf-template-app/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/application-mgt
+            </outputDirectory>
+        </fileSet>
+
         <!-- Copying windows-web-agent-->
         <fileSet>
             <directory>

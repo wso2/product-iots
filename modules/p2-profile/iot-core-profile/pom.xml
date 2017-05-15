@@ -2761,7 +2761,7 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.application.mgt.feature.group</id>
+                                    <id>org.wso2.carbon.device.application.mgt.server.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
