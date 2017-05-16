@@ -94,6 +94,9 @@ goto :eof
     IF EXIST %DIR%..\conf\synapse.properties del %DIR%..\conf\synapse.properties
     IF EXIST %DIR%..\conf\passthru-http.properties del %DIR%..\conf\passthru-http.properties
     IF EXIST %DIR%..\conf\registry-event-broker.xml del %DIR%..\conf\registry-event-broker.xml
+    IF EXIST %DIR%..\conf\datasources\android-datasources.xml del %DIR%..\conf\datasources\android-datasources.xml
+    IF EXIST %DIR%..\conf\datasources\windows-datasources.xml del %DIR%..\conf\datasources\windows-datasources.xml
+    IF EXIST %DIR%..\conf\datasources\cdm-datasources.xml del %DIR%..\conf\datasources\cdm-datasources.xml
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\oauth2.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
@@ -174,9 +177,6 @@ goto :eof
     IF EXIST %DIR%..\conf\synapse-handlers.xml del %DIR%..\conf\synapse-handlers.xml
     IF EXIST %DIR%..\conf\synapse.properties del %DIR%..\conf\synapse.properties
     IF EXIST %DIR%..\conf\passthru-http.properties del %DIR%..\conf\passthru-http.properties
-    IF EXIST %DIR%..\conf\datasources\android-datasources.xml del %DIR%..\conf\datasources\android-datasources.xml
-    IF EXIST %DIR%..\conf\datasources\windows-datasources.xml del %DIR%..\conf\datasources\windows-datasources.xml
-    IF EXIST %DIR%..\conf\datasources\cdm-datasources.xml del %DIR%..\conf\datasources\cdm-datasources.xml
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
