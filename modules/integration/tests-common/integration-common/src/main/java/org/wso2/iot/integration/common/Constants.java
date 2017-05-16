@@ -23,6 +23,7 @@ import java.io.File;
  * Constants used through out the test suite are defined here.
  */
 public final class Constants {
+
     public static final String DEVICE_ID = "d24f870f390352a41234";
     public static final String NUMBER_NOT_EQUAL_TO_DEVICE_ID = "1111";
     public static final String DEVICE_IMEI = "123123123";
@@ -43,7 +44,9 @@ public final class Constants {
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String APPLICATION_SOAP_XML = "application/soap+xml; charset=utf-8";
     public static final String UTF8 = "UTF-8";
-    public static final int HTTPS_ANALYTICS_PORT = 9445;
+    public static final String ZERO = "0";
+    public static final String NULL = "[]";
+    public static final String INACTIVE = "INACTIVE";
 
     public static final String HTTPS = "https";
     public static final String HTTP = "http";
@@ -59,7 +62,12 @@ public final class Constants {
                 + "perm:android:configure-wifi perm:android:enroll perm:android:uninstall-application "
                 + "perm:android:manage-configuration perm:android:location perm:android:install-application "
                 + "perm:android:mute perm:android:change-lock-code perm:android:blacklist-applications "
-                + "perm:android:set-password-policy perm:android:encrypt-storage perm:android:clear-password perm:android:enterprise-wipe perm:android:info perm:android:view-configuration perm:android:upgrade-firmware perm:android:set-webclip perm:android:send-notification perm:android:disenroll perm:android:update-application perm:android:unlock-devices perm:android:control-camera perm:android:reboot perm:android:logcat appm:subscribe perm:sign-csr perm:admin:devices:view perm:roles:add perm:roles:add-users perm:roles:update perm:roles:permissions perm:roles:details perm:roles:view perm:roles:create-combined-role perm:roles:delete perm:dashboard:vulnerabilities perm:dashboard:non-compliant-count perm:dashboard:non-compliant perm:dashboard:by-groups perm:dashboard:device-counts perm:dashboard:feature-non-compliant perm:dashboard:count-overview perm:dashboard:filtered-count perm:dashboard:details perm:get-activity perm:devices:delete perm:devices:applications perm:devices:effective-policy perm:devices:compliance-data perm:devices:features perm:devices:operations perm:devices:search perm:devices:details perm:devices:update perm:devices:view perm:view-configuration perm:manage-configuration perm:policies:remove perm:policies:priorities perm:policies:deactivate perm:policies:get-policy-details perm:policies:manage perm:policies:activate perm:policies:update perm:policies:changes perm:policies:get-details perm:users:add perm:users:details perm:users:count perm:users:delete perm:users:roles perm:users:user-details perm:users:credentials perm:users:search perm:users:is-exist perm:users:update perm:users:send-invitation perm:admin-users:view perm:groups:devices perm:groups:update perm:groups:add perm:groups:device perm:groups:devices-count perm:groups:remove perm:groups:groups perm:groups:groups-view perm:groups:share perm:groups:count perm:groups:roles perm:groups:devices-remove perm:groups:devices-add perm:groups:assign perm:device-types:features perm:device-types:types perm:applications:install perm:applications:uninstall perm:admin-groups:count perm:admin-groups:view perm:notifications:mark-checked perm:notifications:view perm:admin:certificates:delete perm:admin:certificates:details perm:admin:certificates:view perm:admin:certificates:add perm:admin:certificates:verify perm:ios:enroll perm:ios:view-device perm:ios:apn perm:ios:ldap perm:ios:enterprise-app perm:ios:store-application perm:ios:remove-application perm:ios:app-list perm:ios:profile-list perm:ios:lock perm:ios:enterprise-wipe perm:ios:device-info perm:ios:restriction perm:ios:email perm:ios:cellular perm:ios:applications perm:ios:wifi perm:ios:ring perm:ios:location perm:ios:notification perm:ios:airplay perm:ios:caldav perm:ios:cal-subscription perm:ios:passcode-policy perm:ios:webclip perm:ios:vpn perm:ios:per-app-vpn perm:ios:app-to-per-app-vpn perm:ios:app-lock perm:ios:clear-passcode perm:ios:remove-profile perm:ios:get-restrictions perm:ios:wipe-data perm:admin perm:android:applications perm:devicetype:deployment perm:android-sense:enroll";
+                + "perm:android:set-password-policy perm:android:encrypt-storage perm:android:clear-password "
+                + "perm:android:enterprise-wipe perm:android:info perm:android:view-configuration "
+                + "perm:android:upgrade-firmware perm:android:set-webclip perm:android:send-notification "
+                + "perm:android:disenroll perm:android:update-application perm:android:unlock-devices "
+                + "perm:android:control-camera perm:android:reboot perm:android:logcat appm:read appm:subscribe "
+                + "perm:sign-csr perm:admin:devices:view perm:roles:add perm:roles:add-users perm:roles:update perm:roles:permissions perm:roles:details perm:roles:view perm:roles:create-combined-role perm:roles:delete perm:dashboard:vulnerabilities perm:dashboard:non-compliant-count perm:dashboard:non-compliant perm:dashboard:by-groups perm:dashboard:device-counts perm:dashboard:feature-non-compliant perm:dashboard:count-overview perm:dashboard:filtered-count perm:dashboard:details perm:get-activity perm:devices:delete perm:devices:applications perm:devices:effective-policy perm:devices:compliance-data perm:devices:features perm:devices:operations perm:devices:search perm:devices:details perm:devices:update perm:devices:view perm:view-configuration perm:manage-configuration perm:policies:remove perm:policies:priorities perm:policies:deactivate perm:policies:get-policy-details perm:policies:manage perm:policies:activate perm:policies:update perm:policies:changes perm:policies:get-details perm:users:add perm:users:details perm:users:count perm:users:delete perm:users:roles perm:users:user-details perm:users:credentials perm:users:search perm:users:is-exist perm:users:update perm:users:send-invitation perm:admin-users:view perm:groups:devices perm:groups:update perm:groups:add perm:groups:device perm:groups:devices-count perm:groups:remove perm:groups:groups perm:groups:groups-view perm:groups:share perm:groups:count perm:groups:roles perm:groups:devices-remove perm:groups:devices-add perm:groups:assign perm:device-types:features perm:device-types:types perm:applications:install perm:applications:uninstall perm:admin-groups:count perm:admin-groups:view perm:notifications:mark-checked perm:notifications:view perm:admin:certificates:delete perm:admin:certificates:details perm:admin:certificates:view perm:admin:certificates:add perm:admin:certificates:verify perm:ios:enroll perm:ios:view-device perm:ios:apn perm:ios:ldap perm:ios:enterprise-app perm:ios:store-application perm:ios:remove-application perm:ios:app-list perm:ios:profile-list perm:ios:lock perm:ios:enterprise-wipe perm:ios:device-info perm:ios:restriction perm:ios:email perm:ios:cellular perm:ios:applications perm:ios:wifi perm:ios:ring perm:ios:location perm:ios:notification perm:ios:airplay perm:ios:caldav perm:ios:cal-subscription perm:ios:passcode-policy perm:ios:webclip perm:ios:vpn perm:ios:per-app-vpn perm:ios:app-to-per-app-vpn perm:ios:app-lock perm:ios:clear-passcode perm:ios:remove-profile perm:ios:get-restrictions perm:ios:wipe-data perm:admin perm:android:applications";
 
         public static final String OAUTH_TOKEN_PAYLOAD = "username=admin&password=admin" +
                 MULTI_TENANT_OAUTH_TOKEN_PAYLOAD;
@@ -68,24 +76,22 @@ public final class Constants {
                 + "   \"applicationName\":\"app_123456\",\n" + "   \"isAllowedToAllDomains\":false,\n"
                 + "   \"tags\":[\"android\", \"device_management\"],\n" + "   \"isMappingAnExistingOAuthApp\":false\n"
                 + "}").toString();
-        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view "
-                + "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete "
+        public static final String PERMISSION_LIST = "appm:read appm:subscribe perm:admin-groups:count "
+                + "perm:admin-groups:view perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete "
                 + "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view "
-                + "perm:admin:devices:view perm:android-sense:enroll perm:android:applications "
-                + "perm:android:blacklist-applications perm:android:change-lock-code perm:android:clear-password "
-                + "perm:android:configure-vpn perm:android:configure-wifi "
+                + "perm:admin:devices:view perm:android:applications perm:android:blacklist-applications "
+                + "perm:android:change-lock-code perm:android:clear-password perm:android:configure-vpn perm:android:configure-wifi "
                 + "perm:android:control-camera perm:android:disenroll perm:android:encrypt-storage "
                 + "perm:android:enroll perm:android:enterprise-wipe perm:android:info perm:android:install-application "
                 + "perm:android:location perm:android:lock-devices perm:android:logcat perm:android:manage-configuration "
                 + "perm:android:mute perm:android:reboot perm:android:ring perm:android:send-notification "
                 + "perm:android:set-password-policy perm:android:set-webclip perm:android:uninstall-application "
                 + "perm:android:unlock-devices perm:android:update-application perm:android:upgrade-firmware "
-                + "perm:android:view-configuration perm:android:wipe "
-                + "perm:applications:install perm:applications:uninstall perm:device-types:features "
-                + "perm:device-types:types perm:devices:applications perm:devices:compliance-data perm:devices:delete "
-                + "perm:devices:details perm:devices:effective-policy perm:devices:features perm:devices:operations "
-                + "perm:devices:search perm:devices:update perm:devices:view perm:devicetype:deployment "
-                + "perm:get-activity perm:groups:add perm:groups:assign perm:groups:count "
+                + "perm:android:view-configuration perm:android:wipe perm:applications:install perm:applications:uninstall "
+                + "perm:device-types:features perm:device-types:types perm:devices:applications "
+                + "perm:devices:compliance-data perm:devices:delete perm:devices:details perm:devices:effective-policy "
+                + "perm:devices:features perm:devices:operations perm:devices:search perm:devices:update "
+                + "perm:devices:view perm:get-activity perm:groups:add perm:groups:assign perm:groups:count "
                 + "perm:groups:device perm:groups:devices perm:groups:devices-add perm:groups:devices-count "
                 + "perm:groups:devices-remove perm:groups:groups perm:groups:groups-view perm:groups:remove "
                 + "perm:groups:roles perm:groups:share perm:groups:update perm:manage-configuration "
@@ -300,6 +306,8 @@ public final class Constants {
         public static final String REQUEST_PAYLOAD_FILE_NAME = "mobile-device-mgt-payloads.json";
         public static final String UPDATE_PAYLOAD_OPERATION = "UPDATE_DEVICE_INFO";
         public static final String VIEW_DEVICE_TYPES_ENDPOINT = "/mdm-admin/devices/types";
+        public static final String VIEW_DEVICE_RESPONSE_PAYLOAD_FILE_NAME =
+                "mobile-device-mgt-view-device-types-response-payloads.json";
         public static final String NO_DEVICE = "{\"devices\":[],\"count\":0}";
 
         private MobileDeviceManagement() {
@@ -343,7 +351,7 @@ public final class Constants {
         public static final String UPDATE_POLICY_ENDPOINT = "/mdm-admin/policies/1";
         public static final String REMOVE_POLICY_ENDPOINT = "/mdm-admin/policies/bulk-remove";
         public static final String REMOVE_POLICY_PAYLOAD_FILE_NAME = "[1]";
-        public static final String VIEW_POLICY_LIST_ENDPOINT = "/mdm-admin/policies";
+        public static final String VIEW_POLICY_LIST_ENDPOINT = "/api/device-mgt/v1.0/policies";
 
         private PolicyManagement() {
             throw new AssertionError();
@@ -391,19 +399,14 @@ public final class Constants {
         private NotificationManagement() {
             throw new AssertionError();
         }
+
     }
 
-    public static final class AndroidSenseEnrollment {
-        public static final String ENROLLMENT_ENDPOINT = "/android_sense/1.0.0/device/";
-        public static final String RETRIEVER_ENDPOINT = "analytics/tables/";
-        public static final String ANALYTICS_ARTIFACTS_DEPLOYMENT_ENDPOINT = "/api/device-mgt/v1.0/admin/devicetype/1.0.0/deploy/android_sense";
-        public static final String ENROLLMENT_PAYLOAD_FILE_NAME = "android-sense-enrollment-payloads.json";
-        public static final String PUBLISH_DATA_OPERATION = "PUBLISH_DATA";
-        public static final String BATTERY_STATS_TABLE_NAME = "ORG_WSO2_IOT_ANDROID_BATTERY_STATS";
-        public static final String IS_TABLE_EXIST_CHECK_URL = "analytics/table_exists";
-        private AndroidSenseEnrollment() {
+    public static final class QSGManagement {
+        public static final String GET_MOBILE_APPS_ENDPONT = "/api/appm/publisher/v1.1/apps/mobileapp";
+
+        private QSGManagement() {
             throw new AssertionError();
         }
     }
-
 }
