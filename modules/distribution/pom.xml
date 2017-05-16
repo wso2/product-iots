@@ -188,7 +188,7 @@
 							<transformations>
 								<transformation>
 									<input>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</input>
-									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xm</output>
+									<output>../../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/input-event-adapters.xml</output>
 									<config>src/core/conf/input-adapter-change.xml</config>
 								</transformation>
 							</transformations>

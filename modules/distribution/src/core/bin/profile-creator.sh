@@ -120,6 +120,7 @@ then
 	cp -rf ${DIR}/../repository/resources/profiles/manager/*.sh ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/manager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/manager/carbon.xml ${DIR}/../conf/
+	cp -rf ${DIR}/../repository/resources/profiles/manager/axis2/axis2.xml ${DIR}/../conf/axis2/
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
@@ -131,8 +132,11 @@ then
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/
 	rm -rf ${DIR}/../repository/deployment/server/tempwebapp
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
-	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
-	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
+	rm -rf ${DIR}/../repository/deployment/server/synapse-configs
+	rm -rf ${DIR}/../conf/nhttp.properties
+	rm -rf ${DIR}/../conf/synapse-handlers.xml
+	rm -rf ${DIR}/../conf/synapse.properties
+	rm -rf ${DIR}/../conf/passthru-http.properties
 	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
 
     PROFILE="_device-manager"
@@ -162,13 +166,33 @@ then
 	rm -rf ${DIR}/../plugins
 	rm -rf ${DIR}/profile-creator.sh
 	rm -rf ${DIR}/profile-creator.bat
+	rm -rf ${DIR}/../conf/cdm-config.xml ${DIR}/../conf/app-manager.xml ${DIR}/../conf/analytics
+	rm -rf ${DIR}/../conf/apim-integration.xml
+	rm -rf ${DIR}/../conf/certificate-config.xml
+	rm -rf ${DIR}/../conf/data-bridge
+	rm -rf ${DIR}/../conf/governance.xml
+	rm -rf ${DIR}/../conf/input-event-adapters.xml
+	rm -rf ${DIR}/../conf/iot-api-config.xml
+	rm -rf ${DIR}/../conf/mobile-config.xml
+	rm -rf ${DIR}/../conf/nhttp.properties
+	rm -rf ${DIR}/../conf/output-event-adapters.xml
+	rm -rf ${DIR}/../conf/registry-event-broker.xml
+	rm -rf ${DIR}/../conf/social.xml
+	rm -rf ${DIR}/../conf/synapse-handlers.xml
+	rm -rf ${DIR}/../conf/synapse.properties
+	rm -rf ${DIR}/../conf/passthru-http.properties
+	rm -rf ${DIR}/../conf/registry-event-broker.xml
+	rm -rf ${DIR}/../conf/datasources/android-datasources.xml
+	rm -rf ${DIR}/../conf/datasources/windows-datasources.xml
+	rm -rf ${DIR}/../conf/datasources/cdm-datasources.xml
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/carbon.xml ${DIR}/../conf/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/identity/application-authentication.xml ${DIR}/../conf/identity/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/tomcat/context.xml ${DIR}/../conf/tomcat/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/axis2/axis2.xml ${DIR}/../conf/axis2/
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
-	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/api/*
-	rm -rf ${DIR}/../repository/deployment/server/synapse-configs/default/sequences/_*.xml
+	rm -rf ${DIR}/../repository/deployment/server/synapse-configs
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/throttle#data#v1.war ${DIR}/../repository/deployment/server/tempwebapp/

@@ -1507,7 +1507,6 @@
 
         <!-- Carbon Registry -->
         <carbon.registry.version>4.6.5</carbon.registry.version>
-        <carbon.registry.version.iotcore>4.6.5</carbon.registry.version.iotcore>
         <!-- Carbon Governance -->
         <carbon.governance.version>4.7.0</carbon.governance.version>
 
