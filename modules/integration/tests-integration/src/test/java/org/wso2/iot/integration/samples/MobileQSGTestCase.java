@@ -20,6 +20,7 @@ package org.wso2.iot.integration.samples;
 
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -37,12 +38,16 @@ import java.io.IOException;
  */
 public class MobileQSGTestCase extends TestBase {
     private RestClient client;
+    private String username1;
+    private String username2;
 
     @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
     public void initTest() throws Exception {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
         backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps();
         this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
+        username1 = "alex";
+        username2 = "chris";
     }
 
     @Test(description = "This test case tests the execution of QSG script, whether it executes without any exceptions")
@@ -61,11 +66,9 @@ public class MobileQSGTestCase extends TestBase {
     public void testUserRoleCreation() throws Exception {
         // Two users will be created with the quick start script, check whether those two users are created
         // successfully,
-        String username1 = "alex";
         String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
         HttpResponse response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-        String username2 = "chris";
         url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
         response = client.get(url);
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
@@ -98,5 +101,13 @@ public class MobileQSGTestCase extends TestBase {
                 response.getData().contains("android-passcode-policy1"));
         Assert.assertTrue("Windows pass-code policy is not added from qsg script",
                 response.getData().contains("windows-passcode-policy1"));
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
+        client.delete(url);
+        url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
+        client.delete(url);
     }
 }

@@ -1513,7 +1513,7 @@
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.64</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.65</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1521,7 +1521,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.34</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.35</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
@@ -1631,7 +1631,7 @@
         <appmgt.feature.version>1.2.25</appmgt.feature.version>
 
         <!-- Carbon Store version-->
-        <carbon.store.version>1.4.4</carbon.store.version>
+        <carbon.store.version>1.4.8</carbon.store.version>
 
         <!-- Carbon Remote User Management version -->
         <carbon.um.ws.version>5.1.4</carbon.um.ws.version>
