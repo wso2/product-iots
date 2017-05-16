@@ -1343,7 +1343,7 @@
         </file>
 		<file>
 			<source>src/core/resources/tenant/tenant-conf.json</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/tenant</outputDirectory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/</outputDirectory>
 			<filtered>true</filtered>
 			<fileMode>644</fileMode>
 		</file>
