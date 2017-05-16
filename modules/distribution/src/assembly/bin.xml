@@ -684,7 +684,7 @@
                 <exclude>**/version.txt</exclude>
                 <exclude>**/wso2carbon-version.txt</exclude>
                 <exclude>**/wso2server.bat</exclude>
-                <exclude>**/README.txt</exclude>
+                <exclude>**/README</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
@@ -957,7 +957,7 @@
                 <exclude>**/version.txt</exclude>
                 <exclude>**/wso2carbon-version.txt</exclude>
                 <exclude>**/wso2server.bat</exclude>
-                <exclude>**/README.txt</exclude>
+                <exclude>**/README</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/dbscripts</exclude>
@@ -1238,9 +1238,10 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <filtered>true</filtered>
+            <destName>README.txt</destName>
             <fileMode>644</fileMode>
         </file>
         <file>
@@ -1252,12 +1253,6 @@
         <file>
             <source>src/core/release-notes.html</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -1276,7 +1271,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1611,13 +1606,6 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/profile</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
@@ -1630,37 +1618,37 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1754,12 +1742,6 @@
 
         <!-- ********************************* Start of Broker Profile ********************************* -->
         <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
             <filtered>true</filtered>
@@ -1771,37 +1753,37 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
