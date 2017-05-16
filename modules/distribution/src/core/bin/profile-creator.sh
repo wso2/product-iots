@@ -185,7 +185,7 @@ then
 	rm -rf ${DIR}/../conf/datasources/android-datasources.xml
 	rm -rf ${DIR}/../conf/datasources/windows-datasources.xml
 	rm -rf ${DIR}/../conf/datasources/cdm-datasources.xml
-    cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
+	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/carbon.xml ${DIR}/../conf/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/identity/application-authentication.xml ${DIR}/../conf/identity/
