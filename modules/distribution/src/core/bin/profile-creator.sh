@@ -135,8 +135,8 @@ then
 	rm -rf ${DIR}/../repository/deployment/server/synapse-configs
 	rm -rf ${DIR}/../conf/nhttp.properties
 	rm -rf ${DIR}/../conf/synapse-handlers.xml
-    rm -rf ${DIR}/../conf/synapse.properties
-    rm -rf ${DIR}/../conf/passthru-http.properties
+	rm -rf ${DIR}/../conf/synapse.properties
+	rm -rf ${DIR}/../conf/passthru-http.properties
 	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
 
     PROFILE="_device-manager"
