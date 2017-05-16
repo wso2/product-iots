@@ -68,7 +68,7 @@ public final class Constants {
                 + "   \"applicationName\":\"app_123456\",\n" + "   \"isAllowedToAllDomains\":false,\n"
                 + "   \"tags\":[\"android\", \"device_management\"],\n" + "   \"isMappingAnExistingOAuthApp\":false\n"
                 + "}").toString();
-        public static final String PERMISSION_LIST = "default perm:admin-groups:count perm:admin-groups:view "
+        public static final String PERMISSION_LIST = "appm:subscribe perm:admin-groups:count perm:admin-groups:view "
                 + "perm:admin-users:view perm:admin:certificates:add perm:admin:certificates:delete "
                 + "perm:admin:certificates:details perm:admin:certificates:verify perm:admin:certificates:view "
                 + "perm:admin:devices:view perm:android:applications perm:android:blacklist-applications "
