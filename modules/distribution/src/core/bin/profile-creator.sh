@@ -172,20 +172,20 @@ then
 	rm -rf ${DIR}/../conf/data-bridge
 	rm -rf ${DIR}/../conf/governance.xml
 	rm -rf ${DIR}/../conf/input-event-adapters.xml
-    rm -rf ${DIR}/../conf/iot-api-config.xml
-    rm -rf ${DIR}/../conf/mobile-config.xml
-    rm -rf ${DIR}/../conf/nhttp.properties
-    rm -rf ${DIR}/../conf/output-event-adapters.xml
-    rm -rf ${DIR}/../conf/registry-event-broker.xml
-    rm -rf ${DIR}/../conf/social.xml
-    rm -rf ${DIR}/../conf/synapse-handlers.xml
-    rm -rf ${DIR}/../conf/synapse.properties
-    rm -rf ${DIR}/../conf/passthru-http.properties
-    rm -rf ${DIR}/../conf/registry-event-broker.xml
-    rm -rf ${DIR}/../conf/datasources/android-datasources.xml
-    rm -rf ${DIR}/../conf/datasources/windows-datasources.xml
-    rm -rf ${DIR}/../conf/datasources/cdm-datasources.xml
-	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
+	rm -rf ${DIR}/../conf/iot-api-config.xml
+	rm -rf ${DIR}/../conf/mobile-config.xml
+	rm -rf ${DIR}/../conf/nhttp.properties
+	rm -rf ${DIR}/../conf/output-event-adapters.xml
+	rm -rf ${DIR}/../conf/registry-event-broker.xml
+	rm -rf ${DIR}/../conf/social.xml
+	rm -rf ${DIR}/../conf/synapse-handlers.xml
+	rm -rf ${DIR}/../conf/synapse.properties
+	rm -rf ${DIR}/../conf/passthru-http.properties
+	rm -rf ${DIR}/../conf/registry-event-broker.xml
+	rm -rf ${DIR}/../conf/datasources/android-datasources.xml
+	rm -rf ${DIR}/../conf/datasources/windows-datasources.xml
+	rm -rf ${DIR}/../conf/datasources/cdm-datasources.xml
+    cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.sh ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/carbon.xml ${DIR}/../conf/
 	cp -rf ${DIR}/../repository/resources/profiles/keymanager/identity/application-authentication.xml ${DIR}/../conf/identity/
