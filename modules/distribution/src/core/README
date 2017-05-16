@@ -1,6 +1,6 @@
-WSO2 IoT Server 3.1.0
+WSO2 IoT Server @product.version@
 ==============================================================
-Welcome to the WSO2 IoT Server (IoTS) 3.1.0 release.
+Welcome to the WSO2 IoT Server (IoTS) @product.version@ release.
 
 WSO2 IoT Server (IoTS) provides the essential capabilities required to implement a scalable server-side IoT Platform. These capabilities
 involve device management, API/App management for devices, analytics, customizable web portals, transport extensions for MQTT, XMPP
@@ -12,15 +12,15 @@ the Apache Software License Version 2.0, one of the most business-friendly licen
 Key Features
 ==================================
 See the online WSO2 IoT documentation for more information on product features:
-https://docs.wso2.com/display/IoTS300/About+this+Release
+https://docs.wso2.com/display/IoTS@product.doc.version@/About+this+Release
 
 
 Installation & Running
 ==================================
 
-Running the Integrator
+Running the IoT server
 ==================================
-1. Extract  wso2iot-3.1.0.zip and go to the extracted directory/bin.
+1. Extract  wso2iot-@product.version@.zip and go to the extracted directory/bin.
 2. Run iot-server.sh or iot-server.bat.
 3. Point your favourite browser to  https://localhost:9443/devicemgt in order to see the available device types and operations.
 4. Use the following username and password to login
@@ -32,16 +32,16 @@ Running the Integrator
 
 Running other runtimes individually (Analytics, Broker)
 ========================================================
-1. Extract wso2iot-3.1.0.zip and go to the extracted directory.
-2. Go to wso2iot-3.1.0/wso2 directory.
+1. Extract wso2iot-@product.version@.zip and go to the extracted directory.
+2. Go to wso2iot-@product.version@/wso2 directory.
 3. Go to appropriate runtime directory (analytics/broker) /bin.
 4. Execute wso2server.sh or wso2server.bat.
 3. Access the url related to the required runtime. (For example, use https://localhost:9445/carbon for the analytics runtime.)
 
-Running all runtimes (Integrator, Analytics, Broker, Business-Process)
+Running all runtimes (IoT, Analytics, Broker)
 ==================================================================
 
-1. Extract  wso2iot-3.1.0.zip and go to the extracted directory/bin.
+1. Extract  wso2iot-@product.version@.zip and go to the extracted directory/bin.
 2. Run start-all.sh or start-all.bat.
 3. Access appropriate url for the related runtime. (For example, use  https://localhost:9443/devicemgt for the IoT Server runtime)
 
@@ -53,7 +53,7 @@ System Requirements
 2. The portal app requires full Javascript enablement on the Web browser
 
 
-WSO2 EI distribution directory
+WSO2 IoT distribution directory
 =============================================
 
  - bin
@@ -93,13 +93,13 @@ WSO2 EI distribution directory
 
     - LICENSE.txt
 	  Apache License 2.0 and the relevant other licenses under which
-	  WSO2 EI is distributed.
+	  WSO2 IoT is distributed.
 
     - README.txt
 	  This document.
 
     - release-notes.html
-	  Release information for WSO2 IoT 3.1.0
+	  Release information for WSO2 IoT @product.version@
 
 	- patches
 	  Used to add patches related for all runtimes.
