@@ -89,6 +89,16 @@
             <class name="org.wso2.iot.integration.jmeter.AppManagerJmeterTestCase"/>
         </classes>
     </test>
+    <test name="android-sense-enrollment" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>
+        </classes>
+    </test>
+    <test name="mobile-qsg" preserve-order="true" parallel="false">
+        <classes>
+            <class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>
+        </classes>
+    </test>
     <test name="user-mgt" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.user.UserManagement"/>
