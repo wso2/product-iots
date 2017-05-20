@@ -28,80 +28,100 @@
         <listener class-name="org.wso2.carbon.automation.engine.testlisteners.TestTransformerListener"/>
     </listeners>
 
-    <test name="mobile-device-mgt-no-devices" preserve-order="true" parallel="false">
+    <test name="iot-test-cases" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagementWithNoDevices"/>
-        </classes>
-    </test>
-    <test name="android-jmeter" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>
-        </classes>
-    </test>
-    <test name="mobile-device-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>
-        </classes>
-    </test>
-    <test name="android-enrollment" preserve-order="true" parallel="false">
-        <classes>
+            <class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>
             <class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>
-        </classes>
-    </test>
-    <test name="android-operation" preserve-order="false" parallel="true">
-        <classes>
             <class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>
-        </classes>
-    </test>
-    <test name="android-configuration" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>
-        </classes>
-    </test>
-    <test name="role-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.role.RoleManagement"/>
-        </classes>
-    </test>
-
-    <test name="group-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>
-        </classes>
-    </test>
-    <test name="negative-test" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.DeviceManagementAPINegativeTestCase"/>
-        </classes>
-    </test>
-    <test name="notification-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>
-        </classes>
-    </test>
-    <test name="policy-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>
-        </classes>
-    </test>
-    <test name="app-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.jmeter.AppManagerJmeterTestCase"/>
-        </classes>
-    </test>
-    <test name="android-sense-enrollment" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>
-        </classes>
-    </test>
-    <test name="mobile-qsg" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>
-        </classes>
-    </test>
-    <test name="user-mgt" preserve-order="true" parallel="false">
-        <classes>
             <class name="org.wso2.iot.integration.user.UserManagement"/>
         </classes>
     </test>
+    <!--<test name="android-jmeter" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="mobile-device-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="virtual-fire-alarm" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="android-enrollment" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="android-operation" preserve-order="false" parallel="true">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="android-configuration" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="role-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.role.RoleManagement"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="group-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="negative-test" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.DeviceManagementAPINegativeTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="notification-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="policy-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="app-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.jmeter.AppManagerJmeterTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="android-sense-enrollment" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="mobile-qsg" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="user-mgt" preserve-order="true" parallel="false">-->
+        <!--<classes>-->
+            <!--<class name="org.wso2.iot.integration.user.UserManagement"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>

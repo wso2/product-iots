@@ -28,6 +28,7 @@ public final class Constants {
     public static final String DEVICE_IMEI = "123123123";
     public static final String AUTOMATION_CONTEXT = "IOT";
     public static final String APPLICATION_JSON = "application/json";
+    public static final String APPLICATION_ZIP = "application/zip";
     public static final String APPLICATION_URL_ENCODED = "application/x-www-form-urlencoded";
     public static final String OAUTH_CLIENT_ID = "client_id";
     public static final String OAUTH_CLIENT_SECRET = "client_secret";
@@ -89,7 +90,8 @@ public final class Constants {
                 + "perm:ios:location perm:ios:notification perm:ios:airplay perm:ios:caldav perm:ios:cal-subscription "
                 + "perm:ios:passcode-policy perm:ios:webclip perm:ios:vpn perm:ios:per-app-vpn perm:ios:app-to-per-app-vpn "
                 + "perm:ios:app-lock perm:ios:clear-passcode perm:ios:remove-profile perm:ios:get-restrictions "
-                + "perm:ios:wipe-data perm:admin perm:android:applications perm:devicetype:deployment perm:android-sense:enroll";
+                + "perm:ios:wipe-data perm:admin perm:android:applications perm:devicetype:deployment "
+                + "perm:android-sense:enroll perm:firealarm:enroll";
 
         public static final String OAUTH_TOKEN_PAYLOAD = "username=admin&password=admin" +
                 MULTI_TENANT_OAUTH_TOKEN_PAYLOAD;
@@ -114,11 +116,11 @@ public final class Constants {
                 + "perm:device-types:features perm:device-types:types perm:devices:applications "
                 + "perm:devices:compliance-data perm:devices:delete perm:devices:details perm:devices:effective-policy "
                 + "perm:devices:features perm:devices:operations perm:devices:search perm:devices:update "
-                + "perm:devices:view perm:devicetype:deployment perm:get-activity perm:groups:add perm:groups:assign "
-                + "perm:groups:count perm:groups:device perm:groups:devices perm:groups:devices-add perm:groups:devices-count "
-                + "perm:groups:devices-remove perm:groups:groups perm:groups:groups-view perm:groups:remove "
-                + "perm:groups:roles perm:groups:share perm:groups:update perm:manage-configuration "
-                + "perm:notifications:mark-checked perm:notifications:view perm:policies:activate "
+                + "perm:devices:view perm:devicetype:deployment perm:firealarm:enroll perm:get-activity "
+                + "perm:groups:add perm:groups:assign perm:groups:count perm:groups:device perm:groups:devices "
+                + "perm:groups:devices-add perm:groups:devices-count perm:groups:devices-remove perm:groups:groups "
+                + "perm:groups:groups-view perm:groups:remove perm:groups:roles perm:groups:share perm:groups:update "
+                + "perm:manage-configuration perm:notifications:mark-checked perm:notifications:view perm:policies:activate "
                 + "perm:policies:changes perm:policies:deactivate perm:policies:get-details perm:policies:get-policy-details "
                 + "perm:policies:manage perm:policies:priorities perm:policies:remove perm:policies:update perm:roles:add"
                 + " perm:roles:add-users perm:roles:create-combined-role perm:roles:delete perm:roles:details "
@@ -441,5 +443,14 @@ public final class Constants {
         private QSGManagement() {
             throw new AssertionError();
         }
+    }
+
+    public static final class VirtualFireAlarmConstants {
+        public static final String ENROLLMENT_ENDPOINT = "/virtual_firealarm/1.0.0/device/download";
+        public static final String STATS_ENDPOINT = "/virtual_firealarm/1.0.0/device/stats";
+        public static final String PAYLOAD_FILE = "virtual-fire-alarm-enrollment-payloads.json";
+        public static final String ANALYTICS_ARTIFACTS_DEPLOYMENT_ENDPOINT =
+                "/api/device-mgt/v1.0/admin/devicetype/1.0.0/deploy/virtual_firealarm";
+
     }
 }

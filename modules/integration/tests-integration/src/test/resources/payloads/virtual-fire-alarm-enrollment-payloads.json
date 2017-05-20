@@ -1,0 +1,14 @@
+{
+  "PUBLISH_DATA": {
+    "event": {
+      "metaData": {
+        "owner": "admin",
+        "deviceId": "AS101",
+        "time": 1494315475
+      },
+      "payloadData": {
+        "temperature": 30
+      }
+    }
+  }
+}
