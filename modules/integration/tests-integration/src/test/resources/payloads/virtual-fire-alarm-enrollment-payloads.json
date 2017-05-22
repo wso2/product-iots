@@ -10,5 +10,21 @@
         "temperature": 30
       }
     }
+  },
+  "POLICY_DATA" : {
+     "policyName":"testpolicy",
+    "description":"","compliance":"enforce","ownershipType":null,"active":true,
+    "profile":{
+      "profileName":"dvdv",
+      "deviceType":"virtual_firealarm",
+      "profileFeaturesList":[{
+        "featureCode":"CONFIG",
+        "deviceType":"virtual_firealarm",
+        "content":{
+            "policyDefinition":"define stream fireAlarmEventStream (deviceID string, temp int);\nfrom fireAlarmEventStream#window.time(30 sec)\nselect deviceID, max(temp) as maxValue\ngroup by deviceID\ninsert into analyzeStream for expired-events;\nfrom analyzeStream[maxValue > 50]\nselect maxValue\ninsert into bulbOnStream;\nfrom fireAlarmEventStream[temp < 50]\nselect deviceID, temp\ninsert into bulbOffStream;"
+        }
+      }]
+    },
+    "roles":["ANY"]
   }
 }
