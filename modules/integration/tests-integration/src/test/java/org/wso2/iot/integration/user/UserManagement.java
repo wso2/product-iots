@@ -33,6 +33,8 @@ import org.wso2.iot.integration.common.Constants;
 import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
+import org.wso2.iot.integration.samples.VirtualFireAlarmTestCase;
+import static org.wso2.iot.integration.samples.VirtualFireAlarmTestCase.*;
 
 /**
  * This class contains integration tests for user management backend services.
@@ -164,8 +166,47 @@ public class UserManagement extends TestBase {
         Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
     }
 
+    // Test case related to virtual fire alarm added here as the batch cron runs for every 5 minutes and rather than
+    // waiting for that we can check them in a latter test cases
+    @Test(description = "Test whether data that is published is stored in analytics event table", dependsOnMethods =
+            {"testRemoveUser"} )
+    public void testBatchDataPersistence() throws Exception {
+        String deviceId1 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId1 : VirtualFireAlarmTestCase.deviceId1;
+        String deviceId2 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId2 : VirtualFireAlarmTestCase.deviceId2;
+
+        long MilliSecondDifference = System.currentTimeMillis() - VirtualFireAlarmTestCase.currentTime;
+        if (MilliSecondDifference < 300000) {
+            Thread.sleep(300000 - MilliSecondDifference);
+        }
+        String url = Constants.VirtualFireAlarmConstants.STATS_ENDPOINT + "/" + deviceId1;
+        url += "?from=" + (VirtualFireAlarmTestCase.currentTime - 300000)/1000 + "&to=" + System.currentTimeMillis()
+                /1000;
+        HttpResponse response = client.get(url);
+        JsonArray jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+        Assert.assertEquals(
+                "Published event for the device with the id " + deviceId1 + " is not inserted to "
+                        + "analytics table", HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals(
+                "Published event for the device with the id " + deviceId1 + " is not inserted to analytics table", 1,
+                jsonArray.size());
+
+        url = Constants.VirtualFireAlarmConstants.STATS_ENDPOINT + "/" + deviceId2;
+        url += "?from=" + (VirtualFireAlarmTestCase.currentTime - 300000)/1000 + "&to=" + System.currentTimeMillis()
+                /1000;
+        response = client.get(url);
+        jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+        Assert.assertEquals(
+                "Published event for the device with the id " + deviceId2 + " is not inserted to "
+                        + "analytics table", HttpStatus.SC_OK, response.getResponseCode());
+        Assert.assertEquals(
+                "Published event for the device with the id " + deviceId2 + " is not inserted to analytics table", 1,
+                jsonArray.size());
+    }
+
     @Test(description = "Test whether the API that is used to change the password works as expected.",
-            dependsOnMethods = {"testRemoveUser"})
+            dependsOnMethods = {"testBatchDataPersistence"})
     public void testChangePassword() throws Exception {
         String url = Constants.UserManagement.USER_ENDPOINT + "/credentials";
         HttpResponse response = client.put(url, PayloadGenerator
