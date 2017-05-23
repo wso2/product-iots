@@ -34,11 +34,7 @@ import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
 import org.wso2.iot.integration.samples.VirtualFireAlarmTestCase;
-
-import java.sql.Timestamp;
-
-import static org.wso2.iot.integration.samples.VirtualFireAlarmTestCase.deviceId1;
-import static org.wso2.iot.integration.samples.VirtualFireAlarmTestCase.deviceId2;
+import static org.wso2.iot.integration.samples.VirtualFireAlarmTestCase.*;
 
 /**
  * This class contains integration tests for user management backend services.
@@ -175,11 +171,15 @@ public class UserManagement extends TestBase {
     @Test(description = "Test whether data that is published is stored in analytics event table", dependsOnMethods =
             {"testRemoveUser"} )
     public void testBatchDataPersistence() throws Exception {
+        String deviceId1 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId1 : VirtualFireAlarmTestCase.deviceId1;
+        String deviceId2 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId2 : VirtualFireAlarmTestCase.deviceId2;
+
         long MilliSecondDifference = System.currentTimeMillis() - VirtualFireAlarmTestCase.currentTime;
         if (MilliSecondDifference < 300000) {
             Thread.sleep(300000 - MilliSecondDifference);
         }
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis() - 7200000);
         String url = Constants.VirtualFireAlarmConstants.STATS_ENDPOINT + "/" + deviceId1;
         url += "?from=" + (VirtualFireAlarmTestCase.currentTime - 300000)/1000 + "&to=" + System.currentTimeMillis()
                 /1000;
