@@ -41,11 +41,9 @@ public class MobileQSGTestCase extends TestBase {
     private String username1;
     private String username2;
 
-    @BeforeClass(alwaysRun = true, groups = { Constants.UserManagement.USER_MANAGEMENT_GROUP})
+    @BeforeClass(alwaysRun = true)
     public void initTest() throws Exception {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
-        backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps();
-        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
         username1 = "alex";
         username2 = "chris";
     }
@@ -59,6 +57,7 @@ public class MobileQSGTestCase extends TestBase {
         Runtime.getRuntime().exec(cmdArray, null, scriptFile);
         // Allow some time to finish its execution
         Thread.sleep(10000);
+        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
     @Test(description = "This test case tests whether user and roles are created as expected", dependsOnMethods =

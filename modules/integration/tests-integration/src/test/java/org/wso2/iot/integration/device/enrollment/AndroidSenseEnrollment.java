@@ -96,7 +96,8 @@ public class AndroidSenseEnrollment extends TestBase {
 
     }
 
-    @Test(description = "Test an Android sense device data publishing.", dependsOnMethods = {"testEnrollment"} )
+    @Test(description = "Test an Android sense device data publishing.", dependsOnMethods = {"testEnrollment"},
+            groups = {"androidSense"})
     public void testEventPublishing() throws Exception {
         String DEVICE_TYPE = "android_sense";
         String topic = automationContext.getContextTenant().getDomain() + "/" + DEVICE_TYPE + "/" + DEVICE_ID + "/data";

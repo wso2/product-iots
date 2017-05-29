@@ -99,7 +99,7 @@ public class CustomTestServerManager {
      *                     Carbon server
      */
     public synchronized String startServer(String server)
-            throws AutomationFrameworkException, IOException, XPathExpressionException {
+            throws AutomationFrameworkException, IOException, XPathExpressionException, InterruptedException {
         if (carbonHome == null) {
             if (carbonZip == null) {
                 carbonZip = System.getProperty(FrameworkConstants.SYSTEM_PROPERTY_CARBON_ZIP_LOCATION);
@@ -114,6 +114,10 @@ public class CustomTestServerManager {
                 } else {
                     carbonHome = extractedDir;
                 }
+                // Deploy the plugins.
+                String[] cmdArray = new String[] { "mvn", "clean", "install", "-f", "plugins-deployer.xml"};
+                Runtime.getRuntime().exec(cmdArray, null, new File(carbonHome + File.separator + "plugins"));
+                Thread.sleep(15000);
             } else if (server.equalsIgnoreCase("analytics") || server.equalsIgnoreCase("broker")) {
                 if (extractedDir == null) {
                     carbonHome = carbonServer.setUpCarbonHome(carbonZip) + File.separator + "wso2" + File.separator + server;
@@ -131,6 +135,7 @@ public class CustomTestServerManager {
         } else {
             this.portOffset = 0;
         }
+
         carbonServer.startServerUsingCarbonHome(carbonHome, commandMap);
         return carbonHome;
     }
