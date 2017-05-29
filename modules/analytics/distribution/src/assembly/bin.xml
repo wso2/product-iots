@@ -260,6 +260,27 @@
                 <include>**/*</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventstreams/
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/analytics/repository/deployment/server/eventstreams/
+            </outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
+                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventreceivers/
+            </directory>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/analytics/repository/deployment/server/eventreceivers/
+            </outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/analytics/plugins</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/analytics/plugins</outputDirectory>
+            <filtered>true</filtered>
+        </fileSet>
 
     </fileSets>
     <files>

@@ -177,7 +177,10 @@
 									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.device.mgt.plugin.version}
 								</featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.ui.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.backend.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <!-- End of Device Management Plugin Features -->
 
@@ -982,7 +985,7 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Device Management Features -->
@@ -1928,7 +1931,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
@@ -2427,7 +2434,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
@@ -2657,7 +2668,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
@@ -3106,7 +3121,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
@@ -3339,7 +3358,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
@@ -3765,7 +3788,11 @@
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.feature.group</id>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
