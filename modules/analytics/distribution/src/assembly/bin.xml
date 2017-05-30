@@ -262,7 +262,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventstreams/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventstreams/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/analytics/repository/deployment/server/eventstreams/
             </outputDirectory>
@@ -270,7 +270,7 @@
 
         <fileSet>
             <directory>
-                ../p2-profile/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventreceivers/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/deployment/server/eventreceivers/
             </directory>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/analytics/repository/deployment/server/eventreceivers/
@@ -280,6 +280,12 @@
             <directory>src/analytics/plugins</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/analytics/plugins</outputDirectory>
             <filtered>true</filtered>
+        </fileSet>
+
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
         </fileSet>
 
     </fileSets>
