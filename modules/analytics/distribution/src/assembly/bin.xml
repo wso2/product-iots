@@ -282,6 +282,12 @@
             <filtered>true</filtered>
         </fileSet>
 
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
+        </fileSet>
+
     </fileSets>
     <files>
 
