@@ -1440,7 +1440,7 @@
     <properties>
 
         <!--Carbon kernel versions-->
-        <carbon.kernel.version>4.4.14</carbon.kernel.version>
+        <carbon.kernel.version>4.4.16</carbon.kernel.version>
         <carbon.kernel.version.range>[4.4.0, 4.5.0)</carbon.kernel.version.range>
         <carbon.ui.menu.stratos.version>2.2.0</carbon.ui.menu.stratos.version>
 
@@ -1512,7 +1512,7 @@
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.68</carbon.device.mgt.version>
+        <carbon.device.mgt.version>2.0.69-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1520,7 +1520,7 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.36</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>3.0.37-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
@@ -1551,8 +1551,8 @@
 
         <!-- IoT Broker Dependencies -->
         <product.iot.broker.version>${product.iot.version}</product.iot.broker.version>
-        <andes.version>3.1.15</andes.version>
-        <carbon.messaging.version>3.1.17</carbon.messaging.version>
+        <andes.version>3.2.19</andes.version>
+        <carbon.messaging.version>3.2.15</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>

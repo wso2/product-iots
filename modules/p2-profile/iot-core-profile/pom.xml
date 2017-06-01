@@ -182,6 +182,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.backend.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
+								<featureArtifactDef>
+									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.notification.listener.feature:${carbon.device.mgt.plugin.version}
+								</featureArtifactDef>
                                 <!-- End of Device Management Plugin Features -->
 
                                 <!-- IoT Device Management Features -->
@@ -1016,6 +1019,10 @@
                                     <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
                                 <!-- End of Device Management Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.adapter.feature.group</id>
@@ -1136,6 +1143,10 @@
                                     <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.event.input.adapter.server.feature.group</id>
+									<version>${carbon.analytics.common.version}</version>
+								</feature>
                                 <!-- End of Carbon Analytics Common Features -->
 
                                 <feature>
@@ -2015,6 +2026,10 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
@@ -2647,6 +2662,10 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+								<feature>
+									<id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
