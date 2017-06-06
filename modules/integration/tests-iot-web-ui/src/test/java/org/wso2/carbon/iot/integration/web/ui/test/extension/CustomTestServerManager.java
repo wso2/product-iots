@@ -29,8 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.wso2.iot.integration.common.extensions.CarbonServerManagerExtension;
 
-
-
 public class CustomTestServerManager {
     protected CarbonServerManagerExtension carbonServer;
     protected String carbonZip;
