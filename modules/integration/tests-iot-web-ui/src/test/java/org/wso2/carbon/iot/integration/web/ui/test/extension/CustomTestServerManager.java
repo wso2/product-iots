@@ -23,15 +23,14 @@ import org.wso2.carbon.automation.engine.FrameworkConstants;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.extensions.ExtensionConstants;
-import org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerManager;
-
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.wso2.iot.integration.common.extensions.CarbonServerManagerExtension;
 
 public class CustomTestServerManager {
-    protected CarbonServerManager carbonServer;
+    protected CarbonServerManagerExtension carbonServer;
     protected String carbonZip;
     protected int portOffset;
     protected Map<String, String> commandMap = new HashMap<String, String>();
@@ -39,23 +38,23 @@ public class CustomTestServerManager {
     protected String carbonHome;
 
     public CustomTestServerManager(AutomationContext context) {
-        carbonServer = new CarbonServerManager(context);
+        carbonServer = new CarbonServerManagerExtension(context);
     }
 
     public CustomTestServerManager(AutomationContext context, String carbonZip) {
-        carbonServer = new CarbonServerManager(context);
+        carbonServer = new CarbonServerManagerExtension(context);
         this.carbonZip = carbonZip;
     }
 
     public CustomTestServerManager(AutomationContext context, int portOffset) {
-        carbonServer = new CarbonServerManager(context);
+        carbonServer = new CarbonServerManagerExtension(context);
         this.portOffset = portOffset;
         commandMap.put(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND, String.valueOf(portOffset));
     }
 
     public CustomTestServerManager(AutomationContext context, String carbonZip,
             Map<String, String> commandMap) {
-        carbonServer = new CarbonServerManager(context);
+        carbonServer = new CarbonServerManagerExtension(context);
         this.carbonZip = carbonZip;
         if (commandMap.get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) != null) {
             this.portOffset = Integer.parseInt(commandMap.get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND));
