@@ -212,34 +212,9 @@
                 <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
             </SupportedGrantType>
             <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
-            </SupportedGrantType>
-            <SupportedGrantType>
-                <GrantTypeName>urn:ietf:params:oauth:grant-type:jwt-bearer</GrantTypeName>
-                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.ExtendedJWTGrantHandler</GrantTypeHandlerImplClass>
-                <GrantTypeValidatorImplClass>org.wso2.carbon.identity.oauth2.grant.jwt.JWTGrantValidator</GrantTypeValidatorImplClass>
+                <GrantTypeName>access_token</GrantTypeName>
+                <GrantTypeHandlerImplClass>org.wso2.carbon.device.mgt.oauth.extensions.handlers.grant.AccessTokenGrantHandler</GrantTypeHandlerImplClass>
+                <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.AccessTokenGrantValidator</GrantTypeValidatorImplClass>
             </SupportedGrantType>
         </SupportedGrantTypes>
         <OAuthCallbackHandlers>
