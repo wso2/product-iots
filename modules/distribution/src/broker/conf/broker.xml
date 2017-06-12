@@ -171,17 +171,7 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 					inherit from org.dna.mqtt.moquette.server.IAutherizer
 					Note: default implementation authorizes against carbon permission with the topic.
 				-->
-				<!--connectionPermission is required for a user to connect to broker
-				subscriberPermission is needed to subscribe(subriber permission can be more than one)
-				publisherPermission is needed to publish(publisher permission can be more than one)
-				-->
 				<authorizer class="org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.DeviceAccessBasedMQTTAuthorizer">
-					<!--<property name="connectionPermission">/permission/admin/device-mgt/user</property>-->
-					<!--topic subscription permissions which are assigned through grouping-->
-					<property name="subscriberPermission">/permission/device-mgt/user/groups/device_events</property>
-					<!--topic publisher permissions which are assigned through grouping-->
-					<property name="publisherPermission">/permission/device-mgt/user/groups/device_operation</property>
-
 					<property name="username">admin</property>
 					<property name="password">admin</property>
 					<property name="tokenEndpoint">https://localhost:8243</property>

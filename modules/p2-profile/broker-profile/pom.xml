@@ -334,8 +334,7 @@
                                     <version>${analytics.shared.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 
