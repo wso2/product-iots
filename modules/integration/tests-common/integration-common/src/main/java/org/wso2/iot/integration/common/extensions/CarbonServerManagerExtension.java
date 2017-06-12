@@ -102,7 +102,8 @@ public class CarbonServerManagerExtension {
 
                     }
                 });
-                ClientConnectionUtil.waitForPort(defaultHttpPort + this.portOffset, 300000L, false, (String)this.automationContext.getInstance().getHosts().get("default"));
+                ClientConnectionUtil.waitForPort(defaultHttpPort + this.portOffset, DEFAULT_START_STOP_WAIT_MS, false, (String)this
+                        .automationContext.getInstance().getHosts().get("default"));
                 long time = System.currentTimeMillis() + 60000L;
 
                 while(true) {
