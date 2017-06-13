@@ -61,10 +61,6 @@ ANALYTICS_INIT_SCRIPT="$CARBON_HOME/wso2/analytics/bin/wso2server.sh"
 
 # If the daemon is not there, then exit.
 
-sh $ANALYTICS_INIT_SCRIPT $* &
+$ANALYTICS_INIT_SCRIPT $*
+exit;
 
-trap "sh $ANALYTICS_INIT_SCRIPT stop; exit;" INT TERM
-while :
-do
-        sleep 60
-done
