@@ -58,7 +58,7 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
 
         while (!checkScopes(Constants.APIApplicationRegistration.PERMISSION_LIST)) {
             TimeUnit.SECONDS.sleep(5);
-            long WAIT_TIME = 40000;
+            long WAIT_TIME = 60000;
             if (System.currentTimeMillis() - startTime > WAIT_TIME) {
                 Assert.fail("Required APIs are not deployed after waiting for " + WAIT_TIME + " time-out has happened");
             }
