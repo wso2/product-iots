@@ -147,6 +147,7 @@
                 <exclude>**/tomcat/context.xml</exclude>
                 <exclude>**/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/security/Owasp.CsrfGuard.dashboard.properties</exclude>
+                <exclude>**/security/cipher-tool.properties</exclude>
                 <exclude>**/security/application-authenticators.xml</exclude>
                 <exclude>**/identity/application-authentication.xml</exclude>
                 <exclude>**/identity/identity-providers/iot_default.xml</exclude>
@@ -752,11 +753,13 @@
             <excludes>
                 <exclude>**/wso2server*</exclude>
                 <exclude>**/load-spark-env-vars*</exclude>
+                <exclude>**/cipher*</exclude>
                 <exclude>**/java2wsdl*</exclude>
                 <exclude>**/tcpmon*</exclude>
                 <exclude>**/wsdl2java*</exclude>
                 <exclude>**/build.xml</exclude>
             </excludes>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <!--creating an empty output event receivers directory-->
@@ -897,22 +900,23 @@
         <fileSet>
             <directory>src/analytics/bin</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
+            <filtered>true</filtered>
+        </fileSet>
+
+
+        <fileSet>
+            <directory>src/analytics/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
             <includes>
                 <include>**/*.sh</include>
                 <include>**/*.bat</include>
             </includes>
             <filtered>true</filtered>
             <fileMode>755</fileMode>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/analytics/bin</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <excludes>
-                <exclude>**/*.sh</exclude>
-                <exclude>**/*.bat</exclude>
-            </excludes>
-            <filtered>true</filtered>
         </fileSet>
 
         <fileSet>
@@ -1020,18 +1024,20 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin</outputDirectory>
             <excludes>
+                <exclude>**/cipher*</exclude>
                 <exclude>**/wso2server*</exclude>
                 <exclude>**/java2wsdl*</exclude>
                 <exclude>**/tcpmon*</exclude>
                 <exclude>**/wsdl2java*</exclude>
             </excludes>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <fileSet>
             <directory>
                 ../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps
             </directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/borker/repository/deployment/server/webapps
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/server/webapps
             </outputDirectory>
         </fileSet>
 
@@ -1238,6 +1244,10 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
         </file>
         <file>
+            <source>src/core/conf/security/cipher-tool.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
+        </file>
+        <file>
             <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <filtered>true</filtered>
@@ -1307,6 +1317,11 @@
         <!-- Copying api-manager.xml -->
         <file>
             <source>src/core/conf/api-manager.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/conf/cipher-standalone-config.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
@@ -1677,6 +1692,12 @@
         </file>
 
         <file>
+            <source>src/analytics/conf/cipher-standalone-config.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
             <source>src/analytics/conf/tomcat/webapp-classloading-environments.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat</outputDirectory>
         </file>
@@ -1746,6 +1767,11 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/broker/conf/cipher-standalone-config.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
+            <filtered>true</filtered>
         </file>
         <file>
             <source>src/broker/conf/carbon.xml</source>
