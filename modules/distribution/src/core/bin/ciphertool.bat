@@ -1,5 +1,5 @@
 @echo off
-REM Copyright 2005-2009 WSO2, Inc. (http://wso2.com)
+REM Copyright 2017 WSO2, Inc. (http://wso2.com)
 REM Licensed to the Apache Software Foundation (ASF) under one
 REM or more contributor license agreements.  See the NOTICE file
 REM distributed with this work for additional information
