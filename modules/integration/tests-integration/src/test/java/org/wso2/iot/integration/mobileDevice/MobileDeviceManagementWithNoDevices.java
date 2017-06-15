@@ -60,8 +60,7 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
             TimeUnit.SECONDS.sleep(5);
             long WAIT_TIME = 40000;
             if (System.currentTimeMillis() - startTime > WAIT_TIME) {
-                Assert.fail("Required APIs are not deployed after waiting for " + WAIT_TIME + " ms time-out has "
-                        + "happened");
+                Assert.fail("Required APIs are not deployed after waiting for " + WAIT_TIME + " time-out has happened");
             }
         }
     }
