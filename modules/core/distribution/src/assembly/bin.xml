@@ -594,6 +594,11 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/synapse-configs/default/api/
             </outputDirectory>
+            <excludes>
+                <exclude>**/admin--Android-Mutual-SSL-Configuration-Management.xml</exclude>
+                <exclude>**/admin--Android-Mutual-SSL-Device-Management.xml</exclude>
+                <exclude>**/admin--Android-Mutual-SSL-Event-Receiver.xml</exclude>
+            </excludes>
         </fileSet>
 
 
