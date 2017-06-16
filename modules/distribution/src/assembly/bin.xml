@@ -941,6 +941,12 @@
             </excludes>
         </fileSet>
 
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
+        </fileSet>
+
         <!-- ********************************* End of Analytics Profile ********************************* -->
 
         <!-- ********************************* Start of Broker Profile ********************************* -->
