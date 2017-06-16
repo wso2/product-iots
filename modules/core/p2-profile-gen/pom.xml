@@ -482,6 +482,12 @@
                                 </featureArtifactDef>
                                 <!-- End of Dashboards Features -->
 
+                                <!-- Geo Dashboard feature -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.geo.dashboard.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <!-- End of Geo Dashboard feature -->
+
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics.cdmf:org.wso2.carbon.analytics.cdmf.feature:${cdmf.analytics.version}
                                 </featureArtifactDef>
@@ -845,6 +851,14 @@
                                     <version>${product.iot.version}</version>
                                 </feature>
                                 <!-- End of IoTServer Features -->
+
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
+
                                 <!-- Mobile Features -->
                                 <feature>
                                     <id>org.wso2.carbon.appmgt.mdm.osgiconnector.feature.group</id>
@@ -2519,6 +2533,13 @@
                                 </feature>
                                 <!-- End of IoTServer Features -->
 
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
+
 								<!-- App management features-->
 								<feature>
 									<id>org.wso2.carbon.appmgt.core.feature.group</id>
@@ -2848,6 +2869,12 @@
                                     <version>${carbon.commons.version}</version>
                                 </feature>
 
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
 
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
@@ -3232,6 +3259,13 @@
                                     <version>${product.iot.version}</version>
                                 </feature>
                                 <!-- End of IoTServer Features -->
+
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
 
 								<!-- App management features-->
 								<feature>
