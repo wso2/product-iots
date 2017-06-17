@@ -91,7 +91,9 @@ public final class Constants {
                 + "perm:ios:passcode-policy perm:ios:webclip perm:ios:vpn perm:ios:per-app-vpn perm:ios:app-to-per-app-vpn "
                 + "perm:ios:app-lock perm:ios:clear-passcode perm:ios:remove-profile perm:ios:get-restrictions "
                 + "perm:ios:wipe-data perm:admin perm:android:applications perm:devicetype:deployment "
-                + "perm:android-sense:enroll perm:firealarm:enroll";
+                + "perm:android-sense:enroll perm:admin:device-type perm:device-types:events "
+                + "perm:device-types:events:view perm:device-types:types perm:device:enroll perm:device:disenroll "
+                + "perm:device:modify perm:device:operations perm:device:publish-event perm:devices:operations perm:devices:operations perm:firealarm:enroll ";
 
         public static final String OAUTH_TOKEN_PAYLOAD = "username=admin&password=admin" +
                 MULTI_TENANT_OAUTH_TOKEN_PAYLOAD;
@@ -126,7 +128,7 @@ public final class Constants {
                 + " perm:roles:add-users perm:roles:create-combined-role perm:roles:delete perm:roles:details "
                 + "perm:roles:permissions perm:roles:update perm:roles:view perm:users:add perm:users:count "
                 + "perm:users:credentials perm:users:delete perm:users:details perm:users:is-exist perm:users:roles "
-                + "perm:users:search perm:users:send-invitation perm:users:update perm:users:user-details perm:view-configuration";
+                + "perm:users:search perm:users:send-invitation perm:users:update perm:users:user-details perm:device:publish-event perm:view-configuration";
 
         private APIApplicationRegistration() {
             throw new AssertionError();

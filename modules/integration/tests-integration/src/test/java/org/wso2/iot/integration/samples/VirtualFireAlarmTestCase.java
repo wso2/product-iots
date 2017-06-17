@@ -172,7 +172,7 @@ public class VirtualFireAlarmTestCase extends TestBase {
             {"testEnrollment"} )
     public void testPolicyPublishing() throws Exception {
         String deviceId2 = userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId2 : VirtualFireAlarmTestCase.deviceId2;
-        String topic = automationContext.getContextTenant().getDomain() + "/" + DEVICE_TYPE + "/" + deviceId2 + "/#";
+        String topic = automationContext.getContextTenant().getDomain() + "/" + DEVICE_TYPE + "/" + deviceId2 + "/operation/#";
         String clientId = deviceId2 + ":" + DEVICE_TYPE;
         HttpResponse response = restClient.post("/api/device-mgt/v1.0/policies", PayloadGenerator
                 .getJsonPayload(Constants.VirtualFireAlarmConstants.PAYLOAD_FILE,
@@ -194,8 +194,7 @@ public class VirtualFireAlarmTestCase extends TestBase {
         // Allow some time for message delivery
         Thread.sleep(20000);
         ArrayList<MqttMessage> mqttMessages = mqttSubscriberClient.getMqttMessages();
-        Assert.assertEquals("Policy published message is not received by the mqtt listener. ", 1, mqttMessages.size());
-
+        Assert.assertEquals("Policy published message is not received by the mqtt listener. ", 2, mqttMessages.size());
 
     }
 }

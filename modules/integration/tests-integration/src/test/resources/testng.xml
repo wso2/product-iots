@@ -34,6 +34,7 @@
             <class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>
             <class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>
+			<class name="org.wso2.iot.integration.jmeter.DeviceTypeManagementJMeterTestCase"/>
             <class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>
             <class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>
             <class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>
