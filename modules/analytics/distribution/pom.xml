@@ -223,6 +223,48 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <!-- Replace the purge config in the analytics-config.xml file -->
+                    <execution>
+                        <id>replace-for-analytics-config</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>
+                                ${basedir}/../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/analytics/analytics-config.xml
+                            </file>
+                            <replacements>
+                                <replacement>
+                                    <xpath>/analytics-dataservice-configuration/analytics-data-purging/purging-enable
+                                    </xpath>
+                                    <token>(false)</token>
+                                    <value>true</value>
+                                </replacement>
+                                <replacement>
+                                    <xpath>
+                                        /analytics-dataservice-configuration/analytics-data-purging/purge-include-tables/table
+                                    </xpath>
+                                    <token>(.\*)</token>
+                                    <value>IOT_PER_DEVICE_STREAM.*</value>
+                                </replacement>
+                                <replacement>
+                                    <xpath>
+                                        /analytics-dataservice-configuration/analytics-data-purging/data-retention-days
+                                    </xpath>
+                                    <token>(365)</token>
+                                    <value>31</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
