@@ -1562,7 +1562,6 @@
         <orbit.version.geronimo-jms_1.1_spec>1.1.0.wso2v1</orbit.version.geronimo-jms_1.1_spec>
 
         <!--IOT Analytics-->
-        <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <shindig.version>2.0.2</shindig.version>
         <carbon.data.version>4.3.6</carbon.data.version>
         <equinox.osgi.version>3.8.1.v20120830-144521</equinox.osgi.version>
@@ -1602,7 +1601,6 @@
         <slf4j.log4j12.version>1.6.1</slf4j.log4j12.version>
         <slf4j.api.version>1.6.1</slf4j.api.version>
         <slf4j.wso2.version>1.5.10.wso2v1</slf4j.wso2.version>
-        <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
         <geoip.api.version>1.2.15</geoip.api.version>
         <kryo.orbit.version>2.24.0.wso2v1</kryo.orbit.version>
         <kryo.import.version>[2.24.0,3.0)</kryo.import.version>
@@ -1634,7 +1632,7 @@
         <carbon.um.ws.version>5.1.4</carbon.um.ws.version>
 
         <!-- Cipher tool version-->
-        <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
+        <cipher.tool.version>1.0.0-wso2v4</cipher.tool.version>
 
         <!--XMPP/MQTT Version-->
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
