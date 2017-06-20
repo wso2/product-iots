@@ -20,6 +20,8 @@ package org.wso2.iot.integration.mobileDevice;
 
 import junit.framework.Assert;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Factory;
@@ -37,6 +39,8 @@ import java.util.concurrent.TimeUnit;
  * This class contains integration tests for API  Mobile Device Management with No Devices Enrolled.
  */
 public class MobileDeviceManagementWithNoDevices extends TestBase {
+
+    private static Log log = LogFactory.getLog(MobileDeviceManagementWithNoDevices.class);
     private IOTHttpClient client;
 
     @Factory(dataProvider = "userModeProvider")
