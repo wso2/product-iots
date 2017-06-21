@@ -1625,7 +1625,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.25</appmgt.feature.version>
+        <appmgt.feature.version>1.2.27</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.4.8</carbon.store.version>

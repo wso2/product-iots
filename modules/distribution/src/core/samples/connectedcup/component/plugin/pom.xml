@@ -68,13 +68,10 @@
 							javax.naming;resolution:=optional,
 							javax.sql;resolution:=optional,
 							javax.xml.bind.annotation.*;resolution:=optional,
-							javax.net;resolution:=optional,
-							javax.net.ssl;resolution:=optional,
-							org.w3c.dom;resolution:=optional,
 							org.wso2.carbon.device.mgt.common.*,
 							org.wso2.carbon.device.mgt.common,
 							org.wso2.carbon.context.*,
-							org.wso2.carbon.ndatasource.core,
+							org.wso2.carbon.base.*,
 							javax.xml.parsers.*;resolution:=optional
 						</Import-Package>
 
