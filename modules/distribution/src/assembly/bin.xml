@@ -945,6 +945,12 @@
             </excludes>
         </fileSet>
 
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
+        </fileSet>
+
         <!-- ********************************* End of Analytics Profile ********************************* -->
 
         <!-- ********************************* Start of Broker Profile ********************************* -->
@@ -1616,6 +1622,14 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
             </outputDirectory>
+        </file>
+        <!-- Adding Geo Dashboard CApp -->
+        <file>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
