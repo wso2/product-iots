@@ -664,6 +664,10 @@
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
+            <excludes>
+                <exclude>**/*samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup/pom.xml</exclude>
+            </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
@@ -1875,6 +1879,18 @@
         <file>
             <source>src/broker/conf/metrics.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
