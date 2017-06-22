@@ -29,7 +29,7 @@
     <artifactId>analytics-devicetype-feature-installation</artifactId>
     <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Device Type Plugins - Analytics</name>
+    <name>Installing Virtual Fire Alarm, Raspberry Pi, Ardino Device Types - Analytics</name>
     <url>http://wso2.org</url>
 
 
