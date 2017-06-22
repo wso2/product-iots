@@ -24,21 +24,24 @@
         <version>1</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.iot.analytics.devicemgt-plugins</groupId>
-    <artifactId>analytics-devicetype-feature-installation</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Device Type Plugins - Analytics</name>
-    <url>http://wso2.org</url>
+    <modules>
+        <module>connectedcup</module>
+    </modules>
 
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wso2.iot.devicemgt-plugins</groupId>
+    <artifactId>iot-devicetype-samples</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Creating custom distribution</name>
+    <url>http://wso2.org</url>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
-                <version>1.5.3</version>
+                <version>1.5.4</version>
                 <executions>
                     <execution>
                         <id>2-p2-repo-generation</id>
@@ -47,52 +50,33 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
-                                <!-- Ardino Device Type Features -->
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.arduino.analytics.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-
-                                <!-- Raspberry Device Type Features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.raspberrypi.analytics.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-
-                                <!-- Virtual Fire Alarm Device Type Features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.virtualfirealarm.analytics.feature:${carbon.device.mgt.plugin.version}
+                                    org.coffeeking:org.coffeeking.connectedcup.feature:\${org.coffeeking.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>analytics-feature-install</id>
+                        <id>default-feature-install</id>
                         <phase>package</phase>
                         <goals>
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>analytics-default</profile>
-                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
-                            <destination>\${project.basedir}/../../components</destination>
+                            <profile>default</profile>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.arduino.analytics.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.raspberrypi.analytics.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.virtualfirealarm.analytics.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                    <id>org.coffeeking.connectedcup.feature.group</id>
+                                    <version>\${org.coffeeking.version}</version>
                                 </feature>
                             </features>
                         </configuration>
@@ -109,9 +93,13 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy todir="../repository/deployment/server/">
-                                    <fileset dir="resources/">
-                                        <include name="**/*"/>
+                                <replace token="false" value="true"
+                                         dir="../wso2/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                                <copy todir="../wso2/analytics/repository/deployment/server/carbonapps">
+                                    <fileset dir="../repository/deployment/server/carbonapps">
+                                        <include name="*.car"/>
                                     </fileset>
                                 </copy>
                             </tasks>
@@ -200,8 +188,8 @@
             </releases>
         </repository>
     </repositories>
-
     <properties>
-        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>@carbon-device-mgt-plugin-version@</carbon.device.mgt.plugin.version>
+        <org.coffeeking.version>1.0.0</org.coffeeking.version>
     </properties>
 </project>

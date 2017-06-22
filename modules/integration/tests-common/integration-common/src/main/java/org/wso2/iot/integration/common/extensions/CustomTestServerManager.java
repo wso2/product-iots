@@ -113,8 +113,8 @@ public class CustomTestServerManager {
                     carbonHome = extractedDir;
                 }
                 // Deploy the plugins.
-                String[] cmdArray = new String[] { "mvn", "clean", "install", "-f", "plugins-deployer.xml"};
-                Runtime.getRuntime().exec(cmdArray, null, new File(carbonHome + File.separator + "plugins"));
+                String[] cmdArray = new String[] { "mvn", "clean", "install", "-f", "device-plugins-deployer.xml"};
+                Runtime.getRuntime().exec(cmdArray, null, new File(carbonHome + File.separator + "samples"));
                 Thread.sleep(15000);
             } else if (server.equalsIgnoreCase("analytics") || server.equalsIgnoreCase("broker")) {
                 if (extractedDir == null) {

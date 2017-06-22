@@ -654,21 +654,17 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/core/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/plugins</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-			<filtered>true</filtered>
-        </fileSet>
-
-        <fileSet>
             <directory>src/core/samples</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/samples</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
+            <excludes>
+                <exclude>**/*connectedcup-samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup/pom.xml</exclude>
+                <exclude>**/*device-plugins-deployer.xml</exclude>
+            </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
@@ -926,8 +922,8 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/analytics/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/plugins</outputDirectory>
+            <directory>src/analytics/samples</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/samples</outputDirectory>
 			<filtered>true</filtered>
         </fileSet>
 
@@ -945,6 +941,12 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
             </excludes>
+        </fileSet>
+
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
         </fileSet>
 
         <!-- ********************************* End of Analytics Profile ********************************* -->
@@ -1619,6 +1621,32 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
             </outputDirectory>
+        </file>
+        <!-- Adding Geo Dashboard CApp -->
+        <file>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup-samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/device-plugins-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 

@@ -170,6 +170,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of Device Management Features -->
 
                                 <!-- Device Management Plugin Features -->
@@ -751,6 +754,11 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+                                <!-- Geo Dashboard feature -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.geo.dashboard.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <!-- End of Geo Dashboard feature -->
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -1625,6 +1633,13 @@
                                     <id>org.wso2.carbon.device.mgt.cdmf.analytics.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
                             </features>
                         </configuration>
                     </execution>
@@ -2013,16 +2028,16 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2427,16 +2442,16 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2514,6 +2529,13 @@
                                     <version>${identity.inbound.auth.saml.version}</version>
                                 </feature>
                                 <!-- SSO Fix-->
+
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
                             </features>
                         </configuration>
                     </execution>
@@ -2657,16 +2679,16 @@
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -3059,22 +3081,6 @@
                                 </feature>
                                 <!--end required for context.xml-->
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
-									<version>${carbon.device.mgt.version}</version>
-								</feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
@@ -3161,6 +3167,13 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!-- SSO Fix-->
+
+                                <!-- Geo Dashboard Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <!-- End of Geo Dashboard Feature -->
                             </features>
                         </configuration>
                     </execution>

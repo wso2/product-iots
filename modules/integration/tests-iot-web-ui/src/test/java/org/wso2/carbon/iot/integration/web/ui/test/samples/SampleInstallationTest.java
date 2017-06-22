@@ -108,13 +108,13 @@ public class SampleInstallationTest extends IOTIntegrationUIBaseTestCase {
 
         log.info("CARBON_HOME: " + System.getProperty(Constants.CARBON_HOME));
         File dir = new File(carbonHome);
-        log.info("Sample installation started : mvn clean install -f device-deployer.xml");
+        log.info("Sample installation started : mvn clean install -f device-plugins-deployer.xml");
         try {
             if (System.getProperty(Constants.OS_NAME).toLowerCase().contains("windows")) {
-                commands = new String[]{"cmd.exe", "/c", "mvn clean install -f device-deployer.xml"};
+                commands = new String[]{"cmd.exe", "/c", "mvn clean install -f device-plugins-deployer.xml"};
                 tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             } else {
-                commands = new String[]{"mvn", "clean", "install", "-f", "device-deployer.xml"};
+                commands = new String[]{"mvn", "clean", "install", "-f", "device-plugins-deployer.xml"};
                 tempProcess = Runtime.getRuntime().exec(commands, null, dir);
             }
             boolean buildStatus = waitForMessage(tempProcess.getInputStream(), Constants.BUILD_SUCCESS_MSG);
