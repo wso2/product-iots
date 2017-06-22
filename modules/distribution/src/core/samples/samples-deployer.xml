@@ -71,7 +71,7 @@
                             <profile>default</profile>
                             <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
                             <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
-                            <destination>\${basedir}/../core/repository/components</destination>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
@@ -94,11 +94,11 @@
                         <configuration>
                             <tasks>
                                 <replace token="false" value="true"
-                                         dir="../core/repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                         dir="../wso2/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
-                                <copy todir="../analytics/repository/deployment/server/carbonapps">
-                                    <fileset dir="../core/repository/deployment/server/carbonapps">
+                                <copy todir="../wso2/analytics/repository/deployment/server/carbonapps">
+                                    <fileset dir="../repository/deployment/server/carbonapps">
                                         <include name="*.car"/>
                                     </fileset>
                                 </copy>
@@ -189,7 +189,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>@carbon-device-mgt-plugin-version@</carbon.device.mgt.plugin.version>
         <org.coffeeking.version>1.0.0</org.coffeeking.version>
     </properties>
 </project>

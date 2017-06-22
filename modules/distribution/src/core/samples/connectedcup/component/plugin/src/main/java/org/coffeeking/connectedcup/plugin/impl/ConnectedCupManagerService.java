@@ -24,6 +24,8 @@ import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
 import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
+import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
+import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
 import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
 import org.wso2.carbon.device.mgt.common.app.mgt.Application;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManagementException;
@@ -35,7 +37,7 @@ import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 
 import java.util.List;
 
-public class ConnectedCupManagerService implements DeviceManagementService{
+public class ConnectedCupManagerService implements DeviceManagementService {
 	private DeviceManager deviceManager;
 
 	@Override
@@ -78,4 +80,13 @@ public class ConnectedCupManagerService implements DeviceManagementService{
         return null;
     }
 
+	@Override
+	public DeviceStatusTaskPluginConfig getDeviceStatusTaskPluginConfig() {
+		return null;
+	}
+
+	@Override
+	public InitialOperationConfig getInitialOperationConfig() {
+		return null;
+	}
 }

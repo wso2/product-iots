@@ -664,6 +664,10 @@
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
+            <excludes>
+                <exclude>**/*samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup/pom.xml</exclude>
+            </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
@@ -939,6 +943,12 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
             </excludes>
+        </fileSet>
+
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/scripts</outputDirectory>
         </fileSet>
 
         <!-- ********************************* End of Analytics Profile ********************************* -->
@@ -1613,6 +1623,14 @@
                 ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
             </outputDirectory>
         </file>
+        <!-- Adding Geo Dashboard CApp -->
+        <file>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
@@ -1875,6 +1893,18 @@
         <file>
             <source>src/broker/conf/metrics.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
