@@ -167,6 +167,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
                                 <!-- End of Device Management Features -->
 
                                 <!-- Device Management Plugin Features -->
@@ -999,6 +1002,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2016,6 +2023,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
@@ -2422,6 +2433,10 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
@@ -2652,6 +2667,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.http.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -3039,18 +3058,6 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <!--end required for context.xml-->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.mqtt.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.fcm.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
