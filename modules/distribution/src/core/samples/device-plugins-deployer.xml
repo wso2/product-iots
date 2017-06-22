@@ -29,11 +29,11 @@
     <artifactId>iot-devicetype-feature-installation</artifactId>
     <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Device Type Plugins - IoT Core</name>
+    <name>Installing Virtual Fire Alarm, Raspberry Pi, Ardino Device Types - IoT Core</name>
     <url>http://wso2.org</url>
 
     <modules>
-        <module>../wso2/analytics/plugins</module>
+        <module>../wso2/analytics/samples</module>
     </modules>
 
     <build>

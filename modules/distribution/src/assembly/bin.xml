@@ -649,15 +649,6 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/core/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/plugins</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-			<filtered>true</filtered>
-        </fileSet>
-
-        <fileSet>
             <directory>src/core/samples</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/samples</outputDirectory>
             <includes>
@@ -665,8 +656,9 @@
             </includes>
             <fileMode>644</fileMode>
             <excludes>
-                <exclude>**/*samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup-samples-deployer.xml</exclude>
                 <exclude>**/*connectedcup/pom.xml</exclude>
+                <exclude>**/*device-plugins-deployer.xml</exclude>
             </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
@@ -924,8 +916,8 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/analytics/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/plugins</outputDirectory>
+            <directory>src/analytics/samples</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/samples</outputDirectory>
 			<filtered>true</filtered>
         </fileSet>
 
@@ -1631,6 +1623,24 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/core/samples/connectedcup-samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/device-plugins-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
@@ -1893,18 +1903,6 @@
         <file>
             <source>src/broker/conf/metrics.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/samples/samples-deployer.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/samples/connectedcup/pom.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
-            <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
