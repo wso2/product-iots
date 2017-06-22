@@ -475,7 +475,7 @@ public final class Constants {
         public static final String ENROLLMENT_ENDPOINT = "/android_sense/1.0.0/device/";
         public static final String RETRIEVER_ENDPOINT = "analytics/tables/";
         public static final String ANALYTICS_ARTIFACTS_DEPLOYMENT_ENDPOINT =
-                "/api/device-mgt/v1.0/admin/devicetype/1.0.0/deploy/android_sense";
+                "/api/device-mgt/v1.0/admin/publish-artifact/1.0.0/deploy/android_sense";
         public static final String ENROLLMENT_PAYLOAD_FILE_NAME = "android-sense-enrollment-payloads.json";
         public static final String PUBLISH_DATA_OPERATION = "PUBLISH_DATA";
         public static final String BATTERY_STATS_TABLE_NAME = "ORG_WSO2_IOT_ANDROID_BATTERY_STATS";
@@ -499,7 +499,7 @@ public final class Constants {
         public static final String STATS_ENDPOINT = "/virtual_firealarm/1.0.0/device/stats";
         public static final String PAYLOAD_FILE = "virtual-fire-alarm-enrollment-payloads.json";
         public static final String ANALYTICS_ARTIFACTS_DEPLOYMENT_ENDPOINT =
-                "/api/device-mgt/v1.0/admin/devicetype/1.0.0/deploy/virtual_firealarm";
+                "/api/device-mgt/v1.0/admin/publish-artifact/1.0.0/deploy/virtual_firealarm";
         public static final String POLICY_DATA = "POLICY_DATA";
         public static final String ACTIVATE_POLICY_ENDPOINT = "/api/device-mgt/v1.0/policies/activate-policy";
         public static final String APPLY_CHANGES_ENDPOINT = "/api/device-mgt/v1.0/policies/apply-changes";

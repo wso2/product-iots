@@ -190,8 +190,8 @@
             <extentionClasses>
                 <class>
                     <name>org.wso2.carbon.iot.integration.web.ui.test.extension.BrokerServerExtension</name>
-                    <name>org.wso2.carbon.iot.integration.web.ui.test.extension.IOTServerExtension</name>
                     <name>org.wso2.carbon.iot.integration.web.ui.test.extension.AnalyticsServerExtension</name>
+					<name>org.wso2.carbon.iot.integration.web.ui.test.extension.IOTServerExtension</name>
                     <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
                 </class>
             </extentionClasses>

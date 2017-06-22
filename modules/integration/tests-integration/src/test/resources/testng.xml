@@ -44,8 +44,8 @@
             <class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>
             <class name="org.wso2.iot.integration.jmeter.AppManagerJmeterTestCase"/>
             <class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>
-			<class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>
-			<class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>
+			<!--<class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>-->
+			<!--<class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>-->
             <class name="org.wso2.iot.integration.user.UserManagement"/>
         </classes>
     </test>
