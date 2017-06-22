@@ -84,6 +84,7 @@ public class MobileDeviceManagementWithNoDevices extends TestBase {
 
     private boolean checkScopes(String permissionsList) throws Exception {
         String tokenString = OAuthUtil.getScopes(backendHTTPSURL, backendHTTPSURL);
+        log.info("issued-scopes: " + tokenString);
         return tokenString.contains(permissionsList);
     }
 }

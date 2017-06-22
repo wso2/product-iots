@@ -19,6 +19,7 @@
 package org.wso2.iot.integration.jmeter;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
@@ -103,24 +104,25 @@ public class DeviceTypeManagementJMeterTestCase extends TestBase {
         log.info("Connecting to broker: " + broker);
         sampleClient.connect(connOpts);
         log.info("Connected");
-        payload = "{\"temperature\":10,\"status\":\"workingh\",\"humidity\":20}";
-        String payload2 = "{\"temperature\":100,\"status\":\"workingh\",\"humidity\":20}";
-        MqttMessage message = new MqttMessage(payload.getBytes());
-        message.setQos(qos);
-        MqttMessage message2 = new MqttMessage(payload2.getBytes());
-        message.setQos(qos);
-        sampleClient.publish(topicPub, message2);
-        sampleClient.publish(topicPub, message2);
-        log.info("Message is published to Mqtt Client");
+        for (int i = 0; i < 100; i++) {
+            payload = "{\"temperature\":%d,\"status\":\"workingh\",\"humidity\":20}";
+            MqttMessage message = new MqttMessage(String.format(payload, i).getBytes());
+            message.setQos(qos);
+            sampleClient.publish(topicPub, message);
+            log.info("Message is published to Mqtt Client");
+            Thread.sleep(1000);
+        }
         sampleClient.disconnect();
         log.info("Mqtt Client is Disconnected");
         // Allow some time for message delivery
-        Thread.sleep(20000);
-        HttpResponse response = restClient.get("/api/device-mgt/v1.0/events/last-known/"+deviceType+"/"+deviceId);
+        HttpResponse response = restClient.get("/api/device-mgt/v1.0/events/last-known/" + deviceType + "/" + deviceId);
         Assert.assertEquals("No published event found (mqtt)", HttpStatus.SC_OK,
                             response.getResponseCode());
-        Assert.assertTrue("Event count does not match published event count, " + response.getData() ,
-                          response.getData().contains("\"count\":2"));
+        log.error(response.getData());
+        JsonElement jsonElement = new JsonParser().parse(response.getData()).getAsJsonObject().get("count");
+        int count = jsonElement.getAsInt();
+        Assert.assertTrue("Event count does not match published event count, " + response.getData(),
+                          count > 0);
 
     }
 }
