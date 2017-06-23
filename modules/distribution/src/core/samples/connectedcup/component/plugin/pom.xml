@@ -74,7 +74,6 @@
 							org.wso2.carbon.base.*,
 							javax.xml.parsers.*;resolution:=optional
 						</Import-Package>
-
 						<Export-Package>
 							!org.coffeeking.connectedcup.plugin.internal,
 							org.coffeeking.connectedcup.plugin.*
