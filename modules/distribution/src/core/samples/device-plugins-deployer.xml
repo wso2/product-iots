@@ -33,7 +33,7 @@
     <url>http://wso2.org</url>
 
     <modules>
-        <module>../wso2/analytics/samples</module>
+        <module>../wso2/analytics/samples/device-plugins</module>
     </modules>
 
     <build>

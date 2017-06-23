@@ -1,0 +1,20 @@
+instructions.configure = \
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../../conf/device-types/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.ui_${feature.version}/configs/,target:${installFolder}/../../../conf/device-types/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../../repository/deployment/server/jaggeryapps/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.ui_${feature.version}/jaggeryapps/,target:${installFolder}/../../../repository/deployment/server/jaggeryapps/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.ui_${feature.version}/dbscripts/,target:${installFolder}/../../../dbscripts/cdm/plugins/connectedcup,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.ui_${feature.version}/datasources/,target:${installFolder}/../../../conf/datasources/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../../repository/database/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.ui_${feature.version}/database/,target:${installFolder}/../../../repository/database/,overwrite:true);\
+
+
+instructions.unconfigure = \
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../conf/device-types/connectedcup.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../dbscripts/cdm/plugins/connectedcup);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../conf/datasources/connectedcup-datasources.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/database/ConnectedCupDM_DB.h2.db);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.device-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.type-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.analytics-view);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/jaggeryapps/devicemgt/app/units/cdmf.unit.device.type.connectedcup.realtime.analytics-view);\

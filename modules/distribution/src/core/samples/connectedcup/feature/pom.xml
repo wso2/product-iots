@@ -36,7 +36,9 @@
     <url>http://wso2.org</url>
 
     <modules>
-        <module>connectedcup-feature</module>
+        <module>backend-feature</module>
+        <module>ui-feature</module>
+        <module>analytics-feature</module>
     </modules>
 
 </project>

@@ -30,11 +30,11 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.coffeeking.connectedcup.feature</artifactId>
+	<artifactId>org.coffeeking.connectedcup.backend.feature</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0</version>
 	<name>WSO2 IoTS(Device Types) - Connected Cup Feature</name>
-	<description>WSO2 IoTS(Device Types) - Connected Cup Feature</description>
+	<description>WSO2 IoTS(Device Types) - Connected Cup Backend Feature</description>
 	<url>http://wso2.org</url>
 
 	<dependencies>
@@ -74,7 +74,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>src/main/resources</outputDirectory>
+							<outputDirectory>../backend-feature/src/main/resources</outputDirectory>
 							<resources>
 								<resource>
 									<directory>resources</directory>
@@ -93,41 +93,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.coffeeking</groupId>
-                                    <artifactId>org.coffeeking.connectedcup.analytics
-                                    </artifactId>
-                                    <version>${org.coffeeking.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
-                                    </outputDirectory>
-                                    <includes>**/*</includes>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.coffeeking</groupId>
-                                    <artifactId>org.coffeeking.connectedcup.ui
-                                    </artifactId>
-                                    <version>${org.coffeeking.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/jaggeryapps/devicemgt
-                                    </outputDirectory>
-                                    <includes>**/*</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
 					<execution>
 						<id>copy-jaxrs-war</id>
 						<phase>package</phase>
@@ -209,7 +174,7 @@
 							<goal>p2-feature-gen</goal>
 						</goals>
 						<configuration>
-							<id>org.coffeeking.connectedcup</id>
+							<id>org.coffeeking.connectedcup.backend</id>
 							<propertiesFile>../../../features/etc/feature.properties</propertiesFile>
 							<adviceFile>
 								<properties>
