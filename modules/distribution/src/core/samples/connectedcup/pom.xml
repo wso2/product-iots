@@ -361,6 +361,7 @@
     <properties>
         <carbon.kernel.version>${carbon.kernel.version}</carbon.kernel.version>
         <carbon.device.mgt.version>${carbon.device.mgt.version}</carbon.device.mgt.version>
+        <org.coffeeking.version>1.0.0</org.coffeeking.version>
 
         <paho.mqtt.version>1.0.2</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
