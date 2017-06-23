@@ -878,7 +878,7 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.carbon.iot.integration.common</artifactId>
-                <version>${product.iot.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -1006,7 +1006,13 @@
             <dependency>
                 <groupId>org.wso2.iot</groupId>
                 <artifactId>org.wso2.iot.core.admin.styles</artifactId>
-                <version>${product.iot.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wso2.iot</groupId>
+                <artifactId>org.wso2.carbon.iot.core.integration.ui.pages</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <!--mobile-qsg dependencies-->
             <dependency>
