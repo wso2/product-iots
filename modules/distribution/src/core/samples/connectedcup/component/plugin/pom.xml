@@ -57,7 +57,7 @@
 					<instructions>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Name>${project.artifactId}</Bundle-Name>
-						<Bundle-Version>${carbon.device.mgt.plugin.version}</Bundle-Version>
+						<Bundle-Version>${org.coffeeking.version}</Bundle-Version>
 						<Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
 						<Private-Package>org.coffeeking.connectedcup.plugin.internal</Private-Package>
 						<Import-Package>
