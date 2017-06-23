@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-p2-profile</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.1.0-alpha</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -854,9 +854,9 @@
                             <tasks>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
-                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"/>
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" />
                                 </copy>
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true"/>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/etc/bundle-config/hadoop-client" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/analytics/spark" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server" />

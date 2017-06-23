@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.wso2.iot</groupId>
 		<artifactId>wso2iot-parent</artifactId>
-		<version>3.1.0-SNAPSHOT</version>
+		<version>3.1.0-alpha</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
@@ -697,8 +697,8 @@
 								<property name="xmldir" value="src/core/resources/web-apps/web-xml" />
 								<property name="srcdir" value="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps" />
 								<property name="wso2iothome" value="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}" />
-								<property name="wso2analyticshome" value="${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}"/>
-								<property name="wso2brokerhome" value="${basedir}/../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}"/>
+								<property name="wso2analyticshome" value="${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}" />
+								<property name="wso2brokerhome" value="${basedir}/../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}" />
 
 
 								<mkdir dir="${tempdir}" />
@@ -777,7 +777,7 @@
 								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2" />
 								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig" />
 
-								<mkdir dir="${tempdir}/registry"/>
+								<mkdir dir="${tempdir}/registry" />
 								<unzip src="${wso2iothome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" dest="${tempdir}/registry" />
 								<replace file="${tempdir}/registry/core.properties" token="dataDir=../../../../solr/data" value="dataDir=../../../solr/data" />
 								<zip destfile="${wso2analyticshome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" basedir="${tempdir}/registry" />
