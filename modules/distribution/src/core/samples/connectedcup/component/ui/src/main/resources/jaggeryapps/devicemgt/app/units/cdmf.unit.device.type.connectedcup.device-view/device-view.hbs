@@ -7,20 +7,44 @@
 {{/zone}}
 
 {{#zone "device-thumbnail"}}
-    <img src="{{@unit.publicUri}}/images/thumb.png"/>
+    <img src="{{@unit.publicUri}}/images/thumb.png" class="img-responsive"/>
 {{/zone}}
 
-{{#zone "device-opetations"}}
-    <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
-        Operations
-    </div>
+{{#zone "device-details-header"}}
+    <h1 class="device-id"
+    data-deviceid="{{device.deviceIdentifier}}"
+    data-type="{{device.type}}"
+    data-ownership="{{device.ownership}}"
+    data-owner="{{device.owner}}">
+    {{device.enrolmentInfo.owner}}'s {{device.name}}
+      <a id="device-info-tooltip" href="#" data-toggle="tooltip" title="Device Identifier: {{device.deviceIdentifier}}">
+        <i class="fw fw-info"></i>
+      </a>
+    </h1>
+    <h4>Ownership - <strong>{{device.enrolmentInfo.ownership}}</strong></h4>
+    <h4>Device is
+      <strong>
+        {{#equal device.enrolmentInfo.status "ACTIVE"}}Active{{/equal}}
+        {{#equal device.enrolmentInfo.status "INACTIVE"}}Inactive{{/equal}}
+        {{#equal device.enrolmentInfo.status "BLOCKED"}}Blocked{{/equal}}
+        {{#equal device.enrolmentInfo.status "REMOVED"}}Removed{{/equal}}
+        {{#equal device.enrolmentInfo.status "UNREACHABLE"}}Unreachable{{/equal}}
+      </strong>
+    </h4>
+{{/zone}}
 
-    <div class="add-margin-top-4x">
-        <div class="add-margin-top-4x">
-            <div class="buttons">
-                <a class="btn-operations" target="_blank"  href="{{../device.ip}}/connected-cup-agent/index.jsp?deviceOwner={{@user.username}}&tenantDomain={{@user.domain}}&deviceId={{../device.deviceIdentifier}}&token={{../device.accessToken}}" >Go To Device</a>
-            </div>
-        </div>
+
+{{#zone "device-opetations"}}
+    <div class="operation-container">
+      <div class="operation-title">
+          <h4>Device Operations</h4>
+      </div>
+      <div class="buttons">
+        <a class="btn-operations" target="_blank"  
+        href="{{../device.ip}}/connected-cup-agent/index.jsp?deviceOwner={{@user.username}}&tenantDomain={{@user.domain}}&deviceId={{../device.deviceIdentifier}}&token={{../device.accessToken}}" >
+        Go To Device
+        </a>
+      </div>
     </div>
 {{/zone}}
 
@@ -29,8 +53,6 @@
                           data-toggle="tab" aria-controls="device_statistics">Device
                                                                               Statistics</a>
     </li>
-    <li><a class="list-group-item" href="#event_log" role="tab" data-toggle="tab"
-           aria-controls="event_log">Operations Log</a></li>
 {{/zone}}
 
 {{#zone "device-view-tab-contents"}}
@@ -41,27 +63,4 @@
         {{unit "cdmf.unit.device.type.connectedcup.realtime.analytics-view" device=device}}
     </div>
 
-    <div class="panel panel-default tab-pane" id="event_log" role="tabpanel"
-         aria-labelledby="event_log">
-        <div class="panel-heading">Operations Log <span><a href="#"
-                                                           id="refresh-operations"><i
-                class="fw fw-refresh"></i></a></span></div>
-        <div class="panel-body">
-            <div id="operations-spinner" class="wr-advance-operations-init hidden">
-                <br>
-
-                <i class="fw fw-settings fw-spin fw-2x"></i>
-
-                Loading Operations Log . . .
-                <br>
-                <br>
-            </div>
-            <div id="operations-log-container">
-                <div class="panel-body">
-                    Not available yet
-                </div>
-                <br class="c-both"/>
-            </div>
-        </div>
-    </div>
 {{/zone}}
