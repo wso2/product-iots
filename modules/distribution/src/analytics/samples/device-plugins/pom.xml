@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -29,7 +29,7 @@
     <artifactId>analytics-devicetype-feature-installation</artifactId>
     <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Installing Virtual Fire Alarm, Raspberry Pi, Ardino Device Types - Analytics</name>
+    <name>Install Virtual Fire Alarm, Raspberry Pi, Ardino Device Types - Analytics</name>
     <url>http://wso2.org</url>
 
 
@@ -79,7 +79,7 @@
                             <profile>analytics-default</profile>
                             <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
                             <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
-                            <destination>\${project.basedir}/../../components</destination>
+                            <destination>\${project.basedir}/../../../components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>

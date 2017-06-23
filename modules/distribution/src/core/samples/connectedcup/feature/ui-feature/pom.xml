@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -30,31 +30,14 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>org.coffeeking.connectedcup.feature</artifactId>
+	<artifactId>org.coffeeking.connectedcup.ui.feature</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0</version>
-	<name>WSO2 IoTS(Device Types) - Connected Cup Feature</name>
-	<description>WSO2 IoTS(Device Types) - Connected Cup Feature</description>
+	<name>WSO2 IoTS(Device Types) - Connected Cup UI Feature</name>
+	<description>WSO2 IoTS(Device Types) - Connected Cup UI Feature</description>
 	<url>http://wso2.org</url>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.coffeeking</groupId>
-			<artifactId>org.coffeeking.connectedcup.plugin</artifactId>
-			<version>${org.coffeeking.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.coffeeking</groupId>
-			<artifactId>org.coffeeking.connectedcup.api</artifactId>
-			<version>${org.coffeeking.version}</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>org.coffeeking</groupId>
-			<artifactId>org.coffeeking.connectedcup.agent</artifactId>
-			<version>${org.coffeeking.version}</version>
-			<type>war</type>
-		</dependency>
 		<dependency>
 			<groupId>com.h2database.wso2</groupId>
 			<artifactId>h2-database-engine</artifactId>
@@ -74,7 +57,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>src/main/resources</outputDirectory>
+							<outputDirectory>../ui-feature/src/main/resources</outputDirectory>
 							<resources>
 								<resource>
 									<directory>resources</directory>
@@ -103,18 +86,6 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.coffeeking</groupId>
-                                    <artifactId>org.coffeeking.connectedcup.analytics
-                                    </artifactId>
-                                    <version>${org.coffeeking.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/maven-shared-archive-resources/carbonapps
-                                    </outputDirectory>
-                                    <includes>**/*</includes>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.coffeeking</groupId>
                                     <artifactId>org.coffeeking.connectedcup.ui
                                     </artifactId>
                                     <version>${org.coffeeking.version}</version>
@@ -128,33 +99,6 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-					<execution>
-						<id>copy-jaxrs-war</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.coffeeking</groupId>
-									<artifactId>org.coffeeking.connectedcup.api</artifactId>
-									<type>war</type>
-									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/maven-shared-archive-resources/webapps/</outputDirectory>
-									<destFileName>connectedcup.war</destFileName>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.coffeeking</groupId>
-									<artifactId>org.coffeeking.connectedcup.agent</artifactId>
-									<type>war</type>
-									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/maven-shared-archive-resources/webapps/</outputDirectory>
-									<destFileName>connected-cup-agent.war</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
 				</executions>
 			</plugin>
 
@@ -209,7 +153,7 @@
 							<goal>p2-feature-gen</goal>
 						</goals>
 						<configuration>
-							<id>org.coffeeking.connectedcup</id>
+							<id>org.coffeeking.connectedcup.ui</id>
 							<propertiesFile>../../../features/etc/feature.properties</propertiesFile>
 							<adviceFile>
 								<properties>
@@ -217,17 +161,6 @@
 									<propertyDef>org.eclipse.equinox.p2.type.group:true</propertyDef>
 								</properties>
 							</adviceFile>
-							<bundles>
-								<bundleDef>
-									org.coffeeking:org.coffeeking.connectedcup.plugin:${org.coffeeking.version}
-								</bundleDef>
-							</bundles>
-							<importFeatures>
-								<importFeatureDef>org.wso2.carbon.core.server:${carbon.kernel.version}
-								</importFeatureDef>
-								<importFeatureDef>org.wso2.carbon.device.mgt.server:${carbon.device.mgt.version}
-								</importFeatureDef>
-							</importFeatures>
 						</configuration>
 					</execution>
 				</executions>

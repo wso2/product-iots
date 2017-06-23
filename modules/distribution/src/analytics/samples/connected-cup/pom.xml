@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -24,17 +24,12 @@
         <version>1</version>
     </parent>
 
-    <modules>
-        <module>connectedcup</module>
-        <module>../wso2/analytics/samples/connected-cup</module>
-    </modules>
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.devicemgt-plugins</groupId>
-    <artifactId>iot-devicetype-samples</artifactId>
+    <artifactId>iot-devicetype-analytics-samples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Install Connected Cup Device Types - IoT Core</name>
+    <name>Install Connected Cup Device Types - Analytics</name>
     <url>http://wso2.org</url>
 
     <build>
@@ -51,16 +46,13 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.coffeeking:org.coffeeking.connectedcup.backend.feature:\${org.coffeeking.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.coffeeking:org.coffeeking.connectedcup.ui.feature:\${org.coffeeking.version}
+                                    org.coffeeking:org.coffeeking.connectedcup.analytics.feature:\${org.coffeeking.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -72,95 +64,19 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>default</profile>
-                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
-                            <destination>\${basedir}/../wso2/components</destination>
+                            <profile>analytics-default</profile>
+                            <metadataRepository>file:\${project.basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${project.basedir}/target/p2-repo</artifactRepository>
+                            <destination>\${project.basedir}/../../../components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <!-- Connected Cup Features -->
                                 <feature>
-                                    <id>org.coffeeking.connectedcup.ui.feature.group</id>
-                                    <version>\${org.coffeeking.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.coffeeking.connectedcup.backend.feature.group</id>
+                                    <id>org.coffeeking.connectedcup.analytics.feature.group</id>
                                     <version>\${org.coffeeking.version}</version>
                                 </feature>
                             </features>
                         </configuration>
-                    </execution>
-                    <execution>
-                        <id>manager-feature-install</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>p2-profile-gen</goal>
-                        </goals>
-                        <configuration>
-                            <profile>device-manager</profile>
-                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
-                            <destination>\${basedir}/../wso2/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <!-- Connected Cup UI Features -->
-                                <feature>
-                                    <id>org.coffeeking.connectedcup.ui.feature.group</id>
-                                    <version>\${org.coffeeking.version}</version>
-                                </feature>
-                            </features>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>backend-feature-install</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>p2-profile-gen</goal>
-                        </goals>
-                        <configuration>
-                            <profile>device-backend</profile>
-                            <metadataRepository>file:\${basedir}/target/p2-repo</metadataRepository>
-                            <artifactRepository>file:\${basedir}/target/p2-repo</artifactRepository>
-                            <destination>\${basedir}/../wso2/components</destination>
-                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
-                            <features>
-                                <!-- Connected Cup BE Features -->
-                                <feature>
-                                    <id>org.coffeeking.connectedcup.backend.feature.group</id>
-                                    <version>\${org.coffeeking.version}</version>
-                                </feature>
-                            </features>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>default-feature-install</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <replace token="false" value="true"
-                                         dir="../wso2/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
-                                    <include name="**/bundles.info"/>
-                                </replace>
-                                <replace token="false" value="true"
-                                         dir="../wso2/components/device-manager/configuration/org.eclipse.equinox.simpleconfigurator">
-                                    <include name="**/bundles.info"/>
-                                </replace>
-                                <replace token="false" value="true"
-                                         dir="../wso2/components/device-backend/configuration/org.eclipse.equinox.simpleconfigurator">
-                                    <include name="**/bundles.info"/>
-                                </replace>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -243,7 +159,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>@carbon-device-mgt-plugin-version@</carbon.device.mgt.plugin.version>
         <org.coffeeking.version>1.0.0</org.coffeeking.version>
     </properties>
 </project>

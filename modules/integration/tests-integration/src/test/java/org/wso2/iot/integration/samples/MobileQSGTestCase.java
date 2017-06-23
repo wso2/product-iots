@@ -46,6 +46,7 @@ public class MobileQSGTestCase extends TestBase {
         super.init(TestUserMode.SUPER_TENANT_ADMIN);
         username1 = "alex";
         username2 = "chris";
+        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
     @Test(description = "This test case tests the execution of QSG script, whether it executes without any exceptions")
@@ -57,7 +58,6 @@ public class MobileQSGTestCase extends TestBase {
         Runtime.getRuntime().exec(cmdArray, null, scriptFile);
         // Allow some time to finish its execution
         Thread.sleep(10000);
-        this.client = new RestClient(backendHTTPSURL, Constants.APPLICATION_JSON, accessTokenString);
     }
 
     @Test(description = "This test case tests whether user and roles are created as expected", dependsOnMethods =
@@ -104,9 +104,11 @@ public class MobileQSGTestCase extends TestBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
-        client.delete(url);
-        url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
-        client.delete(url);
+        if (client != null) {
+            String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
+            client.delete(url);
+            url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
+            client.delete(url);
+        }
     }
 }
