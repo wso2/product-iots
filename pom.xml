@@ -1663,6 +1663,8 @@
 
         <apache.httpmime.version>4.2.5</apache.httpmime.version>
         <apache.httpclient.version>4.5.2</apache.httpclient.version>
+
+        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
     <scm>
