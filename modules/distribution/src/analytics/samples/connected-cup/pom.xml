@@ -29,7 +29,7 @@
     <artifactId>iot-devicetype-analytics-samples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Installing Connected Cup Device Types - Analytics</name>
+    <name>Install Connected Cup Device Types - Analytics</name>
     <url>http://wso2.org</url>
 
     <build>

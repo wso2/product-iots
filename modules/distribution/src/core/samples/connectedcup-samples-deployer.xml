@@ -34,7 +34,7 @@
     <artifactId>iot-devicetype-samples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Installing Connected Cup Device Types - IoT Core</name>
+    <name>Install Connected Cup Device Types - IoT Core</name>
     <url>http://wso2.org</url>
 
     <build>
