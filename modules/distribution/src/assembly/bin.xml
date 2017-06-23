@@ -575,6 +575,9 @@
             <includes>
                 <include>**/**</include>
             </includes>
+            <excludes>
+                <exclude>**/*.sh*</exclude>
+            </excludes>
         </fileSet>
 
         <!-- Files required to mobile-qsg -->
@@ -1589,6 +1592,13 @@
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/samples/mobile-qsg
             </outputDirectory>
+        </file>
+        <file>
+            <source>../scripts/mobile-qsg/resources/mobile-qsg.sh</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
+            </outputDirectory>
+            <fileMode>755</fileMode>
         </file>
         <file>
             <source>
