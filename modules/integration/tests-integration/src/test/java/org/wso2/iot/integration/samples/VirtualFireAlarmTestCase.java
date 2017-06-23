@@ -70,13 +70,13 @@ public class VirtualFireAlarmTestCase extends TestBase {
             HttpResponse response = restClient
                     .post(Constants.VirtualFireAlarmConstants.ANALYTICS_ARTIFACTS_DEPLOYMENT_ENDPOINT, "");
             Assert.assertEquals(HttpStatus.SC_CREATED, response.getResponseCode());
-            // Time for deploying the carbon apps
-            Thread.sleep(30000);
         }
     }
 
     @Test(description = "This test case tests the virtual fire alarm enrollment")
     public void testEnrollment() throws Exception {
+        // Time for deploying the carbon apps
+        Thread.sleep(30000);
         RestClient client = new RestClient(backendHTTPSURL, Constants.APPLICATION_ZIP, accessTokenString);
         // Enroll an advanced agent and check whether that enrollment succeeds without issues.
         HttpResponse response = client.get(Constants.VirtualFireAlarmConstants.ENROLLMENT_ENDPOINT
@@ -130,9 +130,13 @@ public class VirtualFireAlarmTestCase extends TestBase {
         metaDataPayload.addProperty("deviceId", deviceId1);
         eventPayload.add("metaData", metaDataPayload);
         fireAlarmPayload.add("event", eventPayload);
-        MqttMessage message = new MqttMessage(fireAlarmPayload.toString().getBytes());
-        message.setQos(qos);
-        sampleClient.publish(topic, message);
+        MqttMessage message;
+        for (int i = 0; i < 100; i++) {
+            message = new MqttMessage(fireAlarmPayload.toString().getBytes());
+            message.setQos(qos);
+            sampleClient.publish(topic, message);
+            Thread.sleep(1000);
+        }
         log.info("Message is published to Mqtt Client");
         sampleClient.disconnect();
         log.info("Mqtt Client is Disconnected");
@@ -153,15 +157,19 @@ public class VirtualFireAlarmTestCase extends TestBase {
         log.info("Connected");
 
         fireAlarmPayload = PayloadGenerator.getJsonPayload(Constants.VirtualFireAlarmConstants
-                .PAYLOAD_FILE, Constants.AndroidSenseEnrollment.PUBLISH_DATA_OPERATION);
+                                                                   .PAYLOAD_FILE,
+                                                           Constants.AndroidSenseEnrollment.PUBLISH_DATA_OPERATION);
         eventPayload = fireAlarmPayload.getAsJsonObject("event");
         metaDataPayload = eventPayload.getAsJsonObject("metaData");
         metaDataPayload.addProperty("deviceId", deviceId2);
         eventPayload.add("metaData", metaDataPayload);
         fireAlarmPayload.add("event", eventPayload);
-        message = new MqttMessage(fireAlarmPayload.toString().getBytes());
-        message.setQos(qos);
-        sampleClient.publish(topic, message);
+        for (int i = 0; i < 100; i++) {
+            message = new MqttMessage(fireAlarmPayload.toString().getBytes());
+            message.setQos(qos);
+            sampleClient.publish(topic, message);
+            Thread.sleep(1000);
+        }
         log.info("Message is published to Mqtt Client");
         sampleClient.disconnect();
         log.info("Mqtt Client is Disconnected");
@@ -169,10 +177,10 @@ public class VirtualFireAlarmTestCase extends TestBase {
     }
 
     @Test(description = "Test whether the policy publishing from the server to device works", dependsOnMethods =
-            {"testEnrollment"} )
+            {"testEventPublishing"} )
     public void testPolicyPublishing() throws Exception {
         String deviceId2 = userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId2 : VirtualFireAlarmTestCase.deviceId2;
-        String topic = automationContext.getContextTenant().getDomain() + "/" + DEVICE_TYPE + "/" + deviceId2 + "/#";
+        String topic = automationContext.getContextTenant().getDomain() + "/" + DEVICE_TYPE + "/" + deviceId2 + "/operation/#";
         String clientId = deviceId2 + ":" + DEVICE_TYPE;
         HttpResponse response = restClient.post("/api/device-mgt/v1.0/policies", PayloadGenerator
                 .getJsonPayload(Constants.VirtualFireAlarmConstants.PAYLOAD_FILE,
@@ -194,8 +202,48 @@ public class VirtualFireAlarmTestCase extends TestBase {
         // Allow some time for message delivery
         Thread.sleep(20000);
         ArrayList<MqttMessage> mqttMessages = mqttSubscriberClient.getMqttMessages();
-        Assert.assertEquals("Policy published message is not received by the mqtt listener. ", 1, mqttMessages.size());
+        Assert.assertEquals("Policy published message is not received by the mqtt listener. ", 2, mqttMessages.size());
 
+    }
 
+    // Test case related to virtual fire alarm added here as the batch cron runs for every 5 minutes and rather than
+    // waiting for that we can check them in a latter test cases
+    @Test(description = "Test whether data that is published is stored in analytics event table", dependsOnMethods =
+            {"testPolicyPublishing"} )
+    public void testBatchDataPersistence() throws Exception {
+        String deviceId1 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId1 : VirtualFireAlarmTestCase.deviceId1;
+        String deviceId2 =
+                this.userMode == TestUserMode.TENANT_ADMIN ? tenantDeviceId2 : VirtualFireAlarmTestCase.deviceId2;
+
+        long MilliSecondDifference = System.currentTimeMillis() - VirtualFireAlarmTestCase.currentTime;
+        if (MilliSecondDifference < 300000) {
+            Thread.sleep(300000 - MilliSecondDifference);
+        }
+        String url = Constants.VirtualFireAlarmConstants.STATS_ENDPOINT + "/" + deviceId1;
+        url += "?from=" + (VirtualFireAlarmTestCase.currentTime - 300000)/1000 + "&to=" + System.currentTimeMillis()
+                /1000;
+        HttpResponse response = restClient.get(url);
+//        TODO:Need to verify this testcase
+//        JsonArray jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+//        Assert.assertEquals(
+//                "Published event for the device with the id " + deviceId1 + " is not inserted to "
+//                        + "analytics table", HttpStatus.SC_OK, response.getResponseCode());
+//        Assert.assertTrue(
+//                "Published event for the device with the id " + deviceId1 + " is not inserted to analytics table",
+//                jsonArray.size() > 0);
+//
+//        url = Constants.VirtualFireAlarmConstants.STATS_ENDPOINT + "/" + deviceId2;
+//        url += "?from=" + (VirtualFireAlarmTestCase.currentTime - 300000)/1000 + "&to=" + System.currentTimeMillis()
+//                /1000;
+//        response = restClient.get(url);
+//        log.info("PAYLOADXX : " + response.getData());
+//        jsonArray = new JsonParser().parse(response.getData()).getAsJsonArray();
+//        Assert.assertEquals(
+//                "Published event for the device with the id " + deviceId2 + " is not inserted to "
+//                        + "analytics table", HttpStatus.SC_OK, response.getResponseCode());
+//        Assert.assertTrue(
+//                "Published event for the device with the id " + deviceId2 + " is not inserted to analytics table",
+//                jsonArray.size() > 0);
     }
 }
