@@ -243,7 +243,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>@carbon-device-mgt-plugin-version@</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>${carbon.device.mgt.plugin.version}</carbon.device.mgt.plugin.version>
         <org.coffeeking.version>1.0.0</org.coffeeking.version>
     </properties>
 </project>
