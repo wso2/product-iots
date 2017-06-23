@@ -138,7 +138,7 @@ function doAction(data) {
             window.location = '/devicemgt/login';
         });
         showPopup();
-    } else if (data == 403) {
+    } else if (data.status == 403) {
         $(modalPopupContent).html($('#device-403-content').html());
         $('#device-403-link').click(function () {
             window.location = '/devicemgt/login';
