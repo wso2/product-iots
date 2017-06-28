@@ -100,7 +100,6 @@ goto :eof
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\oauth2.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
-    copy /y %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\authenticationendpoint.war %DIR%..\repository\deployment\server\tempwebapp\
     IF EXIST %DIR%..\repository\deployment\server\webapps @RD /S /Q %DIR%..\repository\deployment\server\webapps
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
@@ -142,7 +141,6 @@ goto :eof
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war del %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war
-    IF EXIST %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war del %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war del %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
 	mkdir %DIR%..\repository\deployment\server\axis2services

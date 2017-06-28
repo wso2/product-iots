@@ -70,6 +70,4 @@
     </PermissionConfiguration>
      -->
     <Listener className="org.wso2.carbon.device.mgt.core.config.permission.lifecycle.WebAppDeploymentLifecycleListener"/>
-    <Listener
-            className="org.wso2.carbon.dynamic.client.web.app.registration.listner.DynamicClientWebAppDeploymentLifecycleListener"/>
 </Context>
