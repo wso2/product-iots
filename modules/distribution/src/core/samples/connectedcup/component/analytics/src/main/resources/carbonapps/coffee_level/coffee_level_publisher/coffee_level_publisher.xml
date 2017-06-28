@@ -17,12 +17,9 @@
   ~ under the License.
   -->
 
-<artifacts>
-    <artifact name="coffee_level" version="1.0.0" type="carbon/application">
-		<dependency artifact="coffee_level_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="coffee_level_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="coffee_level_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="coffee_level_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-		<dependency artifact="coffee_level_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
-    </artifact>
-</artifacts>
+<eventPublisher name="coffee_level_publisher" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+    <from streamName="org.wso2.iot.devices.coffeelevel" version="1.0.0"/>
+    <mapping customMapping="disable" type="wso2event"/>
+    <to eventAdapterType="secured-websocket"/>
+</eventPublisher>
+

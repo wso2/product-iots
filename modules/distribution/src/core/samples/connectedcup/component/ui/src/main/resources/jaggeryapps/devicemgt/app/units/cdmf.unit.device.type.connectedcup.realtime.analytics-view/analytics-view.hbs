@@ -17,17 +17,30 @@
 }}
 {{unit "cdmf.unit.lib.rickshaw-graph"}}
 
-<div id="div-chart" data-websocketurl="{{websocketEndpoint}}">
+<div id="div-chartTemperature" data-websocketurl="{{websocketEndpointTemperature}}" data-sensorType="temperature">
     <div class="chartWrapper" id="chartWrapper">
-        <div id="y_axis" class="custom_y_axis" style="margin-top: -20px;">Temperature</div>
+        <div id="y_axisTemperature" class="custom_y_axis" style="margin-top: -20px;">Temperature</div>
         <div class="legend_container">
             <div id="smoother" title="Smoothing"></div>
             <div id="legend"></div>
         </div>
-        <div id="chart" class="custom_rickshaw_graph"></div>
+        <div id="chartTemperature" class="custom_rickshaw_graph"></div>
         <div class="custom_x_axis">Time</div>
     </div>
 </div>
+
+<div id="div-chartCoffeeLevel" data-websocketurl="{{websocketEndpointCoffeeLevel}}" data-sensorType="coffeelevel">
+    <div class="chartWrapper" id="chartWrapper">
+        <div id="y_axisCoffeeLevel" class="custom_y_axis" style="margin-top: -20px;">Coffee Level</div>
+        <div class="legend_container">
+            <div id="smoother" title="Smoothing"></div>
+            <div id="legend2"></div>
+        </div>
+        <div id="chartCoffeeLevel" class="custom_rickshaw_graph"></div>
+        <div class="custom_x_axis">Time</div>
+    </div>
+</div>
+
 <a class="padding-left"
    href="{{@app.context}}/device/{{device.type}}/analytics?deviceId={{device.deviceIdentifier}}&deviceName={{device.name}}">
     <span class="fw-stack">
