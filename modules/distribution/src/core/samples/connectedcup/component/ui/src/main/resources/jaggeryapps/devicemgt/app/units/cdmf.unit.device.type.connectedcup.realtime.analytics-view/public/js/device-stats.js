@@ -16,25 +16,25 @@
  * under the License.
  */
 
-var wsConnection1;
-var wsConnection2;
-var graphForSensorType1;
-var graphForSensorType2;
-var chartDataSensorType1 = [];
-var chartDataSensorType2 = [];
+var wsConnectionTemperature;
+var wsConnectionCoffeeLevel;
+var graphForSensorTypeTemperature;
+var graphForSensorTypeCoffeeLevel;
+var chartDataSensorTypeTemperature = [];
+var chartDataSensorTypeCoffeeLevel = [];
 
 var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
 $(window).load(function () {
-    drawGraph(wsConnection1, "#div-chart", "y_axis", "chart", chartDataSensorType1
-        , graphForSensorType1);
-    drawGraph(wsConnection2, "#div-chart2", "y_axis2", "chart2", chartDataSensorType2
-        , graphForSensorType2);
+    drawGraph(wsConnectionTemperature, "#div-chartTemperature", "y_axisTemperature", "chartTemperature", chartDataSensorTypeTemperature
+        , graphForSensorTypeTemperature);
+    drawGraph(wsConnectionCoffeeLevel, "#div-chartCoffeeLevel", "y_axisCoffeeLevel", "chartCoffeeLevel", chartDataSensorTypeCoffeeLevel
+        , graphForSensorTypeCoffeeLevel);
 });
 
 window.onbeforeunload = function() {
-    disconnect(wsConnection1);
-    disconnect(wsConnection2);
+    disconnect(wsConnectionTemperature);
+    disconnect(wsConnectionCoffeeLevel);
 };
 
 function drawGraph(wsConnection, placeHolder, yAxis, chat, chartData, graph) {
