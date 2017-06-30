@@ -1512,7 +1512,7 @@
 
         <!-- Carbon Device Management -->
 
-        <carbon.device.mgt.version>2.0.74-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.0.2-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[2.0.0, 3.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1520,10 +1520,10 @@
 
         <!-- Carbon Device Management Plugins-->
 
-        <carbon.device.mgt.plugin.version>3.0.41-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.0.2-SNAPSHOT</carbon.device.mgt.plugin.version>
 
         <!--MQTT Dashboard-->
-        <carbon.andes.extensions.device.mgt.api.version>3.0.43-SNAPSHOT</carbon.andes.extensions.device.mgt.api.version>
+        <carbon.andes.extensions.device.mgt.api.version>4.0.2-SNAPSHOT</carbon.andes.extensions.device.mgt.api.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.80</carbon.api.mgt.version>
