@@ -18,10 +18,14 @@
 
 package org.wso2.iot.integration.samples;
 
+import org.apache.commons.httpclient.HttpStatus;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.carbon.automation.test.utils.http.client.HttpResponse;
 import org.wso2.iot.integration.common.Constants;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
@@ -55,56 +59,54 @@ public class MobileQSGTestCase extends TestBase {
         // Allow some time to finish its execution
         Thread.sleep(10000);
     }
-//    TODO:Need to verify all QSG Testcase
-//    @Test(description = "This test case tests whether user and roles are created as expected", dependsOnMethods =
-//            {"executeQSGScript"})
-//    public void testUserRoleCreation() throws Exception {
-//        // Two users will be created with the quick start script, check whether those two users are created
-//        // successfully,
-//        String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
-//        HttpResponse response = client.get(url);
-//        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-//        url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
-//        response = client.get(url);
-//        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-//
-//        // A single role will be created with the quick start script, checking whether that role creation happens
-//        // without problem
-//        String rolename = "iotMobileUser";
-//        response = client.get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/" + rolename);
-//        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
-//    }
-//
-//    @Test(description = "This test case tests whether app-catalogue is created from qsg script", dependsOnMethods =
-//            {"executeQSGScript"})
-//    public void testMobileApp() throws Exception {
-//        RestClient appManagerRestClient = new RestClient(automationContext.getContextUrls().getWebAppURLHttps(),
-//                Constants.APPLICATION_JSON, accessTokenString);
-//        HttpResponse response = appManagerRestClient.get(Constants.QSGManagement.GET_MOBILE_APPS_ENDPONT);
-//        Assert.assertEquals("Catalog mobile app is not uploaded successfully", HttpStatus.SC_OK,
-//                response.getResponseCode());
-//        Assert.assertTrue("Catalog app addition through script is not successful",
-//                response.getData().contains("Catalog"));
-//    }
-//
-//    @Test(description = "This test case tests the policy creation through qsg script", dependsOnMethods = {"executeQSGScript"})
-//    public void testPolicyCreation() throws Exception {
-//        HttpResponse response = client.get(Constants.PolicyManagement.VIEW_POLICY_LIST_ENDPOINT + "?offset=0&limit=10");
-//        Assert.assertEquals("Policy upload view mobile-qsg script failed", HttpStatus.SC_OK,
-//                response.getResponseCode());
-//        Assert.assertTrue("Android pass-code policy is not added from qsg script",
-//                response.getData().contains("android-passcode-policy1"));
-//        Assert.assertTrue("Windows pass-code policy is not added from qsg script",
-//                response.getData().contains("windows-passcode-policy1"));
-//    }
-//
-//    @AfterClass(alwaysRun = true)
-//    public void tearDown() throws Exception {
-//        if (client != null) {
-//            String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
-//            client.delete(url);
-//            url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
-//            client.delete(url);
-//        }
-//    }
+
+    @Test(description = "This test case tests whether user and roles are created as expected", dependsOnMethods =
+            {"executeQSGScript"})
+    public void testUserRoleCreation() throws Exception {
+        // Two users will be created with the quick start script, check whether those two users are created
+        // successfully,
+        String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
+        HttpResponse response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+        url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
+        response = client.get(url);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+
+        // A single role will be created with the quick start script, checking whether that role creation happens
+        // without problem
+        String rolename = "iotMobileUser";
+        response = client.get(Constants.RoleManagement.ROLE_MANAGEMENT_END_POINT + "/" + rolename);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getResponseCode());
+    }
+
+    @Test(description = "This test case tests whether app-catalogue is created from qsg script", dependsOnMethods =
+            {"executeQSGScript"})
+    public void testMobileApp() throws Exception {
+        RestClient appManagerRestClient = new RestClient(automationContext.getContextUrls().getWebAppURLHttps(),
+                Constants.APPLICATION_JSON, accessTokenString);
+        HttpResponse response = appManagerRestClient.get(Constants.QSGManagement.GET_MOBILE_APPS_ENDPONT);
+        Assert.assertEquals(response.getResponseCode(), HttpStatus.SC_OK);
+        Assert.assertTrue(response.getData().contains("Catalog"),
+                "Catalog app addition through script is not successful");
+    }
+
+    @Test(description = "This test case tests the policy creation through qsg script", dependsOnMethods = {"executeQSGScript"})
+    public void testPolicyCreation() throws Exception {
+        HttpResponse response = client.get(Constants.PolicyManagement.VIEW_POLICY_LIST_ENDPOINT + "?offset=0&limit=10");
+        Assert.assertEquals(response.getResponseCode(), HttpStatus.SC_OK);
+        Assert.assertTrue(response.getData().contains("android-passcode-policy1"),"Android pass-code policy is not " +
+                "added from qsg script");
+        Assert.assertTrue(response.getData().contains("windows-passcode-policy1"),"Windows pass-code policy is not " +
+                "added from qsg script");
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        if (client != null) {
+            String url = Constants.UserManagement.USER_ENDPOINT + "/" + username1;
+            client.delete(url);
+            url = Constants.UserManagement.USER_ENDPOINT + "/" + username2;
+            client.delete(url);
+        }
+    }
 }
