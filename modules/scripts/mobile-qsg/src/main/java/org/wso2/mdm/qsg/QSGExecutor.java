@@ -116,7 +116,7 @@ public class QSGExecutor {
 
         System.out.println("Upload the android application ");
         //Upload the android application
-        MobileApplication application = AppOperations.uploadApplication(Constants.DeviceType.ANDROID, "catalog.apk",
+        MobileApplication application = AppOperations.uploadApplication(Constants.DeviceType.ANDROID, "nfc-app.apk",
                                                                         "application/vnd.android.package-archive");
         if (application == null) {
             System.out.println("Unable to upload the sample android application. Terminating the IoTS QSG now.");
