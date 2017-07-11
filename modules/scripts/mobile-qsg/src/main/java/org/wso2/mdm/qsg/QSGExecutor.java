@@ -132,7 +132,7 @@ public class QSGExecutor {
 
         System.out.println("Create the android application ");
         //Create application entry in publisher
-        status = AppOperations.addApplication("Catalog", application, true);
+        status = AppOperations.addApplication("NFC", application, true);
         if (!status) {
             System.out.println("Unable to create the android mobile application. Terminating the IoTS QSG now.");
             System.exit(0);
