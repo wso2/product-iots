@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -17,9 +17,6 @@
   ~ under the License.
   -->
 
-<eventPublisher name="connected_cup_publisher" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
-    <from streamName="org.wso2.iot.connectedcup" version="1.0.0"/>
-    <mapping customMapping="disable" type="wso2event"/>
-    <to eventAdapterType="secured-websocket"/>
-</eventPublisher>
-
+<artifact name="temperature_level_store" version="1.0.0" type="analytics/eventstore" serverRole="DataAnalyticsServer">
+    <file>org_wso2_iot_devices_temperature.xml</file>
+</artifact>

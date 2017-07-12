@@ -89,10 +89,16 @@ public class APIUtil {
         int tenantId = CarbonContext.getThreadLocalCarbonContext().getTenantId();
         AnalyticsDataAPI analyticsDataAPI = getAnalyticsDataAPI();
         int eventCount = analyticsDataAPI.searchCount(tenantId, tableName, query);
+        // limiting the data read from the server
+        int start = 0;
+        int dataCount = 1000;
         if (eventCount == 0) {
             return null;
+        } else if (eventCount >= dataCount){
+            start = eventCount - dataCount;
         }
-        List<SearchResultEntry> resultEntries = analyticsDataAPI.search(tenantId, tableName, query, 0, eventCount,
+
+        List<SearchResultEntry> resultEntries = analyticsDataAPI.search(tenantId, tableName, query, start, eventCount,
                                                                         sortByFields);
         List<String> recordIds = getRecordIds(resultEntries);
         AnalyticsDataResponse response = analyticsDataAPI.get(tenantId, tableName, 1, null, recordIds);

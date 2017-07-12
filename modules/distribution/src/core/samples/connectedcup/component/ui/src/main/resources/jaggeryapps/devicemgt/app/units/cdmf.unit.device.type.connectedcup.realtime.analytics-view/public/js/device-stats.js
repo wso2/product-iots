@@ -41,9 +41,9 @@ function drawGraph(wsConnection, placeHolder, yAxis, chat, chartData, graph) {
     var tNow = new Date().getTime() / 1000;
     for (var i = 0; i < 30; i++) {
         chartData.push({
-           x: tNow - (30 - i) * 15,
-           y: parseFloat(0)
-       });
+            x: tNow - (30 - i) * 15,
+            y: parseFloat(0)
+        });
     }
 
     graph = new Rickshaw.Graph({
@@ -111,6 +111,11 @@ function connect(wsConnection, target, chartData, graph, sensorType) {
             chartData.shift();
             graph.update();
         };
+    }
+    if (sensorType == "temperature") {
+        wsConnectionTemperature = wsConnection;
+    } else {
+        wsConnectionCoffeeLevel = wsConnection;
     }
 }
 
