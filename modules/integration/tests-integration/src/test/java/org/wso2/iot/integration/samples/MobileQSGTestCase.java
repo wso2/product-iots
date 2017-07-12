@@ -86,8 +86,8 @@ public class MobileQSGTestCase extends TestBase {
                 Constants.APPLICATION_JSON, accessTokenString);
         HttpResponse response = appManagerRestClient.get(Constants.QSGManagement.GET_MOBILE_APPS_ENDPONT);
         Assert.assertEquals(response.getResponseCode(), HttpStatus.SC_OK);
-        Assert.assertTrue(response.getData().contains("Catalog"),
-                "Catalog app addition through script is not successful");
+        Assert.assertTrue(response.getData().contains("NFC"),
+                "NFC app addition through script is not successful");
     }
 
     @Test(description = "This test case tests the policy creation through qsg script", dependsOnMethods = {"executeQSGScript"})
