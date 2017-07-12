@@ -28,8 +28,11 @@ var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 $(window).load(function () {
     drawGraph(wsConnectionTemperature, "#div-chartTemperature", "y_axisTemperature", "chartTemperature", chartDataSensorTypeTemperature
         , graphForSensorTypeTemperature);
-    drawGraph(wsConnectionCoffeeLevel, "#div-chartCoffeeLevel", "y_axisCoffeeLevel", "chartCoffeeLevel", chartDataSensorTypeCoffeeLevel
-        , graphForSensorTypeCoffeeLevel);
+    var millisecondsToWait = 1000;
+    setTimeout(function() {
+        drawGraph(wsConnectionCoffeeLevel, "#div-chartCoffeeLevel", "y_axisCoffeeLevel", "chartCoffeeLevel", chartDataSensorTypeCoffeeLevel
+            , graphForSensorTypeCoffeeLevel);
+    }, millisecondsToWait);
 });
 
 window.onbeforeunload = function() {
