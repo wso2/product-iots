@@ -33,5 +33,5 @@
         from DeviceCoffeeLevelData
         group by coffeelevel, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
     </Script>
-    <CronExpression>0 0/5 * * * ?</CronExpression>
+    <CronExpression>0 0/3 * * * ?</CronExpression>
 </Analytics>
