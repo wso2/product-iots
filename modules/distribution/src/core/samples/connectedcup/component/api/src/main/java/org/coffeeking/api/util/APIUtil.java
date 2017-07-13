@@ -91,7 +91,7 @@ public class APIUtil {
         int eventCount = analyticsDataAPI.searchCount(tenantId, tableName, query);
         // limiting the data read from the server
         int start = 0;
-        int dataCount = 1000;
+        int dataCount = 100;
         if (eventCount == 0) {
             return null;
         } else if (eventCount >= dataCount){
