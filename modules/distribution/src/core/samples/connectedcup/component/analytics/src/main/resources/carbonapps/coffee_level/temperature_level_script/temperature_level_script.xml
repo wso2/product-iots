@@ -31,5 +31,5 @@
         from DeviceTemperatureLevelData
         group by temperature, meta_deviceType, meta_deviceId, meta_owner, cast(meta_time/1000 as BIGINT);
     </Script>
-    <CronExpression>0 0/5 * * * ?</CronExpression>
+    <CronExpression>0 0/3c * * * ?</CronExpression>
 </Analytics>
