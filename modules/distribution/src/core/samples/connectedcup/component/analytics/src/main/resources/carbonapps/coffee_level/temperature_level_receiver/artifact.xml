@@ -17,9 +17,6 @@
   ~ under the License.
   -->
 
-<eventPublisher name="connected_cup_publisher" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
-    <from streamName="org.wso2.iot.connectedcup" version="1.0.0"/>
-    <mapping customMapping="disable" type="wso2event"/>
-    <to eventAdapterType="secured-websocket"/>
-</eventPublisher>
-
+<artifact name="temperature_level_receiver" version="1.0.0" type="event/receiver" serverRole="DataAnalyticsServer">
+    <file>temperature_level_receiver.xml</file>
+</artifact>
