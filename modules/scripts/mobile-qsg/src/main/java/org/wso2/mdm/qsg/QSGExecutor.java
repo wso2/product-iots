@@ -116,7 +116,7 @@ public class QSGExecutor {
 
         System.out.println("Upload the android application ");
         //Upload the android application
-        MobileApplication application = AppOperations.uploadApplication(Constants.DeviceType.ANDROID, "nfc-app.apk",
+        MobileApplication application = AppOperations.uploadApplication(Constants.DeviceType.ANDROID, "con-app.apk",
                                                                         "application/vnd.android.package-archive");
         if (application == null) {
             System.out.println("Unable to upload the sample android application. Terminating the IoTS QSG now.");
@@ -132,7 +132,7 @@ public class QSGExecutor {
 
         System.out.println("Create the android application ");
         //Create application entry in publisher
-        status = AppOperations.addApplication("NFC", application, true);
+        status = AppOperations.addApplication("Con-App-Android", application, true);
         if (!status) {
             System.out.println("Unable to create the android mobile application. Terminating the IoTS QSG now.");
             System.exit(0);
