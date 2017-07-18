@@ -1433,6 +1433,12 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/core/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/etc/
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
         <!-- Copying authenticators.xml -->
         <file>
             <source>
@@ -1679,6 +1685,12 @@
             <filtered>true</filtered>
         </file>
         <file>
+            <source>src/analytics/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/etc/
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
             <filtered>true</filtered>
@@ -1823,6 +1835,12 @@
             <source>src/broker/conf/carbon.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
             <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/broker/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/etc/
+            </outputDirectory>
+            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/core/README</source>
