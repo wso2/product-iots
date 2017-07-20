@@ -582,18 +582,6 @@
 
         <!-- Files required to mobile-qsg -->
 
-        <!-- Files required to server ip configuration -->
-        <fileSet>
-            <directory>../scripts/</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/scripts
-            </outputDirectory>
-            <excludes>
-            </excludes>
-        </fileSet>
-
-        <!-- Files required to mobile-qsg -->
-
         <fileSet>
             <directory>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/components/dropins

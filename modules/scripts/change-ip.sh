@@ -428,15 +428,27 @@ keytool -importkeystore -srckeystore ./tmp/AKEYSTORE.p12 -srcstoretype PKCS12 -d
 
 #########################
 # copying certificates to client trust stores
+echo ""
+echo "Copying certificates to client trust stores"
 
 # copying broker and analytics certificates to IoT core client trust store
-keytool -import -alias wso2broker -file ./tmp/b.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
-keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
+keytool -import -alias wso2broker -file ./tmp/b.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
+keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
 
 # copying core and analytics certificates to IoT broker client trust store
-keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
-keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
+keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
+keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
 
 # copying core and broker certificates to IoT analytics client trust store
-keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
-keytool -import -alias wso2analytics -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
+keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
+keytool -import -alias wso2analytics -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
+
+echo ""
+echo "Replacing IoT server public cert from iot-default.xml"
+VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbon.jks -rfc -storepass wso2carbon | tail -n +2 | tail -r | tail -n +2 | tail -r | tr -cd "[:print:]")
+echo ""
+echo "Printing certificate"
+echo "-----------------------"
+echo $VAR
+sed -i -e 's#<Certificate>.*#<Certificate>'"$VAR"'</Certificate>#g' ../conf/identity/identity-providers/iot_default.xml
+echo "Completed!!!"
