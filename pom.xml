@@ -1512,7 +1512,7 @@
         <carbon.multitenancy.version>4.6.1</carbon.multitenancy.version>
 
         <!-- Carbon Registry -->
-        <carbon.registry.version>4.6.5</carbon.registry.version>
+        <carbon.registry.version>4.6.8</carbon.registry.version>
         <!-- Carbon Governance -->
         <carbon.governance.version>4.7.8</carbon.governance.version>
 
