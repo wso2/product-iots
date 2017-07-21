@@ -42,7 +42,7 @@ Running all runtimes (IoT, Analytics, Broker)
 ==================================================================
 
 1. Extract  wso2iot-@product.version@.zip and go to the extracted directory/bin.
-2. Run start-all.sh or start-all.bat.
+2. Run broker.sh (or broker.bat), then the iot-server.sh (iot-server.bat) and finally analytics.sh (or analytics.bat).
 3. Access appropriate url for the related runtime. (For example, use  https://localhost:9443/devicemgt for the IoT Server runtime)
 
 
