@@ -1267,6 +1267,14 @@
             <destName>README.txt</destName>
             <fileMode>644</fileMode>
         </file>
+
+        <file>
+            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+
         <file>
             <source>src/core/LICENSE.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
