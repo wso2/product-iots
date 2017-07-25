@@ -1,244 +1,63 @@
-Release Notes - WSO2 IOT Server - Version 3.0.0
+<!DOCTYPE html>
+<html>
+<body>
 
-<h2>        Bug
-</h2>
+<a href="http://wso2.com/products/iot-server/">
+<img src="http://b.content.wso2.com/sites/all/common/images/product-logos/IoT-server.svg" alt="WSO2 IoT Server" />
+</a><p></p>
+
+<a href='https://opensource.org/licenses/Apache-2.0'><img src='https://img.shields.io/badge/License-Apache%202.0-blue.svg'></a><br/>
+
+<h1>Release Note - WSO2 IoT Server Version 3.1.0</h1>
+
+<h2>We are pleased to announce WSO2 IoT Server 3.1.0.</h2>
+
+<p>WSO2 IoT Server is one of the most adaptive Apache licensed open source IoT platforms available today. It provides best of breed technologies for device manufacturers to develop connected products as wellas rich integration and smart analytics capabilities for system integrators to adopt devices into systems they build.</p>
+
+<p>These capabilities involve device management, Smart Analytics, API/App management for devices, transport extensions for MQTT, XMPP and many more.</p>
+
+<h4>What's new in WSO2 IoTS 3.1.0</h4>
+
 <ul>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-181'>IOTS-181</a>] -         The Graphs are rendered incorrectly
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-182'>IOTS-182</a>] -         The units are missing from Y axis
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-222'>IOTS-222</a>] -         INSTALL.txt needs to be updated
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-262'>IOTS-262</a>] -         APIThrottleHandler Unable to find throttling info continuously printed.
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-4'>IOTS-4</a>] -         Fresh Pack - Table Not Found: X1234_DeviceGRAVITYSummaryData
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-115'>IOTS-115</a>] -         Edit Role: The domain name can be typed
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-116'>IOTS-116</a>] -         Edit Role: The user is unable to change name
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-119'>IOTS-119</a>] -         When existing role name is used to create a role no validation message is shown
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-128'>IOTS-128</a>] -         Previously selected permission tree is shown for another admin user
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-138'>IOTS-138</a>] -         Remove the admin-device-access role permission
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-144'>IOTS-144</a>] -         Operations Log: the data doesn&#39;t load
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-170'>IOTS-170</a>] -         Proper validation is not fired when an invalid domain is used to login
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-179'>IOTS-179</a>] -         Users who register from APIM Store can login to IOTS and enroll devices
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-190'>IOTS-190</a>] -         Multi Tenancy: error 500 loads on logging for the first time.
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-198'>IOTS-198</a>] -         wso2.anonymous.user in API-Store does not have permission to access custom device types API
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-202'>IOTS-202</a>] -         OAuth2BasedMQTTAuthenticator errors thrown if server is bounced while MQTT clients are publishing
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-226'>IOTS-226</a>] -         MqttException thrown when a device is pushing erroneous events
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-227'>IOTS-227</a>] -         When a device is publishing erroneous events at a high rate over MQTT other device events are dropped
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-244'>IOTS-244</a>] -         MQTT clients can authenticate/authorize using tokens generated with credentials not belonging to them
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-255'>IOTS-255</a>] -         [External APIM] https-ep in deviceConfig.properties is not populated with APIM details
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-256'>IOTS-256</a>] -         Errors thrown at HTTP Gateway profile startup
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-257'>IOTS-257</a>] -         transports not bound for HTTP Gateway profile node
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-259'>IOTS-259</a>] -         ERROR - js {} thrown from devicemgt
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-260'>IOTS-260</a>] -         Error loading properties from a file printed due to missing properties files
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-269'>IOTS-269</a>] -         [Intermittent] Force shutdown fails with errors
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-270'>IOTS-270</a>] -         Arduino device type control events are lost if the server is restarted
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-274'>IOTS-274</a>] -         [IOT] /oauth2/token cannot be called directly
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-277'>IOTS-277</a>] -         Accessing swagger definition failed with CNF
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-315'>IOTS-315</a>] -         Missing the start-all.bat and stop-all.bat files
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-339'>IOTS-339</a>] -         Error occurred while registering device management plugin &#39;android&#39;
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-369'>IOTS-369</a>] -         Add missing grant types in identity.xml
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-378'>IOTS-378</a>] -         Windows Device location is not showing in Device view page
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-391'>IOTS-391</a>] -         Notification Pane position issue
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-18'>IOTS-18</a>] -         Need to add refresh token generation in Android Sense agent.
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-103'>IOTS-103</a>] -         Grouping: need a mechanisam to add devices  to a group from the grouping page
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-108'>IOTS-108</a>] -         When user shares device policies fails with 401
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-118'>IOTS-118</a>] -         Change Role permissions: Selecting the rights need to be synced correctly
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-120'>IOTS-120</a>] -         Last name should allow space in-between when creating / editing the name
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-151'>IOTS-151</a>] -         Server startup fails when configured to use Oracle
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-168'>IOTS-168</a>] -         A role with permission assigned to a user is not functioning
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-173'>IOTS-173</a>] -         Same device can be added multiple times to the same group
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-178'>IOTS-178</a>] -         User cannot login to APIM store with IOT credentials
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-183'>IOTS-183</a>] -         Some buttons are not visible
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-193'>IOTS-193</a>] -         Policies: User is unable to add a policy
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-200'>IOTS-200</a>] -         IllegalTransactionStateException when trying to add a new policy
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-204'>IOTS-204</a>] -         Duplicate log4j.properties file in CARBON_HOME/repository
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-212'>IOTS-212</a>] -         [External APIM] NPE thrown when downloading virtual fire alarm, rasp pi and arduino agents
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-218'>IOTS-218</a>] -         Group: when a device is removed from the group the device is completely removed from the devices list
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-232'>IOTS-232</a>] -         Multi Tenancy: error 500 loads when user access the system
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-236'>IOTS-236</a>] -         Sharing a group fails silently if there is group with the same name and no roles are selected
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-239'>IOTS-239</a>] -         SSO failing due to getting the access token from APIM
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-254'>IOTS-254</a>] -         samples-deployer build fails with missing dependency
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-263'>IOTS-263</a>] -         [UI] Same device can be added to a group multiple times
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-344'>IOTS-344</a>] -         Need to remove Android IOT gadget from IoT Core Dashboard
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-346'>IOTS-346</a>] -         Cannot view devices when registered as a new user
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-356'>IOTS-356</a>] -         When UI is configured to use Gateway, Cannot Login
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-365'>IOTS-365</a>] -         Make Policy Management to be part of device management
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-366'>IOTS-366</a>] -         Dynamic values for push notification needs to have default values
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-137'>IOTS-137</a>] -         -Detup fails, logging exceptions
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-151'>IOTS-151</a>] -         Server startup fails when configured to use Oracle
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-160'>IOTS-160</a>] -         Although two roles are shown in roles section several roles are shown when assigning to users
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-172'>IOTS-172</a>] -         The db scripts are not executed with -Dsetup
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-176'>IOTS-176</a>] -          Creating a New Device Type - device-deployer build failed
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-177'>IOTS-177</a>] -         Device types fail to register to IOTS when configured with Oracle db
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-184'>IOTS-184</a>] -         Windows startup error on hadoop
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-195'>IOTS-195</a>] -         Single sign-on(SSO) cannot enable Between devicemgt and DS
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-201'>IOTS-201</a>] -         DashboardDeployer Gadget directory copying to Wrong path
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-316'>IOTS-316</a>] -         Publisher and store apps are not working
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-319'>IOTS-319</a>] -         Implement enrolment functionality for AndroidSens
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-325'>IOTS-325</a>] -         Unable to delete policies associated with a group
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-330'>IOTS-330</a>] -         Policy not added for Virtual firealarm
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-332'>IOTS-332</a>] -         Devices listing page doesn&#39;t honor analyticsEnabled and groupingEnabled configs
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-333'>IOTS-333</a>] -         Devices listing page doesn&#39;t honor analyticsEnabled and groupingEnabled configs
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-335'>IOTS-335</a>] -         View Dashboard Permissions missing in the role permission tree
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-337'>IOTS-337</a>] -         Permissions (except device-mgt permissions) added through carbon console gets removed when adding permissions through deviceMgt UI
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-340'>IOTS-340</a>] -         NPE for username thrown on Broker
-    </li>
-</ul>
+  <li>Complete API driven device type definition eliminating the necessity to create deployable plugins</li>
+  <li>Geo-fencing and alerting as a reusable functionality</li>
+  <li>Redesigned device overview page for better user experience</li>
+  <li>Improved product profiles for scalable deployment</li>
+  <li>Performance enhancements</li>
+  <li>Enhancements to prebuilt agents</li>
+</ul>  
 
-<h2>        Task
-</h2>
-<ul>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-292'>IOTS-292</a>] -         Migrating to synapse gateway
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-381'>IOTS-381</a>] -         device type listing fails when only windows and android features are installed
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-363'>IOTS-363</a>] -         Windows and IOS enrollment related UI page Logos (Wso2 EMM) should be changed into wso2 IOT
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-307'>IOTS-307</a>] -         Stabilize Android Sense + Integrating with new dashboard
-    </li>
-</ul>
+<h4>Documentation</h4>
 
-<h2>        Improvement
-</h2>
-<ul>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-145'>IOTS-145</a>] -         Remove the second confirmation message to remove a user or role
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-282'>IOTS-282</a>] -         Distributed setup - device-key-manager node gives 405 when try to access /devicemgt
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-370'>IOTS-370</a>] -         Move adapter configs as global configs
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-374'>IOTS-374</a>] -         Updating font wso2 to newest version
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-379'>IOTS-379</a>] -         Modal markup fixes
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-382'>IOTS-382</a>] -         Windows 10 Reboot operation support
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-383'>IOTS-383</a>] -         Modal opening for multiple times
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-390'>IOTS-390</a>] -         Missing action buttons on details views
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-392'>IOTS-392</a>] -         Inconsistent notification pane messege
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-394'>IOTS-394</a>] -         Data table selection issue
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-397'>IOTS-397</a>] -         Advance Search for devices view
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-171'>IOTS-171</a>] -         Register User Form: username message
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-187'>IOTS-187</a>] -         The UI for Role creation should have an option for the user to tick if he wants to have the group name prefix added
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-271'>IOTS-271</a>] -         Viewing Group Details
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-273'>IOTS-273</a>] -         about.html is for UES
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-283'>IOTS-283</a>] -         Distributed Setup - mqtt profile - Class not found error
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-306'>IOTS-306</a>] -         Refactoring permission to scope mapping
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-348'>IOTS-348</a>] -         OOTB H2 needs to be shared with DAS and Core
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-351'>IOTS-351</a>] -         Windows 10 Device Location support
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-352'>IOTS-352</a>] -         CDMF Android agent must use the new gateway DCR endpoints
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-362'>IOTS-362</a>] -         UI configurations need to refactor
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-368'>IOTS-368</a>] -         Federated login page should be compatible with Windows 10 Laptop
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-334'>IOTS-334</a>] -         Add three buttons to improve device enrollment screens
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-336'>IOTS-336</a>] -         The UI to download the Android Agent uses the old EMM UI
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-338'>IOTS-338</a>] -         Windows 10 MDM support
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-341'>IOTS-341</a>] -         Re-word message when selecting roles for group sharing
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-342'>IOTS-342</a>] -         Re-word the message for adding users to the role when sharing a group with users
-    </li>
-</ul>
+Documentations: <a href='https://docs.wso2.com/display/IoTS310/WSO2+IoT+Server+Documentation'> WSO2 IoT Server Documentation</a> 
+
+<h4>Known Issues</h4>
+
+The known set of issues this version can be found <a href='https://github.com/wso2/product-iots/issues?q=is%3Aopen+is%3Aissue+label%3A3.1.0-RC1'> here.</a> 
+
+<h3>Engaging with Community</h3>
+
+<h4>Mailing Lists</h4>
+
+<p>Join our mailing list and correspondence with the developers directly.</p>
+
+<p>Developer list: <a href="mailto:dev@wso2.org">dev@wso2.org</a> | <a href="mailto:dev-request@wso2.org?subject=subscribe">Subscribe</a> | <a href="http://mail.wso2.org/mailarchive/dev/">Mail Archive</a></p>
+
+<h4>Reporting Issues</h4>
+
+<p>We encourage you to report issues, documentation faults and feature requests regarding WSO2 IoT Server through <a href="https://github.com/wso2/product-iots/issues">WSO2 IoT GIT Issues</a>.</p>
+
+<h4>Discussion Forums</h4>
+
+<p>We encourage you to use <a href="http://stackoverflow.com/questions/tagged/wso2iots%20or%20wso2emm%20or%20wso2iot%20or%20wso2-emm">stackoverflow</a> to engage with developers as well as other users.</p>
+
+<p>For more information about WSO2 IoT Server, please see <a href="http://wso2.com/products/iot-server">http://wso2.com/products/iot-server</a> or visit the <a href="http://wso2.com/library/">WSO2 Oxygen Tank</a> developer portal for additional resources.</p>
+
+<p>Thank you for your interest in WSO2 IoT Server.</p>
+
+<p><strong><em>The WSO2 IoT Server Team</em></strong></p>
+
+</body>
+</html>
 
 
-<h2>        Sub-task
-</h2>
-<ul>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-354'>IOTS-354</a>] -         Test Android with Gateway
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-355'>IOTS-355</a>] -         Test Windows with Gateway
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-359'>IOTS-359</a>] -         Re-Enable Integration tests for the new IOT pack.
-    </li>
-    <li>[<a href='https://wso2.org/jira/browse/IOTS-360'>IOTS-360</a>] -         Modify the existing tests and make them working for the current IOT pack.
-    </li>
-</ul>

@@ -154,6 +154,7 @@ rem ----------------- Execute The Requested Command ----------------------------
 cd %CARBON_HOME%
 
 rem ------------------ Remove tmp folder on startup -----------------------------
+IF NOT EXIST %CARBON_HOME%\tmp mkdir %CARBON_HOME%\tmp\work
 set TMP_DIR=%CARBON_HOME%\tmp
 cd "%TMP_DIR%"
 del *.* /s /q > nul
