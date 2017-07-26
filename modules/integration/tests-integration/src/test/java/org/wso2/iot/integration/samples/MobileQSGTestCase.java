@@ -86,7 +86,7 @@ public class MobileQSGTestCase extends TestBase {
                 Constants.APPLICATION_JSON, accessTokenString);
         HttpResponse response = appManagerRestClient.get(Constants.QSGManagement.GET_MOBILE_APPS_ENDPONT);
         Assert.assertEquals(response.getResponseCode(), HttpStatus.SC_OK);
-        Assert.assertTrue(response.getData().contains("Con-App-Android"),
+        Assert.assertTrue(response.getData().contains("WSO2Con-Android"),
                 "Con-App-Android addition through script is not successful");
     }
 

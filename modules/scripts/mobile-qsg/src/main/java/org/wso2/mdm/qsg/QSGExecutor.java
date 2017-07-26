@@ -132,7 +132,7 @@ public class QSGExecutor {
 
         System.out.println("Create the android application ");
         //Create application entry in publisher
-        status = AppOperations.addApplication("Con-App-Android", application, true);
+        status = AppOperations.addApplication("WSO2Con-Android", application, true);
         if (!status) {
             System.out.println("Unable to create the android mobile application. Terminating the IoTS QSG now.");
             System.exit(0);
@@ -160,7 +160,7 @@ public class QSGExecutor {
 
         System.out.println("Create the iOS application ");
         //Create application entry in publisher
-        status = AppOperations.addApplication("WSO2Con", iOSApplication, true);
+        status = AppOperations.addApplication("WSO2Con-iOS", iOSApplication, true);
         if (!status) {
             System.out.println("Unable to create the iOS mobile application. Terminating the IoTS QSG now.");
             System.exit(0);
