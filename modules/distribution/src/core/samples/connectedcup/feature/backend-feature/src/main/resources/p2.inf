@@ -1,0 +1,16 @@
+instructions.configure = \
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../../repository/deployment/server/webapps/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.backend_${feature.version}/webapps/,target:${installFolder}/../../../repository/deployment/server/webapps/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.backend_${feature.version}/dbscripts/,target:${installFolder}/../../../dbscripts/cdm/plugins/connectedcup,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.backend_${feature.version}/datasources/,target:${installFolder}/../../../conf/datasources/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../../repository/database/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.backend_${feature.version}/database/,target:${installFolder}/../../../repository/database/,overwrite:true);\
+
+instructions.unconfigure = \
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/webapps/connectedcup.war);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/webapps/connected-cup-agent.war);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/webapps/connectedcup);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/deployment/server/webapps/connected-cup-agent);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../dbscripts/cdm/plugins/connectedcup);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../conf/datasources/connectedcup-datasources.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../repository/database/ConnectedCupDM_DB.h2.db);\

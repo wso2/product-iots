@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--configuration bit values should be given in Mega Bytes (1KB = 1024 bytes, 1MB = 1024 KB, 1GB = 1024 MB), CPU value in MHz-->
+<Configuration enabled="true">
+    <!--Configuration Validators to validate system configs against recommended config settings-->
+    <Validator class="org.wso2.carbon.core.bootup.validator.SystemValidator">
+        <Parameter id="CPU">800</Parameter>
+        <Parameter id="RAM">2047</Parameter>
+        <Parameter id="swap">2047</Parameter>
+        <Parameter id="freeDisk">1024</Parameter>
+        <Parameter id="ulimit">4096</Parameter>
+        <Parameter id="certFingerprint">02:FB:AA:5F:20:64:49:4A:27:29:55:71:83:F7:46:CD</Parameter>
+    </Validator>
+    <Validator class="org.wso2.carbon.core.bootup.validator.JVMValidator">
+        <Parameter id="initHeapSize">256</Parameter>
+        <Parameter id="maxHeapSize">512</Parameter>
+        <Parameter id="maxPermGenSize">256</Parameter>
+    </Validator>
+    <Validator class="org.wso2.carbon.core.bootup.validator.RequiredSystemPropertiesValidator">
+        <Parameter id="p1">carbon.home</Parameter>
+        <Parameter id="p2">carbon.config.dir.path</Parameter>
+        <Parameter id="p3">axis2.home</Parameter>
+    </Validator>
+    <!--Validator class="org.wso2.carbon.core.bootup.validator.SupportedOSValidator">
+        <Parameter id="os1">Linux</Parameter>
+        <Parameter id="os2">Unix</Parameter>
+        <Parameter id="os3">Mac OS</Parameter>
+        <Parameter id="os4">Windows Server 2003</Parameter>
+        <Parameter id="os5">Windows XP</Parameter>
+        <Parameter id="os6">Windows Vista</Parameter>
+        <Parameter id="os7">Windows 7</Parameter>
+        <Parameter id="os8">Mac OS X</Parameter>
+        <Parameter id="os9">Windows Server 2008</Parameter>
+        <Parameter id="os10">Windows Server 2008 R2</Parameter>
+        <Parameter id="os11">AIX</Parameter>
+    </Validator-->
+</Configuration>

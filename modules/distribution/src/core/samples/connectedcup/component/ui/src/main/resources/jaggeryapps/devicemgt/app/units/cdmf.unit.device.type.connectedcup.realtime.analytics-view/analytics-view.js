@@ -35,10 +35,16 @@ function onRequest(context) {
         if (tokenPair) {
             token = tokenPair.accessToken;
         }
-        websocketEndpoint = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.temperature/1.0.0?"
-            + "deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type;
+        websocketEndpointTemperature = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.temperature/1.0.0?"
+            + "deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type+ "&websocketToken=" + token;
+        websocketEndpointCoffeeLevel = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.coffeelevel/1.0.0?"
+            + "deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type+ "&websocketToken=" + token;
         var websocketToken= {'name':'websocket-token','value': token, 'path':'/', "maxAge":18000};
         response.addCookie(websocketToken);
     }
-    return {"device": device, "websocketEndpoint": websocketEndpoint};
+    return {
+        "device": device,
+        "websocketEndpointTemperature": websocketEndpointTemperature,
+        "websocketEndpointCoffeeLevel": websocketEndpointCoffeeLevel
+    };
 }

@@ -21,6 +21,7 @@ package org.wso2.mdm.qsg.utils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -74,14 +75,21 @@ public class QSGUtils {
     private static ClientCredentials getClientCredentials() {
         ClientCredentials clientCredentials = null;
         HashMap<String, String> headers = new HashMap<String, String>();
-        String dcrEndPoint = EMMQSGConfig.getInstance().getDcrEndPoint();
+        EMMQSGConfig emmqsgConfig = EMMQSGConfig.getInstance();
+        String dcrEndPoint = emmqsgConfig.getDcrEndPoint();
         //Set the DCR payload
         JSONObject obj = new JSONObject();
-        obj.put("owner", "admin");
-        obj.put("clientName", "qsg");
-        obj.put("grantType", "refresh_token password client_credentials");
-        obj.put("tokenScope", "user:view,user:manage,user:admin:reset-password,role:view,role:manage,policy:view," +
-                              "policy:manage,application:manage,appm:create,appm:publish,appm:update,appm:read");
+        JSONArray arr = new JSONArray();
+        arr.add("android");
+        arr.add("device_management");
+        obj.put("applicationName", "qsg");
+        obj.put("tags", arr);
+        obj.put("isAllowedToAllDomains", false);
+        obj.put("isMappingAnExistingOAuthApp", false);
+        String authorizationStr = emmqsgConfig.getUsername() + ":" + emmqsgConfig.getPassword();
+        String authHeader = "Basic " + new String(Base64.encodeBase64(authorizationStr.getBytes()));
+        headers.put(Constants.Header.AUTH, authHeader);
+
         //Set the headers
         headers.put(Constants.Header.CONTENT_TYPE, Constants.ContentType.APPLICATION_JSON);
         HTTPResponse httpResponse = HTTPInvoker.sendHTTPPost(dcrEndPoint, obj.toJSONString(), headers);

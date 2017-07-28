@@ -28,6 +28,8 @@
 	<property key="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
 	<property key="username">admin</property>
 	<property key="password">admin</property>
+	<property key="contentValidator">deviceid-topic-content-validator</property>
+	<property key="cleanSession">true</property>
 </adapterConfig>]]></value>
 	</add>
 </processor>

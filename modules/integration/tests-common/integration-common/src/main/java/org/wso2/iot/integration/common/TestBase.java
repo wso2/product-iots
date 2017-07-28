@@ -35,12 +35,13 @@ public class TestBase {
     protected String backendHTTPSURL;
     protected String backendHTTPURL;
     protected String accessTokenString;
+    protected String accessToken;
     protected TestUserMode userMode;
 
     protected void init(TestUserMode userMode) throws Exception {
         automationContext = new AutomationContext(Constants.AUTOMATION_CONTEXT, userMode);
         String tenantDomain = automationContext.getContextTenant().getDomain();
-                backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps().replace("9443", String.valueOf(Constants
+        backendHTTPSURL = automationContext.getContextUrls().getWebAppURLHttps().replace("9443", String.valueOf(Constants
                 .HTTPS_GATEWAY_PORT)).replace("/t/" + tenantDomain , "");
         backendHTTPURL = automationContext.getContextUrls().getWebAppURL().replace("9763", String.valueOf(Constants
                 .HTTP_GATEWAY_PORT)).replace("/t/" + tenantDomain , "");
@@ -48,9 +49,9 @@ public class TestBase {
         byte[] bytesEncoded = Base64
                 .encodeBase64((currentUser.getUserName() + ":" + currentUser.getPassword()).getBytes());
         String encoded = new String(bytesEncoded);
-        accessTokenString = "Bearer " + OAuthUtil
-                .getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
-                        currentUser.getPassword());
+        accessToken = OAuthUtil.getOAuthTokenPair(encoded, backendHTTPSURL, backendHTTPSURL, currentUser.getUserName(),
+                currentUser.getPassword());
+        accessTokenString = "Bearer " + accessToken;
     }
 
     protected void initPublisher(String productGroupName, String instanceName,

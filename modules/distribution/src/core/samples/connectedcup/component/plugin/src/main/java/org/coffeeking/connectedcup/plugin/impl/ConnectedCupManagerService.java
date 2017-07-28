@@ -20,28 +20,25 @@ package org.coffeeking.connectedcup.plugin.impl;
 
 import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
 import org.wso2.carbon.base.MultitenantConstants;
-import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
 import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
+import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
+import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
 import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
-import org.wso2.carbon.device.mgt.common.app.mgt.Application;
-import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManagementException;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
-import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
 import org.wso2.carbon.device.mgt.common.policy.mgt.PolicyMonitoringManager;
+import org.wso2.carbon.device.mgt.common.pull.notification.PullNotificationSubscriber;
 import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
 
-import java.util.List;
+public class ConnectedCupManagerService implements DeviceManagementService {
+    private DeviceManager deviceManager;
 
-public class ConnectedCupManagerService implements DeviceManagementService{
-	private DeviceManager deviceManager;
-
-	@Override
-	public String getType() {
-		return ConnectedCupConstants.DEVICE_TYPE;
-	}
+    @Override
+    public String getType() {
+        return ConnectedCupConstants.DEVICE_TYPE;
+    }
 
     @Override
     public OperationMonitoringTaskConfig getOperationMonitoringConfig() {
@@ -49,33 +46,47 @@ public class ConnectedCupManagerService implements DeviceManagementService{
     }
 
     @Override
-	public void init() throws DeviceManagementException {
-		this.deviceManager=new ConnectedCupManager();
-	}
+    public void init() throws DeviceManagementException {
+        this.deviceManager = new ConnectedCupManager();
+    }
 
-	@Override
-	public DeviceManager getDeviceManager() {
-		return deviceManager;
-	}
+    @Override
+    public DeviceManager getDeviceManager() {
+        return deviceManager;
+    }
 
-	@Override
-	public ApplicationManager getApplicationManager() {
-		return null;
-	}
+    @Override
+    public ApplicationManager getApplicationManager() {
+        return null;
+    }
 
-	@Override
-	public ProvisioningConfig getProvisioningConfig() {
-		return new ProvisioningConfig(MultitenantConstants.SUPER_TENANT_DOMAIN_NAME, false);
-	}
+    @Override
+    public ProvisioningConfig getProvisioningConfig() {
+        return new ProvisioningConfig(MultitenantConstants.SUPER_TENANT_DOMAIN_NAME, false);
+    }
 
-	@Override
-	public PushNotificationConfig getPushNotificationConfig() {
-		return null;
-	}
+    @Override
+    public PushNotificationConfig getPushNotificationConfig() {
+        return null;
+    }
 
     @Override
     public PolicyMonitoringManager getPolicyMonitoringManager() {
         return null;
     }
 
+    @Override
+    public DeviceStatusTaskPluginConfig getDeviceStatusTaskPluginConfig() {
+        return null;
+    }
+
+    @Override
+    public InitialOperationConfig getInitialOperationConfig() {
+        return null;
+    }
+
+    @Override
+    public PullNotificationSubscriber getPullNotificationSubscriber() {
+        return null;
+    }
 }

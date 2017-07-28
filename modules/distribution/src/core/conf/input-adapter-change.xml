@@ -15,6 +15,7 @@
 	<property key="tokenUrl">https://${iot.gateway.host}:${iot.gateway.https.port}/token</property>
 	<property key="deviceMgtServerUrl">https://${iot.gateway.host}:${iot.gateway.https.port}</property>
 	<property key="tokenRefreshTimeOffset">100</property>
+	<property key="contentValidator">iot-http</property>
 </adapterConfig>
 
 <adapterConfig type="oauth-mqtt">
@@ -28,6 +29,8 @@
 	<property key="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
 	<property key="username">admin</property>
 	<property key="password">admin</property>
+	<property key="contentValidator">deviceid-topic-content-validator</property>
+	<property key="cleanSession">true</property>
 </adapterConfig>]]></value>
 	</add>
 </processor>

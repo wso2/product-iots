@@ -63,8 +63,6 @@ public class AnalyticsServerExtension extends ExecutionListenerExtension {
         try {
             if (executionEnvironment.equalsIgnoreCase(ExecutionEnvironment.STANDALONE.name())) {
                 String carbonHome = serverManager.startServer("analytics");
-                log.info(carbonHome);
-                System.setProperty(ExtensionConstants.CARBON_HOME, carbonHome);
             }
         } catch (Exception e) {
             handleException("Fail to start carbon server ", e);

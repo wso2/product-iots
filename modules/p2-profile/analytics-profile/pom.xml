@@ -116,9 +116,6 @@
                                 <!-- END - Analytics features -->
 
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.cdmf.analytics.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.analytics.gadget.template.feature:${carbon.analytics.common.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -392,8 +389,12 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.execution.json.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
 								<featureArtifactDef>
-                                    org.wso2.carbon.identity.carbon.auth.mutualssl:org.wso2.carbon.identity.authenticator.mutualssl.feature:${identity.carbon.auth.mutual.ssl.version}
+									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature:${carbon.device.mgt.plugin.version}
 								</featureArtifactDef>
+                                <!-- GPL Siddhi Extension Script for Geo Fencing -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.gpl.siddhi.extension.geo.script.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -806,12 +807,6 @@
                                     <id>org.wso2.carbon.identity.jwt.client.extension.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
-
-                                <!-- IoT Analytics Features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.cdmf.analytics.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.analytics.gadget.template.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
@@ -831,6 +826,18 @@
                                     <id>org.wso2.extension.siddhi.execution.json.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+
+								<!--android sense analytics feature-->
+								<feature>
+									<id>org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature.group</id>
+									<version>${carbon.device.mgt.plugin.version}</version>
+								</feature>
+                                
+                                <!-- GPL Siddhi Extension Script for Geo Fencing -->
+                                <feature>
+                                    <id>org.wso2.gpl.siddhi.extension.geo.script.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -847,9 +854,9 @@
                             <tasks>
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
-                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"/>
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" />
                                 </copy>
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true"/>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/etc/bundle-config/hadoop-client" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/analytics/spark" />
                                 <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server" />

@@ -1,7 +1,7 @@
 @echo off
 
 REM ---------------------------------------------------------------------------
-REM        Copyright 2005-2009 WSO2, Inc. http://www.wso2.org
+REM        Copyright 2017 WSO2, Inc. http://www.wso2.org
 REM
 REM  Licensed under the Apache License, Version 2.0 (the "License");
 REM  you may not use this file except in compliance with the License.
@@ -154,6 +154,7 @@ rem ----------------- Execute The Requested Command ----------------------------
 cd %CARBON_HOME%
 
 rem ------------------ Remove tmp folder on startup -----------------------------
+IF NOT EXIST %CARBON_HOME%\tmp mkdir %CARBON_HOME%\tmp\work
 set TMP_DIR=%CARBON_HOME%\tmp
 cd "%TMP_DIR%"
 del *.* /s /q > nul

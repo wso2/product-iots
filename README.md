@@ -7,13 +7,13 @@
 # Welcome to WSO2 IoT Server
 
 <a href='https://opensource.org/licenses/Apache-2.0'><img src='https://img.shields.io/badge/License-Apache%202.0-blue.svg'></a><br/>
-<a href='https://wso2.org/jenkins/job/products/job/product-iots__java8/'><img src='https://wso2.org/jenkins/job/products/job/product-iots__java8/badge/icon'></a> - Java8
+<a href='https://wso2.org/jenkins/job/products/job/product-iots/'><img src='https://wso2.org/jenkins/job/products/job/product-iots/badge/icon'></a>
 
 WSO2 IoT Server is a complete solution that enables device manufacturers and enterprises to connect and manage their devices, build apps, manage events, secure devices and data, and visualize sensor data in a scalable manner.
 
 It also offers a complete and secure enterprise mobility management (EMM/MDM) solution that aims to address mobile computing challenges faced by enterprises today. Supporting iOS, Android, and Windows devices, it helps organizations deal with both corporate owned, personally enabled (COPE) and employee-owned devices with the bring your own device (BYOD) concept.
 
-WSO2 IoT Server comes with advanced analytics, enabling users to analyze speed, proximity and geo-fencing information of devices including details of those in motion and stationary state.
+WSO2 IoT Server comes with advanced analytics, enabling users to analyze speed, proximity, and geo-fencing information of devices including details of those in motion and stationary state.
 
 Find the online documentation at : 
 http://docs.wso2.com/iot-server.
@@ -27,11 +27,11 @@ http://docs.wso2.com/iot-server.
 * Share device operations/data with other users
 * Distribute and manage applications/firmware of devices
 * Edge computing powered by the WSO2 Complex Event Processor (CEP) streaming engine (Siddhi - https://github.com/wso2/siddhi)
-* Out of the Box support for some known device types such as Raspberry Pi, Arduino Uno,...etc
+* Out of the Box support for some known device types such as Raspberry Pi, Arduino Uno etc.
 * Supports mobile platforms such as Android, Windows, and iOS.
 
 #### Mobile Device and App Management
-* Implement self-service device enrollment and management for iOS, Android and Windows devices
+* Implement self-service device enrollment and management for iOS, Android, and Windows devices
 * Provide policy-driven device and profile management for security, data, and device features
 * Enable compliance monitoring for applied policies on devices and role-based access control
 * Provision/de-provision apps to multiple enrolled devices per user and to enrolled devices based on roles
@@ -58,16 +58,16 @@ http://docs.wso2.com/iot-server.
 * Support for SCEP protocol (encryption and authenticity)
 
 ### How to Run
-* Extract the downloaded wso2iot-3.0.0.zip file; this will create a folder named ‘wso2iot-3.0.0’.
-* IoT Server comes with three runnable components namely broker, analytics and core. Start these components in following order by executing wso2server.sh [.bat]
-    * wso2iot-3.0.0/broker/bin
-    * wso2iot-3.0.0/core/bin
-    * wso2iot-3.0.0/analytics/bin
+* Extract the downloaded wso2iot-3.1.0.zip file; this will create a folder named ‘wso2iot-3.1.0’.
+* IoT Server comes with three runnable components namely broker, core, and analytics. Start these components in following order by executing by executing the following scripts:
+    * wso2iot-3.1.0//bin/broker.sh [.bat]
+    * wso2iot-3.1.0/bin/iot-server.sh [.bat]
+    * wso2iot-3.1.0/bin/analytics.sh [.bat]
 
 ### How to Contribute
 
 * WSO2 IoT Server code is hosted in [GitHub](https://github.com/wso2/product-iots).
-* Please report issues at [IoTS JIRA](https://wso2.org/jira/browse/IOTS) and Send your pull requests to [development branch](https://github.com/wso2/product-iots).
+* Please report issues at [IoT Server Git Issues](https://github.com/wso2/product-iots/issues) and Send your pull requests to [development branch](https://github.com/wso2/product-iots).
 
 ### Contact us
 

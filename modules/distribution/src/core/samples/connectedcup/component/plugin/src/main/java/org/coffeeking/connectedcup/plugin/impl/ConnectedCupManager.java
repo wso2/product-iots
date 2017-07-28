@@ -251,5 +251,4 @@ public class ConnectedCupManager implements DeviceManager {
         }
         return devices;
     }
-
 }
