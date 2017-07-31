@@ -14,6 +14,8 @@
         <property key="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
         <property key="username">admin</property>
 		<property key="password">admin</property>
+		<property key="qos">2</property>
+		<property key="clearSession">true</property>
     </adapterConfig>
 
     <adapterConfig type="secured-websocket">
@@ -33,7 +35,6 @@
         <property key="username">admin</property>
         <property key="password">admin</property>
         <!--websocket connection permissions which are validated for grouping (can have multiple permission.)-->
-        <property key="statsPermission">/permission/admin/device-mgt/realtime_analytics</property>
         <!--offset time from expiry time to trigger refresh call (in seconds)-->
         <property key="tokenRefreshTimeOffset">100</property>
     </adapterConfig>]]></value>

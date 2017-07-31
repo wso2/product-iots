@@ -23,5 +23,11 @@
 		<dependency artifact="coffee_level_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
 		<dependency artifact="coffee_level_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
 		<dependency artifact="coffee_level_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="coffee_level_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="temperature_level_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="temperature_level_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="temperature_level_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="temperature_level_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+		<dependency artifact="temperature_level_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
     </artifact>
 </artifacts>

@@ -50,7 +50,7 @@ import javax.ws.rs.core.Response;
                 }
         ),
         tags = {
-                @Tag(name = "connectedcup", description = "")
+                @Tag(name = "connectedcup,device_management", description = "")
         }
 )
 @Scopes(

@@ -304,6 +304,7 @@
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
             </value>
           </objProp>
           <stringProp name="filename">/home/ace/Desktop/results_multi_user_multi_tenancy.jtl</stringProp>
@@ -2099,73 +2100,6 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
           <stringProp name="HTTPSampler.path">/api/device-mgt/android/v1.0/devices/d24f870f390352a41000${DeviceID}/applications</stringProp>
-          <stringProp name="HTTPSampler.method">PUT</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Android Device Management - PUT Pending Operations" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">[&#xd;
-  {&#xd;
-    &quot;code&quot;: &quot;aaa&quot;,&#xd;
-    &quot;properties&quot;: {},&#xd;
-    &quot;type&quot;: &quot;CONFIG&quot;,&#xd;
-    &quot;id&quot;: 0,&#xd;
-    &quot;status&quot;: &quot;IN_PROGRESS&quot;,&#xd;
-    &quot;control&quot;: &quot;REPEAT&quot;,&#xd;
-    &quot;receivedTimeStamp&quot;: &quot;string&quot;,&#xd;
-    &quot;createdTimeStamp&quot;: &quot;string&quot;,&#xd;
-    &quot;payLoad&quot;: {},&#xd;
-    &quot;operationResponse&quot;: &quot;string&quot;,&#xd;
-    &quot;activityId&quot;: &quot;string&quot;,&#xd;
-    &quot;responses&quot;: [&#xd;
-      {&#xd;
-        &quot;response&quot;: &quot;string&quot;,&#xd;
-        &quot;receivedTimeStamp&quot;: &quot;string&quot;&#xd;
-      }&#xd;
-    ],&#xd;
-    &quot;enabled&quot;: false&#xd;
-  }&#xd;
-]</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${host}</stringProp>
-          <stringProp name="HTTPSampler.port">${https_port}</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-          <stringProp name="HTTPSampler.path">/api/device-mgt/android/v1.0/devices/d24f870f390352a41000${DeviceID}/pending-operations</stringProp>
           <stringProp name="HTTPSampler.method">PUT</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -4520,7 +4454,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Operation Completed Response for Request Info" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Operation Completed Response for Request Info" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -6400,73 +6334,6 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Android Device Management - PUT Pending Operations" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">[&#xd;
-  {&#xd;
-    &quot;code&quot;: &quot;aaa&quot;,&#xd;
-    &quot;properties&quot;: {},&#xd;
-    &quot;type&quot;: &quot;CONFIG&quot;,&#xd;
-    &quot;id&quot;: 0,&#xd;
-    &quot;status&quot;: &quot;IN_PROGRESS&quot;,&#xd;
-    &quot;control&quot;: &quot;REPEAT&quot;,&#xd;
-    &quot;receivedTimeStamp&quot;: &quot;string&quot;,&#xd;
-    &quot;createdTimeStamp&quot;: &quot;string&quot;,&#xd;
-    &quot;payLoad&quot;: {},&#xd;
-    &quot;operationResponse&quot;: &quot;string&quot;,&#xd;
-    &quot;activityId&quot;: &quot;string&quot;,&#xd;
-    &quot;responses&quot;: [&#xd;
-      {&#xd;
-        &quot;response&quot;: &quot;string&quot;,&#xd;
-        &quot;receivedTimeStamp&quot;: &quot;string&quot;&#xd;
-      }&#xd;
-    ],&#xd;
-    &quot;enabled&quot;: false&#xd;
-  }&#xd;
-]</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${host}</stringProp>
-          <stringProp name="HTTPSampler.port">${https_port}</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-          <stringProp name="HTTPSampler.path">/api/device-mgt/android/v1.0/devices/d24f870f390352a41000${DeviceID}/pending-operations</stringProp>
-          <stringProp name="HTTPSampler.method">PUT</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-          <boolProp name="HTTPSampler.monitor">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Authorization</stringProp>
-                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Android Device Management - GET Status" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -8793,7 +8660,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           </HeaderManager>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Operation Completed Response for Request Info" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Operation Completed Response for Request Info" enabled="false">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">

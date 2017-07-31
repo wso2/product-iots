@@ -69,16 +69,37 @@ goto :eof
 	for /R %DIR%..\repository\resources\profiles\keymanager %%f in (*.bat) do copy %%f %DIR%..\bin\
     copy /y %DIR%..\repository\resources\profiles\keymanager\carbon.xml %DIR%..\conf\
     copy /y %DIR%..\repository\resources\profiles\keymanager\identity\application-authentication.xml %DIR%..\conf\identity\
+    copy /y %DIR%..\repository\resources\profiles\keymanager\tomcat\context.xml %DIR%..\conf\tomcat\
+    copy /y %DIR%..\repository\resources\profiles\keymanager\axis2\axis2.xml %DIR%..\conf\axis2\
     IF EXIST %DIR%..\repository\deployment\server\jaggeryapps @RD /S /Q %DIR%..\repository\deployment\server\jaggeryapps
     IF EXIST %DIR%..\repository\deployment\server\carbonapps @RD /S /Q %DIR%..\repository\deployment\server\carbonapps
     IF EXIST %DIR%..\repository\deployment\server\axis2services @RD /S /Q %DIR%..\repository\deployment\server\axis2services
     IF EXIST %DIR%..\repository\deployment\server\devicetypes @RD /S /Q %DIR%..\repository\deployment\server\devicetypes
-    IF EXIST %DIR%..\repository\deployment\server\synapse-configs\default\api @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs\default\api
-	del /s /q /f %DIR%..\repository\deployment\server\synapse-configs\default\sequences\_*.xml
+    IF EXIST %DIR%..\repository\deployment\server\synapse-configs @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs
+    IF EXIST %DIR%..\conf\cdm-config.xml del %DIR%..\conf\cdm-config.xml
+    IF EXIST %DIR%..\conf\app-manager.xml del %DIR%..\conf\app-manager.xml
+    If EXIST %DIR%..\conf\analytics @RD /S /Q %DIR%..\conf\analytics
+    IF EXIST %DIR%..\conf\apim-integration.xml del %DIR%..\conf\apim-integration.xml
+    IF EXIST %DIR%..\conf\certificate-config.xml del %DIR%..\conf\certificate-config.xml
+    IF EXIST %DIR%..\conf\data-bridge @RD /S /Q %DIR%..\conf\data-bridge
+    IF EXIST %DIR%..\conf\governance.xml del %DIR%..\conf\governance.xml
+    IF EXIST %DIR%..\conf\input-event-adapters.xml del %DIR%..\conf\input-event-adapters.xml
+    IF EXIST %DIR%..\conf\iot-api-config.xml del %DIR%..\conf\iot-api-config.xml
+    IF EXIST %DIR%..\conf\mobile-config.xml del %DIR%..\conf\mobile-config.xml
+    IF EXIST %DIR%..\conf\nhttp.properties del %DIR%..\conf\nhttp.properties
+    IF EXIST %DIR%..\conf\output-event-adapters.xml del %DIR%..\conf\output-event-adapters.xml
+    IF EXIST %DIR%..\conf\registry-event-broker.xml del %DIR%..\conf\registry-event-broker.xml
+    IF EXIST %DIR%..\conf\social.xml del %DIR%..\conf\social.xml
+    IF EXIST %DIR%..\conf\synapse-handlers.xml del %DIR%..\conf\synapse-handlers.xml
+    IF EXIST %DIR%..\conf\synapse.properties del %DIR%..\conf\synapse.properties
+    IF EXIST %DIR%..\conf\passthru-http.properties del %DIR%..\conf\passthru-http.properties
+    IF EXIST %DIR%..\conf\registry-event-broker.xml del %DIR%..\conf\registry-event-broker.xml
+    IF EXIST %DIR%..\conf\datasources\android-datasources.xml del %DIR%..\conf\datasources\android-datasources.xml
+    IF EXIST %DIR%..\conf\datasources\windows-datasources.xml del %DIR%..\conf\datasources\windows-datasources.xml
+    IF EXIST %DIR%..\conf\datasources\cdm-datasources.xml del %DIR%..\conf\datasources\cdm-datasources.xml
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\oauth2.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
-    copy /y %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\authenticationendpoint.war %DIR%..\repository\deployment\server\tempwebapp\
     IF EXIST %DIR%..\repository\deployment\server\webapps @RD /S /Q %DIR%..\repository\deployment\server\webapps
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
@@ -86,13 +107,8 @@ goto :eof
 	mkdir %DIR%..\repository\deployment\server\axis2services
 	mkdir %DIR%..\repository\deployment\server\devicetypes
 	mkdir %DIR%..\repository\deployment\server\webapps
-	mkdir %DIR%..\repository\deployment\server\synapse-configs\default\api
 	for /R %DIR%..\repository\deployment\server\tempwebapp %%f in (*.war) do copy %%f %DIR%..\repository\deployment\server\webapps\
 	IF EXIST %DIR%..\repository\deployment\server\tempwebapp @RD /S /Q %DIR%..\repository\deployment\server\tempwebapp
-	IF EXIST %DIR%start-all.bat del %DIR%start-all.bat
-	IF EXIST %DIR%start-all.sh del %DIR%start-all.sh
-	IF EXIST %DIR%stop-all.bat del %DIR%stop-all.bat
-	IF EXIST %DIR%stop-all.sh del %DIR%stop-all.sh
 	call :RENAME_DIST
     echo Key Manager profile created successfully in %TEMPDIR%\%DISTRIBUTION%%PROFILE%.
 	goto Exit
@@ -121,22 +137,16 @@ goto :eof
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war del %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war
-    IF EXIST %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war del %DIR%..\repository\deployment\server\webapps\dynamic-client-web.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war del %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
 	mkdir %DIR%..\repository\deployment\server\axis2services
-	mkdir %DIR%..\repository\deployment\server\synapse-configs\default\api
     IF EXIST %DIR%..\conf\identity\sso-idp-config.xml del %DIR%..\conf\identity\sso-idp-config.xml
-	IF EXIST %DIR%start-all.bat del %DIR%start-all.bat
-	IF EXIST %DIR%start-all.sh del %DIR%start-all.sh
-	IF EXIST %DIR%stop-all.bat del %DIR%stop-all.bat
-	IF EXIST %DIR%stop-all.sh del %DIR%stop-all.sh
 	call :RENAME_DIST
     echo Device Backend profile created successfully in %TEMPDIR%\%DISTRIBUTION%%PROFILE%.
 	goto Exit
 
 :Manager
-	echo Preparing the Gateway profile distribution.
+	echo Preparing the Device Manager profile distribution.
 	SET PROFILE=_device-manager
 	call :COPY_DIST
 	set DEFAULT_BUNDLES=%DIR%..\wso2\components\device-manager\configuration\org.eclipse.equinox.simpleconfigurator\bundles.info
@@ -151,8 +161,12 @@ goto :eof
     for /R %DIR%..\repository\resources\profiles\manager %%f in (*.sh) do copy %%f %DIR%..\bin\
     for /R %DIR%..\repository\resources\profiles\manager %%f in (*.bat) do copy %%f %DIR%..\bin\
 	copy /y %DIR%..\repository\resources\profiles\manager\carbon.xml %DIR%..\conf\
-    IF EXIST %DIR%..\repository\deployment\server\synapse-configs\default\api @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs\default\api
-	del /s /q /f %DIR%..\repository\deployment\server\synapse-configs\default\sequences\_*.xml
+	copy /y %DIR%..\repository\resources\profiles\manager\axis2\axis2.xml %DIR%..\conf\axis2\
+    IF EXIST %DIR%..\repository\deployment\server\synapse-configs @RD /S /Q %DIR%..\repository\deployment\server\synapse-configs
+    IF EXIST %DIR%..\conf\nhttp.properties del %DIR%..\conf\nhttp.properties
+    IF EXIST %DIR%..\conf\synapse-handlers.xml del %DIR%..\conf\synapse-handlers.xml
+    IF EXIST %DIR%..\conf\synapse.properties del %DIR%..\conf\synapse.properties
+    IF EXIST %DIR%..\conf\passthru-http.properties del %DIR%..\conf\passthru-http.properties
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
@@ -163,15 +177,10 @@ goto :eof
 	IF EXIST %DIR%..\repository\deployment\server\webapps @RD /S /Q %DIR%..\repository\deployment\server\webapps
     IF EXIST %DIR%..\repository\deployment\server\axis2services @RD /S /Q %DIR%..\repository\deployment\server\axis2services
 	mkdir %DIR%..\repository\deployment\server\axis2services
-	mkdir %DIR%..\repository\deployment\server\synapse-configs\default\api
 	mkdir %DIR%..\repository\deployment\server\webapps
 	for /R %DIR%..\repository\deployment\server\tempwebapp %%f in (*.war) do copy %%f %DIR%..\repository\deployment\server\webapps\
     IF EXIST %DIR%..\conf\identity\sso-idp-config.xml del %DIR%..\conf\identity\sso-idp-config.xml
 	IF EXIST %DIR%..\repository\deployment\server\tempwebapp @RD /S /Q %DIR%..\repository\deployment\server\tempwebapp
-	IF EXIST %DIR%start-all.bat del %DIR%start-all.bat
-	IF EXIST %DIR%start-all.sh del %DIR%start-all.sh
-	IF EXIST %DIR%stop-all.bat del %DIR%stop-all.bat
-	IF EXIST %DIR%stop-all.sh del %DIR%stop-all.sh
 	call :RENAME_DIST
     echo Device Manager profile created successfully in %TEMPDIR%\%DISTRIBUTION%%PROFILE%.
 	goto Exit
@@ -251,10 +260,6 @@ goto :eof
 	IF EXIST %DIR%chpasswd.sh del %DIR%chpasswd.sh
 	IF EXIST %DIR%ciphertool.bat del %DIR%ciphertool.bat
 	IF EXIST %DIR%ciphertool.sh del %DIR%ciphertool.sh
-	IF EXIST %DIR%start-all.bat del %DIR%start-all.bat
-	IF EXIST %DIR%start-all.sh del %DIR%start-all.sh
-	IF EXIST %DIR%stop-all.bat del %DIR%stop-all.bat
-	IF EXIST %DIR%stop-all.sh del %DIR%stop-all.sh
     goto :eof
 
 :Remove_JARS

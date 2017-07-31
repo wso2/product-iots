@@ -101,7 +101,7 @@
         var deviceId = '<%=request.getSession().getAttribute("deviceId")%>';
         var deviceOwner = '<%=request.getSession().getAttribute("deviceOwner")%>';
         var token = '<%=request.getSession().getAttribute("token")%>';
-        var url = '/connectedcup/controller/ordercoffee?deviceId=' + deviceId + '&deviceOwner=' + deviceOwner;
+        var url = '/connectedcup/device/ordercoffee?deviceId=' + deviceId ;
 
         $.ajax({
                    type: 'POST',

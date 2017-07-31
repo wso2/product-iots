@@ -1,0 +1,7 @@
+instructions.configure = \
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../analytics/repository/deployment/server/carbonapps/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.coffeeking.connectedcup.analytics_${feature.version}/carbonapps/,target:${installFolder}/../../analytics/repository/deployment/server/carbonapps/,overwrite:true);\
+
+instructions.unconfigure = \
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../analytics/repository/deployment/server/carbonapps/coffee_level.car);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../analytics/repository/deployment/server/carbonapps/connected_cup.car);\

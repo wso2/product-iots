@@ -15,8 +15,7 @@
  ~ limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2.iot</groupId>
@@ -334,8 +333,7 @@
                                     <version>${analytics.shared.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group
-                                    </id>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 
@@ -354,12 +352,11 @@
                         <phase>test</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf"/>
+                                <mkdir dir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf" />
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/wso2/conf">
-                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"/>
+                                    <fileset dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" />
                                 </copy>
-                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf"
-                                        includeemptydirs="true"/>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}/repository/conf" includeemptydirs="true" />
                             </tasks>
                         </configuration>
                         <goals>

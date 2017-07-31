@@ -1,0 +1,63 @@
+{
+  "PUBLISH_DATA": [{
+    "event": {
+      "metaData": {
+        "owner": "admin",
+        "deviceId": "AS101",
+        "type": "battery",
+        "timestamp": 1494315475
+      },
+      "payloadData": {
+        "battery": 4,
+        "battery_state": "abc",
+        "battery_status": 90,
+        "battery_temperature": 100,
+        "gps_lat": 4.504343,
+        "gps_long": 4.504343,
+        "accelerometer_x": 6.6,
+        "accelerometer_y": 2.3,
+        "accelerometer_z": 4.5,
+        "speed_limit": 9.8,
+        "turn_way": "data5",
+        "magnetic_x": 8.9,
+        "magnetic_y": 6.6,
+        "magnetic_z": 6.6,
+        "gyroscope_x": 6.6,
+        "gyroscope_y": 8.9,
+        "gyroscope_z": 9.8,
+        "light": 2.3,
+        "pressure": 8.9,
+        "proximity": 6.6,
+        "gravity_x": 2.3,
+        "gravity_y": 6.6,
+        "gravity_z": 2.3,
+        "rotation_x": 6.6,
+        "rotation_y": 4.5,
+        "rotation_z": 6.6,
+        "word": "data1",
+        "word_sessionId": "data2",
+        "word_status": "data1",
+        "beacon_major": 70,
+        "beacon_minor": 45,
+        "beacon_proximity": "data4",
+        "beacon_uuid": 4,
+        "call_number": "data3",
+        "call_type": "data3",
+        "call_start_time": 4354643,
+        "call_end_time": 4354643,
+        "screen_state": "data1",
+        "audio_playing": true,
+        "headset_on": true,
+        "music_volume": 4,
+        "activity_type": 50,
+        "confidence": 45,
+        "sms_number": "data2",
+        "application_name": "data1",
+        "action": "data5",
+        "data_type": "data3",
+        "data_sent": 323232,
+        "data_received": 645565
+      }
+    }
+  }]
+}

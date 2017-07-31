@@ -72,6 +72,7 @@
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/client-truststore.jks</exclude>
                 <exclude>**/wso2carbon.jks</exclude>
+                <exclude>**/wso2carbon.jks</exclude>
                 <exclude>**/WSO2AM_DB.h2.db</exclude>
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/lib/httpmime*</exclude>
@@ -147,6 +148,7 @@
                 <exclude>**/tomcat/context.xml</exclude>
                 <exclude>**/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/security/Owasp.CsrfGuard.dashboard.properties</exclude>
+                <exclude>**/security/cipher-tool.properties</exclude>
                 <exclude>**/security/application-authenticators.xml</exclude>
                 <exclude>**/identity/application-authentication.xml</exclude>
                 <exclude>**/identity/identity-providers/iot_default.xml</exclude>
@@ -247,7 +249,11 @@
                 <exclude>**/styles/**</exclude>
                 <exclude>**/synapse-configs/**</exclude>
                 <exclude>**/web-apps/**</exclude>
+                <exclude>**/appm-tenant-conf.xml</exclude>
+				<exclude>**/client-truststore.jks</exclude>
+				<exclude>**/wso2carbon.jks</exclude>
             </excludes>
+
         </fileSet>
 
         <fileSet>
@@ -317,6 +323,10 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
             </outputDirectory>
+			<excludes>
+				<exclude>**/client-truststore.jks</exclude>
+				<exclude>**/wso2carbon.jks</exclude>
+			</excludes>
         </fileSet>
 
         <!-- Copying device type deployer files -->
@@ -541,6 +551,9 @@
             <includes>
                 <include>**/**</include>
             </includes>
+            <excludes>
+                <exclude>**/*.sh*</exclude>
+            </excludes>
         </fileSet>
 
         <!-- Files required to mobile-qsg -->
@@ -616,16 +629,8 @@
                 <exclude>**/artifacts.xml</exclude>
                 <exclude>**/json_2.0.0.wso2v1.jar</exclude>
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
+                <exclude>**/httpclient_4.3.2.wso2v1.jar</exclude>
             </excludes>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/core/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/plugins</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-			<filtered>true</filtered>
         </fileSet>
 
         <fileSet>
@@ -635,6 +640,11 @@
                 <include>*/**</include>
             </includes>
             <fileMode>644</fileMode>
+            <excludes>
+                <exclude>**/*connectedcup-samples-deployer.xml</exclude>
+                <exclude>**/*connectedcup/pom.xml</exclude>
+                <exclude>**/*device-plugins-deployer.xml</exclude>
+            </excludes>
         </fileSet>
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
@@ -656,10 +666,12 @@
                 <exclude>**/version.txt</exclude>
                 <exclude>**/wso2carbon-version.txt</exclude>
                 <exclude>**/wso2server.bat</exclude>
-                <exclude>**/README.txt</exclude>
+                <exclude>**/README</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+				<exclude>**/repository/resources/security/client-truststore.jks</exclude>
+				<exclude>**/repository/resources/security/wso2carbon.jks</exclude>
             </excludes>
         </fileSet>
 
@@ -724,11 +736,13 @@
             <excludes>
                 <exclude>**/wso2server*</exclude>
                 <exclude>**/load-spark-env-vars*</exclude>
+                <exclude>**/cipher*</exclude>
                 <exclude>**/java2wsdl*</exclude>
                 <exclude>**/tcpmon*</exclude>
                 <exclude>**/wsdl2java*</exclude>
                 <exclude>**/build.xml</exclude>
             </excludes>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <!--creating an empty output event receivers directory-->
@@ -836,6 +850,22 @@
             </outputDirectory>
         </fileSet>
 
+		<fileSet>
+			<directory>
+				../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/eventstreams/
+			</directory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventstreams/
+			</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>
+				../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/eventreceivers/
+			</directory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/server/eventreceivers/
+			</outputDirectory>
+		</fileSet>
+
         <fileSet>
             <directory>
                 ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/resources
@@ -853,6 +883,17 @@
         <fileSet>
             <directory>src/analytics/bin</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <excludes>
+                <exclude>**/*.sh</exclude>
+                <exclude>**/*.bat</exclude>
+            </excludes>
+            <filtered>true</filtered>
+        </fileSet>
+
+
+        <fileSet>
+            <directory>src/analytics/bin</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
             <includes>
                 <include>**/*.sh</include>
                 <include>**/*.bat</include>
@@ -862,18 +903,9 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/analytics/bin</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
-            <excludes>
-                <exclude>**/*.sh</exclude>
-                <exclude>**/*.bat</exclude>
-            </excludes>
-            <filtered>true</filtered>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/analytics/plugins</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/plugins</outputDirectory>
+            <directory>src/analytics/samples</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/samples</outputDirectory>
+			<filtered>true</filtered>
         </fileSet>
 
         <fileSet>
@@ -890,6 +922,12 @@
                 <exclude>**/nimbus-jose-jwt_2.26.1.wso2v2.jar</exclude>
                 <exclude>**/artifacts.xml</exclude>
             </excludes>
+        </fileSet>
+
+        <!-- GPL Siddhi Extension Script for Geo Fencing -->
+        <fileSet>
+            <directory>../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/scripts</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/scripts</outputDirectory>
         </fileSet>
 
         <!-- ********************************* End of Analytics Profile ********************************* -->
@@ -912,10 +950,12 @@
                 <exclude>**/version.txt</exclude>
                 <exclude>**/wso2carbon-version.txt</exclude>
                 <exclude>**/wso2server.bat</exclude>
-                <exclude>**/README.txt</exclude>
+                <exclude>**/README</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/dbscripts</exclude>
+				<exclude>**/repository/resources/security/client-truststore.jks</exclude>
+				<exclude>**/repository/resources/security/wso2carbon.jks</exclude>
             </excludes>
         </fileSet>
 
@@ -975,11 +1015,13 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin</outputDirectory>
             <excludes>
+                <exclude>**/cipher*</exclude>
                 <exclude>**/wso2server*</exclude>
                 <exclude>**/java2wsdl*</exclude>
                 <exclude>**/tcpmon*</exclude>
                 <exclude>**/wsdl2java*</exclude>
             </excludes>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <fileSet>
@@ -1193,11 +1235,24 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/conf/security/cipher-tool.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/security</outputDirectory>
+        </file>
+        <file>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
+            <filtered>true</filtered>
+            <destName>README.txt</destName>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/bin/README.txt</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
         <file>
             <source>src/core/LICENSE.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
@@ -1207,12 +1262,6 @@
         <file>
             <source>src/core/release-notes.html</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -1231,7 +1280,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1270,6 +1319,11 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/core/conf/cipher-standalone-config.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
 
         <!-- Copy APILifeCycle.xml -->
         <file>
@@ -1286,7 +1340,7 @@
         </file>
 		<file>
 			<source>src/core/resources/tenant/tenant-conf.json</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/tenant</outputDirectory>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/</outputDirectory>
 			<filtered>true</filtered>
 			<fileMode>644</fileMode>
 		</file>
@@ -1351,6 +1405,12 @@
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/etc/
             </outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/etc/
+            </outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <!-- Copying authenticators.xml -->
@@ -1494,6 +1554,14 @@
             </outputDirectory>
         </file>
         <file>
+            <source>../scripts/mobile-qsg/resources/mobile-qsg.sh</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/samples/mobile-qsg
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
+        <file>
             <source>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/governance.xml
             </source>
@@ -1513,15 +1581,36 @@
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
         <file>
-            <source>src/analytics/resources/profile/master-datasources.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/profile</outputDirectory>
+            <source>
+                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
+            </source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <file>
-            <source>src/core/README.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/bin/</outputDirectory>
+            <source>src/core/samples/connectedcup-samples-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
             <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/device-plugins-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/connectedcup/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <!-- ********************************* End of IoT Core Profile ********************************* -->
+
+        <!-- ********************************* Start of Analytics Profile ********************************* -->
+        <file>
+            <source>src/analytics/resources/profile/master-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/profile</outputDirectory>
             <fileMode>644</fileMode>
         </file>
         <file>
@@ -1536,37 +1625,43 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/analytics/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/etc/
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/database/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/deployment/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/logs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
@@ -1590,6 +1685,12 @@
         <!-- Copying registry.xml -->
         <file>
             <source>src/analytics/conf/registry.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
+        <file>
+            <source>src/analytics/conf/cipher-standalone-config.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/</outputDirectory>
             <fileMode>644</fileMode>
         </file>
@@ -1660,16 +1761,15 @@
 
         <!-- ********************************* Start of Broker Profile ********************************* -->
         <file>
-            <source>src/core/README.txt</source>
+            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/wso2carbon-core-${carbon.kernel.version}/bin/version.txt</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/bin/</outputDirectory>
+            <source>src/broker/conf/cipher-standalone-config.properties</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
             <filtered>true</filtered>
-            <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/broker/conf/carbon.xml</source>
@@ -1677,8 +1777,44 @@
             <filtered>true</filtered>
         </file>
         <file>
-            <source>src/core/README.txt</source>
+            <source>src/broker/conf/etc/config-validation.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/etc/
+            </outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/database/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/logs/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/README</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
@@ -1746,5 +1882,38 @@
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
+
+		<!--Start - Need to remove after kernel 4.4.17 release-->
+		<file>
+			<source>src/core/resources/security/client-truststore.jks</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
+			<fileMode>644</fileMode>
+		</file>
+		<file>
+			<source>src/core/resources/security/client-truststore.jks</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/security</outputDirectory>
+			<fileMode>644</fileMode>
+		</file>
+		<file>
+			<source>src/core/resources/security/client-truststore.jks</source>
+			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/security</outputDirectory>
+			<fileMode>644</fileMode>
+		</file>
+        <file>
+            <source>src/core/resources/security/wso2carbon.jks</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/resources/security/wso2carbon.jks</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/security</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/resources/security/wso2carbon.jks</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/security</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+		<!--End-->
     </files>
 </assembly>

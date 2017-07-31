@@ -33,6 +33,8 @@ import org.wso2.iot.integration.common.Constants;
 import org.wso2.iot.integration.common.PayloadGenerator;
 import org.wso2.iot.integration.common.RestClient;
 import org.wso2.iot.integration.common.TestBase;
+import org.wso2.iot.integration.samples.VirtualFireAlarmTestCase;
+import static org.wso2.iot.integration.samples.VirtualFireAlarmTestCase.*;
 
 /**
  * This class contains integration tests for user management backend services.
