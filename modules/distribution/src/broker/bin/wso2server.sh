@@ -330,6 +330,7 @@ do
     -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true \
     -Dcom.sun.jndi.ldap.connect.pool.authentication=simple  \
     -Dcom.sun.jndi.ldap.connect.pool.timeout=3000  \
+    -Dorg.wso2.ignoreHostnameVerification=true \
     -Dorg.terracotta.quartz.skipUpdateCheck=true \
     -Djava.security.egd=file:/dev/./urandom \
     -Dfile.encoding=UTF8 \
