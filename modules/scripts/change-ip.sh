@@ -444,21 +444,33 @@ keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics
 keytool -import -alias wso2analytics -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
 
 echo ""
-echo "Replacing IoT server public cert from iot-default.xml"
+echo "Generating jwt keystore"
+keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore ../repository/resources/security/wso2carbonjwt.jks -dname "CN=10.10.10.202,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon
+cp -R ../repository/resources/security/wso2carbonjwt.jks ../wso2/analytics/repository/resources/security/
 
-#keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore ../repository/resources/security/wso2carbonjwt.jks -dname "CN=192.168.1.2,
-#OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon
-#cp -R ../repository/resources/security/wso2carbonjwt.jks ../wso2/analytics/repository/resources/security/
-#
-#if hash tac; then
-#    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
-#else
-#    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tail -r | tail -n +2 | tail -r | tr -cd "[:print:]"); fi
-#
-#
-#echo ""
-#echo "Printing certificate"
-#echo "-----------------------"
-#echo $VAR
-#sed -i -e 's#<Certificate>.*#<Certificate>'"$VAR"'</Certificate>#g' ../conf/identity/identity-providers/iot_default.xml
-#echo "Completed!!!"
+echo "Changing  <IoT_HOME>/conf/etc/jwt.properties"
+sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks /' ../conf/etc/jwt.properties
+sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon /' ../conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon /' ../conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon /' ../conf/etc/jwt.properties
+sed -i -e 's/#default-jwt-client=.*/default-jwt-client=false /' ../conf/etc/jwt.properties
+
+echo "Changing  <IoT_HOME>/wso2/analytics/conf/etc/jwt.properties"
+sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks /' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#default-jwt-client=.*/default-jwt-client=false /' ../wso2/analytics/conf/etc/jwt.properties
+
+echo "Setting up the public certificate for the default idp"
+if hash tac; then
+    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
+else
+    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tail -r | tail -n +2 | tail -r | tr -cd "[:print:]"); fi
+
+echo ""
+echo "Printing certificate"
+echo "-----------------------"
+echo $VAR
+sed -i -e 's#<Certificate>.*#<Certificate>'"$VAR"'</Certificate>#g' ../conf/identity/identity-providers/iot_default.xml
+echo "Completed!!!"
