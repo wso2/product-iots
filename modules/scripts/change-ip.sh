@@ -444,24 +444,44 @@ keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics
 keytool -import -alias wso2analytics -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
 
 echo ""
-echo "Generating jwt keystore"
-keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore ../repository/resources/security/wso2carbonjwt.jks -dname "CN=10.10.10.202,OU=Home,O=Home,L=SL,S=WS,C=LK" -storepass wso2carbon -keypass wso2carbon
+echo "Generating JWT keystore"
+echo "-------------------------"
+
+echo ""
+echo "Please enter your gateway IP"
+echo "(If you are going to run IoT server on a single machine, use IoT core IP)"
+read val10;
+
+while [[ -z $val10 ]]; do #if $val2 is a zero length String
+    echo "Please enter your current IP"
+    read val10;
+done
+
+JWT_SUBJ="CN=$val10,OU=IOT,O=WSO2,L=Colombo,S=Western,C=LK"
+
+echo ""
+echo 'Provided Subject for JWT : ' $JWT_SUBJ
+
+keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore ../repository/resources/security/wso2carbonjwt.jks -dname $JWT_SUBJ -storepass wso2carbon -keypass wso2carbon
 cp -R ../repository/resources/security/wso2carbonjwt.jks ../wso2/analytics/repository/resources/security/
 
+echo ""
 echo "Changing  <IoT_HOME>/conf/etc/jwt.properties"
-sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks /' ../conf/etc/jwt.properties
-sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon /' ../conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon /' ../conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon /' ../conf/etc/jwt.properties
-sed -i -e 's/#default-jwt-client=.*/default-jwt-client=false /' ../conf/etc/jwt.properties
+sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks/' ../conf/etc/jwt.properties
+sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon/' ../conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../conf/etc/jwt.properties
+sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../conf/etc/jwt.properties
 
+echo ""
 echo "Changing  <IoT_HOME>/wso2/analytics/conf/etc/jwt.properties"
-sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks /' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon /' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#default-jwt-client=.*/default-jwt-client=false /' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks/' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
+sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../wso2/analytics/conf/etc/jwt.properties
 
+ehco ""
 echo "Setting up the public certificate for the default idp"
 if hash tac; then
     VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
@@ -472,5 +492,13 @@ echo ""
 echo "Printing certificate"
 echo "-----------------------"
 echo $VAR
-sed -i -e 's#<Certificate>.*#<Certificate>'"$VAR"'</Certificate>#g' ../conf/identity/identity-providers/iot_default.xml
-echo "Completed!!!"
+sed -i '' -e 's#<Certificate>.*#<Certificate>'"$VAR"'</Certificate>#g' ../conf/identity/identity-providers/iot_default.xml
+
+echo ""
+if [ -e "../conf/identity/identity-providers/iot_default.xml-e" ]; then
+        echo "IDP temp file exists, hence removing"
+        rm -f ../conf/identity/identity-providers/iot_default.xml-e
+fi
+
+echo ""
+echo "Configuration Completed!!!"
