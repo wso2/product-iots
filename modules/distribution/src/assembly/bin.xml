@@ -902,6 +902,13 @@
 
         <fileSet>
             <directory>
+                ../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/dbscripts</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
                 src/analytics/resources/allthemes
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/resources/allthemes</outputDirectory>
