@@ -34,13 +34,13 @@ import java.net.URL;
 public class AppManagerJmeterTestCase {
     private static Log log = LogFactory.getLog(AppManagerJmeterTestCase.class);
 
-    @Test(description = "This test case tests the flow of App Manager mobile-app creation and lifecycle")
-    public void AppManagementTest() throws AutomationFrameworkException {
+    @Test(description = "This test case tests PlatformManagement")
+    public void PlatformManagementTest() throws AutomationFrameworkException {
         URL url = Thread.currentThread().getContextClassLoader()
-                .getResource("jmeter-scripts" + File.separator + "AppManagerTest.jmx");
+                .getResource("jmeter-scripts" + File.separator + "PlatformManagementAPI.jmx");
         JMeterTest script = new JMeterTest(new File(url.getPath()));
         JMeterTestManager manager = new JMeterTestManager();
-        log.info("Running app manager mobile creation related test cases using jmeter scripts");
+        log.info("Running platform management related test cases using jmeter scripts");
         manager.runTest(script);
     }
 }
