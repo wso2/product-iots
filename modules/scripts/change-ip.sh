@@ -501,4 +501,11 @@ if [ -e "../conf/identity/identity-providers/iot_default.xml-e" ]; then
 fi
 
 echo ""
+echo "Storing JWT public cert in client truststore"
+keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon -file ./tmp/jwtcert
+keytool -importcert -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -file ./tmp/jwtcert -noprompt
+
+sed -i -e 's/<Parameter Name="wso2.org\/products\/iot">.*/<Parameter Name="wso2.org\/products\/iot">wso2carbonjwt<\/Parameter>/' ../conf/etc/webapp-authenticator-config.xml
+
+echo ""
 echo "Configuration Completed!!!"
