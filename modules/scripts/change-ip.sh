@@ -427,6 +427,46 @@ keytool -importkeystore -srckeystore ./tmp/AKEYSTORE.p12 -srcstoretype PKCS12 -d
 
 
 #########################
+# If importing certificate exist in the client trust stores delete the existing certificate
+echo ""
+echo "Deleting existing certificates in client trust stores"
+
+if keytool -list -storepass wso2carbon -alias wso2broker -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2broker public cert in core client truststore"
+    keytool -delete -alias wso2broker -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2analytics -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2analytics public cert in core client truststore"
+    keytool -delete -alias wso2analytics -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2iotcore -keystore ../wso2/broker/repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2iotcore public cert in broker client truststore"
+    keytool -delete -alias wso2iotcore -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2analytics -keystore ../wso2/broker/repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2analytics public cert in broker client truststore"
+    keytool -delete -alias wso2analytics -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2iotcore -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2iotcore public cert in analytics client truststore"
+    keytool -delete -alias wso2iotcore -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2broker -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting wso2broker public cert in analytics client truststore"
+    keytool -delete -alias wso2broker -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if keytool -list -storepass wso2carbon -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
+    echo "Deleting JWT public cert in client truststore"
+    keytool -delete -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+#########################
 # copying certificates to client trust stores
 echo ""
 echo "Copying certificates to client trust stores"
@@ -441,7 +481,7 @@ keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../wso2/broker/
 
 # copying core and broker certificates to IoT analytics client trust store
 keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-keytool -import -alias wso2analytics -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
+keytool -import -alias wso2broker -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
 
 echo ""
 echo "Generating JWT keystore"
