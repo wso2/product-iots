@@ -12,11 +12,11 @@ echo ""
 echo ">>> Step 1: Change current IP address of the IoT Core"
 
 echo ""
-echo "Please enter the IoT Core IP that you need to replace (if you are trying out IoTS server for the first time this will be localhost)"
+echo "Please enter the IoT Core IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
 read val1;
 
 while [[ -z $val1 ]]; do #if $val1 is a zero length String
-    echo "Please enter the IoT Core IP that you need to replace (if you are trying out IoTS server for the first time this will be localhost)"
+    echo "Please enter the IoT Core IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
     read val1;
 done
 
@@ -170,11 +170,11 @@ echo ">>> Step 2: Change current IP address of the IoT Broker"
 echo "-------------------------------------------------------"
 
 echo ""
-echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoTS server for the first time this will be localhost)"
+echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
 read val3;
 
 while [[ -z $val3 ]]; do #if $val1 is a zero length String
-    echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoTS server for the first time this will be localhost)"
+    echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
     read val3;
 done
 
@@ -213,12 +213,12 @@ echo ">>> Step 3: Change current IP address of the IoT Analytics"
 echo "-------------------------------------------------------"
 
 echo ""
-echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoTS server for the first time
+echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoT server for the first time
 this will be localhost)"
 read val5;
 
 while [[ -z $val5 ]]; do #if $val1 is a zero length String
-    echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoTS server for the first time this will be localhost)"
+    echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
     read val5;
 done
 
