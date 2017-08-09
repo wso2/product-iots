@@ -28,21 +28,13 @@ Running the IoT server
    password : admin
 5. Navigate to https://localhost:9443/api-store to see the available device APIs. You can subscribe to these APIs with the default application (or by creating a new application).
    In the API Store, go to my subscriptions and locate the client ID and secret, which can be used to invoke these APIs.
-
-
-Running other runtimes individually (Analytics, Broker)
-========================================================
-1. Extract wso2iot-@product.version@.zip and go to the extracted directory.
-2. Go to wso2iot-@product.version@/wso2 directory.
-3. Go to appropriate runtime directory (analytics/broker) /bin.
-4. Execute wso2server.sh or wso2server.bat.
-3. Access the url related to the required runtime. (For example, use https://localhost:9445/carbon for the analytics runtime.)
+   
 
 Running all runtimes (IoT, Analytics, Broker)
 ==================================================================
 
 1. Extract  wso2iot-@product.version@.zip and go to the extracted directory/bin.
-2. Run start-all.sh or start-all.bat.
+2. Run broker.sh (or broker.bat), then the iot-server.sh (iot-server.bat) and finally analytics.sh (or analytics.bat).
 3. Access appropriate url for the related runtime. (For example, use  https://localhost:9443/devicemgt for the IoT Server runtime)
 
 
