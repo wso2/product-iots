@@ -6,7 +6,7 @@ echo "WSO2 IoT Server IP configuration tool"
 echo "----------------------------------------"
 
 
-##################################### IP configs related to broker ####################################
+##################################### IP configs related to core ####################################
 
 echo ""
 echo ">>> Step 1: Change current IP address of the IoT Core"
@@ -202,6 +202,11 @@ echo "Changing  <IoT_HOME>/bin/iot-server.sh"
 sed -i -e 's/-Dmqtt.broker.host.*/-Dmqtt.broker.host="'$val4'" \\/' ../bin/iot-server.sh
 echo "Completed!!"
 
+echo "Changing <IoT_HOME>/wso2/broker/conf/carbon.xml"
+sed -i '' -e 's#\(<HostName>\)'$val3'\(</HostName>\)#\1'$val4'\2#g' ../wso2/broker/conf/carbon.xml
+sed -i '' -e 's#\(<MgtHostName>\)'$val3'\(</MgtHostName>\)#\1'$val4'\2#g' ../wso2/broker/conf/carbon.xml
+echo "Completed!!"
+
 
 
 
@@ -244,6 +249,11 @@ echo "Completed!!"
 echo "Changing  <IoT_HOME>/wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json"
 sed -i -e 's/"acs.*/\"acs\"\:\"https\:\/\/'$val6':9445\/portal\/acs\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
 sed -i -e 's/"callbackUrl.*/\"callbackUrl\"\:\"https\:\/\/'$val6':9445\/portal\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
+echo "Completed!!"
+
+echo "Changing <IoT_HOME>/wso2/analytics/conf/carbon.xml"
+sed -i '' -e 's#\(<HostName>\)'$val5'\(</HostName>\)#\1'$val6'\2#g' ../wso2/analytics/conf/carbon.xml
+sed -i '' -e 's#\(<MgtHostName>\)'$val5'\(</MgtHostName>\)#\1'$val6'\2#g' ../wso2/analytics/conf/carbon.xml
 echo "Completed!!"
 
 echo ""
