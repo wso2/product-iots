@@ -31,7 +31,7 @@ done
 
 
 echo "--------------------------------------"
-echo "All your " + $val1 + " IP's are replaced with " +$val2 ;
+echo "All your "  $val1  " IP's are replaced with " $val2 ;
 echo "--------------------------------------"
 
 replaceText='s/localhost/'$val1'/g'
@@ -189,7 +189,7 @@ done
 
 echo ""
 echo "--------------------------------------"
-echo "All your " + $val3 + " IP's are replaced with " +$val4 ;
+echo "All your "  $val3  " IP's are replaced with " $val4 ;
 echo "--------------------------------------"
 
 #--------------------
@@ -238,7 +238,7 @@ done
 
 echo ""
 echo "--------------------------------------"
-echo "All your " + $val5 + " IP's are replaced with " +$val6 ;
+echo "All your "  $val5  " IP's are replaced with " $val6 ;
 echo "--------------------------------------"
 
 #--------------------
@@ -439,7 +439,6 @@ keytool -importkeystore -srckeystore ./tmp/AKEYSTORE.p12 -srcstoretype PKCS12 -d
 #########################
 # If importing certificate exist in the client trust stores delete the existing certificate
 echo ""
-echo "Deleting existing certificates in client trust stores"
 
 if keytool -list -storepass wso2carbon -alias wso2broker -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
     echo "Deleting wso2broker public cert in core client truststore"
@@ -474,6 +473,13 @@ fi
 if keytool -list -storepass wso2carbon -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
     echo "Deleting JWT public cert in client truststore"
     keytool -delete -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
+fi
+
+if [ -f ../repository/resources/security/wso2carbonjwt.jks ]; then
+    if keytool -list -storepass wso2carbon -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks >/dev/null; then
+        echo "Deleting self signed cert in jwt keystore"
+        keytool -delete -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -storepass wso2carbon
+    fi
 fi
 
 #########################
@@ -531,7 +537,7 @@ sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../wso2/analytics/
 sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
 sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../wso2/analytics/conf/etc/jwt.properties
 
-ehco ""
+echo ""
 echo "Setting up the public certificate for the default idp"
 if hash tac; then
     VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
