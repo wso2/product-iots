@@ -531,7 +531,7 @@ sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../wso2/analytics/
 sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
 sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../wso2/analytics/conf/etc/jwt.properties
 
-ehco ""
+echo ""
 echo "Setting up the public certificate for the default idp"
 if hash tac; then
     VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
