@@ -20,9 +20,6 @@ package org.wso2.raspberrypicodebased.plugin.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.wso2.raspberrypicodebased.plugin.impl.dao.DeviceTypeDAO;
-import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
-import org.wso2.raspberrypicodebased.plugin.impl.feature.DeviceTypeFeatureManager;
 import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
@@ -32,8 +29,10 @@ import org.wso2.carbon.device.mgt.common.FeatureManager;
 import org.wso2.carbon.device.mgt.common.configuration.mgt.PlatformConfiguration;
 import org.wso2.carbon.device.mgt.common.license.mgt.License;
 import org.wso2.carbon.device.mgt.common.license.mgt.LicenseManagementException;
+import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
+import org.wso2.raspberrypicodebased.plugin.impl.dao.DeviceTypeDAO;
+import org.wso2.raspberrypicodebased.plugin.impl.feature.DeviceTypeFeatureManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

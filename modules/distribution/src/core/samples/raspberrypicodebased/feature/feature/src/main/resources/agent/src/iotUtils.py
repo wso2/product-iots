@@ -23,6 +23,7 @@
 import ConfigParser
 import os
 import random
+
 import running_mode
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,7 +82,6 @@ def switchBulb(state):
 
     if running_mode == "N":
 
-        import RPi.GPIO as GPIO
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(BULB_PIN,GPIO.OUT)

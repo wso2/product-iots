@@ -18,32 +18,21 @@
 
 package org.wso2.raspberrypicodebased.plugin.impl.util;
 
-import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
-import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.base.ServerConfiguration;
-import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.core.util.Utils;
-import org.wso2.carbon.event.output.adapter.core.MessageType;
-import org.wso2.carbon.event.output.adapter.core.OutputEventAdapterConfiguration;
-import org.wso2.carbon.event.output.adapter.core.exception.OutputEventAdapterException;
+import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
+import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 /**
  * Contains utility methods used by raspberrypicodebased plugin.
@@ -97,18 +86,18 @@ public class DeviceTypeUtils {
     }
 
     public static String replaceMqttProperty(String urlWithPlaceholders) {
-        String MQTT_BROKER_HOST = null;
-        String MQTT_PORT = null;
-        if(!DeviceTypeConstants.MQTT_BROKER_HOST.startsWith("$")){
-            MQTT_BROKER_HOST = "\\$".concat(DeviceTypeConstants.MQTT_BROKER_HOST);
+        String mqttBrokerHost = null;
+        String mqttPort = null;
+        if (!DeviceTypeConstants.MQTT_BROKER_HOST.startsWith("$")) {
+            mqttBrokerHost = "\\$".concat(DeviceTypeConstants.MQTT_BROKER_HOST);
         }
-        if(!DeviceTypeConstants.MQTT_PORT.startsWith("$")){
-            MQTT_PORT = "\\$".concat(DeviceTypeConstants.MQTT_PORT);
+        if (!DeviceTypeConstants.MQTT_PORT.startsWith("$"))  {
+            mqttPort = "\\$".concat(DeviceTypeConstants.MQTT_PORT);
         }
         urlWithPlaceholders = Utils.replaceSystemProperty(urlWithPlaceholders);
-        urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_PORT, "" +
+        urlWithPlaceholders = urlWithPlaceholders.replaceAll(mqttPort, "" +
                 (DeviceTypeConstants.DEFAULT_MQTT_PORT + getPortOffset()));
-        urlWithPlaceholders = urlWithPlaceholders.replaceAll(MQTT_BROKER_HOST,
+        urlWithPlaceholders = urlWithPlaceholders.replaceAll(mqttBrokerHost,
                 System.getProperty(DeviceTypeConstants.DEFAULT_CARBON_LOCAL_IP_PROPERTY, "localhost"));
         return urlWithPlaceholders;
     }

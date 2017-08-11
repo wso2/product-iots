@@ -18,13 +18,6 @@
 
 package org.wso2.raspberrypicodebased.api;
 
-import org.wso2.raspberrypicodebased.api.dto.DeviceJSON;
-import org.wso2.raspberrypicodebased.api.dto.SensorRecord;
-import org.wso2.raspberrypicodebased.api.util.APIUtil;
-import org.wso2.raspberrypicodebased.api.util.ZipUtil;
-import org.wso2.raspberrypicodebased.api.util.ZipArchive;
-import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,23 +32,29 @@ import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.EnrolmentInfo;
+import org.wso2.carbon.device.mgt.common.InvalidDeviceException;
 import org.wso2.carbon.device.mgt.common.authorization.DeviceAccessAuthorizationException;
+import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
+import org.wso2.carbon.device.mgt.common.operation.mgt.OperationManagementException;
+import org.wso2.carbon.device.mgt.core.operation.mgt.CommandOperation;
 import org.wso2.carbon.identity.jwt.client.extension.JWTClient;
 import org.wso2.carbon.identity.jwt.client.extension.dto.AccessTokenInfo;
 import org.wso2.carbon.identity.jwt.client.extension.exception.JWTClientException;
 import org.wso2.carbon.user.api.UserStoreException;
-import org.wso2.carbon.device.mgt.common.*;
-import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
-import org.wso2.carbon.device.mgt.common.operation.mgt.OperationManagementException;
-import org.wso2.carbon.device.mgt.core.operation.mgt.CommandOperation;
+import org.wso2.raspberrypicodebased.api.dto.DeviceJSON;
+import org.wso2.raspberrypicodebased.api.dto.SensorRecord;
+import org.wso2.raspberrypicodebased.api.util.APIUtil;
+import org.wso2.raspberrypicodebased.api.util.ZipArchive;
+import org.wso2.raspberrypicodebased.api.util.ZipUtil;
+import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -63,17 +62,16 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-
-import java.util.UUID;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
- * This is the API which is used to control and manage device type functionality
+ * This is the API which is used to control and manage device type functionality.
  */
 public class DeviceTypeServiceImpl implements DeviceTypeService {
 
@@ -159,7 +157,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     }
 
     /**
-     * Retrieve Sensor data for the given time period
+     * Retrieve Sensor data for the given time period.
      *
      * @param deviceId unique identifier for given device type instance
      * @param from     starting time
@@ -206,7 +204,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
     }
 
     /**
-     * To download device type agent source code as zip file
+     * To download device type agent source code as zip file.
      *
      * @param deviceName name for the device type instance
      * @param sketchType folder name where device type agent was installed into server
@@ -227,7 +225,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
             zipFile.getZipFile().delete();
             return resp;
         } catch (IllegalArgumentException ex) {
-            return Response.status(400).entity(ex.getMessage()).build();//bad request
+            return Response.status(400).entity(ex.getMessage()).build(); //bad request
         } catch (DeviceManagementException ex) {
             log.error(ex.getMessage(), ex);
             return Response.status(500).entity(ex.getMessage()).build();

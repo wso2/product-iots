@@ -20,18 +20,18 @@
 """
 
 import argparse
-import httplib
+import calendar
 import logging
 import logging.handlers
 import signal
 import ssl
 import sys
 import threading
-import time, calendar
+import time
 from functools import wraps
 
-import mqttHandler
 import iotUtils
+import mqttHandler
 import running_mode
 
 

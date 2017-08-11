@@ -20,8 +20,9 @@
 **/
 """
 
-import time
 import paho.mqtt.client as mqtt
+import time
+
 import iotUtils
 from token_updater import RefreshToken
 

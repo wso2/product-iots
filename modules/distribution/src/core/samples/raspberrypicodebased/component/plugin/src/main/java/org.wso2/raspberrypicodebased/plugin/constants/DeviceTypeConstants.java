@@ -19,6 +19,7 @@
 package org.wso2.raspberrypicodebased.plugin.constants;
 
 import org.wso2.carbon.utils.CarbonUtils;
+
 import java.io.File;
 
 /**
@@ -26,20 +27,20 @@ import java.io.File;
  * stream definition and device specific dome constants
  */
 public class DeviceTypeConstants {
-    public final static String DEVICE_TYPE = "raspberrypicodebased";
-    public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
-    public final static String DEVICE_PLUGIN_DEVICE_ID = "raspberrypicodebased_DEVICE_ID";
-    public final static String STATE_ON = "ON";
-    public final static String STATE_OFF = "OFF";
-    public final static String BULB_CONTEXT = "BULB";
+    public static final String DEVICE_TYPE = "raspberrypicodebased";
+    public static final String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
+    public static final String DEVICE_PLUGIN_DEVICE_ID = "raspberrypicodebased_DEVICE_ID";
+    public static final String STATE_ON = "ON";
+    public static final String STATE_OFF = "OFF";
+    public static final String BULB_CONTEXT = "BULB";
 
     //sensor events summerized table name
     public static final String SENSOR_TYPE1_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_sensor_temp";
     public static final String SENSOR_TYPE2_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_no_sensor1";
     public static final String DATA_SOURCE_NAME = "jdbc/raspberrypicodebasedDM_DB";
-    public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
-    public final static String SENSOR_TYPE1 = "sensor_temp";
-    public final static String SENSOR_TYPE2 = "no_sensor1";
+    public static final String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
+    public static final String SENSOR_TYPE1 = "sensor_temp";
+    public static final String SENSOR_TYPE2 = "no_sensor1";
 
     //mqtt tranport related constants
     public static final String MQTT_ADAPTER_NAME = "sensor_temp_mqtt";
@@ -65,8 +66,8 @@ public class DeviceTypeConstants {
     public static final String CLEAR_SESSION_PROPERTY_KEY = "clearSession";
     public static final String TOPIC = "topic";
 
-    public final static String SENSOR_TYPE1_STREAM_DEFINITION = "org.wso2.iot.devices.sensor_temp";
-    public final static String SENSOR_TYPE1_STREAM_DEFINITION_VERSION = "1.0.0";
+    public static final String SENSOR_TYPE1_STREAM_DEFINITION = "org.wso2.iot.devices.sensor_temp";
+    public static final String SENSOR_TYPE1_STREAM_DEFINITION_VERSION = "1.0.0";
 
 
     public static final String MQTT_CONFIG_LOCATION = CarbonUtils.getEtcCarbonConfigDirPath() + File.separator

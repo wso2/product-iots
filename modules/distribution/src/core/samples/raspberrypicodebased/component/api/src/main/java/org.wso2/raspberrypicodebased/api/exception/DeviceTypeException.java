@@ -19,7 +19,7 @@
 package org.wso2.raspberrypicodebased.api.exception;
 
 /**
- * Device specific exception handler
+ * Device specific exception handler.
  */
 public class DeviceTypeException extends Exception {
 

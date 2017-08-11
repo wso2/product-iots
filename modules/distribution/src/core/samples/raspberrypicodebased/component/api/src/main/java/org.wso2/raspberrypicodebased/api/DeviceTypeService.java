@@ -28,22 +28,20 @@ import org.wso2.carbon.apimgt.annotations.api.Scope;
 import org.wso2.carbon.apimgt.annotations.api.Scopes;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
 /**
- * This is the API which is used to control and manage device type functionality
+ * This is the API which is used to control and manage device type functionality.
  */
 @SwaggerDefinition(
         info = @Info(
@@ -98,7 +96,7 @@ public interface DeviceTypeService {
                           @Context HttpServletResponse response);
 
     /**
-     * Retrieve Sensor data for the given time period
+     * Retrieve Sensor data for the given time period.
      * @param deviceId unique identifier for given device type instance
      * @param from  starting time
      * @param to    ending time
@@ -124,7 +122,7 @@ public interface DeviceTypeService {
     Response getSensorStats(@PathParam("deviceId") String deviceId, @QueryParam("from") long from,
                             @QueryParam("to") long to, @QueryParam("sensorType") String sensorType);
     /**
-     * To download device type agent source code as zip file
+     * To download device type agent source code as zip file.
      * @param deviceName   name for the device type instance
      * @param sketchType   folder name where device type agent was installed into server
      * @return  Agent source code as zip file

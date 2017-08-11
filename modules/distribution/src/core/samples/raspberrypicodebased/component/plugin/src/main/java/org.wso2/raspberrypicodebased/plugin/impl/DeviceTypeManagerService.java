@@ -18,29 +18,25 @@
 
 package org.wso2.raspberrypicodebased.plugin.impl;
 
+import org.wso2.carbon.device.mgt.common.DeviceManagementException;
+import org.wso2.carbon.device.mgt.common.DeviceManager;
+import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
+import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
+import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
+import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
+import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
+import org.wso2.carbon.device.mgt.common.policy.mgt.PolicyMonitoringManager;
+import org.wso2.carbon.device.mgt.common.pull.notification.PullNotificationSubscriber;
+import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
+import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
+import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
+
 import java.util.HashMap;
 import java.util.Map;
 
-
-import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
-import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
-import org.wso2.carbon.device.mgt.common.pull.notification.PullNotificationSubscriber;
-import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
-import org.wso2.carbon.device.mgt.common.DeviceIdentifier;
-import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
-import org.wso2.carbon.device.mgt.common.DeviceManagementException;
-import org.wso2.carbon.device.mgt.common.DeviceManager;
-import org.wso2.carbon.device.mgt.common.app.mgt.Application;
-import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManagementException;
-import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
-import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
-import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
-import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
-import org.wso2.carbon.device.mgt.common.policy.mgt.PolicyMonitoringManager;
-import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
-import java.util.List;
-
+/**
+ *Devicetype manager service.
+ */
 public class DeviceTypeManagerService implements DeviceManagementService {
     private DeviceManager deviceManager;
     private OperationMonitoringTaskConfig operationMonitoringTaskConfig;
@@ -86,7 +82,7 @@ public class DeviceTypeManagerService implements DeviceManagementService {
         properties.put("qos", "0");
         properties.put("clearSession", "true");
         properties.put("scopes", "");
-        return new PushNotificationConfig("MQTT",false, properties);
+        return new PushNotificationConfig("MQTT", false, properties);
     }
 
     @Override

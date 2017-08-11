@@ -18,12 +18,15 @@
 
 package org.wso2.raspberrypicodebased.api.util;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 import org.wso2.carbon.apimgt.application.extension.constants.ApiApplicationConstants;
+import org.wso2.carbon.core.util.Utils;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.utils.CarbonUtils;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -43,9 +46,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import org.wso2.carbon.core.util.Utils;
-import org.json.JSONObject;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * This is used to create a zip file that includes the necessary configuration required for the agent.
@@ -123,8 +123,8 @@ public class ZipUtil {
             , String zipFileName)
             throws DeviceManagementException, IOException {
         String sketchPath = CarbonUtils.getCarbonHome() + File.separator + templateSketchPath;
-        FileUtils.deleteDirectory(new File(archivesPath));//clear directory
-        FileUtils.deleteDirectory(new File(archivesPath + ".zip"));//clear zip
+        FileUtils.deleteDirectory(new File(archivesPath)); //clear directory
+        FileUtils.deleteDirectory(new File(archivesPath + ".zip")); //clear zip
         if (!new File(archivesPath).mkdirs()) { //new dir
             String message = "Could not create directory at path: " + archivesPath;
             throw new DeviceManagementException(message);
@@ -269,10 +269,10 @@ public class ZipUtil {
         ZipOutputStream out = null;
 
         try {
-            final int BUFFER = 2048;
+            final int buffer = 2048;
             FileOutputStream dest = new FileOutputStream(new File(srcFolder + ".zip"));
             out = new ZipOutputStream(new BufferedOutputStream(dest));
-            byte data[] = new byte[BUFFER];
+            byte data[] = new byte[buffer];
             File subDir = new File(srcFolder);
             String subdirList[] = subDir.list();
             if (subdirList == null) {
@@ -290,24 +290,23 @@ public class ZipUtil {
 
                     for (int i = 0; i < files.length; i++) {
                         FileInputStream fi = new FileInputStream(srcFolder + "/" + sd + "/" + files[i]);
-                        origin = new BufferedInputStream(fi, BUFFER);
+                        origin = new BufferedInputStream(fi, buffer);
                         ZipEntry entry = new ZipEntry(sd + "/" + files[i]);
                         out.putNextEntry(entry);
                         int count;
-                        while ((count = origin.read(data, 0, BUFFER)) != -1) {
+                        while ((count = origin.read(data, 0, buffer)) != -1) {
                             out.write(data, 0, count);
                             out.flush();
                         }
 
                     }
-                } else //it is just a file
-                {
+                } else { //it is just a file
                     FileInputStream fi = new FileInputStream(f);
-                    origin = new BufferedInputStream(fi, BUFFER);
+                    origin = new BufferedInputStream(fi, buffer);
                     ZipEntry entry = new ZipEntry(sd);
                     out.putNextEntry(entry);
                     int count;
-                    while ((count = origin.read(data, 0, BUFFER)) != -1) {
+                    while ((count = origin.read(data, 0, buffer)) != -1) {
                         out.write(data, 0, count);
                         out.flush();
                     }

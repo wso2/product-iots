@@ -38,7 +38,7 @@ public class SensorRecord {
     private Map<String, Object> values;
 
     /**
-     * Unique identifier for each recode
+     * Unique identifier for each recode.
      */
     @XmlElement(required = false, name = "id")
     private String id;

@@ -19,11 +19,12 @@
 package org.wso2.raspberrypicodebased.api.dto;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * These information are sent by agent in each request to server
+ * These information are sent by agent in each request to server.
  */
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)

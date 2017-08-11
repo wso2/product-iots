@@ -20,22 +20,18 @@ package org.wso2.raspberrypicodebased.plugin.impl.dao.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.wso2.carbon.device.mgt.common.Device;
 import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
 import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
 import org.wso2.raspberrypicodebased.plugin.impl.dao.DeviceTypeDAO;
 import org.wso2.raspberrypicodebased.plugin.impl.util.DeviceTypeUtils;
-
-import org.wso2.carbon.device.mgt.common.Device;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Implements IotDeviceDAO for raspberrypicodebased Devices.
@@ -85,7 +81,8 @@ public class DeviceTypeDAOImpl {
         try {
             conn = DeviceTypeDAO.getConnection();
             String createDBQuery =
-                    "INSERT INTO raspberrypicodebased_DEVICE(raspberrypicodebased_DEVICE_ID, DEVICE_NAME) VALUES (?, ?)";
+                    "INSERT INTO raspberrypicodebased_DEVICE(raspberrypicodebased_DEVICE_ID, DEVICE_NAME)" +
+                            " VALUES (?, ?)";
             stmt = conn.prepareStatement(createDBQuery);
             stmt.setString(1, device.getDeviceIdentifier());
             stmt.setString(2, device.getName());

@@ -19,7 +19,7 @@
 package org.wso2.raspberrypicodebased.plugin.exception;
 
 /**
- * Device type plugin exception handler
+ * Device type plugin exception handler.
  */
 public class DeviceMgtPluginException extends Exception {
 

@@ -20,10 +20,9 @@ package org.wso2.raspberrypicodebased.plugin.impl.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.wso2.raspberrypicodebased.plugin.constants.DeviceTypeConstants;
-import org.wso2.raspberrypicodebased.plugin.impl.dao.impl.DeviceTypeDAOImpl;
 import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
+import org.wso2.raspberrypicodebased.plugin.impl.dao.impl.DeviceTypeDAOImpl;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -33,7 +32,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Database handler which is specified for raspberrypicodebased type
+ * Database handler which is specified for raspberrypicodebased type.
  */
 public class DeviceTypeDAO {
 

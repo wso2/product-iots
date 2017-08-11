@@ -18,17 +18,15 @@
 
 package org.wso2.raspberrypicodebased.plugin.internal;
 
-import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
-import org.wso2.raspberrypicodebased.plugin.impl.util.DeviceTypeUtils;
-import org.wso2.raspberrypicodebased.plugin.impl.DeviceTypeManagerService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
-import org.wso2.carbon.core.ServerStartupObserver;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
+import org.wso2.raspberrypicodebased.plugin.exception.DeviceMgtPluginException;
+import org.wso2.raspberrypicodebased.plugin.impl.DeviceTypeManagerService;
+import org.wso2.raspberrypicodebased.plugin.impl.util.DeviceTypeUtils;
 
 /**
  * @scr.component name="org.wso2.raspberrypicodebased.plugin.internal.ServiceComponent"

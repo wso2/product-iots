@@ -21,10 +21,10 @@
 """
 
 import json
-import urllib
-import iotUtils
 import requests
+import urllib
 
+import iotUtils
 
 applicationKey = None
 refreshToken = None
