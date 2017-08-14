@@ -1,0 +1,56 @@
+{{!
+  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+  WSO2 Inc. licenses this file to you under the Apache License,
+  Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied. See the License for the
+  specific language governing permissions and limitations
+  under the License.
+}}
+{{#zone "topCss"}}
+    <style>
+        .thumbnail.icon:before {
+            padding-top: 0;
+        }
+
+    </style>
+{{/zone}}
+
+{{#zone "device-thumbnail"}}
+    <img src="{{@unit.publicUri}}/images/deviceType.png"/>
+{{/zone}}
+
+{{#zone "device-opetations"}}
+    <div style="background: #11375B; color: #fff; padding: 10px; margin-bottom: 5px">
+        Operations
+    </div>
+    <div class="add-margin-top-4x">
+        {{unit "cdmf.unit.device.operation-bar" device=device autoCompleteParams=autoCompleteParams
+               encodedFeaturePayloads=encodedFeaturePayloads}}
+    </div>
+{{/zone}}
+
+{{#zone "device-view-tabs"}}
+    <li class="active"><a class="list-group-item" href="#device_statistics" role="tab"
+                          data-toggle="tab" aria-controls="device_statistics">Device
+                                                                              Statistics</a>
+    </li>
+
+{{/zone}}
+
+{{#zone "device-view-tab-contents"}}
+    <div class="panel panel-default tab-pane active"
+         id="device_statistics" role="tabpanel" aria-labelledby="device_statistics">
+        <div class="panel-heading">Device Statistics</div>
+        {{unit "cdmf.unit.device.type.sampledevice.realtime.analytics-view" device=device}}
+    </div>
+
+{{/zone}}
