@@ -20,13 +20,13 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-tools</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.1.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>iot-devicetype-archetype</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
     <name>WSO2 IoT - Device Type Archetype</name>
     <description>WSO2 IoT Device Type Archetype</description>
     <packaging>maven-archetype</packaging>
