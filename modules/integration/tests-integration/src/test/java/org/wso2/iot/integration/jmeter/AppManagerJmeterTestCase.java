@@ -53,4 +53,14 @@ public class AppManagerJmeterTestCase {
         log.info("Running application management related test cases using jmeter scripts");
         manager.runTest(script);
     }
+
+    @Test(description = "This test case tests Application Release Management")
+    public void ApplicationReleaseManagementTest() throws AutomationFrameworkException {
+        URL url = Thread.currentThread().getContextClassLoader()
+                .getResource("jmeter-scripts" + File.separator + "ApplicationReleaseManagementAPI.jmx");
+        JMeterTest script = new JMeterTest(new File(url.getPath()));
+        JMeterTestManager manager = new JMeterTestManager();
+        log.info("Running application release management related test cases using jmeter scripts");
+        manager.runTest(script);
+    }
 }
