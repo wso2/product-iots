@@ -113,6 +113,7 @@ echo "Completed!!"
 
 #--------------------
 echo "Changing  <IoT_HOME>/bin/iot-server.sh"
+sed -i -e 's/-Diot.manager.host.*/-Diot.manager.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.core.host.*/-Diot.core.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.keymanager.host.*/-Diot.keymanager.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.gateway.host.*/-Diot.gateway.host="'$val2'" \\/' ../bin/iot-server.sh
