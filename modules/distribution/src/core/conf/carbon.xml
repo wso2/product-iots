@@ -685,4 +685,9 @@
 
 		<LoadAPIContextsInServerStartup>true</LoadAPIContextsInServerStartup>
 	</APIManagement>
+
+    <HideMenuItemIds>
+        <HideMenuItemId>claim_mgt_menu</HideMenuItemId>
+    </HideMenuItemIds>
+
 </Server>
