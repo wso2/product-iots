@@ -1,0 +1,10 @@
+{
+  "deviceType": {
+    "label": "sampledevice",
+    "category": "iot",
+    "downloadAgentUri": "sampledevice/device/download",
+    "scopes": [
+      "perm:sampledevice:enroll"
+    ]
+  }
+}
