@@ -1,9 +1,10 @@
 {
   "POST": {
-    "username":"PRIMARY/username123",
+    "basicUserInfo" : {"username":"PRIMARY/username123",
     "firstname":"userfirstname",
     "lastname":"userlastname",
-    "emailAddress":"user123@gmail.com"
+    "emailAddress":"user123@gmail.com"},
+    "message":"Mail Server is not configured. Email invitation will not be sent."
   },
   "PUT": {
     "username":"username123",
