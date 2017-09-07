@@ -90,17 +90,18 @@
                 <executions>
 
                     <execution>
-                        <id>copy-jacoco-dependencies</id>
+                        <id>copy-emma-dependencies</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/jacoco</outputDirectory>
+                            <outputDirectory>${project.build.directory}/emma</outputDirectory>
                             <includeTypes>jar</includeTypes>
-                            <includeArtifactIds>org.jacoco.agent</includeArtifactIds>
+                            <includeArtifactIds>emma</includeArtifactIds>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>copy-secVerifier</id>
                         <phase>compile</phase>
@@ -270,10 +271,6 @@
         <dependency>
             <groupId>org.eclipse.paho</groupId>
             <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
         </dependency>
     </dependencies>
 

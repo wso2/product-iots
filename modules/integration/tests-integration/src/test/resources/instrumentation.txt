@@ -33,4 +33,3 @@ org.wso2.carbon.email.sender.core_
 org.wso2.carbon.identity.jwt.client.extension_
 org.wso2.carbon.identity.authenticator.backend.oauth_
 org.wso2.carbon.webapp.authenticator.framework_
-org.wso2.carbon.device.mgt.analytics.dashboard_

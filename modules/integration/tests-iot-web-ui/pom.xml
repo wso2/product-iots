@@ -91,6 +91,20 @@
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
+
+                    <execution>
+                        <id>copy-emma-dependencies</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/emma</outputDirectory>
+                            <includeTypes>jar</includeTypes>
+                            <includeArtifactIds>emma</includeArtifactIds>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>copy-secVerifier</id>
                         <phase>compile</phase>
