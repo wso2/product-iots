@@ -14,6 +14,7 @@ org.wso2.carbon.device.mgt.input.adapter.extension_
 org.wso2.carbon.device.mgt.input.adapter.mqtt_
 org.wso2.carbon.device.mgt.input.adapter.thrift_
 org.wso2.carbon.device.mgt.input.adapter.xmpp_
+org.wso2.carbon.device.mgt.input.adapter.http_
 org.wso2.carbon.device.mgt.mobile.android_
 org.wso2.carbon.device.mgt.mobile.windows_
 org.wso2.carbon.device.mgt.mqtt.notification.listener_
@@ -33,3 +34,7 @@ org.wso2.carbon.email.sender.core_
 org.wso2.carbon.identity.jwt.client.extension_
 org.wso2.carbon.identity.authenticator.backend.oauth_
 org.wso2.carbon.webapp.authenticator.framework_
+org.wso2.carbon.device.mgt.analytics.dashboard_
+org.wso2.carbon.complex.policy.decision.point_
+org.wso2.carbon.appmgt.mdm.osgiconnector_
+org.wso2.carbon.appmgt.mdm.restconnector_
