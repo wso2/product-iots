@@ -64,7 +64,7 @@ echo "Completed!!"
 
 #--------------------
 echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json"
-sed -i -e 's/"identityProvider.*/\"identityProviderUrl\"\ :\ "https\:\/\/'$val2':9443\/samlsso\"\,/' ../repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
+sed -i -e 's/"identityProvider.*/\"identityProviderURL\"\ :\ "https\:\/\/'$val2':9443\/samlsso\"\,/' ../repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
 echo "Completed!!"
 
 #--------------------
