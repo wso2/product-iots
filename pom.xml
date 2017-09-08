@@ -50,7 +50,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.automation</groupId>
                 <artifactId>org.wso2.carbon.automation.engine</artifactId>
-                <version>${test.framework.version}</version>
+                <version>${platform.integration.utils.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -1596,7 +1596,7 @@
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
         <carbon.automation.jmeter.version>4.2.7</carbon.automation.jmeter.version>
         <xfer.version>3.3.0</xfer.version>
-        <jacoco.agent.version>0.7.4.201502262128</jacoco.agent.version>
+        <jacoco.agent.version>0.7.5.201505241946</jacoco.agent.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.lang.version>2.2</commons.lang.version>
