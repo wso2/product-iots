@@ -5,7 +5,7 @@
   },
   "GET": {
     "responseCode": "OK",
-    "responseMessage": "Android device that carries the id \u0027d24f870f390352a41234\u0027 is enrolled"
+    "responseMessage": "Status of android device that carries the id \u0027d24f870f390352a41234\u0027 is ACTIVE"
   },
   "PUT": {
     "responseCode": "Accepted",
