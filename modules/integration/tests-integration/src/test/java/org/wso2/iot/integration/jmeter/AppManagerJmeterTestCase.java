@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.extensions.jmeter.JMeterTest;
-import org.wso2.carbon.automation.extensions.jmeter.JMeterTestManager;
+import org.wso2.iot.integration.common.JMeterTestManager;
 
 import java.io.File;
 import java.net.URL;
