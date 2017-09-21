@@ -1517,17 +1517,17 @@
         <carbon.governance.version>4.7.8</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>3.0.106</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.0.112</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-	    <carbon.device.mgt.plugin.version>4.0.80</carbon.device.mgt.plugin.version>
+	<carbon.device.mgt.plugin.version>4.0.82</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.95</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
