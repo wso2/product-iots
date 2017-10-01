@@ -230,7 +230,8 @@ public class CarbonServerManagerExtension {
             if(this.isCoverageEnable) {
                 try {
                     log.info("Generating Jacoco code coverage...");
-                    this.generateCoverageReport(new File(this.carbonHome + File.separator + "repository" + File.separator + "components" + File.separator + "plugins" + File.separator));
+                    this.generateCoverageReport(new File(this.carbonHome + File.separator + "wso2"
+                            + File.separator + "components" + File.separator + "plugins" + File.separator));
                 } catch (IOException var7) {
                     log.error("Failed to generate code coverage ", var7);
                     throw new AutomationFrameworkException("Failed to generate code coverage ", var7);

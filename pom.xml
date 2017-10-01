@@ -50,7 +50,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.automation</groupId>
                 <artifactId>org.wso2.carbon.automation.engine</artifactId>
-                <version>${test.framework.version}</version>
+                <version>${platform.integration.utils.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.slf4j</groupId>
@@ -1517,17 +1517,20 @@
         <carbon.governance.version>4.7.8</carbon.governance.version>
 
         <!-- Carbon Device Management -->
-        <carbon.device.mgt.version>3.0.93-SNAPSHOT</carbon.device.mgt.version>
+
+        <carbon.device.mgt.version>3.0.112</carbon.device.mgt.version>
+
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-	    <carbon.device.mgt.plugin.version>4.0.66-SNAPSHOT</carbon.device.mgt.plugin.version>
+	<carbon.device.mgt.plugin.version>4.0.82</carbon.device.mgt.plugin.version>
+
 
         <!-- API Management -->
-        <carbon.api.mgt.version>6.1.95</carbon.api.mgt.version>
+        <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>
         <carbon.api.mgt.version.range>(6.0.0,7.0.0]</carbon.api.mgt.version.range>
 
         <!-- Carbon Mediation -->
@@ -1555,8 +1558,8 @@
 
         <!-- IoT Broker Dependencies -->
         <product.iot.broker.version>${project.version}</product.iot.broker.version>
-        <andes.version>3.2.19</andes.version>
-        <carbon.messaging.version>3.2.15</carbon.messaging.version>
+        <andes.version>3.2.25</andes.version>
+        <carbon.messaging.version>3.2.16</carbon.messaging.version>
 
         <!-- Third Party Dependencies-->
         <spongycastle.version>1.51.0.0</spongycastle.version>
@@ -1596,7 +1599,7 @@
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
         <carbon.automation.jmeter.version>4.2.7</carbon.automation.jmeter.version>
         <xfer.version>3.3.0</xfer.version>
-        <jacoco.agent.version>0.7.4.201502262128</jacoco.agent.version>
+        <jacoco.agent.version>0.7.5.201505241946</jacoco.agent.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <commons.lang.version>2.2</commons.lang.version>
@@ -1629,7 +1632,7 @@
         <caramel.version>1.0.1</caramel.version>
 
         <!-- App manager version-->
-        <appmgt.feature.version>1.2.35</appmgt.feature.version>
+        <appmgt.feature.version>1.2.40</appmgt.feature.version>
 
         <!-- Carbon Store version-->
         <carbon.store.version>1.5.1</carbon.store.version>
@@ -1759,10 +1762,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

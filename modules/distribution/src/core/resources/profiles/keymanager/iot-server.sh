@@ -335,6 +335,7 @@ do
     -Diot.apimpublisher.https.port="9443" \
     -Diot.apimstore.host="localhost" \
     -Diot.apimstore.https.port="9443" \
+    -Dmqtt.broker.https.port="9446" \
     $NODE_PARAMS \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
