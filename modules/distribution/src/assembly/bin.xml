@@ -1992,16 +1992,19 @@
         <file>
             <source>src/core/resources/security/wso2carbon.jks</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
+            <filtered>false</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/core/resources/security/wso2carbon.jks</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/security</outputDirectory>
+            <filtered>false</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>src/core/resources/security/wso2carbon.jks</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/security</outputDirectory>
+            <filtered>false</filtered>
             <fileMode>644</fileMode>
         </file>
 		<!--End-->
