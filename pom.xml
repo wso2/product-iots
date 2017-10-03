@@ -21,7 +21,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot</groupId>
-    <artifatctId>wso2iot-parent</artifatctId>
+    <artifactId>wso2iot-parent</artifactId>
     <packaging>pom</packaging>
     <version>3.1.1-SNAPSHOT</version>
     <name>WSO2 IoT - Parent</name>
