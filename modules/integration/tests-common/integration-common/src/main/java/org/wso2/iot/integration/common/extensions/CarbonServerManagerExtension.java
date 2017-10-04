@@ -414,14 +414,12 @@ public class CarbonServerManagerExtension {
                 log.info("Execution data file non empty file size in KB : " + file.length() / 1024);
                 break;
             } else {
-
                 try {
                     log.warn("Execution data file is empty file size in KB : " + file.length() / 1024);
                     Thread.sleep(500);
                 } catch (InterruptedException ignored) {
                     log.warn("Sleep interrupted ", ignored);
                 }
-
             }
         }
     }
