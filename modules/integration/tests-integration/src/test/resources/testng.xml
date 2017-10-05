@@ -31,22 +31,22 @@
     <test name="iot-test-cases" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagementWithNoDevices"/>
-            <!--<class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>-->
-            <!--<class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>-->
-            <!--<class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>-->
-			<!--<class name="org.wso2.iot.integration.jmeter.DeviceTypeManagementJMeterTestCase"/>-->
-            <!--<class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>-->
-            <!--<class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>-->
-            <!--<class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>-->
-            <!--<class name="org.wso2.iot.integration.role.RoleManagement"/>-->
-            <!--<class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>-->
-            <!--<class name="org.wso2.iot.integration.jmeter.DeviceManagementAPINegativeTestCase"/>-->
-            <!--<class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>-->
+            <class name="org.wso2.iot.integration.jmeter.AndroidDeviceManagementAPIJmeterTestCase"/>
+            <class name="org.wso2.iot.integration.mobileDevice.MobileDeviceManagement"/>
+            <class name="org.wso2.iot.integration.jmeter.PolicyManagementJMeterTestCase"/>
+			<class name="org.wso2.iot.integration.jmeter.DeviceTypeManagementJMeterTestCase"/>
+            <class name="org.wso2.iot.integration.device.enrollment.AndroidEnrollment"/>
+            <class name="org.wso2.iot.integration.device.operation.AndroidOperation"/>
+            <class name="org.wso2.iot.integration.device.configuration.AndroidConfigurationManagement"/>
+            <class name="org.wso2.iot.integration.role.RoleManagement"/>
+            <class name="org.wso2.iot.integration.jmeter.GroupManagementJMeterTestCase"/>
+            <class name="org.wso2.iot.integration.jmeter.DeviceManagementAPINegativeTestCase"/>
+            <class name="org.wso2.iot.integration.jmeter.NotificationManagementAPIJMeterTestCase"/>
             <class name="org.wso2.iot.integration.jmeter.AppManagerJmeterTestCase"/>
-            <!--<class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>-->
+            <class name="org.wso2.iot.integration.samples.MobileQSGTestCase"/>
 			<!--<class name="org.wso2.iot.integration.device.enrollment.AndroidSenseEnrollment"/>-->
 			<!--<class name="org.wso2.iot.integration.samples.VirtualFireAlarmTestCase"/>-->
-            <!--<class name="org.wso2.iot.integration.user.UserManagement"/>-->
+            <class name="org.wso2.iot.integration.user.UserManagement"/>
         </classes>
     </test>
 </suite>
