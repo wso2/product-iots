@@ -1027,7 +1027,11 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.value">{&#xd;
+	identifier: &quot;${platform_identifier}&quot;,&#xd;
+	name: &quot;New Platform&quot;,&#xd;
+	description : &quot;Modified New Platform&quot;&#xd;
+}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -1054,10 +1058,6 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">multipart/form-data</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1328,7 +1328,7 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Platform Management - Tenant" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Platform Management - Tenant" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -1516,8 +1516,8 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Platform1" enabled="true">
           <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
             <collectionProp name="HTTPFileArgs.files">
-              <elementProp name="${script-path}icon.png" elementType="HTTPFileArg">
-                <stringProp name="File.path">${script-path}icon.png</stringProp>
+              <elementProp name="${script-path}image.png" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}image.png</stringProp>
                 <stringProp name="File.paramname">icon</stringProp>
                 <stringProp name="File.mimetype"></stringProp>
               </elementProp>
@@ -1527,7 +1527,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="platform" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{ 	identifier: &quot;${platform_identifiert}&quot;, 	name: &quot;New Platformt&quot;, 	description : &quot;New Platformt&quot;, 	tags : [&quot;business&quot;, &quot;sports&quot;] }</stringProp>
+                <stringProp name="Argument.value">{identifier: &quot;${platform_identifiert}&quot;, 	name: &quot;New Platformt&quot;, 	description : &quot;New Platformt&quot;, 	tags : [&quot;business&quot;, &quot;sports&quot;]}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">platform</stringProp>
@@ -1545,7 +1545,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
           <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
           <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
@@ -1673,10 +1673,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
               </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
@@ -1733,10 +1729,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -1796,10 +1788,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
               </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
-              </elementProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
@@ -1856,10 +1844,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>

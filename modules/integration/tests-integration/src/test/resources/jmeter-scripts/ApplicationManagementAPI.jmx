@@ -542,17 +542,23 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Platform" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="${script-path}image.png" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}image.png</stringProp>
+                <stringProp name="File.paramname">icon</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
+              <elementProp name="platform" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-	identifier: &quot;${platform_identifier}&quot;,&#xd;
-	name: &quot;New Platform&quot;,&#xd;
-	description : &quot;New Platform&quot;&#xd;
-}</stringProp>
+                <stringProp name="Argument.value">{ 	identifier: &quot;${platform_identifier}&quot;, 	name: &quot;New Platform&quot;, 	description : &quot;New Platform&quot; }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">platform</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -578,10 +584,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -2038,17 +2040,23 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Platform" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="${script-path}image.png" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}image.png</stringProp>
+                <stringProp name="File.paramname">icon</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
+              <elementProp name="platform" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-	identifier: &quot;${platform_identifier}&quot;,&#xd;
-	name: &quot;New Platform&quot;,&#xd;
-	description : &quot;New Platform&quot;&#xd;
-}</stringProp>
+                <stringProp name="Argument.value">{ 	identifier: &quot;${platform_identifier}&quot;, 	name: &quot;New Platform&quot;, 	description : &quot;New Platform&quot; }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">platform</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -2074,10 +2082,6 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -3357,81 +3361,6 @@ downloadedFile.delete();</stringProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="false">
-          <stringProp name="BeanShellSampler.query"></stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
-          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-        </BeanShellSampler>
-        <hashTree>
-          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-            <stringProp name="BeanShellAssertion.query">String iconFilePath = vars.get(&quot;iconFile&quot;);
-String bannerFilePath = vars.get(&quot;bannerFile&quot;);
-String screenShotFilePath1 = vars.get(&quot;screenshotFile1&quot;);
-String screenShotFilePath2 = vars.get(&quot;screenshotFile2&quot;);
-
-File icon = new File(iconFilePath + &quot;&quot;);
-File banner = new File(bannerFilePath + &quot;&quot;);
-File screenShotFile1 = new File(screenShotFilePath1 + &quot;&quot;);
-File screenShotFile2 = new File(screenShotFilePath2 + &quot;&quot;);
-
-String filePath  = vars.get(&quot;script-path&quot;) + &quot;image.png&quot;;
-File iconOriginalFile = new File(filePath);
-
-String bannerOriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;banner.jpg&quot;;
-File bannerOriginalFile = new File(bannerOriginalFilePath);
-
-String screenshot1OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot1.jpg&quot;;
-File screenshot1OriginalFile = new File(screenshot1OriginalFilePath);
-
-String screenshot2OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot2.gif&quot;;
-File screenshot2OriginalFile = new File(screenshot2OriginalFilePath);
-
-long expectedSize = iconOriginalFile.length();
-long actualSize = icon.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;iconFile location - &quot; + iconFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = bannerOriginalFile.length();
-actualSize = banner.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;bannerFile location - &quot; + bannerFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot1OriginalFile.length();
-actualSize = screenShotFile1.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 1 location - &quot; + screenShotFilePath1 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot2OriginalFile.length();
-actualSize = screenShotFile2.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 2 location - &quot; + screenShotFilePath2 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-icon.delete();
-banner.delete();
-screenShotFile1.delete();
-screenShotFile2.delete();</stringProp>
-            <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters">iconFile, script-path, bannerFile, screenshotFile1, screenshotFile2</stringProp>
-            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-          </BeanShellAssertion>
-          <hashTree/>
-        </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
