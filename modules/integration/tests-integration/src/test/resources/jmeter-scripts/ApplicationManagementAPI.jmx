@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1 r1770033">
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Application Management API" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -542,17 +542,23 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Platform" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="${script-path}image.png" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}image.png</stringProp>
+                <stringProp name="File.paramname">icon</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
+              <elementProp name="platform" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-	identifier: &quot;${platform_identifier}&quot;,&#xd;
-	name: &quot;New Platform&quot;,&#xd;
-	description : &quot;New Platform&quot;&#xd;
-}</stringProp>
+                <stringProp name="Argument.value">{ 	identifier: &quot;${platform_identifier}&quot;, 	name: &quot;New Platform&quot;, 	description : &quot;New Platform&quot; }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">platform</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -578,10 +584,6 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -794,6 +796,36 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
                 <stringProp name="File.paramname">screenshot</stringProp>
                 <stringProp name="File.mimetype"></stringProp>
               </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+              <elementProp name="${script-path}screenshot2.gif" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}screenshot2.gif</stringProp>
+                <stringProp name="File.paramname">screenshot</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
             </collectionProp>
           </elementProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -830,13 +862,14 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
+              <elementProp name="isWithImages" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.value">true</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">isWithImages</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -873,7 +906,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="-4477999">&quot;name&quot;:&quot;${application_identifier}&quot;</stringProp>
-              <stringProp name="1396038323">&quot;screenShotCount&quot;:2</stringProp>
+              <stringProp name="1396038327">&quot;screenShotCount&quot;:6</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
@@ -925,7 +958,7 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application icon" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application icon" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -966,17 +999,43 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedicon</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">iconFile</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;image.png&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedicon&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes(&quot;UTF-8&quot;));
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual icon file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application banner" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application banner" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -1017,17 +1076,43 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedbanner</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">bannerFile</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;banner.jpg&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedbanner&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes());
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual banner file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot1" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot1" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -1075,17 +1160,43 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedscreenshot</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">screenshotFile1</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;screenshot1.jpg&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedscreenshot1&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes());
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual screen-shot file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot2" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot2" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -1133,87 +1244,38 @@ vars.put(&quot;base64encodedId&quot;,new String(encryptedId));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedscreenshot2</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">screenshotFile2</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
           <hashTree/>
-        </hashTree>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
-          <stringProp name="BeanShellSampler.query"></stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
-          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-        </BeanShellSampler>
-        <hashTree>
           <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-            <stringProp name="BeanShellAssertion.query">String iconFilePath = vars.get(&quot;iconFile&quot;);
-String bannerFilePath = vars.get(&quot;bannerFile&quot;);
-String screenShotFilePath1 = vars.get(&quot;screenshotFile1&quot;);
-String screenShotFilePath2 = vars.get(&quot;screenshotFile2&quot;);
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
 
-File icon = new File(iconFilePath + &quot;&quot;);
-File banner = new File(bannerFilePath + &quot;&quot;);
-File screenShotFile1 = new File(screenShotFilePath1 + &quot;&quot;);
-File screenShotFile2 = new File(screenShotFilePath2 + &quot;&quot;);
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;screenshot2.gif&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedscreenshot2&quot;);
 
-String filePath  = vars.get(&quot;script-path&quot;) + &quot;image.png&quot;;
-File iconOriginalFile = new File(filePath);
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes());
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
 
-String bannerOriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;banner.jpg&quot;;
-File bannerOriginalFile = new File(bannerOriginalFilePath);
-
-String screenshot1OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot1.jpg&quot;;
-File screenshot1OriginalFile = new File(screenshot1OriginalFilePath);
-
-String screenshot2OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot2.gif&quot;;
-File screenshot2OriginalFile = new File(screenshot2OriginalFilePath);
-
-long expectedSize = iconOriginalFile.length();
-long actualSize = icon.length();
-
-if (expectedSize != actualSize)
-{
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+log.info(actualSize + &quot;&quot;);
+if (expectedSize != actualSize) {
     Failure = true;
-    FailureMessage = &quot;iconFile location - &quot; + iconFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+    FailureMessage = &quot;Actual screen-shot file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
 }
 
-expectedSize = bannerOriginalFile.length();
-actualSize = banner.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;bannerFile location - &quot; + bannerFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot1OriginalFile.length();
-actualSize = screenShotFile1.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 1 location - &quot; + screenShotFilePath1 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot2OriginalFile.length();
-actualSize = screenShotFile2.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 2 location - &quot; + screenShotFilePath2 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-icon.delete();
-banner.delete();
-screenShotFile1.delete();
-screenShotFile2.delete();</stringProp>
+downloadedFile.delete();</stringProp>
             <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters">iconFile, script-path, bannerFile, screenshotFile1, screenshotFile2</stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
             <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
           </BeanShellAssertion>
           <hashTree/>
@@ -1978,17 +2040,23 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Platform" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+            <collectionProp name="HTTPFileArgs.files">
+              <elementProp name="${script-path}image.png" elementType="HTTPFileArg">
+                <stringProp name="File.path">${script-path}image.png</stringProp>
+                <stringProp name="File.paramname">icon</stringProp>
+                <stringProp name="File.mimetype"></stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
+              <elementProp name="platform" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-	identifier: &quot;${platform_identifier}&quot;,&#xd;
-	name: &quot;New Platform&quot;,&#xd;
-	description : &quot;New Platform&quot;&#xd;
-}</stringProp>
+                <stringProp name="Argument.value">{ 	identifier: &quot;${platform_identifier}&quot;, 	name: &quot;New Platform&quot;, 	description : &quot;New Platform&quot; }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">platform</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -2014,10 +2082,6 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
               <elementProp name="" elementType="Header">
                 <stringProp name="Header.name">Authorization</stringProp>
                 <stringProp name="Header.value">Bearer ${access_token}</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -2355,8 +2419,15 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application releases of a super-tenant application" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${host}</stringProp>
           <stringProp name="HTTPSampler.port">${https_port}</stringProp>
@@ -2393,7 +2464,7 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application icon" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application icon" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -2434,17 +2505,45 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedicon</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">iconFile</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;image.png&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedicon&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes(&quot;UTF-8&quot;));
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+downloadedFile = new File(&quot;${script-path}downloadedicon&quot;);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual icon file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application banner" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application banner" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -2485,17 +2584,43 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedbanner</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">bannerFile</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;banner.jpg&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedbanner&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded.getBytes());
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual banner file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot1" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot1" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -2543,17 +2668,43 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedscreenshot</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">screenshotFile1</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;screenshot1.jpg&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedscreenshot1&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded);
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual screen-shot file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot2" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Application screenshot2" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="name" elementType="HTTPArgument">
@@ -2601,14 +2752,40 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-            <stringProp name="FileSaver.filename">${script-path}downloadedscreenshot2</stringProp>
-            <boolProp name="FileSaver.errorsonly">false</boolProp>
-            <boolProp name="FileSaver.skipautonumber">false</boolProp>
-            <boolProp name="FileSaver.skipsuffix">false</boolProp>
-            <boolProp name="FileSaver.successonly">false</boolProp>
-            <stringProp name="FileSaver.variablename">screenshotFile2</stringProp>
-          </ResultSaver>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">encodedImage</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;encodedImage&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">0</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+            <stringProp name="BeanShellAssertion.query">import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
+
+String encoded = vars.get(&quot;encodedImage&quot;);
+String filePath  = vars.get(&quot;script-path&quot;) + &quot;screenshot2.gif&quot;;
+File originalFile = new File(filePath);
+File downloadedFile = new File(&quot;${script-path}downloadedscreenshot2&quot;);
+
+byte[] decoded_response = Base64.decodeBase64(encoded);
+FileUtils.writeByteArrayToFile(downloadedFile,decoded_response);
+
+long expectedSize = originalFile.length();
+long actualSize = downloadedFile.length();
+log.info(actualSize + &quot;&quot;);
+if (expectedSize != actualSize) {
+    Failure = true;
+    FailureMessage = &quot;Actual screen-shot file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
+}
+
+downloadedFile.delete();</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters">encodedImage, iconFile</stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Applications" enabled="true">
@@ -3184,81 +3361,6 @@ vars.put(&quot;script-path&quot;, basePath);</stringProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
-          <stringProp name="BeanShellSampler.query"></stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
-          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-        </BeanShellSampler>
-        <hashTree>
-          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-            <stringProp name="BeanShellAssertion.query">String iconFilePath = vars.get(&quot;iconFile&quot;);
-String bannerFilePath = vars.get(&quot;bannerFile&quot;);
-String screenShotFilePath1 = vars.get(&quot;screenshotFile1&quot;);
-String screenShotFilePath2 = vars.get(&quot;screenshotFile2&quot;);
-
-File icon = new File(iconFilePath + &quot;&quot;);
-File banner = new File(bannerFilePath + &quot;&quot;);
-File screenShotFile1 = new File(screenShotFilePath1 + &quot;&quot;);
-File screenShotFile2 = new File(screenShotFilePath2 + &quot;&quot;);
-
-String filePath  = vars.get(&quot;script-path&quot;) + &quot;image.png&quot;;
-File iconOriginalFile = new File(filePath);
-
-String bannerOriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;banner.jpg&quot;;
-File bannerOriginalFile = new File(bannerOriginalFilePath);
-
-String screenshot1OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot1.jpg&quot;;
-File screenshot1OriginalFile = new File(screenshot1OriginalFilePath);
-
-String screenshot2OriginalFilePath = vars.get(&quot;script-path&quot;) + &quot;screenshot2.gif&quot;;
-File screenshot2OriginalFile = new File(screenshot2OriginalFilePath);
-
-long expectedSize = iconOriginalFile.length();
-long actualSize = icon.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;iconFile location - &quot; + iconFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = bannerOriginalFile.length();
-actualSize = banner.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;bannerFile location - &quot; + bannerFilePath + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize +     &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot1OriginalFile.length();
-actualSize = screenShotFile1.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 1 location - &quot; + screenShotFilePath1 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-
-expectedSize = screenshot2OriginalFile.length();
-actualSize = screenShotFile2.length();
-
-if (expectedSize != actualSize)
-{
-    Failure = true;
-    FailureMessage = &quot;Screen-shot file 2 location - &quot; + screenShotFilePath2 + &quot; .Actual file size differs from expected. Expected: &quot; + expectedSize + &quot; and got: &quot; + actualSize    ;
-}
-icon.delete();
-banner.delete();
-screenShotFile1.delete();
-screenShotFile2.delete();</stringProp>
-            <stringProp name="BeanShellAssertion.filename"></stringProp>
-            <stringProp name="BeanShellAssertion.parameters">iconFile, script-path, bannerFile, screenshotFile1, screenshotFile2</stringProp>
-            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-          </BeanShellAssertion>
-          <hashTree/>
-        </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
