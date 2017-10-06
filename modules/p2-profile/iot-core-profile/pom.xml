@@ -1637,12 +1637,12 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
+                                <!--MQTT Dashboard Feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
-                            <!--MQTT Dashboard Feature-->
-                            <feature>
-                                <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
-                                <version>${carbon.device.mgt.plugin.version}</version>
-                            </feature>
                         </configuration>
                     </execution>
 					
@@ -2110,10 +2110,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.core.feature.group</id>
                                     <version>${carbon.kernel.version}</version>
                                 </feature>
                                 <feature>
@@ -2743,10 +2739,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.core.runtime.feature.group</id>
-                                    <version>${carbon.kernel.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.core.feature.group</id>
                                     <version>${carbon.kernel.version}</version>
                                 </feature>
                                 <feature>
