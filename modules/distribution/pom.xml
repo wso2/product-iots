@@ -292,6 +292,11 @@
 									<output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/datasources/master-datasources.xml</output>
 									<config>src/analytics/conf/datasource_config_change.xml</config>
 								</transformation>
+                                <transformation>
+                                    <input>${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/cdm-config.xml</input>
+                                    <output>../../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/cdm-config.xml</output>
+                                    <config>src/analytics/conf/cdm_config_change.xml</config>
+                                </transformation>
 							</transformations>
 						</configuration>
 					</execution>
