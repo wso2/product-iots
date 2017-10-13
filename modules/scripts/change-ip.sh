@@ -9,7 +9,7 @@ echo "----------------------------------------"
 ##################################### IP configs related to core ####################################
 
 echo ""
-echo ">>> Step 1: Change current IP address of the IoT Core"
+echo ">>> Step 1: Change current IP address of the IoT server"
 
 echo ""
 echo "Please enter the IoT Core IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
@@ -64,7 +64,7 @@ echo "Completed!!"
 
 #--------------------
 echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json"
-sed -i -e 's/"identityProvider.*/\"identityProviderUrl\"\ :\ "https\:\/\/'$val2':9443\/samlsso\"\,/' ../repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
+sed -i -e 's/"identityProvider.*/\"identityProviderURL\"\ :\ "https\:\/\/'$val2':9443\/samlsso\"\,/' ../repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
 echo "Completed!!"
 
 #--------------------
@@ -113,6 +113,7 @@ echo "Completed!!"
 
 #--------------------
 echo "Changing  <IoT_HOME>/bin/iot-server.sh"
+sed -i -e 's/-Diot.manager.host.*/-Diot.manager.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.core.host.*/-Diot.core.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.keymanager.host.*/-Diot.keymanager.host="'$val2'" \\/' ../bin/iot-server.sh
 sed -i -e 's/-Diot.gateway.host.*/-Diot.gateway.host="'$val2'" \\/' ../bin/iot-server.sh
@@ -169,42 +170,19 @@ echo ""
 echo ">>> Step 2: Change current IP address of the IoT Broker"
 echo "-------------------------------------------------------"
 
-echo ""
-echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
-read val3;
-
-while [[ -z $val3 ]]; do #if $val1 is a zero length String
-    echo "Please enter the IoT Broker IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
-    read val3;
-done
-
-echo ""
-echo "Please enter your current IP"
-read val4;
-
-while [[ -z $val4 ]]; do #if $val2 is a zero length String
-    echo "Please enter your current IP"
-    read val4;
-done
-
-echo ""
-echo "--------------------------------------"
-echo "All your " + $val3 + " IP's are replaced with " +$val4 ;
-echo "--------------------------------------"
-
 #--------------------
 echo "Changing  <IoT_HOME>/wso2/analytics/bin/wso2server.sh"
-sed -i -e 's/-Dmqtt.broker.host.*/-Dmqtt.broker.host="'$val4'" \\/' ../wso2/analytics/bin/wso2server.sh
+sed -i -e 's/-Dmqtt.broker.host.*/-Dmqtt.broker.host="'$val2'" \\/' ../wso2/analytics/bin/wso2server.sh
 echo "Completed!!"
 
 #--------------------
 echo "Changing  <IoT_HOME>/bin/iot-server.sh"
-sed -i -e 's/-Dmqtt.broker.host.*/-Dmqtt.broker.host="'$val4'" \\/' ../bin/iot-server.sh
+sed -i -e 's/-Dmqtt.broker.host.*/-Dmqtt.broker.host="'$val2'" \\/' ../bin/iot-server.sh
 echo "Completed!!"
 
 echo "Changing <IoT_HOME>/wso2/broker/conf/carbon.xml"
-sed -i '' -e 's#\(<HostName>\)'$val3'\(</HostName>\)#\1'$val4'\2#g' ../wso2/broker/conf/carbon.xml
-sed -i '' -e 's#\(<MgtHostName>\)'$val3'\(</MgtHostName>\)#\1'$val4'\2#g' ../wso2/broker/conf/carbon.xml
+sed -i '' -e 's#\(<HostName>\)'$val1'\(</HostName>\)#\1'$val2'\2#g' ../wso2/broker/conf/carbon.xml
+sed -i '' -e 's#\(<MgtHostName>\)'$val1'\(</MgtHostName>\)#\1'$val2'\2#g' ../wso2/broker/conf/carbon.xml
 echo "Completed!!"
 
 
@@ -217,49 +195,27 @@ echo ""
 echo ">>> Step 3: Change current IP address of the IoT Analytics"
 echo "-------------------------------------------------------"
 
-echo ""
-echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoT server for the first time
-this will be localhost)"
-read val5;
 
-while [[ -z $val5 ]]; do #if $val1 is a zero length String
-    echo "Please enter the IoT Analytics IP that you need to replace (if you are trying out IoT server for the first time this will be localhost)"
-    read val5;
-done
-
-echo ""
-echo "Please enter your current IP"
-read val6;
-
-while [[ -z $val6 ]]; do #if $val2 is a zero length String
-    echo "Please enter your current IP"
-    read val6;
-done
-
-echo ""
-echo "--------------------------------------"
-echo "All your " + $val5 + " IP's are replaced with " +$val6 ;
-echo "--------------------------------------"
 
 #--------------------
 echo "Changing  <IoT_HOME>/bin/iot-server.sh"
-sed -i -e 's/-Diot.analytics.host.*/-Diot.analytics.host="'$val6'" \\/' ../bin/iot-server.sh
+sed -i -e 's/-Diot.analytics.host.*/-Diot.analytics.host="'$val2'" \\/' ../bin/iot-server.sh
 echo "Completed!!"
 
 echo "Changing  <IoT_HOME>/wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json"
-sed -i -e 's/"acs.*/\"acs\"\:\"https\:\/\/'$val6':9445\/portal\/acs\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
-sed -i -e 's/"callbackUrl.*/\"callbackUrl\"\:\"https\:\/\/'$val6':9445\/portal\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
+sed -i -e 's/"acs.*/\"acs\"\:\"https\:\/\/'$val2':9445\/portal\/acs\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
+sed -i -e 's/"callbackUrl.*/\"callbackUrl\"\:\"https\:\/\/'$val2':9445\/portal\"\,/' ../wso2/analytics/repository/deployment/server/jaggeryapps/portal/configs/designer.json
 echo "Completed!!"
 
 echo "Changing <IoT_HOME>/wso2/analytics/conf/carbon.xml"
-sed -i '' -e 's#\(<HostName>\)'$val5'\(</HostName>\)#\1'$val6'\2#g' ../wso2/analytics/conf/carbon.xml
-sed -i '' -e 's#\(<MgtHostName>\)'$val5'\(</MgtHostName>\)#\1'$val6'\2#g' ../wso2/analytics/conf/carbon.xml
+sed -i '' -e 's#\(<HostName>\)'$val1'\(</HostName>\)#\1'$val2'\2#g' ../wso2/analytics/conf/carbon.xml
+sed -i '' -e 's#\(<MgtHostName>\)'$val1'\(</MgtHostName>\)#\1'$val2'\2#g' ../wso2/analytics/conf/carbon.xml
 echo "Completed!!"
 
 echo ""
-echo "--------------------------------------------"
-echo "Generating SSL certificates for the profiles"
-echo "--------------------------------------------"
+echo "-----------------------------------------------"
+echo "Generating SSL certificates for the IoT Server"
+echo "-----------------------------------------------"
 echo ""
 
 B_SUBJ=''
@@ -343,200 +299,18 @@ echo "Export PKCS12 to JKS"
 keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../repository/resources/security/wso2carbon.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
 keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../repository/resources/security/client-truststore.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
 
+keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/broker/repository/resources/security/wso2carbon.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
+keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/broker/repository/resources/security/client-truststore.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
 
-
-##################
-echo ""
-echo 'Use same values for IoT Broker SSL Cerificate? (Y/N)'
-response=''
-read response
-if [ $response = "y" -o $response = "Y" ]; then
-    B_SUBJ=$C_SUBJ
-else
-	echo ''
-	echo '=======Enter Values for IoT Broker SSL Certificate======='
-
-	buildSubject 'C' 'Country' 'B'
-	buildSubject 'ST' 'State' 'B'
-	buildSubject 'L' 'Location' 'B'
-	buildSubject 'O' 'Organization' 'B'
-	buildSubject 'OU' 'Organizational Unit' 'B'
-	buildSubject 'emailAddress' 'Email Address' 'B'
-	buildSubject 'CN' 'Common Name' 'B'
-fi
+keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/analytics/repository/resources/security/wso2carbon.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
+keytool -importkeystore -srckeystore ./tmp/CKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/analytics/repository/resources/security/client-truststore.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
 
 echo ""
-echo 'Provided IoT Broker SSL Subject : ' $B_SUBJ
-
-echo 'If you have a different IoT Broker Keystore password please enter it here. Press Enter to use the default password.'
-read -s password
-if [ ! -z $password ]; then
-    SSL_PASS=$password
-else
-    SSL_PASS="wso2carbon"
-fi
-
-echo ""
-echo "Generating SSL Certificate for IoT Broker"
-openssl genrsa -out ./tmp/b.key 4096
-openssl req -new -key ./tmp/b.key -out ./tmp/b.csr  -subj $B_SUBJ
-openssl x509 -req -days 730 -in ./tmp/b.csr -signkey ./tmp/b.key -set_serial 044324885 -out ./tmp/b.crt
-
-echo "Export to PKCS12"
-openssl pkcs12 -export -out ./tmp/BKEYSTORE.p12 -inkey ./tmp/b.key -in ./tmp/b.crt -name "wso2carbon" -password pass:$SSL_PASS
-
-echo "Export PKCS12 to JKS"
-keytool -importkeystore -srckeystore ./tmp/BKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/broker/repository/resources/security/wso2carbon.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
-keytool -importkeystore -srckeystore ./tmp/BKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/broker/repository/resources/security/client-truststore.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
-
-
-
-######################
-echo ""
-echo 'Use same values for IoT Analytics SSL Cerificate? (Y/N)'
-response=''
-read response
-if [ $response = "y" -o $response = "Y" ]; then
-    A_SUBJ=$C_SUBJ
-else
-        echo ''
-        echo '=======Enter Values for IoT Analytics SSL Certificate======='
-
-        buildSubject 'C' 'Country' 'A'
-        buildSubject 'ST' 'State' 'A'
-        buildSubject 'L' 'Location' 'A'
-        buildSubject 'O' 'Organization' 'A'
-        buildSubject 'OU' 'Organizational Unit' 'A'
-        buildSubject 'emailAddress' 'Email Address' 'A'
-        buildSubject 'CN' 'Common Name' 'A'
-fi
-
-echo ""
-echo 'Provided IoT Analytics SSL Subject : ' $A_SUBJ
-
-echo 'If you have a different IoT Analytics Keystore password please enter it here. Press Enter to use the default password.'
-read -s password
-if [ ! -z $password ]; then
-    SSL_PASS=$password
-else
-    SSL_PASS="wso2carbon"
-fi
-
-echo ""
-echo "Generating SSL Certificate for IoT Analytics"
-openssl genrsa -out ./tmp/a.key 4096
-openssl req -new -key ./tmp/a.key -out ./tmp/a.csr  -subj $A_SUBJ
-openssl x509 -req -days 730 -in ./tmp/a.csr -signkey ./tmp/a.key -set_serial 044324886 -out ./tmp/a.crt
-
-echo "Export to PKCS12"
-openssl pkcs12 -export -out ./tmp/AKEYSTORE.p12 -inkey ./tmp/a.key -in ./tmp/a.crt -name "wso2carbon" -password pass:$SSL_PASS
-
-echo "Export PKCS12 to JKS"
-keytool -importkeystore -srckeystore ./tmp/AKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/analytics/repository/resources/security/wso2carbon.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
-keytool -importkeystore -srckeystore ./tmp/AKEYSTORE.p12 -srcstoretype PKCS12 -destkeystore ../wso2/analytics/repository/resources/security/client-truststore.jks -deststorepass wso2carbon -srcstorepass wso2carbon -noprompt
-
-
-#########################
-# If importing certificate exist in the client trust stores delete the existing certificate
-echo ""
-echo "Deleting existing certificates in client trust stores"
-
-if keytool -list -storepass wso2carbon -alias wso2broker -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2broker public cert in core client truststore"
-    keytool -delete -alias wso2broker -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2analytics -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2analytics public cert in core client truststore"
-    keytool -delete -alias wso2analytics -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2iotcore -keystore ../wso2/broker/repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2iotcore public cert in broker client truststore"
-    keytool -delete -alias wso2iotcore -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2analytics -keystore ../wso2/broker/repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2analytics public cert in broker client truststore"
-    keytool -delete -alias wso2analytics -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2iotcore -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2iotcore public cert in analytics client truststore"
-    keytool -delete -alias wso2iotcore -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2broker -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting wso2broker public cert in analytics client truststore"
-    keytool -delete -alias wso2broker -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-if keytool -list -storepass wso2carbon -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks >/dev/null; then
-    echo "Deleting JWT public cert in client truststore"
-    keytool -delete -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon
-fi
-
-#########################
-# copying certificates to client trust stores
-echo ""
-echo "Copying certificates to client trust stores"
-
-# copying broker and analytics certificates to IoT core client trust store
-keytool -import -alias wso2broker -file ./tmp/b.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-
-# copying core and analytics certificates to IoT broker client trust store
-keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-keytool -import -alias wso2analytics -file ./tmp/a.crt -keystore ../wso2/broker/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-
-# copying core and broker certificates to IoT analytics client trust store
-keytool -import -alias wso2iotcore -file ./tmp/c.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-keytool -import -alias wso2broker -file ./tmp/b.crt -keystore ../wso2/analytics/repository/resources/security/client-truststore.jks -storepass wso2carbon -noprompt
-
-echo ""
-echo "Generating JWT keystore"
-echo "-------------------------"
-
-echo ""
-echo "Please enter your gateway IP"
-echo "(If you are going to run IoT server on a single machine, use IoT core IP)"
-read val10;
-
-while [[ -z $val10 ]]; do #if $val2 is a zero length String
-    echo "Please enter your current IP"
-    read val10;
-done
-
-JWT_SUBJ="CN=$val10,OU=IOT,O=WSO2,L=Colombo,S=Western,C=LK"
-
-echo ""
-echo 'Provided Subject for JWT : ' $JWT_SUBJ
-
-keytool -genkey -alias wso2carbon -keyalg RSA -keysize 2048 -keystore ../repository/resources/security/wso2carbonjwt.jks -dname $JWT_SUBJ -storepass wso2carbon -keypass wso2carbon
-cp -R ../repository/resources/security/wso2carbonjwt.jks ../wso2/analytics/repository/resources/security/
-
-echo ""
-echo "Changing  <IoT_HOME>/conf/etc/jwt.properties"
-sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks/' ../conf/etc/jwt.properties
-sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon/' ../conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../conf/etc/jwt.properties
-sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../conf/etc/jwt.properties
-
-echo ""
-echo "Changing  <IoT_HOME>/wso2/analytics/conf/etc/jwt.properties"
-sed -i -e 's/#KeyStore=.*/KeyStore=repository\/resources\/security\/wso2carbonjwt.jks/' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#KeyStorePassword=.*/KeyStorePassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyAlias=.*/PrivateKeyAlias=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/#PrivateKeyPassword=.*/PrivateKeyPassword=wso2carbon/' ../wso2/analytics/conf/etc/jwt.properties
-sed -i -e 's/default-jwt-client=.*/default-jwt-client=false/' ../wso2/analytics/conf/etc/jwt.properties
-
-ehco ""
 echo "Setting up the public certificate for the default idp"
 if hash tac; then
-    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
+    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbon.jks -rfc -storepass wso2carbon | tail -n +2 | tac | tail -n +2 | tac | tr -cd "[:print:]");
 else
-    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon | tail -n +2 | tail -r | tail -n +2 | tail -r | tr -cd "[:print:]"); fi
+    VAR=$(keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbon.jks -rfc -storepass wso2carbon | tail -n +2 | tail -r | tail -n +2 | tail -r | tr -cd "[:print:]"); fi
 
 echo ""
 echo "Printing certificate"
@@ -549,13 +323,6 @@ if [ -e "../conf/identity/identity-providers/iot_default.xml-e" ]; then
         echo "IDP temp file exists, hence removing"
         rm -f ../conf/identity/identity-providers/iot_default.xml-e
 fi
-
-echo ""
-echo "Storing JWT public cert in client truststore"
-keytool -exportcert -alias wso2carbon -keystore ../repository/resources/security/wso2carbonjwt.jks -rfc -storepass wso2carbon -file ./tmp/jwtcert
-keytool -importcert -alias wso2carbonjwt -keystore ../repository/resources/security/client-truststore.jks -storepass wso2carbon -file ./tmp/jwtcert -noprompt
-
-sed -i -e 's/<Parameter Name="wso2.org\/products\/iot">.*/<Parameter Name="wso2.org\/products\/iot">wso2carbonjwt<\/Parameter>/' ../conf/etc/webapp-authenticator-config.xml
 
 echo ""
 echo "Configuration Completed!!!"

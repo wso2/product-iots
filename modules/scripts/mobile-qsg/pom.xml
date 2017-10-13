@@ -21,13 +21,13 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-scripts</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.1.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mobile-qsg</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
     <name>WSO2 IoT - QSG Script</name>
     <description>This includes the tools for IoTs Quick Start Guide</description>
     <packaging>jar</packaging>

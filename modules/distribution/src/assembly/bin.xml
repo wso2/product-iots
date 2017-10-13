@@ -70,9 +70,6 @@
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/registry.xml</exclude>
-                <exclude>**/client-truststore.jks</exclude>
-                <exclude>**/wso2carbon.jks</exclude>
-                <exclude>**/wso2carbon.jks</exclude>
                 <exclude>**/WSO2AM_DB.h2.db</exclude>
                 <exclude>**/WSO2DM_DB.h2.db</exclude>
                 <exclude>**/lib/httpmime*</exclude>
@@ -253,8 +250,6 @@
                 <exclude>**/synapse-configs/**</exclude>
                 <exclude>**/web-apps/**</exclude>
                 <exclude>**/appm-tenant-conf.xml</exclude>
-				<exclude>**/client-truststore.jks</exclude>
-				<exclude>**/wso2carbon.jks</exclude>
             </excludes>
 
         </fileSet>
@@ -326,10 +321,6 @@
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources
             </outputDirectory>
-			<excludes>
-				<exclude>**/client-truststore.jks</exclude>
-				<exclude>**/wso2carbon.jks</exclude>
-			</excludes>
         </fileSet>
 
         <!-- Copying device type deployer files -->
@@ -697,8 +688,6 @@
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
-				<exclude>**/repository/resources/security/client-truststore.jks</exclude>
-				<exclude>**/repository/resources/security/wso2carbon.jks</exclude>
             </excludes>
         </fileSet>
 
@@ -988,8 +977,6 @@
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/dbscripts</exclude>
-				<exclude>**/repository/resources/security/client-truststore.jks</exclude>
-				<exclude>**/repository/resources/security/wso2carbon.jks</exclude>
             </excludes>
         </fileSet>
 
@@ -1972,38 +1959,5 @@
             <fileMode>644</fileMode>
         </file>
         <!-- ********************************* End of Broker Profile ********************************* -->
-
-		<!--Start - Need to remove after kernel 4.4.17 release-->
-		<file>
-			<source>src/core/resources/security/client-truststore.jks</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
-			<fileMode>644</fileMode>
-		</file>
-		<file>
-			<source>src/core/resources/security/client-truststore.jks</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/security</outputDirectory>
-			<fileMode>644</fileMode>
-		</file>
-		<file>
-			<source>src/core/resources/security/client-truststore.jks</source>
-			<outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/security</outputDirectory>
-			<fileMode>644</fileMode>
-		</file>
-        <file>
-            <source>src/core/resources/security/wso2carbon.jks</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/resources/security/wso2carbon.jks</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/repository/resources/security</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/resources/security/wso2carbon.jks</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/repository/resources/security</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
-		<!--End-->
     </files>
 </assembly>
