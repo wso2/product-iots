@@ -1,5 +1,4 @@
 org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization_
-org.wso2.carbon.device.mgt.analytics.dashboard_
 org.wso2.carbon.device.mgt.analytics.data.publisher_
 org.wso2.carbon.device.mgt.common_
 org.wso2.carbon.device.mgt.core_
@@ -34,7 +33,6 @@ org.wso2.carbon.email.sender.core_
 org.wso2.carbon.identity.jwt.client.extension_
 org.wso2.carbon.identity.authenticator.backend.oauth_
 org.wso2.carbon.webapp.authenticator.framework_
-org.wso2.carbon.device.mgt.analytics.dashboard_
 org.wso2.carbon.complex.policy.decision.point_
 org.wso2.carbon.appmgt.mdm.osgiconnector_
 org.wso2.carbon.appmgt.mdm.restconnector_
