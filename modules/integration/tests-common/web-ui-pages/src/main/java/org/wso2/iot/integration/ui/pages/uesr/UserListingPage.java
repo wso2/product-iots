@@ -64,5 +64,4 @@ public class UserListingPage {
 
         return new UserListingPage(driver);
     }
-
 }

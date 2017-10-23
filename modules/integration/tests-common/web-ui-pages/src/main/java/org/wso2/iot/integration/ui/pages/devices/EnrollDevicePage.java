@@ -81,9 +81,8 @@ public class EnrollDevicePage {
             tryBtn.click();
             return new ConnectedCupDeviceTypeViewPage(driver);
         } else {
-            log.error("Element not found...........................");
+            log.error("Element not found!");
             return null;
         }
     }
-
 }
