@@ -40,14 +40,14 @@ public class BrokerServerExtension extends ExecutionListenerExtension {
     private static final Log log = LogFactory.getLog(CarbonServerExtension.class);
     private String executionEnvironment;
     private AutomationContext automationContext;
-
+    private final String  BROKER_PORT_OFFSET = "3";
 
     @Override
     public void initiate() throws AutomationFrameworkException {
         try {
             automationContext = new AutomationContext("IOT", TestUserMode.SUPER_TENANT_USER);
             if(getParameters().get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) == null) {
-                getParameters().put(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND, "3");
+                getParameters().put(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND, BROKER_PORT_OFFSET);
             }
             serverManager = new CustomTestServerManager(getAutomationContext(), null, getParameters());
             executionEnvironment =
