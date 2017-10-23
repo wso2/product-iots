@@ -110,5 +110,4 @@ public class ConnectedCupDeviceInterface {
         Action action = move.dragAndDropBy(slider, 0, val).build();
         action.perform();
     }
-
 }

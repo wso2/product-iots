@@ -48,5 +48,4 @@ public class EditUserPage {
     public void editUser(String password, String firstName, String lastName) {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.user.add.input.password.xpath")));
     }
-
 }

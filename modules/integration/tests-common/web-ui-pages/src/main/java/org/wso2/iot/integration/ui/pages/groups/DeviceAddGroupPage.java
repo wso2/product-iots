@@ -47,7 +47,6 @@ public class DeviceAddGroupPage {
         }
     }
 
-
     /**
      * This method performs creation of a new device group.
      * @param name : The group name that is need to be created.
@@ -91,5 +90,4 @@ public class DeviceAddGroupPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.device.groups.add.emptyfrom.error"))).getText();
     }
-
 }

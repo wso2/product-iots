@@ -27,7 +27,6 @@ import org.wso2.iot.integration.ui.pages.UIElementMapper;
 
 import java.io.IOException;
 
-
 /**
  * This class represents the add user page of the IOT server.
  */
@@ -76,5 +75,4 @@ public class AddUserPage {
 
         return new UserAddedConfirmationPage(driver);
     }
-
 }

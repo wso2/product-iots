@@ -170,5 +170,4 @@ public class ConnectedCupDeviceViewPage {
             return false;
         }
     }
-
 }

@@ -17,7 +17,6 @@
  */
 package org.wso2.iot.integration.ui.pages.samples;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -79,5 +78,4 @@ public class ConnectedCupDeviceTypeViewPage {
         return driver.findElement(By.xpath(
                 uiElementMapper.getElement("iot.sample.connectedcup.page.title"))).getText().contains("Connected Cup");
     }
-
 }

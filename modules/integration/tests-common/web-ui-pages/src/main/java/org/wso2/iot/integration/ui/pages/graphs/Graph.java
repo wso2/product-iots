@@ -60,5 +60,4 @@ public class Graph {
         return String.format("The graph for graph id : %s, X - axis : %s, Y - axis : %s, legend : %s ", graphId,
                              xAxis, yAxis, legend);
     }
-
 }

@@ -57,7 +57,6 @@ public class IOTHomePage {
         return name.contains(uiElementMapper.getElement("iot.user.login.username"));
     }
 
-
     /**
      * Performs the logout function.
      * @return : IOT login page.
@@ -90,7 +89,5 @@ public class IOTHomePage {
         driver.findElement(By.xpath("iot.device.viewGroup.empty.addGroup.xpath")).click();
         return new DeviceAddGroupPage(driver);
     }
-
     //ToDo : To add policies
-
 }
