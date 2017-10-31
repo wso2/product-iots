@@ -94,6 +94,15 @@
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.basics.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.email.sender.feature:${carbon.device.mgt.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2-transports.wso2.version}
+                                </featureArtifactDef>
                                 <!-- START - Analytics Features -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics:org.wso2.carbon.analytics.core.feature:${carbon.analytics.das.version}
@@ -388,9 +397,15 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.execution.json.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
-								<featureArtifactDef>
-									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature:${carbon.device.mgt.plugin.version}
-								</featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.devicegroup.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.analytics.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
                                 <!-- GPL Siddhi Extension Script for Geo Fencing -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.gpl.siddhi.extension.geo.script.feature:${carbon.device.mgt.plugin.version}
@@ -443,6 +458,18 @@
                             </destination>
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.basics.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.email.sender.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2-transports.wso2.version}</version>
+                                </feature>
                                 <!-- START - Analytics Features -->
                                 <feature>
                                     <id>org.wso2.carbon.analytics.core.feature.group</id>
@@ -826,13 +853,20 @@
                                     <id>org.wso2.extension.siddhi.execution.json.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.extension.siddhi.devicegroup.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
 
 								<!--android sense analytics feature-->
 								<feature>
 									<id>org.wso2.carbon.device.mgt.iot.androidsense.analytics.feature.group</id>
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
-                                
                                 <!-- GPL Siddhi Extension Script for Geo Fencing -->
                                 <feature>
                                     <id>org.wso2.gpl.siddhi.extension.geo.script.feature.group</id>

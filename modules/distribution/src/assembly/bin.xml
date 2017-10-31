@@ -713,6 +713,13 @@
 
         <fileSet>
             <directory>
+                src/analytics/conf/datasources
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/datasources</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>
                 src/analytics/conf/analytics/spark
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/analytics/spark</outputDirectory>
@@ -1222,6 +1229,13 @@
         <file>
             <source>src/core/conf/etc/device-analytics-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf/etc</outputDirectory>
+            <destName>device-analytics-config.xml</destName>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/conf/etc/device-analytics-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/etc</outputDirectory>
             <destName>device-analytics-config.xml</destName>
             <filtered>true</filtered>
             <fileMode>644</fileMode>

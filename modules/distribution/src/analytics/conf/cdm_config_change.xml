@@ -1,0 +1,12 @@
+<processor>
+    <!-- Remove current PushNotificationProviders config -->
+    <remove>
+        <name>//DeviceMgtConfiguration/PushNotificationConfiguration/PushNotificationProviders</name>
+    </remove>
+
+    <!-- Add modified Carbon db and UM db config -->
+    <add>
+        <inside>//DeviceMgtConfiguration/PushNotificationConfiguration</inside>
+        <file>src/analytics/conf/push_notification_config.xml</file>
+    </add>
+</processor>
