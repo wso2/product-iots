@@ -23,7 +23,7 @@
     <groupId>org.wso2.iot</groupId>
     <artifactId>wso2iot-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.1-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
     <name>WSO2 IoT - Parent</name>
     <url>http://wso2.org</url>
     <description>WSO2 IoT Server</description>
@@ -1517,14 +1517,14 @@
         <carbon.governance.version>4.7.8</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.0.144</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.0.170</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-	    <carbon.device.mgt.plugin.version>4.0.88</carbon.device.mgt.plugin.version>
+	    <carbon.device.mgt.plugin.version>4.0.91</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>
