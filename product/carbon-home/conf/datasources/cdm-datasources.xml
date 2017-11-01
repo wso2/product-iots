@@ -21,14 +21,14 @@
 <datasources-configuration>
     <datasources>
         <datasource>
-            <name>WSO2_AM_DB</name>
-            <description>The datasource used for APIM</description>
+            <name>WSO2_DM_DB</name>
+            <description>The datasource used for IoT</description>
             <jndiConfig>
-                <name>jdbc/WSO2AMDB</name>
+                <name>jdbc/WSO2DM</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:./database/AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <url>jdbc:h2:./database/DM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
                     <username>wso2carbon</username>
                     <password>wso2carbon</password>
                     <driverClassName>org.h2.Driver</driverClassName>
