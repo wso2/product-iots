@@ -817,7 +817,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/18022362098305316308</stringProp>
+          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/qwe12-23fdf-2s332-53fv3-sfs338</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -852,7 +852,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/18022362098305316308</stringProp>
+          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/qwe12-23fdf-2s332-53fv3-sfs33</stringProp>
           <stringProp name="HTTPSampler.method">DELETE</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -5005,7 +5005,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/18022362098305316308</stringProp>
+          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/qwe12-23fdf-2s332-53fv3-sfs33</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -5119,7 +5119,7 @@ GEL4ZNjZ+jnwSkzwBU5vh/QS&quot;,&#xd;
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/18022362098305316308</stringProp>
+          <stringProp name="HTTPSampler.path">/api/certificate-mgt/v1.0/admin/certificates/qwe12-23fdf-2s332-53fv3-sfs33</stringProp>
           <stringProp name="HTTPSampler.method">DELETE</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
