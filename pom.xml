@@ -218,6 +218,9 @@
         <javax.cache-api.version>1.0.0</javax.cache-api.version>
         <carbon.lcm.version>1.1.1</carbon.lcm.version>
         <carbon.deployment.version>5.1.0</carbon.deployment.version>
+
+
+        <carbon.devicemgt.version>4.0.2</carbon.devicemgt.version>
     </properties>
 
     <modules>
