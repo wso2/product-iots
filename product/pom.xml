@@ -125,11 +125,10 @@
             <version>${carbon.transport.version}</version>
             <type>zip</type>
         </dependency>
-
-        <!--Devicemgt-->
+        <!--Device Management Dependencies-->
         <dependency>
             <groupId>org.wso2.carbon.devicemgt</groupId>
-            <artifactId>org.wso2.carbon.devicemgt.api.core.feature</artifactId>
+            <artifactId>org.wso2.carbon.device.mgt.api.feature</artifactId>
             <version>${carbon.devicemgt.version}</version>
             <type>zip</type>
         </dependency>
@@ -250,8 +249,9 @@
                                     <id>org.wso2.carbon.caching.feature</id>
                                     <version>${carbon.cache.version}</version>
                                 </feature>
+                                <!--Device Management Dependencies-->
                                 <feature>
-                                    <id>org.wso2.carbon.devicemgt.api.core.feature</id>
+                                    <id>org.wso2.carbon.device.mgt.api.feature</id>
                                     <version>${carbon.devicemgt.version}</version>
                                 </feature>
                             </features>
@@ -351,9 +351,9 @@
                                     <id>org.wso2.carbon.caching.feature</id>
                                     <version>${carbon.cache.version}</version>
                                 </feature>
-
+                                <!--Device Management Dependencies-->
                                 <feature>
-                                    <id>org.wso2.carbon.devicemgt.api.core.feature</id>
+                                    <id>org.wso2.carbon.device.mgt.api.feature</id>
                                     <version>${carbon.devicemgt.version}</version>
                                 </feature>
                             </features>
