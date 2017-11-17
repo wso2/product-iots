@@ -193,9 +193,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.adapter.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
                                 <!-- IoT Device Management Features -->
 
                                 <!-- Carbon Deployment Features -->
@@ -746,10 +743,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.oauth2.grant.jwt.feature:${identity.jwt.extension.version}
                                 </featureArtifactDef>
-                                <!-- Analytics related features -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.device.mgt.analytics.dashboard.feature:${carbon.device.mgt.version}
-                                </featureArtifactDef>
                                 <!-- Geo Dashboard feature -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.geo.dashboard.feature:${carbon.device.mgt.plugin.version}
@@ -1015,10 +1008,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.extensions.push.notification.provider.xmpp.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1627,11 +1616,6 @@
                                     <id>org.wso2.carbon.identity.oauth2.grant.jwt.feature.group</id>
                                     <version>${identity.jwt.extension.version}</version>
                                 </feature>
-                                <!-- Analytics related features -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.cdmf.analytics.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -1649,12 +1633,12 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Realtime Operations Feature -->
+                                <!--MQTT Dashboard Feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
-                            <!--MQTT Dashboard Feature-->
-                            <feature>
-                                <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
-                                <version>${carbon.device.mgt.plugin.version}</version>
-                            </feature>
                         </configuration>
                     </execution>
 					
@@ -2063,10 +2047,6 @@
 									<id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
                                 <!-- End of Device Management Features -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.adapter.feature.group</id>
@@ -2494,10 +2474,6 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.event.stream.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
                                 </feature>
@@ -2718,14 +2694,6 @@
 									<id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
 									<version>${carbon.device.mgt.plugin.version}</version>
 								</feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.notification.listener.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
                                 <!-- End of Device Management Features -->
 
                                 <feature>
@@ -3125,10 +3093,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.analytics.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>

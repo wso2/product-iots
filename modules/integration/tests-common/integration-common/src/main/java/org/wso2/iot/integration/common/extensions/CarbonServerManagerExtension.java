@@ -18,6 +18,9 @@
 
 package org.wso2.iot.integration.common.extensions;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +39,7 @@ import org.wso2.carbon.automation.extensions.servers.utils.ServerLogReader;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -57,6 +61,7 @@ public class CarbonServerManagerExtension {
     private static final String CMD_ARG = "cmdArg";
     private static int defaultHttpPort = Integer.parseInt("9763");
     private static int defaultHttpsPort = Integer.parseInt("9443");
+    private static final long COVERAGE_DUMP_WAIT_TIME = 30000;
 
     public CarbonServerManagerExtension(AutomationContext context) {
         this.automationContext = context;
@@ -246,6 +251,7 @@ public class CarbonServerManagerExtension {
     }
 
     private void generateCoverageReport(File classesDir) throws IOException, AutomationFrameworkException {
+        checkJacocoDataFileSizes(FrameworkPathUtil.getJacocoCoverageHome());
         CodeCoverageUtils.executeMerge(FrameworkPathUtil.getJacocoCoverageHome(), FrameworkPathUtil.getCoverageMergeFilePath());
         ReportGenerator reportGenerator = new ReportGenerator(new File(FrameworkPathUtil.getCoverageMergeFilePath()), classesDir, new File(CodeCoverageUtils.getJacocoReportDirectory()), (File)null);
         reportGenerator.create();
@@ -374,4 +380,48 @@ public class CarbonServerManagerExtension {
         }
 
     }
+
+    /**
+     * To check jacoco file sizes and wait for them to get created..
+     *
+     * @param filePath File Path of the jacoco data files.
+     */
+    private void checkJacocoDataFileSizes(String filePath) {
+        Collection<File> fileSetsCollection = FileUtils
+                .listFiles(new File(filePath), new RegexFileFilter("[^s]+(." + "(?i)(exec))$"),
+                        DirectoryFileFilter.DIRECTORY);
+
+        for (File inputFile : fileSetsCollection) {
+            if (inputFile.isDirectory()) {
+                continue;
+            }
+            //retry to check whether exec data file is non empty.
+            waitForCoverageDumpFileCreation(inputFile);
+        }
+    }
+
+    /**
+     * This is to wait for jacoco exe file creation.
+     *
+     * @param file File that need to be created.
+     */
+    private void waitForCoverageDumpFileCreation(File file) {
+        long currentTime = System.currentTimeMillis();
+        long waitTime = currentTime + COVERAGE_DUMP_WAIT_TIME;
+
+        while (waitTime > System.currentTimeMillis()) {
+            if (file.length() > 0) {
+                log.info("Execution data file non empty file size in KB : " + file.length() / 1024);
+                break;
+            } else {
+                try {
+                    log.warn("Execution data file is empty file size in KB : " + file.length() / 1024);
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {
+                    log.warn("Sleep interrupted ", ignored);
+                }
+            }
+        }
+    }
+
 }
