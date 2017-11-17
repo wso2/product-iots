@@ -398,7 +398,7 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.execution.json.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.devicegroup.feature:${carbon.device.mgt.plugin.version}
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.extension.siddhi.device.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.analytics.feature:${carbon.device.mgt.plugin.version}
@@ -854,7 +854,7 @@
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.extension.siddhi.devicegroup.feature.group</id>
+                                    <id>org.wso2.extension.siddhi.device.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <feature>
