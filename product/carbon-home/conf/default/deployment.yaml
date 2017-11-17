@@ -45,8 +45,7 @@ wso2.datasources:
   - name: WSO2_DM_DB
     description: The datasource used for carbon device management feature
     jndiConfig:
-      name: jdbc/DM_DS
-      useJndiReference: true
+      name: jdbc/WSO2CarbonDeviceMgtDB
     definition:
       type: RDBMS
       configuration:
