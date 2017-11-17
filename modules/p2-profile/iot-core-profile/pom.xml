@@ -750,9 +750,9 @@
                                 <!-- End of Geo Dashboard feature -->
 
                                 <!-- Realtime Operations Feature -->
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.remote.session.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
+                                <!--<featureArtifactDef>-->
+                                    <!--org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.remote.session.feature:${carbon.device.mgt.plugin.version}-->
+                                <!--</featureArtifactDef>-->
                                 <!-- End of Realtime Operations Feature -->
 
                                 <!--MQTT Dashboard-->
@@ -1628,10 +1628,10 @@
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
                                 <!-- Realtime Operations Feature -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.plugin.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of Realtime Operations Feature -->
                                 <!--MQTT Dashboard Feature-->
                                 <feature>
@@ -2516,10 +2516,10 @@
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
                                 <!-- Realtime Operations Feature -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.plugin.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of Realtime Operations Feature -->
 
                             <!--MQTT Dashboard Feature-->
@@ -3150,10 +3150,10 @@
                                 </feature>
                                 <!-- End of Geo Dashboard Feature -->
                                 <!-- Realtime Operations Feature -->
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>-->
+                                    <!--<version>${carbon.device.mgt.plugin.version}</version>-->
+                                <!--</feature>-->
                                 <!-- End of Realtime Operations Feature -->
                             <!--MQTT Dashboard Feature-->
                             <feature>
