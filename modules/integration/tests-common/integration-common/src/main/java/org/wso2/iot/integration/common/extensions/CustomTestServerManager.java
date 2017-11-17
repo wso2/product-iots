@@ -80,7 +80,6 @@ public class CustomTestServerManager {
 
     }
 
-
     public Map<String, String> getCommands() {
         return commandMap;
     }
@@ -181,6 +180,4 @@ public class CustomTestServerManager {
     public void stopServer() throws AutomationFrameworkException {
         carbonServer.serverShutdown(portOffset);
     }
-
-
 }

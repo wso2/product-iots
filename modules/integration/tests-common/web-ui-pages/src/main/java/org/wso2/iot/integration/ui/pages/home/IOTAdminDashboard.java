@@ -132,6 +132,5 @@ public class IOTAdminDashboard {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.admin.device.viewBtn.xpath"))).click();
         return new DevicesPage(driver);
     }
-
     //ToDo : Need to add policy methods
 }

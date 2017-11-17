@@ -80,11 +80,11 @@ public class DevicesPage {
      */
     public ConnectedCupDeviceViewPage viewDevice(String deviceName) throws IOException {
         WebElement deviceTable = driver.findElement(By.xpath(uiElementMapper.getElement("iot.devices.table.xpath")));
-        List<WebElement> data = deviceTable.findElements(By.cssSelector("a"));
-        for (WebElement e : data) {
-            String s = getLink(e, "/device/connectedcup?id=");
-            if (s != null) {
-                driver.get(s);
+        List<WebElement> anchors = deviceTable.findElements(By.cssSelector("a"));
+        for (WebElement element : anchors) {
+            String connectedCupLink = getLink(element, "/device/connectedcup?id=");
+            if (connectedCupLink != null) {
+                driver.get(connectedCupLink);
                 return new ConnectedCupDeviceViewPage(driver, deviceName);
             }
         }
@@ -100,12 +100,11 @@ public class DevicesPage {
     private String getLink(WebElement element, String... lookupText) {
         String link = element.getAttribute("href");
         boolean check = true;
-        for (String s : lookupText) {
-            if (!link.contains(s)) {
+        for (String text : lookupText) {
+            if (!link.contains(text)) {
                 check = false;
             }
         }
         return check ? link : null;
     }
-
 }

@@ -101,5 +101,4 @@ public class LoginPage {
         registerLink.click();
         return new NewUserRegisterPage(driver);
     }
-
 }

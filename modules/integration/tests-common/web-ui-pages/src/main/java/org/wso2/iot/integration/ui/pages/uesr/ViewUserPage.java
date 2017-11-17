@@ -43,5 +43,4 @@ public class ViewUserPage {
             throw new IllegalStateException("This is not the User view page");
         }
     }
-
 }

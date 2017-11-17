@@ -23,7 +23,6 @@ import org.wso2.carbon.automation.engine.annotations.ExecutionEnvironment;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.ContextXpathConstants;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.exceptions.AutomationFrameworkException;
 import org.wso2.carbon.automation.engine.extensions.ExecutionListenerExtension;
 import org.wso2.carbon.automation.extensions.ExtensionConstants;
 import org.wso2.carbon.automation.extensions.servers.carbonserver.CarbonServerExtension;
@@ -40,26 +39,26 @@ public class BrokerServerExtension extends ExecutionListenerExtension {
     private static final Log log = LogFactory.getLog(CarbonServerExtension.class);
     private String executionEnvironment;
     private AutomationContext automationContext;
-
+    private final String BROKER_PORT_OFFSET = "3";
 
     @Override
-    public void initiate() throws AutomationFrameworkException {
+    public void initiate() {
         try {
             automationContext = new AutomationContext("IOT", TestUserMode.SUPER_TENANT_USER);
-            if(getParameters().get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) == null) {
-                getParameters().put(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND, "3");
+            if (getParameters().get(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND) == null) {
+                getParameters().put(ExtensionConstants.SERVER_STARTUP_PORT_OFFSET_COMMAND, BROKER_PORT_OFFSET);
             }
             serverManager = new CustomTestServerManager(getAutomationContext(), null, getParameters());
             executionEnvironment =
                     automationContext.getConfigurationValue(ContextXpathConstants.EXECUTION_ENVIRONMENT);
 
         } catch (XPathExpressionException e) {
-            handleException("Error while initiating test environment", e);
+            throw new RuntimeException("Error while initiating test environment", e);
         }
     }
 
     @Override
-    public void onExecutionStart() throws AutomationFrameworkException {
+    public void onExecutionStart() {
         try {
             if (executionEnvironment.equalsIgnoreCase(ExecutionEnvironment.STANDALONE.name())) {
                 String carbonHome = serverManager.startServer("broker");
@@ -67,23 +66,18 @@ public class BrokerServerExtension extends ExecutionListenerExtension {
                 System.setProperty(ExtensionConstants.CARBON_HOME, carbonHome);
             }
         } catch (Exception e) {
-            handleException("Fail to start carbon server ", e);
+            throw new RuntimeException("Fail to start carbon server ", e);
         }
     }
 
     @Override
-    public void onExecutionFinish() throws AutomationFrameworkException {
+    public void onExecutionFinish() {
         try {
             if (executionEnvironment.equalsIgnoreCase(ExecutionEnvironment.STANDALONE.name())) {
                 serverManager.stopServer();
             }
         } catch (Exception e) {
-            handleException("Fail to stop carbon server ", e);
+            throw new RuntimeException("Fail to stop carbon server ", e);
         }
-    }
-
-    private static void handleException(String msg, Exception e) {
-        log.error(msg, e);
-        throw new RuntimeException(msg, e);
     }
 }
