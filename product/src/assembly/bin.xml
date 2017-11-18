@@ -35,6 +35,7 @@
                 <exclude>**/*.iwr</exclude>
                 <exclude>**/*.eclipse</exclude>
                 <exclude>**/netty-transports.yml</exclude>
+                <exclude>conf/deployment.yaml</exclude>
                 <!--  change this to config provider format an add it again-->
                 <exclude>**/workflow-extensions.yml</exclude>
                 <exclude>wso2/lib/features/**</exclude>
@@ -49,7 +50,11 @@
                 <include>LICENSE</include>
             </includes>
         </fileSet>
-
+        <fileSet>
+            <directory>carbon-home/conf/default</directory>
+            <outputDirectory>conf/default</outputDirectory>
+            <fileMode>644</fileMode>
+        </fileSet>
         <fileSet>
             <directory>carbon-home/conf/transports</directory>
             <outputDirectory>conf/transports</outputDirectory>
@@ -71,16 +76,19 @@
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
-            <directory>carbon-home/conf/datasources</directory>
-            <outputDirectory>conf/datasources</outputDirectory>
-            <fileMode>644</fileMode>
-        </fileSet>
-        <fileSet>
             <directory>carbon-home/lib</directory>
             <outputDirectory>lib</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
-
+        <fileSet>
+            <directory>carbon-home/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>**/*.sh</include>
+                <include>**/*.bat</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
         <fileSet>
             <directory>carbon-home/deployment</directory>
             <outputDirectory>deployment</outputDirectory>
