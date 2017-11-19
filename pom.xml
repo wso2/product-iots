@@ -17,8 +17,7 @@
   ~ */
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -30,14 +29,14 @@
     <groupId>org.wso2.iot</groupId>
     <artifactId>iot-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0-M1</version>
     <name>WSO2 IoT Server - Parent Pom</name>
 
     <scm>
         <url>https://github.com/wso2/product-iots.git</url>
         <developerConnection>scm:git:https://github.com/wso2/product-iots.git</developerConnection>
         <connection>scm:git:https://github.com/wso2/product-iots.git</connection>
-        <tag>4.0.0</tag>
+        <tag>v4.0.0-M1</tag>
     </scm>
 
     <pluginRepositories>
