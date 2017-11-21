@@ -190,7 +190,7 @@
     </dependencyManagement>
 
     <properties>
-        <carbon.devicemgt.version>4.0.4</carbon.devicemgt.version>
+        <carbon.devicemgt.version>4.0.5</carbon.devicemgt.version>
 
         <carbon.kernel.version>5.2.0</carbon.kernel.version>
         <carbon.kernel.product.version>5.2.0</carbon.kernel.product.version>
