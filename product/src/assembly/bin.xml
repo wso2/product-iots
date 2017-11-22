@@ -57,7 +57,7 @@
         </fileSet>
         <fileSet>
             <directory>carbon-home/conf/transports</directory>
-            <outputDirectory>conf/transports</outputDirectory>
+            <outputDirectory>wso2/default/conf/transports</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
