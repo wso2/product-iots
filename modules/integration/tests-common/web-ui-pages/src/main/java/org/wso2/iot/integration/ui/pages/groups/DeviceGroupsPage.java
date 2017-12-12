@@ -73,5 +73,4 @@ public class DeviceGroupsPage {
         }
         return false;
     }
-
 }

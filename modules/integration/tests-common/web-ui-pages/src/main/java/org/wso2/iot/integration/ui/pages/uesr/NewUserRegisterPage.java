@@ -127,5 +127,4 @@ public class NewUserRegisterPage {
         passwordField.clear();
         passwordConfirmationField.clear();
     }
-
 }
