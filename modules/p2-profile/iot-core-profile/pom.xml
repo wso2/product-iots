@@ -119,10 +119,10 @@
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.server.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.api.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.v09.api.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.cert.admin.api.feature:${carbon.device.mgt.version}
+                                    org.wso2.carbon.devicemgt:org.wso2.carbon.certificate.mgt.cert.admin.v09.api.feature:${carbon.device.mgt.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt:org.wso2.carbon.webapp.authenticator.framework.server.feature:${carbon.device.mgt.version}
@@ -957,7 +957,15 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.certificate.mgt.v09.api.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.v09.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -1972,11 +1980,11 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
+                                    <id>org.wso2.carbon.certificate.mgt.v09.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
+                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.v09.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2442,23 +2450,7 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -2616,7 +2608,15 @@
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
+                                    <id>org.wso2.carbon.certificate.mgt.v09.api.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
                                     <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
+                                    <version>${carbon.device.mgt.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.v09.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
@@ -3066,14 +3066,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.certificate.mgt.server.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.api.feature.group</id>
-                                    <version>${carbon.device.mgt.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.certificate.mgt.cert.admin.api.feature.group</id>
                                     <version>${carbon.device.mgt.version}</version>
                                 </feature>
                                 <feature>
