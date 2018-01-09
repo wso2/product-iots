@@ -63,6 +63,11 @@ sed -i -e 's/"acs.*/\"acs\"\ :\ "https\:\/\/'$val2':9443\/devicemgt\/uuf\/sso\/a
 echo "Completed!!"
 
 #--------------------
+echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json"
+sed -i -e 's/"androidAgentDownloadURL.*/\"androidAgentDownloadURL\":\ "https\:\/\/\%iot.manager.host\%\:\%iot.manager.https.port\%\/devicemgt\/public\/cdmf.unit.device.type.android.type-view\/assets\/android-agent.apk\",/' ../repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json
+echo "Completed!!"
+
+#--------------------
 echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/api-store/site/conf/site.json"
 sed -i -e 's/"identityProvider.*/\"identityProviderURL\"\ :\ "https\:\/\/'$val2':9443\/samlsso\"\,/' ../repository/deployment/server/jaggeryapps/api-store/site/conf/site.json
 echo "Completed!!"
