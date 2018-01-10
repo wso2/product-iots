@@ -129,9 +129,6 @@ if [ $val5 = "Y" ]; then
     sed -i -e 's#\("owner": "\)'$val1'\(@carbon.super"\)#\1'$val3'\2#g' ../repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json
     echo "Completed!!"
 
-    echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/android-web-agent/app/conf/config.json"
-    sed -i -e 's#\("owner": "\)'$val1'\(@carbon.super"\)#\1'$val3'\2#g' ../repository/deployment/server/jaggeryapps/android-web-agent/app/conf/config.json
-    echo "Completed!!"
 else if [ $val5 = "N" ]; then
     echo ""
     echo "Please enter the old tenant domain of the IoTS "
@@ -152,10 +149,6 @@ else if [ $val5 = "N" ]; then
     echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json"
     sed -i -e 's#\("adminUser": "\)'$val1'\(@\)'$val6'\("\)#\1'$val3'\2'$val7'\3#g' ../repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json
     sed -i -e 's#\("owner": "\)'$val1'\(@\)'$val6'\("\)#\1'$val3'\2'$val7'\3#g' ../repository/deployment/server/jaggeryapps/devicemgt/app/conf/config.json
-    echo "Completed!!"
-
-    echo "Changing <IoT_HOME>/repository/deployment/server/jaggeryapps/android-web-agent/app/conf/config.json"
-    sed -i -e 's#\("owner": "\)'$val1'\(@\)'$val6'\("\)#\1'$val3'\2'$val7'\3#g' ../repository/deployment/server/jaggeryapps/android-web-agent/app/conf/config.json
     echo "Completed!!"
 fi
 
