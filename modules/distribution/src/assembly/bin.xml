@@ -371,19 +371,6 @@
             </excludes>
         </fileSet>
 
-        <!-- Copying android-web-agent-->
-        <fileSet>
-            <directory>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/jaggeryapps/android-web-agent/
-            </directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent
-            </outputDirectory>
-            <excludes>
-                <exclude>**/jaggery.conf</exclude>
-            </excludes>
-        </fileSet>
-
         <fileSet>
             <directory>
                 ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps/
@@ -1502,14 +1489,6 @@
             <destName>webapp-publisher-config.xml</destName>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
-        </file>
-
-        <file>
-            <source>src/core/jaggeryapps/android-web-agent/jaggery.conf</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/android-web-agent/
-            </outputDirectory>
-            <fileMode>755</fileMode>
         </file>
         <file>
             <source>src/core/jaggeryapps/api-store/jaggery.conf</source>
