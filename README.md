@@ -59,7 +59,7 @@ http://docs.wso2.com/iot-server.
 
 ### How to Run
 * Extract the downloaded wso2iot-3.1.0.zip file; this will create a folder named ‘wso2iot-3.1.0’.
-* IoT Server comes with three runnable components namely broker, core, and analytics. Start these components in following order by executing by executing the following scripts:
+* IoT Server comes with three runnable components namely broker, core, and analytics. Start these components in following order by executing the following scripts:
     * wso2iot-3.1.0//bin/broker.sh [.bat]
     * wso2iot-3.1.0/bin/iot-server.sh [.bat]
     * wso2iot-3.1.0/bin/analytics.sh [.bat]
