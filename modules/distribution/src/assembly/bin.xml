@@ -675,6 +675,7 @@
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/webapp-mode/WEB-INF/web.xml</exclude>
+                <exclude>**/tomcat/catalina-server.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -971,6 +972,7 @@
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>**/release-notes.html</exclude>
                 <exclude>**/dbscripts</exclude>
+                <exclude>**/tomcat/catalina-server.xml</exclude>
             </excludes>
         </fileSet>
 
@@ -1224,6 +1226,18 @@
             <source>src/core/conf/etc/device-analytics-config.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/etc</outputDirectory>
             <destName>device-analytics-config.xml</destName>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/conf/tomcat/catalina-server.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/tomcat</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/conf/tomcat/catalina-server.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/broker/conf/tomcat</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
