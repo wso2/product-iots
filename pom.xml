@@ -1524,7 +1524,7 @@
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-	<carbon.device.mgt.plugin.version>4.0.114</carbon.device.mgt.plugin.version>
+	    <carbon.device.mgt.plugin.version>4.0.114</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>
