@@ -1630,6 +1630,13 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+        <file>
+            <source>../scripts/change-superadmin-credentials.sh</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/scripts
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
 
         <file>
             <source>
