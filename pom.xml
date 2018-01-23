@@ -17,7 +17,8 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot</groupId>
@@ -1498,7 +1499,8 @@
         <identity.inbound.auth.oauth.version>5.3.11</identity.inbound.auth.oauth.version>
         <identity.carbon.auth.mutual.ssl.version>5.1.2</identity.carbon.auth.mutual.ssl.version>
         <identity.user.ws.version>5.1.4</identity.user.ws.version>
-        <identity.outbound.auth.requestpath.basicauth.version>5.1.1</identity.outbound.auth.requestpath.basicauth.version>
+        <identity.outbound.auth.requestpath.basicauth.version>5.1.1
+        </identity.outbound.auth.requestpath.basicauth.version>
         <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
         <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
         <identity.metadata.saml2.version>1.0.0</identity.metadata.saml2.version>
@@ -1524,7 +1526,7 @@
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-	    <carbon.device.mgt.plugin.version>4.0.114</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.0.114</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>
