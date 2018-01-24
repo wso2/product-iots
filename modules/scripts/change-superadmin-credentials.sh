@@ -84,6 +84,11 @@ sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' 
 sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
 echo "Completed!!"
 
+echo "Changing <IoT_HOME>/wso2/analytics/conf/output-event-adapters.xml"
+sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
+sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
+echo "Completed!!"
+
 echo "Changing <IoT_HOME>/conf/user-mgt.xml"
 sed -i -e 's#\(<UserName>\)'$val1'\(</UserName>\)#\1'$val3'\2#g' ../conf/user-mgt.xml
 sed -i -e 's#\(<Password>\)'$val2'\(</Password>\)#\1'$val4'\2#g' ../conf/user-mgt.xml
@@ -115,8 +120,8 @@ sed -i -e 's#\(<Password>\)'$val2'\(</Password>\)#\1'$val4'\2#g' ../wso2/broker/
 echo "Completed!!"
 
 echo "Changing <IoT_HOME>/wso2/broker/conf/broker.xml"
-sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../wso2/broker/conf/broker.xml
-sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/broker/conf/broker.xml
+sed -i -e 's#\(<property name="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../wso2/broker/conf/broker.xml
+sed -i -e 's#\(<property name="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/broker/conf/broker.xml
 echo "Completed!!"
 
 echo ""
