@@ -17,7 +17,8 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -1491,7 +1492,8 @@
 
         <!-- Carbon Identity -->
         <carbon.identity.framework.version>5.7.5</carbon.identity.framework.version>
-        <carbon.identity.framework.version.range>[5.2.0, 6.0.0)</carbon.identity.framework.version.range>
+        <carbon.identity.framework.version.range>[5.2.0, 6.0.0)
+        </carbon.identity.framework.version.range>
         <identity.local.auth.basicauth.version>5.3.1</identity.local.auth.basicauth.version>
         <identity.inbound.auth.openid.version>5.1.1</identity.inbound.auth.openid.version>
         <identity.inbound.auth.saml.version>5.3.1</identity.inbound.auth.saml.version>
@@ -1501,7 +1503,8 @@
         <identity.user.ws.version>5.1.4</identity.user.ws.version>
         <identity.outbound.auth.requestpath.basicauth.version>5.1.1
         </identity.outbound.auth.requestpath.basicauth.version>
-        <identity.outbound.auth.requestpath.oauth.version>5.1.1</identity.outbound.auth.requestpath.oauth.version>
+        <identity.outbound.auth.requestpath.oauth.version>5.1.1
+        </identity.outbound.auth.requestpath.oauth.version>
         <identity.outbound.auth.samlsso.version>5.1.4</identity.outbound.auth.samlsso.version>
         <identity.metadata.saml2.version>1.0.0</identity.metadata.saml2.version>
         <identity.inbound.metadata.saml2.version>0.1.1</identity.inbound.metadata.saml2.version>
@@ -1519,14 +1522,14 @@
         <carbon.governance.version>4.7.8</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.0.207</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.0.216</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>4.0.114</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.0.120</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.1.109</carbon.api.mgt.version>

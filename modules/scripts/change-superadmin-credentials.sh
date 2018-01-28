@@ -42,6 +42,11 @@ while [[ -z $val3 || -z $val4 ]]; do #if $val2 is a zero length String
     read val4;
 done
 
+echo "Changing <IoT_HOME>/conf/cdm-config.xml"
+sed -i -e 's#\(<AdminUsername>\)'$val1'\(</AdminUsername>\)#\1'$val3'\2#g' ../conf/cdm-config.xml
+sed -i -e 's#\(<AdminPassword>\)'$val2'\(</AdminPassword>\)#\1'$val4'\2#g' ../conf/cdm-config.xml
+echo "Completed!!"
+
 echo "Changing <IoT_HOME>/conf/app-manager.xml"
 sed -i -e 's#\(<Username>\)'$val1'\(</Username>\)#\1'$val3'\2#g' ../conf/app-manager.xml
 sed -i -e 's#\(<Password>\)'$val2'\(</Password>\)#\1'$val4'\2#g' ../conf/app-manager.xml
