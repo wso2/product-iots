@@ -26,6 +26,7 @@ import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
 import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
 import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
 import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
+import org.wso2.carbon.device.mgt.common.general.GeneralConfig;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
 import org.wso2.carbon.device.mgt.common.policy.mgt.PolicyMonitoringManager;
 import org.wso2.carbon.device.mgt.common.pull.notification.PullNotificationSubscriber;
@@ -36,6 +37,11 @@ public class ConnectedCupManagerService implements DeviceManagementService {
     private DeviceManager deviceManager;
 
     @Override
+    public void init() throws DeviceManagementException {
+        this.deviceManager = new ConnectedCupManager();
+    }
+
+    @Override
     public String getType() {
         return ConnectedCupConstants.DEVICE_TYPE;
     }
@@ -43,11 +49,6 @@ public class ConnectedCupManagerService implements DeviceManagementService {
     @Override
     public OperationMonitoringTaskConfig getOperationMonitoringConfig() {
         return null;
-    }
-
-    @Override
-    public void init() throws DeviceManagementException {
-        this.deviceManager = new ConnectedCupManager();
     }
 
     @Override
@@ -76,17 +77,22 @@ public class ConnectedCupManagerService implements DeviceManagementService {
     }
 
     @Override
-    public DeviceStatusTaskPluginConfig getDeviceStatusTaskPluginConfig() {
-        return null;
-    }
-
-    @Override
     public InitialOperationConfig getInitialOperationConfig() {
         return null;
     }
 
     @Override
     public PullNotificationSubscriber getPullNotificationSubscriber() {
+        return null;
+    }
+
+    @Override
+    public DeviceStatusTaskPluginConfig getDeviceStatusTaskPluginConfig() {
+        return null;
+    }
+
+    @Override
+    public GeneralConfig getGeneralConfig() {
         return null;
     }
 }
