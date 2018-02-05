@@ -51,13 +51,13 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.sampledevice.feature:1.0.0
+                                    org.wso2.carbon:org.wso2.iot.sampledevice.feature:1.0.0
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -70,13 +70,13 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
-                            <destination>${basedir}/../wso2/components</destination>
+                            <metadataRepository>file:\${basedir}/p2-repo</metadataRepository>
+                            <artifactRepository>file:\${basedir}/p2-repo</artifactRepository>
+                            <destination>\${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
                                 <feature>
-                                    <id>org.wso2.carbon.sampledevice.feature.group</id>
+                                    <id>org.wso2.iot.sampledevice.feature.group</id>
                                     <version>1.0.0</version>
                                 </feature>
                             </features>

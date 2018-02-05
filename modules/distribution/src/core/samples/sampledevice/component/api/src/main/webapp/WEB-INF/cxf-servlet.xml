@@ -27,7 +27,7 @@
     <jaxrs:server id="sampledevice" address="/">
         <jaxrs:serviceBeans>
             <bean id="DeviceTypeService"
-                  class="org.wso2.carbon.sampledevice.api.DeviceTypeServiceImpl">
+                  class="org.wso2.iot.sampledevice.api.DeviceTypeServiceImpl">
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
