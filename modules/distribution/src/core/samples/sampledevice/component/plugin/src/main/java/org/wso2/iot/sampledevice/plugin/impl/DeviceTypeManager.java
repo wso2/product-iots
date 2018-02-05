@@ -76,7 +76,7 @@ public class DeviceTypeManager implements DeviceManager {
                 DeviceTypeDAO.rollbackTransaction();
             } catch (DeviceMgtPluginException iotDAOEx) {
                 log.warn("Error occurred while roll back the device enrol transaction :"
-                        + device.toString(), iotDAOEx);
+                                 + device.toString(), iotDAOEx);
             }
             String msg = "Error while enrolling the sampledevice device : "
                     + device.getDeviceIdentifier();
@@ -143,7 +143,7 @@ public class DeviceTypeManager implements DeviceManager {
         try {
             if (log.isDebugEnabled()) {
                 log.debug("Checking the enrollment of sampledevice device : "
-                        + deviceId.getId());
+                                  + deviceId.getId());
             }
             Device iotDevice =
                     deviceTypeDAO.getDeviceTypeDAO().getDevice(deviceId.getId());
@@ -261,7 +261,8 @@ public class DeviceTypeManager implements DeviceManager {
     }
 
     @Override
-    public boolean updateDeviceProperties(DeviceIdentifier deviceIdentifier, List<Device.Property> list) throws DeviceManagementException {
+    public boolean updateDeviceProperties(DeviceIdentifier deviceIdentifier, List<Device.Property> list)
+            throws DeviceManagementException {
         return false;
     }
 }
