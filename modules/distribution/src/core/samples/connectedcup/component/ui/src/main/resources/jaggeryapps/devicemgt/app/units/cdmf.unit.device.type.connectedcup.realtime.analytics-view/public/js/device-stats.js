@@ -114,6 +114,17 @@ function connect(wsConnection, target, chartData, graph, sensorType) {
             chartData.shift();
             graph.update();
         };
+        wsConnection.onerror = function (event) {
+            var websocketURL = event.currentTarget.url;
+            websocketURL = websocketURL.replace("wss://","https://");
+            var uriParts = websocketURL.split("/");
+            websocketURL = uriParts[0] + "//" + uriParts[2];
+            var errorMsg = $("#websocker-onerror").html();
+            errorMsg = errorMsg.replace(new RegExp('\\$sensorType', 'g'), sensorType);
+            errorMsg = errorMsg.replace(new RegExp('\\$webSocketURL', 'g'), websocketURL);
+            $(graph.element).parent().html("<div class='alert alert-danger'>" + errorMsg + "</div>");
+            $(graph.element).hide();
+        };
     }
     if (sensorType == "temperature") {
         wsConnectionTemperature = wsConnection;
