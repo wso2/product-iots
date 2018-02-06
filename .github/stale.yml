@@ -4,7 +4,7 @@ daysUntilStale: 10
 daysUntilClose: 5
 # Issues with these labels will never be considered stale
 exemptLabels:
-  - in progress
+  - Resolution/Postponed
 # Label to use when marking an issue as stale
 staleLabel: Resolution/Stale
 # Comment to post when marking an issue as stale. Set to `false` to disable
@@ -13,3 +13,5 @@ markComment: >
   recent activity. It will be closed if no further activity occurs.
 # Comment to post when closing a stale issue. Set to `false` to disable
 closeComment: false
+# Only pull requests
+only: pulls
