@@ -648,6 +648,8 @@
             <excludes>
                 <exclude>**/*connectedcup-samples-deployer.xml</exclude>
                 <exclude>**/*connectedcup/pom.xml</exclude>
+                <exclude>**/*sampledevice/pom.xml</exclude>
+                <exclude>**/*sampledevice-deployer.xml</exclude>
                 <exclude>**/*device-plugins-deployer.xml</exclude>
             </excludes>
         </fileSet>
@@ -1691,8 +1693,20 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>src/core/samples/sampledevice-deployer.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>src/core/samples/connectedcup/pom.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/samples/connectedcup/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>src/core/samples/sampledevice/pom.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/samples/sampledevice/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

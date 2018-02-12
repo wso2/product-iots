@@ -60,6 +60,12 @@
 			<artifactId>h2-database-engine</artifactId>
 			<version>1.2.140.wso2v3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.devicemgt</groupId>
+			<artifactId>org.wso2.carbon.device.mgt.server.feature</artifactId>
+			<type>zip</type>
+			<version>${carbon.device.mgt.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -11,20 +11,18 @@
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
 
-package org.coffeeking.connectedcup.plugin.impl;
+package org.wso2.iot.sampledevice.plugin.impl;
 
-import org.coffeeking.connectedcup.plugin.constants.ConnectedCupConstants;
-import org.wso2.carbon.base.MultitenantConstants;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
-import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
-import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
 import org.wso2.carbon.device.mgt.common.DeviceStatusTaskPluginConfig;
+import org.wso2.carbon.device.mgt.common.InitialOperationConfig;
+import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
 import org.wso2.carbon.device.mgt.common.ProvisioningConfig;
 import org.wso2.carbon.device.mgt.common.general.GeneralConfig;
 import org.wso2.carbon.device.mgt.common.app.mgt.ApplicationManager;
@@ -32,24 +30,31 @@ import org.wso2.carbon.device.mgt.common.policy.mgt.PolicyMonitoringManager;
 import org.wso2.carbon.device.mgt.common.pull.notification.PullNotificationSubscriber;
 import org.wso2.carbon.device.mgt.common.push.notification.PushNotificationConfig;
 import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
+import org.wso2.iot.sampledevice.plugin.constants.DeviceTypeConstants;
 
-public class ConnectedCupManagerService implements DeviceManagementService {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * DeviceType Manager Service that defines device manager operations.
+ */
+public class DeviceTypeManagerService implements DeviceManagementService {
     private DeviceManager deviceManager;
-
-    @Override
-    public void init() throws DeviceManagementException {
-        this.deviceManager = new ConnectedCupManager();
-    }
+    private OperationMonitoringTaskConfig operationMonitoringTaskConfig;
 
     @Override
     public String getType() {
-        return ConnectedCupConstants.DEVICE_TYPE;
+        return DeviceTypeConstants.DEVICE_TYPE;
     }
 
     @Override
-    public OperationMonitoringTaskConfig getOperationMonitoringConfig() {
-        return null;
+    public void init() throws DeviceManagementException {
+        this.deviceManager = new DeviceTypeManager();
+        this.operationMonitoringTaskConfig = new OperationMonitoringTaskConfig();
     }
+
 
     @Override
     public DeviceManager getDeviceManager() {
@@ -63,12 +68,25 @@ public class ConnectedCupManagerService implements DeviceManagementService {
 
     @Override
     public ProvisioningConfig getProvisioningConfig() {
-        return new ProvisioningConfig(MultitenantConstants.SUPER_TENANT_DOMAIN_NAME, false);
+        return new ProvisioningConfig(DeviceTypeConstants.DEVICE_TYPE_PROVIDER_DOMAIN, false);
+    }
+
+    @Override
+    public OperationMonitoringTaskConfig getOperationMonitoringConfig() {
+        return operationMonitoringTaskConfig;
     }
 
     @Override
     public PushNotificationConfig getPushNotificationConfig() {
-        return null;
+        // this needs to be retrieved from a config file.
+        Map<String, String> properties = new HashMap<>();
+        properties.put("mqttAdapterName", "sampledevice_mqtt");
+        properties.put("username", "admin");
+        properties.put("password", "admin");
+        properties.put("qos", "0");
+        properties.put("clearSession", "true");
+        properties.put("scopes", "");
+        return new PushNotificationConfig("MQTT", false, properties);
     }
 
     @Override
@@ -78,7 +96,13 @@ public class ConnectedCupManagerService implements DeviceManagementService {
 
     @Override
     public InitialOperationConfig getInitialOperationConfig() {
-        return null;
+
+        InitialOperationConfig config = new InitialOperationConfig();
+        List<String> operations = new ArrayList<>();
+        operations.add(DeviceTypeConstants.BULB_CONTEXT + ":ON");
+        config.setOperations(operations);
+        return config;
+
     }
 
     @Override
@@ -95,4 +119,5 @@ public class ConnectedCupManagerService implements DeviceManagementService {
     public GeneralConfig getGeneralConfig() {
         return null;
     }
+
 }

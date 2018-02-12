@@ -26,10 +26,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${groupId}.sampledevice.analytics</artifactId>
+    <artifactId>${project-base-package}.analytics</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>${groupId}.sampledevice.analytics</name>
+    <name>${project-base-package}.analytics</name>
     <url>http://wso2.org</url>
     <build>
         <plugins>
