@@ -653,6 +653,28 @@
                 <exclude>**/*device-plugins-deployer.xml</exclude>
             </excludes>
         </fileSet>
+
+        <!-- Copying forget me tool -->
+        <fileSet>
+            <directory>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/</outputDirectory>
+            <includes>
+                <include>**/lib/**</include>
+                <include>**/log4j.properties</include>
+                <include>**/**/patterns.xml</include>
+            </includes>
+            <fileMode>644</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/sql/iot</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/sql/iot</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/sql/apim</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/sql/apim</outputDirectory>
+        </fileSet>
+
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
@@ -1473,6 +1495,72 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
+
+
+        <!-- Copying files related to forget me tool -->
+        <file>
+            <source>../scripts/forget-me.sh</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>../scripts/forget-me.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/bin/</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forget-me</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/bin/</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forget-me.bat</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/bin/</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/product-config/config-iot.json</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/</outputDirectory>
+            <destName>config.json</destName>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/apim-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/um-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/cdm-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/log-config/iot-patterns.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/log-config</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+        <file>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/log-config/apim-patterns.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/log-config</outputDirectory>
+            <fileMode>744</fileMode>
+        </file>
+
+
 
         <!-- ************* Analytics API related files Start ********** -->
         <file>

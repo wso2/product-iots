@@ -1440,6 +1440,20 @@
                 <artifactId>kryo</artifactId>
                 <version>${kryo.orbit.version}</version>
             </dependency>
+
+
+            <!--Forget me tool-->
+            <dependency>
+                <groupId>org.wso2.carbon.privacy</groupId>
+                <artifactId>org.wso2.carbon.privacy.forgetme.conf</artifactId>
+                <version>${forgetme.tool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.privacy</groupId>
+                <artifactId>org.wso2.carbon.privacy.forgetme.tool</artifactId>
+                <version>${forgetme.tool.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -1666,6 +1680,9 @@
 
         <apache.httpmime.version>4.2.5</apache.httpmime.version>
         <apache.httpclient.version>4.5.2</apache.httpclient.version>
+
+        <!--Forget me tool version-->
+        <forgetme.tool.version>1.1.4</forgetme.tool.version>
 
         <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
