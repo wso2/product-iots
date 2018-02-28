@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.iot.analytics.devicemgt-plugins</groupId>
     <artifactId>analytics-devicetype-feature-installation</artifactId>
-    <version>3.1.0-update10-SNAPSHOT</version>
+    <version>3.2.0</version>
     <packaging>pom</packaging>
     <name>Install Virtual Fire Alarm, Raspberry Pi, Arduino Device Types - Analytics</name>
     <url>http://wso2.org</url>
