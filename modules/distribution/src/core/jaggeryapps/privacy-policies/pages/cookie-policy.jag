@@ -31,28 +31,141 @@
     </div>
 </header>
 
-<!-- page content -->
 <div class="row">
-    <div class="col-md-12">
-        <!-- content -->
-        <div class="container col-xs-10 col-sm-8 col-md-8 col-lg-6 col-centered wr-content wr-login col-centered padding-bottom-100">
-            <div>
-                <h2 class="wr-title uppercase blue-bg padding-double white boarder-bottom-blue margin-none">
-                    Cookie Policy
-                </h2>
-            </div>
-            <div class="boarder-all ">
-                <div class="clearfix"></div>
-                <div class="padding-double login-form">
-                    <p>Under Construction</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <!-- /content -->
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-md-offset-2">
+     <!-- content -->
+     <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-12 col-centered wr-content wr-login col-centered padding-bottom-100">
+         <div>
+             <h2 class="wr-title uppercase blue-bg padding-double white boarder-bottom-blue margin-none">
+                 WSO2 IoT Server - Cookie Policy
+             </h2>
+         </div>
+         <div class="boarder-all ">
+             <div class="clearfix"></div>
+             <!-- Customizable content. Due to this nature, i18n is not implemented for this section -->
+             <div id="cookiePolicy" class="padding-double">
+                 <h4><a href="https://wso2.com/iot/"><strong>About WSO2 IoT Server</strong></a></h4>
+                 <p>WSO2 IoT Server is a complete solution that enables device manufacturers and enterprises to connect and manage their devices, build apps, manage events, secure devices and data, and visualize sensor data in a scalable manner.
+
+                 <p>It also offers a complete and secure enterprise mobility management (EMM/MDM) solution that aims to address mobile computing challenges faced by enterprises today. Supporting iOS, Android, and Windows devices, it helps organizations deal with both corporate owned, personally enabled (COPE) and employee-owned devices with the bring your own device (BYOD) concept.</p>
+
+                 <p>WSO2 IoT Server comes with advanced analytics, enabling users to analyze speed, proximity, and geo-fencing information of devices including details of those in motion and stationary state.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="cookie-policy"><strong>Cookie Policy</strong></h2>
+                 <p>IoT Server uses cookies to provide you with the best user experience, and to securely identify you. You might not be able to access some of the services if you disable cookies.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="what-is-a-cookie">What is a cookie &quest;</h2>
+                 <p>A browser cookie is a small piece of data that is stored on your device to help websites and mobile apps remember things about you. Other technologies, including Web storage and identifiers associated with your device, may be used for similar purposes. In this policy, we use the term &ldquo;cookies&rdquo; to discuss all of these technologies.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="how-iot-process-cookies">How does IoT Sever process cookies &quest;</h2>
+                 <p>IoT Server uses cookies to store and retrieve information on your browser. This information is used to provide a better user experience. Some cookies have the primary purpose of allowing logging in to the system, maintaining sessions, and keeping track of activities you do within the login session.</p>
+                 <p>Some cookies used in IoT Server are used to identify you personally. However, the cookie lifetime will end when you log-out ending your session or when your session expires.</p>
+                 <p>Some cookies are simply used to give you a more personalised web experience, and these cannot be used to identify you or your activities personally.</p>
+                 <p>This Cookie Policy is part of the IoT Server Privacy Policy.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="what-iot-use-cookies-for">What does IoT use cookies for &quest;</h2>
+                 <p>Cookies are used for two purposes in IoT server</p>
+                 <ol>
+                     <li>Security.</li>
+                     <li>Providing a  better user experience.</li>
+                 </ol>
+                 <div class="margin-bottom"></div>
+                 <h3 id="iot-uses-cookies-for-the-following-purposes">IoT Server uses cookies for the following purposes</h3>
+                 <h4>Preferences</h4>
+                 <p>IoT Server uses cookies to remember your settings and preferences and to auto-fill the fields to make your interactions with the site easier.</p>
+                 <ul>
+                     <li>These cannot be used to identify you personally.</li>
+                 </ul>
+                 <h4>Security</h4>
+                 <p>IoT Server uses selected cookies to identify and prevent security risks.</p>
+                 <p>For example, IoT Server may use cookies to store your session information to prevent others from changing your password without your username and password.</p>
+                 <p>IoT Server uses session cookie to maintain your active session.</p>
+                 <p>IoT Server may use a temporary cookie when performing multi-factor authentication and federated authentication.</p>
+                 <p>IoT Server may use permanent cookies to detect the devices you have logged in previously. This is to to calculate the <strong>risk level</strong> associated with your current login attempt. Using these cookies protects you and your account from possible attacks.</p>
+                 <h4>Performance</h4>
+                 <p>IoT Server may use cookies to allow &ldquo;Remember Me&rdquo; functionalities.</p>
+                 <div class="margin-bottom"></div>
+                 <h3 id="analytics">Analytics</h3>
+                 <p>IoT Server as a product does not use cookies for analytical purposes.</p>
+                 <div class="margin-bottom"></div>
+                 <h3 id="third-party-cookies">Third party cookies</h3>
+                 <p>Using IoT Server may cause some third-party cookie being set to your browser. IoT Server has no control over the operation of these cookies. The third-party cookies which maybe set include,</p>
+                 <ul>
+                     <li>Any of the social login sites, when IoT Server is configured to use &ldquo;Social&rdquo; or &ldquo;Federated&rdquo; login, and you opt to do login with your &ldquo;Social Account&rdquo;</li>
+                     <li>Any third party federated login</li>
+                 </ul>
+                 <p>We strongly advise you to refer the respective cookie policies of such sites carefully as IoT Server has no knowledge or use on these cookies.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="what-type-of-cookies-iot-use">What type of cookies does IoT Server use &quest;</h2>
+                 <p>IoT Server uses persistent cookies and session cookies. A persistent cookie helps IoT Server to recognize you as an existing user, so you can easily return to WSO2 or interact with IoT Server without signing in again. After you sign in, a persistent cookie stays in your browser and will be read by IoT Server when you return.</p>
+                 <p>A session cookie is erased when the user closes the Web browser. It is stored in temporarily and is not retained after the browser is closed. Session cookies do not collect information from the user’s computer.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="how-do-i-control-my-cookies">How do I control my cookies &quest;</h2>
+                 <p>Most browsers allow you to control cookies through settings. However, if you limit the ability of websites to set cookies, you may worsen your overall user experience, since it will no longer be personalized to you. It may also stop you from saving customized settings like login information. Disabling cookies might make you unable to use Authentication and Authorization functionalities offered by IoT Server.</p>
+                 <p>If you have any questions or concerns regarding the use of cookies, please contact the Data Protection Officer of the organization running this IoT Server instance.</p>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="what-are-the-cookies-used">What are the cookies used &quest;</h2>
+                 <table class="table table-bordered">
+                     <tbody>
+                     <tr>
+                         <td>
+                             <p><strong>Cookie Name</strong></p>
+                         </td>
+                         <td>
+                             <p><strong>Purpose</strong></p>
+                         </td>
+                         <td>
+                             <p><strong>Retention</strong></p>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <p>JSESSIONID</p>
+                         </td>
+                         <td>
+                             <p>Keeps track of the user session data when you are logged in for providing a better user experience.</p>
+                         </td>
+                         <td>
+                             <p>Session</p>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <p>commonAuthId</p>
+                         </td>
+                         <td>
+                             <p>Used for authentication the logged in session.</p>
+                         </td>
+                         <td>
+                             <p>Session</p>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <p>samlssoTokenId</p>
+                         </td>
+                         <td>
+                             <p>Used for mapping the logged in users with the SAML token. </p>
+                         </td>
+                         <td>
+                             <p>Request</p>
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+                 <div class="margin-bottom-double"></div>
+                 <h2 id="disclaimer">Disclaimer</h2>
+                 <p>This cookie policy is only for illustrative purposes of the IoT Server product. The content in this policy is technically correct at the time of product shipment. The organization which runs this IoT Server instance has the full authority and responsibility of the effective Cookie Policy.</p>
+             </div>
+             <!-- /Costomizable content -->
+             <div class="clearfix"></div>
+         </div>
+     </div>
+     <!-- /content -->
 
     </div>
 </div>
+
 
 <!-- footer -->
 <footer class="footer">
