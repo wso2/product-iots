@@ -386,6 +386,18 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+
+        <!--Copying privacy and cookie policies -->
+
+        <fileSet>
+            <directory>src/core/jaggeryapps/privacy-policies/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/privacy-policies
+            </outputDirectory>
+            <excludes>
+                <exclude>**/jaggery.conf</exclude>
+            </excludes>
+        </fileSet>
+
         <!-- Copying APP Manager Publisher and Store Jaggery apps -->
         <fileSet>
             <directory>
@@ -1615,6 +1627,15 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
+
+        <file>
+            <source>src/core/jaggeryapps/privacy-policies/jaggery.conf</source>
+            <outputDirectory>
+                ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/privacy-policies/
+            </outputDirectory>
+            <fileMode>755</fileMode>
+        </file>
+
         <file>
             <source>src/core/jaggeryapps/social/jaggery.conf</source>
             <outputDirectory>
