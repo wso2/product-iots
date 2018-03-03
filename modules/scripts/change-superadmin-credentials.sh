@@ -89,9 +89,19 @@ sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' 
 sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
 echo "Completed!!"
 
+echo "Changing <IoT_HOME>/conf/output-event-adapters.xml"
+sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../conf/output-event-adapters.xml
+sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../conf/output-event-adapters.xml
+echo "Completed!!"
+
 echo "Changing <IoT_HOME>/wso2/analytics/conf/output-event-adapters.xml"
-sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
-sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
+sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../wso2/analytics/conf/output-event-adapters.xml
+sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/output-event-adapters.xml
+echo "Completed!!"
+
+echo "Changing <IoT_HOME>/conf/etc/device-analytics-config.xml"
+sed -i -e 's#\(<AdminUsername">\)'$val1'\(</AdminUsername>\)#\1'$val3'\2#g' ../conf/etc/device-analytics-config.xml
+sed -i -e 's#\(<AdminPassword">\)'$val2'\(</AdminPassword>\)#\1'$val4'\2#g' ../conf/etc/device-analytics-config.xml
 echo "Completed!!"
 
 echo "Changing <IoT_HOME>/conf/user-mgt.xml"
