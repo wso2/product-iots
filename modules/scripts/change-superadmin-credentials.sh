@@ -89,6 +89,11 @@ sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' 
 sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../wso2/analytics/conf/input-event-adapters.xml
 echo "Completed!!"
 
+echo "Changing <IoT_HOME>/conf/input-event-adapters.xml"
+sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../conf/input-event-adapters.xml
+sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../conf/input-event-adapters.xml
+echo "Completed!!"
+
 echo "Changing <IoT_HOME>/conf/output-event-adapters.xml"
 sed -i -e 's#\(<property key="username">\)'$val1'\(</property>\)#\1'$val3'\2#g' ../conf/output-event-adapters.xml
 sed -i -e 's#\(<property key="password">\)'$val2'\(</property>\)#\1'$val4'\2#g' ../conf/output-event-adapters.xml
