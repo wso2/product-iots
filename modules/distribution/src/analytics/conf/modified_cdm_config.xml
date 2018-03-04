@@ -1,0 +1,12 @@
+<config>
+    <PushNotificationConfiguration>
+        <SchedulerBatchSize>1000</SchedulerBatchSize>
+        <SchedulerBatchDelayMills>60000</SchedulerBatchDelayMills>
+        <SchedulerTaskInitialDelay>60000</SchedulerTaskInitialDelay>
+        <SchedulerTaskEnabled>false</SchedulerTaskEnabled>
+        <PushNotificationProviders/>
+    </PushNotificationConfiguration>
+    <DeviceStatusTaskConfig>
+        <Enable>false</Enable>
+    </DeviceStatusTaskConfig>
+</config>
