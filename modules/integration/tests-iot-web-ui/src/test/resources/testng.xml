@@ -35,6 +35,7 @@
             <class name="org.wso2.carbon.iot.integration.web.ui.test.group.DeviceGroupFailTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AddUserFormValidationTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.user.AdminFunctionsTest"/>
+            <class name="org.wso2.carbon.iot.integration.web.ui.test.policy.PolicyTest"/>
             <!--
             <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleInstallationTest"/>
             <class name="org.wso2.carbon.iot.integration.web.ui.test.samples.SampleInstallationVerification"/>
