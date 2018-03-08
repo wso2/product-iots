@@ -1,12 +1,16 @@
 <processor>
     <!-- Remove current PushNotificationProviders config -->
     <remove>
-        <name>//DeviceMgtConfiguration/PushNotificationConfiguration/PushNotificationProviders</name>
+        <name>//DeviceMgtConfiguration/PushNotificationConfiguration</name>
+    </remove>
+    <!-- Remove current DeviceStatusTask config -->
+    <remove>
+        <name>//DeviceMgtConfiguration/DeviceStatusTaskConfig</name>
     </remove>
 
-    <!-- Add modified Carbon db and UM db config -->
+    <!-- Add modified config -->
     <add>
-        <inside>//DeviceMgtConfiguration/PushNotificationConfiguration</inside>
-        <file>src/analytics/conf/push_notification_config.xml</file>
+        <inside>//DeviceMgtConfiguration</inside>
+        <file>src/analytics/conf/modified_cdm_config.xml</file>
     </add>
 </processor>
