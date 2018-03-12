@@ -386,6 +386,12 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+        <!--copy the cxf filters to cxf-runtime-->
+        <fileSet>
+            <directory>../cxf-filters/target/cxfFilters/jar</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/runtimes/cxf</outputDirectory>
+        </fileSet>
+
         <!-- Copying APP Manager Publisher and Store Jaggery apps -->
         <fileSet>
             <directory>

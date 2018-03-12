@@ -39,6 +39,7 @@
         <module>modules/features</module>
         <module>modules/scripts</module>
         <module>modules/tools</module>
+        <module>modules/cxf-filters</module>
         <module>modules/p2-profile</module>
         <module>modules/distribution</module>
         <!--<module>modules/integration</module>-->
@@ -492,7 +493,6 @@
                 <artifactId>org.wso2.carbon.identity.jwt.client.extension</artifactId>
                 <version>${carbon.device.mgt.version}</version>
             </dependency>
-
             <!--MDM dependencies-->
             <dependency>
                 <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
@@ -1525,7 +1525,7 @@
         <carbon.governance.version>4.7.23</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.1.1</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.0.244-SNAPSHOT</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
@@ -1673,6 +1673,8 @@
         <apache.httpclient.version>4.5.2</apache.httpclient.version>
 
         <maven.javadoc.skip>true</maven.javadoc.skip>
+        <identity.governance.version>1.0.38</identity.governance.version>
+        <identity.event.handler.account.lock.version>1.1.12</identity.event.handler.account.lock.version>
     </properties>
 
     <scm>
