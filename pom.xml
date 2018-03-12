@@ -1525,14 +1525,14 @@
         <carbon.governance.version>4.7.23</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.0.242-SNAPSHOT</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.1.1</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>4.0.137-SNAPSHOT</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.1.0</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.2.170</carbon.api.mgt.version>
