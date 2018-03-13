@@ -1489,7 +1489,7 @@
         <carbon.deployment.version>4.7.15</carbon.deployment.version>
 
         <!-- Carbon Identity -->
-        <carbon.identity.framework.version>5.11.124</carbon.identity.framework.version>
+        <carbon.identity.framework.version>5.11.139</carbon.identity.framework.version>
         <carbon.identity.framework.version.range>[5.2.0, 6.0.0)
         </carbon.identity.framework.version.range>
         <identity.local.auth.basicauth.version>5.3.7</identity.local.auth.basicauth.version>
@@ -1526,13 +1526,13 @@
 
         <!-- Carbon Device Management-->
         <carbon.device.mgt.version>3.1.3</carbon.device.mgt.version>
-        <carbon.device.mgt.version.range>[3.0.0, 4.0.0)</carbon.device.mgt.version.range>
+        <carbon.device.mgt.version.range>[3.1.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>4.1.0</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.1.1</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.2.170</carbon.api.mgt.version>
@@ -1646,7 +1646,7 @@
         <carbon.um.ws.version>5.1.5</carbon.um.ws.version>
 
         <!-- Cipher tool version-->
-        <cipher.tool.version>1.0.0-wso2v5</cipher.tool.version>
+        <cipher.tool.version>1.0.0-wso2v6</cipher.tool.version>
 
         <!--XMPP/MQTT Version-->
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
@@ -1656,7 +1656,7 @@
         <project.scm.id>github-scm</project.scm.id>
 
         <!-- Carbon Metrics Features -->
-        <carbon.metrics.version>1.2.2</carbon.metrics.version>
+        <carbon.metrics.version>1.2.3</carbon.metrics.version>
 
         <!--http client version-->
         <httpclient.version>4.5.2</httpclient.version>
