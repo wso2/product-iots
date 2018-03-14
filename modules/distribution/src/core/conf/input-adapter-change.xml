@@ -25,7 +25,7 @@
 	<property key="keepAliveTimeInMillis">20000</property>
 	<property key="jobQueueSize">10000</property>
 	<property key="connectionKeepAliveInterval">60</property>
-	<property key="dcrUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}/client-registration/v0.11/register</property>
+	<property key="dcrUrl">https://${iot.keymanager.host}:${iot.keymanager.https.port}/client-registration/v0.12/register</property>
 	<property key="url">tcp://${mqtt.broker.host}:${mqtt.broker.port}</property>
 	<property key="username">admin</property>
 	<property key="password">admin</property>

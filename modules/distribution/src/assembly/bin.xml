@@ -1657,42 +1657,6 @@
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
-
-        <!--<file>-->
-            <!--<source>target/webapp-temp/client-registration#v0.11.war</source>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <file>
-            <source>target/webapp-temp/api#identity#entitlement.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/authenticationendpoint.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/oauth2.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/shindig.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
         <file>
             <source>
                 src/core/cloud/portal/common.css
