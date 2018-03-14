@@ -33,6 +33,12 @@
                 <Enable>true</Enable>
                 <CleanUpTimeout>20160</CleanUpTimeout>
                 <CleanUpPeriod>1140</CleanUpPeriod>
+                <!--Instead of deleting all the records at once, we are deleting the records in chunks to prevent the -->
+                <!--possible deadlock and lock scenarios. The following property defines the chunk size.-->
+                <DeleteChunkSize>50000</DeleteChunkSize>
+                <!--Instead of deleting all the records at once, we are deleting the records in chunks to prevent the -->
+                <!--possible deadlock and lock scenarios. The following property defines the chunk size.-->
+                <DeleteChunkSize>50000</DeleteChunkSize>
             </SessionDataCleanUp>
             <OperationDataCleanUp>
                 <Enable>true</Enable>
@@ -217,13 +223,45 @@
                 <GrantTypeValidatorImplClass>org.wso2.carbon.device.mgt.oauth.extensions.validators.AccessTokenGrantValidator</GrantTypeValidatorImplClass>
             </SupportedGrantType>
         </SupportedGrantTypes>
+
+        <!--
+            Defines the grant types that will filter user claims based on user consent in their responses such as
+            id_token or user info response.
+
+            Default grant types that filter user claims based on user consent are 'authorization_code' and 'implicit'.
+
+            Supported versions: IS 5.5.0 onwards.
+        -->
+        <UserConsentEnabledGrantTypes>
+            <UserConsentEnabledGrantType>
+                <GrantTypeName>authorization_code</GrantTypeName>
+            </UserConsentEnabledGrantType>
+            <UserConsentEnabledGrantType>
+                <GrantTypeName>implicit</GrantTypeName>
+            </UserConsentEnabledGrantType>
+        </UserConsentEnabledGrantTypes>
+
         <OAuthCallbackHandlers>
             <OAuthCallbackHandler Class="org.wso2.carbon.apimgt.keymgt.util.APIManagerOAuthCallbackHandler"/>
         </OAuthCallbackHandlers>
-        <OAuthScopeValidator class="org.wso2.carbon.device.mgt.oauth.extensions.handlers.ScopeValidationHandler"/>
-        <!--TokenValidators>
+
+       <TokenValidators>
             <TokenValidator type="bearer" class="org.wso2.carbon.identity.oauth2.validators.DefaultOAuth2TokenValidator"/>
-        </TokenValidators-->
+            <TokenValidator type="jwt" class="org.wso2.carbon.identity.oauth2.validators.OAuth2JWTTokenValidator"/>
+        </TokenValidators>
+
+        <!-- Scope validators list. The validators registered here wil be executed during token validation. -->
+        <ScopeValidators>
+            <ScopeValidator class="org.wso2.carbon.identity.oauth2.validators.JDBCScopeValidator" />
+            <ScopeValidator class="org.wso2.carbon.identity.oauth2.validators.XACMLScopeValidator"/>
+        </ScopeValidators>
+
+        <!-- Scope handlers list. The handlers registered here will be executed at the scope validation phase while
+             issuing access tokens. -->
+        <ScopeHandlers>
+            <ScopeHandler class="org.wso2.carbon.identity.oauth2.validators.OIDCScopeHandler" />
+        </ScopeHandlers>
+
         <!-- Assertions can be used to embedd parameters into access token. -->
         <EnableAssertions>
             <UserName>false</UserName>
@@ -254,6 +292,26 @@
         <OpenIDConnect>
             <IDTokenBuilder>org.wso2.carbon.identity.openidconnect.DefaultIDTokenBuilder</IDTokenBuilder>
             <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
+
+            <!-- Default asymmetric encryption algorithm that used to encrypt CEK. -->
+            <IDTokenEncryptionAlgorithm>RSA-OAEP</IDTokenEncryptionAlgorithm>
+            <!-- Default symmetric encryption algorithm that used to encrypt JWT claims set. -->
+            <IDTokenEncryptionMethod>A128GCM</IDTokenEncryptionMethod>
+
+            <!-- Supported versions: IS 5.5.0 onwards. -->
+            <SupportedIDTokenEncryptionAlgorithms>
+                <SupportedIDTokenEncryptionAlgorithm>RSA1_5</SupportedIDTokenEncryptionAlgorithm>
+                <SupportedIDTokenEncryptionAlgorithm>RSA-OAEP</SupportedIDTokenEncryptionAlgorithm>
+            </SupportedIDTokenEncryptionAlgorithms>
+            <SupportedIDTokenEncryptionMethods>
+                <SupportedIDTokenEncryptionMethod>A128GCM</SupportedIDTokenEncryptionMethod>
+                <SupportedIDTokenEncryptionMethod>A192GCM</SupportedIDTokenEncryptionMethod>
+                <SupportedIDTokenEncryptionMethod>A256GCM</SupportedIDTokenEncryptionMethod>
+                <SupportedIDTokenEncryptionMethod>A128CBC-HS256</SupportedIDTokenEncryptionMethod>
+                <SupportedIDTokenEncryptionMethod>A128CBC+HS256</SupportedIDTokenEncryptionMethod>
+            </SupportedIDTokenEncryptionMethods>
+
+            <EnableAudiences>true</EnableAudiences>
             <!-- Comment out to add Audience values to the JWT token (id_token)  -->
             <!--Audiences>
                    <Audience>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/token</Audience>
@@ -264,13 +322,44 @@
             -->
             <IDTokenIssuerID>${carbon.protocol}://${carbon.host}:${carbon.management.port}/oauth2/token</IDTokenIssuerID>
             <IDTokenCustomClaimsCallBackHandler>org.wso2.carbon.identity.openidconnect.SAMLAssertionClaimsCallback</IDTokenCustomClaimsCallBackHandler>
+            <UserInfoJWTSignatureAlgorithm>SHA256withRSA</UserInfoJWTSignatureAlgorithm>
             <IDTokenExpiration>3600</IDTokenExpiration>
             <UserInfoEndpointClaimRetriever>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoUserStoreClaimRetriever</UserInfoEndpointClaimRetriever>
             <UserInfoEndpointRequestValidator>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInforRequestDefaultValidator</UserInfoEndpointRequestValidator>
             <UserInfoEndpointAccessTokenValidator>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoISAccessTokenValidator</UserInfoEndpointAccessTokenValidator>
             <UserInfoEndpointResponseBuilder>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoJSONResponseBuilder</UserInfoEndpointResponseBuilder>
             <SkipUserConsent>false</SkipUserConsent>
+            <!-- Sign the ID Token with Service Provider Tenant Private Key-->
+            <SignJWTWithSPKey>false</SignJWTWithSPKey>
+            <!--
+                Expiry period of the logout token used in OIDC Back Channel Logout in seconds.
+                Supported versions: IS 5.5.0 onwards
+            -->
+            <LogoutTokenExpiration>120</LogoutTokenExpiration>
+
+            <!--
+                OIDC Request Object builder implementation.
+                Supported versions: IS 5.4.0 onwards
+            -->
+            <RequestObjectBuilders>
+                <RequestObjectBuilder>
+                    <BuilderName>request_param_value_builder</BuilderName>
+                    <RequestObjectBuilderImplClass>org.wso2.carbon.identity.openidconnect.RequestParamRequestObjectBuilder</RequestObjectBuilderImplClass>
+                </RequestObjectBuilder>
+            </RequestObjectBuilders>
+
+            <!--
+                OIDC Request Object validator implementation.
+                Supported versions: IS 5.4.0 onwards
+            -->
+            <RequestObjectValidator>org.wso2.carbon.identity.openidconnect.RequestObjectValidatorImpl</RequestObjectValidator>
         </OpenIDConnect>
+        <!-- Configs related to OAuth2 token persistence -->
+        <TokenPersistence>
+            <Enable>true</Enable>
+            <PoolSize>0</PoolSize>
+            <RetryCount>5</RetryCount>
+        </TokenPersistence>
     </OAuth>
     <MultifactorAuthentication>
         <!--Enable>false</Enable-->
@@ -315,6 +404,12 @@
         <SAMLDefaultDigestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</SAMLDefaultDigestAlgorithmURI>
         <SLOHostNameVerificationEnabled>true</SLOHostNameVerificationEnabled>
     </SSOService>
+
+    <Consent>
+        <!--Specify whether consent management should be enable during SSO.-->
+        <EnableSSOConsentManagement>true</EnableSSOConsentManagement>
+    </Consent>
+
     <SecurityTokenService>
         <!--
             Default value for IdentityProviderURL is  built in following format
@@ -368,6 +463,17 @@
             </Authenticator>
         </SCIMAuthenticators>
     </SCIM>
+
+    <SCIM2>
+        <!--
+            Default value for UserEPUrl and GroupEPUrl are built in following format
+            https://<HostName>:<MgtTrpProxyPort except 443>/<ProxyContextPath>/<context>/<path>
+            If that doesn't satisfy uncomment the following config and explicitly configure the value
+        -->
+        <!--UserEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/scim2/Users</UserEPUrl-->
+        <!--GroupEPUrl>${carbon.protocol}://${carbon.host}:${carbon.management.port}/scim2/Groups</GroupEPUrl-->
+    </SCIM2>
+
     <!--Recovery>
         <Notification>
             <Password>
@@ -401,10 +507,15 @@
 
     <EmailVerification>
         <Enable>false</Enable>
+        <ExpiryTime>1440</ExpiryTime>
         <LockOnCreation>true</LockOnCreation>
         <Notification>
             <InternallyManage>true</InternallyManage>
         </Notification>
+        <AskPassword>
+            <ExpiryTime>1440</ExpiryTime>
+            <PasswordGenerator>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator</PasswordGenerator>
+        </AskPassword>
     </EmailVerification>
 
     <SelfRegistration>
@@ -415,74 +526,251 @@
         </Notification>
         <ReCaptcha>false</ReCaptcha>
     </SelfRegistration-->
+    <EnableAskPasswordAdminUI>true</EnableAskPasswordAdminUI>
+
+    <EnableRecoveryEndpoint>true</EnableRecoveryEndpoint>
+    <EnableSelfSignUpEndpoint>true</EnableSelfSignUpEndpoint>
+
+    <AuthenticationPolicy>
+        <CheckAccountExist>true</CheckAccountExist>
+    </AuthenticationPolicy>
+
     <EventListeners>
-        <EventListener enable="true" name="org.wso2.carbon.user.mgt.workflow.userstore.UserStoreActionListener" orderId="10" type="org.wso2.carbon.user.core.listener.UserOperationEventListener"/>
-        <EventListener enable="false" name="org.wso2.carbon.identity.mgt.IdentityMgtEventListener" orderId="50" type="org.wso2.carbon.user.core.listener.UserOperationEventListener"/>
-        <EventListener enable="true" name="org.wso2.carbon.identity.governance.listener.IdentityMgtEventListener" orderId="95" type="org.wso2.carbon.user.core.listener.UserOperationEventListener"/>
-        <EventListener enable="true" name="org.wso2.carbon.identity.scim.common.listener.SCIMUserOperationListener" orderId="90" type="org.wso2.carbon.user.core.listener.UserOperationEventListener"/>
-        <EventListener enable="true" name="org.wso2.carbon.identity.governance.listener.IdentityStoreEventListener" orderId="97" type="org.wso2.carbon.user.core.listener.UserOperationEventListener">
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.user.mgt.workflow.userstore.UserStoreActionListener"
+                       orderId="10" enable="true"/>
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.identity.mgt.IdentityMgtEventListener"
+                       orderId="50" enable="false"/>
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.identity.scim.common.listener.SCIMUserOperationListener"
+                       orderId="90" enable="true"/>
+        <!-- Enable the following SCIM2 event listener and disable the above SCIM event listener if SCIM2 is used. -->
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.identity.scim2.common.listener.SCIMUserOperationListener"
+                       orderId="93" enable="false"/>
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.identity.governance.listener.IdentityMgtEventListener"
+                       orderId="95" enable="true"/>
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener" name="org.wso2.carbon.identity.governance.listener.IdentityStoreEventListener"
+                       orderId="97" enable="true">
             <Property name="Data.Store">org.wso2.carbon.identity.governance.store.JDBCIdentityDataStore</Property>
         </EventListener>
-        <EventListener enable="false" name="org.wso2.carbon.identity.data.publisher.application.authentication.impl.DASLoginDataPublisherImpl" orderId="10" type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"/>
-        <EventListener enable="false" name="org.wso2.carbon.identity.data.publisher.application.authentication.impl.DASSessionDataPublisherImpl" orderId="11" type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"/>
-        <EventListener enable="true" name="org.wso2.carbon.identity.data.publisher.application.authentication.AuthnDataPublisherProxy" orderId="11" type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"/>
+        <EventListener type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"
+                       name="org.wso2.carbon.identity.data.publisher.application.authentication.impl.DASLoginDataPublisherImpl"
+                       orderId="10" enable="false"/>
+        <EventListener type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"
+                       name="org.wso2.carbon.identity.data.publisher.application.authentication.impl.DASSessionDataPublisherImpl"
+                       orderId="11" enable="false"/>
+        <EventListener type="org.wso2.carbon.identity.core.handler.AbstractIdentityMessageHandler"
+                       name="org.wso2.carbon.identity.data.publisher.application.authentication.AuthnDataPublisherProxy"
+                       orderId="11" enable="true"/>
+
+        <!-- Enable this listener to call DeleteEventRecorders. -->
+        <EventListener type="org.wso2.carbon.user.core.listener.UserOperationEventListener"
+                       name="org.wso2.carbon.user.mgt.listeners.UserDeletionEventListener"
+                       orderId="98" enable="false"/>
+        <EventListener type="org.wso2.carbon.identity.core.handler.AbstractIdentityHandler"
+                       name="org.wso2.carbon.identity.application.authentication.framework.handler.request.impl.consent.ConsentMgtPostAuthnHandler"
+                       orderId="110" enable="true"/>
     </EventListeners>
+
+    <!-- These recorders are used to write user delete information to specific sources. Default event recorder is CSV
+     file recorder. This recorder is disabled by default. Enable it by setting enable="true". To run these recorders,
+     EventListener "rg.wso2.carbon.user.mgt.listeners.UserDeletionEventListener" also should be enabled. Which is
+     also disabled by default. -->
+    <UserDeleteEventRecorders>
+        <UserDeleteEventRecorder name="org.wso2.carbon.user.mgt.recorder.DefaultUserDeletionEventRecorder" enable="false">
+            <!-- Un comment below line if you need to write entries to a separate .csv file. Otherwise this will be
+            written in to a log file using a separate appender. -->
+            <!--<Property name="path">${carbon.home}/repository/logs/delete-records.csv</Property>-->
+        </UserDeleteEventRecorder>
+    </UserDeleteEventRecorders>
+
     <CacheConfig>
+        <!-- Identity cache configuration.
+             Timeouts are in seconds.
+             Capacity is the maximum cache size.
+             Unless specifically mentioned, you do not need to set the isDistributed flag.
+         -->
         <CacheManager name="IdentityApplicationManagementCacheManager">
-            <Cache capacity="5000" enable="false" isDistributed="false" name="AppAuthFrameworkSessionContextCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="AuthenticationContextCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="AuthenticationRequestCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="AuthenticationResultCache" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="AppInfoCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="AuthorizationGrantCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="OAuthCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="OAuthSessionDataCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="SAMLSSOParticipantCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="SAMLSSOSessionIndexCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="SAMLSSOSessionDataCache" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="ServiceProviderCache" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="ProvisioningConnectorCache" timeout="1"/>
-            <Cache capacity="5000" enable="false" isDistributed="false" name="ProvisioningEntityCache" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="ServiceProviderProvisioningConnectorCache" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="IdPCacheByAuthProperty" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="IdPCacheByHRI" timeout="1"/>
-            <Cache capacity="5000" enable="true" isDistributed="false" name="IdPCacheByName" timeout="1"/>
+            <Cache name="AppAuthFrameworkSessionContextCache"
+                                                     enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="AuthenticationContextCache" enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="AuthenticationRequestCache" enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="AuthenticationResultCache"  enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="AppInfoCache"               enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="AuthorizationGrantCache"    enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="OAuthCache"                 enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="OAuthScopeCache"            enable="true"  timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="OAuthSessionDataCache"      enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="SAMLSSOParticipantCache"    enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="SAMLSSOSessionIndexCache"   enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="SAMLSSOSessionDataCache"    enable="true" timeout="300" capacity="5000" isDistributed="false"/>
+            <Cache name="ServiceProviderCache"       enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="ProvisioningConnectorCache" enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="ProvisioningEntityCache"    enable="true" timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="ServiceProviderProvisioningConnectorCache" enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="IdPCacheByAuthProperty"     enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="IdPCacheByHRI"              enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
+            <Cache name="IdPCacheByName"             enable="true"  timeout="900" capacity="5000" isDistributed="false"/>
         </CacheManager>
     </CacheConfig>
+
     <!--Cookies>
         <Cookie name="commonAuthId" domain="localhost" httpOnly="true" secure="true" />
     </Cookies-->
+
+
     <ResourceAccessControl>
-        <Resource context="(.*)/api/identity/user/(.*)" http-method="all" secured="true"/>
-        <Resource context="(.*)/api/identity/recovery/(.*)" http-method="all" secured="true"/>
-        <Resource context="(.*)/.well-known(.*)" http-method="all" secured="true"/>
-        <Resource context="(.*)/identity/register(.*)" http-method="all" secured="true">
-            <Permissions>/permission/admin/manage/identity/applicationmgt/delete</Permissions>
+        <Resource context="(.*)/api/identity/user/v1.0/validate-code" secured="true" http-method="all"/>
+        <Resource context="(.*)/api/identity/user/v1.0/resend-code" secured="true" http-method="all"/>
+        <Resource context="(.*)/api/identity/user/v1.0/me" secured="true" http-method="POST"/>
+        <Resource context="(.*)/api/identity/user/v1.0/me" secured="true" http-method="GET"/>
+        <Resource context="(.*)/api/identity/user/v1.0/pi-info" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/usermgt/view</Permissions>
         </Resource>
-        <Resource context="(.*)/identity/connect/register(.*)" http-method="all" secured="true">
+        <Resource context="(.*)/api/identity/user/v1.0/pi-info/(.*)" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/usermgt/view</Permissions>
+        </Resource>
+
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents" secured="true" http-method="all"/>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/receipts/(.*)" secured="true" http-method="all"/>
+
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purposes" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/consentmgt/add</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purposes(.*)" secured="true" http-method="GET"/>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purposes(.+)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/consentmgt/delete</Permissions>
+        </Resource>
+
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/pii-categories" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/consentmgt/add</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/pii-categories(.*)" secured="true" http-method="GET"/>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/pii-categories(.+)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/consentmgt/delete</Permissions>
+        </Resource>
+
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purpose-categories" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/consentmgt/add</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purpose-categories(.*)" secured="true" http-method="GET"/>
+        <Resource context="(.*)/api/identity/consent-mgt/v1.0/consents/purpose-categories(.+)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/consentmgt/delete</Permissions>
+        </Resource>
+
+        <Resource context="(.*)/api/identity/recovery/(.*)" secured="true" http-method="all"/>
+        <Resource context="(.*)/.well-known(.*)" secured="true" http-method="all"/>
+        <Resource context="(.*)/api/identity/oauth2/dcr/v1.0/register(.*)" secured="true" http-method="POST">
             <Permissions>/permission/admin/manage/identity/applicationmgt/create</Permissions>
         </Resource>
-        <Resource context="(.*)/oauth2/introspect(.*)" http-method="all" secured="true">
+        <Resource context="(.*)/api/identity/oauth2/dcr/v1.0/register(.*)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/applicationmgt/delete</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/oauth2/dcr/v1.0/register(.*)" secured="true" http-method="PUT">
+            <Permissions>/permission/admin/manage/identity/applicationmgt/update</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/oauth2/dcr/v1.0/register(.*)" secured="true" http-method="GET">
             <Permissions>/permission/admin/manage/identity/applicationmgt/view</Permissions>
         </Resource>
-        <Resource context="(.*)/api/identity/entitlement/(.*)" http-method="all" secured="true">
+        <Resource context="(.*)/identity/register(.*)" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/applicationmgt/delete</Permissions>
+        </Resource>
+        <Resource context="(.*)/identity/connect/register(.*)" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/applicationmgt/create</Permissions>
+        </Resource>
+        <Resource context="(.*)/oauth2/introspect(.*)" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/applicationmgt/view</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/entitlement/(.*)" secured="true" http-method="all">
             <Permissions>/permission/admin/manage/identity/pep</Permissions>
         </Resource>
+        <Resource context="(.*)/scim2/Users" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/usermgt/create</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Users" secured="true" http-method="GET">
+            <Permissions>/permission/admin/manage/identity/usermgt/list</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/rolemgt/create</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups" secured="true" http-method="GET">
+            <Permissions>/permission/admin/manage/identity/rolemgt/view</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Users/(.*)" secured="true" http-method="GET">
+            <Permissions>/permission/admin/manage/identity/usermgt/view</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Users/(.*)" secured="true" http-method="PUT">
+            <Permissions>/permission/admin/manage/identity/usermgt/update</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Users/(.*)" secured="true" http-method="PATCH">
+            <Permissions>/permission/admin/manage/identity/usermgt/update</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Users/(.*)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/usermgt/delete</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups/(.*)" secured="true" http-method="GET">
+            <Permissions>/permission/admin/manage/identity/rolemgt/view</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups/(.*)" secured="true" http-method="PUT">
+            <Permissions>/permission/admin/manage/identity/rolemgt/update</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups/(.*)" secured="true" http-method="PATCH">
+            <Permissions>/permission/admin/manage/identity/rolemgt/update</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Groups/(.*)" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/rolemgt/delete</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Me" secured="true"    http-method="GET">
+            <Permissions>/permission/admin/login</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Me" secured="true" http-method="DELETE">
+            <Permissions>/permission/admin/manage/identity/usermgt/delete</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Me" secured="true"    http-method="PUT">
+            <Permissions>/permission/admin/login</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Me" secured="true"   http-method="PATCH">
+            <Permissions>/permission/admin/login</Permissions>
+        </Resource>
+        <Resource context="(.*)/scim2/Me" secured="true" http-method="POST">
+            <Permissions>/permission/admin/manage/identity/usermgt/create</Permissions>
+        </Resource>
+        <Resource context="/scim2/ServiceProviderConfig" secured="false" http-method="all">
+            <Permissions></Permissions>
+        </Resource>
+        <Resource context="/scim2/ResourceType" secured="false" http-method="all">
+            <Permissions></Permissions>
+        </Resource>
+        <Resource context="/scim2/Bulk" secured="true"  http-method="all">
+            <Permissions>/permission/admin/manage/identity/usermgt</Permissions>
+        </Resource>
+        <Resource context="(.*)/api/identity/oauth2/dcr/(.*)" secured="true" http-method="all">
+            <Permissions>/permission/admin/manage/identity/applicationmgt</Permissions>
+        </Resource>
     </ResourceAccessControl>
+
     <ClientAppAuthentication>
-        <Application hash="66cd9688a2ae068244ea01e70f0e230f5623b7fa4cdecb65070a09ec06452262" name="dashboard"/>
+        <Application name="dashboard" hash="66cd9688a2ae068244ea01e70f0e230f5623b7fa4cdecb65070a09ec06452262"/>
     </ClientAppAuthentication>
+
     <TenantContextsToRewrite>
         <WebApp>
-            <Context>/api/identity/user/v0.9</Context>
-            <Context>/api/identity/recovery/v0.9</Context>
-            <Context>/oauth2</Context>
-            <Context>/api/identity/entitlement</Context>
+            <Context>/api/identity/user/v1.0/</Context>
+            <Context>/api/identity/consent-mgt/v1.0/</Context>
+            <Context>/api/identity/recovery/v0.9/</Context>
+            <Context>/oauth2/</Context>
+            <Context>/scim2/</Context>
+            <Context>/api/identity/entitlement/</Context>
+            <Context>/api/identity/oauth2/dcr/v1.0/</Context>
         </WebApp>
         <Servlet>
             <Context>/identity/(.*)</Context>
         </Servlet>
     </TenantContextsToRewrite>
+
     <!-- Server Synchronization Tolerance Configuration in seconds -->
     <ClockSkew>300</ClockSkew>
 </Server>

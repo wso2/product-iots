@@ -29,7 +29,7 @@
         AuthenticationEndpointURL is location of the web app containing
         the authentication related pages
     -->
-    <AuthenticationEndpointURL>/devicemgt/login</AuthenticationEndpointURL>
+    <AuthenticationEndpointURL>/authenticationendpoint/login.do</AuthenticationEndpointURL>
     <AuthenticationEndpointRetryURL>/authenticationendpoint/retry.do</AuthenticationEndpointRetryURL>
 
     <!--
