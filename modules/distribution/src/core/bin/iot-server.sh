@@ -333,6 +333,7 @@ do
     -Diot.apimstore.host="localhost" \
     -Diot.apimstore.https.port="9443" \
     -Dmqtt.broker.https.port="9446" \
+    -Denable-api-scopes-sharing="true" \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
