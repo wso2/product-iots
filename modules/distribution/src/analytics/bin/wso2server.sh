@@ -340,7 +340,7 @@ do
     -Dcarbon.extensions.dir.path="$CARBON_HOME/../../extensions" \
     -Dcarbon.dropins.dir.path="$CARBON_HOME/../../dropins" \
     -Dcarbon.external.lib.dir.path="$CARBON_HOME/../../lib" \
-    -Dcarbon.data.dir.path="$CARBON_HOME/data" \
+    -Dcarbon.data.dir.path="$CARBON_HOME/repository/data" \
     -Dcarbon.patches.dir.path="$CARBON_HOME/../../patches" \
     -Dcarbon.servicepacks.dir.path="$CARBON_HOME/../../servicepacks" \
     -Dcarbon.internal.lib.dir.path="$CARBON_HOME/../lib" \
