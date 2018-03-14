@@ -386,6 +386,12 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+        <!--copy the cxf filters to cxf-runtime-->
+        <fileSet>
+            <directory>../cxf-filters/target/cxfFilters/jar</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/runtimes/cxf</outputDirectory>
+        </fileSet>
+
         <!-- Copying APP Manager Publisher and Store Jaggery apps -->
         <fileSet>
             <directory>
@@ -1292,6 +1298,11 @@
         </file>
 
         <file>
+            <source>../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/security/balana-config.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/conf/security/</outputDirectory>
+        </file>
+
+        <file>
             <source>src/core/LICENSE.txt</source>
             <outputDirectory>${pom.artifactId}-${pom.version}</outputDirectory>
             <filtered>true</filtered>
@@ -1549,13 +1560,13 @@
             <fileMode>755</fileMode>
         </file>
 
-        <file>
-            <source>target/webapp-temp/client-registration#v0.11.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
+        <!--<file>-->
+            <!--<source>target/webapp-temp/client-registration#v0.11.war</source>-->
+            <!--<outputDirectory>-->
+                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
+            <!--</outputDirectory>-->
+            <!--<fileMode>755</fileMode>-->
+        <!--</file>-->
         <file>
             <source>target/webapp-temp/api#identity#entitlement.war</source>
             <outputDirectory>
