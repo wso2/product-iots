@@ -1103,15 +1103,6 @@
         </fileSet>
 
         <fileSet>
-            <directory>src/broker/resources/STRATOS_ROOT</directory>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/wso2/broker/repository/deployment/server/webapps/STRATOS_ROOT
-            </outputDirectory>
-            <fileMode>644</fileMode>
-            <directoryMode>775</directoryMode>
-        </fileSet>
-
-        <fileSet>
             <directory>../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/components
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/components</outputDirectory>
