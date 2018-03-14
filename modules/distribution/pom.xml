@@ -37,6 +37,14 @@
 			<groupId>com.h2database.wso2</groupId>
 			<artifactId>h2-database-engine</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.privacy</groupId>
+			<artifactId>org.wso2.carbon.privacy.forgetme.conf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.privacy</groupId>
+			<artifactId>org.wso2.carbon.privacy.forgetme.tool</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -83,6 +91,21 @@
 									<type>zip</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>target</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.wso2.carbon.privacy</groupId>
+									<artifactId>org.wso2.carbon.privacy.forgetme.tool</artifactId>
+									<version>${forgetme.tool.version}</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/forget-me</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.wso2.carbon.privacy</groupId>
+									<artifactId>org.wso2.carbon.privacy.forgetme.conf</artifactId>
+									<version>${forgetme.tool.version}</version>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/forget-me-conf</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -714,6 +737,8 @@
 								<delete dir="src/site" />
 								<!--<delete dir="target/shindig" />-->
 								<delete dir="target/jaxwebapps" />
+								<delete dir="target/forget-me" />
+								<delete dir="target/forget-me-conf" />
 							</tasks>
 						</configuration>
 						<goals>
