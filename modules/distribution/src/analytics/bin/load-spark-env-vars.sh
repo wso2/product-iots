@@ -8,4 +8,10 @@ export SPARK_SCALA_VERSION=2.10
 # *** jars will be added to the spark classpath in the code itself. check DAS-105
 # export SPARK_CLASSPATH=`java -cp $CARBON_SPARK_HOME/repository/components/plugins/org.wso2.carbon.analytics.spark.utils*.jar org.wso2.carbon.analytics.spark.utils.ComputeClasspath $CARBON_HOME`
 # export SPARK_CLASSPATH=$SPARK_CLASSPATH:$(echo $CARBON_SPARK_HOME/repository/components/lib/*.jar | tr ' ' ':')
+export carbon.config.dir.path=$CARBON_HOME/conf
+export carbon.data.dir.path=$CARBON_HOME/repository/data
+export carbon.internal.lib.dir.path=$CARBON_HOME/../lib
+export carbon.external.lib.dir.path=$CARBON_HOME/../../lib
+export carbon.dropins.dir.path=$CARBON_HOME/../../dropins
+export components.repo=$CARBON_HOME/../components/plugins
 mkdir -p $CARBON_SPARK_HOME/lib_managed/jars
