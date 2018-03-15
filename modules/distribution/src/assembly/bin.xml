@@ -1524,13 +1524,13 @@
 
 
         <file>
-            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forget-me</source>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forgetme.sh</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/bin/</outputDirectory>
             <fileMode>744</fileMode>
         </file>
 
         <file>
-            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forget-me.bat</source>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/bin/forgetme.bat</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/bin/</outputDirectory>
             <fileMode>744</fileMode>
         </file>
@@ -1543,21 +1543,24 @@
         </file>
 
         <file>
-            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/apim-datasources.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/sample-apim-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources/</outputDirectory>
             <fileMode>744</fileMode>
+            <destName>apim-datasources.xml</destName>
         </file>
 
         <file>
-            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/um-datasources.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/sample-um-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources/</outputDirectory>
             <fileMode>744</fileMode>
+            <destName>um-datasources.xml</destName>
         </file>
 
         <file>
-            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/cdm-datasources.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources</outputDirectory>
+            <source>target/forget-me/identity-anonymization-tool-${forgetme.tool.version}/conf/datasources/sample-cdm-datasources.xml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/datasources/</outputDirectory>
             <fileMode>744</fileMode>
+            <destName>iot-datasources.xml</destName>
         </file>
 
         <file>
