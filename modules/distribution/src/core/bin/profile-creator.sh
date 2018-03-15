@@ -83,8 +83,8 @@ then
 	cp -rf ${DIR}/../repository/resources/profiles/backend/*.sh ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/backend/*.bat ${DIR}/../bin/
 	cp -rf ${DIR}/../repository/resources/profiles/backend/carbon.xml ${DIR}/../conf/
-	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war
-	rm -rf ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war
+	rm -rf ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/webapps/shindig.war ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.12.war ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war
+	rm -rf ${DIR}/../repository/deployment/server/webapps/dynamic-client-web.war ${DIR}/../repository/deployment/server/webapps/client-registration#v0.12.war
 	rm -rf ${DIR}/../repository/deployment/server/jaggeryapps/*
 	rm -rf ${DIR}/../repository/deployment/server/axis2services/*
 	rm -rf ${DIR}/../conf/identity/sso-idp-config.xml
@@ -122,8 +122,8 @@ then
 	cp -rf ${DIR}/../repository/resources/profiles/manager/carbon.xml ${DIR}/../conf/
 	cp -rf ${DIR}/../repository/resources/profiles/manager/axis2/axis2.xml ${DIR}/../conf/axis2/
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
-	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
-	cp ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#am#publisher#v0.12.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/api#am#store#v0.12.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#appm#oauth#v1.0.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#appm#publisher#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/api#appm#store#v1.1.war ${DIR}/../repository/deployment/server/tempwebapp/
@@ -196,7 +196,7 @@ then
 	mkdir ${DIR}/../repository/deployment/server/tempwebapp
 	cp ${DIR}/../repository/deployment/server/webapps/oauth2.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/throttle#data#v1.war ${DIR}/../repository/deployment/server/tempwebapp/
-	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.11.war ${DIR}/../repository/deployment/server/tempwebapp/
+	cp ${DIR}/../repository/deployment/server/webapps/client-registration#v0.12.war ${DIR}/../repository/deployment/server/tempwebapp/
 	cp ${DIR}/../repository/deployment/server/webapps/authenticationendpoint.war ${DIR}/../repository/deployment/server/tempwebapp/
 	rm -rf ${DIR}/../repository/deployment/server/webapps/*
 	cp -rf ${DIR}/../repository/deployment/server/tempwebapp/* ${DIR}/../repository/deployment/server/webapps/

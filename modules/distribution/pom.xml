@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.wso2.iot</groupId>
 		<artifactId>wso2iot-parent</artifactId>
-		<version>3.2.0-update1-SNAPSHOT</version>
+		<version>3.3.0-update1-SNAPSHOT</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
@@ -36,6 +36,14 @@
 		<dependency>
 			<groupId>com.h2database.wso2</groupId>
 			<artifactId>h2-database-engine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.privacy</groupId>
+			<artifactId>org.wso2.carbon.privacy.forgetme.conf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wso2.carbon.privacy</groupId>
+			<artifactId>org.wso2.carbon.privacy.forgetme.tool</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -83,6 +91,21 @@
 									<type>zip</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>target</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.wso2.carbon.privacy</groupId>
+									<artifactId>org.wso2.carbon.privacy.forgetme.tool</artifactId>
+									<version>${forgetme.tool.version}</version>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/forget-me</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.wso2.carbon.privacy</groupId>
+									<artifactId>org.wso2.carbon.privacy.forgetme.conf</artifactId>
+									<version>${forgetme.tool.version}</version>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/forget-me-conf</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -148,6 +171,26 @@
 							</replacements>
 						</configuration>
 					</execution>
+
+					<!-- Replace Consent Mgt Datasource Confgs -->
+					<execution>
+						<id>replace-for-consent</id>
+						<phase>package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/conf/consent-mgt-config.xml</file>
+							<replacements>
+								<replacement>
+									<xpath>/ConsentManager/DataSource/Name</xpath>
+									<token>(jdbc/WSO2CarbonDB)</token>
+									<value>jdbc/WSO2AM_DB</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+
 					<!-- Replace Datasource, Scope mpl classes and OAuth callback class in identity.xml -->
 
 					<!-- Replace the Datasource in the thrift-authentication.xml file -->
@@ -450,7 +493,33 @@
 							</tasks>
 						</configuration>
 					</execution>
+					<execution>
+						<!-- Creating API Management schema -->
+						<id>create-user-consent-schema</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo message="########### Create User Consent H2 Schema ###########" />
 
+								<property name="db.dir" value="target/wso2carbon-core-${carbon.kernel.version}/repository/database" />
+								<property name="userid" value="wso2carbon" />
+								<property name="password" value="wso2carbon" />
+								<property name="dbURL" value="jdbc:h2:file:${basedir}/${db.dir}/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE" />
+
+								<sql driver="org.h2.Driver" url="${dbURL}" userid="${userid}" password="${password}" autocommit="true" onerror="continue">
+									<classpath refid="maven.dependency.classpath" />
+									<classpath refid="maven.compile.classpath" />
+									<classpath refid="maven.runtime.classpath" />
+
+									<fileset file="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/dbscripts/consent/h2.sql" />
+								</sql>
+								<echo message="##################### END ####################" />
+							</tasks>
+						</configuration>
+					</execution>
 					<execution>
 						<!-- Creating App Management schema -->
 						<id>create-app-mgt-schema</id>
@@ -668,6 +737,8 @@
 								<delete dir="src/site" />
 								<!--<delete dir="target/shindig" />-->
 								<delete dir="target/jaxwebapps" />
+								<delete dir="target/forget-me" />
+								<delete dir="target/forget-me-conf" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -688,109 +759,6 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
-
-
-					<execution>
-						<id>replace-web-xmls-in-war-files</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<property name="tempdir" value="target/webapp-temp" />
-								<property name="xmldir" value="src/core/resources/web-apps/web-xml" />
-								<property name="srcdir" value="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/webapps" />
-								<property name="wso2iothome" value="${basedir}/../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}" />
-								<property name="wso2analyticshome" value="${basedir}/../p2-profile/analytics-profile/target/wso2carbon-core-${carbon.kernel.version}" />
-								<property name="wso2brokerhome" value="${basedir}/../p2-profile/broker-profile/target/wso2carbon-core-${carbon.kernel.version}" />
-
-
-								<mkdir dir="${tempdir}" />
-								<mkdir dir="${tempdir}/api#identity#entitlement" />
-								<mkdir dir="${tempdir}/authenticationendpoint" />
-								<mkdir dir="${tempdir}/client-registration#v0.11" />
-								<mkdir dir="${tempdir}/oauth2" />
-								<mkdir dir="${tempdir}/shindig" />
-
-								<unzip dest="${tempdir}/api#identity#entitlement">
-									<fileset dir="${srcdir}">
-										<include name="api#identity#entitlement.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/authenticationendpoint">
-									<fileset dir="${srcdir}">
-										<include name="authenticationendpoint.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/client-registration#v0.11">
-									<fileset dir="${srcdir}">
-										<include name="client-registration#v0.11.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/oauth2">
-									<fileset dir="${srcdir}">
-										<include name="oauth2.war" />
-									</fileset>
-								</unzip>
-								<unzip dest="${tempdir}/shindig">
-									<fileset dir="${srcdir}">
-										<include name="shindig.war" />
-									</fileset>
-								</unzip>
-
-								<delete file="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
-								<delete file="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
-								<delete file="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
-								<delete file="${tempdir}/oauth2/WEB-INF/web.xml" />
-								<delete file="${tempdir}/shindig/WEB-INF/web.xml" />
-
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/api-application-registration/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/api#certificate-mgt#v1.0/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/api#identity#entitlement/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/api#scep-mgt#v1.0/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/authenticationendpoint/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/client-registration#v0.11/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/oauth2/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-								<!--<delete>-->
-									<!--<fileset dir="${tempdir}/shindig/WEB-INF/lib" includes="*" />-->
-								<!--</delete>-->
-
-								<copy file="src/core/resources/web-apps/web-xml/api#identity#entitlement/web.xml" tofile="${tempdir}/api#identity#entitlement/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/authenticationendpoint/web.xml" tofile="${tempdir}/authenticationendpoint/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/client-registration#v0.11/web.xml" tofile="${tempdir}/client-registration#v0.11/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/oauth2/web.xml" tofile="${tempdir}/oauth2/WEB-INF/web.xml" />
-								<copy file="src/core/resources/web-apps/web-xml/shindig/web.xml" tofile="${tempdir}/shindig/WEB-INF/web.xml" />
-
-								<zip destfile="${tempdir}/api#identity#entitlement.war" basedir="${tempdir}/api#identity#entitlement" />
-								<zip destfile="${tempdir}/authenticationendpoint.war" basedir="${tempdir}/authenticationendpoint" />
-								<zip destfile="${tempdir}/client-registration#v0.11.war" basedir="${tempdir}/client-registration#v0.11" />
-								<zip destfile="${tempdir}/oauth2.war" basedir="${tempdir}/oauth2" />
-								<zip destfile="${tempdir}/shindig.war" basedir="${tempdir}/shindig" />
-
-								<mkdir dir="${tempdir}/registry" />
-								<unzip src="${wso2iothome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" dest="${tempdir}/registry" />
-								<replace file="${tempdir}/registry/core.properties" token="dataDir=../../../../solr/data" value="dataDir=../../../solr/data" />
-								<zip destfile="${wso2analyticshome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" basedir="${tempdir}/registry" />
-								<zip destfile="${wso2iothome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" basedir="${tempdir}/registry" />
-								<zip destfile="${wso2brokerhome}/wso2/components/plugins/org.wso2.carbon.registry.indexing_${carbon.registry.version}.jar" basedir="${tempdir}/registry" />
-							</tasks>
-						</configuration>
-					</execution>
 
 				</executions>
 			</plugin>

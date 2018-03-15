@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.wso2.iot</groupId>
         <artifactId>wso2iot-p2-profile</artifactId>
-        <version>3.2.0-update1-SNAPSHOT</version>
+        <version>3.3.0-update1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -185,6 +185,7 @@
                                 </featureArtifactDef>
                                 <!-- ************** END - User Management ********* -->
 
+
                                 <!-- ************** START - Deployment Synchronizer ********* -->
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.deployment.synchronizer.feature:${carbon.commons.version}
@@ -276,6 +277,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.data:org.wso2.carbon.datasource.reader.cassandra.server.feature:${carbon.data.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.data:org.wso2.carbon.datasource.reader.mongo.server.feature:${carbon.data.version}
+                                </featureArtifactDef>
                                 <!-- END - Data source related -->
 
                                 <!-- ************** START - EVENT PROCESSING FEATURES *********** -->
@@ -293,6 +297,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.event-processing:org.wso2.carbon.event.flow.feature:${carbon.event-processing.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.event-processing:org.wso2.carbon.event.processor.server.feature:${carbon.event-processing.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.analytics-common:org.wso2.carbon.event.statistics.feature:${carbon.analytics.common.version}
@@ -588,6 +595,17 @@
                                 </feature>
                                 <!-- ************** END - User Management ********* -->
 
+                                <!--Identity governance-->
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.identity.governance.server.feature.group</id>-->
+                                    <!--<version>${carbon.identity.governance.version}</version>-->
+                                <!--</feature>-->
+                                <!--<feature>-->
+                                    <!--<id>org.wso2.carbon.identity.captcha.server.feature.group</id>-->
+                                    <!--<version>${carbon.identity.governance.version}</version>-->
+                                <!--</feature>-->
+                                <!--Identity governance ends-->
+
                                 <!-- ************** START - Deployment Synchronizer ********* -->
                                 <feature>
                                     <id>org.wso2.carbon.deployment.synchronizer.feature.group</id>
@@ -699,6 +717,13 @@
                                     <id>org.wso2.carbon.datasource.reader.cassandra.server.feature.group</id>
                                     <version>${carbon.data.version}</version>
                                 </feature>
+
+                                <feature>
+                                    <id>org.wso2.carbon.datasource.reader.mongo.server.feature.group</id>
+                                    <version>${carbon.data.version}</version>
+                                </feature>
+
+
                                 <!-- END - Data source related -->
 
                                 <!-- ************** START - EVENT PROCESSING FEATURES ************ -->
