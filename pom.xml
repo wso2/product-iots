@@ -42,7 +42,7 @@
         <module>modules/cxf-filters</module>
         <module>modules/p2-profile</module>
         <module>modules/distribution</module>
-        <!--<module>modules/integration</module>-->
+        <module>modules/integration</module>
     </modules>
 
     <dependencyManagement>
