@@ -34,4 +34,4 @@ PRGDIR=`dirname "$PRG"`
 [ -z "$CARBON_HOME" ] && CARBON_HOME=`cd "$PRGDIR/.." ; pwd`
 
 cd $CARBON_HOME
-sh $CARBON_HOME/wso2/tools/identity-anonymization-tool/bin/forget-me -d $CARBON_HOME/wso2/tools/identity-anonymization-tool/conf $@
+sh $CARBON_HOME/wso2/tools/identity-anonymization-tool/bin/forgetme.sh -d $CARBON_HOME/wso2/tools/identity-anonymization-tool/conf $@
