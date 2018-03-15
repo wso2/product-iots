@@ -29,8 +29,8 @@
         AuthenticationEndpointURL is location of the web app containing
         the authentication related pages
     -->
-    <AuthenticationEndpointURL>/authenticationendpoint/login.do</AuthenticationEndpointURL>
-    <AuthenticationEndpointRetryURL>/authenticationendpoint/retry.do</AuthenticationEndpointRetryURL>
+    <AuthenticationEndpointURL>/devicemgt/login.do</AuthenticationEndpointURL>
+    <AuthenticationEndpointRetryURL>/devicemgt/retry.do</AuthenticationEndpointRetryURL>
 
     <!--
         Extensions allow extending the default behaviour of the authentication
