@@ -99,7 +99,7 @@ goto :eof
     IF EXIST %DIR%..\conf\datasources\cdm-datasources.xml del %DIR%..\conf\datasources\cdm-datasources.xml
     mkdir %DIR%..\repository\deployment\server\tempwebapp
     copy /y %DIR%..\repository\deployment\server\webapps\oauth2.war %DIR%..\repository\deployment\server\tempwebapp\
-    copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
+    copy /y %DIR%..\repository\deployment\server\webapps\client-registration#v0.12.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\authenticationendpoint.war %DIR%..\repository\deployment\server\tempwebapp\
     IF EXIST %DIR%..\repository\deployment\server\webapps @RD /S /Q %DIR%..\repository\deployment\server\webapps
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
@@ -132,12 +132,12 @@ goto :eof
     IF EXIST %DIR%..\repository\deployment\server\jaggeryapps @RD /S /Q %DIR%..\repository\deployment\server\jaggeryapps
 	IF EXIST %DIR%..\repository\deployment\server\axis2services @RD /S /Q %DIR%..\repository\deployment\server\axis2services
 	IF EXIST %DIR%..\repository\deployment\server\webapps\shindig.war del %DIR%..\repository\deployment\server\webapps\shindig.war
-    IF EXIST %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war del %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war
-    IF EXIST %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war del %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war
+    IF EXIST %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.12.war del %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war
+    IF EXIST %DIR%..\repository\deployment\server\webapps\api#am#store#v0.12.war del %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war del %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war
     IF EXIST %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war del %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war
-    IF EXIST %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war del %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war
+    IF EXIST %DIR%..\repository\deployment\server\webapps\client-registration#v0.12.war del %DIR%..\repository\deployment\server\webapps\client-registration#v0.11.war
 	mkdir %DIR%..\repository\deployment\server\jaggeryapps
 	mkdir %DIR%..\repository\deployment\server\axis2services
     IF EXIST %DIR%..\conf\identity\sso-idp-config.xml del %DIR%..\conf\identity\sso-idp-config.xml
@@ -168,8 +168,8 @@ goto :eof
     IF EXIST %DIR%..\conf\synapse.properties del %DIR%..\conf\synapse.properties
     IF EXIST %DIR%..\conf\passthru-http.properties del %DIR%..\conf\passthru-http.properties
     mkdir %DIR%..\repository\deployment\server\tempwebapp
-    copy /y %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
-    copy /y %DIR%..\repository\deployment\server\webapps\api#am#store#v0.11.war %DIR%..\repository\deployment\server\tempwebapp\
+    copy /y %DIR%..\repository\deployment\server\webapps\api#am#publisher#v0.12.war %DIR%..\repository\deployment\server\tempwebapp\
+    copy /y %DIR%..\repository\deployment\server\webapps\api#am#store#v0.12.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#appm#oauth#v1.0.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#appm#publisher#v1.1.war %DIR%..\repository\deployment\server\tempwebapp\
     copy /y %DIR%..\repository\deployment\server\webapps\api#appm#store#v1.1.war %DIR%..\repository\deployment\server\tempwebapp\

@@ -386,6 +386,11 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+        <!--copy the cxf filters to cxf-runtime-->
+        <fileSet>
+            <directory>../cxf-filters/target/cxfFilters/jar</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/runtimes/cxf</outputDirectory>
+        </fileSet>
         <!--Copying privacy and cookie policies -->
 
         <fileSet>
@@ -395,13 +400,6 @@
             <excludes>
                 <exclude>**/jaggery.conf</exclude>
             </excludes>
-        </fileSet>
-
-        <!--copy the cxf filters to cxf-runtime-->
-        <fileSet>
-            <directory>../cxf-filters/target/cxfFilters/jar</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/lib/runtimes/cxf</outputDirectory>
-
         </fileSet>
 
         <!-- Copying APP Manager Publisher and Store Jaggery apps -->
@@ -1656,42 +1654,6 @@
             <source>src/core/jaggeryapps/windows-web-agent/jaggery.conf</source>
             <outputDirectory>
                 ${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/windows-web-agent/
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-
-        <!--<file>-->
-            <!--<source>target/webapp-temp/client-registration#v0.11.war</source>-->
-            <!--<outputDirectory>-->
-                <!--${pom.artifactId}-${pom.version}/repository/deployment/server/webapps-->
-            <!--</outputDirectory>-->
-            <!--<fileMode>755</fileMode>-->
-        <!--</file>-->
-        <file>
-            <source>target/webapp-temp/api#identity#entitlement.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/authenticationendpoint.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/oauth2.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
-            </outputDirectory>
-            <fileMode>755</fileMode>
-        </file>
-        <file>
-            <source>target/webapp-temp/shindig.war</source>
-            <outputDirectory>
-                ${pom.artifactId}-${pom.version}/repository/deployment/server/webapps
             </outputDirectory>
             <fileMode>755</fileMode>
         </file>
