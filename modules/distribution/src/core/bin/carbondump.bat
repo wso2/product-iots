@@ -193,6 +193,6 @@ goto end
 
 :invalidUsage
 echo Usage: carbondump.bat [-carbonHome path] [-pid of the carbon instance]
-echo   e.g. carbondump.bat -carbonHome C:\user\wso2carbon-3.2.0\ -pid 5151
+echo   e.g. carbondump.bat -carbonHome C:\user\wso2carbon-3.3.0\ -pid 5151
 
 :END
