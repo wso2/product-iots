@@ -19,6 +19,7 @@ package org.wso2.iot.integration.common;
 
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.contrib.ssl.EasySSLProtocolSocketFactory;
 import org.apache.commons.httpclient.methods.*;
@@ -164,6 +165,7 @@ public class IOTHttpClient {
 
             DeleteMethod method = new DeleteMethod(url);
             method.setRequestHeader(AUTHORIZATION, authorizationString);
+            method.setRequestHeader(Constants.CONTENT_TYPE, requestHeaders.get(Constants.CONTENT_TYPE));
             method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
                                             new DefaultHttpMethodRetryHandler(3, false));
 
