@@ -31,6 +31,8 @@ import org.wso2.iot.integration.ui.pages.devices.EnrollDevicePage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceAddGroupPage;
 import org.wso2.iot.integration.ui.pages.groups.DeviceGroupsPage;
 import org.wso2.iot.integration.ui.pages.login.LoginPage;
+import org.wso2.iot.integration.ui.pages.policy.PolicyAddPage;
+import org.wso2.iot.integration.ui.pages.policy.PolicyPage;
 import org.wso2.iot.integration.ui.pages.uesr.AddUserPage;
 import org.wso2.iot.integration.ui.pages.uesr.UserListingPage;
 
@@ -95,6 +97,17 @@ public class IOTAdminDashboard {
     public DeviceGroupsPage viewGroups() throws IOException {
         driver.findElement(By.xpath(uiElementMapper.getElement("iot.device.group.viewButton.xpath"))).click();
         return new DeviceGroupsPage(driver);
+    }
+
+    /**
+     * Performs the navigation to policy management page.
+     *
+     * @return {@link PolicyPage} which includes functionality which can be done in policy management page
+     * @throws IOException If error occurs when getting the {@link PolicyPage}
+     */
+    public PolicyPage getPolicyManagementPage() throws IOException {
+        driver.findElement(By.xpath(uiElementMapper.getElement("iot.policy.viewButton.xpath"))).click();
+        return new PolicyPage(driver);
     }
 
     /**
