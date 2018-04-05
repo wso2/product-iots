@@ -23,7 +23,7 @@
     <groupId>org.wso2.iot</groupId>
     <artifactId>wso2iot-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.3.0-update1-SNAPSHOT</version>
+    <version>3.3.0</version>
     <name>WSO2 IoT - Parent</name>
     <url>http://wso2.org</url>
     <description>WSO2 IoT Server</description>
@@ -1687,7 +1687,7 @@
         <url>https://github.com/wso2/product-iots.git</url>
         <developerConnection>scm:git:https://github.com/wso2/product-iots.git</developerConnection>
         <connection>scm:git:https://github.com/wso2/product-iots.git</connection>
-        <tag>HEAD</tag>
+        <tag>v3.3.0</tag>
     </scm>
 
     <build>
