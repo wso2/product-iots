@@ -182,12 +182,6 @@
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.mobile.windows.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
 								<featureArtifactDef>
-									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.ui.feature:${carbon.device.mgt.plugin.version}
-								</featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.androidsense.backend.feature:${carbon.device.mgt.plugin.version}
-                                </featureArtifactDef>
-								<featureArtifactDef>
 									org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.notification.listener.feature:${carbon.device.mgt.plugin.version}
 								</featureArtifactDef>
                                 <!-- End of Device Management Plugin Features -->
@@ -777,7 +771,10 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.iot.geo.dashboard.feature:${carbon.device.mgt.plugin.version}
                                 </featureArtifactDef>
-                                <!-- End of Geo Dashboard feature -->
+                                <!-- IoT Analytics feature -->
+                                <featureArtifactDef>
+                                    org.wso2.carbon.devicemgt-plugins:org.wso2.carbon.device.mgt.iot.analytics.feature:${carbon.device.mgt.plugin.version}
+                                </featureArtifactDef>
 
                                 <!-- Realtime Operations Feature -->
                                 <featureArtifactDef>
@@ -1059,14 +1056,6 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
-                                    <version>${carbon.device.mgt.plugin.version}</version>
-                                </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-									<version>${carbon.device.mgt.plugin.version}</version>
-								</feature>
-                                <feature>
-                                    <id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
 								<feature>
@@ -1721,7 +1710,11 @@
                                     <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-                                <!-- End of Geo Dashboard Feature -->
+                                <!-- IoT Analytics Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                                 <!-- Realtime Operations Feature -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
@@ -2147,10 +2140,6 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.iot.androidsense.ui.feature.group</id>
-									<version>${carbon.device.mgt.plugin.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -2624,7 +2613,11 @@
                                     <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-                                <!-- End of Geo Dashboard Feature -->
+                                <!-- IoT Analytics Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                                 <!-- Realtime Operations Feature -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
@@ -2632,11 +2625,11 @@
                                 </feature>
                                 <!-- End of Realtime Operations Feature -->
 
-                            <!--MQTT Dashboard Feature-->
-                            <feature>
-                                <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
-                                <version>${carbon.device.mgt.plugin.version}</version>
-                            </feature>
+                                <!--MQTT Dashboard Feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -2792,10 +2785,6 @@
                                     <id>org.wso2.carbon.device.mgt.mobile.android.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-								<feature>
-									<id>org.wso2.carbon.device.mgt.iot.androidsense.backend.feature.group</id>
-									<version>${carbon.device.mgt.plugin.version}</version>
-								</feature>
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.mobile.windows.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
@@ -3254,18 +3243,22 @@
                                     <id>org.wso2.carbon.iot.geo.dashboard.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
-                                <!-- End of Geo Dashboard Feature -->
+                                <!-- IoT Analytics Feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.device.mgt.iot.analytics.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                                 <!-- Realtime Operations Feature -->
                                 <feature>
                                     <id>org.wso2.carbon.device.mgt.remote.session.feature.group</id>
                                     <version>${carbon.device.mgt.plugin.version}</version>
                                 </feature>
                                 <!-- End of Realtime Operations Feature -->
-                            <!--MQTT Dashboard Feature-->
-                            <feature>
-                                <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
-                                <version>${carbon.device.mgt.plugin.version}</version>
-                            </feature>
+                                <!--MQTT Dashboard Feature-->
+                                <feature>
+                                    <id>org.wso2.carbon.andes.extensions.device.mgt.api.feature.group</id>
+                                    <version>${carbon.device.mgt.plugin.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>

@@ -1734,14 +1734,6 @@
                 ${pom.artifactId}-${pom.version}/repository/resources/lifecycles
             </outputDirectory>
         </file>
-        <!-- Adding Geo Dashboard CApp -->
-        <file>
-            <source>
-                ../p2-profile/iot-core-profile/target/wso2carbon-core-${carbon.kernel.version}/wso2/deployment/server/carbonapps/org_wso2_carbon_iot_geo_dashboard-1.0.0.car
-            </source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/devicetypes/analytics/</outputDirectory>
-            <fileMode>644</fileMode>
-        </file>
         <file>
             <source>src/core/samples/connectedcup-samples-deployer.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/samples/</outputDirectory>
