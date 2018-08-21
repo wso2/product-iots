@@ -1528,14 +1528,14 @@
         <carbon.governance.version>4.7.23</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.1.32</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.1.34</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.1.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
         <product.iot.version>${project.version}</product.iot.version>
 
         <!-- Carbon Device Management Plugins-->
-        <carbon.device.mgt.plugin.version>4.1.7</carbon.device.mgt.plugin.version>
+        <carbon.device.mgt.plugin.version>4.1.8</carbon.device.mgt.plugin.version>
 
         <!-- API Management -->
         <carbon.api.mgt.version>6.2.201</carbon.api.mgt.version>
@@ -1553,9 +1553,9 @@
         <product.mb.version>3.1.0</product.mb.version>
 
         <!-- Tomcat -->
-        <orbit.tomcat.version>7.0.59.wso2v1</orbit.tomcat.version>
+        <orbit.tomcat.version>7.0.85.wso2v1</orbit.tomcat.version>
         <orbit.tomcat.jdbc.pooling.version>7.0.34.wso2v2</orbit.tomcat.jdbc.pooling.version>
-        <orbit.version.tomcat-servlet-api>7.0.59.wso2v1</orbit.version.tomcat-servlet-api>
+        <orbit.version.tomcat-servlet-api>7.0.85.wso2v1</orbit.version.tomcat-servlet-api>
         <servlet-api.version>2.4</servlet-api.version>
 
         <!-- Rampart -->
