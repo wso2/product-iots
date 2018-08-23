@@ -140,7 +140,6 @@
                 <exclude>**/cdm-datasources.xml</exclude>
                 <exclude>**/tomcat/carbon/WEB-INF/web.xml</exclude>
                 <exclude>**/synapse.properties</exclude>
-                <exclude>**/etc/device-analytics-config.xml</exclude>
                 <exclude>**/synapse-handlers.xml</exclude>
                 <exclude>**/tomcat/context.xml</exclude>
                 <exclude>**/security/Owasp.CsrfGuard.Carbon.properties</exclude>
@@ -1241,20 +1240,6 @@
             <source>src/core/conf/synapse.properties</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/conf</outputDirectory>
             <destName>synapse.properties</destName>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/conf/etc/device-analytics-config.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/conf/etc</outputDirectory>
-            <destName>device-analytics-config.xml</destName>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>src/core/conf/etc/device-analytics-config.xml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/wso2/analytics/conf/etc</outputDirectory>
-            <destName>device-analytics-config.xml</destName>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
