@@ -1528,7 +1528,7 @@
         <carbon.governance.version>4.7.23</carbon.governance.version>
 
         <!-- Carbon Device Management-->
-        <carbon.device.mgt.version>3.1.36</carbon.device.mgt.version>
+        <carbon.device.mgt.version>3.1.37</carbon.device.mgt.version>
         <carbon.device.mgt.version.range>[3.1.0, 4.0.0)</carbon.device.mgt.version.range>
 
         <!-- IOT Device Management -->
