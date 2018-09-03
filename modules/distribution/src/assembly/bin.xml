@@ -690,6 +690,12 @@
             <outputDirectory>${project.artifactId}-${pom.version}/wso2/tools/identity-anonymization-tool/conf/sql/apim</outputDirectory>
         </fileSet>
 
+
+        <fileSet>
+            <directory>../migration</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/dbscripts</outputDirectory>
+        </fileSet>
+
         <!-- ********************************* End of IoT Core Profile ********************************* -->
 
         <!-- ********************************* Start of Analytics Profile ********************************* -->
