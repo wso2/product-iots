@@ -323,6 +323,7 @@ do
     -Dmqtt.broker.port="1886" \
     -Diot.core.host="localhost" \
     -Diot.core.https.port="9443" \
+    -Diot.core.http.port="9763" \
     -Diot.keymanager.host="localhost" \
     -Diot.keymanager.https.port="9443" \
     -Diot.gateway.host="localhost" \
