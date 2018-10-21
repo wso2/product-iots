@@ -2,7 +2,26 @@
     <resource methods="POST" url-mapping="/*" faultSequence="_token_fault_">
         <inSequence>
             <property name="uri.var.portnum" expression="get-property('system','iot.keymanager.https.port')"/>
-	    <property name="uri.var.hostname" expression="get-property('system','iot.keymanager.host')"/>
+	        <property name="uri.var.hostname" expression="get-property('system','iot.keymanager.host')"/>
+            <filter source="$body//scope" regex="PRODUCTION">
+                <then>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <xformValues>
+                                <refresh_token>$1</refresh_token>
+                                <grant_type>refresh_token</grant_type>
+                            </xformValues>
+                        </format>
+                        <args>
+                            <arg xmlns:m0="http://services.samples/xsd" expression="//refresh_token" />
+                        </args>
+                    </payloadFactory>
+                    <header name="Content-Type" scope="transport" value="application/x-www-form-urlencoded" />
+                    <property name="messageType" scope="axis2" type="STRING" value="application/x-www-form-urlencoded" />
+                </then>
+                <else>
+                </else>
+            </filter>
             <send>
                 <endpoint>
                      <http uri-template="https://{uri.var.hostname}:{uri.var.portnum}/oauth2/token">
